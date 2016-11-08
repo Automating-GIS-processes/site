@@ -1,0 +1,689 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Automating GIS-processes - Lecture 9: Python GIS &mdash; Geo-Python 1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Geo-Python 1 documentation" href="index.html"/>
+        <link rel="prev" title="Automating GIS-processes - Lecture 7: Python GIS" href="AutoGIS15_Lecture7_PythonGIS.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Geo-Python
+          
+
+          
+            
+            <img src="_static/logo_hy_geo_135.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2016 Autumn
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="AutoGIS15_Lecture6_PythonGIS.html">Automating GIS-processes - Lecture 6: Python GIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AutoGIS15_Lecture7_PythonGIS.html">Automating GIS-processes - Lecture 7: Python GIS</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Automating GIS-processes - Lecture 9: Python GIS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#useful-functionalities-for-processing-the-data">Useful functionalities for processing the data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#grouping-data">Grouping data</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Geo-Python</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Automating GIS-processes - Lecture 9: Python GIS</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/AutoGIS15_Lecture9_PythonGIS.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="automating-gis-processes-lecture-9-python-gis">
+<h1>Automating GIS-processes - Lecture 9: Python GIS<a class="headerlink" href="#automating-gis-processes-lecture-9-python-gis" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="useful-functionalities-for-processing-the-data">
+<h2>Useful functionalities for processing the data<a class="headerlink" href="#useful-functionalities-for-processing-the-data" title="Permalink to this headline">¶</a></h2>
+<p><em>Pandas</em> and <em>Geopandas</em> have many useful functionalities for managing
+the data. This lecture focuses on showing how few of them can be used.</p>
+</div>
+<div class="section" id="grouping-data">
+<h2>Grouping data<a class="headerlink" href="#grouping-data" title="Permalink to this headline">¶</a></h2>
+<p>One useful function that can be used in Pandas/Geopandas is
+<strong>*.groupby()*</strong>. This function groups data based on values on selected
+column(s) (similar to what we did with earlier with arcpy and
+modelbuilder).</p>
+<p>Let&#8217;s do one more time the grouping of the individual fishes in
+&#8216;DAMSELFISH.shp&#8217; and export the species to individual Shapefiles.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Import the necessary modules</span>
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="c1"># Set file path</span>
+<span class="n">fp</span> <span class="o">=</span> <span class="s2">r&quot;C:\HY-Data\HENTENKA\Data\DAMSELFISH_distributions.shp&quot;</span>
+
+<span class="c1"># Read the data</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+
+<span class="c1"># Let&#39;s see what the data looks like</span>
+<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ORIG_FID</th>
+      <th>binomial</th>
+      <th>category</th>
+      <th>citation</th>
+      <th>class_name</th>
+      <th>compiler</th>
+      <th>dist_comm</th>
+      <th>family_nam</th>
+      <th>genus_name</th>
+      <th>geometry</th>
+      <th>...</th>
+      <th>rl_update</th>
+      <th>seasonal</th>
+      <th>shape_Area</th>
+      <th>shape_Leng</th>
+      <th>source</th>
+      <th>species_na</th>
+      <th>subpop</th>
+      <th>subspecies</th>
+      <th>tax_comm</th>
+      <th>year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>Stegastes leucorus</td>
+      <td>VU</td>
+      <td>International Union for Conservation of Nature...</td>
+      <td>ACTINOPTERYGII</td>
+      <td>IUCN</td>
+      <td>None</td>
+      <td>POMACENTRIDAE</td>
+      <td>Stegastes</td>
+      <td>POLYGON ((-115.6437454219999 29.71392059300007...</td>
+      <td>...</td>
+      <td>2012.1</td>
+      <td>1</td>
+      <td>28.239363</td>
+      <td>82.368856</td>
+      <td>None</td>
+      <td>leucorus</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>2010</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>Stegastes leucorus</td>
+      <td>VU</td>
+      <td>International Union for Conservation of Nature...</td>
+      <td>ACTINOPTERYGII</td>
+      <td>IUCN</td>
+      <td>None</td>
+      <td>POMACENTRIDAE</td>
+      <td>Stegastes</td>
+      <td>POLYGON ((-105.589950704 21.89339825500002, -1...</td>
+      <td>...</td>
+      <td>2012.1</td>
+      <td>1</td>
+      <td>28.239363</td>
+      <td>82.368856</td>
+      <td>None</td>
+      <td>leucorus</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>2010</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>Stegastes leucorus</td>
+      <td>VU</td>
+      <td>International Union for Conservation of Nature...</td>
+      <td>ACTINOPTERYGII</td>
+      <td>IUCN</td>
+      <td>None</td>
+      <td>POMACENTRIDAE</td>
+      <td>Stegastes</td>
+      <td>POLYGON ((-111.159618439 19.01535626700007, -1...</td>
+      <td>...</td>
+      <td>2012.1</td>
+      <td>1</td>
+      <td>28.239363</td>
+      <td>82.368856</td>
+      <td>None</td>
+      <td>leucorus</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>2010</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>Chromis intercrusma</td>
+      <td>LC</td>
+      <td>International Union for Conservation of Nature...</td>
+      <td>ACTINOPTERYGII</td>
+      <td>IUCN</td>
+      <td>None</td>
+      <td>POMACENTRIDAE</td>
+      <td>Chromis</td>
+      <td>POLYGON ((-80.86500229899997 -0.77894492099994...</td>
+      <td>...</td>
+      <td>2012.1</td>
+      <td>1</td>
+      <td>87.461539</td>
+      <td>729.012180</td>
+      <td>None</td>
+      <td>intercrusma</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>2010</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>Chromis intercrusma</td>
+      <td>LC</td>
+      <td>International Union for Conservation of Nature...</td>
+      <td>ACTINOPTERYGII</td>
+      <td>IUCN</td>
+      <td>None</td>
+      <td>POMACENTRIDAE</td>
+      <td>Chromis</td>
+      <td>POLYGON ((-67.33922225599997 -55.6761029239999...</td>
+      <td>...</td>
+      <td>2012.1</td>
+      <td>1</td>
+      <td>87.461539</td>
+      <td>729.012180</td>
+      <td>None</td>
+      <td>intercrusma</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>2010</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 27 columns</p>
+</div><p>In the column &#8216;binomial&#8217; we have the individual fish species defined and
+we can use that column for grouping the data with .groupby() function.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Group the data by column &#39;binomial&#39;</span>
+<span class="n">grouped</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;binomial&#39;</span><span class="p">)</span>
+
+<span class="c1"># Let&#39;s see what we got</span>
+<span class="n">grouped</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">pandas</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">groupby</span><span class="o">.</span><span class="n">DataFrameGroupBy</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x0000000003FB6710</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Group by function gives us an object called <em>DataFrameGroupBy</em> which is
+similar to list of keys and values that we can iterate over.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Iterate over the group object</span>
+
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">grouped</span><span class="p">:</span>
+    <span class="n">individual_fish</span> <span class="o">=</span> <span class="n">values</span>
+
+<span class="c1"># Let&#39;s see what is the LAST item that we iterated</span>
+<span class="n">individual_fish</span>
+</pre></div>
+</div>
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ORIG_FID</th>
+      <th>binomial</th>
+      <th>category</th>
+      <th>citation</th>
+      <th>class_name</th>
+      <th>compiler</th>
+      <th>dist_comm</th>
+      <th>family_nam</th>
+      <th>genus_name</th>
+      <th>geometry</th>
+      <th>...</th>
+      <th>rl_update</th>
+      <th>seasonal</th>
+      <th>shape_Area</th>
+      <th>shape_Leng</th>
+      <th>source</th>
+      <th>species_na</th>
+      <th>subpop</th>
+      <th>subspecies</th>
+      <th>tax_comm</th>
+      <th>year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>27</th>
+      <td>8</td>
+      <td>Teixeirichthys jordani</td>
+      <td>LC</td>
+      <td>Red List Index (Sampled Approach), Zoological ...</td>
+      <td>ACTINOPTERYGII</td>
+      <td>None</td>
+      <td>None</td>
+      <td>POMACENTRIDAE</td>
+      <td>Teixeirichthys</td>
+      <td>POLYGON ((121.6300326400001 33.04248618400004,...</td>
+      <td>...</td>
+      <td>2012.2</td>
+      <td>1</td>
+      <td>116.786519</td>
+      <td>498.057966</td>
+      <td>None</td>
+      <td>jordani</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>2012</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>8</td>
+      <td>Teixeirichthys jordani</td>
+      <td>LC</td>
+      <td>Red List Index (Sampled Approach), Zoological ...</td>
+      <td>ACTINOPTERYGII</td>
+      <td>None</td>
+      <td>None</td>
+      <td>POMACENTRIDAE</td>
+      <td>Teixeirichthys</td>
+      <td>POLYGON ((32.56219482400007 29.97488975500005,...</td>
+      <td>...</td>
+      <td>2012.2</td>
+      <td>1</td>
+      <td>116.786519</td>
+      <td>498.057966</td>
+      <td>None</td>
+      <td>jordani</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>2012</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>8</td>
+      <td>Teixeirichthys jordani</td>
+      <td>LC</td>
+      <td>Red List Index (Sampled Approach), Zoological ...</td>
+      <td>ACTINOPTERYGII</td>
+      <td>None</td>
+      <td>None</td>
+      <td>POMACENTRIDAE</td>
+      <td>Teixeirichthys</td>
+      <td>POLYGON ((130.9052090560001 34.02498196400006,...</td>
+      <td>...</td>
+      <td>2012.2</td>
+      <td>1</td>
+      <td>116.786519</td>
+      <td>498.057966</td>
+      <td>None</td>
+      <td>jordani</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>2012</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>8</td>
+      <td>Teixeirichthys jordani</td>
+      <td>LC</td>
+      <td>Red List Index (Sampled Approach), Zoological ...</td>
+      <td>ACTINOPTERYGII</td>
+      <td>None</td>
+      <td>None</td>
+      <td>POMACENTRIDAE</td>
+      <td>Teixeirichthys</td>
+      <td>POLYGON ((56.32233070000007 -3.707270205999976...</td>
+      <td>...</td>
+      <td>2012.2</td>
+      <td>1</td>
+      <td>116.786519</td>
+      <td>498.057966</td>
+      <td>None</td>
+      <td>jordani</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>2012</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>8</td>
+      <td>Teixeirichthys jordani</td>
+      <td>LC</td>
+      <td>Red List Index (Sampled Approach), Zoological ...</td>
+      <td>ACTINOPTERYGII</td>
+      <td>None</td>
+      <td>None</td>
+      <td>POMACENTRIDAE</td>
+      <td>Teixeirichthys</td>
+      <td>POLYGON ((40.64476131800006 -10.85502363999996...</td>
+      <td>...</td>
+      <td>2012.2</td>
+      <td>1</td>
+      <td>116.786519</td>
+      <td>498.057966</td>
+      <td>None</td>
+      <td>jordani</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>2012</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>8</td>
+      <td>Teixeirichthys jordani</td>
+      <td>LC</td>
+      <td>Red List Index (Sampled Approach), Zoological ...</td>
+      <td>ACTINOPTERYGII</td>
+      <td>None</td>
+      <td>None</td>
+      <td>POMACENTRIDAE</td>
+      <td>Teixeirichthys</td>
+      <td>POLYGON ((48.11258402900006 -9.335103113999935...</td>
+      <td>...</td>
+      <td>2012.2</td>
+      <td>1</td>
+      <td>116.786519</td>
+      <td>498.057966</td>
+      <td>None</td>
+      <td>jordani</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>2012</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>8</td>
+      <td>Teixeirichthys jordani</td>
+      <td>LC</td>
+      <td>Red List Index (Sampled Approach), Zoological ...</td>
+      <td>ACTINOPTERYGII</td>
+      <td>None</td>
+      <td>None</td>
+      <td>POMACENTRIDAE</td>
+      <td>Teixeirichthys</td>
+      <td>POLYGON ((51.75403543100003 -9.21679305899994,...</td>
+      <td>...</td>
+      <td>2012.2</td>
+      <td>1</td>
+      <td>116.786519</td>
+      <td>498.057966</td>
+      <td>None</td>
+      <td>jordani</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>2012</td>
+    </tr>
+  </tbody>
+</table>
+<p>7 rows × 27 columns</p>
+</div><div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s check the type of the grouped object</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">individual_fish</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">geopandas</span><span class="o">.</span><span class="n">geodataframe</span><span class="o">.</span><span class="n">GeoDataFrame</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s check what the &#39;key&#39; variable contains</span>
+<span class="n">key</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="s1">&#39;Teixeirichthys jordani&#39;</span>
+</pre></div>
+</div>
+<p>As can be seen from the example above, each set of data are now grouped
+into separate GeoDataFrames that we can export into Shapefiles using the
+variable &#8216;key&#8217; for creating the output filepath names. Let&#8217;s now export
+those species into individual Shapefiles.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Determine outputpath</span>
+<span class="n">outFolder</span> <span class="o">=</span> <span class="s2">r&quot;C:\HY-Data\HENTENKA\Data&quot;</span>
+
+<span class="c1"># Create a new folder called &#39;Results&#39; (if does not exist) to that folder using os.makedirs() function</span>
+<span class="n">resultFolder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">outFolder</span><span class="p">,</span> <span class="s1">&#39;Results&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">resultFolder</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">resultFolder</span><span class="p">)</span>
+
+<span class="c1"># Iterate over the</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">grouped</span><span class="p">:</span>
+    <span class="c1"># Format the filename</span>
+    <span class="n">outName</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">.shp&quot;</span> <span class="o">%</span> <span class="n">key</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Print some information for the user</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Processing: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">key</span><span class="p">)</span>
+
+    <span class="c1"># Create an output path</span>
+    <span class="n">outpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">resultFolder</span><span class="p">,</span> <span class="n">outName</span><span class="p">)</span>
+
+    <span class="c1"># Export the data</span>
+    <span class="n">values</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">outpath</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Processing</span><span class="p">:</span> <span class="n">Abudefduf</span> <span class="n">concolor</span>
+<span class="n">Processing</span><span class="p">:</span> <span class="n">Abudefduf</span> <span class="n">declivifrons</span>
+<span class="n">Processing</span><span class="p">:</span> <span class="n">Abudefduf</span> <span class="n">troschelii</span>
+<span class="n">Processing</span><span class="p">:</span> <span class="n">Amphiprion</span> <span class="n">sandaracinos</span>
+<span class="n">Processing</span><span class="p">:</span> <span class="n">Azurina</span> <span class="n">eupalama</span>
+<span class="n">Processing</span><span class="p">:</span> <span class="n">Azurina</span> <span class="n">hirundo</span>
+<span class="n">Processing</span><span class="p">:</span> <span class="n">Chromis</span> <span class="n">alpha</span>
+<span class="n">Processing</span><span class="p">:</span> <span class="n">Chromis</span> <span class="n">alta</span>
+<span class="n">Processing</span><span class="p">:</span> <span class="n">Chromis</span> <span class="n">atrilobata</span>
+<span class="n">Processing</span><span class="p">:</span> <span class="n">Chromis</span> <span class="n">crusma</span>
+<span class="n">Processing</span><span class="p">:</span> <span class="n">Chromis</span> <span class="n">cyanea</span>
+<span class="n">Processing</span><span class="p">:</span> <span class="n">Chromis</span> <span class="n">flavicauda</span>
+<span class="n">Processing</span><span class="p">:</span> <span class="n">Chromis</span> <span class="n">intercrusma</span>
+<span class="n">Processing</span><span class="p">:</span> <span class="n">Chromis</span> <span class="n">limbaughi</span>
+<span class="n">Processing</span><span class="p">:</span> <span class="n">Chromis</span> <span class="n">pembae</span>
+<span class="n">Processing</span><span class="p">:</span> <span class="n">Chromis</span> <span class="n">punctipinnis</span>
+<span class="n">Processing</span><span class="p">:</span> <span class="n">Chrysiptera</span> <span class="n">flavipinnis</span>
+<span class="n">Processing</span><span class="p">:</span> <span class="n">Hypsypops</span> <span class="n">rubicundus</span>
+<span class="n">Processing</span><span class="p">:</span> <span class="n">Microspathodon</span> <span class="n">bairdii</span>
+<span class="n">Processing</span><span class="p">:</span> <span class="n">Microspathodon</span> <span class="n">dorsalis</span>
+<span class="n">Processing</span><span class="p">:</span> <span class="n">Nexilosus</span> <span class="n">latifrons</span>
+<span class="n">Processing</span><span class="p">:</span> <span class="n">Stegastes</span> <span class="n">acapulcoensis</span>
+<span class="n">Processing</span><span class="p">:</span> <span class="n">Stegastes</span> <span class="n">arcifrons</span>
+<span class="n">Processing</span><span class="p">:</span> <span class="n">Stegastes</span> <span class="n">baldwini</span>
+<span class="n">Processing</span><span class="p">:</span> <span class="n">Stegastes</span> <span class="n">beebei</span>
+<span class="n">Processing</span><span class="p">:</span> <span class="n">Stegastes</span> <span class="n">flavilatus</span>
+<span class="n">Processing</span><span class="p">:</span> <span class="n">Stegastes</span> <span class="n">leucorus</span>
+<span class="n">Processing</span><span class="p">:</span> <span class="n">Stegastes</span> <span class="n">rectifraenum</span>
+<span class="n">Processing</span><span class="p">:</span> <span class="n">Stegastes</span> <span class="n">redemptus</span>
+<span class="n">Processing</span><span class="p">:</span> <span class="n">Teixeirichthys</span> <span class="n">jordani</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="AutoGIS15_Lecture7_PythonGIS.html" class="btn btn-neutral" title="Automating GIS-processes - Lecture 7: Python GIS" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Henrikki Tenkanen &amp; David Whipp.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
