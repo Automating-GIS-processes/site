@@ -1,34 +1,64 @@
-.. PyGeoEdu documentation master file, created by
+.. Geo-Python documentation master file, created by
    sphinx-quickstart on Tue Nov  8 14:50:02 2016.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Python for Geo-people course!
-========================================
+.. figure:: img/Some_Global_text.png
+
+Welcome to Automating GIS processes course!
+===========================================
 
 Course format
-~~~~~~~~~~~~~
+-------------
 
 The majority of this course will be spent in front of a computer learning to program in the Python language and working on exercises.
-During Teaching Period I, the Automating GIS processes and Introduction to Quantitative Geology courses will meet together and focus on learning to program in Python.
-Previously, both these courses lacked sufficient time for students to properly learn the basic concepts of programming in Python. We hope this extended time learning Python
-will be helpful later in the course (i.e., in Period II) when we work on the course-related applications.
+During Teaching Period I, the Automating GIS processes and Introduction to Quantitative Geology courses will meet together and focus on
+learning to program in Python. Previously, both these courses lacked sufficient time for students to properly learn the basic concepts of programming in Python.
 
-The computer exercises will focus on developing basic programming skills using the Python language and applying those skills to various problems. Typical exercises will involve a
-brief introduction followed by topical computer-based tasks. At the end of the exercises, you may be asked to submit answers to relevant questions, some related plots, and/or Python
-codes you have written or used. You are encouraged to discuss and work together with other students on the laboratory exercises, however the laboratory summary write-ups that you submit
-must be completed individually and must clearly reflect your own work.
+The computer exercises will focus on developing basic programming skills using the Python language and applying those skills to various GIS related problems.
+Typical exercises will involve a brief introduction followed by topical computer-based tasks. At the end of the exercises, you may be asked to submit answers
+to relevant questions, some related plots, and/or Python codes you have written or used. You are encouraged to discuss and work together with other students
+on the laboratory exercises, however the laboratory summary write-ups that you submit must be completed individually and must clearly reflect your own work.
 
-Contents:
+Course topics by week
+---------------------
+See earlier materials from Period I `here <https://github.com/Python-for-geo-people/Course-information>`_.
+
+The materials are divided into weekly sections that are published at these pages every Monday morning. Lessons are held with following schedule:
+
+ * 31.10 - Lesson 1: GIS in Python; Spatial Data Model, Geometric Objects, Shapely
+ * 07.11 - Lesson 2:  Working with (Geo)DataFrames
+ * 14.11 - Lesson 3: Geometric operations and geocoding
+ * 21.11 - Lesson 4: Spatial queries
+ * 28.11 - Lesson 5: Visualization, static and interactive maps
+ * 08.12 - Lesson 6: Using ArcGIS through Python (the arcpy-module)
+ * 12.12 - Lesson 7: Raster data processing in Python
+
+Contents
+--------
+*Lesson content, readings and due dates are subject to change*
 
 .. toctree::
    :maxdepth: 2
+   :caption: Course information
 
-   AutoGIS15_Lecture6_PythonGIS
-   AutoGIS15_Lecture7_PythonGIS
-   AutoGIS15_Lecture9_PythonGIS
+   course-info
 
+.. toctree::
+   :maxdepth: 2
+   :caption: Lesson 1
 
+   Intro-Python-GIS
+   Geometric-Objects
+   Exercise-1
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Lesson 2
+
+   Lesson2-GeoDataFrames
+   geopandas-basics
+   Exercise-2
 
 Indices and tables
 ==================

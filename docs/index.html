@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Welcome to Python for Geo-people course! &mdash; Geo-Python 1 documentation</title>
+  <title>Welcome to Automating GIS processes course! &mdash; Geo-Python 1 documentation</title>
   
 
   
@@ -34,7 +34,7 @@
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="Geo-Python 1 documentation" href="#"/>
-        <link rel="next" title="Automating GIS-processes - Lecture 6: Python GIS" href="AutoGIS15_Lecture6_PythonGIS.html"/> 
+        <link rel="next" title="General info" href="course-info.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -86,10 +86,21 @@
           
             
             
-                <ul>
-<li class="toctree-l1"><a class="reference internal" href="AutoGIS15_Lecture6_PythonGIS.html">Automating GIS-processes - Lecture 6: Python GIS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="AutoGIS15_Lecture7_PythonGIS.html">Automating GIS-processes - Lecture 7: Python GIS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="AutoGIS15_Lecture9_PythonGIS.html">Automating GIS-processes - Lecture 9: Python GIS</a></li>
+                <p class="caption"><span class="caption-text">Course information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="course-info.html">General info</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 1</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Intro-Python-GIS.html">Introduction to Python GIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Geometric-Objects.html">Geometric Objects - Spatial Data Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise-1.html">Exercise 1</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 2</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Lesson2-GeoDataFrames.html">Introduction to Pandas and Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geopandas-basics.html">Basics of Geopandas - working with spatial data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise-2.html">Exercise 2</a></li>
 </ul>
 
             
@@ -120,7 +131,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="#">Docs</a> &raquo;</li>
       
-    <li>Welcome to Python for Geo-people course!</li>
+    <li>Welcome to Automating GIS processes course!</li>
       <li class="wy-breadcrumbs-aside">
         
           
@@ -134,45 +145,85 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="welcome-to-python-for-geo-people-course">
-<h1>Welcome to Python for Geo-people course!<a class="headerlink" href="#welcome-to-python-for-geo-people-course" title="Permalink to this headline">¶</a></h1>
+  <div class="figure">
+<img alt="_images/Some_Global_text.png" src="_images/Some_Global_text.png" />
+</div>
+<div class="section" id="welcome-to-automating-gis-processes-course">
+<h1>Welcome to Automating GIS processes course!<a class="headerlink" href="#welcome-to-automating-gis-processes-course" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="course-format">
 <h2>Course format<a class="headerlink" href="#course-format" title="Permalink to this headline">¶</a></h2>
 <p>The majority of this course will be spent in front of a computer learning to program in the Python language and working on exercises.
-During Teaching Period I, the Automating GIS processes and Introduction to Quantitative Geology courses will meet together and focus on learning to program in Python.
-Previously, both these courses lacked sufficient time for students to properly learn the basic concepts of programming in Python. We hope this extended time learning Python
-will be helpful later in the course (i.e., in Period II) when we work on the course-related applications.</p>
-<p>The computer exercises will focus on developing basic programming skills using the Python language and applying those skills to various problems. Typical exercises will involve a
-brief introduction followed by topical computer-based tasks. At the end of the exercises, you may be asked to submit answers to relevant questions, some related plots, and/or Python
-codes you have written or used. You are encouraged to discuss and work together with other students on the laboratory exercises, however the laboratory summary write-ups that you submit
-must be completed individually and must clearly reflect your own work.</p>
-<p>Contents:</p>
-<div class="toctree-wrapper compound">
+During Teaching Period I, the Automating GIS processes and Introduction to Quantitative Geology courses will meet together and focus on
+learning to program in Python. Previously, both these courses lacked sufficient time for students to properly learn the basic concepts of programming in Python.</p>
+<p>The computer exercises will focus on developing basic programming skills using the Python language and applying those skills to various GIS related problems.
+Typical exercises will involve a brief introduction followed by topical computer-based tasks. At the end of the exercises, you may be asked to submit answers
+to relevant questions, some related plots, and/or Python codes you have written or used. You are encouraged to discuss and work together with other students
+on the laboratory exercises, however the laboratory summary write-ups that you submit must be completed individually and must clearly reflect your own work.</p>
+</div>
+<div class="section" id="course-topics-by-week">
+<h2>Course topics by week<a class="headerlink" href="#course-topics-by-week" title="Permalink to this headline">¶</a></h2>
+<p>See earlier materials from Period I <a class="reference external" href="https://github.com/Python-for-geo-people/Course-information">here</a>.</p>
+<p>The materials are divided into weekly sections that are published at these pages every Monday morning. Lessons are held with following schedule:</p>
+<blockquote>
+<div><ul class="simple">
+<li>31.10 - Lesson 1: GIS in Python; Spatial Data Model, Geometric Objects, Shapely</li>
+<li>07.11 - Lesson 2:  Working with (Geo)DataFrames</li>
+<li>14.11 - Lesson 3: Geometric operations and geocoding</li>
+<li>21.11 - Lesson 4: Spatial queries</li>
+<li>28.11 - Lesson 5: Visualization, static and interactive maps</li>
+<li>08.12 - Lesson 6: Using ArcGIS through Python (the arcpy-module)</li>
+<li>12.12 - Lesson 7: Raster data processing in Python</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="contents">
+<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
+<p><em>Lesson content, readings and due dates are subject to change</em></p>
+<div class="toctree-wrapper compound" id="course-information">
+<p class="caption"><span class="caption-text">Course information</span><a class="headerlink" href="#course-information" title="Permalink to this toctree">¶</a></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="AutoGIS15_Lecture6_PythonGIS.html">Automating GIS-processes - Lecture 6: Python GIS</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="AutoGIS15_Lecture6_PythonGIS.html#gis-with-pure-python">GIS with &#8216;pure&#8217; Python</a></li>
-<li class="toctree-l2"><a class="reference internal" href="AutoGIS15_Lecture6_PythonGIS.html#introduction-to-python-gis">Introduction to Python GIS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="AutoGIS15_Lecture6_PythonGIS.html#geometric-objects-spatial-data-model">Geometric Objects - Spatial Data Model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="AutoGIS15_Lecture6_PythonGIS.html#creating-geometric-objects-with-shapely">Creating Geometric Objects with Shapely</a></li>
-<li class="toctree-l2"><a class="reference internal" href="AutoGIS15_Lecture6_PythonGIS.html#linestring"><em>LineString</em></a></li>
-<li class="toctree-l2"><a class="reference internal" href="AutoGIS15_Lecture6_PythonGIS.html#polygon"><em>Polygon</em></a></li>
-<li class="toctree-l2"><a class="reference internal" href="AutoGIS15_Lecture6_PythonGIS.html#collections-of-geometric-objects"><em>Collections of Geometric Objects</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="course-info.html">General info</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="course-info.html#course-meetings-in-period-ii">Course meetings in Period II</a></li>
+<li class="toctree-l2"><a class="reference internal" href="course-info.html#instructors">Instructors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="course-info.html#course-websites">Course websites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="course-info.html#textbooks">Textbooks</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="AutoGIS15_Lecture7_PythonGIS.html">Automating GIS-processes - Lecture 7: Python GIS</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="AutoGIS15_Lecture7_PythonGIS.html#working-with-spatial-data-using-pandas-geopandas">Working with spatial data using Pandas/Geopandas</a></li>
-<li class="toctree-l2"><a class="reference internal" href="AutoGIS15_Lecture7_PythonGIS.html#reading-a-shapefile">Reading a Shapefile</a></li>
-<li class="toctree-l2"><a class="reference internal" href="AutoGIS15_Lecture7_PythonGIS.html#writing-a-shapefile">Writing a Shapefile</a></li>
-<li class="toctree-l2"><a class="reference internal" href="AutoGIS15_Lecture7_PythonGIS.html#geometries-in-geopandas">Geometries in Geopandas</a></li>
-<li class="toctree-l2"><a class="reference internal" href="AutoGIS15_Lecture7_PythonGIS.html#creating-geodataframe-and-exporting-it-to-shapefile">Creating GeoDataFrame and exporting it to Shapefile</a></li>
-<li class="toctree-l2"><a class="reference internal" href="AutoGIS15_Lecture7_PythonGIS.html#extra-create-an-interactive-visualization-using-bokeh">Extra - Create an interactive visualization using bokeh</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound" id="lesson-1">
+<p class="caption"><span class="caption-text">Lesson 1</span><a class="headerlink" href="#lesson-1" title="Permalink to this toctree">¶</a></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Intro-Python-GIS.html">Introduction to Python GIS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Intro-Python-GIS.html#general-overview-of-the-latter-part-of-the-course">General overview of the latter part of the course</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Intro-Python-GIS.html#what-sort-of-tools-are-available-for-doing-gis-in-pure-python">What sort of tools are available for doing GIS in pure Python?</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="AutoGIS15_Lecture9_PythonGIS.html">Automating GIS-processes - Lecture 9: Python GIS</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="AutoGIS15_Lecture9_PythonGIS.html#useful-functionalities-for-processing-the-data">Useful functionalities for processing the data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="AutoGIS15_Lecture9_PythonGIS.html#grouping-data">Grouping data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Geometric-Objects.html">Geometric Objects - Spatial Data Model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Geometric-Objects.html#overview-of-geometric-objects-and-shapely-module">Overview of geometric objects and Shapely -module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Geometric-Objects.html#point">Point</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Geometric-Objects.html#linestring">LineString</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Geometric-Objects.html#polygon">Polygon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Geometric-Objects.html#pro-tips-optional">Pro -tips (optional)</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise-1.html">Exercise 1</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound" id="lesson-2">
+<p class="caption"><span class="caption-text">Lesson 2</span><a class="headerlink" href="#lesson-2" title="Permalink to this toctree">¶</a></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Lesson2-GeoDataFrames.html">Introduction to Pandas and Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geopandas-basics.html">Basics of Geopandas - working with spatial data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="geopandas-basics.html#downloading-and-extracting-data">Downloading and extracting data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geopandas-basics.html#reading-a-shapefile">Reading a Shapefile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geopandas-basics.html#coordinate-reference-system-crs">Coordinate reference system (CRS)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geopandas-basics.html#writing-a-shapefile">Writing a Shapefile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geopandas-basics.html#geometries-in-geopandas">Geometries in Geopandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geopandas-basics.html#creating-geometries-into-a-geodataframe">Creating geometries into a GeoDataFrame</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise-2.html">Exercise 2</a></li>
 </ul>
 </div>
 </div>
@@ -193,7 +244,7 @@ must be completed individually and must clearly reflect your own work.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="AutoGIS15_Lecture6_PythonGIS.html" class="btn btn-neutral float-right" title="Automating GIS-processes - Lecture 6: Python GIS" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="course-info.html" class="btn btn-neutral float-right" title="General info" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
     </div>

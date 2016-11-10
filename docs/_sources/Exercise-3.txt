@@ -1,0 +1,5 @@
+Exercise 3
+==========
+
+Next, you can continue with the `Exercise 3 in GitHub <>`__.
+

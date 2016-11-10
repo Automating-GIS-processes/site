@@ -1,0 +1,343 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Introduction to Python GIS &mdash; Geo-Python 1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Geo-Python 1 documentation" href="index.html"/>
+        <link rel="next" title="Geometric Objects - Spatial Data Model" href="Geometric-Objects.html"/>
+        <link rel="prev" title="General info" href="course-info.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Geo-Python
+          
+
+          
+            
+            <img src="_static/logo_hy_geo_135.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2016 Autumn
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Course information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="course-info.html">General info</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 1</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction to Python GIS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#general-overview-of-the-latter-part-of-the-course">General overview of the latter part of the course</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-sort-of-tools-are-available-for-doing-gis-in-pure-python">What sort of tools are available for doing GIS in pure Python?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Geometric-Objects.html">Geometric Objects - Spatial Data Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise-1.html">Exercise 1</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 2</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Lesson2-GeoDataFrames.html">Introduction to Pandas and Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geopandas-basics.html">Basics of Geopandas - working with spatial data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise-2.html">Exercise 2</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Geo-Python</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Introduction to Python GIS</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/Intro-Python-GIS.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="introduction-to-python-gis">
+<h1>Introduction to Python GIS<a class="headerlink" href="#introduction-to-python-gis" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="general-overview-of-the-latter-part-of-the-course">
+<h2>General overview of the latter part of the course<a class="headerlink" href="#general-overview-of-the-latter-part-of-the-course" title="Permalink to this headline">¶</a></h2>
+<p>Now as we know the basics of Python programming we are ready to advance
+and apply those skills to different GIS related tasks. During the next
+seven weeks we will learn how to deal with spatial data and analyze it
+using &#8220;pure&#8221; Python.</p>
+<p>At the end of the course you should be able to:</p>
+<ul class="simple">
+<li>Read / write spatial data from/to different file formats</li>
+<li>Deal with different projections</li>
+<li>Do different geometric operations and geocoding</li>
+<li>Do spatial queries</li>
+<li>Do simple spatial analyses</li>
+<li>Visualize data and create (interactive) maps, such as following:</li>
+</ul>
+<div style="margin-top:10px;">
+  <iframe width="1000" height="600" src="http://www.helsinki.fi/science/accessibility/opetus/autogis/texas_unemployment.html" frameborder="0" allowfullscreen></iframe>
+</div><p>Python is extremely useful language to learn in terms of GIS since many
+(or most) of the different GIS Software packages (such as ArcGIS, QGIS,
+PostGIS etc.) provide an interface to do analysis using Python
+scripting. During this course, we will mostly focus on doing GIS without
+any third party softwares such as ArcGIS. <strong>Why?</strong> There are several
+reasons for doing GIS using Python without any additional software:</p>
+<ul class="simple">
+<li><strong>Everything is free</strong>: you don&#8217;t need to buy and expensive license
+for ArcGIS (for example)</li>
+<li>You will <strong>learn and understand</strong> much more deeply how different
+geoprocessing operations work</li>
+<li>Python is <strong>highly efficient</strong>: used for analysing Big Data</li>
+<li>Python is <strong>highly flexible</strong>: supports all data formats that you can
+imagine</li>
+<li>Using Python (or any other open-source programming language)
+<strong>supports open source softwares/codes and open science</strong> by making
+it possible for everyone to reproduce your work, free-of-charge.</li>
+<li><strong>Plug-in and chain different third-party softwares</strong> to build e.g. a
+fancy web-GIS applications as you want (using e.g.
+<a class="reference external" href="https://docs.djangoproject.com/en/1.8/ref/contrib/gis/">GeoDjango</a>
+with <a class="reference external" href="http://postgis.net/">PostGIS</a> as a back-end)</li>
+</ul>
+</div>
+<div class="section" id="what-sort-of-tools-are-available-for-doing-gis-in-pure-python">
+<h2>What sort of tools are available for doing GIS in pure Python?<a class="headerlink" href="#what-sort-of-tools-are-available-for-doing-gis-in-pure-python" title="Permalink to this headline">¶</a></h2>
+<p>We have already used few Python modules for conducting different tasks,
+such as <strong>numpy</strong> for doing mathematical calculations or <strong>matplotlib</strong>
+for visualizing our data. From now on, we will familiarize ourselves
+with punch of other Python modules that are useful when doing data
+analysis or different GIS tasks.</p>
+<p>One drawback when compared to using a specific GIS-software such as
+ArcGIS, is that GIS tools are spread under different Python modules and
+created by different developers. This means that you need to familiarize
+yourself with many different modules (and their documentation), whereas
+e.g. in ArcGIS everything is packaged under a same module called
+<a class="reference external" href="http://desktop.arcgis.com/en/arcmap/10.3/analyze/arcpy/what-is-arcpy-.htm">arcpy</a>.</p>
+<p>Below we have listed most of the crucial modules (and links to their
+docs) that helps you get going when doing data analysis or GIS in
+Python. If you are interested or when you start using these modules in
+your own work, you should read the documentation from the web pages of
+the module that you need:</p>
+<ul class="simple">
+<li><strong>Data analysis &amp; visualization:</strong><ul>
+<li><a class="reference external" href="http://www.numpy.org/">Numpy</a> &#8211;&gt; Fundamental package for
+scientific computing with Python</li>
+<li><a class="reference external" href="http://pandas.pydata.org/">Pandas</a> &#8211;&gt; High-performance,
+easy-to-use data structures and data analysis tools</li>
+<li><a class="reference external" href="http://www.scipy.org/about.html">Scipy</a> &#8211;&gt; A collection of
+numerical algorithms and domain-specific toolboxes, including
+signal processing, optimization and statistics</li>
+<li><a class="reference external" href="http://matplotlib.org/">Matplotlib</a> &#8211;&gt; Basic plotting library
+for Python</li>
+<li><a class="reference external" href="http://bokeh.pydata.org/en/latest/">Bokeh</a> &#8211;&gt; Interactive
+visualizations for the web (also maps)</li>
+<li><a class="reference external" href="https://plot.ly/python/">Plotly</a> &#8211;&gt; Interactive
+visualizations (also maps) for the web (commercial - free for
+educational purposes)</li>
+</ul>
+</li>
+<li><strong>GIS:</strong><ul>
+<li><a class="reference external" href="http://www.gdal.org/">GDAL</a> &#8211;&gt; Fundamental package for
+processing vector and raster data formats (many modules below
+depend on this). Used for raster processing.</li>
+<li><a class="reference external" href="http://geopandas.org/#description">Geopandas</a> &#8211;&gt; Working with
+geospatial data in Python made easier, combines the capabilities
+of pandas and shapely.</li>
+<li><a class="reference external" href="http://toblerity.org/shapely/manual.html">Shapely</a> &#8211;&gt; Python
+package for manipulation and analysis of planar geometric objects
+(based on widely deployed
+<a class="reference external" href="https://trac.osgeo.org/geos/">GEOS</a>).</li>
+<li><a class="reference external" href="https://pypi.python.org/pypi/Fiona">Fiona</a> &#8211;&gt; Reading and
+writing spatial data (alternative for geopandas).</li>
+<li><a class="reference external" href="https://pypi.python.org/pypi/pyproj?">Pyproj</a> &#8211;&gt; Performs
+cartographic transformations and geodetic computations (based on
+<a class="reference external" href="http://trac.osgeo.org/proj">PROJ.4</a>).</li>
+<li><a class="reference external" href="https://pysal.readthedocs.org/en/latest/">Pysal</a> &#8211;&gt; Library
+of spatial analysis functions written in Python.</li>
+<li><a class="reference external" href="http://geopy.readthedocs.io/en/latest/">Geopy</a> &#8211;&gt; Geocoding
+library: coordinates to address &lt;-&gt; address to coordinates.</li>
+<li><a class="reference external" href="http://geo.holoviews.org/index.html">GeoViews</a> &#8211;&gt; Interactive
+Maps for the web.</li>
+<li><a class="reference external" href="https://networkx.github.io/documentation/networkx-1.10/overview.html">Networkx</a>
+&#8211;&gt; Network analysis and routing in Python (e.g. Dijkstra and A*
+-algorithms), see <a class="reference external" href="http://gis.stackexchange.com/questions/65056/is-it-possible-to-route-shapefiles-using-python-and-without-arcgis-qgis-or-pgr">this
+post</a>.</li>
+<li><a class="reference external" href="http://scitools.org.uk/cartopy/docs/latest/index.html">Cartopy</a>
+&#8211;&gt; Make drawing maps for data analysis and visualisation as easy
+as possible.</li>
+<li><a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/spatial.html">Scipy.spatial</a>
+&#8211;&gt; Spatial algorithms and data structures.</li>
+<li><a class="reference external" href="http://toblerity.org/rtree/">Rtree</a> &#8211;&gt; Spatial indexing for
+Python for quick spatial lookups.</li>
+<li><a class="reference external" href="https://github.com/mapbox/rasterio">Rasterio</a> &#8211;&gt; Clean and
+fast and geospatial raster I/O for Python.</li>
+<li><a class="reference external" href="http://www.rsgislib.org/index.html#python-documentation">RSGISLib</a>
+&#8211;&gt; Remote Sensing and GIS Software Library for Python.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Geometric-Objects.html" class="btn btn-neutral float-right" title="Geometric Objects - Spatial Data Model" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="course-info.html" class="btn btn-neutral" title="General info" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Henrikki Tenkanen &amp; David Whipp.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
