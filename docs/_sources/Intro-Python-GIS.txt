@@ -20,9 +20,7 @@ At the end of the course you should be able to:
 
 .. raw:: html
 
-    <div style="margin-top:10px;">
-      <iframe width="1000" height="600" src="http://www.helsinki.fi/science/accessibility/opetus/autogis/texas_unemployment.html" frameborder="0" allowfullscreen></iframe>
-    </div>
+    <iframe width="1000" height="600" src="http://www.helsinki.fi/science/accessibility/opetus/autogis/texas_unemployment.html" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
 
 Python is extremely useful language to learn in terms of GIS since many
 (or most) of the different GIS Software packages (such as ArcGIS, QGIS,
