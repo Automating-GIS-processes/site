@@ -57,6 +57,7 @@ Contents
    :caption: Lesson 2
 
    Lesson2-GeoDataFrames
+   pandas-intro
    geopandas-basics
    Exercise-2
 
