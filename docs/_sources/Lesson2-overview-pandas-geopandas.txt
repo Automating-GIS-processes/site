@@ -1,5 +1,5 @@
-Introduction to Pandas and Geopandas
-------------------------------------
+Overview of Pandas and Geopandas -modules
+=========================================
 
 **Sources**
 

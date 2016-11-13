@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Basics of Geopandas - working with spatial data &mdash; Geo-Python 1 documentation</title>
+  <title>Introduction to Geopandas &mdash; GeoPython - AutoGIS 1 documentation</title>
   
 
   
@@ -33,9 +33,9 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Geo-Python 1 documentation" href="index.html"/>
+    <link rel="top" title="GeoPython - AutoGIS 1 documentation" href="index.html"/>
         <link rel="next" title="Exercise 2" href="Exercise-2.html"/>
-        <link rel="prev" title="Basics of Pandas" href="pandas-intro.html"/> 
+        <link rel="prev" title="Introduction to Pandas" href="Lesson2-pandas-intro.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -53,7 +53,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> Geo-Python
+            <a href="index.html" class="icon icon-home"> GeoPython - AutoGIS
           
 
           
@@ -93,24 +93,37 @@
 </ul>
 <p class="caption"><span class="caption-text">Lesson 1</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="Intro-Python-GIS.html">Introduction to Python GIS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Geometric-Objects.html">Geometric Objects - Spatial Data Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson1-Intro-Python-GIS.html">Introduction to Python GIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson1-Geometric-Objects.html">Geometric Objects - Spatial Data Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Exercise-1.html">Exercise 1</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Lesson 2</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="Lesson2-GeoDataFrames.html">Introduction to Pandas and Geopandas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pandas-intro.html">Basics of Pandas</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Basics of Geopandas - working with spatial data</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="Lesson2-overview-pandas-geopandas.html">Overview of Pandas and Geopandas -modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson2-pandas-intro.html">Introduction to Pandas</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction to Geopandas</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#downloading-and-extracting-data">Downloading and extracting data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#reading-a-shapefile">Reading a Shapefile</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#coordinate-reference-system-crs">Coordinate reference system (CRS)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#writing-a-shapefile">Writing a Shapefile</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#geometries-in-geopandas">Geometries in Geopandas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#creating-geometries-into-a-geodataframe">Creating geometries into a GeoDataFrame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pro-tips-optional-but-recommended">Pro -tips (optional but recommended)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#grouping-data">Grouping data</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Exercise-2.html">Exercise 2</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 3</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Lesson3-geocoding.html">Geocoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson3-table-join.html">Table join</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson3-projections.html">Projections: Converting from projection to another</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson3-point-in-polygon.html">Spatial queries: Point in Polygon &amp; Intersect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson3-spatial-join.html">Spatial join</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise-3.html">Exercise 3</a></li>
 </ul>
 
             
@@ -124,7 +137,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="index.html">Geo-Python</a>
+        <a href="index.html">GeoPython - AutoGIS</a>
       </nav>
 
 
@@ -141,11 +154,11 @@
   <ul class="wy-breadcrumbs">
     <li><a href="index.html">Docs</a> &raquo;</li>
       
-    <li>Basics of Geopandas - working with spatial data</li>
+    <li>Introduction to Geopandas</li>
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="_sources/geopandas-basics.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/Lesson2-geopandas-basics.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -155,8 +168,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="basics-of-geopandas-working-with-spatial-data">
-<h1>Basics of Geopandas - working with spatial data<a class="headerlink" href="#basics-of-geopandas-working-with-spatial-data" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="introduction-to-geopandas">
+<h1>Introduction to Geopandas<a class="headerlink" href="#introduction-to-geopandas" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="downloading-and-extracting-data">
 <h2>Downloading and extracting data<a class="headerlink" href="#downloading-and-extracting-data" title="Permalink to this headline">¶</a></h2>
 <p>For this lesson we are using data that you can download from <a class="reference external" href="https://github.com/Automating-GIS-processes/Lesson-2-Geo-DataFrames/raw/master/data/Data.zip">here</a>.
@@ -184,7 +197,7 @@ DAMSELFISH_distributions.shx
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="c1"># Set filepath</span>
-<span class="n">fp</span> <span class="o">=</span> <span class="s2">r&quot;C:\HY-Data\HENTENKA\Data\AutoGIS16\Data\DAMSELFISH_distributions.shp&quot;</span>
+<span class="n">fp</span> <span class="o">=</span> <span class="s2">r&quot;/home/geo/Data/DAMSELFISH_distributions.shp&quot;</span>
 
 <span class="c1"># Read file using gpd.read_file()</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
@@ -296,7 +309,7 @@ then write the selection into a Shapefile with <code class="docutils literal"><s
 -function:</li>
 </ul>
 <div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Create a output path for the data</span>
-<span class="n">out</span> <span class="o">=</span> <span class="s2">r&quot;/home/geo/DAMSELFISH_distributions_SELECTION.shp&quot;</span>
+<span class="n">out</span> <span class="o">=</span> <span class="s2">r&quot;/home/geo/Data/DAMSELFISH_distributions_SELECTION.shp&quot;</span>
 
 <span class="c1"># Select first 50 rows</span>
 <span class="n">selection</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">50</span><span class="p">]</span>
@@ -510,7 +523,7 @@ we only need to provide the output path for the Shapefile. Easy isn&#8217;t
 it!:</li>
 </ul>
 <div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Determine the output path for the Shapefile</span>
-<span class="n">outfp</span> <span class="o">=</span> <span class="s2">r&quot;C:\HY-Data\HENTENKA\Data\Senaatintori.shp&quot;</span>
+<span class="n">outfp</span> <span class="o">=</span> <span class="s2">r&quot;/home/geo/Data/Senaatintori.shp&quot;</span>
 
 <span class="c1"># Write the data into that Shapefile</span>
 <span class="n">newdata</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
@@ -522,6 +535,135 @@ coordinates from a text file (e.g. points) and create Shapefiles from
 those automatically.</p>
 <p><strong>Task:</strong> check the output Shapefile in QGIS and make sure that the
 attribute table seems correct.</p>
+</div>
+<div class="section" id="pro-tips-optional-but-recommended">
+<h2>Pro -tips (optional but recommended)<a class="headerlink" href="#pro-tips-optional-but-recommended" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="grouping-data">
+<h3>Grouping data<a class="headerlink" href="#grouping-data" title="Permalink to this headline">¶</a></h3>
+<p>One really useful function that can be used in Pandas/Geopandas is <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.groupby.html">.groupby()</a>.
+This function groups data based on values on selected column(s).</p>
+<ul class="simple">
+<li>Let&#8217;s group individual fishes in <code class="docutils literal"><span class="pre">DAMSELFISH_distribution.shp</span></code> and export the species to individual Shapefiles.<ul>
+<li><em>Note: If your `data` -variable doesn&#8217;t contain the Damselfish data anymore, read the Shapefile again into memory using `gpd.read_file()` -function</em></li>
+</ul>
+</li>
+</ul>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Group the data by column &#39;binomial&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">grouped</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;binomial&#39;</span><span class="p">)</span>
+
+<span class="c1"># Let&#39;s see what we got</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">grouped</span>
+<span class="o">&lt;</span><span class="n">pandas</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">groupby</span><span class="o">.</span><span class="n">DataFrameGroupBy</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x0000000003FB6710</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">groupby</span></code> -function gives us an object called <code class="docutils literal"><span class="pre">DataFrameGroupBy</span></code> which is similar to list of keys and values (in a dictionary) that we can iterate over.</li>
+</ul>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Iterate over the group object</span>
+
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">grouped</span><span class="p">:</span>
+    <span class="n">individual_fish</span> <span class="o">=</span> <span class="n">values</span>
+
+<span class="c1"># Let&#39;s see what is the LAST item that we iterated</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">individual_fish</span><span class="p">)</span>
+
+                  <span class="n">binomial</span> <span class="n">category</span>  \
+<span class="mi">27</span>  <span class="n">Teixeirichthys</span> <span class="n">jordani</span>       <span class="n">LC</span>
+<span class="mi">28</span>  <span class="n">Teixeirichthys</span> <span class="n">jordani</span>       <span class="n">LC</span>
+<span class="mi">29</span>  <span class="n">Teixeirichthys</span> <span class="n">jordani</span>       <span class="n">LC</span>
+<span class="mi">30</span>  <span class="n">Teixeirichthys</span> <span class="n">jordani</span>       <span class="n">LC</span>
+<span class="mi">31</span>  <span class="n">Teixeirichthys</span> <span class="n">jordani</span>       <span class="n">LC</span>
+<span class="mi">32</span>  <span class="n">Teixeirichthys</span> <span class="n">jordani</span>       <span class="n">LC</span>
+<span class="mi">33</span>  <span class="n">Teixeirichthys</span> <span class="n">jordani</span>       <span class="n">LC</span>
+
+                                             <span class="n">citation</span>      <span class="n">class_name</span>  \
+<span class="mi">27</span>  <span class="n">Red</span> <span class="n">List</span> <span class="n">Index</span> <span class="p">(</span><span class="n">Sampled</span> <span class="n">Approach</span><span class="p">),</span> <span class="n">Zoological</span> <span class="o">...</span>  <span class="n">ACTINOPTERYGII</span>
+<span class="mi">28</span>  <span class="n">Red</span> <span class="n">List</span> <span class="n">Index</span> <span class="p">(</span><span class="n">Sampled</span> <span class="n">Approach</span><span class="p">),</span> <span class="n">Zoological</span> <span class="o">...</span>  <span class="n">ACTINOPTERYGII</span>
+<span class="mi">29</span>  <span class="n">Red</span> <span class="n">List</span> <span class="n">Index</span> <span class="p">(</span><span class="n">Sampled</span> <span class="n">Approach</span><span class="p">),</span> <span class="n">Zoological</span> <span class="o">...</span>  <span class="n">ACTINOPTERYGII</span>
+<span class="mi">30</span>  <span class="n">Red</span> <span class="n">List</span> <span class="n">Index</span> <span class="p">(</span><span class="n">Sampled</span> <span class="n">Approach</span><span class="p">),</span> <span class="n">Zoological</span> <span class="o">...</span>  <span class="n">ACTINOPTERYGII</span>
+<span class="mi">31</span>  <span class="n">Red</span> <span class="n">List</span> <span class="n">Index</span> <span class="p">(</span><span class="n">Sampled</span> <span class="n">Approach</span><span class="p">),</span> <span class="n">Zoological</span> <span class="o">...</span>  <span class="n">ACTINOPTERYGII</span>
+<span class="mi">32</span>  <span class="n">Red</span> <span class="n">List</span> <span class="n">Index</span> <span class="p">(</span><span class="n">Sampled</span> <span class="n">Approach</span><span class="p">),</span> <span class="n">Zoological</span> <span class="o">...</span>  <span class="n">ACTINOPTERYGII</span>
+<span class="mi">33</span>  <span class="n">Red</span> <span class="n">List</span> <span class="n">Index</span> <span class="p">(</span><span class="n">Sampled</span> <span class="n">Approach</span><span class="p">),</span> <span class="n">Zoological</span> <span class="o">...</span>  <span class="n">ACTINOPTERYGII</span>
+
+   <span class="n">compiler</span> <span class="n">dist_comm</span>     <span class="n">family_nam</span>      <span class="n">genus_name</span>  \
+<span class="mi">27</span>     <span class="kc">None</span>      <span class="kc">None</span>  <span class="n">POMACENTRIDAE</span>  <span class="n">Teixeirichthys</span>
+<span class="mi">28</span>     <span class="kc">None</span>      <span class="kc">None</span>  <span class="n">POMACENTRIDAE</span>  <span class="n">Teixeirichthys</span>
+<span class="mi">29</span>     <span class="kc">None</span>      <span class="kc">None</span>  <span class="n">POMACENTRIDAE</span>  <span class="n">Teixeirichthys</span>
+<span class="mi">30</span>     <span class="kc">None</span>      <span class="kc">None</span>  <span class="n">POMACENTRIDAE</span>  <span class="n">Teixeirichthys</span>
+<span class="mi">31</span>     <span class="kc">None</span>      <span class="kc">None</span>  <span class="n">POMACENTRIDAE</span>  <span class="n">Teixeirichthys</span>
+<span class="mi">32</span>     <span class="kc">None</span>      <span class="kc">None</span>  <span class="n">POMACENTRIDAE</span>  <span class="n">Teixeirichthys</span>
+<span class="mi">33</span>     <span class="kc">None</span>      <span class="kc">None</span>  <span class="n">POMACENTRIDAE</span>  <span class="n">Teixeirichthys</span>
+
+                                             <span class="n">geometry</span>     <span class="n">id_no</span>  <span class="o">...</span>  <span class="n">origin</span>  \
+<span class="mi">27</span>  <span class="n">POLYGON</span> <span class="p">((</span><span class="mf">121.6300326400001</span> <span class="mf">33.04248618400004</span><span class="p">,</span><span class="o">...</span>  <span class="mf">154915.0</span>  <span class="o">...</span>       <span class="mi">1</span>
+<span class="mi">28</span>  <span class="n">POLYGON</span> <span class="p">((</span><span class="mf">32.56219482400007</span> <span class="mf">29.97488975500005</span><span class="p">,</span><span class="o">...</span>  <span class="mf">154915.0</span>  <span class="o">...</span>       <span class="mi">1</span>
+<span class="mi">29</span>  <span class="n">POLYGON</span> <span class="p">((</span><span class="mf">130.9052090560001</span> <span class="mf">34.02498196400006</span><span class="p">,</span><span class="o">...</span>  <span class="mf">154915.0</span>  <span class="o">...</span>       <span class="mi">1</span>
+<span class="mi">30</span>  <span class="n">POLYGON</span> <span class="p">((</span><span class="mf">56.32233070000007</span> <span class="o">-</span><span class="mf">3.707270205999976</span><span class="o">...</span>  <span class="mf">154915.0</span>  <span class="o">...</span>       <span class="mi">1</span>
+<span class="mi">31</span>  <span class="n">POLYGON</span> <span class="p">((</span><span class="mf">40.64476131800006</span> <span class="o">-</span><span class="mf">10.85502363999996</span><span class="o">...</span>  <span class="mf">154915.0</span>  <span class="o">...</span>       <span class="mi">1</span>
+<span class="mi">32</span>  <span class="n">POLYGON</span> <span class="p">((</span><span class="mf">48.11258402900006</span> <span class="o">-</span><span class="mf">9.335103113999935</span><span class="o">...</span>  <span class="mf">154915.0</span>  <span class="o">...</span>       <span class="mi">1</span>
+<span class="mi">33</span>  <span class="n">POLYGON</span> <span class="p">((</span><span class="mf">51.75403543100003</span> <span class="o">-</span><span class="mf">9.21679305899994</span><span class="p">,</span><span class="o">...</span>  <span class="mf">154915.0</span>  <span class="o">...</span>       <span class="mi">1</span>
+
+   <span class="n">phylum_nam</span> <span class="n">rl_update</span> <span class="n">seasonal</span>  <span class="n">source</span> <span class="n">species_na</span>  <span class="n">subpop</span>  <span class="n">subspecies</span>  \
+<span class="mi">27</span>   <span class="n">CHORDATA</span>    <span class="mf">2012.2</span>        <span class="mi">1</span>    <span class="kc">None</span>    <span class="n">jordani</span>    <span class="kc">None</span>        <span class="kc">None</span>
+<span class="mi">28</span>   <span class="n">CHORDATA</span>    <span class="mf">2012.2</span>        <span class="mi">1</span>    <span class="kc">None</span>    <span class="n">jordani</span>    <span class="kc">None</span>        <span class="kc">None</span>
+<span class="mi">29</span>   <span class="n">CHORDATA</span>    <span class="mf">2012.2</span>        <span class="mi">1</span>    <span class="kc">None</span>    <span class="n">jordani</span>    <span class="kc">None</span>        <span class="kc">None</span>
+<span class="mi">30</span>   <span class="n">CHORDATA</span>    <span class="mf">2012.2</span>        <span class="mi">1</span>    <span class="kc">None</span>    <span class="n">jordani</span>    <span class="kc">None</span>        <span class="kc">None</span>
+<span class="mi">31</span>   <span class="n">CHORDATA</span>    <span class="mf">2012.2</span>        <span class="mi">1</span>    <span class="kc">None</span>    <span class="n">jordani</span>    <span class="kc">None</span>        <span class="kc">None</span>
+<span class="mi">32</span>   <span class="n">CHORDATA</span>    <span class="mf">2012.2</span>        <span class="mi">1</span>    <span class="kc">None</span>    <span class="n">jordani</span>    <span class="kc">None</span>        <span class="kc">None</span>
+<span class="mi">33</span>   <span class="n">CHORDATA</span>    <span class="mf">2012.2</span>        <span class="mi">1</span>    <span class="kc">None</span>    <span class="n">jordani</span>    <span class="kc">None</span>        <span class="kc">None</span>
+
+   <span class="n">tax_comm</span>  <span class="n">year</span>
+<span class="mi">27</span>     <span class="kc">None</span>  <span class="mi">2012</span>
+<span class="mi">28</span>     <span class="kc">None</span>  <span class="mi">2012</span>
+<span class="mi">29</span>     <span class="kc">None</span>  <span class="mi">2012</span>
+<span class="mi">30</span>     <span class="kc">None</span>  <span class="mi">2012</span>
+<span class="mi">31</span>     <span class="kc">None</span>  <span class="mi">2012</span>
+<span class="mi">32</span>     <span class="kc">None</span>  <span class="mi">2012</span>
+<span class="mi">33</span>     <span class="kc">None</span>  <span class="mi">2012</span>
+
+<span class="p">[</span><span class="mi">7</span> <span class="n">rows</span> <span class="n">x</span> <span class="mi">24</span> <span class="n">columns</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>From here we can see that an individual_fish variable now contains all the rows that belongs to a fish called <code class="docutils literal"><span class="pre">Teixeirichthys</span> <span class="pre">jordani</span></code>. Notice that the index numbers refer to the row numbers in the
+original data -GeoDataFrame.</p>
+<ul class="simple">
+<li>Let&#8217;s check the datatype of the grouped object and what does the <code class="docutils literal"><span class="pre">key</span></code> variable contain</li>
+</ul>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">individual_fish</span><span class="p">)</span>
+<span class="go">geopandas.geodataframe.GeoDataFrame</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="go">&#39;Teixeirichthys jordani&#39;</span>
+</pre></div>
+</div>
+<p>As can be seen from the example above, each set of data are now grouped into separate GeoDataFrames that we can export into Shapefiles using the variable <code class="docutils literal"><span class="pre">key</span></code>
+for creating the output filepath names. Let&#8217;s now export those species into individual Shapefiles.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Determine outputpath</span>
+<span class="n">outFolder</span> <span class="o">=</span> <span class="s2">r&quot;/home/geo/Data&quot;</span>
+
+<span class="c1"># Create a new folder called &#39;Results&#39; (if does not exist) to that folder using os.makedirs() function</span>
+<span class="n">resultFolder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">outFolder</span><span class="p">,</span> <span class="s1">&#39;Results&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">resultFolder</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">resultFolder</span><span class="p">)</span>
+
+<span class="c1"># Iterate over the</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">grouped</span><span class="p">:</span>
+    <span class="c1"># Format the filename (replace spaces with underscores)</span>
+    <span class="n">outName</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">.shp&quot;</span> <span class="o">%</span> <span class="n">key</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Print some information for the user</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Processing: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">key</span><span class="p">)</span>
+
+    <span class="c1"># Create an output path</span>
+    <span class="n">outpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">resultFolder</span><span class="p">,</span> <span class="n">outName</span><span class="p">)</span>
+
+    <span class="c1"># Export the data</span>
+    <span class="n">values</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">outpath</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now we have saved those individual fishes into separate Shapefiles and named the file according to the species name. These kind of grouping operations can be really
+handy when dealing with Shapefiles. Doing similar process manually would be really laborious and error-prone.</p>
+</div>
 </div>
 </div>
 
@@ -535,7 +677,7 @@ attribute table seems correct.</p>
         <a href="Exercise-2.html" class="btn btn-neutral float-right" title="Exercise 2" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="pandas-intro.html" class="btn btn-neutral" title="Basics of Pandas" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="Lesson2-pandas-intro.html" class="btn btn-neutral" title="Introduction to Pandas" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -544,7 +686,7 @@ attribute table seems correct.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2016, Henrikki Tenkanen &amp; David Whipp.
+        &copy; Copyright 2016, Henrikki Tenkanen.
 
     </p>
   </div>

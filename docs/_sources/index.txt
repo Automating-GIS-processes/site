@@ -12,8 +12,8 @@ Course format
 -------------
 
 The majority of this course will be spent in front of a computer learning to program in the Python language and working on exercises.
-During Teaching Period I, the Automating GIS processes and Introduction to Quantitative Geology courses will meet together and focus on
-learning to program in Python. Previously, both these courses lacked sufficient time for students to properly learn the basic concepts of programming in Python.
+During Teaching Period I, the Automating GIS processes and `Introduction to Quantitative Geology <https://github.com/Intro-Quantitative-Geology/Course-information>`_ courses met together and focused on
+`learning to program in Python <https://github.com/Python-for-geo-people/Course-information>`_. Previously, both these courses lacked sufficient time for students to properly learn the basic concepts of programming in Python.
 
 The computer exercises will focus on developing basic programming skills using the Python language and applying those skills to various GIS related problems.
 Typical exercises will involve a brief introduction followed by topical computer-based tasks. At the end of the exercises, you may be asked to submit answers
@@ -28,8 +28,8 @@ The materials are divided into weekly sections that are published at these pages
 
  * 31.10 - Lesson 1: GIS in Python; Spatial Data Model, Geometric Objects, Shapely
  * 07.11 - Lesson 2:  Working with (Geo)DataFrames
- * 14.11 - Lesson 3: Geometric operations and geocoding
- * 21.11 - Lesson 4: Spatial queries
+ * 14.11 - Lesson 3: Geocoding and spatial queries
+ * 21.11 - Lesson 4: Geometric operations
  * 28.11 - Lesson 5: Visualization, static and interactive maps
  * 08.12 - Lesson 6: Using ArcGIS through Python (the arcpy-module)
  * 12.12 - Lesson 7: Raster data processing in Python
@@ -48,18 +48,29 @@ Contents
    :maxdepth: 2
    :caption: Lesson 1
 
-   Intro-Python-GIS
-   Geometric-Objects
+   Lesson1-Intro-Python-GIS
+   Lesson1-Geometric-Objects
    Exercise-1
 
 .. toctree::
    :maxdepth: 2
    :caption: Lesson 2
 
-   Lesson2-GeoDataFrames
-   pandas-intro
-   geopandas-basics
+   Lesson2-overview-pandas-geopandas
+   Lesson2-pandas-intro
+   Lesson2-geopandas-basics
    Exercise-2
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Lesson 3
+
+   Lesson3-geocoding
+   Lesson3-table-join
+   Lesson3-projections
+   Lesson3-point-in-polygon
+   Lesson3-spatial-join
+   Exercise-3
 
 Indices and tables
 ==================

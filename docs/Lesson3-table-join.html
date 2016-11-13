@@ -1,0 +1,288 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Table join &mdash; GeoPython - AutoGIS 1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="GeoPython - AutoGIS 1 documentation" href="index.html"/>
+        <link rel="next" title="Projections: Converting from projection to another" href="Lesson3-projections.html"/>
+        <link rel="prev" title="Geocoding" href="Lesson3-geocoding.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> GeoPython - AutoGIS
+          
+
+          
+            
+            <img src="_static/logo_hy_geo_135.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2016 Autumn
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Course information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="course-info.html">General info</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 1</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Lesson1-Intro-Python-GIS.html">Introduction to Python GIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson1-Geometric-Objects.html">Geometric Objects - Spatial Data Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise-1.html">Exercise 1</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 2</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Lesson2-overview-pandas-geopandas.html">Overview of Pandas and Geopandas -modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson2-pandas-intro.html">Introduction to Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson2-geopandas-basics.html">Introduction to Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise-2.html">Exercise 2</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 3</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Lesson3-geocoding.html">Geocoding</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Table join</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson3-projections.html">Projections: Converting from projection to another</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson3-point-in-polygon.html">Spatial queries: Point in Polygon &amp; Intersect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson3-spatial-join.html">Spatial join</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise-3.html">Exercise 3</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">GeoPython - AutoGIS</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Table join</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/Lesson3-table-join.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="table-join">
+<h1>Table join<a class="headerlink" href="#table-join" title="Permalink to this headline">¶</a></h1>
+<p>Table joins are again something that you need to really frequently when
+doing GIS analyses. Combining data from different tables based on common
+<code class="docutils literal"><span class="pre">key</span></code> attribute can be done easily in Pandas/Geopandas using
+<a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.merge.html">.merge()</a>
+-function.</p>
+<ul class="simple">
+<li>Let&#8217;s continue with our <a class="reference external" href="Lesson3-geocoding.html#geocoding-in-geopandas">geocoding task</a> and join the <code class="docutils literal"><span class="pre">data</span></code> and <code class="docutils literal"><span class="pre">geo</span></code> DataFrames together based on
+common column <code class="docutils literal"><span class="pre">address</span></code>. Parameter <code class="docutils literal"><span class="pre">on</span></code> is used to determine the
+common key in the tables. If your key in the first table would be
+named differently than in the other one, you can also specify them
+separately for each table by using <code class="docutils literal"><span class="pre">left_on</span></code> and <code class="docutils literal"><span class="pre">right_on</span></code>
+-parameters.</li>
+</ul>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Join tables by using a key column &#39;address&#39;</span>
+<span class="n">join</span> <span class="o">=</span> <span class="n">geo</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;address&#39;</span><span class="p">)</span>
+
+<span class="c1"># Let&#39;s see what we have</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">join</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+                                             <span class="n">address</span>
+<span class="mi">0</span>              <span class="n">Kampinkuja</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">00100</span> <span class="n">Helsinki</span><span class="p">,</span> <span class="n">Finland</span>
+<span class="mi">1</span>               <span class="n">Kaivokatu</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">00101</span> <span class="n">Helsinki</span><span class="p">,</span> <span class="n">Finland</span>
+<span class="mi">2</span>  <span class="n">Hermanstads</span> <span class="n">strandsväg</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">00580</span> <span class="n">Helsingfors</span><span class="p">,</span> <span class="n">F</span><span class="o">...</span>
+<span class="mi">3</span>                  <span class="n">Itäväylä</span><span class="p">,</span> <span class="mi">00900</span> <span class="n">Helsinki</span><span class="p">,</span> <span class="n">Finland</span>
+<span class="mi">4</span>         <span class="n">Tyynenmerenkatu</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">00220</span> <span class="n">Helsinki</span><span class="p">,</span> <span class="n">Finland</span>
+
+                               <span class="n">geometry</span>    <span class="nb">id</span>
+<span class="mi">0</span>         <span class="n">POINT</span> <span class="p">(</span><span class="mf">24.9301701</span> <span class="mf">60.1683731</span><span class="p">)</span>  <span class="mi">1001</span>
+<span class="mi">1</span>         <span class="n">POINT</span> <span class="p">(</span><span class="mf">24.9418933</span> <span class="mf">60.1698665</span><span class="p">)</span>  <span class="mi">1002</span>
+<span class="mi">2</span>  <span class="n">POINT</span> <span class="p">(</span><span class="mf">24.9774004</span> <span class="mf">60.18735880000001</span><span class="p">)</span>  <span class="mi">1003</span>
+<span class="mi">3</span>  <span class="n">POINT</span> <span class="p">(</span><span class="mf">25.0919641</span> <span class="mf">60.21448089999999</span><span class="p">)</span>  <span class="mi">1004</span>
+<span class="mi">4</span>         <span class="n">POINT</span> <span class="p">(</span><span class="mf">24.9214846</span> <span class="mf">60.1565781</span><span class="p">)</span>  <span class="mi">1005</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Let&#8217;s also check the data type of our new <code class="docutils literal"><span class="pre">join</span></code> table</li>
+</ul>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">join</span><span class="p">)</span>
+<span class="go">geopandas.geodataframe.GeoDataFrame</span>
+</pre></div>
+</div>
+<p>As a result we have a new GeoDataFrame called <code class="docutils literal"><span class="pre">join</span></code> where we now have
+all original columns plus a new column for <code class="docutils literal"><span class="pre">geometry</span></code>.</p>
+<ul class="simple">
+<li>Now it is easy to save our address points into a Shapefile</li>
+</ul>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Output file path</span>
+<span class="n">outfp</span> <span class="o">=</span> <span class="s2">r&quot;/home/geo/addresses.shp&quot;</span>
+
+<span class="c1"># Save to Shapefile</span>
+<span class="n">join</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">outfp</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>That&#8217;s it. Now we have successfully geocoded those addresses into Points
+and made a Shapefile out of them.</p>
+<p><strong>Task</strong>: Make a map out of the points. What do you think that the
+addresses are representing?</p>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Lesson3-projections.html" class="btn btn-neutral float-right" title="Projections: Converting from projection to another" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Lesson3-geocoding.html" class="btn btn-neutral" title="Geocoding" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Henrikki Tenkanen.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

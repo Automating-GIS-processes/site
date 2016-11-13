@@ -1,7 +1,7 @@
-Basics of Pandas
-================
+Introduction to Pandas
+======================
 
-In this course we will focus on using Geopandas that takes advantage of Pandas functionalities.
+In this course we will focus on using **Geopandas** that takes advantage of `Pandas <http://pandas.pydata.org/>`_ functionalities.
 Thus, we won't have a separate tutorial dedicated for Pandas.
 
 However, if you are interested, you can take a look at this introductory tutorial to Pandas:

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Basics of Pandas &mdash; Geo-Python 1 documentation</title>
+  <title>Introduction to Pandas &mdash; GeoPython - AutoGIS 1 documentation</title>
   
 
   
@@ -33,9 +33,9 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Geo-Python 1 documentation" href="index.html"/>
-        <link rel="next" title="Basics of Geopandas - working with spatial data" href="geopandas-basics.html"/>
-        <link rel="prev" title="Introduction to Pandas and Geopandas" href="Lesson2-GeoDataFrames.html"/> 
+    <link rel="top" title="GeoPython - AutoGIS 1 documentation" href="index.html"/>
+        <link rel="next" title="Introduction to Geopandas" href="Lesson2-geopandas-basics.html"/>
+        <link rel="prev" title="Overview of Pandas and Geopandas -modules" href="Lesson2-overview-pandas-geopandas.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -53,7 +53,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> Geo-Python
+            <a href="index.html" class="icon icon-home"> GeoPython - AutoGIS
           
 
           
@@ -93,16 +93,25 @@
 </ul>
 <p class="caption"><span class="caption-text">Lesson 1</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="Intro-Python-GIS.html">Introduction to Python GIS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Geometric-Objects.html">Geometric Objects - Spatial Data Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson1-Intro-Python-GIS.html">Introduction to Python GIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson1-Geometric-Objects.html">Geometric Objects - Spatial Data Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Exercise-1.html">Exercise 1</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Lesson 2</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="Lesson2-GeoDataFrames.html">Introduction to Pandas and Geopandas</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Basics of Pandas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="geopandas-basics.html">Basics of Geopandas - working with spatial data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson2-overview-pandas-geopandas.html">Overview of Pandas and Geopandas -modules</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction to Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson2-geopandas-basics.html">Introduction to Geopandas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Exercise-2.html">Exercise 2</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 3</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Lesson3-geocoding.html">Geocoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson3-table-join.html">Table join</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson3-projections.html">Projections: Converting from projection to another</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson3-point-in-polygon.html">Spatial queries: Point in Polygon &amp; Intersect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson3-spatial-join.html">Spatial join</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise-3.html">Exercise 3</a></li>
 </ul>
 
             
@@ -116,7 +125,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="index.html">Geo-Python</a>
+        <a href="index.html">GeoPython - AutoGIS</a>
       </nav>
 
 
@@ -133,11 +142,11 @@
   <ul class="wy-breadcrumbs">
     <li><a href="index.html">Docs</a> &raquo;</li>
       
-    <li>Basics of Pandas</li>
+    <li>Introduction to Pandas</li>
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="_sources/pandas-intro.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/Lesson2-pandas-intro.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -147,8 +156,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="basics-of-pandas">
-<h1>Basics of Pandas<a class="headerlink" href="#basics-of-pandas" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="introduction-to-pandas">
+<h1>Introduction to Pandas<a class="headerlink" href="#introduction-to-pandas" title="Permalink to this headline">¶</a></h1>
 <p>In this course we will focus on using <strong>Geopandas</strong> that takes advantage of <a class="reference external" href="http://pandas.pydata.org/">Pandas</a> functionalities.
 Thus, we won&#8217;t have a separate tutorial dedicated for Pandas.</p>
 <p>However, if you are interested, you can take a look at this introductory tutorial to Pandas:</p>
@@ -168,10 +177,10 @@ Thus, we won&#8217;t have a separate tutorial dedicated for Pandas.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="geopandas-basics.html" class="btn btn-neutral float-right" title="Basics of Geopandas - working with spatial data" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="Lesson2-geopandas-basics.html" class="btn btn-neutral float-right" title="Introduction to Geopandas" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="Lesson2-GeoDataFrames.html" class="btn btn-neutral" title="Introduction to Pandas and Geopandas" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="Lesson2-overview-pandas-geopandas.html" class="btn btn-neutral" title="Overview of Pandas and Geopandas -modules" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -180,7 +189,7 @@ Thus, we won&#8217;t have a separate tutorial dedicated for Pandas.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2016, Henrikki Tenkanen &amp; David Whipp.
+        &copy; Copyright 2016, Henrikki Tenkanen.
 
     </p>
   </div>

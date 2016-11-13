@@ -1,8 +1,8 @@
-Basics of Geopandas - working with spatial data
------------------------------------------------
+Introduction to Geopandas
+=========================
 
 Downloading and extracting data
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------
 
 For this lesson we are using data that you can download from `here <https://github.com/Automating-GIS-processes/Lesson-2-Geo-DataFrames/raw/master/data/Data.zip>`_.
 Once you have downloaded the Data.zip file into your home directory, you can unzip the file using the ``unzip`` command in the Terminal window.
@@ -22,7 +22,7 @@ The Data folder includes a Shapefile called **DAMSELFISH_distribution.shp** (and
 Let's start now working with spatial data using geopandas.
 
 Reading a Shapefile
-~~~~~~~~~~~~~~~~~~~
+-------------------
 
 Spatial data can be read easily with geopandas using ``gpd.from_file()``
 -function:
@@ -34,7 +34,7 @@ Spatial data can be read easily with geopandas using ``gpd.from_file()``
     import matplotlib.pyplot as plt
 
     # Set filepath
-    fp = r"C:\HY-Data\HENTENKA\Data\AutoGIS16\Data\DAMSELFISH_distributions.shp"
+    fp = r"/home/geo/Data/DAMSELFISH_distributions.shp"
 
     # Read file using gpd.read_file()
     data = gpd.read_file(fp)
@@ -112,7 +112,7 @@ some special features and functions that are useful in GIS.
    :width: 60%
 
 Coordinate reference system (CRS)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------
 
 GeoDataFrame that is read from a Shapefile contains *always* (well not
 always but should) information about the coordinate system in which the
@@ -138,7 +138,7 @@ You can check easily different epsg-codes from `this
 website <http://spatialreference.org/ref/epsg/>`__.
 
 Writing a Shapefile
-~~~~~~~~~~~~~~~~~~~
+-------------------
 
 Writing a new Shapefile is also something that is needed frequently.
 
@@ -150,7 +150,7 @@ Writing a new Shapefile is also something that is needed frequently.
 .. code:: python
 
     # Create a output path for the data
-    out = r"/home/geo/DAMSELFISH_distributions_SELECTION.shp"
+    out = r"/home/geo/Data/DAMSELFISH_distributions_SELECTION.shp"
 
     # Select first 50 rows
     selection = data[0:50]
@@ -162,7 +162,7 @@ Writing a new Shapefile is also something that is needed frequently.
 our computer instance, and see how the data looks like.
 
 Geometries in Geopandas
-~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------
 
 Geopandas takes advantage of Shapely's geometric objects. Geometries are
 stored in a column called *geometry* that is a default column name for
@@ -245,7 +245,7 @@ earlier.
     Mean area: 19.96
 
 Creating geometries into a GeoDataFrame
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------------
 
 Since geopandas takes advantage of Shapely geometric objects it is
 possible to create a Shapefile from a scratch by passing Shapely's
@@ -376,7 +376,7 @@ case since we are creating the data from the scratch:
 .. code:: python
 
     # Determine the output path for the Shapefile
-    outfp = r"C:\HY-Data\HENTENKA\Data\Senaatintori.shp"
+    outfp = r"/home/geo/Data/Senaatintori.shp"
 
     # Write the data into that Shapefile
     newdata.to_file(out)
@@ -388,3 +388,138 @@ those automatically.
 
 **Task:** check the output Shapefile in QGIS and make sure that the
 attribute table seems correct.
+
+Pro -tips (optional but recommended)
+------------------------------------
+
+Grouping data
+~~~~~~~~~~~~~
+
+One really useful function that can be used in Pandas/Geopandas is `.groupby() <http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.groupby.html>`_.
+This function groups data based on values on selected column(s).
+
+- Let's group individual fishes in ``DAMSELFISH_distribution.shp`` and export the species to individual Shapefiles.
+
+  - *Note: If your `data` -variable doesn't contain the Damselfish data anymore, read the Shapefile again into memory using `gpd.read_file()` -function*
+
+.. code::
+
+    # Group the data by column 'binomial'
+    >>> grouped = data.groupby('binomial')
+
+    # Let's see what we got
+    >>> grouped
+    <pandas.core.groupby.DataFrameGroupBy object at 0x0000000003FB6710>
+
+
+
+- ``groupby`` -function gives us an object called ``DataFrameGroupBy`` which is similar to list of keys and values (in a dictionary) that we can iterate over.
+
+.. code:: python
+
+    # Iterate over the group object
+
+    for key, values in grouped:
+        individual_fish = values
+
+    # Let's see what is the LAST item that we iterated
+    >>> print(individual_fish)
+
+                      binomial category  \
+    27  Teixeirichthys jordani       LC
+    28  Teixeirichthys jordani       LC
+    29  Teixeirichthys jordani       LC
+    30  Teixeirichthys jordani       LC
+    31  Teixeirichthys jordani       LC
+    32  Teixeirichthys jordani       LC
+    33  Teixeirichthys jordani       LC
+
+                                                 citation      class_name  \
+    27  Red List Index (Sampled Approach), Zoological ...  ACTINOPTERYGII
+    28  Red List Index (Sampled Approach), Zoological ...  ACTINOPTERYGII
+    29  Red List Index (Sampled Approach), Zoological ...  ACTINOPTERYGII
+    30  Red List Index (Sampled Approach), Zoological ...  ACTINOPTERYGII
+    31  Red List Index (Sampled Approach), Zoological ...  ACTINOPTERYGII
+    32  Red List Index (Sampled Approach), Zoological ...  ACTINOPTERYGII
+    33  Red List Index (Sampled Approach), Zoological ...  ACTINOPTERYGII
+
+       compiler dist_comm     family_nam      genus_name  \
+    27     None      None  POMACENTRIDAE  Teixeirichthys
+    28     None      None  POMACENTRIDAE  Teixeirichthys
+    29     None      None  POMACENTRIDAE  Teixeirichthys
+    30     None      None  POMACENTRIDAE  Teixeirichthys
+    31     None      None  POMACENTRIDAE  Teixeirichthys
+    32     None      None  POMACENTRIDAE  Teixeirichthys
+    33     None      None  POMACENTRIDAE  Teixeirichthys
+
+                                                 geometry     id_no  ...  origin  \
+    27  POLYGON ((121.6300326400001 33.04248618400004,...  154915.0  ...       1
+    28  POLYGON ((32.56219482400007 29.97488975500005,...  154915.0  ...       1
+    29  POLYGON ((130.9052090560001 34.02498196400006,...  154915.0  ...       1
+    30  POLYGON ((56.32233070000007 -3.707270205999976...  154915.0  ...       1
+    31  POLYGON ((40.64476131800006 -10.85502363999996...  154915.0  ...       1
+    32  POLYGON ((48.11258402900006 -9.335103113999935...  154915.0  ...       1
+    33  POLYGON ((51.75403543100003 -9.21679305899994,...  154915.0  ...       1
+
+       phylum_nam rl_update seasonal  source species_na  subpop  subspecies  \
+    27   CHORDATA    2012.2        1    None    jordani    None        None
+    28   CHORDATA    2012.2        1    None    jordani    None        None
+    29   CHORDATA    2012.2        1    None    jordani    None        None
+    30   CHORDATA    2012.2        1    None    jordani    None        None
+    31   CHORDATA    2012.2        1    None    jordani    None        None
+    32   CHORDATA    2012.2        1    None    jordani    None        None
+    33   CHORDATA    2012.2        1    None    jordani    None        None
+
+       tax_comm  year
+    27     None  2012
+    28     None  2012
+    29     None  2012
+    30     None  2012
+    31     None  2012
+    32     None  2012
+    33     None  2012
+
+    [7 rows x 24 columns]
+
+From here we can see that an individual_fish variable now contains all the rows that belongs to a fish called ``Teixeirichthys jordani``. Notice that the index numbers refer to the row numbers in the
+original data -GeoDataFrame.
+
+- Let's check the datatype of the grouped object and what does the ``key`` variable contain
+
+.. code:: python
+
+    >>> type(individual_fish)
+    geopandas.geodataframe.GeoDataFrame
+
+    >>> print(key)
+    'Teixeirichthys jordani'
+
+As can be seen from the example above, each set of data are now grouped into separate GeoDataFrames that we can export into Shapefiles using the variable ``key``
+for creating the output filepath names. Let's now export those species into individual Shapefiles.
+
+.. code:: python
+
+    # Determine outputpath
+    outFolder = r"/home/geo/Data"
+
+    # Create a new folder called 'Results' (if does not exist) to that folder using os.makedirs() function
+    resultFolder = os.path.join(outFolder, 'Results')
+    if not os.path.exists(resultFolder):
+        os.makedirs(resultFolder)
+
+    # Iterate over the
+    for key, values in grouped:
+        # Format the filename (replace spaces with underscores)
+        outName = "%s.shp" % key.replace(" ", "_")
+
+        # Print some information for the user
+        print("Processing: %s" % key)
+
+        # Create an output path
+        outpath = os.path.join(resultFolder, outName)
+
+        # Export the data
+        values.to_file(outpath)
+
+Now we have saved those individual fishes into separate Shapefiles and named the file according to the species name. These kind of grouping operations can be really
+handy when dealing with Shapefiles. Doing similar process manually would be really laborious and error-prone.
