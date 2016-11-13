@@ -111,11 +111,8 @@
 <li class="toctree-l1"><a class="reference internal" href="Lesson3-projections.html">Projections: Converting from projection to another</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson3-point-in-polygon.html">Spatial queries: Point in Polygon &amp; Intersect</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Spatial join</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#performing-spatial-join-in-geopandas">Performing spatial join in Geopandas</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#download-and-clean-the-data">Download and clean the data</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#join-the-layers">Join the layers</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#download-and-clean-the-data">Download and clean the data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#join-the-layers">Join the layers</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Exercise-3.html">Exercise 3</a></li>
@@ -165,14 +162,12 @@
             
   <div class="section" id="spatial-join">
 <h1>Spatial join<a class="headerlink" href="#spatial-join" title="Permalink to this headline">¶</a></h1>
+<p><strong>Sources</strong></p>
+<p><em>Following materials are partly based on documentation of</em> <a class="reference external" href="http://geopandas.org">Geopandas</a>.</p>
 <p><a class="reference external" href="http://wiki.gis.com/wiki/index.php/Spatial_Join">Spatial join</a> is
 yet another classic GIS problem. Getting attributes from one layer and
 transferring them into another layer based on their spatial relationship
 is something you most likely need to do on a regular basis.</p>
-<p><strong>Sources</strong></p>
-<p>Following materials are partly based on documentation of <a class="reference external" href="http://geopandas.org">Geopandas</a>.</p>
-<div class="section" id="performing-spatial-join-in-geopandas">
-<h2>Performing spatial join in Geopandas<a class="headerlink" href="#performing-spatial-join-in-geopandas" title="Permalink to this headline">¶</a></h2>
 <p>The previous materials focused on learning how to perform a <a class="reference external" href="Lesson3-point-in-polygon.html#how-to-check-if-point-is-inside-a-polygon">Point in Polygon query</a>.
 We could now apply those techniques and create our
 own function to perform a spatial join between two layers based on their
@@ -196,7 +191,7 @@ in the <a class="reference external" href="Lesson3-point-in-polygon.html">previo
 and a Polygon layer that is a
 250m x 250m grid showing the amount of people living in Helsinki Region.</p>
 <div class="section" id="download-and-clean-the-data">
-<h3>Download and clean the data<a class="headerlink" href="#download-and-clean-the-data" title="Permalink to this headline">¶</a></h3>
+<h2>Download and clean the data<a class="headerlink" href="#download-and-clean-the-data" title="Permalink to this headline">¶</a></h2>
 <p>For this lesson we will be using publicly available population data from
 Helsinki that can be downloaded from <a class="reference external" href="http://www.hri.fi/en/dataset/vaestotietoruudukko">Helsinki Region Infroshare
 (HRI)</a> which is an
@@ -300,7 +295,7 @@ columns that we need i.e. <code class="docutils literal"><span class="pre">pop15
 for our analysis.</p>
 </div>
 <div class="section" id="join-the-layers">
-<h3>Join the layers<a class="headerlink" href="#join-the-layers" title="Permalink to this headline">¶</a></h3>
+<h2>Join the layers<a class="headerlink" href="#join-the-layers" title="Permalink to this headline">¶</a></h2>
 <p>Now we are ready to perform the spatial join between the two layers that
 we have. The aim here is to get information about <strong>how many people live
 in a polygon that contains an individual address-point</strong> . Thus, we want
@@ -407,7 +402,6 @@ values.</li>
 seems that the results do make sense as the points with highest
 population are located in the south where the city center of Helsinki
 is.</p>
-</div>
 </div>
 </div>
 
