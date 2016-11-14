@@ -66,7 +66,7 @@ that can geocode a list of addresses (strings) and return a GeoDataFrame
 containing the resulting point objects in ``geometry`` column. Nice,
 isn't it! Let's try this out.
 
-Download a text file called `addresses.txt <https://raw.githubusercontent.com/Automating-GIS-processes/AutoGIS-Sphinx/master/data/addresses.txt>`__ that
+Download a text file called `addresses.txt <https://raw.githubusercontent.com/Automating-GIS-processes/Lesson-3-Geocoding-Spatial-Queries/master/data/addresses.txt>`__ that
 contains few addresses around Helsinki Region. The first rows of the
 data looks like following:
 

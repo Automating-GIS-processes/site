@@ -389,15 +389,14 @@ points where color intensity indicates the population numbers.</p>
 <ul class="simple">
 <li>Plot the points and use the <code class="docutils literal"><span class="pre">pop15</span></code> column to indicate the color.
 <code class="docutils literal"><span class="pre">cmap</span></code> -parameter tells to use a sequential colormap for the
-values.</li>
+values, <code class="docutils literal"><span class="pre">markersize</span></code> adjusts the size of a point, <code class="docutils literal"><span class="pre">scheme</span></code> parameter can be used to adjust the classification method based on <a class="reference external" href="http://pysal.readthedocs.io/en/latest/library/esda/mapclassify.html">pysal</a>, and <code class="docutils literal"><span class="pre">legend</span></code> tells that we want to have a legend.</li>
 </ul>
 <div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
-<span class="n">joined</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">c</span><span class="o">=</span><span class="n">joined</span><span class="p">[</span><span class="s1">&#39;pop15&#39;</span><span class="p">],</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Reds&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">join</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;pop15&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Reds&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s1">&#39;natural_breaks&#39;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="_images/Lesson3-spatial-join_18_1.png" src="_images/Lesson3-spatial-join_18_1.png" />
+<img alt="_images/Lesson3-spatial-join_18_2.png" src="_images/Lesson3-spatial-join_18_2.png" />
 <p>By knowing approximately how population is distributed in Helsinki, it
 seems that the results do make sense as the points with highest
 population are located in the south where the city center of Helsinki
