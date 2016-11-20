@@ -34,7 +34,7 @@
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="GeoPython - AutoGIS 1 documentation" href="index.html"/>
-        <link rel="next" title="Projections: Converting from projection to another" href="Lesson3-projections.html"/>
+        <link rel="next" title="Re-projecting data" href="Lesson3-projections.html"/>
         <link rel="prev" title="Geocoding" href="Lesson3-geocoding.html"/> 
 
   
@@ -90,6 +90,7 @@
                 <p class="caption"><span class="caption-text">Course information</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="course-info.html">General info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Installing_Anacondas_GIS.html">Installing Python + GIS</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Lesson 1</span></p>
 <ul>
@@ -108,10 +109,18 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="Lesson3-geocoding.html">Geocoding</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Table join</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lesson3-projections.html">Projections: Converting from projection to another</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lesson3-point-in-polygon.html">Spatial queries: Point in Polygon &amp; Intersect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson3-projections.html">Re-projecting data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson3-point-in-polygon.html">Point in Polygon &amp; Intersect</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson3-spatial-join.html">Spatial join</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Exercise-3.html">Exercise 3</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 4</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Lesson4-download-data.html">Download datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson4-geometric-operations.html">Geometric operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson4-reclassify.html">Data reclassification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson4-nearest-neighbour.html">Nearest Neighbour Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise-4.html">Exercise 4</a></li>
 </ul>
 
             
@@ -171,31 +180,32 @@ named differently than in the other one, you can also specify them
 separately for each table by using <code class="docutils literal"><span class="pre">left_on</span></code> and <code class="docutils literal"><span class="pre">right_on</span></code>
 -parameters.</li>
 </ul>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Join tables by using a key column &#39;address&#39;</span>
-<span class="n">join</span> <span class="o">=</span> <span class="n">geo</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;address&#39;</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="go"># Join tables by using a key column &#39;address&#39;</span>
+<span class="gp">In [1]: </span><span class="n">join</span> <span class="o">=</span> <span class="n">geo</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;address&#39;</span><span class="p">)</span>
 
-<span class="c1"># Let&#39;s see what we have</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">join</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
-                                             <span class="n">address</span>
-<span class="mi">0</span>              <span class="n">Kampinkuja</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">00100</span> <span class="n">Helsinki</span><span class="p">,</span> <span class="n">Finland</span>
-<span class="mi">1</span>               <span class="n">Kaivokatu</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">00101</span> <span class="n">Helsinki</span><span class="p">,</span> <span class="n">Finland</span>
-<span class="mi">2</span>  <span class="n">Hermanstads</span> <span class="n">strandsväg</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">00580</span> <span class="n">Helsingfors</span><span class="p">,</span> <span class="n">F</span><span class="o">...</span>
-<span class="mi">3</span>                  <span class="n">Itäväylä</span><span class="p">,</span> <span class="mi">00900</span> <span class="n">Helsinki</span><span class="p">,</span> <span class="n">Finland</span>
-<span class="mi">4</span>         <span class="n">Tyynenmerenkatu</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">00220</span> <span class="n">Helsinki</span><span class="p">,</span> <span class="n">Finland</span>
+<span class="go"># Let&#39;s see what we have</span>
+<span class="gp">In [2]: </span><span class="n">join</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[2]: </span><span class="go"></span>
+<span class="go">                                             address  \</span>
+<span class="go">0              Kampinkuja 1, 00100 Helsinki, Finland   </span>
+<span class="go">1               Kaivokatu 8, 00101 Helsinki, Finland   </span>
+<span class="go">2  Hermanstads strandsväg 1, 00580 Helsingfors, F...   </span>
+<span class="go">3                  Itäväylä, 00900 Helsinki, Finland   </span>
+<span class="go">4         Tyynenmerenkatu 9, 00220 Helsinki, Finland   </span>
 
-                               <span class="n">geometry</span>    <span class="nb">id</span>
-<span class="mi">0</span>         <span class="n">POINT</span> <span class="p">(</span><span class="mf">24.9301701</span> <span class="mf">60.1683731</span><span class="p">)</span>  <span class="mi">1001</span>
-<span class="mi">1</span>         <span class="n">POINT</span> <span class="p">(</span><span class="mf">24.9418933</span> <span class="mf">60.1698665</span><span class="p">)</span>  <span class="mi">1002</span>
-<span class="mi">2</span>  <span class="n">POINT</span> <span class="p">(</span><span class="mf">24.9774004</span> <span class="mf">60.18735880000001</span><span class="p">)</span>  <span class="mi">1003</span>
-<span class="mi">3</span>  <span class="n">POINT</span> <span class="p">(</span><span class="mf">25.0919641</span> <span class="mf">60.21448089999999</span><span class="p">)</span>  <span class="mi">1004</span>
-<span class="mi">4</span>         <span class="n">POINT</span> <span class="p">(</span><span class="mf">24.9214846</span> <span class="mf">60.1565781</span><span class="p">)</span>  <span class="mi">1005</span>
+<span class="go">                               geometry    id  </span>
+<span class="go">0         POINT (24.9301701 60.1683731)  1001  </span>
+<span class="go">1         POINT (24.9418933 60.1698665)  1002  </span>
+<span class="go">2  POINT (24.9774004 60.18735880000001)  1003  </span>
+<span class="go">3  POINT (25.0919641 60.21448089999999)  1004  </span>
+<span class="go">4         POINT (24.9214846 60.1565781)  1005  </span>
 </pre></div>
 </div>
 <ul class="simple">
 <li>Let&#8217;s also check the data type of our new <code class="docutils literal"><span class="pre">join</span></code> table</li>
 </ul>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">join</span><span class="p">)</span>
-<span class="go">geopandas.geodataframe.GeoDataFrame</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [3]: </span><span class="nb">type</span><span class="p">(</span><span class="n">join</span><span class="p">)</span>
+<span class="gh">Out[3]: </span><span class="go">geopandas.geodataframe.GeoDataFrame</span>
 </pre></div>
 </div>
 <p>As a result we have a new GeoDataFrame called <code class="docutils literal"><span class="pre">join</span></code> where we now have
@@ -223,7 +233,7 @@ addresses are representing?</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="Lesson3-projections.html" class="btn btn-neutral float-right" title="Projections: Converting from projection to another" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="Lesson3-projections.html" class="btn btn-neutral float-right" title="Re-projecting data" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="Lesson3-geocoding.html" class="btn btn-neutral" title="Geocoding" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>

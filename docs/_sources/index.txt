@@ -27,9 +27,9 @@ See earlier materials from Period I `here <https://github.com/Python-for-geo-peo
 The materials are divided into weekly sections that are published at these pages every Monday morning. Lessons are held with following schedule:
 
  * 31.10 - Lesson 1: GIS in Python; Spatial Data Model, Geometric Objects, Shapely
- * 07.11 - Lesson 2:  Working with (Geo)DataFrames
+ * 07.11 - Lesson 2: Working with (Geo)DataFrames
  * 14.11 - Lesson 3: Geocoding and spatial queries
- * 21.11 - Lesson 4: Geometric operations
+ * 21.11 - Lesson 4: Geometric operations, reclassifying data
  * 28.11 - Lesson 5: Visualization, static and interactive maps
  * 08.12 - Lesson 6: Using ArcGIS through Python (the arcpy-module)
  * 12.12 - Lesson 7: Raster data processing in Python
@@ -43,6 +43,7 @@ Contents
    :caption: Course information
 
    course-info
+   Installing_Anacondas_GIS
 
 .. toctree::
    :maxdepth: 2
@@ -71,6 +72,23 @@ Contents
    Lesson3-point-in-polygon
    Lesson3-spatial-join
    Exercise-3
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Lesson 4
+
+   Lesson4-download-data
+   Lesson4-geometric-operations
+   Lesson4-reclassify
+   Lesson4-nearest-neighbour
+   Exercise-4
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Lesson 5
+
+   #Lesson5-interactive-map-folium
+   #Lesson5-World-3D
 
 Indices and tables
 ==================

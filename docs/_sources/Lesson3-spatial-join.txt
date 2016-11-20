@@ -68,43 +68,28 @@ above.
 
 -  Let's read the data into memory and see what we have.
 
+.. ipython:: python
+  :suppress:
+
+    import os
+    import gdal
+    fp = os.path.join(os.path.abspath('data'), "Vaestotietoruudukko_2015.shp")
+    pop = gpd.read_file(fp)
+
 .. code:: python
 
     import geopandas as gpd
-    
+
     # Filepath
-    fp = r"/home/geo/Pop15/Vaestotietoruudukko_2015.shp"
-    
+    fp = "/home/geo/Pop15/Vaestotietoruudukko_2015.shp"
+
     # Read the data
     pop = gpd.read_file(fp)
-    
+
+.. ipython:: python
+
     # See the first rows
-    print(pop.head())
-
-
-.. parsed-literal::
-
-       ASUKKAITA  ASVALJYYS  IKA0_9  IKA10_19  IKA20_29  IKA30_39  IKA40_49  \
-    0          8       31.0      99        99        99        99        99   
-    1          6       42.0      99        99        99        99        99   
-    2          8       44.0      99        99        99        99        99   
-    3          7       64.0      99        99        99        99        99   
-    4         19       23.0      99        99        99        99        99   
-    
-       IKA50_59  IKA60_69  IKA70_79  IKA_YLI80  INDEX  \
-    0        99        99        99         99    688   
-    1        99        99        99         99    703   
-    2        99        99        99         99    710   
-    3        99        99        99         99    711   
-    4        99        99        99         99    715   
-    
-                                                geometry  
-    0  POLYGON ((25472499.99532626 6689749.005069185,...  
-    1  POLYGON ((25472499.99532626 6685998.998064222,...  
-    2  POLYGON ((25472499.99532626 6684249.004130407,...  
-    3  POLYGON ((25472499.99532626 6683999.004997005,...  
-    4  POLYGON ((25472499.99532626 6682998.998461431,...  
-    
+    pop.head()
 
 Okey so we have multiple columns in the dataset but the most important
 one here is the column ``ASUKKAITA`` (*population in Finnish*) that
@@ -115,44 +100,27 @@ tells the amount of inhabitants living under that polygon.
    using a function called ``rename()`` where we pass a dictionary to a
    parameter ``columns={'oldname': 'newname'}``.
 
-.. code:: python
+.. ipython:: python
 
     # Change the name of a column
     pop = pop.rename(columns={'ASUKKAITA': 'pop15'})
     
     # See the column names and confirm that we now have a column called 'pop15'
-    print(pop.columns)
-
-
-.. parsed-literal::
-
-    Index(['pop15', 'ASVALJYYS', 'IKA0_9', 'IKA10_19', 'IKA20_29', 'IKA30_39',
-           'IKA40_49', 'IKA50_59', 'IKA60_69', 'IKA70_79', 'IKA_YLI80', 'INDEX',
-           'geometry'],
-          dtype='object')
-    
+    pop.columns
 
 -  Let's also get rid of all unnecessary columns by selecting only
    columns that we need i.e. ``pop15`` and ``geometry``
 
-.. code:: python
+.. ipython:: python
 
     # Columns that will be sected
     selected_cols = ['pop15', 'geometry']
     
     # Select those columns
     pop = pop[selected_cols]
-    
+
     # Let's see the last 2 rows
-    print(pop.tail(2))
-
-
-.. parsed-literal::
-
-          pop15                                           geometry
-    5782      9  POLYGON ((25513499.99632164 6685498.999797418,...
-    5783  30244  POLYGON ((25513999.999929 6659998.998172711, 2...
-    
+    pop.tail(2)
 
 Now we have cleaned the data and have only those columns that we need
 for our analysis.
@@ -168,51 +136,39 @@ addresses point layer ``addresses_epsg3879.shp``.
 
 -  Read the addresses layer into memory
 
-.. code:: python
+.. ipython:: python
 
     # Addresses filpath
     addr_fp = r"/home/geo/addresses_epsg3879.shp"
+
+    @suppress
+    import os
+
+    @suppress
+    "NOTICE: Following is the real path to the data, the one above is for online documentation to reflect the situation at computing instance"
+
+    @suppress
+    addr_fp = os.path.join(os.path.abspath('data'), "addresses_epsg3879.shp")
     
     # Read data
     addresses = gpd.read_file(addr_fp)
     
     # Check the head of the file
-    print(addresses.head(2))
-
-
-.. parsed-literal::
-
-                                     address  \
-    0  Kampinkuja 1, 00100 Helsinki, Finland   
-    1   Kaivokatu 8, 00101 Helsinki, Finland   
-    
-                                          geometry    id  
-    0  POINT (25496123.30852197 6672833.941567578)  1001  
-    1  POINT (25496774.28242895 6672999.698581985)  1002  
-    
+    addresses.head(2)
 
 -  Let's make sure that the coordinate reference system of the layers
    are identical
 
-.. code:: python
+.. ipython:: python
 
     # Check the crs of address points
-    print(addresses.crs)
+    addresses.crs
     
     # Check the crs of population layer
-    print(pop.crs)
+    pop.crs
     
     # Do they match? - We can test that
     addresses.crs == pop.crs
-
-
-.. parsed-literal::
-
-    {'y_0': 0, 'no_defs': True, 'x_0': 25500000, 'k': 1, 'lat_0': 0, 'units': 'm', 'lon_0': 25, 'ellps': 'GRS80', 'proj': 'tmerc'}
-    {'y_0': 0, 'no_defs': True, 'x_0': 25500000, 'k': 1, 'lat_0': 0, 'units': 'm', 'lon_0': 25, 'ellps': 'GRS80', 'proj': 'tmerc'}
-    True
-
-
 
 Indeed they are identical. Thus, we can be sure that when doing spatial
 queries between layers the locations match and we get the right results
@@ -221,31 +177,13 @@ e.g. from the spatial join that we are conducting here.
 -  Let's now join the attributes from ``pop`` GeoDataFrame into
    ``addresses`` GeoDataFrame by using ``gpd.sjoin()`` -function
 
-.. code:: python
+.. ipython:: python
 
     # Make a spatial join
     join = gpd.sjoin(addresses, pop, how="inner", op="within")
     
     # Let's check the result
-    print(join.head())
-
-
-.. parsed-literal::
-
-                                              address  \
-    16  Malminkartanontie 17, 00410 Helsinki, Finland   
-    19     Pitäjänmäentie 15, 00370 Helsinki, Finland   
-    12       Trumstigen 8, 00420 Helsingfors, Finland   
-    11           Kuparitie 8, 00440 Helsinki, Finland   
-    15            Kylätie 23, 00320 Helsinki, Finland   
-    
-                                           geometry    id  index_right  pop15  
-    16  POINT (25492349.68368251 6681772.551210108)  1017         2684     74  
-    19  POINT (25492292.61413005 6679039.264838208)  1020         2691    241  
-    12  POINT (25493207.62503373 6680836.727432437)  1013         2852    577  
-    11  POINT (25493575.10327127 6679775.868274149)  1012         2949    562  
-    15   POINT (25494077.1680778 6678341.639159317)  1016         3036    414  
-    
+    join.head()
 
 Awesome! Now we have performed a successful spatial join where we got
 two new columns into our ``join`` GeoDataFrame, i.e. ``index_right``
@@ -270,14 +208,19 @@ points where color intensity indicates the population numbers.
    ``cmap`` -parameter tells to use a sequential colormap for the
    values, ``markersize`` adjusts the size of a point, ``scheme`` parameter can be used to adjust the classification method based on `pysal <http://pysal.readthedocs.io/en/latest/library/esda/mapclassify.html>`_, and ``legend`` tells that we want to have a legend.
 
-.. code:: python
+.. ipython:: python
 
     import matplotlib.pyplot as plt
-    
-    join.plot(column='pop15', cmap="Reds", markersize=7, scheme='natural_breaks', legend=True)
 
+    # Plot the points with population info
+    join.plot(column='pop15', cmap="Reds", markersize=7, scheme='natural_breaks', legend=True);
 
-.. image:: Lesson3-spatial-join_files/Lesson3-spatial-join_18_2.png
+    # Add title
+    plt.title("Amount of inhabitants living close the the point");
+
+    # Remove white space around the figure
+    @savefig population_points.png width=7in
+    plt.tight_layout()
 
 By knowing approximately how population is distributed in Helsinki, it
 seems that the results do make sense as the points with highest

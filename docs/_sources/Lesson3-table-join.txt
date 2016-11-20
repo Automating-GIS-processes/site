@@ -14,34 +14,35 @@ doing GIS analyses. Combining data from different tables based on common
    separately for each table by using ``left_on`` and ``right_on``
    -parameters.
 
-.. code:: python
+.. ipython:: python
+  :suppress:
+
+    # THIS CODE WILL BE RUNNING IN BACKGROUND
+    # ---------------------------------------
+    import gdal
+    import pandas as pd
+    import geopandas as gpd
+    from shapely.geometry import Point
+    from geopandas.tools import geocode
+    import os
+    fp = os.path.join(os.path.abspath('data'), "addresses.txt")
+    data = pd.read_csv(fp, sep=';')
+    key = 'AIzaSyAwNVHAtkbKlPs-EEs3OYqbnxzaYfDF2_8'
+    geo = geocode(data['address'], api_key=key)
+
+.. ipython:: python
 
     # Join tables by using a key column 'address'
     join = geo.merge(data, on='address')
 
     # Let's see what we have
-    >>> print(join.head())
-                                                 address
-    0              Kampinkuja 1, 00100 Helsinki, Finland
-    1               Kaivokatu 8, 00101 Helsinki, Finland
-    2  Hermanstads strandsväg 1, 00580 Helsingfors, F...
-    3                  Itäväylä, 00900 Helsinki, Finland
-    4         Tyynenmerenkatu 9, 00220 Helsinki, Finland
-
-                                   geometry    id
-    0         POINT (24.9301701 60.1683731)  1001
-    1         POINT (24.9418933 60.1698665)  1002
-    2  POINT (24.9774004 60.18735880000001)  1003
-    3  POINT (25.0919641 60.21448089999999)  1004
-    4         POINT (24.9214846 60.1565781)  1005
-
+    join.head()
 
 - Let's also check the data type of our new ``join`` table
 
-.. code:: python
+.. ipython:: python
 
-    >>> type(join)
-    geopandas.geodataframe.GeoDataFrame
+    type(join)
 
 As a result we have a new GeoDataFrame called ``join`` where we now have
 all original columns plus a new column for ``geometry``.

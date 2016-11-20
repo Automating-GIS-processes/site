@@ -54,8 +54,10 @@ and enabling a that API from
 short introduction about using Google API Console from
 `here <https://developers.googleblog.com/2016/03/introducing-google-api-console.html>`__.
 
-Note: There are also other Python modules in addition to geopy that can do
-geocoding such as `Geocoder <http://geocoder.readthedocs.io/>`__.
+.. note::
+
+    There are also other Python modules in addition to geopy that can do
+    geocoding such as `Geocoder <http://geocoder.readthedocs.io/>`__.
 
 Geocoding in Geopandas
 ----------------------
@@ -89,38 +91,42 @@ data looks like following:
     import geopandas as gpd
     from shapely.geometry import Point
     
-    # Import the geocoding function
-    from geopandas.tools import geocode
-    
     # Filepath
-    fp = r"/home/geo/addresses.txt"
+    fp = r"addresses.txt"
 
     # Read the data
     data = pd.read_csv(fp, sep=';')
-    
+
+.. ipython:: python
+   :suppress:
+
+    # THIS CODE WILL BE RUNNING IN BACKGROUND
+    # ---------------------------------------
+    import gdal
+    import pandas as pd
+    import geopandas as gpd
+    from shapely.geometry import Point
+    from geopandas.tools import geocode
+    import os
+    fp = os.path.join(os.path.abspath('data'), "addresses.txt")
+    data = pd.read_csv(fp, sep=';')
+
+.. ipython:: python
+
     # Let's take a look of the data
-    print(data.head())
-
-
-.. parsed-literal::
-
-         id                                            address
-    0  1000           Itämerenkatu 14, 00101 Helsinki, Finland
-    1  1001              Kampinkuja 1, 00100 Helsinki, Finland
-    2  1002               Kaivokatu 8, 00101 Helsinki, Finland
-    3  1003  Hermanstads strandsväg 1, 00580 Helsingfors, F...
-    4  1004                  Itäväylä, 00900 Helsinki, Finland
-    
+    data.head()
 
 -  Now we have our data in a Pandas DataFrame and we can geocode our
    addresses
 
-| * **Notice**: here we use my API key that has a limitation of 2500 requests / hour. Because of this, only the computer instances of our course environment have access to Google Geocoding API for a short period of time. Thus, the following key will NOT work from your own computer, only from our cloud computers. If you wish, you can create your own API key to Google Geocoding API V3 from `Google APIs console <https://code.google.com/apis/console>`_. See the notes from `above <Lesson3-geocoding.html#overview-of-geocoders>`_.
+.. note::
 
-|
+    Here we use my API key that has a limitation of 2500 requests / hour. Because of this, only the computer instances of our course environment have access to Google Geocoding API for a short period of time. Thus, the following key will NOT work from your own computer, only from our cloud computers. If you wish, you can create your own API key to Google Geocoding API V3 from `Google APIs console <https://code.google.com/apis/console>`_. See the notes from `above <Lesson3-geocoding.html#overview-of-geocoders>`_.
 
-.. code:: python
 
+.. ipython:: python
+
+    # Import the geocoding tool
     from geopandas.tools import geocode
     
     # Key for our Google Geocoding API 
@@ -131,15 +137,7 @@ data looks like following:
     # Geocode addresses
     geo = geocode(data['address'], api_key=key)
     
-    print(geo.head(2))
-
-
-.. parsed-literal::
-
-                                        address                       geometry
-    0  Itämerenkatu 14, 00180 Helsinki, Finland  POINT (24.9146767 60.1628658)
-    1     Kampinkuja 1, 00100 Helsinki, Finland  POINT (24.9301701 60.1683731)
-    
+    geo.head(2)
 
 And Voilà! As a result we have a GeoDataFrame that contains our original
 address and a 'geometry' column containing Shapely Point -objects that

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Projections: Converting from projection to another &mdash; GeoPython - AutoGIS 1 documentation</title>
+  <title>Re-projecting data &mdash; GeoPython - AutoGIS 1 documentation</title>
   
 
   
@@ -34,7 +34,7 @@
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="GeoPython - AutoGIS 1 documentation" href="index.html"/>
-        <link rel="next" title="Spatial queries: Point in Polygon &amp; Intersect" href="Lesson3-point-in-polygon.html"/>
+        <link rel="next" title="Point in Polygon &amp; Intersect" href="Lesson3-point-in-polygon.html"/>
         <link rel="prev" title="Table join" href="Lesson3-table-join.html"/> 
 
   
@@ -90,6 +90,7 @@
                 <p class="caption"><span class="caption-text">Course information</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="course-info.html">General info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Installing_Anacondas_GIS.html">Installing Python + GIS</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Lesson 1</span></p>
 <ul>
@@ -108,10 +109,18 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="Lesson3-geocoding.html">Geocoding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson3-table-join.html">Table join</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Projections: Converting from projection to another</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lesson3-point-in-polygon.html">Spatial queries: Point in Polygon &amp; Intersect</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Re-projecting data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson3-point-in-polygon.html">Point in Polygon &amp; Intersect</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson3-spatial-join.html">Spatial join</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Exercise-3.html">Exercise 3</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 4</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Lesson4-download-data.html">Download datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson4-geometric-operations.html">Geometric operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson4-reclassify.html">Data reclassification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson4-nearest-neighbour.html">Nearest Neighbour Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise-4.html">Exercise 4</a></li>
 </ul>
 
             
@@ -142,7 +151,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="index.html">Docs</a> &raquo;</li>
       
-    <li>Projections: Converting from projection to another</li>
+    <li>Re-projecting data</li>
       <li class="wy-breadcrumbs-aside">
         
           
@@ -156,8 +165,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="projections-converting-from-projection-to-another">
-<h1>Projections: Converting from projection to another<a class="headerlink" href="#projections-converting-from-projection-to-another" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="re-projecting-data">
+<h1>Re-projecting data<a class="headerlink" href="#re-projecting-data" title="Permalink to this headline">¶</a></h1>
 <p>A map projection is a systematic transformation of the latitudes and
 longitudes into a plain surface. As map projections of gis-layers are
 fairly often defined differently (i.e. they do not match), it is a
@@ -175,28 +184,28 @@ used in Finland.</p>
 <ul class="simple">
 <li>Let&#8217;s first read the data from the Shapefile that we <a class="reference external" href="Lesson3-table-join.html">created previously</a></li>
 </ul>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
 
-<span class="c1"># Filepath to the addresses Shapefile</span>
-<span class="n">fp</span> <span class="o">=</span> <span class="s2">r&quot;/home/geo/addresses.shp&quot;</span>
+<span class="go"># Filepath to the addresses Shapefile</span>
+<span class="gp">In [2]: </span><span class="n">fp</span> <span class="o">=</span> <span class="s2">&quot;/home/geo/addresses.shp&quot;</span>
 
-<span class="c1"># Read data</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+<span class="go"># Read data</span>
+<span class="gp">In [3]: </span><span class="n">data</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li>Let&#8217;s check what is the current CRS of our layer</li>
 </ul>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">crs</span>
-<span class="go">{&#39;init&#39;: &#39;epsg:4326&#39;}</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="n">data</span><span class="o">.</span><span class="n">crs</span>
+<span class="gh">Out[4]: </span><span class="go">{&#39;init&#39;: &#39;epsg:4326&#39;}</span>
 </pre></div>
 </div>
 <p>Okey, so it is WGS84 (i.e. EPSG: 4326).</p>
 <ul class="simple">
 <li>Let&#8217;s also check the values in our <code class="docutils literal"><span class="pre">geometry</span></code> column</li>
 </ul>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[5]: </span><span class="go"></span>
 <span class="go">0           POINT (24.9301701 60.1683731)</span>
 <span class="go">1           POINT (24.9418933 60.1698665)</span>
 <span class="go">2    POINT (24.9774004 60.18735880000001)</span>
@@ -218,18 +227,18 @@ use.</li>
 proj4 strings or dictionaries, see more
 <a class="reference external" href="http://geopandas.org/projections.html#coordinate-reference-systems">here</a></li>
 </ul>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s take a copy of our layer</span>
-<span class="n">data_proj</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="go"># Let&#39;s take a copy of our layer</span>
+<span class="gp">In [6]: </span><span class="n">data_proj</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
-<span class="c1"># Reproject the geometries by replacing the values with projected ones</span>
-<span class="n">data_proj</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_proj</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">epsg</span><span class="o">=</span><span class="mi">3879</span><span class="p">)</span>
+<span class="go"># Reproject the geometries by replacing the values with projected ones</span>
+<span class="gp">In [7]: </span><span class="n">data_proj</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_proj</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">epsg</span><span class="o">=</span><span class="mi">3879</span><span class="p">)</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li>Let&#8217;s see how they look now</li>
 </ul>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data_proj</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [8]: </span><span class="n">data_proj</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[8]: </span><span class="go"></span>
 <span class="go">0    POINT (25496123.30852197 6672833.941567578)</span>
 <span class="go">1    POINT (25496774.28242895 6672999.698581985)</span>
 <span class="go">2     POINT (25498746.0795546 6674947.404346379)</span>
@@ -243,15 +252,32 @@ changed the projection of our layer into a new one.</p>
 <ul class="simple">
 <li>Let&#8217;s still compare the layers visually</li>
 </ul>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Plot the WGS84</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">data</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Plot the WGS84</span>
+<span class="n">data</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">markersize</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">);</span>
+
+<span class="c1"># Add title</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;WGS84 projection&quot;</span><span class="p">);</span>
+
+<span class="c1"># Remove empty white space around the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 
 <span class="c1"># Plot the one with ETRS GK-25 projection</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">data_proj</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">data_proj</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">markersize</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">);</span>
+
+<span class="c1"># Add title</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;ETRS GK-25 projection&quot;</span><span class="p">);</span>
+
+<span class="c1"># Remove empty white space around the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="_images/Lesson3-projections_11_0.png" src="_images/Lesson3-projections_11_0.png" />
-<img alt="_images/Lesson3-projections_11_1.png" src="_images/Lesson3-projections_11_1.png" />
+<div class="highlight-ipython"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/wgs84.png"><img alt="_images/wgs84.png" src="_images/wgs84.png" style="width: 3.5in;" /></a>
+<a class="reference internal image-reference" href="_images/projected.png"><img alt="_images/projected.png" src="_images/projected.png" style="width: 3.5in;" /></a>
 <p>Indeed, they look different and our re-projected one looks much better
 in Finland (not so stretced as in WGS84).</p>
 <ul class="simple">
@@ -259,29 +285,39 @@ in Finland (not so stretced as in WGS84).</p>
 3879 as now we only modified the values of the <code class="docutils literal"><span class="pre">geometry</span></code> column.
 We can take use of fiona&#8217;s <code class="docutils literal"><span class="pre">from_epsg</span></code> -function.</li>
 </ul>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">fiona.crs</span> <span class="k">import</span> <span class="n">from_epsg</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="kn">from</span> <span class="nn">fiona.crs</span> <span class="kn">import</span> <span class="n">from_epsg</span>
 
-<span class="c1"># Determine the CRS of the GeoDataFrame</span>
-<span class="n">data_proj</span><span class="o">.</span><span class="n">crs</span> <span class="o">=</span> <span class="n">from_epsg</span><span class="p">(</span><span class="mi">3879</span><span class="p">)</span>
+<span class="go"># Determine the CRS of the GeoDataFrame</span>
+<span class="gp">In [10]: </span><span class="n">data_proj</span><span class="o">.</span><span class="n">crs</span> <span class="o">=</span> <span class="n">from_epsg</span><span class="p">(</span><span class="mi">3879</span><span class="p">)</span>
 
-<span class="c1"># Let&#39;s see what we have</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">data_proj</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
-<span class="p">{</span><span class="s1">&#39;init&#39;</span><span class="p">:</span> <span class="s1">&#39;epsg:3879&#39;</span><span class="p">,</span> <span class="s1">&#39;no_defs&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+<span class="go"># Let&#39;s see what we have</span>
+<span class="gp">In [11]: </span><span class="n">data_proj</span><span class="o">.</span><span class="n">crs</span>
+<span class="gh">Out[11]: </span><span class="go">{&#39;init&#39;: &#39;epsg:3879&#39;, &#39;no_defs&#39;: True}</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li><strong>Notice</strong>: The above works for most EPSG codes but as ETRS GK-25
-projection is rather rare, so we still need to specify and make sure
-that .prj file is having correct coordinate system information by
-passing a proj4 dictionary below into it (otherwise the .prj file
-would be empty):</li>
-</ul>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Pass the coordinate information</span>
-<span class="n">data_proj</span><span class="o">.</span><span class="n">crs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;y_0&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;no_defs&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;x_0&#39;</span><span class="p">:</span> <span class="mi">25500000</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;lat_0&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;units&#39;</span><span class="p">:</span> <span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="s1">&#39;lon_0&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span> <span class="s1">&#39;ellps&#39;</span><span class="p">:</span> <span class="s1">&#39;GRS80&#39;</span><span class="p">,</span> <span class="s1">&#39;proj&#39;</span><span class="p">:</span> <span class="s1">&#39;tmerc&#39;</span><span class="p">}</span>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The above works for most EPSG codes but as ETRS GK-25
+projection is a rather rare one, we still need to make sure
+that .prj file is having correct coordinate system information. We do that by
+passing a proj4 dictionary (below) into it (otherwise the <code class="docutils literal"><span class="pre">.prj</span></code> file of the Shapefile
+might be empty):</p>
+</div>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="go"># Pass the coordinate information</span>
+<span class="gp">In [12]: </span><span class="n">data_proj</span><span class="o">.</span><span class="n">crs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;y_0&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;no_defs&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="s1">&#39;x_0&#39;</span><span class="p">:</span> <span class="mi">25500000</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;lat_0&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;units&#39;</span><span class="p">:</span> <span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="s1">&#39;lon_0&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span> <span class="s1">&#39;ellps&#39;</span><span class="p">:</span> <span class="s1">&#39;GRS80&#39;</span><span class="p">,</span> <span class="s1">&#39;proj&#39;</span><span class="p">:</span> <span class="s1">&#39;tmerc&#39;</span><span class="p">}</span>
 
-<span class="c1"># Check it</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">data_proj</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
-<span class="p">{</span><span class="s1">&#39;lat_0&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;y_0&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;no_defs&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;x_0&#39;</span><span class="p">:</span> <span class="mi">25500000</span><span class="p">,</span> <span class="s1">&#39;units&#39;</span><span class="p">:</span> <span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="s1">&#39;lon_0&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span> <span class="s1">&#39;proj&#39;</span><span class="p">:</span> <span class="s1">&#39;tmerc&#39;</span><span class="p">,</span> <span class="s1">&#39;ellps&#39;</span><span class="p">:</span> <span class="s1">&#39;GRS80&#39;</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+<span class="go"># Check that it changed</span>
+<span class="gp">In [13]: </span><span class="n">data_proj</span><span class="o">.</span><span class="n">crs</span>
+<span class="gh">Out[13]: </span><span class="go"></span>
+<span class="go">{&#39;ellps&#39;: &#39;GRS80&#39;,</span>
+<span class="go"> &#39;k&#39;: 1,</span>
+<span class="go"> &#39;lat_0&#39;: 0,</span>
+<span class="go"> &#39;lon_0&#39;: 25,</span>
+<span class="go"> &#39;no_defs&#39;: True,</span>
+<span class="go"> &#39;proj&#39;: &#39;tmerc&#39;,</span>
+<span class="go"> &#39;units&#39;: &#39;m&#39;,</span>
+<span class="go"> &#39;x_0&#39;: 25500000,</span>
+<span class="go"> &#39;y_0&#39;: 0}</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -304,7 +340,7 @@ can use it later.</li>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="Lesson3-point-in-polygon.html" class="btn btn-neutral float-right" title="Spatial queries: Point in Polygon &amp; Intersect" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="Lesson3-point-in-polygon.html" class="btn btn-neutral float-right" title="Point in Polygon &amp; Intersect" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="Lesson3-table-join.html" class="btn btn-neutral" title="Table join" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
