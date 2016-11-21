@@ -1,0 +1,229 @@
+
+Interactive maps: Folium & Leaflet
+==================================
+
+Whenever you go into a website that has some kind of interactive map, it
+is quite probable that you are wittnessing a map that has been made with
+a JavaScipt library called `Leaflet <http://leafletjs.com/>`__ (the
+other popular one that you might have wittnessed is called
+`OpenLayers <https://openlayers.org/>`__).
+
+There is also a Python module called
+`Folium <https://github.com/python-visualization/folium>`__ that makes
+it possible visualize data that's been manipulated in Python on an
+interactive Leaflet map.
+
+Creating a simple interactive web-map
+-------------------------------------
+
+Let's first see how we can do a simple interactive web-map without any data on it. We just visualize OpenStreetMap on a specific location of the a world.
+
+- First thing that we need to do is to create a Map instance. There are few parameters that we can use to adjust how in our Map instance that will affect how the background map will look like.
+
+.. code:: python
+
+    import folium
+
+    # Create a Map instance
+    m = folium.Map(location=[60.25, 24.8], tiles='Stamen Toner',
+                       zoom_start=10, control_scale=True)
+
+The first parameter ``location`` takes a pair of lat, lon values as list as an input which will determine where the map will be positioned when user opens up the map. ``zoom_start`` -parameter adjusts the default zoom-level for the map (the higher the number the closer the zoom is). ``control_scale`` defines if map should have a scalebar or not.
+
+.. ipython:: python
+   :suppress:
+
+    import folium
+    import gdal
+    import geopandas as gpd
+    from fiona.crs import from_epsg
+
+    # Create a Map instance
+    m = folium.Map(location=[60.25, 24.8], zoom_start=10, control_scale=True, prefer_canvas=True)
+
+- Let's see what our map looks like. We can already now save the map without any content. It will now just show the basemap in such a way that we initialized it. Let's save the map as ``/home/geo/base_map.html``.
+
+.. ipython:: python
+
+    @suppress
+    import os
+
+    outfp = "/home/geo/base_map.html"
+
+    @suppress
+    outfp = os.path.join(os.path.abspath("./data"), "base_map.html")
+
+    m.save(outfp)
+
+Take a look at the map by clicking it with right mouse and open it with Google Chrome which then opens it up in a web browser.
+
+- Let's change the basemap style to ``Stamen Toner`` and change the location of our map slightly. The ``tiles`` -parameter is used for changing the background map provider and map style (see here for all possible ones).
+
+.. code:: python
+
+    # Let's change the basemap style to 'Stamen Toner'
+    m = folium.Map(location=[40.730610, -73.935242], tiles='Stamen Toner',
+                   zoom_start=12, control_scale=True, prefer_canvas=True)
+
+    # Filepath to the output
+    outfp = "/home/geo/base_map2.html"
+
+   # Save the map
+    m.save(outfp)
+
+.. ipython:: python
+  :suppress:
+
+    m = folium.Map(location=[40.730610, -73.935242], tiles='Stamen Toner', zoom_start=12, control_scale=True, prefer_canvas=True)
+    outfp = "/home/geo/base_map2.html"
+    outfp = os.path.join(os.path.abspath("./data"), "base_map2.html")
+    m.save(outfp)
+
+.. note::
+
+    **TASK:** Play around with the parameters and save the map and see how those changes affect the look of the map.
+
+Adding layers to web-map
+------------------------
+
+Adding layers to a web-map is fairly straightforward procedure and we can use familiar tools to handle the data, i.e. Geopandas.
+
+.. code:: python
+
+    # Create a Clustered map
+    marker_cluster = folium.MarkerCluster().add_to(map_osm)
+
+    # Visualize population grid
+
+    # Filepaths
+    fp = "Vaestotietoruudukko_2015.shp"
+    addr_fp = "addresses.shp"
+
+    # Read Data
+    data = gpd.read_file(fp)
+    ad = gpd.read_file(addr_fp)
+
+    # Re-project to WGS84
+    data['geometry'] = data['geometry'].to_crs(epsg=4326)
+    ad['geometry'] = ad['geometry'].to_crs(epsg=4326)
+
+    # Update the CRS of the GeoDataFrame
+    data.crs = from_epsg(4326)
+    ad.crs = from_epsg(4326)
+
+    # Make a selection (only data above 0 and below 1000)
+    data = data.ix[(data['ASUKKAITA'] > 0) & (data['ASUKKAITA'] <= 1000)]
+
+    # Create a Geo-id
+    data['geoid'] = data.index.astype(str)
+    ad['geoid'] = ad.index.astype(str)
+
+    # Select data
+    data = data[['geoid', 'ASUKKAITA', 'geometry']]
+
+    # Save the file as geojson
+    jsontxt = data.to_json()
+
+    # Create Choropleth map
+    map_osm.choropleth(geo_str=jsontxt, data=data, columns=['geoid', 'ASUKKAITA'], key_on="feature.id",
+                       fill_color='YlOrRd', fill_opacity=0.9, line_opacity=0.2, line_color='white', line_weight=0,
+                       threshold_scale=[100, 250, 500, 1000, 2000],
+                       legend_name='Population in Helsinki', highlight=False, smooth_factor=2.25)
+
+
+    # Create Address points on top of the map
+    for idx, row in ad.iterrows():
+        # Get lat and lon of points
+        lon = row['geometry'].x
+        lat = row['geometry'].y
+
+        # Get address information
+        address = row['address']
+
+        #folium.Marker(location=[lat, lon], popup=address).add_to(marker_cluster)
+        #folium.Marker(location=[lat, lon], popup=address).add_to(map_osm)
+
+        #folium.RegularPolygonMarker(location=[lat, lon], popup=address, fill_color='#2b8cbe', number_of_sides=6, radius=8).add_to(map_osm)
+        folium.RegularPolygonMarker(location=[lat, lon], popup=address, fill_color='#2b8cbe', number_of_sides=6, radius=8).add_to(marker_cluster)
+
+        #folium.CircleMarker(location=[lat, lon], popup=address, radius=30, color='#3186cc', fill_color='#3186cc').add_to(map_osm)
+
+    # Save the output
+    map_osm.save(r'C:\HY-Data\HENTENKA\KOODIT\Opetus\Automating-GIS-processes\Lesson-5-Visualization-Maps\Codes\pop15.html')
+
+
+.. code:: python
+
+    import folium 
+    import geopandas as gpd
+    from fiona.crs import from_epsg
+    
+    # Create a Map instance
+    map_osm = folium.Map(location=[60.25, 24.8], tiles='Stamen Toner',
+                       zoom_start=10, control_scale=True, prefer_canvas=True)
+    
+    # Create a Clustered map
+    marker_cluster = folium.MarkerCluster().add_to(map_osm)
+    
+    # Visualize population grid
+
+    # Filepaths
+    fp = "Vaestotietoruudukko_2015.shp"
+    addr_fp = "addresses.shp"
+
+    # Read Data 
+    data = gpd.read_file(fp)
+    ad = gpd.read_file(addr_fp)
+    
+    # Re-project to WGS84
+    data['geometry'] = data['geometry'].to_crs(epsg=4326)
+    ad['geometry'] = ad['geometry'].to_crs(epsg=4326)
+    
+    # Update the CRS of the GeoDataFrame
+    data.crs = from_epsg(4326)
+    ad.crs = from_epsg(4326)
+    
+    # Make a selection (only data above 0 and below 1000)
+    data = data.ix[(data['ASUKKAITA'] > 0) & (data['ASUKKAITA'] <= 1000)]
+    
+    # Create a Geo-id
+    data['geoid'] = data.index.astype(str)
+    ad['geoid'] = ad.index.astype(str)
+    
+    # Select data
+    data = data[['geoid', 'ASUKKAITA', 'geometry']]
+
+    # Save the file as geojson
+    jsontxt = data.to_json()
+    
+    # Create Choropleth map
+    map_osm.choropleth(geo_str=jsontxt, data=data, columns=['geoid', 'ASUKKAITA'], key_on="feature.id", 
+                       fill_color='YlOrRd', fill_opacity=0.9, line_opacity=0.2, line_color='white', line_weight=0,
+                       threshold_scale=[100, 250, 500, 1000, 2000], 
+                       legend_name='Population in Helsinki', highlight=False, smooth_factor=2.25)
+    
+    
+    # Create Address points on top of the map
+    for idx, row in ad.iterrows():
+        # Get lat and lon of points
+        lon = row['geometry'].x
+        lat = row['geometry'].y
+        
+        # Get address information
+        address = row['address']
+    
+        #folium.Marker(location=[lat, lon], popup=address).add_to(marker_cluster)
+        #folium.Marker(location=[lat, lon], popup=address).add_to(map_osm)
+        
+        #folium.RegularPolygonMarker(location=[lat, lon], popup=address, fill_color='#2b8cbe', number_of_sides=6, radius=8).add_to(map_osm)
+        folium.RegularPolygonMarker(location=[lat, lon], popup=address, fill_color='#2b8cbe', number_of_sides=6, radius=8).add_to(marker_cluster)
+        
+        #folium.CircleMarker(location=[lat, lon], popup=address, radius=30, color='#3186cc', fill_color='#3186cc').add_to(map_osm)
+        
+    # Save the output
+    map_osm.save(r'C:\HY-Data\HENTENKA\KOODIT\Opetus\Automating-GIS-processes\Lesson-5-Visualization-Maps\Codes\pop15.html')
+    
+    # Show it
+    map_osm
+
+

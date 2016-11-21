@@ -27,21 +27,34 @@ Reading a Shapefile
 Spatial data can be read easily with geopandas using ``gpd.from_file()``
 -function:
 
-.. code:: python
+.. ipython:: python
 
+    @suppress
+    import gdal
+    
     # Import necessary modules
     import geopandas as gpd
-    import matplotlib.pyplot as plt
 
-    # Set filepath
-    fp = r"/home/geo/Data/DAMSELFISH_distributions.shp"
+    # Set filepath (fix path relative to yours)
+    fp = "/home/geo/Data/DAMSELFISH_distributions.shp"
+
+    @suppress
+    import os
+
+    @suppress
+    """ NOTICE: Following is the real path to the data, the one above is for online documentation to reflect the situation at computing instance """
+
+    @suppress
+    fp = os.path.join(os.path.abspath('data'), "DAMSELFISH_distributions.shp")
 
     # Read file using gpd.read_file()
     data = gpd.read_file(fp)
 
-    # Let's see what datatype is our 'data' variable
-    >>> type(data)
-    geopandas.geodataframe.GeoDataFrame
+- Let's see what datatype is our 'data' variable
+
+.. ipython:: python
+
+   type(data)
 
 Okey so from the above we can see that our ``data`` -variable is a
 **GeoDataFrame**. GeoDataFrame extends the functionalities of
@@ -52,64 +65,19 @@ some special features and functions that are useful in GIS.
 -  Let's take a look at our data and print the first 5 rows using the
    ``head()`` -function prints the first 5 rows by default
 
-.. code:: python
+.. ipython:: python
 
-    >>> data.head()
-                  binomial category  \
-    0   Stegastes leucorus       VU
-    1   Stegastes leucorus       VU
-    2   Stegastes leucorus       VU
-    3  Chromis intercrusma       LC
-    4  Chromis intercrusma       LC
-
-                                                citation      class_name compiler  \
-    0  International Union for Conservation of Nature...  ACTINOPTERYGII     IUCN
-    1  International Union for Conservation of Nature...  ACTINOPTERYGII     IUCN
-    2  International Union for Conservation of Nature...  ACTINOPTERYGII     IUCN
-    3  International Union for Conservation of Nature...  ACTINOPTERYGII     IUCN
-    4  International Union for Conservation of Nature...  ACTINOPTERYGII     IUCN
-
-      dist_comm     family_nam genus_name  \
-    0      None  POMACENTRIDAE  Stegastes
-    1      None  POMACENTRIDAE  Stegastes
-    2      None  POMACENTRIDAE  Stegastes
-    3      None  POMACENTRIDAE    Chromis
-    4      None  POMACENTRIDAE    Chromis
-
-                                                geometry     id_no  ...  origin  \
-    0  POLYGON ((-115.6437454219999 29.71392059300007...  183963.0  ...       1
-    1  POLYGON ((-105.589950704 21.89339825500002, -1...  183963.0  ...       1
-    2  POLYGON ((-111.159618439 19.01535626700007, -1...  183963.0  ...       1
-    3  POLYGON ((-80.86500229899997 -0.77894492099994...  183793.0  ...       1
-    4  POLYGON ((-67.33922225599997 -55.6761029239999...  183793.0  ...       1
-
-      phylum_nam rl_update seasonal  source   species_na  subpop  subspecies  \
-    0   CHORDATA    2012.1        1    None     leucorus    None        None
-    1   CHORDATA    2012.1        1    None     leucorus    None        None
-    2   CHORDATA    2012.1        1    None     leucorus    None        None
-    3   CHORDATA    2012.1        1    None  intercrusma    None        None
-    4   CHORDATA    2012.1        1    None  intercrusma    None        None
-
-      tax_comm  year
-    0     None  2010
-    1     None  2010
-    2     None  2010
-    3     None  2010
-    4     None  2010
-
-    [5 rows x 24 columns]
+    data.head()
 
 -  Let's also take a look how our data looks like on a map. If you just
    want to explore your data on a map, you can use ``.plot()`` -function
    in geopandas that creates a simple map out of the data (uses
    matplotlib as a backend):
 
-.. code:: python
+.. ipython:: python
 
-    >>> data.plot()
-
-.. figure:: img/damselfish-simple-map.PNG
-   :width: 60%
+   @savefig damselfish.png width=5in
+   data.plot();
 
 Coordinate reference system (CRS)
 ---------------------------------
@@ -121,10 +89,9 @@ data is projected.
 -  We can see the current coordinate reference system from ``.crs``
    attribute:
 
-.. code:: python
+.. ipython:: python
 
-    >>> print(data.crs)
-    {'init': 'epsg:4326'}
+    data.crs
 
 Okey, so from this we can see that the data is something called
 **epsg:4326**. The EPSG number (*"European Petroleum Survey Group"*) is
@@ -170,16 +137,10 @@ storing geometric information in geopandas.
 
 -  Let's print the first 5 rows of the column 'geometry':
 
-.. code:: python
+.. ipython:: python
 
-    >>> # It is possible to use only specific columns by specifying the column name within square brackets []
-    ... data['geometry'].head()
-    0    POLYGON ((-115.6437454219999 29.71392059300007...
-    1    POLYGON ((-105.589950704 21.89339825500002, -1...
-    2    POLYGON ((-111.159618439 19.01535626700007, -1...
-    3    POLYGON ((-80.86500229899997 -0.77894492099994...
-    4    POLYGON ((-67.33922225599997 -55.6761029239999...
-    Name: geometry, dtype: object
+    # It is possible to use only specific columns by specifying the column name within square brackets []
+    data['geometry'].head()
 
 Since spatial data is stored as Shapely objects, **it is possible to use
 all of the functionalities of Shapely module** that we practiced
@@ -187,7 +148,7 @@ earlier.
 
 -  Let's print the areas of the first 5 polygons:
 
-.. code:: python
+.. ipython:: python
 
     # Make a selection that contains only the first five rows
     selection = data[0:5]
@@ -195,54 +156,57 @@ earlier.
 -  We can iterate over the selected rows using a specific
    ``.iterrows()`` -function in (geo)pandas:
 
-.. code:: python
+.. ipython:: python
 
-    >>> for index, row in selection.iterrows():
-    ...     # Calculate the area of the polygon
-    ...     poly_area = row['geometry'].area
-    ...     # Print information for the user
-    ...     print("Polygon area at index {0} is: {1:.3f}".format(index, poly_area))
-    Polygon area at index 0 is: 19.396
-    Polygon area at index 1 is: 6.146
-    Polygon area at index 2 is: 2.697
-    Polygon area at index 3 is: 87.461
-    Polygon area at index 4 is: 0.001
+    for index, row in selection.iterrows():
+        # Calculate the area of the polygon
+        poly_area = row['geometry'].area
+        # Print information for the user
+        print("Polygon area at index {0} is: {1:.3f}".format(index, poly_area))
 
 -  Let's create a new column into our GeoDataFrame where we calculate
    and store the areas individual polygons:
 
-.. code:: python
+.. ipython:: python
 
     # Empty column for area
     data['area'] = None
 
 -  Let's iterate over the rows and calculate the areas
 
-::
+.. code:: python
 
+    # Iterate rows one at the time
     for index, row in data.iterrows():
         # Update the value in 'area' column with area information at index
         data.loc[index, 'area'] = row['geometry'].area
 
+.. ipython:: python
+   :suppress:
+
+    # THIS CODE RUNS IN BACKGROUND AND IS HIDDEN
+    for index, row in data.iterrows():
+        data.loc[index, 'area'] = row['geometry'].area
+
 -  Let's see the first 2 rows of our 'area' column
 
-::
+.. ipython:: python
 
-    >>> data['area'].head(2)
-    0    19.3963
-    1     6.1459
-    Name: area, dtype: object
+    data['area'].head(2)
 
--  Let's check what is the mean and the max of those areas using
+-  Let's check what is the min and the max of those areas using
    familiar functions from our previous numpy lessions
 
-.. code:: python
+.. ipython:: python
 
-    >>> max_area = data['area'].max()
-    >>> min_area = data['area'].mean()
-    >>> print("Max area: %s\nMean area: %s" % (round(max_area, 2), round(min_area, 2)))
-    Max area: 1493.2
-    Mean area: 19.96
+    # Maximum area
+    max_area = data['area'].max()
+
+    # Minimum area
+    min_area = data['area'].mean()
+
+    print("Max area: %s\nMean area: %s" % (round(max_area, 2), round(min_area, 2)))
+
 
 Creating geometries into a GeoDataFrame
 ---------------------------------------
@@ -252,6 +216,7 @@ possible to create a Shapefile from a scratch by passing Shapely's
 geometric objects into the GeoDataFrame. This is useful as it makes it
 easy to convert e.g. a text file that contains coordinates into a
 Shapefile.
+
 
 -  Let's create an empty ``GeoDataFrame``.
 
@@ -266,27 +231,36 @@ Shapefile.
     # Create an empty geopandas GeoDataFrame
     newdata = gpd.GeoDataFrame()
 
+.. ipython:: python
+   :suppress:
+
+    # Import necessary modules first
+    import pandas as pd
+    import geopandas as gpd
+    from shapely.geometry import Point, Polygon
+    import fiona
+
+    # Create an empty geopandas GeoDataFrame
+    newdata = gpd.GeoDataFrame()
+
+.. ipython:: python
+
     # Let's see what's inside
-    >>> print(newdata)
-    Empty GeoDataFrame
-    Columns: []
-    Index: []
+    newdata
 
 The GeoDataFrame is empty since we haven't placed any data inside.
 
 -  Let's create a new column called ``geometry`` that will contain our
    Shapely objects:
 
-.. code:: python
+.. ipython:: python
 
     # Create a new column called 'geometry' to the GeoDataFrame
     newdata['geometry'] = None
 
     # Let's see what's inside
-    >>> print(newdata)
-    Empty GeoDataFrame
-    Columns: [geometry]
-    Index: []
+    newdata
+
 
 Now we have a geometry column in our GeoDataFrame but we don't have any
 data yet.
@@ -294,7 +268,7 @@ data yet.
 -  Let's create a Shapely Polygon repsenting the Helsinki Senate square
    that we can insert to our GeoDataFrame:
 
-.. code:: python
+.. ipython:: python
 
     # Coordinates of the Helsinki Senate square in Decimal Degrees
     coordinates = [(24.950899, 60.169158), (24.953492, 60.169158), (24.953510, 60.170104), (24.950958, 60.169990)]
@@ -302,23 +276,21 @@ data yet.
     # Create a Shapely polygon from the coordinate-tuple list
     poly = Polygon(coordinates)
 
-    >>> print(poly)
-    POLYGON ((24.950899 60.169158, 24.953492 60.169158, 24.95351 60.170104, 24.950958 60.16999, 24.950899 60.169158))
+    # Let's see what we have
+    poly
 
 Okey, so now we have appropriate Polygon -object.
 
 -  Let's insert the polygon into our 'geometry' column in our
    GeoDataFrame:
 
-.. code:: python
+.. ipython:: python
 
     # Insert the polygon into 'geometry' -column at index 0
     newdata.loc[0, 'geometry'] = poly
 
     # Let's see what we have now
-    >>> print(newdata)
-                                                geometry
-    0  POLYGON ((24.950899 60.169158, 24.953492 60.16...
+    newdata
 
 Now we have a GeoDataFrame with Polygon that we can export to a
 Shapefile.
@@ -326,15 +298,13 @@ Shapefile.
 -  Let's add another column to our GeoDataFrame called ``Location`` with
    text *Senaatintori*.
 
-.. code:: python
+.. ipython:: python
 
     # Add a new column and insert data
     newdata.loc[0, 'Location'] = 'Senaatintori'
 
     # Let's check the data
-    >>> print(newdata)
-                                                geometry      Location
-    0  POLYGON ((24.950899 60.169158, 24.953492 60.16...  Senaatintori
+    newdata
 
 Okey, now we have additional information that is useful to be able to
 recognice what the feature represents.
@@ -346,17 +316,16 @@ As was shown earlier, GeoDataFrame has a property called *.crs* that
 shows the coordinate system of the data which is empty (None) in our
 case since we are creating the data from the scratch:
 
-.. code:: python
+.. ipython:: python
 
-    >>> print(newdata.crs)
-    None
+    print(newdata.crs)
 
 -  Let's add a crs for our GeoDataFrame. A Python module called
    **fiona** has a nice function called ``from_epsg()`` for passing
    coordinate system for the GeoDataFrame. Next we will use that and
    determine the projection to WGS84 (epsg code: 4326):
 
-.. code:: python
+.. ipython:: python
 
     # Import specific function 'from_epsg' from fiona module
     from fiona.crs import from_epsg
@@ -365,8 +334,7 @@ case since we are creating the data from the scratch:
     newdata.crs = from_epsg(4326)
 
     # Let's see how the crs definition looks like
-    >>> print(newdata.crs)
-    {'init': 'epsg:4326', 'no_defs': True}
+    newdata.crs
 
 -  Finally, we can export the data using GeoDataFrames ``.to_file()``
    -function. The function works similarly as numpy or pandas, but here
@@ -402,20 +370,17 @@ This function groups data based on values on selected column(s).
 
   - *Note: If your `data` -variable doesn't contain the Damselfish data anymore, read the Shapefile again into memory using `gpd.read_file()` -function*
 
-.. code::
+.. ipython:: python
 
     # Group the data by column 'binomial'
-    >>> grouped = data.groupby('binomial')
+    grouped = data.groupby('binomial')
 
     # Let's see what we got
-    >>> grouped
-    <pandas.core.groupby.DataFrameGroupBy object at 0x0000000003FB6710>
-
-
+    grouped
 
 - ``groupby`` -function gives us an object called ``DataFrameGroupBy`` which is similar to list of keys and values (in a dictionary) that we can iterate over.
 
-.. code:: python
+.. ipython:: python
 
     # Iterate over the group object
 
@@ -423,76 +388,18 @@ This function groups data based on values on selected column(s).
         individual_fish = values
 
     # Let's see what is the LAST item that we iterated
-    >>> print(individual_fish)
-
-                      binomial category  \
-    27  Teixeirichthys jordani       LC
-    28  Teixeirichthys jordani       LC
-    29  Teixeirichthys jordani       LC
-    30  Teixeirichthys jordani       LC
-    31  Teixeirichthys jordani       LC
-    32  Teixeirichthys jordani       LC
-    33  Teixeirichthys jordani       LC
-
-                                                 citation      class_name  \
-    27  Red List Index (Sampled Approach), Zoological ...  ACTINOPTERYGII
-    28  Red List Index (Sampled Approach), Zoological ...  ACTINOPTERYGII
-    29  Red List Index (Sampled Approach), Zoological ...  ACTINOPTERYGII
-    30  Red List Index (Sampled Approach), Zoological ...  ACTINOPTERYGII
-    31  Red List Index (Sampled Approach), Zoological ...  ACTINOPTERYGII
-    32  Red List Index (Sampled Approach), Zoological ...  ACTINOPTERYGII
-    33  Red List Index (Sampled Approach), Zoological ...  ACTINOPTERYGII
-
-       compiler dist_comm     family_nam      genus_name  \
-    27     None      None  POMACENTRIDAE  Teixeirichthys
-    28     None      None  POMACENTRIDAE  Teixeirichthys
-    29     None      None  POMACENTRIDAE  Teixeirichthys
-    30     None      None  POMACENTRIDAE  Teixeirichthys
-    31     None      None  POMACENTRIDAE  Teixeirichthys
-    32     None      None  POMACENTRIDAE  Teixeirichthys
-    33     None      None  POMACENTRIDAE  Teixeirichthys
-
-                                                 geometry     id_no  ...  origin  \
-    27  POLYGON ((121.6300326400001 33.04248618400004,...  154915.0  ...       1
-    28  POLYGON ((32.56219482400007 29.97488975500005,...  154915.0  ...       1
-    29  POLYGON ((130.9052090560001 34.02498196400006,...  154915.0  ...       1
-    30  POLYGON ((56.32233070000007 -3.707270205999976...  154915.0  ...       1
-    31  POLYGON ((40.64476131800006 -10.85502363999996...  154915.0  ...       1
-    32  POLYGON ((48.11258402900006 -9.335103113999935...  154915.0  ...       1
-    33  POLYGON ((51.75403543100003 -9.21679305899994,...  154915.0  ...       1
-
-       phylum_nam rl_update seasonal  source species_na  subpop  subspecies  \
-    27   CHORDATA    2012.2        1    None    jordani    None        None
-    28   CHORDATA    2012.2        1    None    jordani    None        None
-    29   CHORDATA    2012.2        1    None    jordani    None        None
-    30   CHORDATA    2012.2        1    None    jordani    None        None
-    31   CHORDATA    2012.2        1    None    jordani    None        None
-    32   CHORDATA    2012.2        1    None    jordani    None        None
-    33   CHORDATA    2012.2        1    None    jordani    None        None
-
-       tax_comm  year
-    27     None  2012
-    28     None  2012
-    29     None  2012
-    30     None  2012
-    31     None  2012
-    32     None  2012
-    33     None  2012
-
-    [7 rows x 24 columns]
+    individual_fish
 
 From here we can see that an individual_fish variable now contains all the rows that belongs to a fish called ``Teixeirichthys jordani``. Notice that the index numbers refer to the row numbers in the
 original data -GeoDataFrame.
 
 - Let's check the datatype of the grouped object and what does the ``key`` variable contain
 
-.. code:: python
+.. ipython:: python
 
-    >>> type(individual_fish)
-    geopandas.geodataframe.GeoDataFrame
+    type(individual_fish)
 
-    >>> print(key)
-    'Teixeirichthys jordani'
+    print(key)
 
 As can be seen from the example above, each set of data are now grouped into separate GeoDataFrames that we can export into Shapefiles using the variable ``key``
 for creating the output filepath names. Let's now export those species into individual Shapefiles.

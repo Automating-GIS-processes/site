@@ -60,7 +60,7 @@ Point
 -  Creating point is easy, you pass x and y coordinates into Point()
    -object (+ possibly also z -coordinate) :
 
-.. code:: python
+.. ipython:: python
 
      # Import necessary geometric objects from shapely module
      from shapely.geometry import Point, LineString, Polygon
@@ -76,16 +76,11 @@ Point
 
 -  Let's see what the variables look like
 
-.. code:: python
+.. ipython:: python
 
-     >>> print(point1)
-     POINT (2.2 4.2)
-
-     >>> print(point3D)
-     POINT Z (9.26 -2.456 0.57)
-
-     >>> print(type(point1))
-     shapely.geometry.point.Point
+     print(point1)
+     print(point3D)
+     print(type(point1))
 
 We can see that the type of the point is shapely's Point which is
 represented in a specific format that is based on
@@ -105,19 +100,18 @@ distance between points.
 -  Extracting the coordinates of a Point can be done in a couple of
    different ways
 
-.. code:: python
+.. ipython:: python
 
      # Get the coordinates
      point_coords = point1.coords
 
      # What is the type of this?
-     >>> type(point_coords)
-     shapely.coords.CoordinateSequence
+     type(point_coords)
 
 Ok, we can see that the output is a Shapely CoordinateSequence. Let's
 see how we can get out the actual coordinates:
 
-.. code:: python
+.. ipython:: python
 
      # Get x and y coordinates
      xy = point_coords.xy
@@ -130,16 +124,11 @@ see how we can get out the actual coordinates:
 
 -  What is inside?
 
-.. code:: python
+.. ipython:: python
 
-     >>> print(xy)
-     (array('d', [2.2]), array('d', [4.2]))
-
-     >>> print(x)
-     2.2
-
-     >>> print(y)
-     4.2
+     print(xy)
+     print(x)
+     print(y)
 
 Okey, so we can see that the our xy variable contains a tuple where x and y are stored inside of a numpy arrays.
 However, our x and y variables are plain decimal numbers.
@@ -149,13 +138,12 @@ However, our x and y variables are plain decimal numbers.
 -  the returned distance is based on the projection of the points
    (degrees in WGS84, meters in UTM)
 
-.. code:: python
+.. ipython:: python
 
      # Calculate the distance between point1 and point2
      point_dist = point1.distance(point2)
      
-     >>> print("Distance between the points is {0:.2f} decimal degrees".format(point_dist))
-     Distance between the points is 29.72 decimal degrees
+     print("Distance between the points is {0:.2f} decimal degrees".format(point_dist))
 
 LineString
 ----------
@@ -165,7 +153,7 @@ LineString
    the line using either a list of shapely Point -objects or pass
    coordinate-tuples:
 
-.. code:: python
+.. ipython:: python
 
      # Create a LineString from our Point objects
      line = LineString([point1, point2, point3])
@@ -176,15 +164,11 @@ LineString
 
 - Let's see how our LineString looks like
 
-.. code:: python
-     >>> print(line)
-     LINESTRING (2.2 4.2, 7.2 -25.1, 9.26 -2.456)
-     
-     >>> print(line2)
-     LINESTRING (2.2 4.2, 7.2 -25.1, 9.26 -2.456)
-     
-     >>> type(line)
-     shapely.geometry.linestring.LineString
+.. ipython:: python
+
+     print(line)
+     print(line2)
+     type(line)
 
 Ok, now we can see that variable line constitutes of multiple
 coordinate-pairs and the type of the data is shapely LineString.
@@ -204,13 +188,12 @@ go through a few of them.
 -  We can extract the coordinates of a LineString similarly as with
    Point
 
-.. code:: python
+.. ipython:: python
 
      # Get x and y coordinates of the line
      lxy = line.xy
      
-     >>> print(lxy)
-    (array('d', [2.2, 7.2, 9.26]), array('d', [4.2, -25.1, -2.456]))
+     print(lxy)
 
 Okey, we can see that the coordinates are again stored as a numpy arrays
 where first array includes all x-coordinates and the second all the
@@ -219,7 +202,7 @@ y-coordinates respectively.
 -  We can extract only x or y coordinates by referring to those arrays
    as follows
 
-.. code:: python
+.. ipython:: python
 
      # Extract x coordinates
      line_x = lxy[0]
@@ -227,16 +210,14 @@ y-coordinates respectively.
      # Extract y coordinates straight from the LineObject by referring to a array at index 1
      line_y = line.xy[1]
 
-     >>> print(line_x)
-     array('d', [2.2, 7.2, 9.26])
-     
-     >>> print(line_y)
-     array('d', [4.2, -25.1, -2.456])
+     print(line_x)
+
+     print(line_y)
 
 -  We can get specific attributes such as lenght of the line and center
    of the line (centroid) straight from the LineString object itself
 
-.. code:: python
+.. ipython:: python
 
      # Get the lenght of the line
      l_length = line.length
@@ -247,16 +228,10 @@ y-coordinates respectively.
      # What type is the centroid?
      centroid_type = type(l_centroid)
 
-.. code:: python
-
-     >>> print("Length of our line: {0:.2f}".format(l_length))
-     Length of our line: 52.46
-     
-     >>> print("Centroid of our line: ", l_centroid)
-     Centroid of our line:  POINT (6.229961354035622 -11.89241115757239)
-     
-     >>> print("Type of the centroid:", centroid_type)
-     shapely.geometry.point.Point
+     # Print the outputs
+     print("Length of our line: {0:.2f}".format(l_length))
+     print("Centroid of our line: ", l_centroid)
+     print("Type of the centroid:", centroid_type)
 
 Okey, so these are already fairly useful information for many different
 GIS tasks, and we didn't even calculate anything yet! These attributes
@@ -272,7 +247,7 @@ Polygon
    coordinate-tuples as input. Polygon needs at least three
    coordinate-tuples:
 
-.. code:: python
+.. ipython:: python
 
      # Create a Polygon from the coordinates
      poly = Polygon([(2.2, 4.2), (7.2, -25.1), (9.26, -2.456)])
@@ -287,21 +262,11 @@ Polygon
      # Using the Python's type function gives the type in a different format
      poly_type2 = type(poly)
 
--  Let's see how our Polygon looks like
-
-.. code:: python
-
-     >>> print(poly)
-     POLYGON ((2.2 4.2, 7.2 -25.1, 9.26 -2.456, 2.2 4.2))
-     
-     >>> print(poly2)
-     POLYGON ((2.2 4.2, 7.2 -25.1, 9.26 -2.456, 2.2 4.2))
-     
-     >>> print("Geometry type as text:", poly_type)
-     Geometry type as text: Polygon
-     
-     >>> print("Geometry how Python shows it:", poly_type2")
-     shapely.geometry.polygon.Polygon
+     # Let's see how our Polygon looks like
+     print(poly)
+     print(poly2)
+     print("Geometry type as text:", poly_type)
+     print("Geometry how Python shows it:", poly_type2)
 
 Notice that Polygon has double parentheses around the coordinates. This
 is because Polygon can also have holes inside of it. As the help of
@@ -328,7 +293,7 @@ coordinates creates a hole inside the Polygon:
 
 -  Let's create a Polygon with a hole inside
 
-.. code:: python
+.. ipython:: python
 
      # Let's create a bounding box of the world and make a whole in it
 
@@ -347,16 +312,11 @@ coordinates creates a hole inside the Polygon:
 
 -  Let's see what we have now:
 
-.. code:: python
+.. ipython:: python
 
-     >>> print(world)
-     POLYGON ((-180 90, -180 -90, 180 -90, 180 90, -180 90))
-     
-     >>> print(world_has_a_hole)
-     POLYGON ((-180 90, -180 -90, 180 -90, 180 90, -180 90), (-170 80, -170 -80, 170 -80, 170 80, -170 80))
-     
-     >>> type(world_has_a_hole)
-     shapely.geometry.polygon.Polygon
+     print(world)
+     print(world_has_a_hole)
+     type(world_has_a_hole)
 
 Now we can see that the polygon has two different tuples of coordinates.
 The first one represents the outerior and the second one represents the
@@ -369,7 +329,7 @@ Polygon attributes and functions
    as area, centroid, bounding box, exterior, and exterior-length of the
    Polygon
 
-.. code:: python
+.. ipython:: python
 
      # Get the centroid of the Polygon
      world_centroid = world.centroid
@@ -388,22 +348,13 @@ Polygon attributes and functions
 
 -  Let's see what we have now
 
-.. code:: python
+.. ipython:: python
 
-     >>> print("Poly centroid: ", world_centroid)
-     Poly centroid:  POINT (-0 -0)
-     
-     >>> print("Poly Area: ", world_area)
-     Poly Area:  64800.0
-     
-     >>> print("Poly Bounding Box: ", world_bbox)
-     Poly Bounding Box:  (-180.0, -90.0, 180.0, 90.0)
-     
-     >>> print("Poly Exterior: ", world_ext)
-     Poly Exterior:  LINEARRING (-180 90, -180 -90, 180 -90, 180 90, -180 90)
-     
-     >>> print("Poly Exterior Length: ", world_ext_length)
-     Poly Exterior Length:  1080.0
+     print("Poly centroid: ", world_centroid)
+     print("Poly Area: ", world_area)
+     print("Poly Bounding Box: ", world_bbox)
+     print("Poly Exterior: ", world_ext)
+     print("Poly Exterior Length: ", world_ext_length)
 
 Pro -tips (optional)
 --------------------
@@ -432,7 +383,7 @@ to create one using Shapely.
 
 -  Geometry collections can be constructed in a following manner:
 
-.. code:: python
+.. ipython:: python
 
      # Import collections of geometric objects + bounding box
      from shapely.geometry import MultiPoint, MultiLineString, MultiPolygon, box
@@ -475,19 +426,12 @@ to create one using Shapely.
 
 - Let's see what do we have:
      
-.. code:: python
+.. ipython:: python
 
-     >>> print("MultiPoint:", multi_point)
-     MultiPoint: MULTIPOINT (2.2 4.2, 7.2 -25.1, 9.26 -2.456)
-     
-     >>> print("MultiLine: ", multi_line)
-     MultiLine:  MULTILINESTRING ((2.2 4.2, 7.2 -25.1), (7.2 -25.1, 9.26 -2.456))
-     
-     >>> print("Bounding box: ", east_poly_box)
-     Bounding box:  POLYGON ((180 -90, 180 90, 0 90, 0 -90, 180 -90))
-     
-     >>> print("MultiPoly: ", multi_poly)
-     MultiPoly:  MULTIPOLYGON (((-180 90, -180 -90, 0 -90, 0 90, -180 90), (-170 80, -170 -80, -10 -80, -10 80, -170 80)), ((180 -90, 180 90, 0 90, 0 -90, 180 -90)))
+     print("MultiPoint:", multi_point)
+     print("MultiLine: ", multi_line)
+     print("Bounding box: ", east_poly_box)
+     print("MultiPoly: ", multi_poly)
 
 We can see that the outputs are similar to the basic geometric objects
 that we created previously but now these objects contain multiple
@@ -498,7 +442,7 @@ Geometry collection -objects' attributes and functions
 
 -  We can also get many useful attributes from those objects:
 
-.. code:: python
+.. ipython:: python
 
      # Convex Hull of our MultiPoint --> https://en.wikipedia.org/wiki/Convex_hull
      convex = multi_point.convex_hull
@@ -522,23 +466,13 @@ Geometry collection -objects' attributes and functions
 
 -  Let's see what do we have:
 
-.. code:: python
+.. ipython:: python
 
-     >>> print("Convex hull of the points: ", convex)
-     Convex hull of the points:  POLYGON ((7.2 -25.1, 2.2 4.2, 9.26 -2.456, 7.2 -25.1))
-
-     >>> print("Number of lines in MultiLineString:", lines_count)
-     Number of lines in MultiLineString: 2
-     
-     >>> print("Area of our MultiPolygon:", multi_poly_area)
-     Area of our MultiPolygon: 39200.0
-     
-     >>> print("Area of our Western Hemisphere polygon:", west_area)
-     Area of our Western Hemisphere polygon: 6800.0
-     
-     >>> print("Is polygon valid?: ", valid)
-     Self-intersection at or near point 0 -90
-     Is polygon valid?:  False
+     print("Convex hull of the points: ", convex)
+     print("Number of lines in MultiLineString:", lines_count)
+     print("Area of our MultiPolygon:", multi_poly_area)
+     print("Area of our Western Hemisphere polygon:", west_area)
+     print("Is polygon valid?: ", valid)
 
 From the above we can see that MultiPolygons have exactly the same
 attributes available as single geometric objects but now the information

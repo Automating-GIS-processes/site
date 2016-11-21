@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Spatial queries: Point in Polygon &amp; Intersect &mdash; GeoPython - AutoGIS 1 documentation</title>
+  <title>Point in Polygon &amp; Intersect &mdash; GeoPython - AutoGIS 1 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="GeoPython - AutoGIS 1 documentation" href="index.html"/>
         <link rel="next" title="Spatial join" href="Lesson3-spatial-join.html"/>
-        <link rel="prev" title="Projections: Converting from projection to another" href="Lesson3-projections.html"/> 
+        <link rel="prev" title="Re-projecting data" href="Lesson3-projections.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -90,6 +90,7 @@
                 <p class="caption"><span class="caption-text">Course information</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="course-info.html">General info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Installing_Anacondas_GIS.html">Installing Python + GIS</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Lesson 1</span></p>
 <ul>
@@ -108,14 +109,22 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="Lesson3-geocoding.html">Geocoding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson3-table-join.html">Table join</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lesson3-projections.html">Projections: Converting from projection to another</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Spatial queries: Point in Polygon &amp; Intersect</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="Lesson3-projections.html">Re-projecting data</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Point in Polygon &amp; Intersect</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#how-to-check-if-point-is-inside-a-polygon">How to check if point is inside a polygon?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#intersect">Intersect</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson3-spatial-join.html">Spatial join</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Exercise-3.html">Exercise 3</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 4</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Lesson4-download-data.html">Download datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson4-geometric-operations.html">Geometric operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson4-reclassify.html">Data reclassification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson4-nearest-neighbour.html">Nearest Neighbour Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise-4.html">Exercise 4</a></li>
 </ul>
 
             
@@ -146,7 +155,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="index.html">Docs</a> &raquo;</li>
       
-    <li>Spatial queries: Point in Polygon &amp; Intersect</li>
+    <li>Point in Polygon &amp; Intersect</li>
       <li class="wy-breadcrumbs-aside">
         
           
@@ -160,8 +169,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="spatial-queries-point-in-polygon-intersect">
-<h1>Spatial queries: Point in Polygon &amp; Intersect<a class="headerlink" href="#spatial-queries-point-in-polygon-intersect" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="point-in-polygon-intersect">
+<h1>Point in Polygon &amp; Intersect<a class="headerlink" href="#point-in-polygon-intersect" title="Permalink to this headline">¶</a></h1>
 <p>Finding out if a certain point is located inside or outside of an area,
 or finding out if a line intersects with another line or polygon are
 fundamental geospatial operations that are often used e.g. to select
@@ -205,37 +214,32 @@ couple of Point objects</li>
 <span class="n">p1</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mf">24.952242</span><span class="p">,</span> <span class="mf">60.1696017</span><span class="p">)</span>
 <span class="n">p2</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mf">24.976567</span><span class="p">,</span> <span class="mf">60.1612500</span><span class="p">)</span>
 
-
 <span class="c1"># Create a Polygon</span>
 <span class="n">coords</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">24.950899</span><span class="p">,</span> <span class="mf">60.169158</span><span class="p">),</span> <span class="p">(</span><span class="mf">24.953492</span><span class="p">,</span> <span class="mf">60.169158</span><span class="p">),</span> <span class="p">(</span><span class="mf">24.953510</span><span class="p">,</span> <span class="mf">60.170104</span><span class="p">),</span> <span class="p">(</span><span class="mf">24.950958</span><span class="p">,</span> <span class="mf">60.169990</span><span class="p">)]</span>
 <span class="n">poly</span> <span class="o">=</span> <span class="n">Polygon</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="go"># Let&#39;s check what we have</span>
+<span class="gp">In [1]: </span><span class="k">print</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
+<span class="go">POINT (24.952242 60.1696017)</span>
 
-<span class="c1"># Let&#39;s check what we have</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
-<span class="n">POINT</span> <span class="p">(</span><span class="mf">24.952242</span> <span class="mf">60.1696017</span><span class="p">)</span>
+<span class="gp">In [2]: </span><span class="k">print</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
+<span class="go">                             POINT (24.976567 60.16125)</span>
 
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
-<span class="n">POINT</span> <span class="p">(</span><span class="mf">24.976567</span> <span class="mf">60.16125</span><span class="p">)</span>
-
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
-<span class="n">POLYGON</span> <span class="p">((</span><span class="mf">24.950899</span> <span class="mf">60.169158</span><span class="p">,</span> <span class="mf">24.953492</span> <span class="mf">60.169158</span><span class="p">,</span> <span class="mf">24.95351</span> <span class="mf">60.170104</span><span class="p">,</span> <span class="mf">24.950958</span> <span class="mf">60.16999</span><span class="p">,</span> <span class="mf">24.950899</span> <span class="mf">60.169158</span><span class="p">))</span>
+<span class="gp">In [3]: </span><span class="k">print</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
+<span class="go">                                                        POLYGON ((24.950899 60.169158, 24.953492 60.169158, 24.95351 60.170104, 24.950958 60.16999, 24.950899 60.169158))</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li>Let&#8217;s check if those points are <code class="docutils literal"><span class="pre">within</span></code> the polygon</li>
 </ul>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Check if p1 is within the polygon using the within function</span>
-<span class="n">p1_within</span> <span class="o">=</span> <span class="n">p1</span><span class="o">.</span><span class="n">within</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="go"># Check if p1 is within the polygon using the within function</span>
+<span class="gp">In [4]: </span><span class="n">p1</span><span class="o">.</span><span class="n">within</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
+<span class="gh">Out[4]: </span><span class="go">True</span>
 
-<span class="c1"># Check if p2 is within the polygon</span>
-<span class="n">p2_within</span> <span class="o">=</span> <span class="n">p2</span><span class="o">.</span><span class="n">within</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Is p1 within the polygon?: &quot;</span><span class="p">,</span> <span class="n">p1_within</span><span class="p">)</span>
-<span class="go">Is p1 within the polygon?:  True</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Is p2 within the polygon?: &quot;</span><span class="p">,</span> <span class="n">p2_within</span><span class="p">)</span>
-<span class="go">Is p2 within the polygon?:  False</span>
+<span class="go"># Check if p2 is within the polygon</span>
+<span class="gp">In [5]: </span><span class="n">p2</span><span class="o">.</span><span class="n">within</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
+<span class="go">             Out[5]: False</span>
 </pre></div>
 </div>
 <p>Okey, so we can see that the first point seems to be inside that polygon
@@ -244,22 +248,26 @@ and the other one doesn&#8217;t.</p>
 <li>In fact, the first point is close to the center of the polygon as we
 can see:</li>
 </ul>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="go"># Our point</span>
+<span class="gp">In [6]: </span><span class="k">print</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
 <span class="go">POINT (24.952242 60.1696017)</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">poly</span><span class="o">.</span><span class="n">centroid</span><span class="p">)</span>
-<span class="go">POINT (24.95224242849236 60.16960179038188)</span>
+<span class="go"># The centroid</span>
+<span class="gp">In [7]: </span><span class="k">print</span><span class="p">(</span><span class="n">poly</span><span class="o">.</span><span class="n">centroid</span><span class="p">)</span>
+<span class="go">                             POINT (24.95224242849236 60.16960179038188)</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li>It is also possible to do PIP other way around, i.e. to check if
 polygon contains a point:</li>
 </ul>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Does polygon contain p1?: &quot;</span><span class="p">,</span> <span class="n">poly</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">p1</span><span class="p">))</span>
-<span class="go">Does polygon contain p1?:  True</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="go"># Does polygon contain p1?</span>
+<span class="gp">In [8]: </span><span class="n">poly</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
+<span class="gh">Out[8]: </span><span class="go">True</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Does polygon contain p2?: &quot;</span><span class="p">,</span> <span class="n">poly</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">p2</span><span class="p">))</span>
-<span class="go">Does polygon contain p2?:  False</span>
+<span class="go"># Does polygon contain p2?</span>
+<span class="gp">In [9]: </span><span class="n">poly</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
+<span class="go">             Out[9]: False</span>
 </pre></div>
 </div>
 <p>Thus, both ways of checking the spatial relationship results in the same way.</p>
@@ -311,21 +319,22 @@ interiors shoud NOT intersect.</li>
 <ul class="simple">
 <li>Let&#8217;s see if they intersect</li>
 </ul>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">line_a</span><span class="o">.</span><span class="n">intersects</span><span class="p">(</span><span class="n">line_b</span><span class="p">)</span>
-<span class="go">True</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [10]: </span><span class="n">line_a</span><span class="o">.</span><span class="n">intersects</span><span class="p">(</span><span class="n">line_b</span><span class="p">)</span>
+<span class="gh">Out[10]: </span><span class="go">True</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li>Do they also touch each other?</li>
 </ul>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">line_a</span><span class="o">.</span><span class="n">touches</span><span class="p">(</span><span class="n">line_b</span><span class="p">)</span>
-<span class="go">True</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="n">line_a</span><span class="o">.</span><span class="n">touches</span><span class="p">(</span><span class="n">line_b</span><span class="p">)</span>
+<span class="gh">Out[11]: </span><span class="go">True</span>
 </pre></div>
 </div>
 <p>Indeed, they do and we can see this by plotting the features together</p>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Create a MultiLineString</span>
-<span class="n">multi_line</span> <span class="o">=</span> <span class="n">MultiLineString</span><span class="p">([</span><span class="n">line_a</span><span class="p">,</span> <span class="n">line_b</span><span class="p">])</span>
-<span class="n">multi_line</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="go"># Create a MultiLineString</span>
+<span class="gp">In [12]: </span><span class="n">multi_line</span> <span class="o">=</span> <span class="n">MultiLineString</span><span class="p">([</span><span class="n">line_a</span><span class="p">,</span> <span class="n">line_b</span><span class="p">])</span>
+
+<span class="gp">In [13]: </span><span class="n">multi_line</span><span class="p">;</span>
 </pre></div>
 </div>
 <img alt="_images/Lesson3-point-in-polygon_16_0.svg" src="_images/Lesson3-point-in-polygon_16_0.svg" /><p>Thus, the <code class="docutils literal"><span class="pre">line_b</span></code> continues from the same node ( (1,1) ) where <code class="docutils literal"><span class="pre">line_a</span></code> ends.</p>
@@ -333,15 +342,17 @@ interiors shoud NOT intersect.</li>
 <ul class="simple">
 <li>Check if line_a touches itself</li>
 </ul>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Touches?: &quot;</span><span class="p">,</span> <span class="n">line_a</span><span class="o">.</span><span class="n">touches</span><span class="p">(</span><span class="n">line_a</span><span class="p">))</span>
-<span class="go">Touches?:  False</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="go"># Does the line touch with itself?</span>
+<span class="gp">In [14]: </span><span class="n">line_a</span><span class="o">.</span><span class="n">touches</span><span class="p">(</span><span class="n">line_a</span><span class="p">)</span>
+<span class="gh">Out[14]: </span><span class="go">False</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li>It does not. However, it does intersect</li>
 </ul>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Intersects?: &quot;</span><span class="p">,</span> <span class="n">line_a</span><span class="o">.</span><span class="n">intersects</span><span class="p">(</span><span class="n">line_a</span><span class="p">))</span>
-<span class="go">Intersects?:  True</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="go"># Does the line intersect with itself?</span>
+<span class="gp">In [15]: </span><span class="n">line_a</span><span class="o">.</span><span class="n">intersects</span><span class="p">(</span><span class="n">line_a</span><span class="p">)</span>
+<span class="gh">Out[15]: </span><span class="go">True</span>
 </pre></div>
 </div>
 </div>
@@ -357,7 +368,7 @@ interiors shoud NOT intersect.</li>
         <a href="Lesson3-spatial-join.html" class="btn btn-neutral float-right" title="Spatial join" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="Lesson3-projections.html" class="btn btn-neutral" title="Projections: Converting from projection to another" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="Lesson3-projections.html" class="btn btn-neutral" title="Re-projecting data" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

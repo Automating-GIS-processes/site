@@ -90,6 +90,7 @@
                 <p class="caption"><span class="caption-text">Course information</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="course-info.html">General info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Installing_Anacondas_GIS.html">Installing Python + GIS</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Lesson 1</span></p>
 <ul>
@@ -112,10 +113,18 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson3-table-join.html">Table join</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lesson3-projections.html">Projections: Converting from projection to another</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lesson3-point-in-polygon.html">Spatial queries: Point in Polygon &amp; Intersect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson3-projections.html">Re-projecting data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson3-point-in-polygon.html">Point in Polygon &amp; Intersect</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson3-spatial-join.html">Spatial join</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Exercise-3.html">Exercise 3</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 4</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Lesson4-download-data.html">Download datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson4-geometric-operations.html">Geometric operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson4-reclassify.html">Data reclassification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson4-nearest-neighbour.html">Nearest Neighbour Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise-4.html">Exercise 4</a></li>
 </ul>
 
             
@@ -209,8 +218,11 @@ and enabling a that API from
 <a class="reference external" href="https://console.developers.google.com/apis/library">Library</a>. Read a
 short introduction about using Google API Console from
 <a class="reference external" href="https://developers.googleblog.com/2016/03/introducing-google-api-console.html">here</a>.</p>
-<p>Note: There are also other Python modules in addition to geopy that can do
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">There are also other Python modules in addition to geopy that can do
 geocoding such as <a class="reference external" href="http://geocoder.readthedocs.io/">Geocoder</a>.</p>
+</div>
 </div>
 <div class="section" id="geocoding-in-geopandas">
 <h2>Geocoding in Geopandas<a class="headerlink" href="#geocoding-in-geopandas" title="Permalink to this headline">¶</a></h2>
@@ -238,53 +250,48 @@ data looks like following:</p>
 <span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 <span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="k">import</span> <span class="n">Point</span>
 
-<span class="c1"># Import the geocoding function</span>
-<span class="kn">from</span> <span class="nn">geopandas.tools</span> <span class="k">import</span> <span class="n">geocode</span>
-
 <span class="c1"># Filepath</span>
-<span class="n">fp</span> <span class="o">=</span> <span class="s2">r&quot;/home/geo/addresses.txt&quot;</span>
+<span class="n">fp</span> <span class="o">=</span> <span class="s2">r&quot;addresses.txt&quot;</span>
 
 <span class="c1"># Read the data</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>
-
-<span class="c1"># Let&#39;s take a look of the data</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span>     <span class="nb">id</span>                                            <span class="n">address</span>
-<span class="mi">0</span>  <span class="mi">1000</span>           <span class="n">Itämerenkatu</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">00101</span> <span class="n">Helsinki</span><span class="p">,</span> <span class="n">Finland</span>
-<span class="mi">1</span>  <span class="mi">1001</span>              <span class="n">Kampinkuja</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">00100</span> <span class="n">Helsinki</span><span class="p">,</span> <span class="n">Finland</span>
-<span class="mi">2</span>  <span class="mi">1002</span>               <span class="n">Kaivokatu</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">00101</span> <span class="n">Helsinki</span><span class="p">,</span> <span class="n">Finland</span>
-<span class="mi">3</span>  <span class="mi">1003</span>  <span class="n">Hermanstads</span> <span class="n">strandsväg</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">00580</span> <span class="n">Helsingfors</span><span class="p">,</span> <span class="n">F</span><span class="o">...</span>
-<span class="mi">4</span>  <span class="mi">1004</span>                  <span class="n">Itäväylä</span><span class="p">,</span> <span class="mi">00900</span> <span class="n">Helsinki</span><span class="p">,</span> <span class="n">Finland</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="go"># Let&#39;s take a look of the data</span>
+<span class="gp">In [1]: </span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[1]: </span><span class="go"></span>
+<span class="go">     id                                            address</span>
+<span class="go">0  1000           Itämerenkatu 14, 00101 Helsinki, Finland</span>
+<span class="go">1  1001              Kampinkuja 1, 00100 Helsinki, Finland</span>
+<span class="go">2  1002               Kaivokatu 8, 00101 Helsinki, Finland</span>
+<span class="go">3  1003  Hermanstads strandsväg 1, 00580 Helsingfors, F...</span>
+<span class="go">4  1004                  Itäväylä, 00900 Helsinki, Finland</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li>Now we have our data in a Pandas DataFrame and we can geocode our
 addresses</li>
 </ul>
-<div class="line-block">
-<div class="line">* <strong>Notice</strong>: here we use my API key that has a limitation of 2500 requests / hour. Because of this, only the computer instances of our course environment have access to Google Geocoding API for a short period of time. Thus, the following key will NOT work from your own computer, only from our cloud computers. If you wish, you can create your own API key to Google Geocoding API V3 from <a class="reference external" href="https://code.google.com/apis/console">Google APIs console</a>. See the notes from <a class="reference external" href="Lesson3-geocoding.html#overview-of-geocoders">above</a>.</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Here we use my API key that has a limitation of 2500 requests / hour. Because of this, only the computer instances of our course environment have access to Google Geocoding API for a short period of time. Thus, the following key will NOT work from your own computer, only from our cloud computers. If you wish, you can create your own API key to Google Geocoding API V3 from <a class="reference external" href="https://code.google.com/apis/console">Google APIs console</a>. See the notes from <a class="reference external" href="Lesson3-geocoding.html#overview-of-geocoders">above</a>.</p>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">geopandas.tools</span> <span class="k">import</span> <span class="n">geocode</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="go"># Import the geocoding tool</span>
+<span class="gp">In [2]: </span><span class="kn">from</span> <span class="nn">geopandas.tools</span> <span class="kn">import</span> <span class="n">geocode</span>
 
-<span class="c1"># Key for our Google Geocoding API</span>
-<span class="c1"># Notice: only the cloud computers of our course can access and</span>
-<span class="c1"># successfully execute the following</span>
-<span class="n">key</span> <span class="o">=</span> <span class="s1">&#39;AIzaSyAwNVHAtkbKlPs-EEs3OYqbnxzaYfDF2_8&#39;</span>
+<span class="go"># Key for our Google Geocoding API</span>
+<span class="go"># Notice: only the cloud computers of our course can access and</span>
+<span class="go"># successfully execute the following</span>
+<span class="gp">In [3]: </span><span class="n">key</span> <span class="o">=</span> <span class="s1">&#39;AIzaSyAwNVHAtkbKlPs-EEs3OYqbnxzaYfDF2_8&#39;</span>
 
-<span class="c1"># Geocode addresses</span>
-<span class="n">geo</span> <span class="o">=</span> <span class="n">geocode</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">],</span> <span class="n">api_key</span><span class="o">=</span><span class="n">key</span><span class="p">)</span>
+<span class="go"># Geocode addresses</span>
+<span class="gp">In [4]: </span><span class="n">geo</span> <span class="o">=</span> <span class="n">geocode</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">],</span> <span class="n">api_key</span><span class="o">=</span><span class="n">key</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">geo</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
-</pre></div>
-</div>
-<div class="highlight-default"><div class="highlight"><pre><span></span>                                    <span class="n">address</span>                       <span class="n">geometry</span>
-<span class="mi">0</span>  <span class="n">Itämerenkatu</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">00180</span> <span class="n">Helsinki</span><span class="p">,</span> <span class="n">Finland</span>  <span class="n">POINT</span> <span class="p">(</span><span class="mf">24.9146767</span> <span class="mf">60.1628658</span><span class="p">)</span>
-<span class="mi">1</span>     <span class="n">Kampinkuja</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">00100</span> <span class="n">Helsinki</span><span class="p">,</span> <span class="n">Finland</span>  <span class="n">POINT</span> <span class="p">(</span><span class="mf">24.9301701</span> <span class="mf">60.1683731</span><span class="p">)</span>
+<span class="gp">In [5]: </span><span class="n">geo</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gh">Out[5]: </span><span class="go"></span>
+<span class="go">                                    address                       geometry</span>
+<span class="go">0  Itämerenkatu 14, 00180 Helsinki, Finland  POINT (24.9146767 60.1628658)</span>
+<span class="go">1     Kampinkuja 1, 00100 Helsinki, Finland  POINT (24.9301701 60.1683731)</span>
 </pre></div>
 </div>
 <p>And Voilà! As a result we have a GeoDataFrame that contains our original

@@ -35,7 +35,7 @@
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="GeoPython - AutoGIS 1 documentation" href="index.html"/>
         <link rel="next" title="Exercise 3" href="Exercise-3.html"/>
-        <link rel="prev" title="Spatial queries: Point in Polygon &amp; Intersect" href="Lesson3-point-in-polygon.html"/> 
+        <link rel="prev" title="Point in Polygon &amp; Intersect" href="Lesson3-point-in-polygon.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -90,6 +90,7 @@
                 <p class="caption"><span class="caption-text">Course information</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="course-info.html">General info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Installing_Anacondas_GIS.html">Installing Python + GIS</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Lesson 1</span></p>
 <ul>
@@ -108,14 +109,22 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="Lesson3-geocoding.html">Geocoding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson3-table-join.html">Table join</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lesson3-projections.html">Projections: Converting from projection to another</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lesson3-point-in-polygon.html">Spatial queries: Point in Polygon &amp; Intersect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson3-projections.html">Re-projecting data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson3-point-in-polygon.html">Point in Polygon &amp; Intersect</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Spatial join</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#download-and-clean-the-data">Download and clean the data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#join-the-layers">Join the layers</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Exercise-3.html">Exercise 3</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 4</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Lesson4-download-data.html">Download datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson4-geometric-operations.html">Geometric operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson4-reclassify.html">Data reclassification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson4-nearest-neighbour.html">Nearest Neighbour Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise-4.html">Exercise 4</a></li>
 </ul>
 
             
@@ -221,35 +230,37 @@ above.</p>
 <div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 
 <span class="c1"># Filepath</span>
-<span class="n">fp</span> <span class="o">=</span> <span class="s2">r&quot;/home/geo/Pop15/Vaestotietoruudukko_2015.shp&quot;</span>
+<span class="n">fp</span> <span class="o">=</span> <span class="s2">&quot;/home/geo/Pop15/Vaestotietoruudukko_2015.shp&quot;</span>
 
 <span class="c1"># Read the data</span>
 <span class="n">pop</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
-
-<span class="c1"># See the first rows</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">pop</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 </div>
-<pre class="literal-block">
-   ASUKKAITA  ASVALJYYS  IKA0_9  IKA10_19  IKA20_29  IKA30_39  IKA40_49  0          8       31.0      99        99        99        99        99
-1          6       42.0      99        99        99        99        99
-2          8       44.0      99        99        99        99        99
-3          7       64.0      99        99        99        99        99
-4         19       23.0      99        99        99        99        99
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="go"># See the first rows</span>
+<span class="gp">In [1]: </span><span class="n">pop</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[1]: </span><span class="go"></span>
+<span class="go">   ASUKKAITA  ASVALJYYS  IKA0_9  IKA10_19  IKA20_29  IKA30_39  IKA40_49  \</span>
+<span class="go">0          8       31.0      99        99        99        99        99   </span>
+<span class="go">1          6       42.0      99        99        99        99        99   </span>
+<span class="go">2          8       44.0      99        99        99        99        99   </span>
+<span class="go">3          7       64.0      99        99        99        99        99   </span>
+<span class="go">4         19       23.0      99        99        99        99        99   </span>
 
-   IKA50_59  IKA60_69  IKA70_79  IKA_YLI80  INDEX  0        99        99        99         99    688
-1        99        99        99         99    703
-2        99        99        99         99    710
-3        99        99        99         99    711
-4        99        99        99         99    715
+<span class="go">   IKA50_59  IKA60_69  IKA70_79  IKA_YLI80  INDEX  \</span>
+<span class="go">0        99        99        99         99    688   </span>
+<span class="go">1        99        99        99         99    703   </span>
+<span class="go">2        99        99        99         99    710   </span>
+<span class="go">3        99        99        99         99    711   </span>
+<span class="go">4        99        99        99         99    715   </span>
 
-                                            geometry
-0  POLYGON ((25472499.99532626 6689749.005069185,...
-1  POLYGON ((25472499.99532626 6685998.998064222,...
-2  POLYGON ((25472499.99532626 6684249.004130407,...
-3  POLYGON ((25472499.99532626 6683999.004997005,...
-4  POLYGON ((25472499.99532626 6682998.998461431,...
-</pre>
+<span class="go">                                            geometry  </span>
+<span class="go">0  POLYGON ((25472499.99532626 6689749.005069185,...  </span>
+<span class="go">1  POLYGON ((25472499.99532626 6685998.998064222,...  </span>
+<span class="go">2  POLYGON ((25472499.99532626 6684249.004130407,...  </span>
+<span class="go">3  POLYGON ((25472499.99532626 6683999.004997005,...  </span>
+<span class="go">4  POLYGON ((25472499.99532626 6682998.998461431,...  </span>
+</pre></div>
+</div>
 <p>Okey so we have multiple columns in the dataset but the most important
 one here is the column <code class="docutils literal"><span class="pre">ASUKKAITA</span></code> (<em>population in Finnish</em>) that
 tells the amount of inhabitants living under that polygon.</p>
@@ -259,36 +270,34 @@ more intuitive. Changing column names is easy in Pandas / Geopandas
 using a function called <code class="docutils literal"><span class="pre">rename()</span></code> where we pass a dictionary to a
 parameter <code class="docutils literal"><span class="pre">columns={'oldname':</span> <span class="pre">'newname'}</span></code>.</li>
 </ul>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Change the name of a column</span>
-<span class="n">pop</span> <span class="o">=</span> <span class="n">pop</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;ASUKKAITA&#39;</span><span class="p">:</span> <span class="s1">&#39;pop15&#39;</span><span class="p">})</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="go"># Change the name of a column</span>
+<span class="gp">In [2]: </span><span class="n">pop</span> <span class="o">=</span> <span class="n">pop</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;ASUKKAITA&#39;</span><span class="p">:</span> <span class="s1">&#39;pop15&#39;</span><span class="p">})</span>
 
-<span class="c1"># See the column names and confirm that we now have a column called &#39;pop15&#39;</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">pop</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Index</span><span class="p">([</span><span class="s1">&#39;pop15&#39;</span><span class="p">,</span> <span class="s1">&#39;ASVALJYYS&#39;</span><span class="p">,</span> <span class="s1">&#39;IKA0_9&#39;</span><span class="p">,</span> <span class="s1">&#39;IKA10_19&#39;</span><span class="p">,</span> <span class="s1">&#39;IKA20_29&#39;</span><span class="p">,</span> <span class="s1">&#39;IKA30_39&#39;</span><span class="p">,</span>
-       <span class="s1">&#39;IKA40_49&#39;</span><span class="p">,</span> <span class="s1">&#39;IKA50_59&#39;</span><span class="p">,</span> <span class="s1">&#39;IKA60_69&#39;</span><span class="p">,</span> <span class="s1">&#39;IKA70_79&#39;</span><span class="p">,</span> <span class="s1">&#39;IKA_YLI80&#39;</span><span class="p">,</span> <span class="s1">&#39;INDEX&#39;</span><span class="p">,</span>
-       <span class="s1">&#39;geometry&#39;</span><span class="p">],</span>
-      <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;object&#39;</span><span class="p">)</span>
+<span class="go"># See the column names and confirm that we now have a column called &#39;pop15&#39;</span>
+<span class="gp">In [3]: </span><span class="n">pop</span><span class="o">.</span><span class="n">columns</span>
+<span class="gh">Out[3]: </span><span class="go"></span>
+<span class="go">Index([&#39;pop15&#39;, &#39;ASVALJYYS&#39;, &#39;IKA0_9&#39;, &#39;IKA10_19&#39;, &#39;IKA20_29&#39;, &#39;IKA30_39&#39;,</span>
+<span class="go">       &#39;IKA40_49&#39;, &#39;IKA50_59&#39;, &#39;IKA60_69&#39;, &#39;IKA70_79&#39;, &#39;IKA_YLI80&#39;, &#39;INDEX&#39;,</span>
+<span class="go">       &#39;geometry&#39;],</span>
+<span class="go">      dtype=&#39;object&#39;)</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li>Let&#8217;s also get rid of all unnecessary columns by selecting only
 columns that we need i.e. <code class="docutils literal"><span class="pre">pop15</span></code> and <code class="docutils literal"><span class="pre">geometry</span></code></li>
 </ul>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Columns that will be sected</span>
-<span class="n">selected_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;pop15&#39;</span><span class="p">,</span> <span class="s1">&#39;geometry&#39;</span><span class="p">]</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="go"># Columns that will be sected</span>
+<span class="gp">In [4]: </span><span class="n">selected_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;pop15&#39;</span><span class="p">,</span> <span class="s1">&#39;geometry&#39;</span><span class="p">]</span>
 
-<span class="c1"># Select those columns</span>
-<span class="n">pop</span> <span class="o">=</span> <span class="n">pop</span><span class="p">[</span><span class="n">selected_cols</span><span class="p">]</span>
+<span class="go"># Select those columns</span>
+<span class="gp">In [5]: </span><span class="n">pop</span> <span class="o">=</span> <span class="n">pop</span><span class="p">[</span><span class="n">selected_cols</span><span class="p">]</span>
 
-<span class="c1"># Let&#39;s see the last 2 rows</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">pop</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
-</pre></div>
-</div>
-<div class="highlight-default"><div class="highlight"><pre><span></span>      <span class="n">pop15</span>                                           <span class="n">geometry</span>
-<span class="mi">5782</span>      <span class="mi">9</span>  <span class="n">POLYGON</span> <span class="p">((</span><span class="mf">25513499.99632164</span> <span class="mf">6685498.999797418</span><span class="p">,</span><span class="o">...</span>
-<span class="mi">5783</span>  <span class="mi">30244</span>  <span class="n">POLYGON</span> <span class="p">((</span><span class="mf">25513999.999929</span> <span class="mf">6659998.998172711</span><span class="p">,</span> <span class="mf">2.</span><span class="o">..</span>
+<span class="go"># Let&#39;s see the last 2 rows</span>
+<span class="gp">In [6]: </span><span class="n">pop</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gh">Out[6]: </span><span class="go"></span>
+<span class="go">      pop15                                           geometry</span>
+<span class="go">5782      9  POLYGON ((25513499.99632164 6685498.999797418,...</span>
+<span class="go">5783  30244  POLYGON ((25513999.999929 6659998.998172711, 2...</span>
 </pre></div>
 </div>
 <p>Now we have cleaned the data and have only those columns that we need
@@ -304,41 +313,57 @@ addresses point layer <code class="docutils literal"><span class="pre">addresses
 <ul class="simple">
 <li>Read the addresses layer into memory</li>
 </ul>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Addresses filpath</span>
-<span class="n">addr_fp</span> <span class="o">=</span> <span class="s2">r&quot;/home/geo/addresses_epsg3879.shp&quot;</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="go"># Addresses filpath</span>
+<span class="gp">In [7]: </span><span class="n">addr_fp</span> <span class="o">=</span> <span class="s2">r&quot;/home/geo/addresses_epsg3879.shp&quot;</span>
 
-<span class="c1"># Read data</span>
-<span class="n">addresses</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">addr_fp</span><span class="p">)</span>
+<span class="go"># Read data</span>
+<span class="gp">In [8]: </span><span class="n">addresses</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">addr_fp</span><span class="p">)</span>
 
-<span class="c1"># Check the head of the file</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">addresses</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="go"># Check the head of the file</span>
+<span class="gp">In [9]: </span><span class="n">addresses</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gh">Out[9]: </span><span class="go"></span>
+<span class="go">                                 address  \</span>
+<span class="go">0  Kampinkuja 1, 00100 Helsinki, Finland   </span>
+<span class="go">1   Kaivokatu 8, 00101 Helsinki, Finland   </span>
+
+<span class="go">                                      geometry    id  </span>
+<span class="go">0  POINT (25496123.30852197 6672833.941567578)  1001  </span>
+<span class="go">1  POINT (25496774.28242895 6672999.698581985)  1002  </span>
 </pre></div>
 </div>
-<pre class="literal-block">
-                                 address  0  Kampinkuja 1, 00100 Helsinki, Finland
-1   Kaivokatu 8, 00101 Helsinki, Finland
-
-                                      geometry    id
-0  POINT (25496123.30852197 6672833.941567578)  1001
-1  POINT (25496774.28242895 6672999.698581985)  1002
-</pre>
 <ul class="simple">
 <li>Let&#8217;s make sure that the coordinate reference system of the layers
 are identical</li>
 </ul>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Check the crs of address points</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">addresses</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="go"># Check the crs of address points</span>
+<span class="gp">In [10]: </span><span class="n">addresses</span><span class="o">.</span><span class="n">crs</span>
+<span class="gh">Out[10]: </span><span class="go"></span>
+<span class="go">{&#39;ellps&#39;: &#39;GRS80&#39;,</span>
+<span class="go"> &#39;k&#39;: 1,</span>
+<span class="go"> &#39;lat_0&#39;: 0,</span>
+<span class="go"> &#39;lon_0&#39;: 25,</span>
+<span class="go"> &#39;no_defs&#39;: True,</span>
+<span class="go"> &#39;proj&#39;: &#39;tmerc&#39;,</span>
+<span class="go"> &#39;units&#39;: &#39;m&#39;,</span>
+<span class="go"> &#39;x_0&#39;: 25500000,</span>
+<span class="go"> &#39;y_0&#39;: 0}</span>
 
-<span class="c1"># Check the crs of population layer</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">pop</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+<span class="go"># Check the crs of population layer</span>
+<span class="gp">In [11]: </span><span class="n">pop</span><span class="o">.</span><span class="n">crs</span>
+<span class="go">                                                                                                                                                 Out[11]: </span>
+<span class="go">{&#39;ellps&#39;: &#39;GRS80&#39;,</span>
+<span class="go"> &#39;k&#39;: 1,</span>
+<span class="go"> &#39;lat_0&#39;: 0,</span>
+<span class="go"> &#39;lon_0&#39;: 25,</span>
+<span class="go"> &#39;no_defs&#39;: True,</span>
+<span class="go"> &#39;proj&#39;: &#39;tmerc&#39;,</span>
+<span class="go"> &#39;units&#39;: &#39;m&#39;,</span>
+<span class="go"> &#39;x_0&#39;: 25500000,</span>
+<span class="go"> &#39;y_0&#39;: 0}</span>
 
-<span class="c1"># Do they match? - We can test that</span>
-<span class="n">addresses</span><span class="o">.</span><span class="n">crs</span> <span class="o">==</span> <span class="n">pop</span><span class="o">.</span><span class="n">crs</span>
-</pre></div>
-</div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;y_0&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;no_defs&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;x_0&#39;</span><span class="p">:</span> <span class="mi">25500000</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;lat_0&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;units&#39;</span><span class="p">:</span> <span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="s1">&#39;lon_0&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span> <span class="s1">&#39;ellps&#39;</span><span class="p">:</span> <span class="s1">&#39;GRS80&#39;</span><span class="p">,</span> <span class="s1">&#39;proj&#39;</span><span class="p">:</span> <span class="s1">&#39;tmerc&#39;</span><span class="p">}</span>
-<span class="p">{</span><span class="s1">&#39;y_0&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;no_defs&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;x_0&#39;</span><span class="p">:</span> <span class="mi">25500000</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;lat_0&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;units&#39;</span><span class="p">:</span> <span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="s1">&#39;lon_0&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span> <span class="s1">&#39;ellps&#39;</span><span class="p">:</span> <span class="s1">&#39;GRS80&#39;</span><span class="p">,</span> <span class="s1">&#39;proj&#39;</span><span class="p">:</span> <span class="s1">&#39;tmerc&#39;</span><span class="p">}</span>
-<span class="kc">True</span>
+<span class="go"># Do they match? - We can test that</span>
+<span class="gp">In [12]: </span><span class="n">addresses</span><span class="o">.</span><span class="n">crs</span> <span class="o">==</span> <span class="n">pop</span><span class="o">.</span><span class="n">crs</span>
+<span class="go">                                                                                                                                                                                                                                                                                                  Out[12]: True</span>
 </pre></div>
 </div>
 <p>Indeed they are identical. Thus, we can be sure that when doing spatial
@@ -348,27 +373,27 @@ e.g. from the spatial join that we are conducting here.</p>
 <li>Let&#8217;s now join the attributes from <code class="docutils literal"><span class="pre">pop</span></code> GeoDataFrame into
 <code class="docutils literal"><span class="pre">addresses</span></code> GeoDataFrame by using <code class="docutils literal"><span class="pre">gpd.sjoin()</span></code> -function</li>
 </ul>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Make a spatial join</span>
-<span class="n">join</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span><span class="n">addresses</span><span class="p">,</span> <span class="n">pop</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;inner&quot;</span><span class="p">,</span> <span class="n">op</span><span class="o">=</span><span class="s2">&quot;within&quot;</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="go"># Make a spatial join</span>
+<span class="gp">In [13]: </span><span class="n">join</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span><span class="n">addresses</span><span class="p">,</span> <span class="n">pop</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;inner&quot;</span><span class="p">,</span> <span class="n">op</span><span class="o">=</span><span class="s2">&quot;within&quot;</span><span class="p">)</span>
 
-<span class="c1"># Let&#39;s check the result</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">join</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="go"># Let&#39;s check the result</span>
+<span class="gp">In [14]: </span><span class="n">join</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[14]: </span><span class="go"></span>
+<span class="go">                                          address  \</span>
+<span class="go">16  Malminkartanontie 17, 00410 Helsinki, Finland   </span>
+<span class="go">19     Pitäjänmäentie 15, 00370 Helsinki, Finland   </span>
+<span class="go">12       Trumstigen 8, 00420 Helsingfors, Finland   </span>
+<span class="go">11           Kuparitie 8, 00440 Helsinki, Finland   </span>
+<span class="go">15            Kylätie 23, 00320 Helsinki, Finland   </span>
+
+<span class="go">                                       geometry    id  index_right  pop15  </span>
+<span class="go">16  POINT (25492349.68368251 6681772.551210108)  1017         2684     74  </span>
+<span class="go">19  POINT (25492292.61413005 6679039.264838208)  1020         2691    241  </span>
+<span class="go">12  POINT (25493207.62503373 6680836.727432437)  1013         2852    577  </span>
+<span class="go">11  POINT (25493575.10327127 6679775.868274149)  1012         2949    562  </span>
+<span class="go">15   POINT (25494077.1680778 6678341.639159317)  1016         3036    414  </span>
 </pre></div>
 </div>
-<pre class="literal-block">
-                                          address  16  Malminkartanontie 17, 00410 Helsinki, Finland
-19     Pitäjänmäentie 15, 00370 Helsinki, Finland
-12       Trumstigen 8, 00420 Helsingfors, Finland
-11           Kuparitie 8, 00440 Helsinki, Finland
-15            Kylätie 23, 00320 Helsinki, Finland
-
-                                       geometry    id  index_right  pop15
-16  POINT (25492349.68368251 6681772.551210108)  1017         2684     74
-19  POINT (25492292.61413005 6679039.264838208)  1020         2691    241
-12  POINT (25493207.62503373 6680836.727432437)  1013         2852    577
-11  POINT (25493575.10327127 6679775.868274149)  1012         2949    562
-15   POINT (25494077.1680778 6678341.639159317)  1016         3036    414
-</pre>
 <p>Awesome! Now we have performed a successful spatial join where we got
 two new columns into our <code class="docutils literal"><span class="pre">join</span></code> GeoDataFrame, i.e. <code class="docutils literal"><span class="pre">index_right</span></code>
 that tells the index of the matching polygon in the <code class="docutils literal"><span class="pre">pop</span></code> layer and
@@ -391,12 +416,19 @@ points where color intensity indicates the population numbers.</p>
 <code class="docutils literal"><span class="pre">cmap</span></code> -parameter tells to use a sequential colormap for the
 values, <code class="docutils literal"><span class="pre">markersize</span></code> adjusts the size of a point, <code class="docutils literal"><span class="pre">scheme</span></code> parameter can be used to adjust the classification method based on <a class="reference external" href="http://pysal.readthedocs.io/en/latest/library/esda/mapclassify.html">pysal</a>, and <code class="docutils literal"><span class="pre">legend</span></code> tells that we want to have a legend.</li>
 </ul>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [15]: </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
-<span class="n">join</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;pop15&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Reds&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s1">&#39;natural_breaks&#39;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go"># Plot the points with population info</span>
+<span class="gp">In [16]: </span><span class="n">join</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;pop15&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Reds&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s1">&#39;natural_breaks&#39;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="bp">True</span><span class="p">);</span>
+
+<span class="go"># Add title</span>
+<span class="gp">In [17]: </span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Amount of inhabitants living close the the point&quot;</span><span class="p">);</span>
+
+<span class="go"># Remove white space around the figure</span>
+<span class="gp">In [18]: </span><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="_images/Lesson3-spatial-join_18_2.png" src="_images/Lesson3-spatial-join_18_2.png" />
+<a class="reference internal image-reference" href="_images/population_points.png"><img alt="_images/population_points.png" src="_images/population_points.png" style="width: 7in;" /></a>
 <p>By knowing approximately how population is distributed in Helsinki, it
 seems that the results do make sense as the points with highest
 population are located in the south where the city center of Helsinki
@@ -414,7 +446,7 @@ is.</p>
         <a href="Exercise-3.html" class="btn btn-neutral float-right" title="Exercise 3" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="Lesson3-point-in-polygon.html" class="btn btn-neutral" title="Spatial queries: Point in Polygon &amp; Intersect" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="Lesson3-point-in-polygon.html" class="btn btn-neutral" title="Point in Polygon &amp; Intersect" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
