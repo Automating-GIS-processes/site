@@ -60,6 +60,9 @@ plot the other layer on top of that.
 
 Let's do an overlay analysis and select polygons from grid that intersect with our Helsinki layer.
 
+**Notice!** This can be a slow procedure with less powerful computer. There is a way to
+overcome this issue by doing the analysis **in batches** which is explained below, see the performance-tip_.
+
 .. ipython:: python
 
     result = gpd.overlay(grid, hel, how='intersection')
@@ -114,9 +117,58 @@ format nowadays for storing spatial data.
     resultfp = os.path.join(os.path.abspath('data'), "TravelTimes_to_5975375_RailwayStation_Helsinki.geojson"
     result.to_file(resultfp, driver="GeoJSON")
 
-.. note::
+There are many more examples for different types of overlay analysis in `Geopandas documentation  <http://geopandas.org/set_operations.html>`_ where you can go and learn more.
 
-    There are many more examples for different types of overlay analysis in `Geopandas documentation  <http://geopandas.org/set_operations.html>`_ where you can go and learn more.
+.. _performance-tip:
+
+.. hint::
+
+    Overlay analysis such as ours with around 13 000 polygons is quite CPU intensive task which can be quite slow to execute. Luckily, doing such analysis in *batches* improves the
+    performance dramatically (spatial lookups are much quicker that way). The code snippet below shows how to do it with batch size of 10 rows which takes only around 1.5 minutes to run the analysis in our computer instance.
+
+    .. code:: python
+
+        import geopandas as gpd
+        import numpy as np
+
+        # File paths
+        border_fp = "/home/geo/data/Helsinki_borders.shp"
+        grid_fp = "/home/geo/data/TravelTimes_to_5975375_RailwayStation.shp"
+
+        # Read files
+        grid = gpd.read_file(grid_fp)
+        hel = gpd.read_file(border_fp)
+
+        # Batch size
+        b = 10
+
+        # Number of iterations (round up with np.ceil) and convert to integer
+        row_cnt = len(grid)
+        iterations = int(np.ceil(row_cnt / b))
+
+        # Final result
+        final = gpd.GeoDataFrame()
+
+        # Set the start and end index according the batch size
+        start_idx = 0
+        end_idx = start_idx + b
+
+        for iteration in range(iterations):
+            print("Iteration: %s/%s" % (iteration, iterations))
+
+            # Make an overlay analysis using a subset of the rows
+            result = gpd.overlay(grid[start_idx:end_idx], hel, how='intersection')
+
+            # Append the overlay result to final GeoDataFrame
+            final = final.append(result)
+
+            # Update indices
+            start_idx += b
+            end_idx = start_idx + b
+
+        # Save the output as GeoJSON
+        outfp = "/home/geo/data/overlay_analysis_speedtest.geojson"
+        final.to_file(outfp, driver="GeoJSON")
 
 Aggregating data
 ----------------

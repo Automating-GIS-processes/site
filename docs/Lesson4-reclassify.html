@@ -132,6 +132,17 @@
 <li class="toctree-l1"><a class="reference internal" href="Lesson4-nearest-neighbour.html">Nearest Neighbour Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Exercise-4.html">Exercise 4</a></li>
 </ul>
+<p class="caption"><span class="caption-text">Lesson 5</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Lesson5-overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson5-download-data.html">Download datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson5-static-maps.html">Static maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson5-interactive-map-bokeh.html">Interactive maps with Bokeh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson5-share-on-github.html">Sharing interactive plots on GitHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson5-interactive-map-folium.html">Interactive maps on Leaflet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson5-World-3D.html">Inspiration: World 3D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise-5.html">Exercise 5</a></li>
+</ul>
 
             
           
@@ -215,7 +226,7 @@ self-made classifier, or using a ready made classifiers that are commonly used e
 </ol>
 <div class="section" id="data-preparation">
 <h2>Data preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">¶</a></h2>
-<p>Before doing any classification, we need to prepare our data a little bit. Make sure you have <cite>downloaded and extracted the data</cite> &lt;Lesson4-download-data.html&gt;_ before continuing.</p>
+<p>Before doing any classification, we need to prepare our data a little bit. Make sure you have <a class="reference external" href="Lesson4-download-data.html">downloaded and extracted the data</a> before continuing.</p>
 <p>Let&#8217;s read the data in and select only English columns from it and plot our data so that we can see how it looks like on a map.</p>
 <div class="code highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -263,7 +274,7 @@ self-made classifier, or using a ready made classifiers that are commonly used e
 </div>
 <p>Let&#8217;s plot the data and use column &#8216;Level3&#8217; as our color.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="n">data</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;Level3&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
-<span class="gh">Out[5]: </span><span class="go">&lt;matplotlib.axes._subplots.AxesSubplot at 0x226d4ecb3c8&gt;</span>
+<span class="gh">Out[5]: </span><span class="go">&lt;matplotlib.axes._subplots.AxesSubplot at 0x240e9f7bba8&gt;</span>
 
 <span class="go"># Use tight layout and remove empty whitespace around our map</span>
 <span class="gp">In [6]: </span><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
@@ -396,7 +407,7 @@ Thus, let&#8217;s apply our function and do the classification.</p>
 </div>
 <p>Let&#8217;s plot these lakes and see how they look like.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="n">lakes</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;small_big&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;seismic&quot;</span><span class="p">)</span>
-<span class="gh">Out[18]: </span><span class="go">&lt;matplotlib.axes._subplots.AxesSubplot at 0x226f4b12eb8&gt;</span>
+<span class="gh">Out[18]: </span><span class="go">&lt;matplotlib.axes._subplots.AxesSubplot at 0x240e9b497b8&gt;</span>
 
 <span class="gp">In [19]: </span><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>

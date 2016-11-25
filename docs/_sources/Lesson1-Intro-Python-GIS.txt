@@ -38,7 +38,7 @@ At the end of the course you should be able to:
                   body {
                     width: 90%;
                     height: 100%;
-                    margin: auto;
+                    margin: 10px;
                   }
                 </style>
             </head>

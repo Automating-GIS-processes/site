@@ -127,6 +127,17 @@
 <li class="toctree-l1"><a class="reference internal" href="Lesson4-nearest-neighbour.html">Nearest Neighbour Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Exercise-4.html">Exercise 4</a></li>
 </ul>
+<p class="caption"><span class="caption-text">Lesson 5</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Lesson5-overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson5-download-data.html">Download datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson5-static-maps.html">Static maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson5-interactive-map-bokeh.html">Interactive maps with Bokeh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson5-share-on-github.html">Sharing interactive plots on GitHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson5-interactive-map-folium.html">Interactive maps on Leaflet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson5-World-3D.html">Inspiration: World 3D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise-5.html">Exercise 5</a></li>
+</ul>
 
             
           
@@ -210,12 +221,14 @@ plot the other layer on top of that.</p>
 </div>
 <a class="reference internal image-reference" href="_images/helsinki_grid_borders.png"><img alt="_images/helsinki_grid_borders.png" src="_images/helsinki_grid_borders.png" style="width: 7in;" /></a>
 <p>Let&#8217;s do an overlay analysis and select polygons from grid that intersect with our Helsinki layer.</p>
+<p><strong>Notice!</strong> This can be a slow procedure with less powerful computer. There is a way to
+overcome this issue by doing the analysis <strong>in batches</strong> which is explained below, see the <a class="reference internal" href="#performance-tip">performance-tip</a>.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [6]: </span><span class="n">result</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">overlay</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">hel</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;intersection&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Let&#8217;s plot our data and see what we have.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [7]: </span><span class="n">result</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">)</span>
-<span class="gh">Out[7]: </span><span class="go">&lt;matplotlib.axes._subplots.AxesSubplot at 0x226d4a724e0&gt;</span>
+<span class="gh">Out[7]: </span><span class="go">&lt;matplotlib.axes._subplots.AxesSubplot at 0x240dba01518&gt;</span>
 
 <span class="go"># Use tight layout</span>
 <span class="gp">In [8]: </span><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
@@ -268,9 +281,54 @@ format nowadays for storing spatial data.</p>
 <span class="n">result</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">resultfp</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s2">&quot;GeoJSON&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">There are many more examples for different types of overlay analysis in <a class="reference external" href="http://geopandas.org/set_operations.html">Geopandas documentation</a> where you can go and learn more.</p>
+<p>There are many more examples for different types of overlay analysis in <a class="reference external" href="http://geopandas.org/set_operations.html">Geopandas documentation</a> where you can go and learn more.</p>
+<div class="admonition hint" id="performance-tip">
+<p class="first admonition-title">Hint</p>
+<p>Overlay analysis such as ours with around 13 000 polygons is quite CPU intensive task which can be quite slow to execute. Luckily, doing such analysis in <em>batches</em> improves the
+performance dramatically (spatial lookups are much quicker that way). The code snippet below shows how to do it with batch size of 10 rows which takes only around 1.5 minutes to run the analysis in our computer instance.</p>
+<div class="code python last highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># File paths</span>
+<span class="n">border_fp</span> <span class="o">=</span> <span class="s2">&quot;/home/geo/data/Helsinki_borders.shp&quot;</span>
+<span class="n">grid_fp</span> <span class="o">=</span> <span class="s2">&quot;/home/geo/data/TravelTimes_to_5975375_RailwayStation.shp&quot;</span>
+
+<span class="c1"># Read files</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">grid_fp</span><span class="p">)</span>
+<span class="n">hel</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">border_fp</span><span class="p">)</span>
+
+<span class="c1"># Batch size</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="c1"># Number of iterations (round up with np.ceil) and convert to integer</span>
+<span class="n">row_cnt</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+<span class="n">iterations</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">row_cnt</span> <span class="o">/</span> <span class="n">b</span><span class="p">))</span>
+
+<span class="c1"># Final result</span>
+<span class="n">final</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">()</span>
+
+<span class="c1"># Set the start and end index according the batch size</span>
+<span class="n">start_idx</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">end_idx</span> <span class="o">=</span> <span class="n">start_idx</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="k">for</span> <span class="n">iteration</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iterations</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Iteration: </span><span class="si">%s</span><span class="s2">/</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">iteration</span><span class="p">,</span> <span class="n">iterations</span><span class="p">))</span>
+
+    <span class="c1"># Make an overlay analysis using a subset of the rows</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">overlay</span><span class="p">(</span><span class="n">grid</span><span class="p">[</span><span class="n">start_idx</span><span class="p">:</span><span class="n">end_idx</span><span class="p">],</span> <span class="n">hel</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;intersection&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Append the overlay result to final GeoDataFrame</span>
+    <span class="n">final</span> <span class="o">=</span> <span class="n">final</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+    <span class="c1"># Update indices</span>
+    <span class="n">start_idx</span> <span class="o">+=</span> <span class="n">b</span>
+    <span class="n">end_idx</span> <span class="o">=</span> <span class="n">start_idx</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="c1"># Save the output as GeoJSON</span>
+<span class="n">outfp</span> <span class="o">=</span> <span class="s2">&quot;/home/geo/data/overlay_analysis_speedtest.geojson&quot;</span>
+<span class="n">final</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">outfp</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s2">&quot;GeoJSON&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="aggregating-data">

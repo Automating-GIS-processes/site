@@ -37,7 +37,7 @@ The target in this part of the lesson is to:
 Data preparation
 ----------------
 
-Before doing any classification, we need to prepare our data a little bit. Make sure you have `downloaded and extracted the data` <Lesson4-download-data.html>_ before continuing.
+Before doing any classification, we need to prepare our data a little bit. Make sure you have `downloaded and extracted the data <Lesson4-download-data.html>`_ before continuing.
 
 Let's read the data in and select only English columns from it and plot our data so that we can see how it looks like on a map.
 

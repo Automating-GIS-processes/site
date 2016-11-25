@@ -87,8 +87,14 @@ Contents
    :maxdepth: 2
    :caption: Lesson 5
 
-   #Lesson5-interactive-map-folium
-   #Lesson5-World-3D
+   Lesson5-overview
+   Lesson5-download-data
+   Lesson5-static-maps
+   Lesson5-interactive-map-bokeh
+   Lesson5-share-on-github
+   Lesson5-interactive-map-folium
+   Lesson5-World-3D
+   Exercise-5
 
 Indices and tables
 ==================
