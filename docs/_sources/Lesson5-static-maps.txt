@@ -13,7 +13,7 @@ First, we need to read the data.
 .. code:: python
 
     import geopandas as gpd
-    import maptlotlib.pyplot as plt
+    import matplotlib.pyplot as plt
 
     # Filepaths
     grid_fp = r"/home/geo/data/TravelTimes_to_5975375_RailwayStation.shp"
