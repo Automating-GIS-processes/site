@@ -8,6 +8,11 @@
 Welcome to Automating GIS processes course!
 ===========================================
 
+**Automating GIS processes** -course teaches you how to do different GIS-related tasks in Python programming language. Each lesson is a tutorial with specific topic(s) where the aim is to learn
+how to solve common GIS-related problems and tasks using Python tools. In the lessons we use only publicly available data which can be used and downloaded by anyone anywhere. In this course,
+we assume that you know the basics of Python programming. If Python is not familiar to you, we recommend to start with our earlier course that focuses on learning the basics of Python
+from `geo-python.github.io <https://geo-python.github.io>`_.
+
 Course format
 -------------
 
@@ -19,6 +24,16 @@ The computer exercises will focus on developing basic programming skills using t
 Typical exercises will involve a brief introduction followed by topical computer-based tasks. At the end of the exercises, you may be asked to submit answers
 to relevant questions, some related plots, and/or Python codes you have written or used. You are encouraged to discuss and work together with other students
 on the laboratory exercises, however the laboratory summary write-ups that you submit must be completed individually and must clearly reflect your own work.
+
+.. admonition:: Open Access!
+
+    The course is **open for everyone**. The aim of this course is to share the knowledge and help people to get started with their journey for doing GIS more efficiently using programming
+    that makes your work reproducible and hence supports open science.
+
+.. admonition:: For teachers
+
+    If you would like to use these materials for your own teaching or develop them further, we highly support that.
+    Please read more about how to do it from `here <License-terms.html>`_.
 
 Course topics by week
 ---------------------
@@ -44,6 +59,7 @@ Contents
 
    course-info
    Installing_Anacondas_GIS
+   License-terms
 
 .. toctree::
    :maxdepth: 2
@@ -95,6 +111,24 @@ Contents
    Lesson5-interactive-map-folium
    Lesson5-World-3D
    Exercise-5
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Lesson 6
+
+   Lesson6-overview
+   Lesson6-arcpy
+   Lesson6-toolbox
+   Lesson6-arcpy-script
+   Lesson6-run-the-tool
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Final Assignment
+
+   Final-assignment
+
+
 
 Indices and tables
 ==================
