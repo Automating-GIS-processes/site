@@ -151,7 +151,10 @@
 <li class="toctree-l1"><a class="reference internal" href="Lesson6-arcpy.html">Python in ArcGIS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson6-toolbox.html">ArcGIS Toolbox</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson6-arcpy-script.html">Writing arcpy scripts</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Running the Python script from ArcGIS</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Running the Python script from ArcGIS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-proceed-from-here">How to proceed from here?</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption"><span class="caption-text">Final Assignment</span></p>
 <ul>
@@ -212,6 +215,28 @@
 <a class="reference internal image-reference" href="_images/arcgis-source.png"><img alt="_images/arcgis-source.png" src="_images/arcgis-source.png" style="width: 323.25px; height: 423.0px;" /></a>
 </div>
 <p>That&#8217;s it! Now you can test your tool by running it from ArcGIS!</p>
+<p>After running your tool, you should get rasters such as following from the tool:</p>
+<div class="figure">
+<a class="reference internal image-reference" href="_images/arcgis-raster-result.png"><img alt="_images/arcgis-raster-result.png" src="_images/arcgis-raster-result.png" style="width: 555.0px; height: 375.75px;" /></a>
+</div>
+<div class="section" id="how-to-proceed-from-here">
+<h2>How to proceed from here?<a class="headerlink" href="#how-to-proceed-from-here" title="Permalink to this headline">¶</a></h2>
+<p>Okey, now you have seen a little bit how arcpy can be used to automatize a specific GIS process flow. Of course, our tutorial only covered a tiny fraction of all different functionalities that ArcGIS has to offer
+but the basic logic is more or less similar with different tools (except raster processing and map algebra &#8211;&gt; see <a class="reference external" href="http://desktop.arcgis.com/en/arcmap/latest/extensions/spatial-analyst/map-algebra/a-quick-tour-of-using-map-algebra.htm">quick tour</a>).
+Thus, you can use similar programming approach for many other tools as well that ArcGIS provides.</p>
+<p><strong>I am interested in using arcpy in my work..How can I find information how to use those tools?</strong></p>
+<p>Basically how you can proceed from here is to read the <a class="reference external" href="http://desktop.arcgis.com/en/arcmap/latest/analyze/arcpy/what-is-arcpy-.htm">documentation of arcpy</a> to find out how your typical analysis steps and tools in ArcGIS
+can be called from Python using arcpy -module. One good way to find documentation about the tool that you are searching is to use e.g. Google or use the search functionality in ArcGIS documentation pages.</p>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">If you know how to use <a class="reference external" href="http://pro.arcgis.com/en/pro-app/help/analysis/geoprocessing/modelbuilder/what-is-modelbuilder-.htm">Model Builder</a>, it is possible to <a class="reference external" href="http://desktop.arcgis.com/en/arcmap/10.3/analyze/modelbuilder/exporting-a-model-to-a-python-script.htm">export your model to a Python script</a>.
+In that way, you can at least see how those tools that you use in your model can be called from Python using arcpy module.</p>
+</div>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">Add example of raster processing and map algebra with arcpy.</p>
+</div>
+</div>
 </div>
 
 
