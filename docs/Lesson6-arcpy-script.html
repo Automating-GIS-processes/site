@@ -331,7 +331,8 @@ for this purpose but unfortunately arcpy does not have such a function that woul
 <div class="section" id="selecting-data">
 <h2>Selecting data<a class="headerlink" href="#selecting-data" title="Permalink to this headline">¶</a></h2>
 <p>Now that we have a list of unique species values we can iterate over that list and select all rows that correspond to a selected species and then rasterize those rows (polygons).</p>
-<p>Before we can do selections in arcpy, we need to &#8220;prepare&#8221; the selection by creating a temporary feature layer (enables to make selections) using <code class="docutils literal"><span class="pre">MakeFeatureLayer_management()</span></code> -function:</p>
+<p>Before we can do selections in arcpy, we need to &#8220;prepare&#8221; the selection by creating a temporary feature layer (enables to make selections) using <code class="docutils literal"><span class="pre">MakeFeatureLayer_management()</span></code> -function
+(see <a class="reference external" href="http://desktop.arcgis.com/en/arcmap/latest/tools/data-management-toolbox/make-feature-layer.htm">help</a>):</p>
 <div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1">#--------------------------------------------------------------------------------------------------------------------------------</span>
 <span class="c1"># 5. Create a feature layer from the shapefile with &#39;MakeFeatureLayer_management&#39; method that enables us to select specific rows</span>
 <span class="c1">#   Method info: http://desktop.arcgis.com/en/arcmap/latest/tools/data-management-toolbox/make-feature-layer.htm</span>
@@ -356,7 +357,7 @@ in ArcGIS, and save those selections into separate Shapefiles using <code class=
 
     <span class="c1"># Select rows based on individual breed using &#39;SelectLayerByAttribute_management&#39; method</span>
     <span class="c1"># Method info: http://desktop.arcgis.com/en/arcmap/latest/tools/data-management-toolbox/select-layer-by-attribute.htm</span>
-    <span class="n">selection</span> <span class="o">=</span> <span class="n">arcpy</span><span class="o">.</span><span class="n">SelectLayerByAttribute_management</span><span class="p">(</span><span class="n">species_lyr</span><span class="p">,</span> <span class="s2">&quot;NEW_SELECTION&quot;</span><span class="p">,</span> <span class="n">where_clause</span><span class="o">=</span><span class="n">expression</span><span class="p">)</span>
+    <span class="n">arcpy</span><span class="o">.</span><span class="n">SelectLayerByAttribute_management</span><span class="p">(</span><span class="n">species_lyr</span><span class="p">,</span> <span class="s2">&quot;NEW_SELECTION&quot;</span><span class="p">,</span> <span class="n">where_clause</span><span class="o">=</span><span class="n">expression</span><span class="p">)</span>
 
     <span class="c1"># Create an output path for Shapefile</span>
     <span class="n">shape_name</span> <span class="o">=</span> <span class="n">individual</span> <span class="o">+</span> <span class="s2">&quot;.shp&quot;</span>
@@ -364,7 +365,7 @@ in ArcGIS, and save those selections into separate Shapefiles using <code class=
 
     <span class="c1"># Export the selection as a Shapefile into the output folder using &#39;CopyFeatures_management&#39; method</span>
     <span class="c1"># Method info: http://desktop.arcgis.com/en/arcmap/latest/tools/data-management-toolbox/copy-features.htm</span>
-    <span class="n">arcpy</span><span class="o">.</span><span class="n">CopyFeatures_management</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="n">selection</span><span class="p">,</span> <span class="n">out_feature_class</span><span class="o">=</span><span class="n">individual_shp</span><span class="p">)</span>
+    <span class="n">arcpy</span><span class="o">.</span><span class="n">CopyFeatures_management</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="n">species_lyr</span><span class="p">,</span> <span class="n">out_feature_class</span><span class="o">=</span><span class="n">individual_shp</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -453,16 +454,14 @@ any kind of messages to the user who uses the Python tool that we have created a
     <span class="n">expression</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> = &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">species_attribute</span><span class="p">,</span> <span class="n">individual</span><span class="p">)</span>
 
     <span class="c1"># Select rows based on individual breed using &#39;SelectLayerByAttribute_management&#39; method</span>
-    <span class="c1"># Method info: http://resources.arcgis.com/en/help/main/10.2/index.html#//001700000071000000</span>
-    <span class="n">selection</span> <span class="o">=</span> <span class="n">arcpy</span><span class="o">.</span><span class="n">SelectLayerByAttribute_management</span><span class="p">(</span><span class="n">species_lyr</span><span class="p">,</span> <span class="s2">&quot;NEW_SELECTION&quot;</span><span class="p">,</span> <span class="n">where_clause</span><span class="o">=</span><span class="n">expression</span><span class="p">)</span>
+    <span class="n">arcpy</span><span class="o">.</span><span class="n">SelectLayerByAttribute_management</span><span class="p">(</span><span class="n">species_lyr</span><span class="p">,</span> <span class="s2">&quot;NEW_SELECTION&quot;</span><span class="p">,</span> <span class="n">where_clause</span><span class="o">=</span><span class="n">expression</span><span class="p">)</span>
 
     <span class="c1"># Create an output path for Shapefile</span>
     <span class="n">shape_name</span> <span class="o">=</span> <span class="n">individual</span> <span class="o">+</span> <span class="s2">&quot;.shp&quot;</span>
     <span class="n">individual_shp</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_folder</span><span class="p">,</span> <span class="n">shape_name</span><span class="p">)</span>
 
     <span class="c1"># Export the selection as a Shapefile into the output folder using &#39;CopyFeatures_management&#39; method</span>
-    <span class="c1"># Method info: http://resources.arcgis.com/en/help/main/10.2/index.html#//001700000035000000</span>
-    <span class="n">arcpy</span><span class="o">.</span><span class="n">CopyFeatures_management</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="n">selection</span><span class="p">,</span> <span class="n">out_feature_class</span><span class="o">=</span><span class="n">individual_shp</span><span class="p">)</span>
+    <span class="n">arcpy</span><span class="o">.</span><span class="n">CopyFeatures_management</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="n">species_lyr</span><span class="p">,</span> <span class="n">out_feature_class</span><span class="o">=</span><span class="n">individual_shp</span><span class="p">)</span>
 
     <span class="c1"># 6.2):</span>
     <span class="c1"># Create an output path for the Raster Dataset (*.tif)</span>
@@ -470,7 +469,6 @@ any kind of messages to the user who uses the Python tool that we have created a
     <span class="n">individual_tif</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_folder</span><span class="p">,</span> <span class="n">tif_name</span><span class="p">)</span>
 
     <span class="c1"># Convert the newly created Shapefile into a Raster Dataset using &#39;PolygonToRaster_conversion&#39; method</span>
-    <span class="c1"># Method info: http://resources.arcgis.com/en/help/main/10.2/index.html#//001200000030000000</span>
     <span class="n">arcpy</span><span class="o">.</span><span class="n">PolygonToRaster_conversion</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="n">individual_shp</span><span class="p">,</span> <span class="n">value_field</span><span class="o">=</span><span class="n">attribute_name</span><span class="p">,</span> <span class="n">out_rasterdataset</span><span class="o">=</span><span class="n">individual_tif</span><span class="p">)</span>
 
     <span class="c1"># Print progress info for the user</span>

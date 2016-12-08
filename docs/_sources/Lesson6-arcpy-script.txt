@@ -141,7 +141,8 @@ Selecting data
 
 Now that we have a list of unique species values we can iterate over that list and select all rows that correspond to a selected species and then rasterize those rows (polygons).
 
-Before we can do selections in arcpy, we need to "prepare" the selection by creating a temporary feature layer (enables to make selections) using ``MakeFeatureLayer_management()`` -function:
+Before we can do selections in arcpy, we need to "prepare" the selection by creating a temporary feature layer (enables to make selections) using ``MakeFeatureLayer_management()`` -function
+(see `help <http://desktop.arcgis.com/en/arcmap/latest/tools/data-management-toolbox/make-feature-layer.htm>`_):
 
 .. code:: python
 
@@ -172,7 +173,7 @@ in ArcGIS, and save those selections into separate Shapefiles using ``CopyFeatur
 
         # Select rows based on individual breed using 'SelectLayerByAttribute_management' method
         # Method info: http://desktop.arcgis.com/en/arcmap/latest/tools/data-management-toolbox/select-layer-by-attribute.htm
-        selection = arcpy.SelectLayerByAttribute_management(species_lyr, "NEW_SELECTION", where_clause=expression)
+        arcpy.SelectLayerByAttribute_management(species_lyr, "NEW_SELECTION", where_clause=expression)
 
         # Create an output path for Shapefile
         shape_name = individual + ".shp"
@@ -180,7 +181,7 @@ in ArcGIS, and save those selections into separate Shapefiles using ``CopyFeatur
 
         # Export the selection as a Shapefile into the output folder using 'CopyFeatures_management' method
         # Method info: http://desktop.arcgis.com/en/arcmap/latest/tools/data-management-toolbox/copy-features.htm
-        arcpy.CopyFeatures_management(in_features=selection, out_feature_class=individual_shp)
+        arcpy.CopyFeatures_management(in_features=species_lyr, out_feature_class=individual_shp)
 
 Convert Polygons to raster
 --------------------------
@@ -276,16 +277,14 @@ Here is the full script that we prepared previously:
         expression = "%s = '%s'" % (species_attribute, individual)
 
         # Select rows based on individual breed using 'SelectLayerByAttribute_management' method
-        # Method info: http://resources.arcgis.com/en/help/main/10.2/index.html#//001700000071000000
-        selection = arcpy.SelectLayerByAttribute_management(species_lyr, "NEW_SELECTION", where_clause=expression)
+        arcpy.SelectLayerByAttribute_management(species_lyr, "NEW_SELECTION", where_clause=expression)
 
         # Create an output path for Shapefile
         shape_name = individual + ".shp"
         individual_shp = os.path.join(output_folder, shape_name)
 
         # Export the selection as a Shapefile into the output folder using 'CopyFeatures_management' method
-        # Method info: http://resources.arcgis.com/en/help/main/10.2/index.html#//001700000035000000
-        arcpy.CopyFeatures_management(in_features=selection, out_feature_class=individual_shp)
+        arcpy.CopyFeatures_management(in_features=species_lyr, out_feature_class=individual_shp)
 
         # 6.2):
         # Create an output path for the Raster Dataset (*.tif)
@@ -293,7 +292,6 @@ Here is the full script that we prepared previously:
         individual_tif = os.path.join(output_folder, tif_name)
 
         # Convert the newly created Shapefile into a Raster Dataset using 'PolygonToRaster_conversion' method
-        # Method info: http://resources.arcgis.com/en/help/main/10.2/index.html#//001200000030000000
         arcpy.PolygonToRaster_conversion(in_features=individual_shp, value_field=attribute_name, out_rasterdataset=individual_tif)
 
         # Print progress info for the user
