@@ -380,9 +380,11 @@ A-haa, okey so we can see that suitable places for us with our criteria seem to 
 eastern part from the city center. Actually, those locations are along the metro line which makes them
 good locations in terms of travel time to city center since metro is really fast travel mode.
 
-.. note::
+.. todo::
 
-   **Task:** Try to change your classification criteria and see how your results change! What places would be
+   **Task:**
+
+   Try to change your classification criteria and see how your results change! What places would be
    suitable for you to buy an apartment in Helsinki region? You can also change the travel mode and see how
    they change the results.
 

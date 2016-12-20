@@ -60,5 +60,10 @@ all original columns plus a new column for ``geometry``.
 That's it. Now we have successfully geocoded those addresses into Points
 and made a Shapefile out of them.
 
-**Task**: Make a map out of the points. What do you think that the
-addresses are representing?
+
+.. todo::
+
+  **Task**:
+
+  Make a map out of the points. What do you think that the
+  addresses are representing?
