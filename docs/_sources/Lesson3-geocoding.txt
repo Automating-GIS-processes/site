@@ -1,10 +1,5 @@
-
 Geocoding
 =========
-
-**Sources**
-
-Following materials are partly based on documentation of `Geopandas <http://geopandas.org/geocoding.html>`__, `geopy <http://geopy.readthedocs.io/en/1.11.0/#>`__ and `Pandas <http://pandas.pydata.org/>`__.
 
 Overview of Geocoders
 ---------------------
