@@ -1,8 +1,0 @@
-Python in ArcGIS (arcpy)
-========================
-
-ArcGIS.
-
-
-
-
