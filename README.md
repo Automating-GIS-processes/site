@@ -1,5 +1,5 @@
-# Course
-GitHub Pages for Automating GIS-processes course, Department of Geosciences and Geography, University of Helsinki, Finland.  
+# Automating GIS-processes - Sphinx + GitHub Pages
 
-Go to [**Course Pages**](https://automating-gis-processes.github.io/2016/)
- 
+Source documents for maintaining the [Automating GIS-processes course pages](https://automating-gis-processes.github.io/2016/).
+
+The docs are written in [Sphinx](http://www.sphinx-doc.org/en/1.4.9/) and all the rst files for the lesson contents are located in the [source](source/) -folder.
