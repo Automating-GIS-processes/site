@@ -1,5 +1,5 @@
-Overview
-========
+Lesson 7 Overview
+=================
 
 In this lesson we will learn basic techniques for automating raster data processing with Python and the Geospatial Data Abstraction Library `GDAL <http://www.gdal.org/>`_.
 
