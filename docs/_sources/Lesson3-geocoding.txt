@@ -75,7 +75,6 @@ data looks like following:
     1002;Kaivokatu 8, 00101 Helsinki, Finland
     1003;Hermanstads strandsväg 1, 00580 Helsingfors, Finland
 
-
 -  Let's first read the data into a Pandas DataFrame using
    ``read_csv()`` -function:
 
