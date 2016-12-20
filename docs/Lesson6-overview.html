@@ -112,13 +112,16 @@
 </ul>
 <p class="caption"><span class="caption-text">Lesson 2</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="Lesson2-overview-pandas-geopandas.html">Overview of Pandas and Geopandas -modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson2-overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson2-download-data.html">Download datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson2-overview-pandas-geopandas.html">Pandas and Geopandas -modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson2-pandas-intro.html">Introduction to Pandas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson2-geopandas-basics.html">Introduction to Geopandas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Exercise-2.html">Exercise 2</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Lesson 3</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="Lesson3-overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson3-geocoding.html">Geocoding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson3-table-join.html">Table join</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson3-projections.html">Re-projecting data</a></li>
@@ -128,6 +131,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Lesson 4</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="Lesson4-overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson4-download-data.html">Download datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson4-geometric-operations.html">Geometric operations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson4-reclassify.html">Data reclassification</a></li>
@@ -148,13 +152,26 @@
 <p class="caption"><span class="caption-text">Lesson 6</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Overview</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#aim-of-the-lesson">Aim of the lesson</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#learning-objectives">Learning objectives</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson6-arcpy.html">Python in ArcGIS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson6-toolbox.html">ArcGIS Toolbox</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson6-arcpy-script.html">Writing arcpy scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson6-run-the-tool.html">Running the Python script from ArcGIS</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 7</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Lesson7-overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson7-download.html">Download data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson7-read-raster.html">Reading raster files with GDAL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson7-read-raster-array.html">Reading raster as a numerical array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson7-gdal-utilities.html">GDAL command line tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise-7.html">Exercise 7</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 8</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Lesson8-network-analysis.html">Network analysis in Python</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Final Assignment</span></p>
 <ul>
@@ -213,11 +230,20 @@ Exceptionally we won&#8217;t be using the computer instance for going through th
 instead we will be using the GIS-lab computers where <a class="reference external" href="http://desktop.arcgis.com/en/">ArcGIS</a> is installed. ArcGIS is not an open source or freely available
 software such as <a class="reference external" href="http://www.qgis.org/en/site/">Quantum GIS</a> or the Python tools that we have been using. However, it is widely used software in many places (companies, public sector etc.)
 which is the reason why we give this short introduction how you can automatize the ArcGIS workflows using Python scripting with arcpy -module.</p>
+<div class="section" id="learning-objectives">
+<h2>Learning objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">¶</a></h2>
 <p>We <strong>don&#8217;t</strong> have any exercise for this week. Thus, the aim this week is to only learn the basics how the ArcGIS tools can be run using arcpy functions, and how we can
-create a graphical user interface for your custom scripts using ArcGIS Toolbox (.tbx -file).</p>
-<div class="section" id="aim-of-the-lesson">
-<h2>Aim of the lesson<a class="headerlink" href="#aim-of-the-lesson" title="Permalink to this headline">¶</a></h2>
-<p>The aim of this weeks&#8217; lesson is to incrementally create an ArcGIS Python tool that <strong>converts the individual Damselfish species distribution Polygons into raster layers</strong> (<code class="docutils literal"><span class="pre">.tif</span></code>). The data is the same that we used already during the <a class="reference external" href="Lesson2-geopandas-basics.html">second week</a>:</p>
+create a graphical user interface for your custom scripts using ArcGIS Toolbox (.tbx -file). The aim of this weeks&#8217; lesson is to incrementally create an ArcGIS Python tool that
+<strong>converts the individual Damselfish species distribution Polygons into raster layers</strong> (<code class="docutils literal"><span class="pre">.tif</span></code>).</p>
+<p>After this week&#8217;s lesson you should be able to:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Create a simple user interface using ArcGIS ToolBox.</li>
+<li>Run few different arcpy tools from Python.</li>
+<li>Find and know how to read the arcpy documentation online.</li>
+</ul>
+</div></blockquote>
+<p>The data we use this week is the same that we used already during the <a class="reference external" href="Lesson2-geopandas-basics.html">second week</a>:</p>
 <div class="figure">
 <img alt="_images/damselfish-simple-map.PNG" src="_images/damselfish-simple-map.PNG" />
 </div>
@@ -244,6 +270,7 @@ create a graphical user interface for your custom scripts using ArcGIS Toolbox (
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, Henrikki Tenkanen.
+      Last updated on Dec 20, 2016.
 
     </p>
   </div>
@@ -290,7 +317,15 @@ create a graphical user interface for your custom scripts using ArcGIS Toolbox (
           SphinxRtdTheme.StickyNav.enable();
       });
   </script>
-   
+  
+    <li><a href="http://project.invalid/">Project Homepage</a> &raquo;</li>
+
+    <div class="footer">
+        <img src="../img/GPLv3_Logo.svg">
+    </div>
+     
+
+
 
 </body>
 </html>
