@@ -112,10 +112,11 @@
 </ul>
 <p class="caption"><span class="caption-text">Lesson 2</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="Lesson2-overview-pandas-geopandas.html">Overview of Pandas and Geopandas -modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson2-overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson2-download-data.html">Download datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson2-overview-pandas-geopandas.html">Pandas and Geopandas -modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson2-pandas-intro.html">Introduction to Pandas</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction to Geopandas</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#downloading-and-extracting-data">Downloading and extracting data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#reading-a-shapefile">Reading a Shapefile</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#coordinate-reference-system-crs">Coordinate reference system (CRS)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#writing-a-shapefile">Writing a Shapefile</a></li>
@@ -131,6 +132,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Lesson 3</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="Lesson3-overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson3-geocoding.html">Geocoding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson3-table-join.html">Table join</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson3-projections.html">Re-projecting data</a></li>
@@ -140,6 +142,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Lesson 4</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="Lesson4-overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson4-download-data.html">Download datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson4-geometric-operations.html">Geometric operations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson4-reclassify.html">Data reclassification</a></li>
@@ -164,6 +167,19 @@
 <li class="toctree-l1"><a class="reference internal" href="Lesson6-toolbox.html">ArcGIS Toolbox</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson6-arcpy-script.html">Writing arcpy scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson6-run-the-tool.html">Running the Python script from ArcGIS</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 7</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Lesson7-overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson7-download.html">Download data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson7-read-raster.html">Reading raster files with GDAL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson7-read-raster-array.html">Reading raster as a numerical array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson7-gdal-utilities.html">GDAL command line tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise-7.html">Exercise 7</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 8</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Lesson8-network-analysis.html">Network analysis in Python</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Final Assignment</span></p>
 <ul>
@@ -214,24 +230,6 @@
             
   <div class="section" id="introduction-to-geopandas">
 <h1>Introduction to Geopandas<a class="headerlink" href="#introduction-to-geopandas" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="downloading-and-extracting-data">
-<h2>Downloading and extracting data<a class="headerlink" href="#downloading-and-extracting-data" title="Permalink to this headline">¶</a></h2>
-<p>For this lesson we are using data that you can download from <a class="reference external" href="https://github.com/Automating-GIS-processes/Lesson-2-Geo-DataFrames/raw/master/data/Data.zip">here</a>.
-Once you have downloaded the Data.zip file into your home directory, you can unzip the file using the <code class="docutils literal"><span class="pre">unzip</span></code> command in the Terminal window.</p>
-<blockquote>
-<div><div class="code bash highlight-default"><div class="highlight"><pre><span></span>$ cd $HOME
-$ unzip Data.zip
-$ ls Data
-DAMSELFISH_distributions.dbf   DAMSELFISH_distributions.prj
-DAMSELFISH_distributions.sbn   DAMSELFISH_distributions.sbx
-DAMSELFISH_distributions.shp   DAMSELFISH_distributions.shp.xml
-DAMSELFISH_distributions.shx
-</pre></div>
-</div>
-</div></blockquote>
-<p>The Data folder includes a Shapefile called <strong>DAMSELFISH_distribution.shp</strong> (and files related to it).</p>
-<p>Let&#8217;s start now working with spatial data using geopandas.</p>
-</div>
 <div class="section" id="reading-a-shapefile">
 <h2>Reading a Shapefile<a class="headerlink" href="#reading-a-shapefile" title="Permalink to this headline">¶</a></h2>
 <p>Spatial data can be read easily with geopandas using <code class="docutils literal"><span class="pre">gpd.from_file()</span></code>
@@ -285,28 +283,28 @@ some special features and functions that are useful in GIS.</p>
 <span class="go">3      None  POMACENTRIDAE    Chromis   </span>
 <span class="go">4      None  POMACENTRIDAE    Chromis   </span>
 
-<span class="go">                                            geometry     id_no  ...  origin  \</span>
-<span class="go">0  POLYGON ((-115.6437454219999 29.71392059300007...  183963.0  ...       1   </span>
-<span class="go">1  POLYGON ((-105.589950704 21.89339825500002, -1...  183963.0  ...       1   </span>
-<span class="go">2  POLYGON ((-111.159618439 19.01535626700007, -1...  183963.0  ...       1   </span>
-<span class="go">3  POLYGON ((-80.86500229899997 -0.77894492099994...  183793.0  ...       1   </span>
-<span class="go">4  POLYGON ((-67.33922225599997 -55.6761029239999...  183793.0  ...       1   </span>
+<span class="go">                                            geometry     id_no  ...   \</span>
+<span class="go">0  POLYGON ((-115.6437454219999 29.71392059300007...  183963.0  ...    </span>
+<span class="go">1  POLYGON ((-105.589950704 21.89339825500002, -1...  183963.0  ...    </span>
+<span class="go">2  POLYGON ((-111.159618439 19.01535626700007, -1...  183963.0  ...    </span>
+<span class="go">3  POLYGON ((-80.86500229899997 -0.77894492099994...  183793.0  ...    </span>
+<span class="go">4  POLYGON ((-67.33922225599997 -55.6761029239999...  183793.0  ...    </span>
 
-<span class="go">  phylum_nam rl_update seasonal  source   species_na  subpop  subspecies  \</span>
-<span class="go">0   CHORDATA    2012.1        1    None     leucorus    None        None   </span>
-<span class="go">1   CHORDATA    2012.1        1    None     leucorus    None        None   </span>
-<span class="go">2   CHORDATA    2012.1        1    None     leucorus    None        None   </span>
-<span class="go">3   CHORDATA    2012.1        1    None  intercrusma    None        None   </span>
-<span class="go">4   CHORDATA    2012.1        1    None  intercrusma    None        None   </span>
+<span class="go">  phylum_nam rl_update seasonal source   species_na subpop  subspecies  \</span>
+<span class="go">0   CHORDATA    2012.1        1   None     leucorus   None        None   </span>
+<span class="go">1   CHORDATA    2012.1        1   None     leucorus   None        None   </span>
+<span class="go">2   CHORDATA    2012.1        1   None     leucorus   None        None   </span>
+<span class="go">3   CHORDATA    2012.1        1   None  intercrusma   None        None   </span>
+<span class="go">4   CHORDATA    2012.1        1   None  intercrusma   None        None   </span>
 
-<span class="go">  tax_comm  year  </span>
-<span class="go">0     None  2010  </span>
-<span class="go">1     None  2010  </span>
-<span class="go">2     None  2010  </span>
-<span class="go">3     None  2010  </span>
-<span class="go">4     None  2010  </span>
+<span class="go">   tax_comm testCol  year  </span>
+<span class="go">0      None       1  2010  </span>
+<span class="go">1      None       1  2010  </span>
+<span class="go">2      None       1  2010  </span>
+<span class="go">3      None       1  2010  </span>
+<span class="go">4      None       1  2010  </span>
 
-<span class="go">[5 rows x 24 columns]</span>
+<span class="go">[5 rows x 25 columns]</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -318,7 +316,7 @@ matplotlib as a backend):</li>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [6]: </span><span class="n">data</span><span class="o">.</span><span class="n">plot</span><span class="p">();</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/damselfish.png"><img alt="_images/damselfish.png" src="_images/damselfish.png" style="width: 5in;" /></a>
+<a class="reference internal image-reference" href="..\docs\_static\damselfish.png"><img alt="..\docs\_static\damselfish.png" src="..\docs\_static\damselfish.png" style="width: 5in;" /></a>
 </div>
 <div class="section" id="coordinate-reference-system-crs">
 <h2>Coordinate reference system (CRS)<a class="headerlink" href="#coordinate-reference-system-crs" title="Permalink to this headline">¶</a></h2>
@@ -511,7 +509,7 @@ that we can insert to our GeoDataFrame:</li>
 
 <span class="go"># Let&#39;s see what we have</span>
 <span class="gp">In [21]: </span><span class="n">poly</span>
-<span class="gh">Out[21]: </span><span class="go">&lt;shapely.geometry.polygon.Polygon at 0x24d5e438&gt;</span>
+<span class="gh">Out[21]: </span><span class="go">&lt;shapely.geometry.polygon.Polygon at 0x25c49ba8&gt;</span>
 </pre></div>
 </div>
 <p>Okey, so now we have appropriate Polygon -object.</p>
@@ -610,7 +608,7 @@ This function groups data based on values on selected column(s).</p>
 
 <span class="go"># Let&#39;s see what we got</span>
 <span class="gp">In [31]: </span><span class="n">grouped</span>
-<span class="gh">Out[31]: </span><span class="go">&lt;pandas.core.groupby.DataFrameGroupBy object at 0x0000000027C9E8D0&gt;</span>
+<span class="gh">Out[31]: </span><span class="go">&lt;pandas.core.groupby.DataFrameGroupBy object at 0x0000000025C75C50&gt;</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -660,25 +658,25 @@ This function groups data based on values on selected column(s).</p>
 <span class="go">32  POLYGON ((48.11258402900006 -9.335103113999935...  154915.0   ...      </span>
 <span class="go">33  POLYGON ((51.75403543100003 -9.21679305899994,...  154915.0   ...      </span>
 
-<span class="go">   phylum_nam rl_update seasonal source  species_na subpop  subspecies  \</span>
-<span class="go">27   CHORDATA    2012.2        1   None     jordani   None        None   </span>
-<span class="go">28   CHORDATA    2012.2        1   None     jordani   None        None   </span>
-<span class="go">29   CHORDATA    2012.2        1   None     jordani   None        None   </span>
-<span class="go">30   CHORDATA    2012.2        1   None     jordani   None        None   </span>
-<span class="go">31   CHORDATA    2012.2        1   None     jordani   None        None   </span>
-<span class="go">32   CHORDATA    2012.2        1   None     jordani   None        None   </span>
-<span class="go">33   CHORDATA    2012.2        1   None     jordani   None        None   </span>
+<span class="go">   rl_update seasonal source species_na  subpop subspecies  tax_comm  testCol  \</span>
+<span class="go">27    2012.2        1   None    jordani    None       None      None        1   </span>
+<span class="go">28    2012.2        1   None    jordani    None       None      None        1   </span>
+<span class="go">29    2012.2        1   None    jordani    None       None      None        1   </span>
+<span class="go">30    2012.2        1   None    jordani    None       None      None        1   </span>
+<span class="go">31    2012.2        1   None    jordani    None       None      None        1   </span>
+<span class="go">32    2012.2        1   None    jordani    None       None      None        1   </span>
+<span class="go">33    2012.2        1   None    jordani    None       None      None        1   </span>
 
-<span class="go">    tax_comm  year     area  </span>
-<span class="go">27      None  2012  38.6712  </span>
-<span class="go">28      None  2012  37.4457  </span>
-<span class="go">29      None  2012  16.9395  </span>
-<span class="go">30      None  2012   10.127  </span>
-<span class="go">31      None  2012   7.7603  </span>
-<span class="go">32      None  2012  3.43424  </span>
-<span class="go">33      None  2012  2.40862  </span>
+<span class="go">    year     area  </span>
+<span class="go">27  2012  38.6712  </span>
+<span class="go">28  2012  37.4457  </span>
+<span class="go">29  2012  16.9395  </span>
+<span class="go">30  2012   10.127  </span>
+<span class="go">31  2012   7.7603  </span>
+<span class="go">32  2012  3.43424  </span>
+<span class="go">33  2012  2.40862  </span>
 
-<span class="go">[7 rows x 25 columns]</span>
+<span class="go">[7 rows x 26 columns]</span>
 </pre></div>
 </div>
 <p>From here we can see that an individual_fish variable now contains all the rows that belongs to a fish called <code class="docutils literal"><span class="pre">Teixeirichthys</span> <span class="pre">jordani</span></code>. Notice that the index numbers refer to the row numbers in the
@@ -744,6 +742,7 @@ handy when dealing with Shapefiles. Doing similar process manually would be real
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, Henrikki Tenkanen.
+      Last updated on Dec 20, 2016.
 
     </p>
   </div>
@@ -790,7 +789,15 @@ handy when dealing with Shapefiles. Doing similar process manually would be real
           SphinxRtdTheme.StickyNav.enable();
       });
   </script>
-   
+  
+    <li><a href="http://project.invalid/">Project Homepage</a> &raquo;</li>
+
+    <div class="footer">
+        <img src="../img/GPLv3_Logo.svg">
+    </div>
+     
+
+
 
 </body>
 </html>

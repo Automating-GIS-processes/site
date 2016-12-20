@@ -17,4 +17,15 @@ In addition to these modules, there are also at least a few good and interesting
  - `Basemap <http://matplotlib.org/basemap/index.html>`_ (Matplotlib's own mapping module)
  - `GeoViews <http://geo.holoviews.org/>`_
 
+Learning objectives
+-------------------
+
+After this weeks lesson you should be able to (at least):
+
+ - Create a static map using Geopandas
+
+ - Create a simple interactive map using either Bokeh or Folium (or both).
+
+ - Share your maps (static / interactive) on GitHub using GitHub pages.
+
 Let's start by recalling how those static maps could be done in Geopandas.

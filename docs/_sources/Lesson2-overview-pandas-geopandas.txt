@@ -1,11 +1,5 @@
-Overview of Pandas and Geopandas -modules
-=========================================
-
-**Sources**
-
-*These materials are partly based on* `Pandas introductory
-tutorial <http://pandas.pydata.org/pandas-docs/version/0.15.2/10min.html#min>`_
-*and Geopandas documentation*.
+Pandas and Geopandas -modules
+=============================
 
 `Pandas <http://pandas.pydata.org>`__ is a modern, powerful and
 feature rich library that is designed for doing data analysis in Python.

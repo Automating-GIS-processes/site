@@ -1,0 +1,37 @@
+id;address
+1000;Itämerenkatu 14, 00101 Helsinki, Finland
+1001;Kampinkuja 1, 00100 Helsinki, Finland
+1002;Kaivokatu 8, 00101 Helsinki, Finland
+1003;Hermanstads strandsväg 1, 00580 Helsingfors, Finland
+1004;Itäväylä, 00900 Helsinki, Finland
+1005;Tyynenmerenkatu 9, 00220 Helsinki, Finland
+1006;Kontulantie 18, 00940 Helsinki, Finland
+1007;Itäväylä, 00800 Helsinki, Finland
+1008;Tapulikaupungintie 3, 00750 Helsinki, Finland
+1009;Sompionpolku 2, 00730 Helsinki, Finland
+1010;Atomitie 5, 00370 Helsinki, Finland
+1011;Rautatientori 1, 00100 Helsinki, Finland
+1012;Kuparitie 8, 00440 Helsinki, Finland
+1013;Trumstigen 8, 00420 Helsingfors, Finland
+1014;Kullatorpsvägen 1, 00620 Helsingfors, Finland
+1015;Malminkaari 15, 00700 Helsinki, Finland
+1016;Kylätie 23, 00320 Helsinki, Finland
+1017;Malminkartanontie 17, 00410 Helsinki, Finland
+1018;Åggelby torg 2b, 00640 Helsingfors, Finland
+1019;Bangårdsvägen 6, 00101 Helsingfors, Finland
+1020;Pitäjänmäentie 15, 00370 Helsinki, Finland
+1021;Eskolantie 2, 00720 Helsinki, Finland
+1022;Tattariharjuntie, 00700 Helsinki, Finland
+1023;Tallinnanaukio 1, 00930 Helsinki, Finland
+1024;Tyynylaavantie 7, 00980 Helsinki, Finland
+1025;Varvasmäenkuja, 00920 Helsinki, Finland
+1026;Mellungsbackastråket 6, 00970 Helsingfors, Finland
+1027;Vasastigen 2, 00101 Helsingfors, Finland
+1028;Hiihtäjäntie 2, 00810 Helsinki, Finland
+1029;Ukko-Pekan porras, 00570 Helsinki, Finland
+1030;Siltasaarenkatu 16, 00530 Helsinki, Finland
+1031;Urho Kekkosen katu 1, 00100 Helsinki, Finland
+1032;Gräsviksgatan 17, 00101 Helsingfors, Finland
+1033;Stillahavsgatan 3, 00220 Helsingfors, Finland
+1034;Vilhelmsgatan 4, 00101 Helsingfors, Finland
+1035;Torisilta, 00980 Helsinki, Finland

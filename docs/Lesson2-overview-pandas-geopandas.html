@@ -19,7 +19,7 @@
     </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Overview of Pandas and Geopandas -modules &mdash; GeoPython - AutoGIS 1 documentation</title>
+  <title>Pandas and Geopandas -modules &mdash; GeoPython - AutoGIS 1 documentation</title>
   
 
   
@@ -46,7 +46,7 @@
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="GeoPython - AutoGIS 1 documentation" href="index.html"/>
         <link rel="next" title="Introduction to Pandas" href="Lesson2-pandas-intro.html"/>
-        <link rel="prev" title="Exercise 1" href="Exercise-1.html"/> 
+        <link rel="prev" title="Download datasets" href="Lesson2-download-data.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -112,13 +112,16 @@
 </ul>
 <p class="caption"><span class="caption-text">Lesson 2</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Overview of Pandas and Geopandas -modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson2-overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson2-download-data.html">Download datasets</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Pandas and Geopandas -modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson2-pandas-intro.html">Introduction to Pandas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson2-geopandas-basics.html">Introduction to Geopandas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Exercise-2.html">Exercise 2</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Lesson 3</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="Lesson3-overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson3-geocoding.html">Geocoding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson3-table-join.html">Table join</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson3-projections.html">Re-projecting data</a></li>
@@ -128,6 +131,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Lesson 4</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="Lesson4-overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson4-download-data.html">Download datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson4-geometric-operations.html">Geometric operations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson4-reclassify.html">Data reclassification</a></li>
@@ -152,6 +156,19 @@
 <li class="toctree-l1"><a class="reference internal" href="Lesson6-toolbox.html">ArcGIS Toolbox</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson6-arcpy-script.html">Writing arcpy scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson6-run-the-tool.html">Running the Python script from ArcGIS</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 7</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Lesson7-overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson7-download.html">Download data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson7-read-raster.html">Reading raster files with GDAL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson7-read-raster-array.html">Reading raster as a numerical array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson7-gdal-utilities.html">GDAL command line tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise-7.html">Exercise 7</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 8</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Lesson8-network-analysis.html">Network analysis in Python</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Final Assignment</span></p>
 <ul>
@@ -186,7 +203,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="index.html">Docs</a> &raquo;</li>
       
-    <li>Overview of Pandas and Geopandas -modules</li>
+    <li>Pandas and Geopandas -modules</li>
       <li class="wy-breadcrumbs-aside">
         
           
@@ -200,12 +217,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="overview-of-pandas-and-geopandas-modules">
-<h1>Overview of Pandas and Geopandas -modules<a class="headerlink" href="#overview-of-pandas-and-geopandas-modules" title="Permalink to this headline">¶</a></h1>
-<p><strong>Sources</strong></p>
-<p><em>These materials are partly based on</em> <a class="reference external" href="http://pandas.pydata.org/pandas-docs/version/0.15.2/10min.html#min">Pandas introductory
-tutorial</a>
-<em>and Geopandas documentation</em>.</p>
+  <div class="section" id="pandas-and-geopandas-modules">
+<h1>Pandas and Geopandas -modules<a class="headerlink" href="#pandas-and-geopandas-modules" title="Permalink to this headline">¶</a></h1>
 <p><a class="reference external" href="http://pandas.pydata.org">Pandas</a> is a modern, powerful and
 feature rich library that is designed for doing data analysis in Python.
 It is a mature data analytics framework that is widely used among
@@ -261,7 +274,7 @@ analysis (will be covered during the Lesson 7.</p>
         <a href="Lesson2-pandas-intro.html" class="btn btn-neutral float-right" title="Introduction to Pandas" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="Exercise-1.html" class="btn btn-neutral" title="Exercise 1" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="Lesson2-download-data.html" class="btn btn-neutral" title="Download datasets" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -271,6 +284,7 @@ analysis (will be covered during the Lesson 7.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, Henrikki Tenkanen.
+      Last updated on Dec 20, 2016.
 
     </p>
   </div>
@@ -317,7 +331,15 @@ analysis (will be covered during the Lesson 7.</p>
           SphinxRtdTheme.StickyNav.enable();
       });
   </script>
-   
+  
+    <li><a href="http://project.invalid/">Project Homepage</a> &raquo;</li>
+
+    <div class="footer">
+        <img src="../img/GPLv3_Logo.svg">
+    </div>
+     
+
+
 
 </body>
 </html>
