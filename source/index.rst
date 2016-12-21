@@ -26,7 +26,7 @@ on the laboratory exercises, however the laboratory summary write-ups that you s
     The course is **open for everyone**. The aim of this course is to share the knowledge and help people to get started with their journey for doing GIS more efficiently and in a reproducible manner
     using Python programming.
 
-.. admonition:: Cloud computing!
+.. admonition:: Step by step instructions with cloud computing!
 
     The materials are written in a way that you can follow them step by step exactly as they are written, as long as you use the cloud computing resources that
     we provide for you (unfortunately **for Uni. Helsinki people** only). Read more about our cloud computing environment from `here <https://github.com/Python-for-geo-people/Lesson-1-Course-Environment/blob/master/Background/course-environment-components.md>`_.
