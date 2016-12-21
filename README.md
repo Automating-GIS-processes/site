@@ -7,6 +7,8 @@ Build html pages are located in the [docs](docs/) -folder.
 
 ## License and terms of usage
 
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /></a> 
+
 We hope that the materials provided here would be helpful for others. Thus, we share all the lesson materials openly, and also our source codes and lesson materials are openly available **from these pages**.
 
 **Our materials and code snippets are licensed** with **Creative Commons Attribution-ShareAlike 4.0 International licence** and **GNU GPLv3 license**. 
@@ -77,6 +79,6 @@ Main developer and maintainer of these materials: **Henrikki Tenkanen**
 
 Co-developers: **Vuokko Heikinheimo**.
 
-See contact info from [here](https://github.com/Automating-GIS-processes/2016/blob/master/source/course-info.rst#instructors)
+See contact info from [here](https://github.com/Automating-GIS-processes/2016/blob/master/source/course-info.rst#instructors).
 
 
