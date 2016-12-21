@@ -11,7 +11,7 @@ We hope that the materials provided here would be helpful for others. Thus, we s
 
 **Our materials and code snippets are licensed** with **Creative Commons Attribution-ShareAlike 4.0 International licence** and **GNU GPLv3 license**. 
 
-**Read more about the license and terms of usage from [here](https://github.com/Automating-GIS-processes/2016/blob/master/source/License-terms.rst)**
+**Read more about the license and terms of usage from [here](https://github.com/Automating-GIS-processes/2016/blob/master/source/License-terms.rst)**.
 
 ## Requirements
 
@@ -61,8 +61,8 @@ wants them so that GitHub Pages works. I have edited the [make.bat](make.bat) fo
 ### Sphinx actually runs the codes! 
 
 One of the most powerful features that Sphinx has (in my opinion), is that it will actually run all the Python codes that are written under the `.. ipython:: python` code block. This makes
-possible that you can e.g. plot images dynamically to the pages without doing any manual work, see and show the contents of a datafile on the pages without needing to add them manually 
-(which is how you would do it on Markdown pages). Hence, doing the documentation reminds a bit how you can write documents with [Jupyter Notebooks](https://jupyter.org/) but with a nicer 
+it possible that you can e.g. plot images dynamically to the pages without doing any manual work (adding images with links), see and show the contents of a datafile on the pages without needing to 
+add them manually (which is how you would do it on Markdown pages). Hence, doing the documentation reminds a bit how you can write documents with [Jupyter Notebooks](https://jupyter.org/) but with a nicer 
 looking pages.  
 
 ### Data needs to be in the repository
