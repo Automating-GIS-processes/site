@@ -32,9 +32,9 @@ on the laboratory exercises, however the laboratory summary write-ups that you s
 
 .. admonition:: Cloud computing!
 
-    The materials are written in a way that you can follow them step by step exactly as they are written in the materials as long as you use the cloud computing resources that
-    we provide for you (**unfortunately, only for University of Helsinki people**). Read more about our cloud computing environment and how to use it from `here <https://github.com/Python-for-geo-people/Lesson-1-Course-Environment/blob/master/Background/course-environment-components.md>`_.
-    If you work from your own computer, you need to adjust the file paths to the data accordingly.
+    The materials are written in a way that you can follow them step by step exactly as they are written, as long as you use the cloud computing resources that
+    we provide for you (unfortunately **for Uni. Helsinki people** only). Read more about our cloud computing environment from `here <https://github.com/Python-for-geo-people/Lesson-1-Course-Environment/blob/master/Background/course-environment-components.md>`_.
+    If you work from your own computer, **you need to adjust the file paths to the data** accordingly.
 
 .. admonition:: For teachers
 
