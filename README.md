@@ -8,7 +8,7 @@ Build html pages are located in the [docs](docs/) -folder.
 ## License and terms of usage
 
 <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" align="left" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /></a>
-![](source/img/source/GPLv3_Logo.svg) 
+![](source/img/GPLv3_Logo.svg) 
 
 We hope that the materials provided here would be helpful for others. Thus, we share all the lesson materials openly, and also our source codes and lesson materials are openly available **from these pages**.
 
