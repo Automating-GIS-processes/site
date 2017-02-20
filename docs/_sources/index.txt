@@ -150,12 +150,11 @@ Contents
 
    Final-assignment
 
+.. toctree::
+   :maxdepth: 2
+   :caption: Map Challenge 2016
+
+   map-challenge
 
 
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
 
