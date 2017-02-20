@@ -1,5 +1,5 @@
-Overview
-========
+Lesson 3 Overview
+=================
 
 Learning objectives
 -------------------

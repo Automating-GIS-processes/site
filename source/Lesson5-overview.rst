@@ -1,5 +1,5 @@
-Overview
-========
+Lesson 5 Overview
+=================
 
 This week we will focus on learning how to create beautiful maps in Python and how to share them on GitHub using `GitHub Pages <https://pages.github.com/>`_.
 As you might remember from our earlier `plotting lesson <https://github.com/Python-for-geo-people/Lesson-7-Plotting>`_

@@ -112,7 +112,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Lesson 2</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="Lesson2-overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson2-overview.html">Lesson 2 Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson2-download-data.html">Download datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson2-overview-pandas-geopandas.html">Pandas and Geopandas -modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson2-pandas-intro.html">Introduction to Pandas</a></li>
@@ -121,7 +121,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Lesson 3</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="Lesson3-overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson3-overview.html">Lesson 3 Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson3-geocoding.html">Geocoding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson3-table-join.html">Table join</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson3-projections.html">Re-projecting data</a></li>
@@ -131,7 +131,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Lesson 4</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="Lesson4-overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson4-overview.html">Lesson 4 Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson4-download-data.html">Download datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson4-geometric-operations.html">Geometric operations</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Data reclassification</a><ul>
@@ -150,7 +150,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Lesson 5</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="Lesson5-overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson5-overview.html">Lesson 5 Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson5-download-data.html">Download datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson5-static-maps.html">Static maps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson5-interactive-map-bokeh.html">Interactive maps with Bokeh</a></li>
@@ -161,7 +161,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Lesson 6</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="Lesson6-overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson6-overview.html">Lesson 6 Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson6-arcpy.html">Python in ArcGIS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson6-toolbox.html">ArcGIS Toolbox</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson6-arcpy-script.html">Writing arcpy scripts</a></li>
@@ -169,7 +169,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Lesson 7</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="Lesson7-overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson7-overview.html">Lesson 7 Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson7-download.html">Download data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson7-read-raster.html">Reading raster files with GDAL</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson7-read-raster-array.html">Reading raster as a numerical array</a></li>
@@ -319,7 +319,7 @@ self-made classifier, or using a ready made classifiers that are commonly used e
 </div>
 <p>Let&#8217;s plot the data and use column &#8216;Level3&#8217; as our color.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="n">data</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;Level3&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
-<span class="gh">Out[5]: </span><span class="go">&lt;matplotlib.axes._subplots.AxesSubplot at 0x377240b8&gt;</span>
+<span class="gh">Out[5]: </span><span class="go">&lt;matplotlib.axes._subplots.AxesSubplot at 0x126b0ac8&gt;</span>
 
 <span class="go"># Use tight layout and remove empty whitespace around our map</span>
 <span class="gp">In [6]: </span><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
@@ -452,7 +452,7 @@ Thus, let&#8217;s apply our function and do the classification.</p>
 </div>
 <p>Let&#8217;s plot these lakes and see how they look like.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="n">lakes</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;small_big&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;seismic&quot;</span><span class="p">)</span>
-<span class="gh">Out[18]: </span><span class="go">&lt;matplotlib.axes._subplots.AxesSubplot at 0x370d89e8&gt;</span>
+<span class="gh">Out[18]: </span><span class="go">&lt;matplotlib.axes._subplots.AxesSubplot at 0x12a8e048&gt;</span>
 
 <span class="gp">In [19]: </span><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
@@ -548,26 +548,33 @@ and find out grid cells where the <strong>travel time is lower or equal to 20 mi
 <p>Let&#8217;s see what we got.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [28]: </span><span class="n">acc</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 <span class="gh">Out[28]: </span><span class="go"></span>
-<span class="go">     GML_ID   NAMEFIN      NAMESWE NATCODE          area  car_m_d  car_m_t  \</span>
-<span class="go">0  27517366  Helsinki  Helsingfors     091  62499.999976    15981       36   </span>
-<span class="go">1  27517366  Helsinki  Helsingfors     091  62499.999977    16190       34   </span>
-<span class="go">2  27517366  Helsinki  Helsingfors     091  62499.999977    15727       33   </span>
-<span class="go">3  27517366  Helsinki  Helsingfors     091  62499.999976    15975       33   </span>
-<span class="go">4  27517366  Helsinki  Helsingfors     091  62499.999977    16136       35   </span>
+<span class="go">   car_m_d  car_m_t  car_r_d  car_r_t  from_id  pt_m_d  pt_m_t  pt_m_tt  \</span>
+<span class="go">0    15981       36    15988       41  6002702   14698      65       73   </span>
+<span class="go">1    16190       34    16197       39  6002701   14661      64       73   </span>
+<span class="go">2    15727       33    15733       37  6001132   14256      59       69   </span>
+<span class="go">3    15975       33    15982       37  6001131   14512      62       73   </span>
+<span class="go">4    16136       35    16143       40  6001138   14730      65       73   </span>
 
-<span class="go">   car_r_d  car_r_t  from_id      ...       pt_m_d  pt_m_t  pt_m_tt  pt_r_d  \</span>
-<span class="go">0    15988       41  6002702      ...        14698      65       73   14698   </span>
-<span class="go">1    16197       39  6002701      ...        14661      64       73   14661   </span>
-<span class="go">2    15733       37  6001132      ...        14256      59       69   14256   </span>
-<span class="go">3    15982       37  6001131      ...        14512      62       73   14512   </span>
-<span class="go">4    16143       40  6001138      ...        14730      65       73   14730   </span>
+<span class="go">   pt_r_d  pt_r_t      ...         to_id  walk_d  walk_t    GML_ID   NAMEFIN  \</span>
+<span class="go">0   14698      61      ...       5975375   14456     207  27517366  Helsinki   </span>
+<span class="go">1   14661      60      ...       5975375   14419     206  27517366  Helsinki   </span>
+<span class="go">2   14256      55      ...       5975375   14014     200  27517366  Helsinki   </span>
+<span class="go">3   14512      58      ...       5975375   14270     204  27517366  Helsinki   </span>
+<span class="go">4   14730      61      ...       5975375   14212     203  27517366  Helsinki   </span>
 
-<span class="go">   pt_r_t  pt_r_tt    to_id  walk_d  walk_t  Suitable_area  </span>
-<span class="go">0      61       72  5975375   14456     207              0  </span>
-<span class="go">1      60       72  5975375   14419     206              0  </span>
-<span class="go">2      55       62  5975375   14014     200              0  </span>
-<span class="go">3      58       70  5975375   14270     204              0  </span>
-<span class="go">4      61       72  5975375   14212     203              0  </span>
+<span class="go">       NAMESWE NATCODE          area  \</span>
+<span class="go">0  Helsingfors     091  62499.999976   </span>
+<span class="go">1  Helsingfors     091  62499.999977   </span>
+<span class="go">2  Helsingfors     091  62499.999977   </span>
+<span class="go">3  Helsingfors     091  62499.999976   </span>
+<span class="go">4  Helsingfors     091  62499.999977   </span>
+
+<span class="go">                                            geometry Suitable_area  </span>
+<span class="go">0  POLYGON ((391000.0001349226 6667750.00004299, ...             0  </span>
+<span class="go">1  POLYGON ((390750.0001349644 6668000.000042951,...             0  </span>
+<span class="go">2  POLYGON ((391000.0001349143 6668000.000042943,...             0  </span>
+<span class="go">3  POLYGON ((390750.0001349644 6668000.000042951,...             0  </span>
+<span class="go">4  POLYGON ((392500.0001346234 6668000.000042901,...             0  </span>
 
 <span class="go">[5 rows x 21 columns]</span>
 </pre></div>
@@ -595,9 +602,10 @@ Let&#8217;s see where they are located.</p>
 <p>A-haa, okey so we can see that suitable places for us with our criteria seem to be located in the
 eastern part from the city center. Actually, those locations are along the metro line which makes them
 good locations in terms of travel time to city center since metro is really fast travel mode.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last"><strong>Task:</strong> Try to change your classification criteria and see how your results change! What places would be
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<p><strong>Task:</strong></p>
+<p class="last">Try to change your classification criteria and see how your results change! What places would be
 suitable for you to buy an apartment in Helsinki region? You can also change the travel mode and see how
 they change the results.</p>
 </div>
@@ -649,7 +657,7 @@ Available map classifiers in pysal -module are (<a class="reference external" hr
 <span class="go">0        7</span>
 <span class="go">1        7</span>
 <span class="go">2        6</span>
-<span class="go">3        7</span>
+<span class="go">3        6</span>
 <span class="go">4        7</span>
 </pre></div>
 </div>
@@ -664,26 +672,33 @@ Available map classifiers in pysal -module are (<a class="reference external" hr
 <span class="go"># Let&#39;s see how our data looks like</span>
 <span class="gp">In [39]: </span><span class="n">acc</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 <span class="gh">Out[39]: </span><span class="go"></span>
-<span class="go">     GML_ID   NAMEFIN      NAMESWE NATCODE          area  car_m_d  car_m_t  \</span>
-<span class="go">0  27517366  Helsinki  Helsingfors     091  62499.999976    15981       36   </span>
-<span class="go">1  27517366  Helsinki  Helsingfors     091  62499.999977    16190       34   </span>
-<span class="go">2  27517366  Helsinki  Helsingfors     091  62499.999977    15727       33   </span>
-<span class="go">3  27517366  Helsinki  Helsingfors     091  62499.999976    15975       33   </span>
-<span class="go">4  27517366  Helsinki  Helsingfors     091  62499.999977    16136       35   </span>
+<span class="go">   car_m_d  car_m_t  car_r_d  car_r_t  from_id  pt_m_d  pt_m_t  pt_m_tt  \</span>
+<span class="go">0    15981       36    15988       41  6002702   14698      65       73   </span>
+<span class="go">1    16190       34    16197       39  6002701   14661      64       73   </span>
+<span class="go">2    15727       33    15733       37  6001132   14256      59       69   </span>
+<span class="go">3    15975       33    15982       37  6001131   14512      62       73   </span>
+<span class="go">4    16136       35    16143       40  6001138   14730      65       73   </span>
 
-<span class="go">   car_r_d  car_r_t  from_id     ...     pt_m_t  pt_m_tt  pt_r_d  pt_r_t  \</span>
-<span class="go">0    15988       41  6002702     ...         65       73   14698      61   </span>
-<span class="go">1    16197       39  6002701     ...         64       73   14661      60   </span>
-<span class="go">2    15733       37  6001132     ...         59       69   14256      55   </span>
-<span class="go">3    15982       37  6001131     ...         62       73   14512      58   </span>
-<span class="go">4    16143       40  6001138     ...         65       73   14730      61   </span>
+<span class="go">   pt_r_d  pt_r_t    ...      walk_d  walk_t    GML_ID   NAMEFIN      NAMESWE  \</span>
+<span class="go">0   14698      61    ...       14456     207  27517366  Helsinki  Helsingfors   </span>
+<span class="go">1   14661      60    ...       14419     206  27517366  Helsinki  Helsingfors   </span>
+<span class="go">2   14256      55    ...       14014     200  27517366  Helsinki  Helsingfors   </span>
+<span class="go">3   14512      58    ...       14270     204  27517366  Helsinki  Helsingfors   </span>
+<span class="go">4   14730      61    ...       14212     203  27517366  Helsinki  Helsingfors   </span>
 
-<span class="go">   pt_r_tt    to_id  walk_d  walk_t  Suitable_area  nb_pt_r_tt  </span>
-<span class="go">0       72  5975375   14456     207              0           7  </span>
-<span class="go">1       72  5975375   14419     206              0           7  </span>
-<span class="go">2       62  5975375   14014     200              0           6  </span>
-<span class="go">3       70  5975375   14270     204              0           7  </span>
-<span class="go">4       72  5975375   14212     203              0           7  </span>
+<span class="go">  NATCODE          area                                           geometry  \</span>
+<span class="go">0     091  62499.999976  POLYGON ((391000.0001349226 6667750.00004299, ...   </span>
+<span class="go">1     091  62499.999977  POLYGON ((390750.0001349644 6668000.000042951,...   </span>
+<span class="go">2     091  62499.999977  POLYGON ((391000.0001349143 6668000.000042943,...   </span>
+<span class="go">3     091  62499.999976  POLYGON ((390750.0001349644 6668000.000042951,...   </span>
+<span class="go">4     091  62499.999977  POLYGON ((392500.0001346234 6668000.000042901,...   </span>
+
+<span class="go">   Suitable_area nb_pt_r_tt  </span>
+<span class="go">0              0          7  </span>
+<span class="go">1              0          7  </span>
+<span class="go">2              0          6  </span>
+<span class="go">3              0          6  </span>
+<span class="go">4              0          7  </span>
 
 <span class="go">[5 rows x 22 columns]</span>
 </pre></div>
@@ -722,7 +737,7 @@ Available map classifiers in pysal -module are (<a class="reference external" hr
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, Henrikki Tenkanen.
-      Last updated on Dec 22, 2016.
+      Last updated on Feb 20, 2017.
 
     </p>
   </div>

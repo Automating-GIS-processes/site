@@ -112,7 +112,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Lesson 2</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="Lesson2-overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson2-overview.html">Lesson 2 Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson2-download-data.html">Download datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson2-overview-pandas-geopandas.html">Pandas and Geopandas -modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson2-pandas-intro.html">Introduction to Pandas</a></li>
@@ -132,7 +132,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Lesson 3</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="Lesson3-overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson3-overview.html">Lesson 3 Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson3-geocoding.html">Geocoding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson3-table-join.html">Table join</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson3-projections.html">Re-projecting data</a></li>
@@ -142,7 +142,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Lesson 4</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="Lesson4-overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson4-overview.html">Lesson 4 Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson4-download-data.html">Download datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson4-geometric-operations.html">Geometric operations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson4-reclassify.html">Data reclassification</a></li>
@@ -151,7 +151,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Lesson 5</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="Lesson5-overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson5-overview.html">Lesson 5 Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson5-download-data.html">Download datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson5-static-maps.html">Static maps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson5-interactive-map-bokeh.html">Interactive maps with Bokeh</a></li>
@@ -162,7 +162,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Lesson 6</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="Lesson6-overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson6-overview.html">Lesson 6 Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson6-arcpy.html">Python in ArcGIS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson6-toolbox.html">ArcGIS Toolbox</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson6-arcpy-script.html">Writing arcpy scripts</a></li>
@@ -170,7 +170,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Lesson 7</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="Lesson7-overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson7-overview.html">Lesson 7 Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson7-download.html">Download data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson7-read-raster.html">Reading raster files with GDAL</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lesson7-read-raster-array.html">Reading raster as a numerical array</a></li>
@@ -266,47 +266,47 @@ some special features and functions that are useful in GIS.</p>
 </ul>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 <span class="gh">Out[5]: </span><span class="go"></span>
-<span class="go">              binomial category  \</span>
-<span class="go">0   Stegastes leucorus       VU   </span>
-<span class="go">1   Stegastes leucorus       VU   </span>
-<span class="go">2   Stegastes leucorus       VU   </span>
-<span class="go">3  Chromis intercrusma       LC   </span>
-<span class="go">4  Chromis intercrusma       LC   </span>
+<span class="go">      id_no             binomial  origin compiler  year  \</span>
+<span class="go">0  183963.0   Stegastes leucorus       1     IUCN  2010   </span>
+<span class="go">1  183963.0   Stegastes leucorus       1     IUCN  2010   </span>
+<span class="go">2  183963.0   Stegastes leucorus       1     IUCN  2010   </span>
+<span class="go">3  183793.0  Chromis intercrusma       1     IUCN  2010   </span>
+<span class="go">4  183793.0  Chromis intercrusma       1     IUCN  2010   </span>
 
-<span class="go">                                            citation      class_name compiler  \</span>
-<span class="go">0  International Union for Conservation of Nature...  ACTINOPTERYGII     IUCN   </span>
-<span class="go">1  International Union for Conservation of Nature...  ACTINOPTERYGII     IUCN   </span>
-<span class="go">2  International Union for Conservation of Nature...  ACTINOPTERYGII     IUCN   </span>
-<span class="go">3  International Union for Conservation of Nature...  ACTINOPTERYGII     IUCN   </span>
-<span class="go">4  International Union for Conservation of Nature...  ACTINOPTERYGII     IUCN   </span>
+<span class="go">                                            citation source dist_comm island  \</span>
+<span class="go">0  International Union for Conservation of Nature...   None      None   None   </span>
+<span class="go">1  International Union for Conservation of Nature...   None      None   None   </span>
+<span class="go">2  International Union for Conservation of Nature...   None      None   None   </span>
+<span class="go">3  International Union for Conservation of Nature...   None      None   None   </span>
+<span class="go">4  International Union for Conservation of Nature...   None      None   None   </span>
 
-<span class="go">  dist_comm     family_nam genus_name  \</span>
-<span class="go">0      None  POMACENTRIDAE  Stegastes   </span>
-<span class="go">1      None  POMACENTRIDAE  Stegastes   </span>
-<span class="go">2      None  POMACENTRIDAE  Stegastes   </span>
-<span class="go">3      None  POMACENTRIDAE    Chromis   </span>
-<span class="go">4      None  POMACENTRIDAE    Chromis   </span>
+<span class="go">  subspecies                        ...                         kingdom_na  \</span>
+<span class="go">0       None                        ...                           ANIMALIA   </span>
+<span class="go">1       None                        ...                           ANIMALIA   </span>
+<span class="go">2       None                        ...                           ANIMALIA   </span>
+<span class="go">3       None                        ...                           ANIMALIA   </span>
+<span class="go">4       None                        ...                           ANIMALIA   </span>
 
-<span class="go">                                            geometry     id_no  ...   \</span>
-<span class="go">0  POLYGON ((-115.6437454219999 29.71392059300007...  183963.0  ...    </span>
-<span class="go">1  POLYGON ((-105.589950704 21.89339825500002, -1...  183963.0  ...    </span>
-<span class="go">2  POLYGON ((-111.159618439 19.01535626700007, -1...  183963.0  ...    </span>
-<span class="go">3  POLYGON ((-80.86500229899997 -0.77894492099994...  183793.0  ...    </span>
-<span class="go">4  POLYGON ((-67.33922225599997 -55.6761029239999...  183793.0  ...    </span>
+<span class="go">  phylum_nam      class_name   order_name     family_nam genus_name  \</span>
+<span class="go">0   CHORDATA  ACTINOPTERYGII  PERCIFORMES  POMACENTRIDAE  Stegastes   </span>
+<span class="go">1   CHORDATA  ACTINOPTERYGII  PERCIFORMES  POMACENTRIDAE  Stegastes   </span>
+<span class="go">2   CHORDATA  ACTINOPTERYGII  PERCIFORMES  POMACENTRIDAE  Stegastes   </span>
+<span class="go">3   CHORDATA  ACTINOPTERYGII  PERCIFORMES  POMACENTRIDAE    Chromis   </span>
+<span class="go">4   CHORDATA  ACTINOPTERYGII  PERCIFORMES  POMACENTRIDAE    Chromis   </span>
 
-<span class="go">  phylum_nam rl_update seasonal source   species_na subpop  subspecies  \</span>
-<span class="go">0   CHORDATA    2012.1        1   None     leucorus   None        None   </span>
-<span class="go">1   CHORDATA    2012.1        1   None     leucorus   None        None   </span>
-<span class="go">2   CHORDATA    2012.1        1   None     leucorus   None        None   </span>
-<span class="go">3   CHORDATA    2012.1        1   None  intercrusma   None        None   </span>
-<span class="go">4   CHORDATA    2012.1        1   None  intercrusma   None        None   </span>
+<span class="go">    species_na category testCol  \</span>
+<span class="go">0     leucorus       VU       1   </span>
+<span class="go">1     leucorus       VU       1   </span>
+<span class="go">2     leucorus       VU       1   </span>
+<span class="go">3  intercrusma       LC       1   </span>
+<span class="go">4  intercrusma       LC       1   </span>
 
-<span class="go">   tax_comm testCol  year  </span>
-<span class="go">0      None       1  2010  </span>
-<span class="go">1      None       1  2010  </span>
-<span class="go">2      None       1  2010  </span>
-<span class="go">3      None       1  2010  </span>
-<span class="go">4      None       1  2010  </span>
+<span class="go">                                            geometry  </span>
+<span class="go">0  POLYGON ((-115.6437454219999 29.71392059300007...  </span>
+<span class="go">1  POLYGON ((-105.589950704 21.89339825500002, -1...  </span>
+<span class="go">2  POLYGON ((-111.159618439 19.01535626700007, -1...  </span>
+<span class="go">3  POLYGON ((-80.86500229899997 -0.77894492099994...  </span>
+<span class="go">4  POLYGON ((-67.33922225599997 -55.6761029239999...  </span>
 
 <span class="go">[5 rows x 25 columns]</span>
 </pre></div>
@@ -513,7 +513,7 @@ that we can insert to our GeoDataFrame:</li>
 
 <span class="go"># Let&#39;s see what we have</span>
 <span class="gp">In [21]: </span><span class="n">poly</span>
-<span class="gh">Out[21]: </span><span class="go">&lt;shapely.geometry.polygon.Polygon at 0x24d770f0&gt;</span>
+<span class="gh">Out[21]: </span><span class="go">&lt;shapely.geometry.polygon.Polygon at 0xf05a160&gt;</span>
 </pre></div>
 </div>
 <p>Okey, so now we have appropriate Polygon -object.</p>
@@ -612,7 +612,7 @@ This function groups data based on values on selected column(s).</p>
 
 <span class="go"># Let&#39;s see what we got</span>
 <span class="gp">In [31]: </span><span class="n">grouped</span>
-<span class="gh">Out[31]: </span><span class="go">&lt;pandas.core.groupby.DataFrameGroupBy object at 0x0000000027C1D048&gt;</span>
+<span class="gh">Out[31]: </span><span class="go">&lt;pandas.core.groupby.DataFrameGroupBy object at 0x000000000BCF4828&gt;</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -626,59 +626,50 @@ This function groups data based on values on selected column(s).</p>
 <span class="go"># Let&#39;s see what is the LAST item that we iterated</span>
 <span class="gp">In [33]: </span><span class="n">individual_fish</span>
 <span class="gh">Out[33]: </span><span class="go"></span>
-<span class="go">                  binomial category  \</span>
-<span class="go">27  Teixeirichthys jordani       LC   </span>
-<span class="go">28  Teixeirichthys jordani       LC   </span>
-<span class="go">29  Teixeirichthys jordani       LC   </span>
-<span class="go">30  Teixeirichthys jordani       LC   </span>
-<span class="go">31  Teixeirichthys jordani       LC   </span>
-<span class="go">32  Teixeirichthys jordani       LC   </span>
-<span class="go">33  Teixeirichthys jordani       LC   </span>
+<span class="go">       id_no                binomial  origin compiler  year  \</span>
+<span class="go">27  154915.0  Teixeirichthys jordani       1     None  2012   </span>
+<span class="go">28  154915.0  Teixeirichthys jordani       1     None  2012   </span>
+<span class="go">29  154915.0  Teixeirichthys jordani       1     None  2012   </span>
+<span class="go">30  154915.0  Teixeirichthys jordani       1     None  2012   </span>
+<span class="go">31  154915.0  Teixeirichthys jordani       1     None  2012   </span>
+<span class="go">32  154915.0  Teixeirichthys jordani       1     None  2012   </span>
+<span class="go">33  154915.0  Teixeirichthys jordani       1     None  2012   </span>
 
-<span class="go">                                             citation      class_name  \</span>
-<span class="go">27  Red List Index (Sampled Approach), Zoological ...  ACTINOPTERYGII   </span>
-<span class="go">28  Red List Index (Sampled Approach), Zoological ...  ACTINOPTERYGII   </span>
-<span class="go">29  Red List Index (Sampled Approach), Zoological ...  ACTINOPTERYGII   </span>
-<span class="go">30  Red List Index (Sampled Approach), Zoological ...  ACTINOPTERYGII   </span>
-<span class="go">31  Red List Index (Sampled Approach), Zoological ...  ACTINOPTERYGII   </span>
-<span class="go">32  Red List Index (Sampled Approach), Zoological ...  ACTINOPTERYGII   </span>
-<span class="go">33  Red List Index (Sampled Approach), Zoological ...  ACTINOPTERYGII   </span>
+<span class="go">                                             citation source dist_comm island  \</span>
+<span class="go">27  Red List Index (Sampled Approach), Zoological ...   None      None   None   </span>
+<span class="go">28  Red List Index (Sampled Approach), Zoological ...   None      None   None   </span>
+<span class="go">29  Red List Index (Sampled Approach), Zoological ...   None      None   None   </span>
+<span class="go">30  Red List Index (Sampled Approach), Zoological ...   None      None   None   </span>
+<span class="go">31  Red List Index (Sampled Approach), Zoological ...   None      None   None   </span>
+<span class="go">32  Red List Index (Sampled Approach), Zoological ...   None      None   None   </span>
+<span class="go">33  Red List Index (Sampled Approach), Zoological ...   None      None   None   </span>
 
-<span class="go">   compiler dist_comm     family_nam      genus_name  \</span>
-<span class="go">27     None      None  POMACENTRIDAE  Teixeirichthys   </span>
-<span class="go">28     None      None  POMACENTRIDAE  Teixeirichthys   </span>
-<span class="go">29     None      None  POMACENTRIDAE  Teixeirichthys   </span>
-<span class="go">30     None      None  POMACENTRIDAE  Teixeirichthys   </span>
-<span class="go">31     None      None  POMACENTRIDAE  Teixeirichthys   </span>
-<span class="go">32     None      None  POMACENTRIDAE  Teixeirichthys   </span>
-<span class="go">33     None      None  POMACENTRIDAE  Teixeirichthys   </span>
+<span class="go">   subspecies   ...    phylum_nam      class_name   order_name     family_nam  \</span>
+<span class="go">27       None   ...      CHORDATA  ACTINOPTERYGII  PERCIFORMES  POMACENTRIDAE   </span>
+<span class="go">28       None   ...      CHORDATA  ACTINOPTERYGII  PERCIFORMES  POMACENTRIDAE   </span>
+<span class="go">29       None   ...      CHORDATA  ACTINOPTERYGII  PERCIFORMES  POMACENTRIDAE   </span>
+<span class="go">30       None   ...      CHORDATA  ACTINOPTERYGII  PERCIFORMES  POMACENTRIDAE   </span>
+<span class="go">31       None   ...      CHORDATA  ACTINOPTERYGII  PERCIFORMES  POMACENTRIDAE   </span>
+<span class="go">32       None   ...      CHORDATA  ACTINOPTERYGII  PERCIFORMES  POMACENTRIDAE   </span>
+<span class="go">33       None   ...      CHORDATA  ACTINOPTERYGII  PERCIFORMES  POMACENTRIDAE   </span>
 
-<span class="go">                                             geometry     id_no   ...     \</span>
-<span class="go">27  POLYGON ((121.6300326400001 33.04248618400004,...  154915.0   ...      </span>
-<span class="go">28  POLYGON ((32.56219482400007 29.97488975500005,...  154915.0   ...      </span>
-<span class="go">29  POLYGON ((130.9052090560001 34.02498196400006,...  154915.0   ...      </span>
-<span class="go">30  POLYGON ((56.32233070000007 -3.707270205999976...  154915.0   ...      </span>
-<span class="go">31  POLYGON ((40.64476131800006 -10.85502363999996...  154915.0   ...      </span>
-<span class="go">32  POLYGON ((48.11258402900006 -9.335103113999935...  154915.0   ...      </span>
-<span class="go">33  POLYGON ((51.75403543100003 -9.21679305899994,...  154915.0   ...      </span>
+<span class="go">        genus_name species_na category testCol  \</span>
+<span class="go">27  Teixeirichthys    jordani       LC       1   </span>
+<span class="go">28  Teixeirichthys    jordani       LC       1   </span>
+<span class="go">29  Teixeirichthys    jordani       LC       1   </span>
+<span class="go">30  Teixeirichthys    jordani       LC       1   </span>
+<span class="go">31  Teixeirichthys    jordani       LC       1   </span>
+<span class="go">32  Teixeirichthys    jordani       LC       1   </span>
+<span class="go">33  Teixeirichthys    jordani       LC       1   </span>
 
-<span class="go">   rl_update seasonal source species_na  subpop subspecies  tax_comm  testCol  \</span>
-<span class="go">27    2012.2        1   None    jordani    None       None      None        1   </span>
-<span class="go">28    2012.2        1   None    jordani    None       None      None        1   </span>
-<span class="go">29    2012.2        1   None    jordani    None       None      None        1   </span>
-<span class="go">30    2012.2        1   None    jordani    None       None      None        1   </span>
-<span class="go">31    2012.2        1   None    jordani    None       None      None        1   </span>
-<span class="go">32    2012.2        1   None    jordani    None       None      None        1   </span>
-<span class="go">33    2012.2        1   None    jordani    None       None      None        1   </span>
-
-<span class="go">    year     area  </span>
-<span class="go">27  2012  38.6712  </span>
-<span class="go">28  2012  37.4457  </span>
-<span class="go">29  2012  16.9395  </span>
-<span class="go">30  2012   10.127  </span>
-<span class="go">31  2012   7.7603  </span>
-<span class="go">32  2012  3.43424  </span>
-<span class="go">33  2012  2.40862  </span>
+<span class="go">                                             geometry     area  </span>
+<span class="go">27  POLYGON ((121.6300326400001 33.04248618400004,...  38.6712  </span>
+<span class="go">28  POLYGON ((32.56219482400007 29.97488975500005,...  37.4457  </span>
+<span class="go">29  POLYGON ((130.9052090560001 34.02498196400006,...  16.9395  </span>
+<span class="go">30  POLYGON ((56.32233070000007 -3.707270205999976...   10.127  </span>
+<span class="go">31  POLYGON ((40.64476131800006 -10.85502363999996...   7.7603  </span>
+<span class="go">32  POLYGON ((48.11258402900006 -9.335103113999935...  3.43424  </span>
+<span class="go">33  POLYGON ((51.75403543100003 -9.21679305899994,...  2.40862  </span>
 
 <span class="go">[7 rows x 26 columns]</span>
 </pre></div>
@@ -746,7 +737,7 @@ handy when dealing with Shapefiles. Doing similar process manually would be real
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, Henrikki Tenkanen.
-      Last updated on Dec 22, 2016.
+      Last updated on Feb 20, 2017.
 
     </p>
   </div>

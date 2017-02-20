@@ -1,5 +1,5 @@
-Overview
-========
+Lesson 6 Overview
+=================
 
 .. figure:: img/arcpy-logo.png
 

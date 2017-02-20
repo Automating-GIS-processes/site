@@ -81,6 +81,37 @@ if "%1" == "html" (
 	echo.Build finished. The HTML pages are in %BUILDDIR%.
 	goto end
 )
+if "%1" == "gh-pages" (
+
+    git checkout gh-pages
+
+    if errorlevel 1 exit /b 1
+    # Continue only if branch switching worked
+    RD /S /Q _sources
+    RD /S /Q _static
+    RD /S /Q _images
+    DEL /Q *.*
+    git checkout master data source make.bat Makefile
+    git reset HEAD
+    make html
+    # Ensure that images are rendered properly by building again
+    make html
+    # Clean the repo
+    DEL make.bat
+    DEL Makefile
+    RD /S /Q data
+    MOVE /Y docs\*.*
+    MOVE /Y docs\_images
+    MOVE /Y docs\_static
+    MOVE /Y docs\_sources
+    RD /S /Q docs
+    RD /S /Q source
+    git add -A
+    git commit -m "Generated gh-pages for `git log master -1 --pretty=short --abbrev-commit`"
+    git push origin gh-pages
+    git checkout master
+    goto end
+)
 
 if "%1" == "dirhtml" (
 	%SPHINXBUILD% -b dirhtml %ALLSPHINXOPTS% %BUILDDIR%/dirhtml
