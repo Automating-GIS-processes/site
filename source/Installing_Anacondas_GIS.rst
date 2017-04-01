@@ -29,20 +29,22 @@ Test that the Anaconda´s package manage called ``conda`` works by `opening a co
 and running command ``conda --version``.
 
 
-Install GIS related packages with conda by running in command prompt following commands (in the same order as they are listed):
+Install GIS related packages with conda (and pip) by running in command prompt following commands (in the same order as they are listed):
 
 .. code::
 
     conda install -y psycopg2 matplotlib bokeh holoviews
     conda install -y -c conda-forge basemap=1.0.8.dev0 --no-deps
-    conda install -y -c ioos geopandas=0.2.1
-    conda install -y -c conda-forge rasterio=1.0a3
-    conda install -y -c ioos iris=1.10.0
-    conda install -y -c ioam geoviews=1.1.0
-    conda install -y -c anaconda flake8=2.5.1
-    conda install -y -c conda-forge seawater
-    conda install -y -c conda-forge gpxpy=1.1.1
-    conda install -y -c ioos gdal=2.1.2
+    conda install -y -c conda-forge pyproj=1.9.5.1
+    conda install -c conda-forge fiona shapely pyproj rtree
+    pip install https://github.com/geopandas/geopandas/archive/master.zip
+    conda install -y -c conda-forge rasterio=1.0a8
+    conda install -y -c conda-forge cartopy=0.15.1
+    conda install -y -c ioam geoviews=1.2.0dev1
+    #conda install -y -c anaconda flake8=2.5.1
+    #conda install -y -c conda-forge seawater
+    #conda install -y -c conda-forge gpxpy=1.1.1
+    #conda install -y -c ioos gdal=2.1.2
 
     # Following one will be installed using pip as we want to install the
     # development version of the folium module with more features
