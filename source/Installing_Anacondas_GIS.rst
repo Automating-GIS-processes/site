@@ -41,15 +41,12 @@ Install GIS related packages with conda (and pip) by running in command prompt f
     conda install -y -c conda-forge rasterio=1.0a8
     conda install -y -c conda-forge cartopy=0.15.1
     conda install -y -c ioam geoviews=1.2.0dev1
-    #conda install -y -c anaconda flake8=2.5.1
-    #conda install -y -c conda-forge seawater
-    #conda install -y -c conda-forge gpxpy=1.1.1
-    #conda install -y -c ioos gdal=2.1.2
-
-    # Following one will be installed using pip as we want to install the
-    # development version of the folium module with more features
+    
+    # Following ones will be installed using pip as we want to install the
+    # development version of the packages with more features
 
     pip install https://github.com/python-visualization/folium/archive/master.zip
+    pip install https://github.com/ResidentMario/geoplot/archive/master.zip
 
 
 Let's also upgrade few packages:
