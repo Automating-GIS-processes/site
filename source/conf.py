@@ -41,6 +41,7 @@ import sys
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
+
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.doctest',
@@ -57,7 +58,17 @@ extensions = [
     'IPython.sphinxext.ipython_directive',
 
     # Enable Google Analytics ( requires: https://pypi.python.org/pypi/sphinxcontrib-googleanalytics )
+    # Install with: pip install sphinxcontrib-googleanalytics
+    
     'sphinxcontrib.googleanalytics',
+    
+    # Enable Sphinx Slides ( reqiores: https://pypi.python.org/pypi/sphinxcontrib-slide )
+    # Install with: pip install sphinxcontrib-slide
+    # Requires few changes in the source code:
+        #   Change 1, line 11: import urllib2 ==> import urllib as urllib2
+        #   Change 2, line 37: except Exception, e: ==> except Exception as e: 
+        
+    'sphinxcontrib.slide',
 ]
 
 # Google Analytics ID to enable tracking of site traffic
