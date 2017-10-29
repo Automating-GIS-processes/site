@@ -16,8 +16,8 @@ Course format
 -------------
 
 The majority of this course will be spent in front of a computer learning to program in the Python language and working on exercises.
-During Teaching Period I, the Automating GIS processes and `Introduction to Quantitative Geology <https://github.com/Intro-Quantitative-Geology/Course-information>`_ courses met together and focused on
-`learning to program in Python <https://github.com/Python-for-geo-people/Course-information>`_. Previously, both these courses lacked sufficient time for students to properly learn the basic concepts of programming in Python.
+During Teaching Period I, the Automating GIS-processes and `Introduction to Quantitative Geology <https://github.com/Intro-Quantitative-Geology/Course-information>`_ courses met together and focused on
+`learning to program in Python <https://geo-python.github.io>`_. Previously, both these courses lacked sufficient time for students to properly learn the basic concepts of programming in Python.
 
 The computer exercises will focus on developing basic programming skills using the Python language and applying those skills to various GIS related problems.
 Typical exercises will involve a brief introduction followed by topical computer-based tasks. At the end of the exercises, you may be asked to submit answers
@@ -43,17 +43,17 @@ on the laboratory exercises, however the laboratory summary write-ups that you s
 
 Course topics by week
 ---------------------
-See earlier materials from Period I `here <https://github.com/Python-for-geo-people/Course-information>`_.
+See earlier materials from Period I `here <https://geo-python.github.io>`_.
 
 The materials are divided into weekly sections that are published at these pages every Monday morning. Lessons are held with following schedule:
 
- * 31.10 - Lesson 1: GIS in Python; Spatial Data Model, Geometric Objects, Shapely
- * 07.11 - Lesson 2: Working with (Geo)DataFrames
- * 14.11 - Lesson 3: Geocoding and spatial queries
- * 21.11 - Lesson 4: Geometric operations, reclassifying data
- * 28.11 - Lesson 5: Visualization, static and interactive maps
- * 08.12 - Lesson 6: Using ArcGIS through Python (the arcpy-module)
- * 12.12 - Lesson 7: Raster data processing in Python
+ * 30.10 - Lesson 1: GIS in Python; Spatial Data Model, Geometric Objects, Shapely
+ * 06.11 - Lesson 2: Working with (Geo)DataFrames
+ * 13.11 - Lesson 3: Geocoding and spatial queries
+ * 20.11 - Lesson 4: Geometric operations, reclassifying data
+ * 27.11 - Lesson 5: Visualization, static and interactive maps
+ * 07.12 - Lesson 6: Python programming in Quantum GIS
+ * 11.12 - Lesson 7: Raster data processing in Python
 
 Contents
 --------
@@ -63,104 +63,19 @@ Contents
    :maxdepth: 2
    :caption: Course information
 
-   course-info
-   Installing_Anacondas_GIS
-   License-terms
+   course-info/course-info
+   course-info/Installing_Anacondas_GIS
+   course-info/License-terms
 
 .. toctree::
    :maxdepth: 2
    :caption: Lesson 1
 
-   Lesson1-Intro-Python-GIS
-   Lesson1-Geometric-Objects
-   Exercise-1
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Lesson 2
-
-   Lesson2-overview
-   Lesson2-download-data
-   Lesson2-overview-pandas-geopandas
-   Lesson2-pandas-intro
-   Lesson2-geopandas-basics
-   Exercise-2
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Lesson 3
-
-   Lesson3-overview
-   Lesson3-geocoding
-   Lesson3-table-join
-   Lesson3-projections
-   Lesson3-point-in-polygon
-   Lesson3-spatial-join
-   Exercise-3
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Lesson 4
-
-   Lesson4-overview
-   Lesson4-download-data
-   Lesson4-geometric-operations
-   Lesson4-reclassify
-   Lesson4-nearest-neighbour
-   Exercise-4
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Lesson 5
-
-   Lesson5-overview
-   Lesson5-download-data
-   Lesson5-static-maps
-   Lesson5-interactive-map-bokeh
-   Lesson5-share-on-github
-   Lesson5-interactive-map-folium
-   Lesson5-World-3D
-   Exercise-5
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Lesson 6
-
-   Lesson6-overview
-   Lesson6-arcpy
-   Lesson6-toolbox
-   Lesson6-arcpy-script
-   Lesson6-run-the-tool
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Lesson 7
-
-   Lesson7-overview
-   Lesson7-download
-   Lesson7-read-raster
-   Lesson7-read-raster-array
-   Lesson7-gdal-utilities
-   Exercise-7
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Lesson 8
-
-   Lesson8-network-analysis
+   Lessons/L1/Intro-Python-GIS
+   Lessons/L1/Geometric-Objects
+   Lessons/L1/Ex1
 
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Final Assignment
-
-   Final-assignment
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Map Challenge 2016
-
-   map-challenge
 
 
 
