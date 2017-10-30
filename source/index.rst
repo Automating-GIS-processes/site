@@ -56,13 +56,42 @@ See earlier materials from Period I `here <https://geo-python.github.io>`_.
 
 The materials are divided into weekly sections that are published at these pages every Monday morning. Lessons are held with following schedule:
 
- * 30.10 - Lesson 1: GIS in Python; Spatial Data Model, Geometric Objects, Shapely
- * 06.11 - Lesson 2: Working with (Geo)DataFrames
- * 13.11 - Lesson 3: Geocoding and spatial queries
- * 20.11 - Lesson 4: Geometric operations, reclassifying data
- * 27.11 - Lesson 5: Visualization, static and interactive maps
- * 07.12 - Lesson 6: Python programming in Quantum GIS
- * 11.12 - Lesson 7: Network analysis and routing in Python
++----------------+---------------------------------+
+| Time           | Theme                           |
++================+=================================+
+| **Class 1**    | GIS in Python;                  |
+|   30.10.2017   | Spatial data model;             |
+|                | Geometric Objects; Shapely      |
+|                |                                 |
++----------------+---------------------------------+
+| **Class 2**    | Working with GeoDataFrames      |
+|  6.11.2017     |                                 |
+|                |                                 |
+|                |                                 |
++----------------+---------------------------------+
+| **Class 3**    | Geocoding and making spatial    |
+|  13.11.2017    | queries                         |
+|                |                                 |
+|                |                                 |
++----------------+---------------------------------+
+| **Class 4**    | Geometric operations;           |
+|  20.11.2017    | Reclassifying data with Pysal   |
+|                |                                 |
++----------------+---------------------------------+
+| **Class 5**    | Visualization, making static    |
+|  27.11.2017    | and interactive maps            |
+|                |                                 |
++----------------+---------------------------------+
+| **Class 6**    | Using Python programming in     |
+|  7.12.2017     | Quantum GIS                     |
+|                |                                 |
++----------------+---------------------------------+
+| **Class 7**    | Network analysis and routing    |
+|  11.12.2017    | in Python (transport modelling) |
+|                |                                 |
++----------------+---------------------------------+
+
+|
 
 Contents
 --------
