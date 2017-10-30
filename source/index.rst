@@ -12,16 +12,6 @@ how to solve common GIS-related problems and tasks using Python tools. In the le
 we assume that you know the basics of Python programming. If Python is not familiar to you, we recommend to start with our earlier course that focuses on learning the basics of Python
 from `geo-python.github.io <https://geo-python.github.io>`_.
 
-Earlier versions
-~~~~~~~~~~~~~~~~
-
-Older course materials are availabel at:
-
- - `2016 <https://automating-gis-processes.github.io/2016/>`__
-
-Note, that the contents of the course are updated for each year. Hence, the older course materials may not be used, and they
-might be outdated.
-
 Course format
 -------------
 
@@ -33,6 +23,15 @@ The computer exercises will focus on developing basic programming skills using t
 Typical exercises will involve a brief introduction followed by topical computer-based tasks. At the end of the exercises, you may be asked to submit answers
 to relevant questions, some related plots, and/or Python codes you have written or used. You are encouraged to discuss and work together with other students
 on the laboratory exercises, however the laboratory summary write-ups that you submit must be completed individually and must clearly reflect your own work.
+
+.. admonition:: Earlier versions
+
+    Older course materials are available at:
+
+        - `2016 <https://automating-gis-processes.github.io/2016/>`__
+
+    Note, that the contents of the course are updated for each year. Hence, the older course materials may not be used, and they
+    might be outdated.
 
 .. admonition:: Open Access!
 
