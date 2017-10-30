@@ -75,7 +75,7 @@ Contents
    lessons/L1/overview
    lessons/L1/lecture
    lessons/L1/Geometric-Objects
-   lessons/L1/Ex1
+   lessons/L1/ex-1
    lessons/L1/exercise-1-hints
 
 
