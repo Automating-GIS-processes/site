@@ -12,7 +12,7 @@ it makes life much easier when installing new tools on your Python to play with.
 Install Python + GIS on Windows
 -------------------------------
 
-Following steps have been tested to work on Windows 7 and 10 with Anaconda3 version 4.2.0 (19th November 2016).
+Following steps have been tested to work on Windows 7 and 10 with Anaconda3 64 bit, using conda v4.3.29 (30th October 2017).
 
 `Download Anaconda installer (64 bit) <https://www.continuum.io/downloads>`_ for Windows.
 
@@ -33,27 +33,79 @@ Install GIS related packages with conda (and pip) by running in command prompt f
 
 .. code::
 
-    conda install -y psycopg2 matplotlib bokeh holoviews
-    conda install -y -c conda-forge basemap=1.0.8.dev0 --no-deps
-    conda install -y -c conda-forge pyproj=1.9.5.1
-    conda install -c conda-forge fiona shapely pyproj rtree
-    pip install https://github.com/geopandas/geopandas/archive/master.zip
-    conda install -y -c conda-forge rasterio=1.0a8
-    conda install -y -c conda-forge cartopy=0.15.1
-    conda install -y -c ioam geoviews=1.2.0dev1
-    
-    # Following ones will be installed using pip as we want to install the
-    # development version of the packages with more features
+    # Install numpy (v 1.13.1)
+    conda install numpy
 
-    pip install https://github.com/python-visualization/folium/archive/master.zip
-    pip install https://github.com/ResidentMario/geoplot/archive/master.zip
+    # Install pandas (v 0.20.3) --> bundled with python-dateutil (v 2.6.1) and pytz (v 2017.2)
+    conda install pandas
+
+    # Install scipy (v 0.19.1)
+    conda install scipy
+
+    # Install matplotlib (v 2.0.2) --> bundled with cycler, freetype, icu, jpeg, libpng, pyqt, qt, sip, sqlite, tornado, zlib
+    conda install matplotlib
+
+    # Install scikit-learn (v 0.19.0)
+    conda install scikit-learn
+
+    # Install networkx (v 1.11) --> bundled with decorator (v 4.1.2)
+    conda install networkx
+
+    # Install bokeh (v 0.12.9) --> bundled with jinja2, markupsafe, pyyaml, yaml -packages
+    conda install bokeh
+
+    # Install statsmodels (v 0.8.0) --> bundled with patsy (0.4.1)
+    conda install statsmodels
+
+    # Install PySpark (v 2.2.0) --> bundled with py4j (v 0.10.6)
+    conda install pyspark
+
+    # Install Geopandas (v 0.3.0) --> bundled with click, click-plugins, cligj, curl, descartes, expat, fiona, freexl, gdal, geos, hdf4, hdf5, kealib, krb5, libiconv, libnetcdf, libpq, libspatialindex, libspatialite, libtiff, libxml2, munch, openjpeg, pcre, proj4, psycopg2, pyproj, pysal, rtree, shapely, sqlalchemy, xerces-c
+    conda install -c conda-forge geopandas
+
+    # Install cartopy (v 0.15.1) --> bundled with libxslt, lxml, olefile, owslib, pillow, pyepsg, pyshp
+    conda install -c conda-forge cartopy
+
+    # Install geoplot (v 0.0.4) using pip (on Linux: be sure to use pip that comes with conda distribution!) --> bundled with seaborn
+    pip install geoplot
+
+    # Install osmnx (v 0.5.4) --> bundled with altair, bleach, branca, colorama, entrypoints, folium, geopy, html5lib, ipykernel, ipython, ipython_genutils, jedi, jsonschema, jupyter_client, jupyter_core, mistune, nbconvert, nbformat, notebook, pandoc, pandocfilters, pickleshare, prompt_toolkit, pygments, pyzmq, simplegeneric, testpath, traitlets, vega, vincent, wcwidth, webencodings
+    conda install -c conda-forge osmnx
+
+    # Install Folium (v 0.5.0) --> bundled with altair, vega
+    conda install -c conda-forge folium
+
+    # Install Dash using Pip
+    pip install dash==0.19.0  # The core dash backend
+    pip install dash-renderer==0.11.1  # The dash front-end
+    pip install dash-html-components==0.8.0  # HTML components
+    pip install dash-core-components==0.14.0  # Supercharged components
+    pip install plotly --upgrade  # Plotly graphing library
+
+Test that everything works
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can test that the installations have worked by running following commands in your IPython console (comes with mini-conda).
+
+.. code:: python
+
+     import numpy as np
+     import pandas as pd
+     import geopandas as gpd
+     import scipy
+     import shapely
+     import matplotlib.pyplot as plt
+     import pysal
+     import bokeh
+     import cartopy
+     import statsmodels
+     import sklearn
+     import geoplot
+     import osmnx
+     import folium
 
 
-Let's also upgrade few packages:
-
-.. code::
-
-    conda upgrade spyder pandas scipy
+If you don't receive any errors, everything should be working!
 
 Install Python + GIS on Linux / Mac
 -----------------------------------

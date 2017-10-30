@@ -71,9 +71,12 @@ Contents
    :maxdepth: 2
    :caption: Lesson 1
 
-   Lessons/L1/Intro-Python-GIS
-   Lessons/L1/Geometric-Objects
-   Lessons/L1/Ex1
+   lessons/L1/Intro-Python-GIS
+   lessons/L1/overview
+   lessons/L1/lecture
+   lessons/L1/Geometric-Objects
+   lessons/L1/Ex1
+   lessons/L1/exercise-1-hints
 
 
 
