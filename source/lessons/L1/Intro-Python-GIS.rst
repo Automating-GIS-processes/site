@@ -154,7 +154,7 @@ the module that you need:
       Maps for the web.
    -  `Geoplot <https://github.com/ResidentMario/geoplot>`__ --> High-level geospatial data visualization library for Python.
    - `Dash <https://plot.ly/products/dash/>`__ --> Dash is a Python framework for building analytical web applications.
-    - `OSMnx <https://github.com/gboeing/osmnx>`__ --> Python for street networks. Retrieve, construct, analyze, and visualize street networks from OpenStreetMap
+   - `OSMnx <https://github.com/gboeing/osmnx>`__ --> Python for street networks. Retrieve, construct, analyze, and visualize street networks from OpenStreetMap
    -  `Networkx <https://networkx.github.io/documentation/networkx-1.10/overview.html>`__
       --> Network analysis and routing in Python (e.g. Dijkstra and A\*
       -algorithms), see `this
