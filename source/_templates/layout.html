@@ -1,11 +1,7 @@
-{% extends '!layout.html' %}
+{% extends "!layout.html" %}
 
-{% block footer %}
-    <li><a href="http://project.invalid/">Project Homepage</a> &raquo;</li>
-
-    <div class="footer">
-        <img src="../img/GPLv3_Logo.svg">
-    </div>
+{% block extrahead %}
+    <link href="{{ pathto("_static/geo-python.css", True) }}" rel="stylesheet" type="text/css">
     {{ super() }}
-
 {% endblock %}
+
