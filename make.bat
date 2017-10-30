@@ -82,35 +82,62 @@ if "%1" == "html" (
 	goto end
 )
 if "%1" == "gh-pages" (
+    SETLOCAL ENABLEDELAYEDEXPANSION
 
-    git checkout gh-pages
+    :: Update remote refs
+    git remote update
 
-    if errorlevel 1 exit /b 1
-    # Continue only if branch switching worked
-    RD /S /Q _sources
-    RD /S /Q _static
-    RD /S /Q _images
-    DEL /Q *.*
-    git checkout master data source make.bat Makefile
-    git reset HEAD
-    make html
-    # Ensure that images are rendered properly by building again
-    make html
-    # Clean the repo
-    DEL make.bat
-    DEL Makefile
-    RD /S /Q data
-    MOVE /Y docs\*.*
-    MOVE /Y docs\_images
-    MOVE /Y docs\_static
-    MOVE /Y docs\_sources
-    RD /S /Q docs
-    RD /S /Q source
-    git add -A
-    git commit -m "Generated gh-pages for `git log master -1 --pretty=short --abbrev-commit`"
-    git push origin gh-pages
-    git checkout master
-    goto end
+    :: Check if there are incoming changes
+    for /f "tokens=*" %%a in ('git status -uno ^| find /I "git pull"') do set _CmdResult=%%a
+
+    :: If command output is empty, we can start building the pages
+    if "!_CmdResult!"=="" (
+
+        echo Building GitHub Pages..
+
+        git checkout gh-pages
+
+        :: Continue only if branch switching worked
+        if errorlevel 1 exit /b 1
+
+        :: Pull possible changes
+        git pull origin gh-pages
+
+        :: Make a clean branch
+        DEL /Q *.*
+        FOR /D %%i in (*.*) DO @RMDIR /S /Q "%%i"
+
+        :: Checkout necessary files to build the pages
+        git checkout master source data img make.bat
+        git reset HEAD
+
+        :: Build pages
+        make html
+        :: Ensure that images are rendered properly by building again
+        make html
+
+        :: Copy everything from docs folder to the root
+        XCOPY /E /V docs
+
+        :: Clean the repo from unnecessary files
+        DEL make.bat
+        DEL Makefile
+        RD /S /Q docs
+        RD /S /Q source
+
+        :: Commit and push changes
+        git add -A
+        ::for /f "tokens=*" %%a in ('git log master -1 -s --abbrev-commit') do set _PrettyResult=%%a
+        ::git commit -m "%_PrettyResult%"
+        git commit -m "Auto-generated"
+        git push origin gh-pages
+
+        :: Checkout to original master
+        git checkout master
+        goto end
+        ) else (
+            echo There are incoming changes in the master/origin. Pull and merge changes.
+        )
 )
 
 if "%1" == "dirhtml" (
