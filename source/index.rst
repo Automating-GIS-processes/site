@@ -53,7 +53,7 @@ The materials are divided into weekly sections that are published at these pages
  * 20.11 - Lesson 4: Geometric operations, reclassifying data
  * 27.11 - Lesson 5: Visualization, static and interactive maps
  * 07.12 - Lesson 6: Python programming in Quantum GIS
- * 11.12 - Lesson 7: Raster data processing in Python
+ * 11.12 - Lesson 7: Network analysis and routing in Python
 
 Contents
 --------
