@@ -1,5 +1,5 @@
 
-.. figure:: img/Some_Global_text.png
+.. figure:: img/AutoGIS_banner_2017.jpg
 
 Welcome to Automating GIS-processes 2017!
 =========================================
