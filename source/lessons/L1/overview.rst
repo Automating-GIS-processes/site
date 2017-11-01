@@ -18,8 +18,10 @@ can be manipulated in pure Python.
 Learning goals
 --------------
 
-After this weeks lesson your should be able to:
+After this week you should:
 
-  - Explain how functions are used and their benefits
-  - Create your own functions to calculate an output value based on an input value
-  - Save functions to a script file for future use
+  - have an idea of what kind of tools are available for doing GIS in Python
+  - know how to install Python packages using conda
+  - know what kind of geometric objects are available
+  - know how to create different kind of geometries using Shapely
+  - know how to read coordinates from a file and create Points based on those
