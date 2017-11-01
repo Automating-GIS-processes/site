@@ -108,7 +108,7 @@ if "%1" == "gh-pages" (
         FOR /D %%i in (*.*) DO @RMDIR /S /Q "%%i"
 
         :: Checkout necessary files to build the pages
-        git checkout master source data img make.bat
+        git checkout master source data img make.bat .gitignore
         git reset HEAD
 
         :: Build pages
