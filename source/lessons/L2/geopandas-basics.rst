@@ -62,57 +62,31 @@ Okey so from the above we can see that our ``data`` -variable is a
 spatial data within pandas (hence the name geopandas). GeoDataFrame have
 some special features and functions that are useful in GIS.
 
--  Let's take a look at our data and print the first 5 rows using the
-   ``head()`` -function prints the first 5 rows by default
+- Let's take a look at our data and print the first 5 rows using the
+``head()`` -function prints the first 5 rows by default
 
 .. ipython:: python
 
     data.head()
 
--  Let's also take a look how our data looks like on a map. If you just
-   want to explore your data on a map, you can use ``.plot()`` -function
-   in geopandas that creates a simple map out of the data (uses
-   matplotlib as a backend):
+- Let's also take a look how our data looks like on a map. If you just
+want to explore your data on a map, you can use ``.plot()`` -function
+in geopandas that creates a simple map out of the data (uses
+matplotlib as a backend):
 
 .. ipython:: python
 
    @savefig damselfish.png width=5in
    data.plot();
 
-Coordinate reference system (CRS)
----------------------------------
-
-GeoDataFrame that is read from a Shapefile contains *always* (well not
-always but should) information about the coordinate system in which the
-data is projected.
-
--  We can see the current coordinate reference system from ``.crs``
-   attribute:
-
-.. ipython:: python
-
-    data.crs
-
-Okey, so from this we can see that the data is something called
-**epsg:4326**. The EPSG number (*"European Petroleum Survey Group"*) is
-a code that tells about the coordinate system of the dataset. "`EPSG
-Geodetic Parameter Dataset <http://www.epsg.org/>`__ is a collection of
-definitions of coordinate reference systems and coordinate
-transformations which may be global, regional, national or local in
-application". EPSG-number 4326 that we have here belongs to the WGS84
-coordinate system (i.e. coordinates are in decimal degrees (lat, lon)).
-You can check easily different epsg-codes from `this
-website <http://spatialreference.org/ref/epsg/>`__.
-
 Writing a Shapefile
 -------------------
 
 Writing a new Shapefile is also something that is needed frequently.
 
--  Let's select 50 first rows of the input data and write those into a
-   new Shapefile by first selecting the data using index slicing and
-   then write the selection into a Shapefile with ``gpd.to_file()``
-   -function:
+- Let's select 50 first rows of the input data and write those into a
+new Shapefile by first selecting the data using index slicing and
+then write the selection into a Shapefile with ``gpd.to_file()`` -function:
 
 .. code:: python
 
@@ -153,8 +127,8 @@ earlier.
     # Make a selection that contains only the first five rows
     selection = data[0:5]
 
--  We can iterate over the selected rows using a specific
-   ``.iterrows()`` -function in (geo)pandas:
+We can iterate over the selected rows using a specific
+``.iterrows()`` -function in (geo)pandas and print the area for each polygon:
 
 .. ipython:: python
 
@@ -164,38 +138,24 @@ earlier.
         # Print information for the user
         print("Polygon area at index {0} is: {1:.3f}".format(index, poly_area))
 
--  Let's create a new column into our GeoDataFrame where we calculate
-   and store the areas individual polygons:
+Hence, as you might guess from here, all the functionalities of **Pandas** are available directly in
+Geopandas without the need to call pandas separately because Geopandas is an **extension** for Pandas.
+
+- Let's next create a new column into our GeoDataFrame where we calculate
+and store the areas individual polygons. Calculating the areas of polygons is really easy in geopandas by using ``GeoDataFrame.area`` attribute:
 
 .. ipython:: python
 
-    # Empty column for area
-    data['area'] = None
+    data['area'] = data.area
 
--  Let's iterate over the rows and calculate the areas
-
-.. code:: python
-
-    # Iterate rows one at the time
-    for index, row in data.iterrows():
-        # Update the value in 'area' column with area information at index
-        data.loc[index, 'area'] = row['geometry'].area
-
-.. ipython:: python
-   :suppress:
-
-    # THIS CODE RUNS IN BACKGROUND AND IS HIDDEN
-    for index, row in data.iterrows():
-        data.loc[index, 'area'] = row['geometry'].area
-
--  Let's see the first 2 rows of our 'area' column
+Let's see the first 2 rows of our 'area' column.
 
 .. ipython:: python
 
     data['area'].head(2)
 
--  Let's check what is the min and the max of those areas using
-   familiar functions from our previous numpy lessions
+Okey so we can see that the area of our first polygon seems to be X and XX for the second polygon.
+Let's check what is the min and the max of those areas using familiar functions from our previous numpy lessions.
 
 .. ipython:: python
 
@@ -217,8 +177,7 @@ geometric objects into the GeoDataFrame. This is useful as it makes it
 easy to convert e.g. a text file that contains coordinates into a
 Shapefile.
 
-
--  Let's create an empty ``GeoDataFrame``.
+Let's create an empty ``GeoDataFrame``.
 
 .. code:: python
 
@@ -250,8 +209,7 @@ Shapefile.
 
 The GeoDataFrame is empty since we haven't placed any data inside.
 
--  Let's create a new column called ``geometry`` that will contain our
-   Shapely objects:
+Let's create a new column called ``geometry`` that will contain our Shapely objects:
 
 .. ipython:: python
 
@@ -261,12 +219,10 @@ The GeoDataFrame is empty since we haven't placed any data inside.
     # Let's see what's inside
     newdata
 
-
 Now we have a geometry column in our GeoDataFrame but we don't have any
 data yet.
 
--  Let's create a Shapely Polygon repsenting the Helsinki Senate square
-   that we can insert to our GeoDataFrame:
+Let's create a Shapely Polygon repsenting the Helsinki Senate square that we can insert to our GeoDataFrame:
 
 .. ipython:: python
 
@@ -281,8 +237,7 @@ data yet.
 
 Okey, so now we have appropriate Polygon -object.
 
--  Let's insert the polygon into our 'geometry' column in our
-   GeoDataFrame:
+Let's insert the polygon into our 'geometry' column in our GeoDataFrame:
 
 .. ipython:: python
 
@@ -295,8 +250,7 @@ Okey, so now we have appropriate Polygon -object.
 Now we have a GeoDataFrame with Polygon that we can export to a
 Shapefile.
 
--  Let's add another column to our GeoDataFrame called ``Location`` with
-   text *Senaatintori*.
+Let's add another column to our GeoDataFrame called ``Location`` with text *Senaatintori*.
 
 .. ipython:: python
 
@@ -309,10 +263,10 @@ Shapefile.
 Okey, now we have additional information that is useful to be able to
 recognice what the feature represents.
 
-Before exporting the data it is useful to **determine the spatial
-reference system for the GeoDataFrame.**
+Before exporting the data it is useful to **determine the coordinate
+reference system (projection) for the GeoDataFrame.**
 
-As was shown earlier, GeoDataFrame has a property called *.crs* that
+GeoDataFrame has a property called *.crs* that (more about projection on next tutorial)
 shows the coordinate system of the data which is empty (None) in our
 case since we are creating the data from the scratch:
 
@@ -357,14 +311,12 @@ those automatically.
 **Task:** check the output Shapefile in QGIS and make sure that the
 attribute table seems correct.
 
-Pro -tips (optional but recommended)
-------------------------------------
-
-Grouping data
-~~~~~~~~~~~~~
+Practical example: Save multiple Shapefiles
+-------------------------------------------
 
 One really useful function that can be used in Pandas/Geopandas is `.groupby() <http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.groupby.html>`_.
-This function groups data based on values on selected column(s).
+We saw and `used this function already in Lesson 5 of the Geo-Python course <https://geo-python.github.io/2017/lessons/L6/pandas-analysis.html?highlight=group#aggregating-data-in-pandas-by-grouping>`_.
+Group by function is useful to group data based on values on selected column(s).
 
 - Let's group individual fishes in ``DAMSELFISH_distribution.shp`` and export the species to individual Shapefiles.
 
@@ -402,7 +354,8 @@ original data -GeoDataFrame.
     print(key)
 
 As can be seen from the example above, each set of data are now grouped into separate GeoDataFrames that we can export into Shapefiles using the variable ``key``
-for creating the output filepath names. Let's now export those species into individual Shapefiles.
+for creating the output filepath names. Here we use a specific string formatting method to produce the output filename using ``% operator`` (`read more here <https://www.learnpython.org/en/String_Formatting>`__).
+Let's now export those species into individual Shapefiles.
 
 .. code:: python
 

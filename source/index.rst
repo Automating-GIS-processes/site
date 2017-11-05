@@ -121,6 +121,7 @@ Contents
    lessons/L2/lecture
    lessons/L2/geopandas-basics
    lessons/L2/projections
+   lessons/L2/using-functions
    lessons/L2/ex-2
    lessons/L2/exercise-2-hints
 

@@ -1,14 +1,16 @@
 Map projections
 ===============
 
-A map projection (or coordinate reference system, CRS) is a systematic transformation of the latitudes and
-longitudes into a plain surface. As map projections of gis-layers are
-fairly often defined differently (i.e. they do not match), it is a
+Coordinate reference systems (CRS) are important because the geometric shapes in a GeoDataFrame are simply a
+collection of coordinates in an arbitrary space. A CRS tells Python how those coordinates related to places on
+the Earth. A map projection (or a projected coordinate system) is a systematic transformation of the latitudes and
+longitudes into a plain surface where units are quite commonly represented as meters (instead of decimal degrees).
+
+As map projections of gis-layers are fairly often defined differently (i.e. they do not match), it is a
 common procedure to redefine the map projections to be identical in both
 layers. It is important that the layers have the same projection as it
 makes it possible to analyze the spatial relationships between layer,
-such as conduct the Point in Polygon spatial query (which we will try
-next).
+such as conduct the Point in Polygon spatial query.
 
 Luckily, defining and changing projections is easy in Geopandas. In this tutorial we will see how to retrieve the
 coordinate reference system information from the data, and how to change it. We will re-project a data file from
@@ -38,18 +40,19 @@ that contains a Shapefile with following files:
    Europe_borders.cpg  Europe_borders.prj  Europe_borders.sbx  Europe_borders.shx
    Europe_borders.dbf  Europe_borders.sbn  Europe_borders.shp
 
-Checking the coordinate reference system of data
-------------------------------------------------
+Coordinate reference system (CRS)
+---------------------------------
 
-Coordinate reference systems (CRS) are important because the geometric shapes in a GeoDataFrame are simply a collection of coordinates
-in an arbitrary space. A CRS tells Python how those coordinates related to places on the Earth.
+GeoDataFrame that is read from a Shapefile contains *always* (well not
+always but should) information about the coordinate system in which the
+data is projected.
 
 Let's start by reading the data from the ``Europe_borders.shp`` file.
 
 .. ipython:: python
 
     import geopandas as gpd
-    
+
     # Filepath to the Europe borders Shapefile
     fp = "/home/geo/Europe_borders.shp"
 
@@ -62,21 +65,35 @@ Let's start by reading the data from the ``Europe_borders.shp`` file.
     # Read data
     data = gpd.read_file(fp)
 
-Let's check what is the current CRS of our layer.
+We can see the current coordinate reference system from ``.crs``
+attribute:
 
 .. ipython:: python
 
     data.crs
 
-Okey, so it is WGS84 (i.e. EPSG: 4326).
+Okey, so from this disctionary we can see that the data is something called
+**epsg:4326**. The EPSG number (*"European Petroleum Survey Group"*) is
+a code that tells about the coordinate system of the dataset. "`EPSG
+Geodetic Parameter Dataset <http://www.epsg.org/>`__ is a collection of
+definitions of coordinate reference systems and coordinate
+transformations which may be global, regional, national or local in
+application". EPSG-number 4326 that we have here belongs to the WGS84
+coordinate system (i.e. coordinates are in decimal degrees (lat, lon)).
 
-Let's also check the values in our ``geometry`` column
+You can find a lot of information about different available coordinate reference systems from:
+
+  - `www.spatialreference.org <http://spatialreference.org/>`__
+  - `www.proj4.org <http://proj4.org/projections/index.html>`__
+  - `www.mapref.org <http://mapref.org/CollectionofCRSinEurope.html>`__
+
+Let's also check the values in our ``geometry`` column.
 
 .. ipython:: python
 
     data['geometry'].head()
 
-Okey, so the coordinate values indeed look like lat-lon values.
+Okey, so the coordinate values of the Polygons indeed look like lat-lon values.
 
 Let's convert those geometries into Lambert Azimuthal Equal Area projection (`EPSG: 3035 <http://spatialreference.org/ref/epsg/etrs89-etrs-laea/>`__).
 Changing the projection is really easy to `do in Geopandas <http://geopandas.org/projections.html#re-projecting>`__
@@ -90,22 +107,23 @@ in this case, and a ``epgs`` value of the projection that you want to use.
     data_proj = data.copy()
     
     # Reproject the geometries by replacing the values with projected ones
-    data_proj['geometry'] = data_proj['geometry'].to_crs(epsg=3035)
+    data_proj = data_proj.to_crs(epsg=3035)
 
-Let's see how they look now.
+Let's see how the coordinates look now.
 
 .. ipython:: python
 
     data_proj['geometry'].head()
 
 And here we go, the numbers have changed! Now we have successfully
-changed the projection of our layer into a new one.
+changed the projection of our layer into a new one, i.e. to ETRS-LAEA projection.
 
 .. note::
 
    There is also possibility to pass the projection information as proj4 strings or dictionaries, see more `here <http://geopandas.org/projections.html#coordinate-reference-systems>`__
 
-Let's still compare the layers visually
+To really understand what is going on, it is good to explore our data visually. Hence, let's compare the datasets by making
+maps out of them.
 
 .. code:: python
 
@@ -144,9 +162,9 @@ Let's still compare the layers visually
        plt.tight_layout();
 
 Indeed, they look quite different and our re-projected one looks much better
-in Europe as the areas in the north especially are more realistic and not so stretced as in WGS84.
+in Europe as the areas especially in the north are more realistic and not so stretched as in WGS84.
 
-Now we still need to change the crs of our GeoDataFrame into EPSG
+Next, we still need to change the crs of our GeoDataFrame into EPSG
 3035 as now we only modified the values of the ``geometry`` column.
 We can take use of fiona's ``from_epsg`` -function.
 
@@ -160,24 +178,7 @@ We can take use of fiona's ``from_epsg`` -function.
     # Let's see what we have
     data_proj.crs
 
-.. note::
-
-   The above works for most EPSG codes but as ETRS GK-25
-   projection is a rather rare one, we still need to make sure
-   that .prj file is having correct coordinate system information. We do that by
-   passing a proj4 dictionary (below) into it (otherwise the ``.prj`` file of the Shapefile
-   might be empty):
-
-.. ipython:: python
-
-    # Pass the coordinate information
-    #data_proj.crs = {'y_0': 0, 'no_defs': True, 'x_0': 25500000, 'k': 1, 'lat_0': 0, 'units': 'm', 'lon_0': 25, 'ellps': 'GRS80', 'proj': 'tmerc'}
-
-    # Check that it changed
-    #data_proj.crs
-
-Finally, let's save our projected layer into a Shapefile so that we
-can use it later.
+Finally, let's save our projected layer into a Shapefile so that we can use it later.
 
 .. code:: python
 
@@ -186,4 +187,17 @@ can use it later.
     
     # Save to disk
     data_proj.to_file(outfp)
+
+.. note::
+
+   On Windows, the prj -file might NOT update with the new CRS value when using the ``from_epsg()`` -function. If this happens
+   it is possible to fix the prj by passing the coordinate reference information as proj4 text, like following.
+
+   .. ipython:: python
+
+      data_proj.crs = '+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs'
+
+   You can find ``proj4`` text versions for different projection from `spatialreference.org <http://spatialreference.org>`__.
+   Each page showing spatial reference information has links for different formats for the CRS. Click a link that says ``Proj4`` and
+   you will get the correct proj4 text presentation for your projection.
 
