@@ -154,19 +154,21 @@ Let's see the first 2 rows of our 'area' column.
 
     data['area'].head(2)
 
-Okey so we can see that the area of our first polygon seems to be X and XX for the second polygon.
-Let's check what is the min and the max of those areas using familiar functions from our previous numpy lessions.
+Okey, so we can see that the area of our first polygon seems to be 19.39 and 6.14 for the second polygon.
+They correspond to the ones we saw in previous step when iterating rows, hence, everything seems to work as it should.
+Let's check what is the min and the max of those areas using familiar functions from our previous Pandas lessions.
 
 .. ipython:: python
 
     # Maximum area
     max_area = data['area'].max()
 
-    # Minimum area
-    min_area = data['area'].mean()
+    # Mean area
+    mean_area = data['area'].mean()
 
     print("Max area: %s\nMean area: %s" % (round(max_area, 2), round(min_area, 2)))
 
+Okey, so the largest Polygon in our dataset seems to be 1494 square decimal degrees (~ 165 000 km2) and the average size is ~20 square decimal degrees (~2200 km2).
 
 Creating geometries into a GeoDataFrame
 ---------------------------------------
