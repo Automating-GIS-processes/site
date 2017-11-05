@@ -61,9 +61,9 @@ The materials are divided into weekly sections that are published at these pages
 |                | Geometric Objects; Shapely      |
 |                |                                 |
 +----------------+---------------------------------+
-| **Class 2**    | Working with GeoDataFrames      |
-|  6.11.2017     |                                 |
-|                |                                 |
+| **Class 2**    | Working with GeoDataFrames;     |
+|  6.11.2017     | Managing projections;           |
+|                | Table join;                     |
 |                |                                 |
 +----------------+---------------------------------+
 | **Class 3**    | Geocoding and making spatial    |
@@ -113,6 +113,16 @@ Contents
    lessons/L1/ex-1
    lessons/L1/exercise-1-hints
 
+.. toctree::
+   :maxdepth: 2
+   :caption: Lesson 2
+
+   lessons/L2/overview
+   lessons/L2/lecture
+   lessons/L2/geopandas-basics
+   lessons/L2/projections
+   lessons/L2/ex-2
+   lessons/L2/exercise-2-hints
 
 
 
