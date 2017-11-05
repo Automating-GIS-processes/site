@@ -11,11 +11,11 @@ Last year there was only Pandas as Geopandas stuff. Now we have more time to foc
 - Iterating over rows and creating a LineString from centroid of Polygons to specific destination point (to demonstrate the usefulness of apply function)
 - Projections --> Reprojecting data
     - We could create a function that returns a GeoDataFrame with identical crs for each input dataset
-- Recap of a table join
 
 **Things to cover in Lesson 3:**
 
 - Geocoding, using Nominatim (http://nominatim.openstreetmap.org/) --> provider='nominatim' --> does not require API key
+- Recap of a table join (with geocoding)
 - Point in Polygon / Intersect
 - Spatial Join
 - Nearest point (scipy.spatial)
