@@ -28,7 +28,7 @@ Europe <http://mapref.org/LinkedDocuments/MapProjectionsForEurope-EUR-20120.pdf>
 Download data
 -------------
 
-For this tutorial we will be using a Shapefile representing Europe. Download and extract Europe_borders.zip file
+For this tutorial we will be using a Shapefile representing Europe. Download and extract `Europe_borders.zip <../../_static/data/L2/Europe_borders.zip>`__ file
 that contains a Shapefile with following files:
 
 .. code:: bash
@@ -201,3 +201,152 @@ Finally, let's save our projected layer into a Shapefile so that we can use it l
    Each page showing spatial reference information has links for different formats for the CRS. Click a link that says ``Proj4`` and
    you will get the correct proj4 text presentation for your projection.
 
+Calculating distances
+---------------------
+
+Let's, continue working with our ``Europe_borders.shp`` file and find out the Euclidean distances from
+the centroids of the European countries to Helsinki, Finland. We will calculate the distance between Helsinki and
+other European countries (centroids) using a metric projection (World Equidistant Cylindrical) that gives us the distance
+in meters.
+
+- Let's first import necessary packages.
+
+.. ipython:: python
+
+    from shapely.geometry import Point
+    from fiona.crs import from_epsg
+
+Next we need to specify our projection to metric system using `World Equidistant Cylindrical -projection <http://spatialreference.org/ref/esri/world-azimuthal-equidistant/>`__ where distances are represented correctly from the center longitude and latitude.
+
+- Let's specify our target location to be the coordinates of Helsinki (lon=24.9417 and lat=60.1666).
+
+.. ipython:: python
+
+   hki_lon = 24.9417
+   hki_lat = 60.1666
+
+Next we need to specify a Proj4 string to reproject our data into World Equidistant Cylindrical
+in which we want to center our projection to Helsinki. We need to specify the ``+lat_0`` and ``+lon_0`` parameters in Proj4 string to do this.
+
+.. ipython:: python
+
+   proj4_txt = '+proj=eqc +lat_ts=60 +lat_0=60.1666 +lon_0=24.9417 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs'
+
+Okey, now we are ready to transform our ``Europe_borders.shp`` data into the desired projection. Let's create a new
+copy of our GeoDataFrame called ``data_d`` (d for 'distance').
+
+.. ipython:: python
+
+   data_d = data.to_crs(proj4_txt)
+
+Let's take a look of our data and create a map, so we can see what we have now.
+
+.. ipython:: python
+
+   data_d.plot(facecolor='white');
+   @savefig europe_euqdist.png width=4.5in
+   plt.tight_layout();
+
+Okey, from here we can see that indeed our map is now centered to Helsinki as the 0-position in both x and y is on top of Helsinki.
+
+- Let's continue our analysis by creating a Point object from Helsinki and insert it into a GeoPandas GeoSeries. We also specify that the CRS of the GeoSeries is WGS84. You can do this by using ``crs`` parameter when creating the GeoSeries.
+
+.. ipython:: python
+
+   hki = gpd.GeoSeries([Point(hki_lon, hki_lat)], crs=from_epsg(4326))
+
+- Let's convert this point to the same projection as our Europe data is.
+
+.. ipython:: python
+
+   hki = hki.to_crs(proj4_txt)
+   print(hki)
+
+Aha! So the Point coordinates of Helsinki are 0. This confirms us that the center point of our projection is indeed Helsinki.
+
+Next we need to calculate the centroids for all the Polygons of the European countries. This can be done easily in Geopandas by using the ``centroid`` attribute.
+
+.. ipython:: python
+
+   data_d['country_centroid'] = data_d.centroid
+   data_d.head(2)
+
+Okey, so now we have a new column ``country_centroid`` that has the Point geometries representing the centroids of each Polygon.
+
+Now we can calculate the distances between the centroids and Helsinki.
+At the end of `Lesson 6 of Geo-Python course <https://geo-python.github.io/2017/lessons/L6/pandas-analysis.html#repeating-the-data-analysis-with-larger-dataset>`__
+we saw an example where we used ``apply()`` function for doing the loop instead of using the ``iterrows()`` function.
+
+In (Geo)Pandas, the ``apply()`` function takes advantage of numpy when looping, and is hence much faster
+which can give a lot of speed benefit when you have many rows to iterate over. Here, we will see how we can use that
+to calculate the distance between the centroids and Helsinki. We will create our own function to do this calculation.
+
+ - Let's first create our function called ``calculateDistance()``.
+
+.. code:: python
+
+   def calculateDistance(row, dest_geom, src_col='geometry', target_col='distance'):
+       """
+       Calculates the distance between a single Shapely Point geometry and a GeoDataFrame with Point geometries.
+
+       Parameters
+       ----------
+       dest_geom : shapely.Point
+           A single Shapely Point geometry to which the distances will be calculated to.
+       src_col : str
+           A name of the column that has the Shapely Point objects from where the distances will be calculated from.
+       target_col : str
+           A name of the target column where the result will be stored.
+       """
+       # Calculate the distances
+       dist = row[src_col].distance(dest_geom)
+       # Tranform into kilometers
+       dist_km = dist/1000
+       # Assign the distance to the original data
+       row[target_col] = dist_km
+       return row
+
+.. ipython:: python
+   :suppress:
+
+      def calculateDistance(row, dest_geom, src_col='geometry', target_col='distance'):
+          dist = row[src_col].distance(dest_geom)
+          dist_km = dist/1000
+          row[target_col] = dist_km
+          return row
+
+The parameter row is used to pass the data from each row of our GeoDataFrame into our function and then the other paramaters are used for passing other necessary information for using our function.
+
+- Before using our function and calculating the distances between Helsinki and centroids, we need to get the Shapely point geometry from the re-projected Helsinki center point. We can use the ``get()`` function to retrieve a value from specific index (here index 0).
+
+.. ipython:: python
+
+   hki_geom = hki.get(0)
+   print(hki_geom)
+
+Now we are ready to use our function with ``apply()`` function. When using the function, it is important to specify that the ``axis=1``.
+This specifies that the calculations should be done row by row (instead of column-wise).
+
+.. ipython:: python
+
+   data_d = data_d.apply(calculateDistance, dest_geom=hki_geom, src_col='country_centroid', target_col='dist_to_Hki', axis=1)
+   data_d.head(20)
+
+Great! Now we have successfully calculated the distances between the Polygon centroids and Helsinki. :)
+
+Let's check what is the longest and mean distance to Helsinki from the centroids of other European countries.
+
+.. ipython:: python
+
+   max_dist = data_d['dist_to_Hki'].max()
+   mean_dist = data_d['dist_to_Hki'].mean()
+   print("Maximum distance to Helsinki is %.0f km, and the mean distance is %.0f km." % (max_dist, mean_dist))
+
+Okey, it seems that we finns in the North are fairly far away from all other European countries as the mean distance to other countries is 1185 kilometers.
+
+.. note::
+
+   If you would like to calculate distances between multiple locations across the globe, it is recommended to use
+   `Haversine formula <https://en.wikipedia.org/wiki/Haversine_formula>`__ to do the calculations.
+   `Haversine <https://github.com/mapado/haversine>`__ package in Python provides an easy-to-use function for calculating these
+   based on latitude and longitude values.
