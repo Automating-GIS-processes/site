@@ -18,5 +18,5 @@ Lecture
 
 .. admonition:: Lesson 1.3 - Exercise 1 overview
 
-    Coming soon..
+    Coming ..
 
