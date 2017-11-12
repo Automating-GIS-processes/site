@@ -15,6 +15,7 @@ After this weeks' lesson you should be able to:
 
  - Do geocoding, i.e. converting addresses into Points (and vice versa)
  - Conduct a Point in Polygon queries
+ - Read data from KML file
  - Make spatial and table joins between layers
  - Find the nearest neighbour from Point -objects.
 
