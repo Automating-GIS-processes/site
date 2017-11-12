@@ -124,7 +124,7 @@ Now we have our data in a Pandas DataFrame and we can geocode our addresses.
     from geopandas.tools import geocode
     
     # Geocode addresses with Nominatim backend
-    geo = geocode(data['address'], provider='nominatim')
+    geo = geocode(data['addr'], provider='nominatim')
     geo.head(2)
 
 And Voilà! As a result we have a GeoDataFrame that contains our original
@@ -152,13 +152,10 @@ based on index by default.
 
 .. ipython::
 
-    # Join tables by their index
-    join = data.join(geo)
-
-    # Let's see what we have
+    join = geo.join(data)
     join.head()
 
-- Let's also check the data type of our new ``join`` table
+- Let's also check the data type of our new ``join`` table.
 
 .. ipython:: python
 

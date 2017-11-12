@@ -10,10 +10,6 @@ spatial join (will be introduced later) between two spatial datasets is
 one of the most typical applications where Point in Polygon (PIP) query
 is used.
 
-**Sources**
-
-Following materials are partly based on documentation of `Shapely <http://toblerity.org/shapely/manual.html>`_, `Geopandas <http://geopandas.org/geocoding.html>`__ and `Lawhead, J. (2013), Chapters I and V <https://www.packtpub.com/application-development/learning-geospatial-analysis-python>`_.
-
 How to check if point is inside a polygon?
 ------------------------------------------
 
@@ -199,3 +195,121 @@ However, if the lines overlap fully, they don't touch due to the spatial relatio
 
     # Does the line intersect with itself?
     line_a.intersects(line_a)
+
+Point in Polygon using Geopandas
+--------------------------------
+
+Next we will do a practical example where we check which of the addresses from `previous tutorial <https://automating-gis-processes.github.io/2017/lessons/L3/geocoding.html>`__ are located in Southern district of Helsinki.
+Let's start by `downloading a KML-file <../../_static/data/L3/PKS_suuralue.kml>`__ that has the Polygons for districts of Helsinki Region (data openly available from `Helsinki Region Infoshare <http://www.hri.fi/fi/dataset/paakaupunkiseudun-aluejakokartat>`__).
+
+- Let's start by reading the addresses from the Shapefile that we saved earlier.
+
+.. code:: python
+
+   import geopandas as gpd
+   fp = "/home/geo/addresses.shp"
+   data = gpd.read_file(fp)
+
+.. ipython:: python
+   :suppress:
+
+      import os
+      import geopandas as gpd
+      fp = os.path.join(os.path.abspath('data'), "addresses.shp")
+      data = gpd.read_file(fp)
+
+Reading KML-files in Geopandas
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+It is possible to read the data from KML-file in a similar manner as Shapefile. However, we need to first, enable the KML-driver which is not enabled by default (because KML-files can contain unsupported data structures, nested folders etc., hence be careful when reading KML-files).
+
+- Let's enable the read and write functionalities for KML-driver by passing ``'rw'`` to whitelist of fiona's supported drivers:
+
+.. ipython:: python
+
+   import geopandas as gpd
+   import matplotlib.pyplot as plt
+   gpd.io.file.fiona.drvsupport.supported_drivers['KML'] = 'rw'
+
+Now we should be able to read a KML file with Geopandas.
+
+- Let's read the data from a following KML -file:
+
+.. code:: python
+
+   # Filepath to KML file
+   fp = "/home/geo/PKS_suuralue.kml"
+
+.. ipython:: python
+   :suppress:
+
+      fp = os.path.join(os.path.abspath('data'), "PKS_suuralue.kml")
+
+.. ipython:: python
+
+   polys = gpd.read_file(fp, driver='KML')
+   polys
+
+Nice, now we can see that we have 22 districts in our area. We are interested in an area that is called ``Eteläinen`` (*'Southern'* in english).
+
+- Let's select that one and see where it is located, and plot also the points on top of the map.
+
+.. ipython:: python
+
+   southern = polys.ix[polys['Name']=='Eteläinen']
+   southern.reset_index(drop=True, inplace=True)
+   fig, ax = plt.subplots()
+   polys.plot(ax=ax, facecolor='gray');
+   southern.plot(ax=ax, facecolor='red');
+   data.plot(ax=ax, color='blue', markersize=5);
+   @savefig helsinki_districts.png width=7in
+   plt.tight_layout();
+
+Okey, so we can see that, indeed, certain points are within the selected red Polygon.
+
+Let's find out which one of them are located within the Polygon. Hence, we are conducting a Point in Polygon query.
+
+- Let's first enable shapely.speedups which makes some of the spatial queries running faster.
+
+.. ipython:: python
+
+   import shapely.speedups
+   shapely.speedups.enable()
+
+- Let's check which Points are within the ``southern`` Polygon. Notice, that here we check if the Points are ``within`` the **geometry**
+  of the ``southern`` GeoDataFrame. Hence, we use the ``loc[0, 'geometry']`` to parse the actual Polygon geometry object from the GeoDataFrame.
+
+.. ipython:: python
+
+   pip_mask = data.within(southern.loc[0, 'geometry'])
+   print(pip_mask)
+
+As we can see, we now have an array of boolean values for each row, where the result is ``True``
+if Point was inside the Polygon, and ``False`` if it was not.
+
+- We can now use this mask array to select the Points that are inside the Polygon. Selecting data with this kind of mask array (of boolean values) is
+  easy by passing the array inside the ``loc`` indexing function of Pandas.
+
+.. ipython:: python
+
+   pip_data = data.loc[pip_mask]
+   pip_data
+
+Let's finally confirm that our Point in Polygon query worked as it should by plotting the data.
+
+.. ipython:: python
+
+   southern = polys.ix[polys['Name']=='Eteläinen']
+   southern.reset_index(drop=True, inplace=True)
+   fig, ax = plt.subplots()
+   polys.plot(ax=ax, facecolor='gray');
+   southern.plot(ax=ax, facecolor='red');
+   pip_data.plot(ax=ax, color='gold', markersize=2);
+   @savefig helsinki_districts_pip.png width=7in
+   plt.tight_layout();
+
+Perfect! Now we only have the (golden) points that, indeed, are inside the red Polygon which is exactly what we wanted!
+
+.. admonition:: Sources
+
+   Materials are partly based on documentation of `Shapely <http://toblerity.org/shapely/manual.html>`_, `Geopandas <http://geopandas.org/geocoding.html>`__ and `Lawhead, J. (2013), Chapters I and V <https://www.packtpub.com/application-development/learning-geospatial-analysis-python>`_.
