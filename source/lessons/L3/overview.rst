@@ -1,10 +1,12 @@
 Overview
 ========
 
-1. Geocoding addresses to Points (and vice versa)
-2. Point in Polygon
-3. Spatial join
-4. Nearest neighbour
+During this week we will learn a few really useful and commonly used GIS functionalities using Geopandas, namely:
+
+1. :doc:`Geocoding addresses to Points (and vice versa) <geocoding>`
+2. :doc:`Conducting Point in Polygon queries <point-in-polygon>`
+3. :doc:`Making Spatial joins <spatial-join>`
+4. :doc:`Finding Nearest neighbour of a geometry <nearest-neighbour>`
 
 Learning goals
 --------------
