@@ -3,7 +3,7 @@ Exercise 3
 
 .. admonition:: Start your assignment
 
-    You can start working on your copy of Exercise 3 by `accepting the GitHub Classroom assignment <https://classroom.github.com>`__.
+    You can start working on your copy of Exercise 3 by `accepting the GitHub Classroom assignment <https://classroom.github.com/a/xcbh7AA3>`__.
 
     **Exercise 3 is due by the start of lecture on 20.11**.
 
