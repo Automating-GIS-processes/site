@@ -52,7 +52,8 @@ Nearest points using Geopandas
 ------------------------------
 
 Of course, the previous example is not really useful yet. Hence, next I show, how it is possible to find nearest points
-from a set of origin points to a set of destination points using GeoDataFrames.
+from a set of origin points to a set of destination points using GeoDataFrames. If you don't already have the addresses and PKS_suuralueet.kml datasets,
+you can find and download them from :doc:`geocoding <geocoding>` and :doc:`Point in Polygon <point-in-polygon>` tutorials.
 
 - First we need to create a function that takes advantage of the previous function but is tailored to work with two GeoDataFrames.
 
