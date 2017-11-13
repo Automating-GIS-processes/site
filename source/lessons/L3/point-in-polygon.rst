@@ -174,9 +174,7 @@ Indeed, they do and we can see this by plotting the features together
 
     # Create a MultiLineString
     multi_line = MultiLineString([line_a, line_b])
-    multi_line;
-
-.. image:: Lesson3-point-in-polygon_files/Lesson3-point-in-polygon_16_0.svg
+    multi_line
 
 Thus, the ``line_b`` continues from the same node ( (1,1) ) where ``line_a`` ends.
 

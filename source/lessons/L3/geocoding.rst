@@ -135,7 +135,7 @@ information from ``data`` into our new GeoDataFrame ``geo``, thus making
 a **Table Join**.
 
 Table join
-==========
+----------
 
 Table joins are really common procedures when
 doing GIS analyses. As you might remember from our earlier lessons, combining data from different tables based on common
@@ -150,7 +150,7 @@ as in our original ``data`` DataFrame.
 Hence, we can join those tables together with ``join()`` -function which merges the two DataFrames together
 based on index by default.
 
-.. ipython::
+.. ipython:: python
 
     join = geo.join(data)
     join.head()
