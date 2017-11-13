@@ -22,4 +22,5 @@ After this weeks' lesson you should be able to:
 Sources
 -------
 
-Following materials are partly based on documentation of `Geopandas <http://geopandas.org/geocoding.html>`__, `geopy <http://geopy.readthedocs.io/en/1.11.0/#>`__, `Google <https://developers.google.com/>`_ and `Pandas <http://pandas.pydata.org/>`__.
+Following materials are partly based on documentation of `Geopandas <http://geopandas.org/geocoding.html>`__, `geopy <http://geopy.readthedocs.io/en/1.11.0/#>`__, `Google <https://developers.google.com/>`_, `Pandas <http://pandas.pydata.org/>`__,
+`Shapely <http://toblerity.org/shapely/manual.html>`_, and `Lawhead, J. (2013), Chapters I and V <https://www.packtpub.com/application-development/learning-geospatial-analysis-python>`_.

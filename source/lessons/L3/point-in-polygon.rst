@@ -309,7 +309,3 @@ Let's finally confirm that our Point in Polygon query worked as it should by plo
    plt.tight_layout();
 
 Perfect! Now we only have the (golden) points that, indeed, are inside the red Polygon which is exactly what we wanted!
-
-.. admonition:: Sources
-
-   Materials are partly based on documentation of `Shapely <http://toblerity.org/shapely/manual.html>`_, `Geopandas <http://geopandas.org/geocoding.html>`__ and `Lawhead, J. (2013), Chapters I and V <https://www.packtpub.com/application-development/learning-geospatial-analysis-python>`_.

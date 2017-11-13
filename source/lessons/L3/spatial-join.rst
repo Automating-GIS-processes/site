@@ -2,11 +2,6 @@
 Spatial join
 ============
 
-**Sources**
-
-*Following materials are partly based on documentation of* `Geopandas <http://geopandas.org>`__.
-
-
 `Spatial join <http://wiki.gis.com/wiki/index.php/Spatial_Join>`__ is
 yet another classic GIS problem. Getting attributes from one layer and
 transferring them into another layer based on their spatial relationship
