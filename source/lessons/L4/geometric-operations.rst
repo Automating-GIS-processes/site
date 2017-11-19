@@ -193,63 +193,70 @@ Let's aggregate our travel time data by car travel times, i.e. the grid cells th
 .. ipython:: python
 
    result_aggregated = result.dissolve(by="car_r_t")
-
-   # What do we have now
    result_aggregated.head()
 
 Let's compare the number of cells in the layers before and after the aggregation.
 
 .. ipython:: python
 
-    # Number of rows before the aggregation
     len(result)
-
-    # Number of rows after the aggregation
     len(result_aggregated)
 
 Indeed the number of rows in our data has decreased and the Polygons were merged together.
 
+- Let's finally see how our aggregated data looks like.
+
 .. ipython:: python
-   :suppress:
 
-    # Let's see how our aggregated data looks like.
-    #result_aggregated.plot(color="b", linewidth=0.02)
+    result_aggregated.plot(color="b", linewidth=0.02)
+    @savefig aggregated_polys.png width=7in
+    plt.tight_layout()
 
-    # Use tight layout and remove empty whitespace around our map
-    #@savefig aggregated_polys.png width=7in
-    #plt.tight_layout()
-
-    # Indeed, the Polygon cells have been merged together!
+Indeed, the Polygon cells have been merged together!
 
 Simplifying geometries
 ----------------------
 
-Docs will be added here soon.
+Sometimes it might be useful to be able to simplify geometries. This could be something to consider for example
+when you have very detailed spatial features that cover the whole world. If you make a map that covers the whole
+world, it is unnecessary to have really detailed geometries because it is simply impossible to see those small details
+from your map. Furthermore, it takes a long time to actually render a large quantity of features into a map. Here, we
+will see how it is possible to simplify geometric features in Python by continuing the previous example.
+
+What we will do next is to only include the big lakes and simplify them slightly so that they are not as detailed.
+
+- Include only big lakes
 
 .. ipython:: python
-   :suppress:
 
-    What we want to do next is to only include the big lakes and simplify them slightly so that they are not as detailed.
-
-    # Let's take only big lakes
     big_lakes = lakes.ix[lakes['small_big'] == 1].copy()
 
-    # Let's see how they look
+- Let's see how they look
+
+.. ipython:: python
+
+
     big_lakes.plot(linewidth=0.05, color='blue');
+    @savefig big_lakes.png width=7in
     plt.tight_layout()
 
-    # The Polygons that are presented there are quite detailed, let's generalize them a bit
+The Polygons that are presented there are quite detailed, let's generalize them a bit.
 
-    # Generalization can be done easily by using a Shapely function called ``.simplify()``. The ``tolerance`` parameter is adjusts how much
-    # geometries should be generalized. **The tolerance value is tied to the coordinate system of the geometries**.
-    # Thus, here the value we pass is 250 **meters**.
+- Generalization can be done easily by using a Shapely function called ``.simplify()``. The ``tolerance`` parameter is adjusts how much
+geometries should be generalized. **The tolerance value is tied to the coordinate system of the geometries**.
+Thus, here the value we pass is 250 **meters**.
+
+.. ipython:: python
+
     big_lakes['geom_gen'] = big_lakes.simplify(tolerance=250)
 
-    # Let's set the geometry to be our new column
-    big_lakes['geometry'] = big_lakes['geom_gen']
+- Let's set the geometry to be our new column, and plot the results.
 
-    # Let's see how they look now
+.. ipython:: python
+
+    big_lakes['geometry'] = big_lakes['geom_gen']
     big_lakes.plot(linewidth=0.05, color='blue')
+    @savefig big_lakes_simplified.png width=7in
     plt.tight_layout()
 
-    # Great! Now we can see that our Polygons have been simplified a bit that are good for visualizing larger areas
+Great! Now we can see that our Polygons have been simplified a bit that are good for visualizing larger areas.
