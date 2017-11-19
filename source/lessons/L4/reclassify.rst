@@ -1,5 +1,6 @@
 Data reclassification
 =====================
+
 Reclassifying data based on specific criteria is a common task when doing GIS analysis.
 The purpose of this lesson is to see how we can reclassify values based on some criteria which can be whatever, such as:
 
@@ -34,10 +35,28 @@ The target in this part of the lesson is to:
 
 3. use ready made classifiers from pysal -module to classify travel times into multiple classes.
 
+Download data
+-------------
+
+Download (and then extract) the dataset zip-package used during this lesson `from this link <https://github.com/Automating-GIS-processes/Lesson-4-Classification-overlay/raw/master/data/data.zip>`_.
+
+You should have following Shapefiles in the ``data`` folder:
+
+.. code:: bash
+
+   $ cd /home/geo/L4/data
+   $ ls
+   Corine2012_Uusimaa.cpg      Helsinki_borders.cpg                       TravelTimes_to_5975375_RailwayStation.dbf
+   Corine2012_Uusimaa.dbf      Helsinki_borders.dbf                       TravelTimes_to_5975375_RailwayStation.prj
+   Corine2012_Uusimaa.prj      Helsinki_borders.prj                       TravelTimes_to_5975375_RailwayStation.shp
+   Corine2012_Uusimaa.shp      Helsinki_borders.shp                       TravelTimes_to_5975375_RailwayStation.shx
+   Corine2012_Uusimaa.shp.xml  Helsinki_borders.shx
+   Corine2012_Uusimaa.shx      TravelTimes_to_5975375_RailwayStation.cpg
+
 Data preparation
 ----------------
 
-Before doing any classification, we need to prepare our data a little bit. Make sure you have `downloaded and extracted the data <Lesson4-download-data.html>`_ before continuing.
+Before doing any classification, we need to prepare our data a little bit.
 
 Let's read the data in and select only English columns from it and plot our data so that we can see how it looks like on a map.
 
@@ -219,7 +238,18 @@ Let's plot these lakes and see how they look like.
    @savefig small-big-lakes.png width=6in
    plt.tight_layout()
 
-Okey so it looks like they are correctly classified, good.
+Okey so it looks like they are correctly classified, good. As a final step let's save the lakes as a file to disk.
+
+.. code:: python
+
+    In [20]: outfp_lakes = r"/home/geo/lakes.shp"
+    In [21]: lakes.to_file(outfp_lakes)
+
+.. ipython:: python
+   :suppress:
+
+    outfp_lakes = os.path.join(os.path.abspath('data'), "lakes.shp")
+    lakes.to_file(outfp_lakes)
 
 .. note::
 
@@ -228,7 +258,7 @@ Okey so it looks like they are correctly classified, good.
 
    Let's give a value 0 for small lakes and value 1 for big lakes by using an alternative technique:
 
-   .. code::
+   .. code:: python
 
       lakes['small_big_alt'] = None
       lakes.loc[lakes['area_km2'] < l_mean_size, 'small_big_alt'] = 0

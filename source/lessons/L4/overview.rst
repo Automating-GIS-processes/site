@@ -1,8 +1,15 @@
-Lesson 4 Overview
-=================
+Overview
+========
 
-Learning objectives
--------------------
+During this week we will learn a few really useful and commonly used GIS functionalities using Geopandas, namely:
+
+1. :doc:`Data classification <reclassify>`
+2. :doc:`Geometric operations: Overlay analysis, spatial aggregation <geometric-operations>`
+3. :doc:`Exercise 4 <ex-4>`
+4. :doc:`Exercise 4 hints <exercise-4-hints>`
+
+Learning goals
+--------------
 
 After this week's lesson you should be able to:
 
@@ -11,6 +18,8 @@ After this week's lesson you should be able to:
  - Do a simple overlay analysis such as selecting data from one layer based on boundaries of another layer.
 
  - Aggregate data, i.e. merge geometric objects together, based on some common identifier.
+
+ - Simplify geometries
 
 Sources
 -------

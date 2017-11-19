@@ -1,23 +1,11 @@
 Geometric operations
 ====================
 
-Download data
--------------
-
-Download (and then extract) the dataset zip-package used during this lesson `from this link <https://github.com/Automating-GIS-processes/Lesson-4-Classification-overlay/raw/master/data/data.zip>`_.
-
-You should have following Shapefiles in the ``data`` folder:
-
-  - Corine2012_Uusimaa.shp
-  - Helsinki_borders.shp
-  - TravelTimes_to_5975375_RailwayStation.shp
-
 Overlay analysis
 ----------------
 
 The aim here is to make an overlay analysis where we select only specific polygon cells from the data
 based on the borders of municipality of Helsinki.
-
 
 Let's first read the data.
 
@@ -25,6 +13,10 @@ Let's first read the data.
 
     import geopandas as gpd
     import matplotlib.pyplot as plt
+    import shapely.speedups
+
+    # Let's enable speedups to make queries faster
+    shapely.speedups.enable()
 
     # File paths
     border_fp = "/home/geo/data/Helsinki_borders.shp"
@@ -41,11 +33,12 @@ Let's first read the data.
     import geopandas as gpd
     import os
     import matplotlib.pyplot as plt
+    import shapely.speedups
+    shapely.speedups.enable()
     border_fp = os.path.join(os.path.abspath('data'), "Helsinki_borders.shp")
     grid_fp = os.path.join(os.path.abspath('data'), "TravelTimes_to_5975375_RailwayStation.shp")
     grid = gpd.read_file(grid_fp)
     hel = gpd.read_file(border_fp)
-
 
 Let's check that the coordinate systems match.
 
@@ -54,16 +47,16 @@ Let's check that the coordinate systems match.
     hel.crs
     grid.crs
 
-They do.
+Indeed, they do. This is pre-srequisite to conduct spatial operations between the layers (as their coordinates need to match).
 
-Let's see how our datasets look like, let's use the Helsinki municipality layer as our basemap and
+Let's see how our datasets look like. We will use the Helsinki municipality layer as our basemap and
 plot the other layer on top of that.
 
 .. ipython:: python
 
 
     basemap = hel.plot()
-    grid.plot(ax=basemap, linewidth=0.02);
+    grid.plot(ax=basemap, facecolor='gray' linewidth=0.02);
 
     # Use tight layout
     @savefig helsinki_grid_borders.png width=7in
@@ -71,8 +64,10 @@ plot the other layer on top of that.
 
 Let's do an overlay analysis and select polygons from grid that intersect with our Helsinki layer.
 
-**Notice!** This can be a slow procedure with less powerful computer. There is a way to
-overcome this issue by doing the analysis **in batches** which is explained below, see the performance-tip_.
+.. note::
+
+   This can be a slow procedure with less powerful computer. There is a way to
+   overcome this issue by doing the analysis **in batches** which is explained below, see the performance-tip_.
 
 .. ipython:: python
 
@@ -83,11 +78,8 @@ Let's plot our data and see what we have.
 .. ipython:: python
 
     result.plot(color="b")
-
-    # Use tight layout
     @savefig helsinki_grid_borders_intersect.png width=7in
     plt.tight_layout()
-
 
 Cool! Now as a result we have only those grid cells included that intersect with the Helsinki borders
 and the grid cells are clipped based on the boundary.
@@ -204,16 +196,6 @@ Let's compare the number of cells in the layers before and after the aggregation
 
 Indeed the number of rows in our data has decreased and the Polygons were merged together.
 
-- Let's finally see how our aggregated data looks like.
-
-.. ipython:: python
-
-    result_aggregated.plot(color="b", linewidth=0.02)
-    @savefig aggregated_polys.png width=7in
-    plt.tight_layout()
-
-Indeed, the Polygon cells have been merged together!
-
 Simplifying geometries
 ----------------------
 
@@ -221,9 +203,25 @@ Sometimes it might be useful to be able to simplify geometries. This could be so
 when you have very detailed spatial features that cover the whole world. If you make a map that covers the whole
 world, it is unnecessary to have really detailed geometries because it is simply impossible to see those small details
 from your map. Furthermore, it takes a long time to actually render a large quantity of features into a map. Here, we
-will see how it is possible to simplify geometric features in Python by continuing the previous example.
+will see how it is possible to simplify geometric features in Python by continuing the example from the previous tutorial
+on data classification.
 
 What we will do next is to only include the big lakes and simplify them slightly so that they are not as detailed.
+
+- Let's start by reading the lakes data into Geopandas that we saved earlier.
+
+.. ipython:: python
+   :suppress:
+
+      lakes_fp = os.path.join(os.path.abspath('data'), "lakes.shp")
+
+.. code:: python
+
+   lakes_fp = "/home/geo/lakes.shp"
+
+.. ipython:: python
+
+   lakes = gpd.read_file(lakes_fp)
 
 - Include only big lakes
 
@@ -244,11 +242,11 @@ The Polygons that are presented there are quite detailed, let's generalize them 
 
 - Generalization can be done easily by using a Shapely function called ``.simplify()``. The ``tolerance`` parameter is adjusts how much
 geometries should be generalized. **The tolerance value is tied to the coordinate system of the geometries**.
-Thus, here the value we pass is 250 **meters**.
+Thus, here the value we pass is 300 **meters**.
 
 .. ipython:: python
 
-    big_lakes['geom_gen'] = big_lakes.simplify(tolerance=250)
+    big_lakes['geom_gen'] = big_lakes.simplify(tolerance=300)
 
 - Let's set the geometry to be our new column, and plot the results.
 
