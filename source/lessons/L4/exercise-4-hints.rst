@@ -29,7 +29,46 @@ Reading multiple files efficiently
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Here we are reading multiple files from a folder. We could write the filepaths to all of those files but **it is not efficient!**
-Instead, you should use `glob()` -function from module glob to get a filtered list of those files that you want to read and then read the files by iterating over the list. There are lesson materials about doing this in [**here**](https://github.com/Python-for-geo-people/Lesson-5-Reading-Writing/blob/master/Lesson/reading-multiple-files.md#list-files).
+Instead, you should use `glob()` -function from module glob to get a filtered list of those files that you want to read and then read the files by iterating over the list.
+
+Listing and searching for file path names from file system can be done using a specific module called `glob <https://docs.python.org/3/library/glob.html>`__.
+
+The glob library contains a function, also called glob, that finds files and directories whose names match a pattern.
+We provide those patterns as strings: the character * matches zero or more characters, while ? matches any one character.
+
+- We can use this to get the names of all files in the data directory ('/home/geo/data'):
+
+.. code:: python
+
+  In [0]: import glob
+  In [1]: my_files = glob.glob('/home/geo/data/*')
+  In [2]: print(my_files)
+  ['/home/geo/data/inflammation-08.csv',
+   '/home/geo/data/inflammation-10.csv',
+   '/home/geo/data/inflammation-11.csv',
+   '/home/geo/data/inflammation-06.csv',
+   '/home/geo/data/inflammation-12.csv',
+   '/home/geo/data/small-03.csv',
+   '/home/geo/data/small-02.csv',
+   '/home/geo/data/inflammation-07.csv',
+   '/home/geo/data/inflammation-05.csv',
+   '/home/geo/data/small-01.csv',
+   '/home/geo/data/inflammation-03.csv',
+   '/home/geo/data/inflammation-04.csv',
+   '/home/geo/data/inflammation-02.csv',
+   '/home/geo/data/inflammation-01.csv',
+   '/home/geo/data/inflammation-09.csv']
+
+- We can also search for only specific files and file formats. Here, we search for files that starts with the word 'small' and ends with file format '.csv':
+
+.. code:: python
+
+  In [3]: csv_files = glob.glob('/home/geo/data/small*.csv')
+  In [4]: print(csv_files)
+   ['/home/geo/data/small-03.csv', '/home/geo/data/small-02.csv', '/home/geo/data/small-01.csv']
+
+Now we have successfully filtered only certain types of files and as a result we have a list of files that we
+can loop over and process.
 
 Renaming column based on 'to_id' value
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -40,8 +79,8 @@ We want to rename our column from `pt_r_tt` into `pt_r_tt_XXXXXXX` where XXXXXX 
  - Convert the integer value of `destination` variable as **string**
  - Rename the `pt_r_tt` value:
 
-    - Parse the new column name where you combine `pt_r_tt` text and text from `destination` variable into a new variable called `new_name`. See [a hint from earlier materials](https://github.com/Python-for-geo-people/Exercise-3#general-tips).
-    - Rename the `pt_r_tt` column using value from `new_name` variable. Use `data.rename()` -function. See [lesson materials](https://automating-gis-processes.github.io/2016/Lesson3-spatial-join.html?highlight=rename#download-and-clean-the-data).
+    - Parse the new column name where you combine `pt_r_tt` text and text from `destination` variable into a new variable called `new_name`.
+    - Rename the `pt_r_tt` column using value from `new_name` variable. Use `data.rename()` -function. See `lesson 6 materials in GeoPython <https://geo-python.github.io/2017/lessons/L6/pandas-analysis.html#exploring-data-and-renaming-columns>`__.
 
 Finding out which shopping center is the closest
 
@@ -55,7 +94,7 @@ We can find out the minimum value from multiple columns simply by applying a `.m
     # Find out the minimum value of those column of a given row in the DataFrame
     minimum_values = row[value_columns].min()
 
-It is also possible to find out which column contains that value by applying ``.idxmin()`` (http://pandas.pydata.org/pandas-docs/version/0.18.1/generated/pandas.DataFrame.idxmin.html) -function:
+It is also possible to find out which column contains that value by applying ``.idxmin()`` -function (`see Pandas docs <http://pandas.pydata.org/pandas-docs/version/0.18.1/generated/pandas.DataFrame.idxmin.html>`__).
 
 .. code:: python
 

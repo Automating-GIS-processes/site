@@ -257,4 +257,4 @@ Thus, here the value we pass is 300 **meters**.
     @savefig big_lakes_simplified.png width=7in
     plt.tight_layout()
 
-Great! Now we can see that our Polygons have been simplified a bit that are good for visualizing larger areas.
+Nice! As a result, now we have simplified our Polygons slightly (although the differences might be a bit hard to spot).
