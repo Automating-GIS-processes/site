@@ -149,4 +149,14 @@ Contents
    lessons/L4/ex-4
    lessons/L4/exercise-4-hints
 
+.. toctree::
+   :maxdepth: 2
+   :caption: Lesson 5
 
+   lessons/L5/overview
+   lessons/L5/lecture
+   lessons/L5/static_maps
+   lessons/L5/interactive-map-bokeh
+   lessons/L5/interactive-map-folium
+   lessons/L5/ex-5
+   lessons/L5/exercise-5-hints
