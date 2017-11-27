@@ -155,7 +155,7 @@ Contents
 
    lessons/L5/overview
    lessons/L5/lecture
-   lessons/L5/static_maps
+   lessons/L5/static-maps
    lessons/L5/interactive-map-bokeh
    lessons/L5/interactive-map-folium
    lessons/L5/ex-5
