@@ -8,13 +8,13 @@ in Bokeh and add a legend into the map which is one of the key elements of a goo
 
 .. ipython:: python
 
-from bokeh.palettes import YlOrRd as palette  #Spectral6 as palette
-from bokeh.plotting import figure, save
-from bokeh.models import ColumnDataSource, HoverTool, LogColorMapper
-from bokeh.palettes import RdYlGn10 as palette
-import geopandas as gpd
-import pysal as ps
-import numpy as np
+    from bokeh.palettes import YlOrRd as palette  #Spectral6 as palette
+    from bokeh.plotting import figure, save
+    from bokeh.models import ColumnDataSource, HoverTool, LogColorMapper
+    from bokeh.palettes import RdYlGn10 as palette
+    import geopandas as gpd
+    import pysal as ps
+    import numpy as np
 
 - Let's use three different layers to produce the map. One of the files (``road.shp``) is containing MultiLineString
 objects. Here we learn how to deal with such geometric objects when plotting bokeh maps.
