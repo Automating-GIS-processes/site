@@ -31,7 +31,7 @@ objects. Here we learn how to deal with such geometric objects when plotting bok
 
     roads_fp = os.path.join(os.path.abspath('data'), "roads.shp")
     fp = os.path.join(os.path.abspath('data'), "TravelTimes_to_5975375_RailwayStation.shp")
-    metro_fp = (os.path.abspath('data'), "metro.shp")
+    metro_fp = os.path.abspath('data'), "metro.shp")
 
 - Read the data with Geopandas.
 
@@ -243,6 +243,8 @@ Next, we want to classify the travel times with 5 minute intervals until 200 min
     breaks = [x for x in range(5, 200, 5)]
 
 - Now we can create a pysal ``User_Defined`` classifier and classify our travel time values.
+
+.. ipython:: python
 
     classifier = ps.User_Defined.make(bins=breaks)
     pt_classif = data[['pt_r_tt']].apply(classifier)

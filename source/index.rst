@@ -159,6 +159,7 @@ Contents
    lessons/L5/interactive-map-bokeh
    lessons/L5/advanced-bokeh
    lessons/L5/interactive-map-folium
+   lessons/L5/share-on-github
    lessons/L5/ex-5
    lessons/L5/exercise-5-hints
 
