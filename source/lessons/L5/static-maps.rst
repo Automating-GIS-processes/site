@@ -81,13 +81,9 @@ Then, we need to be sure that the files are in the same coordinate system. Let's
 .. ipython:: python
    :suppress:
 
-    # Get the CRS of the grid
     gridCRS = grid.crs
-
-    # Reproject geometries using the crs of travel time grid
     roads['geometry'] = roads['geometry'].to_crs(crs=gridCRS)
     metro['geometry'] = metro['geometry'].to_crs(crs=gridCRS)
-
 
 Finally we can make a visualization using the ``.plot()`` -function in Geopandas.
 
@@ -119,7 +115,6 @@ And this is how our map should look like:
 
     my_map = grid.plot(column="car_r_t", linewidth=0.03, cmap="Spectral", scheme="quantiles", k=9, alpha=0.9);
     roads.plot(ax=my_map, color="grey", linewidth=1.5);
-
     @savefig static_map.png width=7in
     metro.plot(ax=my_map, color="red", linewidth=2.5);
 
