@@ -52,6 +52,12 @@ objects. Here we learn how to deal with such geometric objects when plotting bok
 Next, let's create a set of functions that are used for getting the x and y coordinates of the geometries.
 Shapefiles etc. can often have Multi-geometries (MultiLineStrings etc.), thus we need to handle those as well which makes things slightly more complicated.
 
+.. note::
+
+   Nowadays, converting GeoDataFrames to a format that Bokeh understands is much easier with dedicated ``GeoJSONDataSource`` object than shown in here.
+   Take a look at the example_ at the end of this page.
+
+
 - It is always a good practice to slice your functions into small pieces which is what we have done here:
 
 .. code:: python
@@ -372,5 +378,41 @@ Next, we want to classify the travel times with 5 minute intervals until 200 min
 .. hint::
 
    **Important update!** Bokeh nowadays support ``GeoJSONDataSource`` that makes it much easier to work and
-   plot data from ``GeoDataFrame``.
+   plot data from ``GeoDataFrame``. Take a look of the following .. _example:
+
+   .. code:: python
+
+      import geopandas as gpd
+      from bokeh.plotting import save, figure
+      from bokeh.models import GeoJSONDataSource
+
+      addresses_fp = r'/home/geo/addresses.shp'
+      roads_fp = r'/home/geo/roads.shp'
+
+      # Read the data
+      addresses = gpd.read_file(addresses_fp)
+      roads = gpd.read_file(roads_fp)
+
+      # Reproject to the same projection
+      CRS = roads.crs
+      addresses = addresses.to_crs(crs=CRS)
+
+      # Convert GeoDataFrames into GeoJSONDataSource objects (similar to ColumnDataSource)
+      point_source = GeoJSONDataSource(geojson=addresses.to_json())
+      roads_source = GeoJSONDataSource(geojson=roads.to_json())
+
+      # Initialize our plot figure
+      p = figure(title="A test map")
+
+      # Add the lines to the map from our GeoJSONDataSource -object (it is important to specify the columns as 'xs' and 'ys')
+      p.multi_line('xs', 'ys', source=roads_source, color='gray', line_width=3)
+
+      # Add the lines to the map from our 'msource' ColumnDataSource -object
+      p.circle('x', 'y', source=point_source, color='black', size=6)
+
+      # Output filepath
+      outfp = r"C:\HY-DATA\HENTENKA\KOODIT\Opetus\Automating-GIS-processes\Test\Martta_Ex5\test_map.html"
+
+      # Save the map
+      save(p, outfp)
 
