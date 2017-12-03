@@ -10,12 +10,12 @@ Using a Python console
 
 There is (at least) two different Python consoles available within QGIS:
 
-1. Access the **built-in Python console** from the menu *Plugins → Python Console**. It offers basic functionality, and allows to load and save scripts from and to files.
+1. Access the **built-in Python console** from the menu *Plugins → Python Console*. It offers basic functionality, and allows to load and save scripts from and to files.
 
    .. figure:: img/L6-02-pyqgis-00-builtin-python-console.png
 
 2. The more advanced **iPython console** has to be installed as a Plugin before first use:
-   - Go to *Plugins → Manage and Install Plugins**, 
+   - Go to *Plugins → Manage and Install Plugins*, 
    - Select to search in *All* plugins, and type `ipython` into the search field.
    - Select the **IPyConsole** plugin, and click *Install plugin*
 
