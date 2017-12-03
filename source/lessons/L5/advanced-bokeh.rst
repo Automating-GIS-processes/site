@@ -8,9 +8,9 @@ in Bokeh and add a legend into the map which is one of the key elements of a goo
 
 .. ipython:: python
 
-    from bokeh.palettes import YlOrRd as palette  #Spectral6 as palette
+    from bokeh.palettes import YlOrRd6 as palette
     from bokeh.plotting import figure, save
-    from bokeh.models import ColumnDataSource, HoverTool, LogColorMapper
+    from bokeh.models import ColumnDataSource, HoverTool, LogColorMapper, GeoJSONDataSource
     from bokeh.palettes import RdYlGn10 as palette
     import geopandas as gpd
     import pysal as ps
@@ -31,7 +31,7 @@ objects. Here we learn how to deal with such geometric objects when plotting bok
 
     roads_fp = os.path.join(os.path.abspath('data'), "roads.shp")
     fp = os.path.join(os.path.abspath('data'), "TravelTimes_to_5975375_RailwayStation.shp")
-    metro_fp = os.path.abspath('data'), "metro.shp")
+    metro_fp = os.path.join(os.path.abspath('data'), "metro.shp")
 
 - Read the data with Geopandas.
 
@@ -367,4 +367,10 @@ Next, we want to classify the travel times with 5 minute intervals until 200 min
 
    # Save the map
    save(p, output_file);
+
+
+.. hint::
+
+   **Important update!** Bokeh nowadays support ``GeoJSONDataSource`` that makes it much easier to work and
+   plot data from ``GeoDataFrame``.
 
