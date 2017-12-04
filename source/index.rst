@@ -168,9 +168,12 @@ Contents
    :caption: Lesson 6
 
    lessons/L6/01-overview
+   lessons/L6/lecture
    lessons/L6/02-pyqgis
    lessons/L6/03-processing-toolbox
    lessons/L6/04-processing-script
    lessons/L6/05-run-the-tool
+   lessons/L6/ex-6
+
 
 
