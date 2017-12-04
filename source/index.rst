@@ -80,7 +80,7 @@ The materials are divided into weekly sections that are published at these pages
 |                |                                 |
 +----------------+---------------------------------+
 | **Class 6**    | Using Python programming in     |
-|  7.12.2017     | Quantum GIS                     |
+|  4.12.2017     | Quantum GIS                     |
 |                |                                 |
 +----------------+---------------------------------+
 | **Class 7**    | Network analysis and routing    |
