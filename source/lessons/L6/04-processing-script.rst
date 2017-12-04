@@ -37,7 +37,7 @@ Previous to QGIS 2.99, *processing* offered a ``processing.alglist()`` command t
          'qgis:variabledistancebuffer']
 
 
- .. note:: This code uses a very *pythonic* programming language feature: *list comprehensions*. A *list* is a variable containing zero, one or more values, in the order they were added to the list. To define a list, put its member values (if any) inside brackets, comma-separated: ``["a", "list", "of", "strings"]``. In the above example, the list is filled with values created on-the-fly in a *for-loop* within these brackets. (*List comprehension* is an advanced language feature, and copy-&-paste is fine for the purpose of this course)
+.. note:: This code uses a very *pythonic* programming language feature: *list comprehensions*. A *list* is a variable containing zero, one or more values, in the order they were added to the list. To define a list, put its member values (if any) inside brackets, comma-separated: ``["a", "list", "of", "strings"]``. In the above example, the list is filled with values created on-the-fly in a *for-loop* within these brackets. (*List comprehension* is an advanced language feature, and copy-&-paste is fine for the purpose of this course)
 
 To access more information on an individual algorithm, run ``processing.algorithmHelp()``:
 
@@ -98,3 +98,163 @@ To access more information on an individual algorithm, run ``processing.algorith
                 Buffered
 
 
+Rasterise Species Range Maps
+----------------------------
+
+We want to create a script which for our example *damselfish* dataset or any similar dataset loops over the described species, and exports one raster dataset per species, containing its respective species range map.
+
+Let’s develop the script in the *IPython console*. Because at this stage we don’t run this script from within *processing*, we have to import ``processing`` manually, and manually define the input variables which will later be taken from the toolbox menu. (Make sure you have the *damselfish* data loaded.)
+
+.. code:: python
+    import os.path
+    import processing
+
+    # define variables manually (hard-coded),
+    # only for script development on the console
+    # (replaced later)
+
+    # input layer
+    Species_Range_Polygons = iface.activeLayer()
+    # species column name
+    Species_Attribute = "BINOMIAL"
+    # column name to be added and rasterised
+    Presence_Field_Name = "presence"
+    # value for this column (and the later raster values)
+    Presence_Field_Value = 1
+    # output directory
+    Output_Directory = "/tmp"
+
+The variable names are already prepared for later saving this script as a *processing* script. The variable names are cleaned (underscore is replaced by space) and used for labelling the input user interface. Thus, a variable name of ``Species_Range_Polygons`` will result in an input field labelled “Species Range Polygons”.
+
+Adding a new field and updating its value
+-----------------------------------------
+
+We need to add a new field with a user-defined name. This field name is stored in ``Presence_Field_Name``. We use the *field calculator* algorithm of the processing toolbox. To find its scripting name (``id``), search for it, then display its help text:
+
+.. code:: python
+    # search for “buffer” algorithms:
+    In [3]: searchTerm = "calculator"
+    In [4]: print([a.id() for a in QgsApplication.processingRegistry().algorithms() if searchTerm in a.id()])
+    Out[4]: ['qgis:advancedpythonfieldcalculator', 'qgis:fieldcalculator', 'qgis:rastercalculator']
+    In [5]: processing.algorithmHelp
+    Out[5]: Field calculator (qgis:fieldcalculator)
+    
+    This algorithm computes a new vector layer with the same features of the input layer, but with an additional attribute. The values of this new attribute are computed from each feature using a mathematical formula, based on the properties and attributes of the feature.
+    
+    
+    ----------------
+    Input parameters
+    ----------------
+    
+    INPUT:  <QgsProcessingParameterFeatureSource>
+            Input layer
+    
+    FIELD_NAME:  <QgsProcessingParameterString>
+            Result field name
+    
+    FIELD_TYPE:  <QgsProcessingParameterEnum>
+            Field type
+                    0 - Float
+                    1 - Integer
+                    2 - String
+                    3 - Date
+    
+    FIELD_LENGTH:  <QgsProcessingParameterNumber>
+            Field length
+    
+    FIELD_PRECISION:  <QgsProcessingParameterNumber>
+            Field precision
+    
+    NEW_FIELD:  <QgsProcessingParameterBoolean>
+            Create new field
+    
+    FORMULA:  <QgsProcessingParameterExpression>
+            Formula
+    
+    OUTPUT:  <QgsProcessingParameterFeatureSink>
+            Calculated
+    
+    ----------------
+    Outputs
+    ----------------
+    
+    OUTPUT:  <QgsProcessingOutputVectorLayer>
+            Calculated
+
+We use ``processing.run()`` to run the algorithm, and have to supply the algorithm’s ``id`` and all *input parameters* in a dictionary. ``run()`` returns a dictionary with all *output values*, amongst them the output layer.
+
+.. code:: python
+    algorithmOutput = processing.run(
+        "qgis:fieldcalculator",
+        {
+            "INPUT": Species_Range_Polygons,
+            "FIELD_NAME": Presence_Field_Name,
+            "FIELD_TYPE": 1,
+            "FIELD_LENGTH": 5,
+            "FIELD_PRECISION": 0,
+            "NEW_FIELD": True,
+            "FORMULA": Presence_Field_Value,
+            "OUTPUT": "memory:speciesRangePolygonsWithPresenceValue"
+        }
+    )
+    speciesRangePolygonsWithPresenceValue = algorithmOutput["OUTPUT"]
+    
+
+Finding unique species
+----------------------
+
+As we wanted to save individual species into separate raster files, we need to determine the unique species in our attribute table. For this, we will use the layer’s ``uniqueValues()`` function, which requires a field’s index instead of its name. This function is somewhat equivalent to Geopandas ``unique()``.
+
+.. code:: python
+    # get the field index for the column "Species_Attribute"
+    fields = speciesRangePolygonsWithPresenceValue.fields()
+    fieldIndex = fields.indexFromName(Species_Attribute)
+
+    # get unique values for this columns
+    uniqueSpecies = Species_Range_Polygons.uniqueValues(fieldIndex)
+
+Select by attribute and rasterise
+---------------------------------
+
+Now, for each species we run two algorithms: we use *select by attribute* (``qgis:selectbyattribute``) to save the features belonging to the current species into a new layer, and then convert the vector data into a raster file using the *rasterize (vector to raster)* tool (``gdal:rasterize``). Before that, we have to define an output file name for our raster.
+
+.. code:: python
+    # loop over unique species
+    for species in uniqueSpecies:
+
+        # select only feature with the current species
+        algorithmOutput = processing.run(
+            "qgis:selectbyattribute",
+            {
+                "INPUT": speciesRangePolygonsWithPresenceValue,
+                "FIELD": Species_Attribute,
+                "OPERATOR": 0,
+                "VALUE": species
+            }
+        )
+        oneSpeciesRangePolygons = algorithmOutput["OUTPUT"]
+
+        # define output raster file name:
+        outputFile = os.path.join(
+            Output_Directory,
+            species.replace(" ","_") + ".tif"
+        )
+
+        # rasterise the vector layer
+        algorithmOutput = processing.run(
+            "gdal:rasterize",
+            {
+                "INPUT": oneSpeciesRangePolygons,
+                "FIELD": Presence_Field_Name,
+                "DIMENSIONS": 0,
+                "WIDTH": 2000,
+                "HEIGHT": 1000,
+                "RAST_EXT": oneSpeciesRangePolygons.extent(),
+                "RTYPE": 0,
+                "OUTPUT": outputFile
+            }
+        )
+
+After developing the script in the *IPython console*, let’s create a proper *processing toolbox* script. 
+
+TODO!!!
