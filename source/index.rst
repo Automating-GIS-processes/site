@@ -163,3 +163,14 @@ Contents
    lessons/L5/ex-5
    lessons/L5/exercise-5-hints
 
+.. toctree::
+   :maxdepth: 2
+   :caption: Lesson 6
+
+   lessons/L6/01-overview
+   lessons/L6/02-pyqgis
+   lessons/L6/03-processing-toolbox
+   lessons/L6/04-processing-script
+   lessons/L6/05-run-the-tool
+
+
