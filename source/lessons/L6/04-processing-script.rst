@@ -16,11 +16,13 @@ To add a new python script to the processing toolbox, choose *Scripts → Tools 
 Import the ``processing`` module to use its algorithms:
 
 .. code:: python
+
     import processing
 
 Previous to QGIS 2.99, *processing* offered a ``processing.alglist()`` command to list all available algorithms and search for keywords in their names. In QGIS 3.0, the following two lines are an easy drop-in for the same search:
 
 .. code:: python
+
     # search for “buffer” algorithms:
     In [1]: searchTerm = "buffer"
     In [2]: print([a.id() for a in QgsApplication.processingRegistry().algorithms() if searchTerm in a.id()])
@@ -42,6 +44,7 @@ Previous to QGIS 2.99, *processing* offered a ``processing.alglist()`` command t
 To access more information on an individual algorithm, run ``processing.algorithmHelp()``:
 
 .. code:: python
+
     In [3]: processing.algorithmHelp("native:buffer")
     Out[3]: 
         Buffer (native:buffer)
@@ -106,6 +109,7 @@ We want to create a script which for our example *damselfish* dataset or any sim
 Let’s develop the script in the *IPython console*. Because at this stage we don’t run this script from within *processing*, we have to import ``processing`` manually, and manually define the input variables which will later be taken from the toolbox menu. (Make sure you have the *damselfish* data loaded.)
 
 .. code:: python
+
     import os.path
     import processing
 
@@ -132,6 +136,7 @@ Adding a new field and updating its value
 We need to add a new field with a user-defined name. This field name is stored in ``Presence_Field_Name``. We use the *field calculator* algorithm of the processing toolbox. To find its scripting name (``id``), search for it, then display its help text:
 
 .. code:: python
+
     # search for “buffer” algorithms:
     In [3]: searchTerm = "calculator"
     In [4]: print([a.id() for a in QgsApplication.processingRegistry().algorithms() if searchTerm in a.id()])
@@ -184,6 +189,7 @@ We need to add a new field with a user-defined name. This field name is stored i
 We use ``processing.run()`` to run the algorithm, and have to supply the algorithm’s ``id`` and all *input parameters* in a dictionary. ``run()`` returns a dictionary with all *output values*, amongst them the output layer.
 
 .. code:: python
+
     algorithmOutput = processing.run(
         "qgis:fieldcalculator",
         {
@@ -206,6 +212,7 @@ Finding unique species
 As we wanted to save individual species into separate raster files, we need to determine the unique species in our attribute table. For this, we will use the layer’s ``uniqueValues()`` function, which requires a field’s index instead of its name. This function is somewhat equivalent to Geopandas ``unique()``.
 
 .. code:: python
+
     # get the field index for the column "Species_Attribute"
     fields = speciesRangePolygonsWithPresenceValue.fields()
     fieldIndex = fields.indexFromName(Species_Attribute)
@@ -219,6 +226,7 @@ Select by attribute and rasterise
 Now, for each species we run two algorithms: we use *select by attribute* (``qgis:selectbyattribute``) to save the features belonging to the current species into a new layer, and then convert the vector data into a raster file using the *rasterize (vector to raster)* tool (``gdal:rasterize``). Before that, we have to define an output file name for our raster.
 
 .. code:: python
+
     # loop over unique species
     for species in uniqueSpecies:
 
