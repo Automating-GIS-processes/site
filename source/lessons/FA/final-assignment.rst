@@ -26,7 +26,7 @@ will affect positively in the grading of the final work. You can choose yourself
 When is the deadline?
 ~~~~~~~~~~~~~~~~~~~~~
 
-You should **return your final assignment in GitHub by 7.1.2017 at 23:59** at latest. Of course, you can return your work also before the deadline! If you are ready
+You should **return your final assignment in GitHub by 7.1.2018 at 23:59** at latest. Of course, you can return your work also before the deadline! If you are ready
 before the deadline, please send us a note about it (e.g. in Slack), so that we know and can start evaluating your work.
 
 Grading
