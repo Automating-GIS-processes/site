@@ -326,8 +326,8 @@ Group by function is useful to group data based on values on selected column(s).
 
 .. ipython:: python
 
-    # Group the data by column 'binomial'
-    grouped = data.groupby('binomial')
+    # Group the data by column 'BINOMIAL'
+    grouped = data.groupby('BINOMIAL')
 
     # Let's see what we got
     grouped

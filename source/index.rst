@@ -175,5 +175,20 @@ Contents
    lessons/L6/05-run-the-tool
    lessons/L6/ex-6
 
+.. toctree::
+   :maxdepth: 2
+   :caption: Lesson 7
 
+   lessons/L7/overview
+   lessons/L7/lecture
+   lessons/L7/retrieve-osm-data
+   lessons/L7/network-analysis
+   lessons/L7/ex-7
+   lessons/L7/exercise-7-hints
 
+.. toctree::
+   :maxdepth: 2
+   :caption: Final Assignment
+
+   lessons/FA/final-assignment
+   lessons/FA/fa-hints
