@@ -98,6 +98,14 @@ edges_proj.head()
 # Okey, as we can see from the CRS the data is now in `UTM projection <https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system>`__ using zone 35 which is the one used for Finland, 
 # and indeed the orientation of the map and the geometry values also confirm this. 
 
+# Analyzing the network properties
+# --------------------------------
+
+
+
+# Shortest path analysis
+# ----------------------
+
 # Let's now calculate the shortest path between two points. First we need to specify the source and target locations
 # for our route. Let's use the centroid of our network as the source location and the furthest point in East in our network as the target location.
 
