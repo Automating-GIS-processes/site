@@ -350,14 +350,13 @@ Now we can save to disk all the elements that we want.
 
 .. ipython:: python
     :suppress:
-    :verbatim:
 
         place_name_out = place_name.replace(' ', '_').replace(',','')
         streets_out = os.path.join(os.path.abspath('data'), "%s_streets.shp" % place_name_out)
         route_out = os.path.join(os.path.abspath('data'), "Route_from_a_to_b_at_%s.shp" % place_name_out)
-        nodes_out = os.path.join(os.path.abspath('data'), "%s_nodes.shp" % place_name_out
-        buildings_out = os.path.join(os.path.abspath('data'), "%s_buildings.shp" % place_name_out
-        od_out = os.path.join(os.path.abspath('data'), "%s_route_OD_points.shp" % place_name_out
+        nodes_out = os.path.join(os.path.abspath('data'), "%s_nodes.shp" % place_name_out)
+        buildings_out = os.path.join(os.path.abspath('data'), "%s_buildings.shp" % place_name_out)
+        od_out = os.path.join(os.path.abspath('data'), "%s_route_OD_points.shp" % place_name_out)
 
 As there are certain columns with such data values that Shapefile format does not support (such as ``list`` or ``boolean``), we need to convert those into strings to be able to export the data to Shapefile.
 
