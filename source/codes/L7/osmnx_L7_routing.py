@@ -165,6 +165,11 @@ print(route)
 fig, ax = ox.plot_graph_route(graph_proj, route, origin_point=orig_xy, destination_point=target_xy)
 
 # Awesome! Now we have a the shortest path between our origin and target locations. 
+# Being able to analyze shortest paths between locations can be valuable information for many applications.
+# Here, we only analyzed the shortest paths based on distance but quite often it is more useful to find the 
+# optimal routes between locations based on the travelled time. Here, for example we could calculate the time that it takes
+# to cross each road segment by dividing the length of the road segment with the speed limit and calculate the optimal routes by
+# taking into account the speed limits as well that might alter the result especially on longer trips than here. 
 
 # Saving shortest paths to disk
 # -----------------------------
@@ -214,11 +219,11 @@ od_points.plot(ax=ax, markersize=24, color='green')
 # properties that matplotlib provides to modify how our map will look like 
 # (here we modified the shortest path to be with dashed line). 
 # Now we can save to disk all the elements that we want. 
-
-streets_out = r"C:\HY-DATA\HENTENKA\KOODIT\Opetus\Automating-GIS-processes\2017\data\Kamppi_streets.shp"
-route_out = r"C:\HY-DATA\HENTENKA\KOODIT\Opetus\Automating-GIS-processes\2017\data\Route_from_a_to_b_at_Kamppi.shp"
-nodes_out = r"C:\HY-DATA\HENTENKA\KOODIT\Opetus\Automating-GIS-processes\2017\data\Kamppi_nodes.shp"
-od_out = r"C:\HY-DATA\HENTENKA\KOODIT\Opetus\Automating-GIS-processes\2017\data\Kamppi_route_OD_points.shp"
+place_name_out = place_name.replace(' ', '_').replace(',','')
+streets_out = r"C:\HY-DATA\HENTENKA\KOODIT\Opetus\Automating-GIS-processes\2017\data\%s_streets.shp" % place_name_out
+route_out = r"C:\HY-DATA\HENTENKA\KOODIT\Opetus\Automating-GIS-processes\2017\data\Route_from_a_to_b_at_%s.shp" % place_name_out
+nodes_out = r"C:\HY-DATA\HENTENKA\KOODIT\Opetus\Automating-GIS-processes\2017\data\%s_nodes.shp" % place_name_out
+od_out = r"C:\HY-DATA\HENTENKA\KOODIT\Opetus\Automating-GIS-processes\2017\data\%s_route_OD_points.shp" % place_name_out
 
 # As there are certain columns with such data values that Shapefile format does not support (such as ``list`` or ``boolean``), we need to convert those into strings to be able to export the data to Shapefile.
 
