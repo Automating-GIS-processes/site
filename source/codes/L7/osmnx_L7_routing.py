@@ -207,22 +207,27 @@ od_points.loc[0, ['geometry', 'type']] = orig_point, 'Origin'
 od_points.loc[1, ['geometry', 'type']] = target_point, 'Target'
 od_points.head()             
 
+# Let's also get the buildings for our area and plot them as well.
+buildings = ox.buildings_from_place(place_name)
+buildings_proj = buildings.to_crs(crs=edges_proj.crs)
+
 # Let's now plot the route and the street network elements to verify that everything is as it should. 
 fig, ax = plt.subplots()
 edges_proj.plot(ax=ax, linewidth=0.75, color='gray')
 nodes_proj.plot(ax=ax, markersize=2, color='gray')
+buildings_proj.plot(ax=ax, facecolor='khaki', alpha=0.7)
 route_geom.plot(ax=ax, linewidth=4, linestyle='--', color='red')
 od_points.plot(ax=ax, markersize=24, color='green')
 
 # Great everything seems to be in order! As you can see, now we have a full 
 # control of all the elements of our map and we can use all the aesthetic 
-# properties that matplotlib provides to modify how our map will look like 
-# (here we modified the shortest path to be with dashed line). 
+# properties that matplotlib provides to modify how our map will look like. 
 # Now we can save to disk all the elements that we want. 
 place_name_out = place_name.replace(' ', '_').replace(',','')
 streets_out = r"C:\HY-DATA\HENTENKA\KOODIT\Opetus\Automating-GIS-processes\2017\data\%s_streets.shp" % place_name_out
 route_out = r"C:\HY-DATA\HENTENKA\KOODIT\Opetus\Automating-GIS-processes\2017\data\Route_from_a_to_b_at_%s.shp" % place_name_out
 nodes_out = r"C:\HY-DATA\HENTENKA\KOODIT\Opetus\Automating-GIS-processes\2017\data\%s_nodes.shp" % place_name_out
+buildings_out = r"C:\HY-DATA\HENTENKA\KOODIT\Opetus\Automating-GIS-processes\2017\data\%s_buildings.shp" % place_name_out
 od_out = r"C:\HY-DATA\HENTENKA\KOODIT\Opetus\Automating-GIS-processes\2017\data\%s_route_OD_points.shp" % place_name_out
 
 # As there are certain columns with such data values that Shapefile format does not support (such as ``list`` or ``boolean``), we need to convert those into strings to be able to export the data to Shapefile.
@@ -239,3 +244,7 @@ edges_proj.to_file(streets_out)
 route_geom.to_file(route_out)
 nodes_proj.to_file(nodes_out)
 od_points.to_file(od_out)
+buildings[['geometry', 'name', 'addr:street']].to_file(buildings_out)
+
+# Great now we have saved all the data that was used to produce the maps as Shapefiles.
+
