@@ -34,7 +34,7 @@ Created on Thu Dec  7 15:49:53 2017
 import osmnx as ox
 import networkx as nx
 import geopandas as gpd
-import pandas as pd
+import matplotlib.pyplot as plt
 
 place_name = "Kamppi, Helsinki, Finland"
 graph = ox.graph_from_place(place_name, network_type='drive')
@@ -134,14 +134,24 @@ target_point = target_loc.geometry.values[0]
 print(target_point)
 
 # - Let's now find the nearest graph nodes (and their node-ids) to these points. 
-# For osmnx we need to parse the coordinates of the Point as tuple. 
-orig_xy = (orig_point.x, orig_point.y)
-target_xy = (target_point.x, target_point.y)
-orig_node = ox.get_nearest_node(graph_proj, orig_xy)
-target_node = ox.get_nearest_node(graph_proj, target_xy)
+# For osmnx we need to parse the coordinates of the Point as coordinate-tuple with Latitude, Longitude coordinates. 
+# As our data is now projected to UTM projection, we need to specify with ``method`` parameter that the function uses 
+# 'euclidean' distances to calculate the distance from the point to the closest node. 
+# This becomes important if you want to know the actual distance between the Point and the closest node which you can retrieve by specifying parameter ``return_dist=True``.
+
+orig_xy = (orig_point.y, orig_point.x)
+target_xy = (target_point.y, target_point.x)
+orig_node = ox.get_nearest_node(graph_proj, orig_xy, method='euclidean')
+target_node = ox.get_nearest_node(graph_proj, target_xy, method='euclidean')
 
 print(orig_node)
 print(target_node)
+
+o_closest = nodes_proj.loc[orig_node]
+t_closest = nodes_proj.loc[target_node]
+
+# Let's make a GeoDataFrame out of these series
+od_nodes = gpd.GeoDataFrame([o_closest, t_closest], geometry='geometry', crs=nodes_proj.crs)
 
 # Okey, as a result we got now the closest node-ids of our origin and target locations.
 # Now we are ready to do the routing and find the shortest path between the origin and target locations 
@@ -152,9 +162,12 @@ print(route)
 
 # Okey, as a result we get a list of all the nodes that are along the shortest path. We could extract the locations of those nodes from the ``nodes_proj`` GeoDataFrame and create a LineString presentation of the points, 
 # but luckily osmnx can do that for us and we can plot shortest path by using ``plot_graph_route()`` function.
-fig, ax = ox.plot_graph_route(graph_proj, route)
+fig, ax = ox.plot_graph_route(graph_proj, route, origin_point=orig_xy, destination_point=target_xy)
 
 # Awesome! Now we have a the shortest path between our origin and target locations. 
+
+# Saving shortest paths to disk
+# -----------------------------
 
 # Quite often you need to save the route e.g. as a Shapefile. 
 # Hence, let's continue still a bit and see how we can make a Shapefile of our route with some information associated with it.  
@@ -169,8 +182,55 @@ route_line = LineString(list(route_nodes.geometry.values))
 print(route_line)
 
 # Let's make a GeoDataFrame having some useful information about our route such as a list of the osmids that are part of the route and the length of the route. 
-route_geom = gpd.GeoDataFrame()
+route_geom = gpd.GeoDataFrame(crs=edges_proj.crs)
+route_geom['geometry'] = None
+route_geom['osmids'] = None
 
-# Let's add the information
-route_geom.loc[0, 'geometry'] = 2
+# Let's add the information: geometry, a list of osmids and the length of the route.
 route_geom.loc[0, 'geometry'] = route_line
+route_geom.loc[0, 'osmids'] = str(list(route_nodes['osmid'].values))
+route_geom['length_m'] = route_geom.length
+
+# Now we have a GeoDataFrame that we can save to disk. Let's still confirm that everything is okey by plotting our route
+# on top of our street network, and plot also the origin and target points on top of our map.
+
+# Let's first prepare a GeoDataFrame for our origin and target points.
+od_points = gpd.GeoDataFrame(crs=edges_proj.crs)
+od_points['geometry'] = None
+od_points['type'] = None
+od_points.loc[0, ['geometry', 'type']] = orig_point, 'Origin'
+od_points.loc[1, ['geometry', 'type']] = target_point, 'Target'
+od_points.head()             
+
+# Let's now plot the route and the street network elements to verify that everything is as it should. 
+fig, ax = plt.subplots()
+edges_proj.plot(ax=ax, linewidth=0.75, color='gray')
+nodes_proj.plot(ax=ax, markersize=2, color='gray')
+route_geom.plot(ax=ax, linewidth=4, linestyle='--', color='red')
+od_points.plot(ax=ax, markersize=24, color='green')
+
+# Great everything seems to be in order! As you can see, now we have a full 
+# control of all the elements of our map and we can use all the aesthetic 
+# properties that matplotlib provides to modify how our map will look like 
+# (here we modified the shortest path to be with dashed line). 
+# Now we can save to disk all the elements that we want. 
+
+streets_out = r"C:\HY-DATA\HENTENKA\KOODIT\Opetus\Automating-GIS-processes\2017\data\Kamppi_streets.shp"
+route_out = r"C:\HY-DATA\HENTENKA\KOODIT\Opetus\Automating-GIS-processes\2017\data\Route_from_a_to_b_at_Kamppi.shp"
+nodes_out = r"C:\HY-DATA\HENTENKA\KOODIT\Opetus\Automating-GIS-processes\2017\data\Kamppi_nodes.shp"
+od_out = r"C:\HY-DATA\HENTENKA\KOODIT\Opetus\Automating-GIS-processes\2017\data\Kamppi_route_OD_points.shp"
+
+# As there are certain columns with such data values that Shapefile format does not support (such as ``list`` or ``boolean``), we need to convert those into strings to be able to export the data to Shapefile.
+
+# Columns with invalid values
+invalid_cols = ['lanes', 'maxspeed', 'name', 'oneway', 'osmid']
+
+# Iterate over invalid columns and convert them to string format
+for col in invalid_cols:
+    edges_proj[col] = edges_proj[col].astype(str)
+
+# Save the data
+edges_proj.to_file(streets_out)
+route_geom.to_file(route_out)
+nodes_proj.to_file(nodes_out)
+od_points.to_file(od_out)

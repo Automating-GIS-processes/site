@@ -10,7 +10,8 @@ Created on Tue Dec  5 15:48:04 2017
 # Working with OpenStreetMap data
 # ===============================
 
-# OpenStreetMap is a global crowdsourced dataset that contains a lot of information about the our built environment. It contains data about streets, buildings, and services to mention a few. 
+# OpenStreetMap (OSM) is a global crowd-sourced dataset that contains a lot of information about the our built environment. It contains data about streets, buildings, and services to mention a few. 
+# OSM 
 
 # This week we will explore a new and exciting Python module called `osmnx <https://github.com/gboeing/osmnx>`__
 # that can be used to retrieve, construct, analyze, and visualize street networks from OpenStreetMap. 
@@ -34,7 +35,7 @@ place_name = "Kamppi, Helsinki, Finland"
 graph = ox.graph_from_place(place_name)
 type(graph)
 
-# Okey, as we can see the data that we retrieved is a special data object called ``networkx.classes.multidigraph.MultiDiGraph``. 
+# Okey, as we can see the data that we retrieved is a special data object called ``networkx.classes.multidigraph.MultiDiGraph``. A DiGraph is a data type that stores nodes and edges with optional data, or attributes.
 # What we can see here is that this data type belongs to a Python module called `networkx <https://networkx.github.io/documentation/stable/>`__
 # that can be used to create, manipulate, and study the structure, dynamics, and functions of complex networks.
 # Networkx module contains algorithms that can be used to calculate `shortest paths <https://networkx.github.io/documentation/networkx-1.10/reference/algorithms.shortest_paths.html>`__ 
