@@ -239,10 +239,11 @@ Okey, as a result we got now the closest node-ids of our origin and target locat
 
 - Now we are ready to do the routing and find the shortest path between the origin and target locations
 by using the ``shortest_path()`` `function <https://networkx.github.io/documentation/networkx-1.10/reference/generated/networkx.algorithms.shortest_paths.generic.shortest_path.html>`__ of networkx.
+With ``weight`` -parameter we can specify that ``'length'`` attribute should be used as the cost impedance in the routing.
 
 .. ipython:: python
 
-    route = nx.shortest_path(G=graph_proj, source=orig_node, target=target_node, weight='distance')
+    route = nx.shortest_path(G=graph_proj, source=orig_node, target=target_node, weight='length')
     print(route)
 
 Okey, as a result we get a list of all the nodes that are along the shortest path. We could extract the locations of those nodes from the ``nodes_proj`` GeoDataFrame and create a LineString presentation of the points,
