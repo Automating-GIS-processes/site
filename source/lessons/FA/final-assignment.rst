@@ -145,14 +145,17 @@ the tool should only create the Shapefile but not execute any calculations. It s
 Accepted travel modes are the same ones that are found in the actual TravelTimeMatrix file (pt_r_tt, car_t, etc.).
 If the user specifies something else, stop the program, and give advice what are the acceptable values.
 
-5. (optional). Bundled with AccessViz there is also a separate interactive map that shows the YKR grid values in Helsinki region. The purpose of the map is to help
+**Additionally, you should choose and implement one of the following functionalities**:
+
+5. (option 1). Bundled with AccessViz there is also a separate interactive map that shows the YKR grid values in Helsinki region. The purpose of the map is to help
 the user to choose the YKR-IDs that s/he is interested to visualize / analyze.
 
-6. (optional). AccessViz can also visualize the travel mode comparisons that were described in step 4. You can design the style of the map yourself, but try to make it
+6. (option 2). AccessViz can also visualize the travel mode comparisons that were described in step 4. You can design the style of the map yourself, but try to make it
 as informative as possible!
 
-7. (optional). AccessViz can also visualize shortest path routes (walking, cycling, and/or driving) using OpenStreetMap data from Helsinki Region.
+7. (option 3). AccessViz can also visualize shortest path routes (walking, cycling, and/or driving) using OpenStreetMap data from Helsinki Region.
 The impedance value for the routes can be distance (as was shown in Lesson 7) or time (optional for the most advanced students).
+This functionality can also be a separate program (it is not required to bundle include this with the rest of the AccessViz tool)
 
 .. note::
 
