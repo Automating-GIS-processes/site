@@ -49,7 +49,7 @@ graph (nodes and edges) into GeoDataFrames.
 
     edges.columns
 
-Okey, so we have quite many columns in our GeoDataFrame. Most of the columns are fairly self-exploratory but the following table describes all of them.
+Okey, so we have quite many columns in our GeoDataFrame. Most of the columns are fairly self-explanatory but the following table describes all of them.
 
 +----------------------------------------------------------------+----------------------------------------+------------------------+
 | Column                                                         | Description                            | Data type              |
