@@ -1,8 +1,10 @@
 # Automating GIS-processes - Sphinx + GitHub Pages
 
+[![Build Status](https://travis-ci.org/Automating-GIS-processes/2018.svg?branch=master)](https://travis-ci.org/Automating-GIS-processes/2018)
+
 Source documents for maintaining the [Automating GIS-processes course pages, year 2017](https://automating-gis-processes.github.io/2017/).
 
-The docs are written in [Sphinx](http://www.sphinx-doc.org/en/1.4.9/) and all the rst files for the lesson contents are located in the [source](source/) -folder. 
+The docs are written using a combination of [Sphinx](http://www.sphinx-doc.org/en/1.4.9/) and [Jupyter Notebooks](http://jupyter.org/) all the rst files for the lesson contents are located in the [source](source/) -folder.
 Build html pages are located in the [docs](docs/) -folder.
 
 ## License and terms of usage
