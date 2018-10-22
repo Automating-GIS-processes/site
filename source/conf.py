@@ -57,6 +57,9 @@ extensions = [
     'IPython.sphinxext.ipython_console_highlighting',
     'IPython.sphinxext.ipython_directive',
 
+    # NBsphinx
+    'nbsphinx',
+
     # Enable Google Analytics ( requires: https://pypi.python.org/pypi/sphinxcontrib-googleanalytics )
     # Install with: pip install sphinxcontrib-googleanalytics
     
@@ -398,3 +401,33 @@ texinfo_documents = [
 
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {'https://docs.python.org/': None}
+
+
+# -- Extension configuration -------------------------------------------------
+# This is processed by Jinja2 and inserted before each notebook
+nbsphinx_prolog = r"""
+{% set docname = env.doc2path(env.docname, base='source') %}
+{% set docname2 = env.doc2path(env.docname, base='') %}
+.. only:: html
+    .. role:: raw-html(raw)
+        :format: html
+    .. nbinfo::
+        This page was generated from `{{ docname }}`__.
+        :raw-html:`<br/><a href="https://mybinder.org/v2/gh/geo-python/{{ env.config.release }}/master?urlpath=lab/tree/{{ docname }}"><img alt="Binder badge" src="https://img.shields.io/badge/launch-full%20binder-red.svg" style="vertical-align:text-bottom"></a>`
+        :raw-html:`<a href="https://mybinder.org/v2/gh/geo-python/notebooks/master?urlpath=lab/tree/{{ docname2 }}"><img alt="Binder badge" src="https://img.shields.io/badge/launch-student%20binder-red.svg" style="vertical-align:text-bottom"></a>`
+        :raw-html:`<a href="https://notebooks.csc.fi/#/blueprint/d71cd2d26d924f48820dc22b67a87d8e"><img alt="CSC badge" src="https://img.shields.io/badge/launch-CSC%20notebook-blue.svg" style="vertical-align:text-bottom"></a>`
+    __ https://github.com/Geo-Python/{{ env.config.release }}/blob/master/{{ docname }}
+.. raw:: latex
+    \vfil\penalty-1\vfilneg
+    \vspace{\baselineskip}
+    \textcolor{gray}{The following section was generated from
+    \texttt{\strut{}{{ docname }}}\\[-0.5\baselineskip]
+    \noindent\rule{\textwidth}{0.4pt}}
+    \vspace{-2\baselineskip}
+"""
+
+nbsphinx_allow_errors = True
+
+# Sphinx versioning settings
+scv_show_banner = True
+scv_whitelist_branches = ('master', 'develop', '2017')
