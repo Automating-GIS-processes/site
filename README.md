@@ -4,8 +4,7 @@
 
 Source documents for maintaining the [Automating GIS-processes course pages, year 2017](https://automating-gis-processes.github.io/2017/).
 
-The docs are written using a combination of [Sphinx](http://www.sphinx-doc.org/en/1.4.9/) and [Jupyter Notebooks](http://jupyter.org/) all the rst files for the lesson contents are located in the [source](source/) -folder.
-Build html pages are located in the [docs](docs/) -folder.
+The docs are written using a combination of [Sphinx](http://www.sphinx-doc.org/en/1.4.9/) and [Jupyter Notebooks](http://jupyter.org/). All the rst files for the lesson contents are located in [source/lessons](source/lessons) -folder and all notebooks are located in [source/notebooks](source/notebooks) folder. Build html pages are located in the [docs](docs/) -folder.
 
 ## License and terms of usage
 
