@@ -1,6 +1,6 @@
 # Automating GIS-processes - Sphinx + GitHub Pages
 
-[![Build Status](https://travis-ci.org/automating-gis-processes/2018.svg?branch=master)](https://travis-ci.org/automating-gis-processes/2018)
+[![Build Status](https://travis-ci.org/Automating-GIS-processes/2018.svg?branch=master)](https://travis-ci.org/Automating-GIS-processes/2018)
 
 Source documents for maintaining the [Automating GIS-processes course pages, year 2017](https://automating-gis-processes.github.io/2017/).
 
