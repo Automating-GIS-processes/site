@@ -227,7 +227,7 @@ html_static_path = ['_static']
 # The empty string is equivalent to '%b %d, %Y'.
 #
 # Important when using sphinxcontrib-versioning this needs to be None
-html_last_updated_fmt = None
+html_last_updated_fmt = ""
 
 # If true, SmartyPants will be used to convert quotes and dashes to
 # typographically correct entities.
