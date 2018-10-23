@@ -84,10 +84,10 @@ the data-reading-procedure from the user, from [here](https://raw.githubusercont
 
 ## Contact & Developers
 
-Main developer and maintainer of these materials: **Henrikki Tenkanen**
+- **Henrikki Tenkanen**
 
-Co-developers: **Vuokko Heikinheimo**.
+- **Vuokko Heikinheimo**.
 
-See contact info from [here](https://github.com/Automating-GIS-processes/2016/blob/master/source/course-info.rst#instructors).
+See contact info from [here](https://automating-gis-processes.github.io/2017/course-info/course-info.html).
 
 
