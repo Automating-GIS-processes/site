@@ -1,14 +1,28 @@
 language: python
 python:
-  - 3.5
+  # We don't actually use the Travis Python, but this keeps it organized.
+  - "3.5"
 before_install:
   - hg clone https://bitbucket.org/birkenfeld/sphinx-contrib/
 install:
+  - sudo apt-get update
   - sudo apt-get install pandoc
-  - pip install sphinx==1.7.9 sphinx_rtd_theme nbsphinx IPython==6.5.0 jupyter_client ipykernel
-  - pip install matplotlib numpy pandas imageio
-  - pip install git+https://github.com/wfpinedar/sphinxcontrib-versioning.git
+  - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
+  - bash miniconda.sh -b -p $HOME/miniconda
+  - export PATH="$HOME/miniconda/bin:$PATH"
+  - hash -r
+  - conda config --set always_yes yes --set changeps1 no
+  - conda config --add channels conda-forge
+  - conda update -q conda
+  # Useful for debugging any issues with conda
+  - conda info -a
+
+  # Install packages
+  - conda create -q -n autogis-environment python=$TRAVIS_PYTHON_VERSION sphinx==1.7.9 sphinx_rtd_theme nbsphinx IPython==6.5.0 jupyter_client ipykernel matplotlib geopandas imageio
+  - source activate autogis-environment
+  - pip install git+https://github.com/HTenkanen/sphinxcontrib-versioning.git
   - cd sphinx-contrib/googleanalytics; python setup.py install; cd ../..
+
 script: sphinx-versioning build source build/html
 after_success:
   - ./push.sh

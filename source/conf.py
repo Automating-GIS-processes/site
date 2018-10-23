@@ -94,7 +94,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'Geo-Python - AutoGIS'
-copyright = '2017, Henrikki Tenkanen'
+copyright = '2018, Henrikki Tenkanen'
 author = 'Henrikki Tenkanen'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -184,7 +184,7 @@ html_context = {
     # Set the following variables to generate the resulting github URL for each page.
     # Format Template: https://{{ github_host|default("github.com") }}/{{ github_user }}/{{ github_repo }}/blob/{{ github_version }}{{ conf_py_path }}{{ pagename }}{{ suffix }}
     'github_user': 'Automating-GIS-processes',
-    'github_repo': '2017',
+    'github_repo': '2018',
     'github_version': 'master/source/'
 }
 
@@ -226,6 +226,7 @@ html_static_path = ['_static']
 # bottom, using the given strftime format.
 # The empty string is equivalent to '%b %d, %Y'.
 #
+# Important when using sphinxcontrib-versioning this needs to be None
 html_last_updated_fmt = ""
 
 # If true, SmartyPants will be used to convert quotes and dashes to
@@ -294,7 +295,7 @@ html_last_updated_fmt = ""
 # html_search_scorer = 'scorer.js'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'Geo-Python'
+htmlhelp_basename = 'AutoGIS'
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -320,8 +321,8 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'Geo-Python.tex', 'Geo-Python Documentation',
-     'Henrikki Tenkanen \\& David Whipp', 'manual'),
+    (master_doc, 'AutoGIS.tex', 'AutoGIS Documentation',
+     'Henrikki Tenkanen', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -362,7 +363,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'geopython', 'GeoPython Documentation',
+    (master_doc, 'autogis', 'AutoGIS Documentation',
      [author], 1)
 ]
 
@@ -377,8 +378,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'GeoPython', 'GeoPython Documentation',
-     author, 'GeoPython', 'One line description of project.',
+    (master_doc, 'AutoGIS', 'AutoGIS Documentation',
+     author, 'AutoGIS', 'One line description of project.',
      'Miscellaneous'),
 ]
 
