@@ -113,15 +113,4 @@ Contents
    lessons/L1/ex-1
    lessons/L1/exercise-1-hints
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Lesson 2
-
-   lessons/L2/overview
-   lessons/L2/lecture
-   lessons/L2/geopandas-basics
-   lessons/L2/projections
-   lessons/L2/using-functions
-   lessons/L2/ex-2
-   lessons/L2/exercise-2-hints
 
