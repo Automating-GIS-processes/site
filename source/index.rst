@@ -1,7 +1,7 @@
 
 .. figure:: img/AutoGIS_banner_2017.png
 
-Welcome to Automating GIS-processes 2017!
+Welcome to Automating GIS-processes 2018!
 =========================================
 
 **Automating GIS-processes** -course teaches you how to do different GIS-related tasks in Python programming language. Each lesson is a tutorial with specific topic(s) where the aim is to learn
