@@ -1,0 +1,728 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-88382509-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Data reclassification &mdash; Geo-Python - AutoGIS  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Geometric operations" href="geometric-operations.html" />
+    <link rel="prev" title="Lecture" href="lecture.html" />
+    <link href="../../_static/geo-python.css" rel="stylesheet" type="text/css">
+     
+
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Geo-Python - AutoGIS
+          
+
+          
+            
+            <img src="../../_static/logo_hy_geo_135.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2017
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Course information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/course-info.html">General info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/Installing_Anacondas_GIS.html">Installing Python + GIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/License-terms.html">License and terms of usage</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 1</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L1/Intro-Python-GIS.html">Introduction to Python GIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1/overview.html">Lesson overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1/lecture.html">Lecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1/Geometric-Objects.html">Geometric Objects - Spatial Data Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1/ex-1.html">Exercise 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1/exercise-1-hints.html">Exercise 1 hints</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 2</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L2/overview.html">Lesson 2 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/lecture.html">Lecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/geopandas-basics.html">Introduction to Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/projections.html">Map projections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/ex-2.html">Exercise 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/exercise-2-hints.html">Exercise 2 hints</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 3</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L3/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L3/lecture.html">Lecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L3/geocoding.html">Geocoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L3/point-in-polygon.html">Point in Polygon &amp; Intersect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L3/spatial-join.html">Spatial join</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L3/nearest-neighbour.html">Nearest Neighbour Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L3/ex-3.html">Exercise 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L3/exercise-3-hints.html">Exercise 3 hints</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 4</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lecture.html">Lecture</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Data reclassification</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#download-data">Download data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data-preparation">Data preparation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#calculations-in-dataframes">Calculations in DataFrames</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#classifying-data">Classifying data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#creating-a-custom-classifier">Creating a custom classifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multicriteria-data-classification">Multicriteria data classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#classification-based-on-common-classifiers">Classification based on common classifiers</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="geometric-operations.html">Geometric operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ex-4.html">Exercise 4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercise-4-hints.html">Exercise 4 hints</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 5</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L5/overview.html">Lesson 5 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/lecture.html">Lecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/static-maps.html">Static maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/interactive-map-bokeh.html">Interactive maps with Bokeh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/advanced-bokeh.html">Advanced plotting with Bokeh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/interactive-map-folium.html">Interactive maps on Leaflet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/share-on-github.html">Sharing interactive plots on GitHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/ex-5.html">Exercise 5</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/exercise-5-hints.html">Exercise 5 hints</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 6</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L6/01-overview.html">Lesson 6 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L6/lecture.html">Lecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L6/02-pyqgis.html">Python in QGIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L6/03-processing-toolbox.html">The QGIS Processing Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L6/04-processing-script.html">Processing toolbox scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L6/04-processing-script.html#run-the-script">Run the script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L6/ex-6.html">Exercise 6</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 7</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L7/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L7/lecture.html">Lecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L7/retrieve-osm-data.html">Retrieving OpenStreetMap data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L7/network-analysis.html">Network analysis in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L7/ex-7.html">Exercise 7</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L7/exercise-7-hints.html">Exercise 7 hints</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Final Assignment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../FA/final-assignment.html">Final assignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FA/fa-hints.html">Final Assignment hints</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Geo-Python - AutoGIS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Data reclassification</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/Automating-GIS-processes/2017/blob/2017lessons/L4/reclassify.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+
+
+    
+    
+
+
+
+    <p class="scv-banner scv-sphinx_rtd_theme"><b>Warning:</b> This document is for the development version of Geo-Python - AutoGIS.</p>
+<div class="section" id="data-reclassification">
+<h1>Data reclassification<a class="headerlink" href="#data-reclassification" title="Permalink to this headline">¶</a></h1>
+<p>Reclassifying data based on specific criteria is a common task when doing GIS analysis.
+The purpose of this lesson is to see how we can reclassify values based on some criteria which can be whatever, such as:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">1.</span> <span class="k">if</span> <span class="n">available</span> <span class="n">space</span> <span class="ow">in</span> <span class="n">a</span> <span class="n">pub</span> <span class="ow">is</span> <span class="n">less</span> <span class="n">than</span> <span class="n">the</span> <span class="n">space</span> <span class="ow">in</span> <span class="n">my</span> <span class="n">wardrobe</span>
+
+<span class="n">AND</span>
+
+<span class="mf">2.</span> <span class="n">the</span> <span class="n">temperature</span> <span class="n">outside</span> <span class="ow">is</span> <span class="n">warmer</span> <span class="n">than</span> <span class="n">my</span> <span class="n">beer</span>
+
+<span class="o">------------------------------------------------------</span>
+
+<span class="n">IF</span> <span class="n">TRUE</span><span class="p">:</span> <span class="o">==&gt;</span> <span class="n">I</span> <span class="n">go</span> <span class="ow">and</span> <span class="n">drink</span> <span class="n">my</span> <span class="n">beer</span> <span class="n">outside</span>
+<span class="n">IF</span> <span class="n">NOT</span> <span class="n">TRUE</span><span class="p">:</span> <span class="o">==&gt;</span> <span class="n">I</span> <span class="n">go</span> <span class="ow">and</span> <span class="n">enjoy</span> <span class="n">my</span> <span class="n">beer</span> <span class="n">inside</span> <span class="n">at</span> <span class="n">a</span> <span class="n">table</span>
+</pre></div>
+</div>
+<p>Even though, the above would be an interesting study case, we will use slightly more traditional cases to learn classifications.
+We will use Corine land cover layer from year 2012, and a Travel Time Matrix data from Helsinki to classify some features of them based on our own
+self-made classifier, or using a ready made classifiers that are commonly used e.g. when doing visualizations.</p>
+<p>The target in this part of the lesson is to:</p>
+<ol class="arabic">
+<li><p class="first">classify the lakes into big and small lakes where</p>
+<blockquote>
+<div><ul class="simple">
+<li>a big lake is a lake that is larger than the average size of all lakes in our study region</li>
+<li>a small lake ^ vice versa</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">use travel times and distances to find out</p>
+<ul class="simple">
+<li>good locations to buy an apartment with good public tranportation accessibility to city center</li>
+<li>but from a bit further away from city center where the prices are lower (or at least we assume so).</li>
+</ul>
+</li>
+<li><p class="first">use ready made classifiers from pysal -module to classify travel times into multiple classes.</p>
+</li>
+</ol>
+<div class="section" id="download-data">
+<h2>Download data<a class="headerlink" href="#download-data" title="Permalink to this headline">¶</a></h2>
+<p>Download (and then extract) the dataset zip-package used during this lesson <a class="reference external" href="https://github.com/Automating-GIS-processes/Lesson-4-Classification-overlay/raw/master/data/data.zip">from this link</a>.</p>
+<p>You should have following Shapefiles in the <code class="docutils literal notranslate"><span class="pre">data</span></code> folder:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd /home/geo/L4/data
+$ ls
+Corine2012_Uusimaa.cpg      Helsinki_borders.cpg                       TravelTimes_to_5975375_RailwayStation.dbf
+Corine2012_Uusimaa.dbf      Helsinki_borders.dbf                       TravelTimes_to_5975375_RailwayStation.prj
+Corine2012_Uusimaa.prj      Helsinki_borders.prj                       TravelTimes_to_5975375_RailwayStation.shp
+Corine2012_Uusimaa.shp      Helsinki_borders.shp                       TravelTimes_to_5975375_RailwayStation.shx
+Corine2012_Uusimaa.shp.xml  Helsinki_borders.shx
+Corine2012_Uusimaa.shx      TravelTimes_to_5975375_RailwayStation.cpg
+</pre></div>
+</div>
+</div>
+<div class="section" id="data-preparation">
+<h2>Data preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">¶</a></h2>
+<p>Before doing any classification, we need to prepare our data a little bit.</p>
+<p>Let’s read the data in and select only English columns from it and plot our data so that we can see how it looks like on a map.</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># File path</span>
+<span class="n">fp</span> <span class="o">=</span> <span class="s2">&quot;/home/data/Corine2012_Uusimaa.shp&quot;</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s see what we have.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s select only English columns</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Select only English columns</span>
+<span class="gp">In [1]: </span><span class="n">selected_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Level1&#39;</span><span class="p">,</span> <span class="s1">&#39;Level1Eng&#39;</span><span class="p">,</span> <span class="s1">&#39;Level2&#39;</span><span class="p">,</span> <span class="s1">&#39;Level2Eng&#39;</span><span class="p">,</span> <span class="s1">&#39;Level3&#39;</span><span class="p">,</span> <span class="s1">&#39;Level3Eng&#39;</span><span class="p">,</span> <span class="s1">&#39;Luokka3&#39;</span><span class="p">,</span> <span class="s1">&#39;geometry&#39;</span><span class="p">]</span>
+
+<span class="go"># Select data</span>
+<span class="gp">In [1]: </span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">selected_cols</span><span class="p">]</span>
+
+<span class="go"># What are the columns now?</span>
+<span class="gp">In [1]: </span><span class="n">data</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+<p>Let’s plot the data and use column ‘Level3’ as our color.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">data</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;Level3&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+
+<span class="go"># Use tight layout and remove empty whitespace around our map</span>
+<span class="gp">In [1]: </span><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="savefig/corine-level3.png"><img alt="savefig/corine-level3.png" src="savefig/corine-level3.png" style="width: 7in;" /></a>
+<p>Let’s see what kind of values we have in ‘Level3Eng’ column.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Level3Eng&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>Okey we have plenty of different kind of land covers in our data. Let’s select only lakes from our data. Selecting specific rows from a DataFrame
+based on some value(s) is easy to do in Pandas / Geopandas using a specific indexer called <code class="docutils literal notranslate"><span class="pre">.ix[]</span></code>, read more from <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/indexing.html#different-choices-for-indexing">here</a>..</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Select lakes (i.e. &#39;waterbodies&#39; in the data) and make a proper copy out of our data</span>
+<span class="gp">In [1]: </span><span class="n">lakes</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Level3Eng&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Water bodies&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="gp">In [1]: </span><span class="n">lakes</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="calculations-in-dataframes">
+<h2>Calculations in DataFrames<a class="headerlink" href="#calculations-in-dataframes" title="Permalink to this headline">¶</a></h2>
+<p>Okey now we have our lakes dataset ready. The aim was to classify those lakes into small and big lakes based on <strong>the average size of all lakes</strong> in our
+study area. Thus, we need to calculate the average size of our lakes.</p>
+<p>Let’s check the coordinate system.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Check coordinate system information</span>
+<span class="gp">In [1]: </span><span class="n">data</span><span class="o">.</span><span class="n">crs</span>
+</pre></div>
+</div>
+<p>Okey we can see that the units are in meters and we have a <a class="reference external" href="https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system">UTM projection.</a></p>
+<p>Let’s calculate first the are of our lakes.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Calculate the area of lakes</span>
+<span class="gp">In [1]: </span><span class="n">lakes</span><span class="p">[</span><span class="s1">&#39;area&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lakes</span><span class="o">.</span><span class="n">area</span>
+
+<span class="go"># What do we have?</span>
+<span class="gp">In [1]: </span><span class="n">lakes</span><span class="p">[</span><span class="s1">&#39;area&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Notice that the values are now in square meters.. Let’s change those into square kilometers so they are easier to read. Doing calculations in Pandas / Geopandas
+are easy to do:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">lakes</span><span class="p">[</span><span class="s1">&#39;area_km2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lakes</span><span class="p">[</span><span class="s1">&#39;area&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">1000000</span>
+
+<span class="go"># What is the mean size of our lakes?</span>
+<span class="gp">In [1]: </span><span class="n">l_mean_size</span> <span class="o">=</span> <span class="n">lakes</span><span class="p">[</span><span class="s1">&#39;area_km2&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="gp">In [1]: </span><span class="n">l_mean_size</span>
+</pre></div>
+</div>
+<p>Okey so the size of our lakes seem to be approximately 1.58 square kilometers.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>It is also easy to calculate e.g. sum or difference between two or more layers (plus all other mathematical operations), e.g.:</p>
+<div class="code python last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sum two columns</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;sum_of_columns&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;col_1&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;col_2&#39;</span><span class="p">]</span>
+
+<span class="c1"># Calculate the difference of three columns</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;difference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;some_column&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;col_1&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;col_2&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="classifying-data">
+<h2>Classifying data<a class="headerlink" href="#classifying-data" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="creating-a-custom-classifier">
+<h3>Creating a custom classifier<a class="headerlink" href="#creating-a-custom-classifier" title="Permalink to this headline">¶</a></h3>
+<p>Let’s create a function where we classify the geometries into two classes based on a given <code class="docutils literal notranslate"><span class="pre">threshold</span></code> -parameter.
+If the area of a polygon is lower than the threshold value (average size of the lake), the output column will get a value 0,
+if it is larger, it will get a value 1. This kind of classification is often called a <a class="reference external" href="https://en.wikipedia.org/wiki/Binary_classification">binary classification</a>.</p>
+<p>First we need to create a function for our classification task. This function takes a single row of the GeoDataFrame as input,
+plus few other parameters that we can use.</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">binaryClassifier</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">source_col</span><span class="p">,</span> <span class="n">output_col</span><span class="p">,</span> <span class="n">threshold</span><span class="p">):</span>
+    <span class="c1"># If area of input geometry is lower that the threshold value</span>
+    <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="n">source_col</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">threshold</span><span class="p">:</span>
+        <span class="c1"># Update the output column with value 0</span>
+        <span class="n">row</span><span class="p">[</span><span class="n">output_col</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># If area of input geometry is higher than the threshold value update with value 1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">row</span><span class="p">[</span><span class="n">output_col</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="c1"># Return the updated row</span>
+    <span class="k">return</span> <span class="n">row</span>
+</pre></div>
+</div>
+<p>Let’s create an empty column for our classification</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">lakes</span><span class="p">[</span><span class="s1">&#39;small_big&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+</pre></div>
+</div>
+<p>We can use our custom function by using a Pandas / Geopandas function called <code class="docutils literal notranslate"><span class="pre">.apply()</span></code>.
+Thus, let’s apply our function and do the classification.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">lakes</span> <span class="o">=</span> <span class="n">lakes</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">binaryClassifier</span><span class="p">,</span> <span class="n">source_col</span><span class="o">=</span><span class="s1">&#39;area_km2&#39;</span><span class="p">,</span> <span class="n">output_col</span><span class="o">=</span><span class="s1">&#39;small_big&#39;</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="n">l_mean_size</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s plot these lakes and see how they look like.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">lakes</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;small_big&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;seismic&quot;</span><span class="p">)</span>
+
+<span class="gp">In [1]: </span><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="savefig/small-big-lakes.png"><img alt="savefig/small-big-lakes.png" src="savefig/small-big-lakes.png" style="width: 6in;" /></a>
+<p>Okey so it looks like they are correctly classified, good. As a final step let’s save the lakes as a file to disk.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">20</span><span class="p">]:</span> <span class="n">outfp_lakes</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;/home/geo/lakes.shp&quot;</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">21</span><span class="p">]:</span> <span class="n">lakes</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">outfp_lakes</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>There is also a way of doing this without a function but with the previous example might be easier to understand how the function works.
+Doing more complicated set of criteria should definitely be done in a function as it is much more human readable.</p>
+<p>Let’s give a value 0 for small lakes and value 1 for big lakes by using an alternative technique:</p>
+<div class="code python last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lakes</span><span class="p">[</span><span class="s1">&#39;small_big_alt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">lakes</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">lakes</span><span class="p">[</span><span class="s1">&#39;area_km2&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">l_mean_size</span><span class="p">,</span> <span class="s1">&#39;small_big_alt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">lakes</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">lakes</span><span class="p">[</span><span class="s1">&#39;area_km2&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">l_mean_size</span><span class="p">,</span> <span class="s1">&#39;small_big_alt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="multicriteria-data-classification">
+<h3>Multicriteria data classification<a class="headerlink" href="#multicriteria-data-classification" title="Permalink to this headline">¶</a></h3>
+<p>It also possible to do classifiers with multiple criteria easily in Pandas/Geopandas by extending the example that we started earlier.
+Now we will modify our binaryClassifier function a bit so that it classifies the data based on two columns.</p>
+<p>Let’s call it customClassifier2 as it takes into account two criteria:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">customClassifier2</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">src_col1</span><span class="p">,</span> <span class="n">src_col2</span><span class="p">,</span> <span class="n">threshold1</span><span class="p">,</span> <span class="n">threshold2</span><span class="p">,</span> <span class="n">output_col</span><span class="p">):</span>
+    <span class="c1"># 1. If the value in src_col1 is LOWER than the threshold1 value</span>
+    <span class="c1"># 2. AND the value in src_col2 is HIGHER than the threshold2 value, give value 1, otherwise give 0</span>
+    <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="n">src_col1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">threshold1</span> <span class="ow">and</span> <span class="n">row</span><span class="p">[</span><span class="n">src_col2</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">threshold2</span><span class="p">:</span>
+        <span class="c1"># Update the output column with value 0</span>
+        <span class="n">row</span><span class="p">[</span><span class="n">output_col</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="c1"># If area of input geometry is higher than the threshold value update with value 1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">row</span><span class="p">[</span><span class="n">output_col</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># Return the updated row</span>
+    <span class="k">return</span> <span class="n">row</span>
+</pre></div>
+</div>
+<p>Okey, now we have our classifier ready, let’s use it to our data.</p>
+<p>First, we need to read our Travel Time data from Helsinki into memory from the GeoJSON file that <a class="reference external" href="Lesson4-geometric-operations.html">we prepared earlier</a> with overlay analysis.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fp</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;/home/geo/TravelTimes_to_5975375_RailwayStation_Helsinki.geojson&quot;</span>
+
+<span class="c1"># Read the GeoJSON file similarly as Shapefile</span>
+<span class="n">acc</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+
+<span class="c1"># Let&#39;s see what we have</span>
+<span class="n">acc</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Okey we have plenty of different variables (see <a class="reference external" href="http://blogs.helsinki.fi/accessibility/helsinki-region-travel-time-matrix-2015/">from here the description</a>
+for all attributes) but what we are
+interested in are columns called <code class="docutils literal notranslate"><span class="pre">pt_r_tt</span></code> which is telling the time in minutes that it takes to reach city center
+from different parts of the city, and <code class="docutils literal notranslate"><span class="pre">walk_d</span></code> that tells the network distance by roads to reach city center
+from different parts of the city (almost equal to Euclidian distance).</p>
+<p><strong>The NoData values are presented with value -1</strong>. Thus we need to remove those first.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">acc</span> <span class="o">=</span> <span class="n">acc</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">acc</span><span class="p">[</span><span class="s1">&#39;pt_r_tt&#39;</span><span class="p">]</span> <span class="o">&gt;=</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Let’s plot it and see how our data looks like.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="go"># Plot using 9 classes and classify the values using &quot;Fisher Jenks&quot; classification</span>
+<span class="gp">In [1]: </span><span class="n">acc</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;pt_r_tt&quot;</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s2">&quot;Fisher_Jenks&quot;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdYlBu&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">);</span>
+
+<span class="go"># Use tight layour</span>
+<span class="gp">In [1]: </span><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="savefig/pt_time.png"><img alt="savefig/pt_time.png" src="savefig/pt_time.png" style="width: 7in;" /></a>
+<p>Okey so from this figure we can see that the travel times are lower in the south where
+the city center is located but there are some areas of “good” accessibility also in some other areas
+(where the color is red).</p>
+<p>Let’s also make a plot about walking distances</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">acc</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;walk_d&quot;</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s2">&quot;Fisher_Jenks&quot;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdYlBu&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">);</span>
+
+<span class="go"># Use tight layour</span>
+<span class="gp">In [1]: </span><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="savefig/walk_distances.png"><img alt="savefig/walk_distances.png" src="savefig/walk_distances.png" style="width: 7in;" /></a>
+<p>Okey, from here we can see that the walking distances (along road network) reminds
+more or less Euclidian distances.</p>
+<p>Let’s finally do our classification based on two criteria
+and find out grid cells where the <strong>travel time is lower or equal to 20 minutes</strong> but they are further away
+<strong>than 4 km (4000 meters) from city center</strong>.</p>
+<p>Let’s create an empty column for our classification results called “Suitable_area”.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">acc</span><span class="p">[</span><span class="s2">&quot;Suitable_area&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+</pre></div>
+</div>
+<p>Now we are ready to apply our custom classifier to our data with our own criteria.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">acc</span> <span class="o">=</span> <span class="n">acc</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">customClassifier2</span><span class="p">,</span> <span class="n">src_col1</span><span class="o">=</span><span class="s1">&#39;pt_r_tt&#39;</span><span class="p">,</span> <span class="n">src_col2</span><span class="o">=</span><span class="s1">&#39;walk_d&#39;</span><span class="p">,</span> <span class="n">threshold1</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">threshold2</span><span class="o">=</span><span class="mi">4000</span><span class="p">,</span> <span class="n">output_col</span><span class="o">=</span><span class="s2">&quot;Suitable_area&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s see what we got.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">acc</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Okey we have new values in <code class="docutils literal notranslate"><span class="pre">Suitable_area</span></code> .column.</p>
+<p>How many Polygons are suitable for us? Let’s find out by using a Pandas function called <code class="docutils literal notranslate"><span class="pre">value_counts()</span></code> that return the count of
+different values in our column.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">acc</span><span class="p">[</span><span class="s1">&#39;Suitable_area&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Okey so there seems to be nine suitable locations for us where we can try to find an appartment to buy
+Let’s see where they are located.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Plot</span>
+<span class="gp">In [1]: </span><span class="n">acc</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;Suitable_area&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">);</span>
+
+<span class="go"># Use tight layour</span>
+<span class="gp">In [1]: </span><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="savefig/suitable_areas.png"><img alt="savefig/suitable_areas.png" src="savefig/suitable_areas.png" style="width: 7in;" /></a>
+<p>A-haa, okey so we can see that suitable places for us with our criteria seem to be located in the
+eastern part from the city center. Actually, those locations are along the metro line which makes them
+good locations in terms of travel time to city center since metro is really fast travel mode.</p>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<p><strong>Task:</strong></p>
+<p class="last">Try to change your classification criteria and see how your results change! What places would be
+suitable for you to buy an apartment in Helsinki region? You can also change the travel mode and see how
+they change the results.</p>
+</div>
+</div>
+<div class="section" id="classification-based-on-common-classifiers">
+<h3>Classification based on common classifiers<a class="headerlink" href="#classification-based-on-common-classifiers" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="http://pysal.readthedocs.io/en/latest/">Pysal</a> -module is an extensive Python library including various functions and tools to
+do spatial data analysis. It also includes all of the most common data classifiers that are used commonly e.g. when visualizing data.
+Available map classifiers in pysal -module are (<a class="reference external" href="http://pysal.readthedocs.io/en/latest/library/esda/mapclassify.html">see here for more details</a>):</p>
+<blockquote>
+<div><ul class="simple">
+<li>Box_Plot</li>
+<li>Equal_Interval</li>
+<li>Fisher_Jenks</li>
+<li>Fisher_Jenks_Sampled</li>
+<li>HeadTail_Breaks</li>
+<li>Jenks_Caspall</li>
+<li>Jenks_Caspall_Forced</li>
+<li>Jenks_Caspall_Sampled</li>
+<li>Max_P_Classifier</li>
+<li>Maximum_Breaks</li>
+<li>Natural_Breaks</li>
+<li>Quantiles</li>
+<li>Percentiles</li>
+<li>Std_Mean</li>
+<li>User_Defined</li>
+</ul>
+</div></blockquote>
+<p>Let’s apply one of those classifiers into our data and classify the travel times by public transport into 9 classes.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">pysal</span> <span class="kn">as</span> <span class="nn">ps</span>
+
+<span class="go"># Define the number of classes</span>
+<span class="gp">In [1]: </span><span class="n">n_classes</span> <span class="o">=</span> <span class="mi">9</span>
+</pre></div>
+</div>
+<p>The classifier needs to be initialized first with <code class="docutils literal notranslate"><span class="pre">make()</span></code> function that takes the number of desired classes as input parameter.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Create a Natural Breaks classifier</span>
+<span class="gp">In [1]: </span><span class="n">classifier</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="n">Natural_Breaks</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="n">n_classes</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now we can apply that classifier into our data quite similarly as in our previous examples.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Classify the data</span>
+<span class="gp">In [1]: </span><span class="n">classifications</span> <span class="o">=</span> <span class="n">acc</span><span class="p">[[</span><span class="s1">&#39;pt_r_tt&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">classifier</span><span class="p">)</span>
+
+<span class="go"># Let&#39;s see what we have</span>
+<span class="gp">In [1]: </span><span class="n">classifications</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Okey, so we have a DataFrame where our input column was classified into 9 different classes (numbers 1-9) based on <a class="reference external" href="http://wiki-1-1930356585.us-east-1.elb.amazonaws.com/wiki/index.php/Jenks_Natural_Breaks_Classification">Natural Breaks classification</a>.</p>
+<p>Now we want to join that reclassification into our original data but let’s first rename the column so that we recognize it later on.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Rename the column so that we know that it was classified with natural breaks</span>
+<span class="gp">In [1]: </span><span class="n">classifications</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;nb_pt_r_tt&#39;</span><span class="p">]</span>
+
+<span class="go"># Join with our original data (here index is the key</span>
+<span class="gp">In [1]: </span><span class="n">acc</span> <span class="o">=</span> <span class="n">acc</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">classifications</span><span class="p">)</span>
+
+<span class="go"># Let&#39;s see how our data looks like</span>
+<span class="gp">In [1]: </span><span class="n">acc</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Great, now we have those values in our accessibility GeoDataFrame. Let’s visualize the results and see how they look.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Plot</span>
+<span class="gp">In [1]: </span><span class="n">acc</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;nb_pt_r_tt&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="bp">True</span><span class="p">);</span>
+
+<span class="go"># Use tight layour</span>
+<span class="gp">In [1]: </span><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="savefig/natural_breaks_pt_accessibility.png"><img alt="savefig/natural_breaks_pt_accessibility.png" src="savefig/natural_breaks_pt_accessibility.png" style="width: 7in;" /></a>
+<p>And here we go, now we have a map where we have used one of the common classifiers to classify our data into 9 classes.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="geometric-operations.html" class="btn btn-neutral float-right" title="Geometric operations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="lecture.html" class="btn btn-neutral" title="Lecture" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Henrikki Tenkanen
+      Last updated on Nov 26, 2017.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+    <p> <br/> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /> </a></p>
+     
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: 2017
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="reclassify.html">2017</a></dd>
+            <dd><a href="../../../develop/index.html">develop</a></dd>
+            <dd><a href="../../../master/index.html">master</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

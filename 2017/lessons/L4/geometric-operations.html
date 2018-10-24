@@ -1,0 +1,568 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-88382509-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Geometric operations &mdash; Geo-Python - AutoGIS  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Exercise 4" href="ex-4.html" />
+    <link rel="prev" title="Data reclassification" href="reclassify.html" />
+    <link href="../../_static/geo-python.css" rel="stylesheet" type="text/css">
+     
+
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Geo-Python - AutoGIS
+          
+
+          
+            
+            <img src="../../_static/logo_hy_geo_135.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2017
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Course information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/course-info.html">General info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/Installing_Anacondas_GIS.html">Installing Python + GIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/License-terms.html">License and terms of usage</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 1</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L1/Intro-Python-GIS.html">Introduction to Python GIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1/overview.html">Lesson overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1/lecture.html">Lecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1/Geometric-Objects.html">Geometric Objects - Spatial Data Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1/ex-1.html">Exercise 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1/exercise-1-hints.html">Exercise 1 hints</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 2</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L2/overview.html">Lesson 2 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/lecture.html">Lecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/geopandas-basics.html">Introduction to Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/projections.html">Map projections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/ex-2.html">Exercise 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/exercise-2-hints.html">Exercise 2 hints</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 3</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L3/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L3/lecture.html">Lecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L3/geocoding.html">Geocoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L3/point-in-polygon.html">Point in Polygon &amp; Intersect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L3/spatial-join.html">Spatial join</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L3/nearest-neighbour.html">Nearest Neighbour Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L3/ex-3.html">Exercise 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L3/exercise-3-hints.html">Exercise 3 hints</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 4</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lecture.html">Lecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reclassify.html">Data reclassification</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Geometric operations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overlay-analysis">Overlay analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#aggregating-data">Aggregating data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#simplifying-geometries">Simplifying geometries</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ex-4.html">Exercise 4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercise-4-hints.html">Exercise 4 hints</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 5</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L5/overview.html">Lesson 5 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/lecture.html">Lecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/static-maps.html">Static maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/interactive-map-bokeh.html">Interactive maps with Bokeh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/advanced-bokeh.html">Advanced plotting with Bokeh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/interactive-map-folium.html">Interactive maps on Leaflet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/share-on-github.html">Sharing interactive plots on GitHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/ex-5.html">Exercise 5</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/exercise-5-hints.html">Exercise 5 hints</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 6</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L6/01-overview.html">Lesson 6 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L6/lecture.html">Lecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L6/02-pyqgis.html">Python in QGIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L6/03-processing-toolbox.html">The QGIS Processing Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L6/04-processing-script.html">Processing toolbox scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L6/04-processing-script.html#run-the-script">Run the script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L6/ex-6.html">Exercise 6</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 7</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L7/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L7/lecture.html">Lecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L7/retrieve-osm-data.html">Retrieving OpenStreetMap data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L7/network-analysis.html">Network analysis in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L7/ex-7.html">Exercise 7</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L7/exercise-7-hints.html">Exercise 7 hints</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Final Assignment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../FA/final-assignment.html">Final assignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FA/fa-hints.html">Final Assignment hints</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Geo-Python - AutoGIS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Geometric operations</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/Automating-GIS-processes/2017/blob/2017lessons/L4/geometric-operations.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+
+
+    
+    
+
+
+
+    <p class="scv-banner scv-sphinx_rtd_theme"><b>Warning:</b> This document is for the development version of Geo-Python - AutoGIS.</p>
+<div class="section" id="geometric-operations">
+<h1>Geometric operations<a class="headerlink" href="#geometric-operations" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overlay-analysis">
+<h2>Overlay analysis<a class="headerlink" href="#overlay-analysis" title="Permalink to this headline">¶</a></h2>
+<p>The aim here is to make an overlay analysis where we select only specific polygon cells from the data
+based on the borders of municipality of Helsinki.</p>
+<p>Let’s first read the data.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">shapely.speedups</span>
+
+<span class="c1"># Let&#39;s enable speedups to make queries faster</span>
+<span class="n">shapely</span><span class="o">.</span><span class="n">speedups</span><span class="o">.</span><span class="n">enable</span><span class="p">()</span>
+
+<span class="c1"># File paths</span>
+<span class="n">border_fp</span> <span class="o">=</span> <span class="s2">&quot;/home/geo/data/Helsinki_borders.shp&quot;</span>
+<span class="n">grid_fp</span> <span class="o">=</span> <span class="s2">&quot;/home/geo/data/TravelTimes_to_5975375_RailwayStation.shp&quot;</span>
+
+<span class="c1"># Read files</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">grid_fp</span><span class="p">)</span>
+<span class="n">hel</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">border_fp</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s check that the coordinate systems match.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">hel</span><span class="o">.</span><span class="n">crs</span>
+<span class="gh">Out[1]: </span><span class="go">{&#39;init&#39;: &#39;epsg:3067&#39;}</span>
+
+<span class="gp">In [2]: </span><span class="n">grid</span><span class="o">.</span><span class="n">crs</span>
+<span class="go">                              Out[2]: {&#39;init&#39;: &#39;epsg:3067&#39;}</span>
+</pre></div>
+</div>
+<p>Indeed, they do. This is pre-srequisite to conduct spatial operations between the layers (as their coordinates need to match).</p>
+<p>Let’s see how our datasets look like. We will use the Helsinki municipality layer as our basemap and
+plot the other layer on top of that.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [3]: </span><span class="n">basemap</span> <span class="o">=</span> <span class="n">hel</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+
+<span class="gp">In [4]: </span><span class="n">grid</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">basemap</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.02</span><span class="p">);</span>
+
+<span class="go"># Use tight layout</span>
+</pre></div>
+</div>
+<p>Let’s do an overlay analysis and select polygons from grid that intersect with our Helsinki layer.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This can be a slow procedure with less powerful computer. There is a way to
+overcome this issue by doing the analysis <strong>in batches</strong> which is explained below, see the <a class="reference internal" href="#performance-tip">performance-tip</a>.</p>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="n">result</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">overlay</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">hel</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;intersection&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s plot our data and see what we have.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [6]: </span><span class="n">result</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">)</span>
+<span class="gh">Out[6]: </span><span class="go">&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f036ef74b38&gt;</span>
+
+<span class="gp">In [7]: </span><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/helsinki_grid_borders_intersect.png"><img alt="../../_images/helsinki_grid_borders_intersect.png" src="../../_images/helsinki_grid_borders_intersect.png" style="width: 7in;" /></a>
+<p>Cool! Now as a result we have only those grid cells included that intersect with the Helsinki borders
+and the grid cells are clipped based on the boundary.</p>
+<p>Whatabout the data attributes? Let’s see what we have.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [8]: </span><span class="n">result</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[8]: </span><span class="go"></span>
+<span class="go">     car_m_d                        ...                                                                   geometry</span>
+<span class="go">94     29476                        ...                          POLYGON ((402250.0001322526 6685750.000039577,...</span>
+<span class="go">95     29456                        ...                          POLYGON ((402367.8898583531 6685750.000039573,...</span>
+<span class="go">96     36772                        ...                          POLYGON ((403250.000132058 6685750.000039549, ...</span>
+<span class="go">97     36898                        ...                          POLYGON ((403456.4840652301 6685750.000039542,...</span>
+<span class="go">193    29411                        ...                          POLYGON ((402000.0001323065 6685500.000039622,...</span>
+
+<span class="go">[5 rows x 19 columns]</span>
+</pre></div>
+</div>
+<p>Nice! Now we have attributes from both layers included.</p>
+<p>Let’s see the length of the GeoDataFrame.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="gh">Out[9]: </span><span class="go">3826</span>
+</pre></div>
+</div>
+<p>And the original data.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [10]: </span><span class="nb">len</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+<span class="gh">Out[10]: </span><span class="go">13231</span>
+</pre></div>
+</div>
+<p>Let’s save our result grid as a GeoJSON file that is another commonly used file
+format nowadays for storing spatial data.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">resultfp</span> <span class="o">=</span> <span class="s2">&quot;/home/geo/data/TravelTimes_to_5975375_RailwayStation_Helsinki.geojson&quot;</span>
+
+<span class="c1"># Use GeoJSON driver</span>
+<span class="n">result</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">resultfp</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s2">&quot;GeoJSON&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>There are many more examples for different types of overlay analysis in <a class="reference external" href="http://geopandas.org/set_operations.html">Geopandas documentation</a> where you can go and learn more.</p>
+<div class="admonition hint" id="performance-tip">
+<p class="first admonition-title">Hint</p>
+<p>Overlay analysis such as ours with around 13 000 polygons is quite CPU intensive task which can be quite slow to execute. Luckily, doing such analysis in <em>batches</em> improves the
+performance dramatically (spatial lookups are much quicker that way). The code snippet below shows how to do it with batch size of 10 rows which takes only around 1.5 minutes to run the analysis in our computer instance.</p>
+<div class="code python last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># File paths</span>
+<span class="n">border_fp</span> <span class="o">=</span> <span class="s2">&quot;/home/geo/data/Helsinki_borders.shp&quot;</span>
+<span class="n">grid_fp</span> <span class="o">=</span> <span class="s2">&quot;/home/geo/data/TravelTimes_to_5975375_RailwayStation.shp&quot;</span>
+
+<span class="c1"># Read files</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">grid_fp</span><span class="p">)</span>
+<span class="n">hel</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">border_fp</span><span class="p">)</span>
+
+<span class="c1"># Batch size</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="c1"># Number of iterations (round up with np.ceil) and convert to integer</span>
+<span class="n">row_cnt</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+<span class="n">iterations</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">row_cnt</span> <span class="o">/</span> <span class="n">b</span><span class="p">))</span>
+
+<span class="c1"># Final result</span>
+<span class="n">final</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">()</span>
+
+<span class="c1"># Set the start and end index according the batch size</span>
+<span class="n">start_idx</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">end_idx</span> <span class="o">=</span> <span class="n">start_idx</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="k">for</span> <span class="n">iteration</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iterations</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Iteration: </span><span class="si">%s</span><span class="s2">/</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">iteration</span><span class="p">,</span> <span class="n">iterations</span><span class="p">))</span>
+
+    <span class="c1"># Make an overlay analysis using a subset of the rows</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">overlay</span><span class="p">(</span><span class="n">grid</span><span class="p">[</span><span class="n">start_idx</span><span class="p">:</span><span class="n">end_idx</span><span class="p">],</span> <span class="n">hel</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;intersection&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Append the overlay result to final GeoDataFrame</span>
+    <span class="n">final</span> <span class="o">=</span> <span class="n">final</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+    <span class="c1"># Update indices</span>
+    <span class="n">start_idx</span> <span class="o">+=</span> <span class="n">b</span>
+    <span class="n">end_idx</span> <span class="o">=</span> <span class="n">start_idx</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="c1"># Save the output as GeoJSON</span>
+<span class="n">outfp</span> <span class="o">=</span> <span class="s2">&quot;/home/geo/data/overlay_analysis_speedtest.geojson&quot;</span>
+<span class="n">final</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">outfp</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s2">&quot;GeoJSON&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="aggregating-data">
+<h2>Aggregating data<a class="headerlink" href="#aggregating-data" title="Permalink to this headline">¶</a></h2>
+<p>Aggregating data can also be useful sometimes. What we mean by aggregation is that we basically merge Geometries into together by some common identifier.
+Suppose we are interested in studying continents, but we only have country-level data like the country dataset.
+By aggregation we would convert this into a continent-level dataset.</p>
+<p>Let’s aggregate our travel time data by car travel times, i.e. the grid cells that have the same travel time to Railway Station will be merged together.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="n">result_aggregated</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">dissolve</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;car_r_t&quot;</span><span class="p">)</span>
+
+<span class="gp">In [11]: </span><span class="n">result_aggregated</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Let’s compare the number of cells in the layers before and after the aggregation.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+<span class="gp">In [11]: </span><span class="nb">len</span><span class="p">(</span><span class="n">result_aggregated</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Indeed the number of rows in our data has decreased and the Polygons were merged together.</p>
+</div>
+<div class="section" id="simplifying-geometries">
+<h2>Simplifying geometries<a class="headerlink" href="#simplifying-geometries" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes it might be useful to be able to simplify geometries. This could be something to consider for example
+when you have very detailed spatial features that cover the whole world. If you make a map that covers the whole
+world, it is unnecessary to have really detailed geometries because it is simply impossible to see those small details
+from your map. Furthermore, it takes a long time to actually render a large quantity of features into a map. Here, we
+will see how it is possible to simplify geometric features in Python by continuing the example from the previous tutorial
+on data classification.</p>
+<p>What we will do next is to only include the big lakes and simplify them slightly so that they are not as detailed.</p>
+<ul class="simple">
+<li>Let’s start by reading the lakes data into Geopandas that we saved earlier.</li>
+</ul>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lakes_fp</span> <span class="o">=</span> <span class="s2">&quot;/home/geo/lakes.shp&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="n">lakes</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">lakes_fp</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Include only big lakes</li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="n">big_lakes</span> <span class="o">=</span> <span class="n">lakes</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">lakes</span><span class="p">[</span><span class="s1">&#39;small_big&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Let’s see how they look</li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="n">big_lakes</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">);</span>
+
+<span class="gp">In [11]: </span><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="savefig/big_lakes.png"><img alt="savefig/big_lakes.png" src="savefig/big_lakes.png" style="width: 7in;" /></a>
+<p>The Polygons that are presented there are quite detailed, let’s generalize them a bit.</p>
+<ul class="simple">
+<li>Generalization can be done easily by using a Shapely function called <code class="docutils literal notranslate"><span class="pre">.simplify()</span></code>. The <code class="docutils literal notranslate"><span class="pre">tolerance</span></code> parameter is adjusts how much</li>
+</ul>
+<p>geometries should be generalized. <strong>The tolerance value is tied to the coordinate system of the geometries</strong>.
+Thus, here the value we pass is 300 <strong>meters</strong>.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="n">big_lakes</span><span class="p">[</span><span class="s1">&#39;geom_gen&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">big_lakes</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span><span class="n">tolerance</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Let’s set the geometry to be our new column, and plot the results.</li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="n">big_lakes</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">big_lakes</span><span class="p">[</span><span class="s1">&#39;geom_gen&#39;</span><span class="p">]</span>
+
+<span class="gp">In [11]: </span><span class="n">big_lakes</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+
+<span class="gp">In [11]: </span><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="savefig/big_lakes_simplified.png"><img alt="savefig/big_lakes_simplified.png" src="savefig/big_lakes_simplified.png" style="width: 7in;" /></a>
+<p>Nice! As a result, now we have simplified our Polygons slightly (although the differences might be a bit hard to spot).</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ex-4.html" class="btn btn-neutral float-right" title="Exercise 4" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="reclassify.html" class="btn btn-neutral" title="Data reclassification" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Henrikki Tenkanen
+      Last updated on Nov 26, 2017.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+    <p> <br/> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /> </a></p>
+     
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: 2017
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="geometric-operations.html">2017</a></dd>
+            <dd><a href="../../../develop/index.html">develop</a></dd>
+            <dd><a href="../../../master/index.html">master</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,562 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-88382509-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Geocoding &mdash; Geo-Python - AutoGIS  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Point in Polygon &amp; Intersect" href="point-in-polygon.html" />
+    <link rel="prev" title="Lecture" href="lecture.html" />
+    <link href="../../_static/geo-python.css" rel="stylesheet" type="text/css">
+     
+
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Geo-Python - AutoGIS
+          
+
+          
+            
+            <img src="../../_static/logo_hy_geo_135.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2017
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Course information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/course-info.html">General info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/Installing_Anacondas_GIS.html">Installing Python + GIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/License-terms.html">License and terms of usage</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 1</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L1/Intro-Python-GIS.html">Introduction to Python GIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1/overview.html">Lesson overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1/lecture.html">Lecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1/Geometric-Objects.html">Geometric Objects - Spatial Data Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1/ex-1.html">Exercise 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1/exercise-1-hints.html">Exercise 1 hints</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 2</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L2/overview.html">Lesson 2 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/lecture.html">Lecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/geopandas-basics.html">Introduction to Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/projections.html">Map projections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/ex-2.html">Exercise 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/exercise-2-hints.html">Exercise 2 hints</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 3</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lecture.html">Lecture</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Geocoding</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview-of-geocoders">Overview of Geocoders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#geocoding-in-geopandas">Geocoding in Geopandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#table-join">Table join</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="point-in-polygon.html">Point in Polygon &amp; Intersect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spatial-join.html">Spatial join</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nearest-neighbour.html">Nearest Neighbour Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ex-3.html">Exercise 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercise-3-hints.html">Exercise 3 hints</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 4</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L4/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L4/lecture.html">Lecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L4/reclassify.html">Data reclassification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L4/geometric-operations.html">Geometric operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L4/ex-4.html">Exercise 4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L4/exercise-4-hints.html">Exercise 4 hints</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 5</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L5/overview.html">Lesson 5 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/lecture.html">Lecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/static-maps.html">Static maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/interactive-map-bokeh.html">Interactive maps with Bokeh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/advanced-bokeh.html">Advanced plotting with Bokeh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/interactive-map-folium.html">Interactive maps on Leaflet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/share-on-github.html">Sharing interactive plots on GitHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/ex-5.html">Exercise 5</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/exercise-5-hints.html">Exercise 5 hints</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 6</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L6/01-overview.html">Lesson 6 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L6/lecture.html">Lecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L6/02-pyqgis.html">Python in QGIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L6/03-processing-toolbox.html">The QGIS Processing Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L6/04-processing-script.html">Processing toolbox scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L6/04-processing-script.html#run-the-script">Run the script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L6/ex-6.html">Exercise 6</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 7</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L7/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L7/lecture.html">Lecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L7/retrieve-osm-data.html">Retrieving OpenStreetMap data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L7/network-analysis.html">Network analysis in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L7/ex-7.html">Exercise 7</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L7/exercise-7-hints.html">Exercise 7 hints</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Final Assignment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../FA/final-assignment.html">Final assignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FA/fa-hints.html">Final Assignment hints</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Geo-Python - AutoGIS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Geocoding</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/Automating-GIS-processes/2017/blob/2017lessons/L3/geocoding.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+
+
+    
+    
+
+
+
+    <p class="scv-banner scv-sphinx_rtd_theme"><b>Warning:</b> This document is for the development version of Geo-Python - AutoGIS.</p>
+<div class="section" id="geocoding">
+<h1>Geocoding<a class="headerlink" href="#geocoding" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview-of-geocoders">
+<h2>Overview of Geocoders<a class="headerlink" href="#overview-of-geocoders" title="Permalink to this headline">¶</a></h2>
+<p>Geocoding, i.e. converting addresses into coordinates or vice versa, is
+a really common GIS task. Luckily, in Python there are nice libraries
+that makes the geocoding really easy. One of the libraries that can do
+the geocoding for us is
+<a class="reference external" href="http://geopy.readthedocs.io/en/1.11.0/">geopy</a> that makes it easy to
+locate the coordinates of addresses, cities, countries, and landmarks
+across the globe using third-party geocoders and other data sources.</p>
+<p>As said, <strong>Geopy</strong> uses third-party geocoders - i.e. services that does
+the geocoding - to locate the addresses and it works with multiple
+different service providers such as:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://resources.arcgis.com/en/help/arcgis-rest-api/">ESRI
+ArcGIS</a></li>
+<li><a class="reference external" href="http://developer.baidu.com/map/webservice-geocoding.htm">Baidu
+Maps</a></li>
+<li><a class="reference external" href="http://www.microsoft.com/maps/developers/web.aspx">Bing</a></li>
+<li><a class="reference external" href="http://geocoder.us/">geocoder.us</a></li>
+<li><a class="reference external" href="https://www.geocodefarm.com/">GeocodeFarm</a></li>
+<li><a class="reference external" href="http://www.geonames.org/">GeoNames</a></li>
+<li><a class="reference external" href="https://developers.google.com/maps/documentation/geocoding/">Google Geocoding API
+(V3)</a></li>
+<li><a class="reference external" href="http://api.ign.fr/tech-docs-js/fr/developpeur/search.html">IGN
+France</a></li>
+<li><a class="reference external" href="http://www.mapquestapi.com/geocoding/">Mapquest</a></li>
+<li><a class="reference external" href="https://mapzen.com/projects/search/">Mapzen Search</a></li>
+<li><a class="reference external" href="http://navidata.pl">NaviData</a></li>
+<li><a class="reference external" href="http://geocoder.opencagedata.com/api.html">OpenCage</a></li>
+<li><a class="reference external" href="http://developer.mapquest.com/web/products/open/geocoding-service">OpenMapQuest</a></li>
+<li><a class="reference external" href="https://wiki.openstreetmap.org/wiki/Nominatim">Open Street Map Nominatim</a></li>
+<li><a class="reference external" href="https://smartystreets.com/products/liveaddress-api">SmartyStreets</a></li>
+<li><a class="reference external" href="http://what3words.com/api/reference">What3words</a></li>
+<li><a class="reference external" href="http://api.yandex.com/maps/doc/intro/concepts/intro.xml">Yandex</a></li>
+</ul>
+<p>Thus, there are plenty of geocoders where to choose from! However, for most of these services you might need to
+request so called API access-keys from the service provider to be able to use the service.</p>
+<p>Luckily, Nominatim, which is a geocoder based on OpenStreetMap data does not require a API key to use their service
+if it is used for small scale geocoding jobs as the service is rate-limited to 1 request per second (3600 / hour).
+As we are only making a small set of queries, we can do the geocoding by using Nominatim.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li><strong>Note 1:</strong> If you need to do larger scale geocoding jobs, use and request an API key to some of the geocoders listed above.</li>
+<li><strong>Note 2:</strong> There are also other Python modules in addition to geopy that can do geocoding such as <a class="reference external" href="http://geocoder.readthedocs.io/">Geocoder</a>.</li>
+</ul>
+</div>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">You can get your access keys to e.g. Google Geocoding API from <a class="reference external" href="https://code.google.com/apis/console">Google APIs console</a> by creating a Project
+and enabling a that API from <a class="reference external" href="https://console.developers.google.com/apis/library">Library</a>. Read a
+short introduction about using Google API Console from <a class="reference external" href="https://developers.googleblog.com/2016/03/introducing-google-api-console.html">here</a>.</p>
+</div>
+</div>
+<div class="section" id="geocoding-in-geopandas">
+<h2>Geocoding in Geopandas<a class="headerlink" href="#geocoding-in-geopandas" title="Permalink to this headline">¶</a></h2>
+<p>It is possible to do geocoding in Geopandas using its integrated
+functionalities of geopy. Geopandas has a function called <code class="docutils literal notranslate"><span class="pre">geocode()</span></code>
+that can geocode a list of addresses (strings) and return a GeoDataFrame
+containing the resulting point objects in <code class="docutils literal notranslate"><span class="pre">geometry</span></code> column. Nice,
+isn’t it! Let’s try this out.</p>
+<p>Download a text file called <a class="reference external" href="../../_static/data/L3/addresses.txt">addresses.txt</a> that
+contains few addresses around Helsinki Region. The first rows of the
+data looks like following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">id</span><span class="p">;</span><span class="n">addr</span>
+<span class="mi">1000</span><span class="p">;</span><span class="n">Itämerenkatu</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">00101</span> <span class="n">Helsinki</span><span class="p">,</span> <span class="n">Finland</span>
+<span class="mi">1001</span><span class="p">;</span><span class="n">Kampinkuja</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">00100</span> <span class="n">Helsinki</span><span class="p">,</span> <span class="n">Finland</span>
+<span class="mi">1002</span><span class="p">;</span><span class="n">Kaivokatu</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">00101</span> <span class="n">Helsinki</span><span class="p">,</span> <span class="n">Finland</span>
+<span class="mi">1003</span><span class="p">;</span><span class="n">Hermannin</span> <span class="n">rantatie</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">00580</span> <span class="n">Helsinki</span><span class="p">,</span> <span class="n">Finland</span>
+</pre></div>
+</div>
+<p>We have an <code class="docutils literal notranslate"><span class="pre">id</span></code> for each row and an address on column <code class="docutils literal notranslate"><span class="pre">addr</span></code>.</p>
+<ul class="simple">
+<li>Let’s first read the data into a Pandas DataFrame using
+<code class="docutils literal notranslate"><span class="pre">read_csv()</span></code> -function:</li>
+</ul>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import necessary modules</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="k">import</span> <span class="n">Point</span>
+
+<span class="c1"># Filepath</span>
+<span class="n">fp</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;addresses.txt&quot;</span>
+
+<span class="c1"># Read the data</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Let&#39;s take a look of the data</span>
+<span class="gp">In [1]: </span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[1]: </span><span class="go"></span>
+<span class="go">     id                                           addr</span>
+<span class="go">0  1000       Itämerenkatu 14, 00101 Helsinki, Finland</span>
+<span class="go">1  1001          Kampinkuja 1, 00100 Helsinki, Finland</span>
+<span class="go">2  1002           Kaivokatu 8, 00101 Helsinki, Finland</span>
+<span class="go">3  1003  Hermannin rantatie 1, 00580 Helsinki, Finland</span>
+<span class="go">4  1005     Tyynenmerenkatu 9, 00220 Helsinki, Finland</span>
+</pre></div>
+</div>
+<p>Now we have our data in a Pandas DataFrame and we can geocode our addresses.</p>
+<ul class="simple">
+<li>Let’s</li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Import the geocoding tool</span>
+<span class="gp">In [2]: </span><span class="kn">from</span> <span class="nn">geopandas.tools</span> <span class="kn">import</span> <span class="n">geocode</span>
+
+<span class="go"># Geocode addresses with Nominatim backend</span>
+<span class="gp">In [3]: </span><span class="n">geo</span> <span class="o">=</span> <span class="n">geocode</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;addr&#39;</span><span class="p">],</span> <span class="n">provider</span><span class="o">=</span><span class="s1">&#39;nominatim&#39;</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-3-0311dcae81b6&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">geo</span> <span class="o">=</span> <span class="n">geocode</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;addr&#39;</span><span class="p">],</span> <span class="n">provider</span><span class="o">=</span><span class="s1">&#39;nominatim&#39;</span><span class="p">)</span>
+
+<span class="nn">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/geopandas/tools/geocoding.py</span> in <span class="ni">geocode</span><span class="nt">(strings, provider, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">60</span> 
+<span class="g g-Whitespace">     </span><span class="mi">61</span>     <span class="s2">&quot;&quot;&quot;</span>
+<span class="ne">---&gt; </span><span class="mi">62</span><span class="s2">     return _query(strings, True, provider, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">63</span><span class="s2"> </span>
+<span class="g g-Whitespace">     </span><span class="mi">64</span><span class="s2"> </span>
+
+<span class="nn">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/geopandas/tools/geocoding.py</span> in <span class="ni">_query</span><span class="nt">(data, forward, provider, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">109</span><span class="s2"> def _query(data, forward, provider, **kwargs):</span>
+<span class="g g-Whitespace">    </span><span class="mi">110</span><span class="s2">     # generic wrapper for calls over lists to geopy Geocoders</span>
+<span class="ne">--&gt; </span><span class="mi">111</span><span class="s2">     import geopy</span>
+<span class="g g-Whitespace">    </span><span class="mi">112</span><span class="s2">     from geopy.geocoders.base import GeocoderQueryError</span>
+<span class="g g-Whitespace">    </span><span class="mi">113</span><span class="s2">     from geopy.geocoders import get_geocoder_for_service</span>
+
+<span class="ne">ImportError</span>: No module named &#39;geopy&#39;
+
+<span class="gp">In [4]: </span><span class="n">geo</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-4-fee2bd90ad10&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 geo.head(2)</span>
+
+<span class="go">NameError: name &#39;geo&#39; is not defined</span>
+</pre></div>
+</div>
+<p>And Voilà! As a result we have a GeoDataFrame that contains our original
+address and a ‘geometry’ column containing Shapely Point -objects that
+we can use for exporting the addresses to a Shapefile for example.
+However, the <code class="docutils literal notranslate"><span class="pre">id</span></code> column is not there. Thus, we need to join the
+information from <code class="docutils literal notranslate"><span class="pre">data</span></code> into our new GeoDataFrame <code class="docutils literal notranslate"><span class="pre">geo</span></code>, thus making
+a <strong>Table Join</strong>.</p>
+</div>
+<div class="section" id="table-join">
+<h2>Table join<a class="headerlink" href="#table-join" title="Permalink to this headline">¶</a></h2>
+<p>Table joins are really common procedures when
+doing GIS analyses. As you might remember from our earlier lessons, combining data from different tables based on common
+<code class="docutils literal notranslate"><span class="pre">key</span></code> attribute can be done easily in Pandas/Geopandas using <a class="reference external" href="https://geo-python.github.io/2017/lessons/L6/exercise-6-hints.html?highlight=merge#joining-data-from-one-dataframe-to-another">.merge()</a>
+-function.</p>
+<p>However, sometimes it is useful to join two tables together based on the <strong>index</strong> of those DataFrames. In such case, we assume
+that there is <strong>same number of records</strong> in our DataFrames and that the <strong>order of the records should be the same</strong> in both DataFrames.
+In fact, now we have such a situation as we are geocoding our addresses where the order of the geocoded addresses in <code class="docutils literal notranslate"><span class="pre">geo</span></code> DataFrame is the same
+as in our original <code class="docutils literal notranslate"><span class="pre">data</span></code> DataFrame.</p>
+<p>Hence, we can join those tables together with <code class="docutils literal notranslate"><span class="pre">join()</span></code> -function which merges the two DataFrames together
+based on index by default.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="n">join</span> <span class="o">=</span> <span class="n">geo</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-5-4f19346db1fa&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">join</span> <span class="o">=</span> <span class="n">geo</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;geo&#39; is not defined
+
+<span class="gp">In [6]: </span><span class="n">join</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="go">                                                                                                                                                                                                                                                                         ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-6-5af4a6625532&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 join.head()</span>
+
+<span class="go">NameError: name &#39;join&#39; is not defined</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Let’s also check the data type of our new <code class="docutils literal notranslate"><span class="pre">join</span></code> table.</li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [7]: </span><span class="nb">type</span><span class="p">(</span><span class="n">join</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-7-d96e6640ceab&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="nb">type</span><span class="p">(</span><span class="n">join</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;join&#39; is not defined
+</pre></div>
+</div>
+<p>As a result we have a new GeoDataFrame called <code class="docutils literal notranslate"><span class="pre">join</span></code> where we now have
+all original columns plus a new column for <code class="docutils literal notranslate"><span class="pre">geometry</span></code>.</p>
+<ul class="simple">
+<li>Now it is easy to save our address points into a Shapefile</li>
+</ul>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Output file path</span>
+<span class="n">outfp</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;/home/geo/addresses.shp&quot;</span>
+
+<span class="c1"># Save to Shapefile</span>
+<span class="n">join</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">outfp</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>That’s it. Now we have successfully geocoded those addresses into Points
+and made a Shapefile out of them. Easy isn’t it!</p>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">Nominatim works relatively nicely if you have well defined and well-known addresses such as the ones that we used in this tutorial.
+However, in some cases, you might not have such well-defined addresses, and you might have e.g. only the name of a museum available.
+In such cases, Nominatim might not provide such good results, and in such cases you might want to use e.g. <a class="reference external" href="https://developers.google.com/maps/documentation/geocoding/">Google Geocoding API (V3)</a>.
+Take a look from last year, <a class="reference external" href="https://automating-gis-processes.github.io/2016/Lesson3-geocoding.html#geocoding-in-geopandas">where we show how to use Google Geocoding API</a> in a similar manner as we used Nominatim here.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="point-in-polygon.html" class="btn btn-neutral float-right" title="Point in Polygon &amp; Intersect" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="lecture.html" class="btn btn-neutral" title="Lecture" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Henrikki Tenkanen
+      Last updated on Nov 26, 2017.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+    <p> <br/> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /> </a></p>
+     
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: 2017
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="geocoding.html">2017</a></dd>
+            <dd><a href="../../../develop/index.html">develop</a></dd>
+            <dd><a href="../../../master/index.html">master</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
