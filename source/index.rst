@@ -57,34 +57,34 @@ The materials are divided into weekly sections that are published at these pages
 | Time           | Theme                           |
 +================+=================================+
 | **Class 1**    | GIS in Python;                  |
-|   30.10.2017   | Spatial data model;             |
+|   29.10.2017   | Spatial data model;             |
 |                | Geometric Objects; Shapely      |
 |                |                                 |
 +----------------+---------------------------------+
 | **Class 2**    | Working with GeoDataFrames;     |
-|  6.11.2017     | Managing projections;           |
+|  5.11.2017     | Managing projections;           |
 |                | Table join;                     |
 |                |                                 |
 +----------------+---------------------------------+
 | **Class 3**    | Geocoding and making spatial    |
-|  13.11.2017    | queries                         |
+|  12.11.2017    | queries                         |
 |                |                                 |
 |                |                                 |
 +----------------+---------------------------------+
 | **Class 4**    | Geometric operations;           |
-|  20.11.2017    | Reclassifying data with Pysal   |
+|  19.11.2017    | Reclassifying data with Pysal   |
 |                |                                 |
 +----------------+---------------------------------+
 | **Class 5**    | Visualization, making static    |
-|  27.11.2017    | and interactive maps            |
+|  26.11.2017    | and interactive maps            |
 |                |                                 |
 +----------------+---------------------------------+
 | **Class 6**    | Using Python programming in     |
-|  4.12.2017     | Quantum GIS                     |
+|  3.12.2017     | QGIS                            |
 |                |                                 |
 +----------------+---------------------------------+
 | **Class 7**    | Network analysis and routing    |
-|  11.12.2017    | in Python (transport modelling) |
+|  10.12.2017    | in Python (transport modelling) |
 |                |                                 |
 +----------------+---------------------------------+
 
@@ -109,6 +109,6 @@ Contents
    lessons/L1/Intro-Python-GIS
    lessons/L1/overview
    lessons/L1/lecture
-   lessons/L1/Geometric-Objects
+   notebooks/L1/geometric-objects.ipynb
    lessons/L1/ex-1
    lessons/L1/exercise-1-hints
