@@ -1,0 +1,9 @@
+name: autogis-environment
+
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - python=3.5
+  - osmnx
