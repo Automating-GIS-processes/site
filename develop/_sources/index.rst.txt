@@ -1,7 +1,7 @@
 
 .. figure:: img/AutoGIS_banner_2017.png
 
-Welcome to Automating GIS-processes 2017!
+Welcome to Automating GIS-processes 2018!
 =========================================
 
 **Automating GIS-processes** -course teaches you how to do different GIS-related tasks in Python programming language. Each lesson is a tutorial with specific topic(s) where the aim is to learn
@@ -57,34 +57,34 @@ The materials are divided into weekly sections that are published at these pages
 | Time           | Theme                           |
 +================+=================================+
 | **Class 1**    | GIS in Python;                  |
-|   30.10.2017   | Spatial data model;             |
+|   29.10.2017   | Spatial data model;             |
 |                | Geometric Objects; Shapely      |
 |                |                                 |
 +----------------+---------------------------------+
 | **Class 2**    | Working with GeoDataFrames;     |
-|  6.11.2017     | Managing projections;           |
+|  5.11.2017     | Managing projections;           |
 |                | Table join;                     |
 |                |                                 |
 +----------------+---------------------------------+
 | **Class 3**    | Geocoding and making spatial    |
-|  13.11.2017    | queries                         |
+|  12.11.2017    | queries                         |
 |                |                                 |
 |                |                                 |
 +----------------+---------------------------------+
 | **Class 4**    | Geometric operations;           |
-|  20.11.2017    | Reclassifying data with Pysal   |
+|  19.11.2017    | Reclassifying data with Pysal   |
 |                |                                 |
 +----------------+---------------------------------+
 | **Class 5**    | Visualization, making static    |
-|  27.11.2017    | and interactive maps            |
+|  26.11.2017    | and interactive maps            |
 |                |                                 |
 +----------------+---------------------------------+
 | **Class 6**    | Using Python programming in     |
-|  4.12.2017     | Quantum GIS                     |
+|  3.12.2017     | QGIS                            |
 |                |                                 |
 +----------------+---------------------------------+
 | **Class 7**    | Network analysis and routing    |
-|  11.12.2017    | in Python (transport modelling) |
+|  10.12.2017    | in Python (transport modelling) |
 |                |                                 |
 +----------------+---------------------------------+
 
