@@ -1,5 +1,5 @@
 
-.. figure:: img/AutoGIS_banner_2017.png
+.. figure:: img/AutoGIS_banner.jpg
 
 Welcome to Automating GIS-processes 2018!
 =========================================
@@ -21,10 +21,11 @@ Typical exercises will involve a brief introduction followed by topical computer
 to relevant questions, some related plots, and/or Python codes you have written or used. You are encouraged to discuss and work together with other students
 on the laboratory exercises, however the laboratory summary write-ups that you submit must be completed individually and must clearly reflect your own work.
 
-.. admonition:: Earlier versions
+.. admonition:: Earlier versions of the course
 
     Older course materials are available at:
 
+        - `2017 <https://automating-gis-processes.github.io/2017/>`__
         - `2016 <https://automating-gis-processes.github.io/2016/>`__
 
     Note, that the contents of the course are updated for each year. Hence, the older course materials may not be used, and they
@@ -38,7 +39,7 @@ on the laboratory exercises, however the laboratory summary write-ups that you s
 .. admonition:: Step by step instructions with cloud computing!
 
     The materials are written in a way that you can follow them step by step exactly as they are written, as long as you use the cloud computing resources that
-    we provide for you (unfortunately **for Uni. Helsinki people** only). Read more about our cloud computing environment from `here <https://github.com/Python-for-geo-people/Lesson-1-Course-Environment/blob/master/Background/course-environment-components.md>`_.
+    we provide for you using `Binder <https://mybinder.readthedocs.io/en/latest/>`__ and `CSC Finland <https://www.csc.fi/>`__ cloud computing resources (for Finnish students).
     If you work from your own computer, **you need to adjust the file paths to the data** accordingly.
 
 .. admonition:: For teachers
