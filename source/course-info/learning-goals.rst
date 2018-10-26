@@ -6,48 +6,49 @@ After each week you should be able to achieve following learning goals.
 +---------------------------------+-------------------------------------------------------------------------------------+
 | Class                           | Learning goals                                                                      |
 +=================================+=====================================================================================+
-| 1.                              |  - Explain the basic concepts of a                                                  |
-|                                 |        1. computer,                                                                 |
-|                                 |        2. a program, and                                                            |
-|                                 |        3. a programming language                                                    |
-|                                 |  - Define & use variables                                                           |
-|                                 |  - Describe the concept of a data type                                              |
-|                                 |  - Know how to determine a data type in Python                                      |
+| 1.                              | At the end of class 1 you should be able to:                                        |
+|                                 |   - Have an idea of what kind of tools are available for doing GIS in Python        |
+|                                 |   - Understand what kind of geometric objects are available and what they are       |
+|                                 |   - Know how to create different kind of geometries using Shapely                   |
+|                                 |   - Know how to read coordinates from a file and create Points based on those       |
 |                                 |                                                                                     |
 +---------------------------------+-------------------------------------------------------------------------------------+
-| 2.                              |  At the end of class 2 you should be able to:                                       |
-|                                 |     - Access your user space in Github.com                                          |
-|                                 |     - Explain the concept of an index value                                         |
-|                                 |     - Use Spyder IDE to create, edit and test scripts                               |
+| 2.                              | At the end of class 2 you should be able to:                                        |
+|                                 |     - Read and write data from/to Shapefile                                         |
+|                                 |     - Create geometries into GeoDataFrame                                           |
+|                                 |     - Change the coordinate reference system of the data                            |
 |                                 |                                                                                     |
 +---------------------------------+-------------------------------------------------------------------------------------+
 | 3.                              |  At the end of class 3 you should be able to:                                       |
-|                                 |    - Create a for loop and use it to repeat a section of code                       |
-|                                 |    - Use if, elif, and else statements to make decisions in their programs          |
-|                                 |    - Explain how values can be compared using comparison operators                  |
+|                                 |    - Do geocoding, i.e. converting addresses into Points (and vice versa)           |
+|                                 |    - Conduct a Point in Polygon queries                                             |
+|                                 |    - Read data from KML file                                                        |
+|                                 |    - Make spatial and table joins between layers                                    |
+|                                 |    - Find the nearest neighbour from Point -objects                                 |
 |                                 |                                                                                     |
 +---------------------------------+-------------------------------------------------------------------------------------+
 | 4.                              |  At the end of class 4 you should be able to:                                       |
-|                                 |    - Explain how functions are used and why they are so useful                      |
-|                                 |    - Create your own functions to calculate an output value based on an input value |
-|                                 |    - Save functions to a script file for future use                                 |
+|                                 |    - Reclassify data based on different criteria (custom or common classifiers)     |
+|                                 |    - Do overlay analysis & select data e.g. based on boundaries of another layer    |
+|                                 |    - Aggregate data & merge geometric objects together, based on common id          |
+|                                 |    - Simplify geometries                                                            |
 |                                 |                                                                                     |
 +---------------------------------+-------------------------------------------------------------------------------------+
 | 5.                              |  At the end of class 5 you should be able to:                                       |
-|                                 |    - Explain what a Python module is and how they can be used                       |
-|                                 |    - Read data into a program from a .csv text file                                 |
-|                                 |    - Do simple data analysis using Numpy and/or Pandas                              |
+|                                 |    - Create a static map with background basemap using Geopandas & contextily       |
+|                                 |    - Create a simple interactive map using either Bokeh or Folium (or both)         |
+|                                 |    - Share your maps (static / interactive) on the internet using GitHub pages      |
 |                                 |                                                                                     |
 +---------------------------------+-------------------------------------------------------------------------------------+
 | 6.                              |  At the end of class 6 you should be able to:                                       |
-|                                 |    - Analyze tabular data in Python (using skills you have learned)                 |
-|                                 |    - Understand common Python errors                                                |
-|                                 |    - Follow a simple set of guidelines to debug programs efficiently                |
+|                                 |    - Retrieve and save data from OpenStreetMap using Python                         |
+|                                 |    - Extract simple street network properties and statistics                        |
+|                                 |    - Do simple route optimization using shortest path algorithm in osmnx / networkx |
 |                                 |                                                                                     |
 +---------------------------------+-------------------------------------------------------------------------------------+
 | 7.                              |  At the end of class 7 you should be able to:                                       |
-|                                 |    - Make basic x-y plots of data                                                   |
-|                                 |    - Manipulate plot formatting                                                     |
-|                                 |    - Save plots as image files                                                      |
+|                                 |    - Create a simple user interface for a script in the QGIS Processing Toolbox     |
+|                                 |    - Run different QGIS algorithms from Python                                      |
+|                                 |    - Find and know how to read the PyQGIS and QGIS Processing documentation online  |
 |                                 |                                                                                     |
 +---------------------------------+-------------------------------------------------------------------------------------+
