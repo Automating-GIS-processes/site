@@ -4,22 +4,27 @@
 Welcome to Automating GIS-processes 2018!
 =========================================
 
-**Automating GIS-processes** -course teaches you how to do different GIS-related tasks in Python programming language. Each lesson is a tutorial with specific topic(s) where the aim is to learn
-how to solve common GIS-related problems and tasks using Python tools. In the lessons we use only publicly available data which can be used and downloaded by anyone anywhere. In this course,
-we assume that you know the basics of Python programming. If Python is not familiar to you, we recommend to start with our earlier course that focuses on learning the basics of Python
-from `geo-python.github.io <https://geo-python.github.io>`_.
+**Automating GIS-processes** -course teaches you how to do different GIS-related tasks in Python programming language.
+Each lesson is a tutorial with specific topic(s) where the aim is to learn how to solve common GIS-related problems and
+tasks using Python tools. We are using only publicly available data which can be used and downloaded by anyone anywhere.
+We also provide a computing environment which allows you to instantly start programming and trying out the materials yourself,
+directly in your browser (no installations needed).
+
+Notice: we assume that you know the basics of Python programming. If Python is not familiar to you, we recommend to start with
+our earlier course that prepares you for this course, and focuses on learning the basics of Python, see `geo-python.github.io <https://geo-python.github.io>`_.
 
 Course format
 -------------
 
-The majority of this course will be spent in front of a computer learning to program in the Python language and working on exercises.
-During Teaching Period I, the Automating GIS-processes and `Introduction to Quantitative Geology <https://github.com/Intro-Quantitative-Geology/Course-information>`_ courses met together and focused on
-`learning to program in Python <https://geo-python.github.io>`_. Previously, both these courses lacked sufficient time for students to properly learn the basic concepts of programming in Python.
+The majority of this course will be spent in front of a computer learning to program with Python programming language and doing practical exercises.
+During Teaching Period I, the Automating GIS-processes and `Introduction to Quantitative Geology <https://introqg.github.io>`_ courses met together and focused on
+`learning the basics of programming with Python <https://geo-python.github.io>`_. Previously, both these courses lacked sufficient time for students to properly learn the basic concepts of programming in Python.
 
-The computer exercises will focus on developing basic programming skills using the Python language and applying those skills to various GIS related problems.
-Typical exercises will involve a brief introduction followed by topical computer-based tasks. At the end of the exercises, you may be asked to submit answers
-to relevant questions, some related plots, and/or Python codes you have written or used. You are encouraged to discuss and work together with other students
-on the laboratory exercises, however the laboratory summary write-ups that you submit must be completed individually and must clearly reflect your own work.
+The computer exercises will focus on developing basic programming skills using Python and applying those skills to various GIS related problems.
+Typical exercises will involve a brief introduction, followed by topical computer-based tasks and exercises. At the end of the exercises, you are asked
+to submit answers to relevant questions, some related plots, and the Python codes you have written.
+You are encouraged to discuss and work together with other students on the laboratory exercises, however the laboratory
+summary write-ups that you submit must be completed individually and must clearly reflect your own work.
 
 .. admonition:: Open Access!
 
@@ -49,7 +54,7 @@ on the laboratory exercises, however the laboratory summary write-ups that you s
 
 Course topics by week
 ---------------------
-See earlier materials from Period I `here <https://geo-python.github.io>`_.
+See earlier materials for learning the basics of Python programming from `here <https://geo-python.github.io>`_.
 
 The materials are divided into weekly sections that are published at these pages every Monday morning. Lessons are held with following schedule:
 
@@ -57,34 +62,34 @@ The materials are divided into weekly sections that are published at these pages
 | Time           | Theme                           |
 +================+=================================+
 | **Class 1**    | GIS in Python;                  |
-|   29.10.2017   | Spatial data model;             |
+|   29.10.2018   | Spatial data model;             |
 |                | Geometric Objects; Shapely      |
 |                |                                 |
 +----------------+---------------------------------+
 | **Class 2**    | Working with GeoDataFrames;     |
-|  5.11.2017     | Managing projections;           |
+|  5.11.2018     | Managing projections;           |
 |                | Table join;                     |
 |                |                                 |
 +----------------+---------------------------------+
 | **Class 3**    | Geocoding and making spatial    |
-|  12.11.2017    | queries                         |
+|  12.11.2018    | queries                         |
 |                |                                 |
 |                |                                 |
 +----------------+---------------------------------+
 | **Class 4**    | Geometric operations;           |
-|  19.11.2017    | Reclassifying data with Pysal   |
+|  19.11.2018    | Reclassifying data with Pysal   |
 |                |                                 |
 +----------------+---------------------------------+
 | **Class 5**    | Visualization, making static    |
-|  26.11.2017    | and interactive maps            |
+|  26.11.2018    | and interactive maps            |
 |                |                                 |
 +----------------+---------------------------------+
 | **Class 6**    | Network analysis and routing    |
-|  3.12.2017     | in Python (transport modelling) |
+|  3.12.2018     | in Python (transport modelling) |
 |                |                                 |
 +----------------+---------------------------------+
 | **Class 7**    | Using Python programming in     |
-|  10.12.2017    | QGIS                            |
+|  10.12.2018    | QGIS                            |
 |                |                                 |
 +----------------+---------------------------------+
 
