@@ -100,7 +100,11 @@ Contents
    :caption: Course information
 
    course-info/course-info
+   course-info/course-environment-components
+   course-info/grading
+   course-info/learning-goals
    course-info/Installing_Anacondas_GIS
+   course-info/resources
    course-info/License-terms
 
 .. toctree::
