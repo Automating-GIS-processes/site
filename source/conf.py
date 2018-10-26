@@ -429,4 +429,4 @@ nbsphinx_allow_errors = True
 
 # Sphinx versioning settings
 scv_show_banner = True
-scv_whitelist_branches = ('master', 'develop', '2017')
+scv_whitelist_branches = ('latest', 'develop', '2017')
