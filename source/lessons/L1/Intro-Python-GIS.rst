@@ -1,13 +1,13 @@
-Introduction to Python GIS
-==========================
+Motivation for the course
+=========================
 
 General overview of the latter part of the course
 -------------------------------------------------
 
-Now as we know `the basics of Python programming <https://geo-python.github.io>`_ we are ready to
+Now as you know `the basics of Python programming <https://geo-python.github.io>`_ it is time to
 apply those skills to different GIS related tasks. During the next
-seven weeks we will learn how to deal with spatial data and analyze it
-using "pure" Python.
+seven weeks you will learn how to deal with spatial data and analyze it
+using Python programming language and various libraries that has been developed for GIS.
 
 Learning objectives
 -------------------
