@@ -21,22 +21,12 @@ Typical exercises will involve a brief introduction followed by topical computer
 to relevant questions, some related plots, and/or Python codes you have written or used. You are encouraged to discuss and work together with other students
 on the laboratory exercises, however the laboratory summary write-ups that you submit must be completed individually and must clearly reflect your own work.
 
-.. admonition:: Earlier versions of the course
-
-    Older course materials are available at:
-
-        - `2017 <https://automating-gis-processes.github.io/2017/>`__
-        - `2016 <https://automating-gis-processes.github.io/2016/>`__
-
-    Note, that the contents of the course are updated for each year. Hence, the older course materials may not be used, and they
-    might be outdated.
-
 .. admonition:: Open Access!
 
     The course is **open for everyone**. The aim of this course is to share the knowledge and help people to get started with their journey for doing GIS more efficiently and in a reproducible manner
     using Python programming.
 
-.. admonition:: Step by step instructions with cloud computing!
+.. admonition:: Step by step instructions with cloud computing
 
     The materials are written in a way that you can follow them step by step exactly as they are written, as long as you use the cloud computing resources that
     we provide for you using `Binder <https://mybinder.readthedocs.io/en/latest/>`__ and `CSC Finland <https://www.csc.fi/>`__ cloud computing resources (for Finnish students).
@@ -46,6 +36,15 @@ on the laboratory exercises, however the laboratory summary write-ups that you s
 
     If you would like to use these materials for your own teaching or develop them further, we highly support that.
     Please read more about how to do it from `here <License-terms.html>`_.
+
+.. admonition:: Earlier versions of the course
+
+    Older course materials are available at:
+        - `2017 <https://automating-gis-processes.github.io/2017/>`__
+        - `2016 <https://automating-gis-processes.github.io/2016/>`__
+
+    Note, that the contents of the course are updated for each year. Hence, the older course materials may not be used, and they
+    might be outdated.
 
 
 Course topics by week
@@ -80,12 +79,12 @@ The materials are divided into weekly sections that are published at these pages
 |  26.11.2017    | and interactive maps            |
 |                |                                 |
 +----------------+---------------------------------+
-| **Class 6**    | Using Python programming in     |
-|  3.12.2017     | QGIS                            |
+| **Class 6**    | Network analysis and routing    |
+|  3.12.2017     | in Python (transport modelling) |
 |                |                                 |
 +----------------+---------------------------------+
-| **Class 7**    | Network analysis and routing    |
-|  10.12.2017    | in Python (transport modelling) |
+| **Class 7**    | Using Python programming in     |
+|  10.12.2017    | QGIS                            |
 |                |                                 |
 +----------------+---------------------------------+
 
