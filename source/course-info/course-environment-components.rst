@@ -43,10 +43,10 @@ and to develop your own code for the course exercises. You can use the cloud com
 Please note that the cloud computing environments are **temporary**, always remember to download your own work (and / or push it to github).
 
 .. figure:: img/LaunchButtons2.png
-   :alt: Launch buttons on the `Lesson 1: a Taste of Python page
+   :alt: Launch buttons on the Lesson 1: Geometric objects - Spatial data model
    :width: 550px
 
-   Launch buttons on the `Lesson 1: a Taste of Python A-taste-of-Python page
+   Launch buttons on the Lesson 1: Geometric objects - Spatial data model
 
 Each interactive lesson and exercise will have a launch button for both Binder and CSC Notebook.
 Both of the environments should work in a similar manner, but we have two options available in case one of the services is not working properly.
