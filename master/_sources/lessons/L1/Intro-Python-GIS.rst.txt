@@ -150,6 +150,7 @@ the module that you need:
       of spatial analysis functions written in Python.
    -  `Geopy <http://geopy.readthedocs.io/en/latest/>`__ --> Geocoding
       library: coordinates to address <-> address to coordinates.
+   -  `Contextily <https://github.com/darribas/contextily>`__ --> Add background basemaps for your (static) map visualizations
    -  `GeoViews <http://geo.holoviews.org/index.html>`__ --> Interactive
       Maps for the web.
    -  `Geoplot <https://github.com/ResidentMario/geoplot>`__ --> High-level geospatial data visualization library for Python.
