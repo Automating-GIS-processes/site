@@ -80,12 +80,12 @@ The materials are divided into weekly sections that are published at these pages
 |  26.11.2017    | and interactive maps            |
 |                |                                 |
 +----------------+---------------------------------+
-| **Class 6**    | Using Python programming in     |
-|  3.12.2017     | QGIS                            |
+| **Class 6**    | Network analysis and routing    |
+|  3.12.2017     | in Python (transport modelling) |
 |                |                                 |
 +----------------+---------------------------------+
-| **Class 7**    | Network analysis and routing    |
-|  10.12.2017    | in Python (transport modelling) |
+| **Class 7**    | Using Python programming in     |
+|  10.12.2017    | QGIS                            |
 |                |                                 |
 +----------------+---------------------------------+
 
