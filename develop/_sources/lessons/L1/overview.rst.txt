@@ -4,7 +4,7 @@ Lesson overview
 In this week's lesson we will introduce you a spatial data model (geometric objects) and some basics of how spatial data
 can be manipulated in pure Python.
 
-1. :doc:`Geometric Objects - Spatial Data Model <../../notebooks/L1/notebooks/geometric-objects.ipynb>`__
+1. `Geometric Objects - Spatial Data Model <../../notebooks/L1/notebooks/geometric-objects.ipynb>`__
 
     -  Overview of Geometric Objects and Shapely -module
     -  Point -object
