@@ -91,7 +91,7 @@ This service is available only for students who are affiliated with Finnish univ
 
 1. Log in
 2. Go to Account
-2. Join Group `Geo-Python` using the joining code: geo-python-tadl4
+2. Join Group `Geo-Python` using the joining code: **geo-python-tadl4**
 
 .. figure:: img/CSC_join_group.png
    :alt: Join Group in CSC Notebooks
