@@ -24,7 +24,7 @@ One good example how to use assertions inside a function is to ensure that the v
 of correct type. It is also common to test value ranges with assert, such as test that values are positive.
 Consider following example that combines these two checks:
 
-.. ipython:: python
+.. code:: python
 
     # A function for summing positive values
     def sum_positive_values(value1, value2):
