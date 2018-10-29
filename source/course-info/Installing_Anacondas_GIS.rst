@@ -34,7 +34,7 @@ Install GIS related packages with conda (and pip) by running in command prompt f
 Many of the GIS packages are bundled with geopandas, but there are a few that requires separate installation.
 As you can see below, many of the GIS packages are available from specific ``channel`` from conda called ``conda-forge``.
 
-.. code::
+.. code:: bash
 
     # Install Geopandas
     conda install -c conda-forge geopandas
@@ -101,7 +101,7 @@ The following have been tested on Ubuntu 16.04. Might work also on Mac (not test
 
 **Install Anaconda 3 and add it to system path**
 
-.. code::
+.. code:: bash
 
     # Download and install Anaconda
     sudo wget https://repo.continuum.io/archive/Anaconda3-4.1.1-Linux-x86_64.sh
@@ -117,7 +117,7 @@ The following have been tested on Ubuntu 16.04. Might work also on Mac (not test
 
 Install GIS related packages with conda (and pip) by running in command prompt following commands (in the same order as they are listed):
 
-.. code::
+.. code:: bash
 
     # Install numpy (v 1.13.1)
     conda install numpy
