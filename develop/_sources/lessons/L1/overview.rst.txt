@@ -12,7 +12,7 @@ can be manipulated in pure Python.
     -  Polygon -object
     -  Geometry collections (optional)
 
-2. :doc:`Exercise 1: Working with geometric objects <ex-1>`
+2. :doc:`Exercise 1: Working with geometric objects <exercise-1>`
 
 Learning goals
 --------------

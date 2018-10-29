@@ -118,7 +118,7 @@ Contents
    lessons/L1/Intro-Python-GIS
    lessons/L1/overview
    notebooks/L1/geometric-objects.ipynb
-   lessons/L1/ex-1
+   lessons/L1/exercise-1
    lessons/L1/exercise-1-hints
 
 
