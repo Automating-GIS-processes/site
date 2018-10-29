@@ -19,7 +19,8 @@ We hope that the materials provided here would be helpful for others. Thus, we s
 
 ## Requirements
 
-Docs are written using [Sphinx](http://www.sphinx-doc.org/en/1.4.9/) with modified version of the [Read The Docs theme](http://docs.readthedocs.io/en/latest/theme.html). [Google Analytics](https://analytics.google.com/)
+Docs are written using [Sphinx](http://www.sphinx-doc.org/en/1.4.9/) with modified version of the [Read The Docs theme](http://docs.readthedocs.io/en/latest/theme.html).
+[Google Analytics](https://analytics.google.com/)
 is used for tracking the usage of the site. Thus for building these pages with Sphinx you need to install following (we recommend 
 installing [conda](http://conda.pydata.org/docs/using/pkgs.html#install-a-package) from [Anaconda Python distribution package](https://www.continuum.io/downloads)):
   
@@ -48,7 +49,13 @@ to write as Markdown but rst makes it possible to include many things that are i
 colored notes or hints etc.). All the .rst -files should be placed into the [/source](/source) -folder which is the directory where Sphinx tries to find the documentation by default. **Those .rst files are also 
 the ones that you want to modify if you desire to make changes to the documents**.
 
-## Building the pages
+## Continuous Integration with Travis CI
+
+[Travis-CI](https://travis-ci.org/) makes it possible to build the GitHub pages automatically whenever a change has been pushed to master.
+It is highly recommendable to use separate branches for developing the materials (such as using `develop` branch) and then merging the changes
+from that branch to `master` using **pull requests**.
+
+## Building the pages manually with sphinx
 
 Unlike Markdown pages (such as this page), Sphinx pages need to be build before you can see the final result. This is because Sphinx produces html pages (into [/docs](/docs) -folder) 
 that can have many nice features such as the navigation bar on the left, efficient search functionality etc. 
