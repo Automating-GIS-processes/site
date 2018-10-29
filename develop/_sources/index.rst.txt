@@ -72,9 +72,9 @@ The materials are divided into weekly sections that are published at these pages
 |                |                                 |
 +----------------+---------------------------------+
 | **Class 3**    | Geocoding and making spatial    |
-|  12.11.2018    | queries                         |
-|                |                                 |
-|                |                                 |
+| Wed 14.11.2018 | queries                         |
+| (note change   |                                 |
+|  in schedule!) |                                 |
 +----------------+---------------------------------+
 | **Class 4**    | Geometric operations;           |
 |  19.11.2018    | Reclassifying data with Pysal   |
