@@ -248,6 +248,38 @@ and running command <code class="docutils literal notranslate"><span class="pre"
 <p>Install GIS related packages with conda (and pip) by running in command prompt following commands.
 Many of the GIS packages are bundled with geopandas, but there are a few that requires separate installation.
 As you can see below, many of the GIS packages are available from specific <code class="docutils literal notranslate"><span class="pre">channel</span></code> from conda called <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install Geopandas</span>
+conda install -c conda-forge geopandas
+
+<span class="c1"># Install geoplot</span>
+conda install -c conda-forge geoplot
+
+<span class="c1"># Install osmnx</span>
+conda install -c conda-forge osmnx
+
+<span class="c1"># Install pysal</span>
+conda install -c conda-forge pysal
+
+<span class="c1"># Install contextily</span>
+conda install -c conda-forge contextily
+
+<span class="c1"># Install rasterio</span>
+conda install -c conda-forge rasterio
+
+<span class="c1"># Install rasterstats</span>
+conda install -c conda-forge rasterstats
+
+<span class="c1"># Install pycrs</span>
+pip install pycrs
+
+<span class="c1"># Install Dash using Pip</span>
+pip install <span class="nv">dash</span><span class="o">==</span><span class="m">0</span>.19.0  <span class="c1"># The core dash backend</span>
+pip install dash-renderer<span class="o">==</span><span class="m">0</span>.11.1  <span class="c1"># The dash front-end</span>
+pip install dash-html-components<span class="o">==</span><span class="m">0</span>.8.0  <span class="c1"># HTML components</span>
+pip install dash-core-components<span class="o">==</span><span class="m">0</span>.14.0  <span class="c1"># Supercharged components</span>
+pip install plotly --upgrade  <span class="c1"># Plotly graphing library</span>
+</pre></div>
+</div>
 <div class="section" id="test-that-everything-works">
 <h3>Test that everything works<a class="headerlink" href="#test-that-everything-works" title="Permalink to this headline">¶</a></h3>
 <p>You can test that the installations have worked by running following commands in your IPython console (comes with mini-conda).</p>
@@ -273,10 +305,52 @@ that is provided by us. Using them requires a few special tricks, <a class="refe
 </div>
 <div class="section" id="install-python-gis-on-linux-mac">
 <h2>Install Python + GIS on Linux / Mac<a class="headerlink" href="#install-python-gis-on-linux-mac" title="Permalink to this headline">¶</a></h2>
-<p>The following have been tested on Ubuntu 16.04. Might work also on Mac (not tested yet).</p>
 <p><strong>Install Anaconda 3 and add it to system path</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Download and install Anaconda</span>
+sudo wget https://repo.continuum.io/archive/Anaconda3-5.3.0-Linux-x86_64.sh
+sudo bash Anaconda3-5.3.0-Linux-x86_64.sh
+
+<span class="c1"># Add Anaconda installation permanently to PATH variable</span>
+nano ~/.bashrc
+
+<span class="c1"># Add following line at the end of the file and save (EDIT ACCORDING YOUR INSTALLATION PATH)</span>
+<span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:/PATH_TO_ANACONDA/anaconda3/bin:/PATH_TO_ANACONDA/anaconda3/lib/python3.7/site-packages
+</pre></div>
+</div>
 <p><strong>Install Python packages</strong></p>
 <p>Install GIS related packages with conda (and pip) by running in command prompt following commands (in the same order as they are listed):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install Geopandas</span>
+conda install -c conda-forge geopandas
+
+<span class="c1"># Install geoplot</span>
+conda install -c conda-forge geoplot
+
+<span class="c1"># Install osmnx</span>
+conda install -c conda-forge osmnx
+
+<span class="c1"># Install pysal</span>
+conda install -c conda-forge pysal
+
+<span class="c1"># Install contextily</span>
+conda install -c conda-forge contextily
+
+<span class="c1"># Install rasterio</span>
+conda install -c conda-forge rasterio
+
+<span class="c1"># Install rasterstats</span>
+conda install -c conda-forge rasterstats
+
+<span class="c1"># Install pycrs</span>
+pip install pycrs
+
+<span class="c1"># Install Dash using Pip</span>
+pip install <span class="nv">dash</span><span class="o">==</span><span class="m">0</span>.19.0  <span class="c1"># The core dash backend</span>
+pip install dash-renderer<span class="o">==</span><span class="m">0</span>.11.1  <span class="c1"># The dash front-end</span>
+pip install dash-html-components<span class="o">==</span><span class="m">0</span>.8.0  <span class="c1"># HTML components</span>
+pip install dash-core-components<span class="o">==</span><span class="m">0</span>.14.0  <span class="c1"># Supercharged components</span>
+pip install plotly --upgrade  <span class="c1"># Plotly graphing library</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="how-to-find-out-which-conda-command-to-use-when-installing-a-package">
 <h2>How to find out which conda -command to use when installing a package?<a class="headerlink" href="#how-to-find-out-which-conda-command-to-use-when-installing-a-package" title="Permalink to this headline">¶</a></h2>
