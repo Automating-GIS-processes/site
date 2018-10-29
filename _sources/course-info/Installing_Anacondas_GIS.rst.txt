@@ -3,10 +3,12 @@ Installing Python + GIS
 
 **How to start doing GIS with Python on your own computer?**
 
-Well, first you need to install Python and necessary Python modules that are used to perform various GIS-tasks. The purpose of this page is to help you
-out installing Python and all those modules into your own computer. Even though it is possible to install Python from their `homepage <https://www.python.org/>`_,
-**we highly recommend using** `Anaconda <https://www.continuum.io/anaconda-overview>`_ which is an open source distribution of the Python and R programming
-languages for large-scale data processing, predictive analytics, and scientific computing, that aims to simplify package management and deployment. In short,
+First step is to install Python and necessary Python modules that are needed to perform various GIS-tasks.
+The purpose of this page is to help you out installing Python and various useful GIS modules into your own computer.
+Even though it is possible to install Python from their `homepage <https://www.python.org/>`_,
+**we highly recommend using** `Anaconda <https://www.continuum.io/anaconda-overview>`_ which is an open source
+distribution of the Python and R programming languages for large-scale data processing, predictive analytics,
+and scientific computing, that aims to simplify package management and deployment. In short,
 it makes life much easier when installing new tools on your Python to play with.
 
 Install Python + GIS on Windows
@@ -28,51 +30,35 @@ Install it to **all users** and use default settings.
 Test that the Anaconda´s package manage called ``conda`` works by `opening a command prompt as a admin user <http://www.howtogeek.com/194041/how-to-open-the-command-prompt-as-administrator-in-windows-8.1/>`_
 and running command ``conda --version``.
 
-Install GIS related packages with conda (and pip) by running in command prompt following commands (in the same order as they are listed):
+Install GIS related packages with conda (and pip) by running in command prompt following commands.
+Many of the GIS packages are bundled with geopandas, but there are a few that requires separate installation.
+As you can see below, many of the GIS packages are available from specific ``channel`` from conda called ``conda-forge``.
 
-.. code::
+.. code:: bash
 
-    # Install numpy (v 1.13.1)
-    conda install numpy
-
-    # Install pandas (v 0.20.3) --> bundled with python-dateutil (v 2.6.1) and pytz (v 2017.2)
-    conda install pandas
-
-    # Install scipy (v 0.19.1)
-    conda install scipy
-
-    # Install matplotlib (v 2.0.2) --> bundled with cycler, freetype, icu, jpeg, libpng, pyqt, qt, sip, sqlite, tornado, zlib
-    conda install matplotlib
-
-    # Install scikit-learn (v 0.19.0)
-    conda install scikit-learn
-
-    # Install networkx (v 1.11) --> bundled with decorator (v 4.1.2)
-    conda install networkx
-
-    # Install bokeh (v 0.12.9) --> bundled with jinja2, markupsafe, pyyaml, yaml -packages
-    conda install bokeh
-
-    # Install statsmodels (v 0.8.0) --> bundled with patsy (0.4.1)
-    conda install statsmodels
-
-    # Install PySpark (v 2.2.0) --> bundled with py4j (v 0.10.6)
-    conda install pyspark
-
-    # Install Geopandas (v 0.3.0) --> bundled with click, click-plugins, cligj, curl, descartes, expat, fiona, freexl, gdal, geos, hdf4, hdf5, kealib, krb5, libiconv, libnetcdf, libpq, libspatialindex, libspatialite, libtiff, libxml2, munch, openjpeg, pcre, proj4, psycopg2, pyproj, pysal, rtree, shapely, sqlalchemy, xerces-c
+    # Install Geopandas
     conda install -c conda-forge geopandas
 
-    # Install cartopy (v 0.15.1) --> bundled with libxslt, lxml, olefile, owslib, pillow, pyepsg, pyshp
-    conda install -c conda-forge cartopy
+    # Install geoplot
+    conda install -c conda-forge geoplot
 
-    # Install geoplot (v 0.0.4) using pip (on Linux: be sure to use pip that comes with conda distribution!) --> bundled with seaborn
-    pip install geoplot
-
-    # Install osmnx (v 0.5.4) --> bundled with altair, bleach, branca, colorama, entrypoints, folium, geopy, html5lib, ipykernel, ipython, ipython_genutils, jedi, jsonschema, jupyter_client, jupyter_core, mistune, nbconvert, nbformat, notebook, pandoc, pandocfilters, pickleshare, prompt_toolkit, pygments, pyzmq, simplegeneric, testpath, traitlets, vega, vincent, wcwidth, webencodings
+    # Install osmnx
     conda install -c conda-forge osmnx
 
-    # Install Folium (v 0.5.0) --> bundled with altair, vega
-    conda install -c conda-forge folium
+    # Install pysal
+    conda install -c conda-forge pysal
+
+    # Install contextily
+    conda install -c conda-forge contextily
+
+    # Install rasterio
+    conda install -c conda-forge rasterio
+
+    # Install rasterstats
+    conda install -c conda-forge rasterstats
+
+    # Install pycrs
+    pip install pycrs
 
     # Install Dash using Pip
     pip install dash==0.19.0  # The core dash backend
@@ -88,91 +74,72 @@ You can test that the installations have worked by running following commands in
 
 .. code:: python
 
-     import numpy as np
-     import pandas as pd
      import geopandas as gpd
-     import scipy
-     import shapely
-     import matplotlib.pyplot as plt
      import pysal
-     import bokeh
      import cartopy
-     import statsmodels
-     import sklearn
      import geoplot
      import osmnx
      import folium
      import dash
+     import rasterio
+     import osmnx
+     import contextily
 
 
 If you don't receive any errors, everything should be working!
 
+.. hint::
+
+    It is also possible to install all these packages at once by taking advantage of ``.yml`` environment file
+    that is provided by us. Using them requires a few special tricks, :doc:`read more from here <install-using-yml>`.
+
+
 Install Python + GIS on Linux / Mac
 -----------------------------------
 
-The following have been tested on Ubuntu 16.04. Might work also on Mac (not tested yet).
-
 **Install Anaconda 3 and add it to system path**
 
-.. code::
+.. code:: bash
 
     # Download and install Anaconda
-    sudo wget https://repo.continuum.io/archive/Anaconda3-4.1.1-Linux-x86_64.sh
-    sudo bash Anaconda3-4.1.1-Linux-x86_64.sh
+    sudo wget https://repo.continuum.io/archive/Anaconda3-5.3.0-Linux-x86_64.sh
+    sudo bash Anaconda3-5.3.0-Linux-x86_64.sh
 
     # Add Anaconda installation permanently to PATH variable
     nano ~/.bashrc
 
     # Add following line at the end of the file and save (EDIT ACCORDING YOUR INSTALLATION PATH)
-    export PATH=$PATH:/PATH_TO_ANACONDA/anaconda3/bin:/PATH_TO_ANACONDA/anaconda3/lib/python3.5/site-packages
+    export PATH=$PATH:/PATH_TO_ANACONDA/anaconda3/bin:/PATH_TO_ANACONDA/anaconda3/lib/python3.7/site-packages
 
 **Install Python packages**
 
 Install GIS related packages with conda (and pip) by running in command prompt following commands (in the same order as they are listed):
 
-.. code::
+.. code:: bash
 
-    # Install numpy (v 1.13.1)
-    conda install numpy
-
-    # Install pandas (v 0.20.3) --> bundled with python-dateutil (v 2.6.1) and pytz (v 2017.2)
-    conda install pandas
-
-    # Install scipy (v 0.19.1)
-    conda install scipy
-
-    # Install matplotlib (v 2.0.2) --> bundled with cycler, freetype, icu, jpeg, libpng, pyqt, qt, sip, sqlite, tornado, zlib
-    conda install matplotlib
-
-    # Install scikit-learn (v 0.19.0)
-    conda install scikit-learn
-
-    # Install networkx (v 1.11) --> bundled with decorator (v 4.1.2)
-    conda install networkx
-
-    # Install bokeh (v 0.12.9) --> bundled with jinja2, markupsafe, pyyaml, yaml -packages
-    conda install bokeh
-
-    # Install statsmodels (v 0.8.0) --> bundled with patsy (0.4.1)
-    conda install statsmodels
-
-    # Install PySpark (v 2.2.0) --> bundled with py4j (v 0.10.6)
-    conda install pyspark
-
-    # Install Geopandas (v 0.3.0) --> bundled with click, click-plugins, cligj, curl, descartes, expat, fiona, freexl, gdal, geos, hdf4, hdf5, kealib, krb5, libiconv, libnetcdf, libpq, libspatialindex, libspatialite, libtiff, libxml2, munch, openjpeg, pcre, proj4, psycopg2, pyproj, pysal, rtree, shapely, sqlalchemy, xerces-c
+    # Install Geopandas
     conda install -c conda-forge geopandas
 
-    # Install cartopy (v 0.15.1) --> bundled with libxslt, lxml, olefile, owslib, pillow, pyepsg, pyshp
-    conda install -c conda-forge cartopy
+    # Install geoplot
+    conda install -c conda-forge geoplot
 
-    # Install geoplot (v 0.0.4) using pip (on Linux: be sure to use pip that comes with conda distribution!) --> bundled with seaborn
-    pip install geoplot
-
-    # Install osmnx (v 0.5.4) --> bundled with altair, bleach, branca, colorama, entrypoints, folium, geopy, html5lib, ipykernel, ipython, ipython_genutils, jedi, jsonschema, jupyter_client, jupyter_core, mistune, nbconvert, nbformat, notebook, pandoc, pandocfilters, pickleshare, prompt_toolkit, pygments, pyzmq, simplegeneric, testpath, traitlets, vega, vincent, wcwidth, webencodings
+    # Install osmnx
     conda install -c conda-forge osmnx
 
-    # Install Folium (v 0.5.0) --> bundled with altair, vega
-    conda install -c conda-forge folium
+    # Install pysal
+    conda install -c conda-forge pysal
+
+    # Install contextily
+    conda install -c conda-forge contextily
+
+    # Install rasterio
+    conda install -c conda-forge rasterio
+
+    # Install rasterstats
+    conda install -c conda-forge rasterstats
+
+    # Install pycrs
+    pip install pycrs
 
     # Install Dash using Pip
     pip install dash==0.19.0  # The core dash backend
