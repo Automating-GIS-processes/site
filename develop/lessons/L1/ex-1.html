@@ -117,6 +117,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Exercise 1</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#hints">Hints</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#assert-statements">Assert statements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iterating-multiple-lists-simultaneously">Iterating multiple lists simultaneously</a></li>
 </ul>
 </li>
 </ul>
@@ -251,6 +252,31 @@ Consider following example that combines these two checks:</p>
 </div>
 <p>This example demonstrates how it is possible to check and control that the input values are appropriate for the
 function, and guide the user how to use the function correctly with informative error messages.</p>
+</div>
+<div class="section" id="iterating-multiple-lists-simultaneously">
+<h3>Iterating multiple lists simultaneously<a class="headerlink" href="#iterating-multiple-lists-simultaneously" title="Permalink to this headline">¶</a></h3>
+<p>In Python a function called <code class="docutils literal notranslate"><span class="pre">zip()</span></code> makes it easy to iterate over multiple lists at the same time.
+Consider following example:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Create lists</span>
+<span class="gp">In [2]: </span><span class="n">dog_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Blackie&#39;</span><span class="p">,</span> <span class="s1">&#39;Musti&#39;</span><span class="p">,</span> <span class="s1">&#39;Svarte&#39;</span><span class="p">]</span>
+
+<span class="gp">In [3]: </span><span class="n">age_list</span> <span class="o">=</span> <span class="p">[</span><span class="mf">4.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
+
+<span class="go"># Iterate over the lists using zip() to print an informative message</span>
+<span class="gp">In [4]: </span><span class="k">for</span> <span class="n">dog</span><span class="p">,</span> <span class="n">age</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">dog_list</span><span class="p">,</span> <span class="n">age_list</span><span class="p">):</span>
+<span class="gp">   ...: </span>    <span class="k">print</span><span class="p">(</span><span class="n">dog</span><span class="p">,</span> <span class="s1">&#39;is&#39;</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="s1">&#39;years old.&#39;</span><span class="p">)</span>
+<span class="gp">   ...: </span>
+<span class="go">Blackie is 4.5 years old.</span>
+<span class="go">Musti is 2 years old.</span>
+<span class="go">Svarte is 15 years old.</span>
+</pre></div>
+</div>
+<p>This example demonstrates how it was possible to take two lists (could be even more lists) and access the values
+from them using the same index number.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This approach assumes that the length of the lists are identical. If not, you will most probably get <code class="docutils literal notranslate"><span class="pre">IndexError</span></code> because the list index is out of range.</p>
+</div>
 </div>
 </div>
 </div>

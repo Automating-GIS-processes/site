@@ -51,3 +51,26 @@ Consider following example that combines these two checks:
 
 This example demonstrates how it is possible to check and control that the input values are appropriate for the
 function, and guide the user how to use the function correctly with informative error messages.
+
+Iterating multiple lists simultaneously
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In Python a function called ``zip()`` makes it easy to iterate over multiple lists at the same time.
+Consider following example:
+
+.. ipython:: python
+
+    # Create lists
+    dog_list = ['Blackie', 'Musti', 'Svarte']
+    age_list = [4.5, 2, 15]
+
+    # Iterate over the lists using zip() to print an informative message
+    for dog, age in zip(dog_list, age_list):
+        print(dog, 'is', age, 'years old.')
+
+This example demonstrates how it was possible to take two lists (could be even more lists) and access the values
+from them using the same index number.
+
+.. note::
+
+    This approach assumes that the length of the lists are identical. If not, you will most probably get ``IndexError`` because the list index is out of range.
