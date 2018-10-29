@@ -185,7 +185,9 @@ html_context = {
     # Format Template: https://{{ github_host|default("github.com") }}/{{ github_user }}/{{ github_repo }}/blob/{{ github_version }}{{ conf_py_path }}{{ pagename }}{{ suffix }}
     'github_user': 'Automating-GIS-processes',
     'github_repo': '2018',
-    'github_version': 'master/source/'
+    'github_version': 'master',
+    'conf_py_path': 'source'
+
 }
 
 # Add any paths that contain custom themes here, relative to this directory.
