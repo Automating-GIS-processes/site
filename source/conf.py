@@ -186,8 +186,7 @@ html_context = {
     'github_user': 'Automating-GIS-processes',
     'github_repo': '2018',
     'github_version': 'master/',
-    'conf_py_path': 'source/'
-
+    'conf_py_path': '/source/'
 }
 
 # Add any paths that contain custom themes here, relative to this directory.
