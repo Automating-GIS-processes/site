@@ -40,8 +40,6 @@
   <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Map projections" href="projections.html" />
-    <link rel="prev" title="Lesson 2 Overview" href="overview.html" />
     <link href="../../_static/geo-python.css" rel="stylesheet" type="text/css">
      
 
@@ -118,17 +116,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../L1/exercise-1.html">Exercise 1</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Lesson 2</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Lesson 2 Overview</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction to Geopandas</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#downloading-data">Downloading data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#reading-a-shapefile">Reading a Shapefile</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#writing-a-shapefile">Writing a Shapefile</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#geometries-in-geopandas">Geometries in Geopandas</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#creating-geometries-into-a-geodataframe">Creating geometries into a GeoDataFrame</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#practical-example-save-multiple-shapefiles">Practical example: Save multiple Shapefiles</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L2/geopandas-basics.html">Introduction to Geopandas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="projections.html">Map projections</a></li>
 <li class="toctree-l1"><a class="reference internal" href="exercise-2.html">Exercise 2</a></li>
 </ul>
@@ -444,7 +434,7 @@ data yet.</p>
 
 <span class="go"># Let&#39;s see what we have</span>
 <span class="gp">In [20]: </span><span class="n">poly</span>
-<span class="gh">Out[20]: </span><span class="go">&lt;shapely.geometry.polygon.Polygon at 0x7f2f98f2b3c8&gt;</span>
+<span class="gh">Out[20]: </span><span class="go">&lt;shapely.geometry.polygon.Polygon at 0x7fea42f217b8&gt;</span>
 </pre></div>
 </div>
 <p>Okey, so now we have appropriate Polygon -object.</p>
@@ -536,7 +526,7 @@ Group by function is useful to group data based on values on selected column(s).
 
 <span class="go"># Let&#39;s see what we got</span>
 <span class="gp">In [30]: </span><span class="n">grouped</span>
-<span class="gh">Out[30]: </span><span class="go">&lt;pandas.core.groupby.groupby.DataFrameGroupBy object at 0x7f2f996db550&gt;</span>
+<span class="gh">Out[30]: </span><span class="go">&lt;pandas.core.groupby.groupby.DataFrameGroupBy object at 0x7fea422ef198&gt;</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -610,15 +600,6 @@ handy when dealing with Shapefiles. Doing similar process manually would be real
            
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="projections.html" class="btn btn-neutral float-right" title="Map projections" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="overview.html" class="btn btn-neutral" title="Lesson 2 Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
   
 
   <hr/>
