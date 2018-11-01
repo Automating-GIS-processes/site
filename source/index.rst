@@ -125,6 +125,6 @@ Contents
    :caption: Lesson 2
 
    lessons/L2/overview
-   lessons/L2/geopandas-basics
+   notebooks/L2/geopandas-basics.ipynb
    lessons/L2/projections
    lessons/L2/exercise-2
