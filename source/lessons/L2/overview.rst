@@ -5,7 +5,7 @@ In this week, we will learn how to read and write spatial data, and how to deal 
 and some useful data management functionalities.
 
 1. :doc:`Introduction to Geopandas <../../notebooks/L2/notebooks/geopandas-basics.ipynb>`
-2. :doc:`Managing map projections <projections>`
+2. :doc:`Managing map projections <../../notebooks/L2/notebooks/projections.ipynb>`
 3. :doc:`Exercise 2: Working with geometric objects <exercise-2>`
 
 
