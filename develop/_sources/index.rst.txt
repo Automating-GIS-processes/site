@@ -126,5 +126,5 @@ Contents
 
    lessons/L2/overview
    notebooks/L2/geopandas-basics.ipynb
-   lessons/L2/projections
+   notebooks/L2/projections.ipynb
    lessons/L2/exercise-2

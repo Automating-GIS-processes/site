@@ -747,7 +747,7 @@
     " - specifying the coordinate reference system with crs dictionary e.g. `{'init': 'epsg:4326'}`\n",
     " - specifying CRS with Proj4-string using PyCRS library: `pycrs.parser.from_epsg_code(4326).to_proj4()`\n",
     " - specifying slightly less common CRS (Azimuthal Equidistant) with Proj4-string using pyproj library: `pyproj.Proj(proj='aeqd', ellps='WGS84', datum='WGS84', lat_0=hki_lat, lon_0=hki_lon).srs`\n",
-    " - A fourth option that was not covered in the materials is to use a library called `fiona` and its function `from_epsg()`. See documentation about this from [here](http://toblerity.org/fiona/manual.html#format-drivers-crs-bounds-and-schema) if you are interested. \n",
+    " - A fourth option that was not covered in the materials is to use a library called `fiona` and its function `from_epsg()`. See documentation about this from [here](http://toblerity.org/fiona/manual.html#format-drivers-crs-bounds-and-schema) if you are interested. We also quickly introduced this in the [previous tutorial](geopandas-basics.ipynb).\n",
     " \n",
     "**2)** reproject (transform) the geometries from crs to another using the `to_crs()` -function in GeoPandas\n",
     "\n",

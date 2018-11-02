@@ -40,6 +40,8 @@
   <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Exercise 2" href="../../lessons/L2/exercise-2.html" />
+    <link rel="prev" title="Introduction to Geopandas" href="geopandas-basics.html" />
     <link href="../../_static/geo-python.css" rel="stylesheet" type="text/css">
      
 
@@ -116,10 +118,15 @@
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/L1/exercise-1.html">Exercise 1</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Lesson 2</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/L2/overview.html">Lesson 2 Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="geopandas-basics.html">Introduction to Geopandas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lessons/L2/projections.html">Map projections</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Map projections</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Coordinate-reference-system-(CRS)-in-Geopandas">Coordinate reference system (CRS) in Geopandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Calculating-distances">Calculating distances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Summary">Summary</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/L2/exercise-2.html">Exercise 2</a></li>
 </ul>
 
@@ -1134,7 +1141,8 @@ Proj4-string using pyproj library:
 library called <code class="docutils literal notranslate"><span class="pre">fiona</span></code> and its function <code class="docutils literal notranslate"><span class="pre">from_epsg()</span></code>. See
 documentation about this from
 <a class="reference external" href="http://toblerity.org/fiona/manual.html#format-drivers-crs-bounds-and-schema">here</a>
-if you are interested.</li>
+if you are interested. We also quickly introduced this in the
+<a class="reference internal" href="geopandas-basics.html"><span class="doc">previous tutorial</span></a>.</li>
 </ul>
 <p><strong>2)</strong> reproject (transform) the geometries from crs to another using
 the <code class="docutils literal notranslate"><span class="pre">to_crs()</span></code> -function in GeoPandas</p>
@@ -1149,6 +1157,15 @@ the <code class="docutils literal notranslate"><span class="pre">to_crs()</span>
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../lessons/L2/exercise-2.html" class="btn btn-neutral float-right" title="Exercise 2" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="geopandas-basics.html" class="btn btn-neutral" title="Introduction to Geopandas" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
