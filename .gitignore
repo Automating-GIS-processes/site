@@ -4,3 +4,6 @@ build
 .ipynb_checkpoints
 .nbgrader.log
 .DS_Store
+Senaatintori*
+Results/
+Europe_borders_epsg*

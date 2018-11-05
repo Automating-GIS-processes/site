@@ -119,3 +119,12 @@ Contents
    lessons/L1/overview
    notebooks/L1/geometric-objects.ipynb
    lessons/L1/exercise-1
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Lesson 2
+
+   lessons/L2/overview
+   notebooks/L2/geopandas-basics.ipynb
+   notebooks/L2/projections.ipynb
+   lessons/L2/exercise-2
