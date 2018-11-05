@@ -1,0 +1,638 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-88382509-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Map projections &mdash; AutoGIS 2018 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link href="../../_static/geo-python.css" rel="stylesheet" type="text/css">
+     
+
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> AutoGIS
+          
+
+          
+            
+            <img src="../../_static/logo_hy_geo_135.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2018
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Course information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/course-info.html">General info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/course-environment-components.html">Course environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/grading.html">Grading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/learning-goals.html">Learning goals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/Installing_Anacondas_GIS.html">Installing Python + GIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/License-terms.html">License and terms of usage</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 1</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L1/Intro-Python-GIS.html">Motivation for the course</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1/overview.html">Lesson overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L1/geometric-objects.html">Geometric objects - Spatial data model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1/exercise-1.html">Exercise 1</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 2</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Lesson 2 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L2/geopandas-basics.html">Introduction to Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L2/projections.html">Map projections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercise-2.html">Exercise 2</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AutoGIS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Map projections</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/Automating-GIS-processes/2018/blob/master/source/lessons/L2/projections.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+
+
+
+
+
+
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="map-projections">
+<h1>Map projections<a class="headerlink" href="#map-projections" title="Permalink to this headline">¶</a></h1>
+<p>Coordinate reference systems (CRS) are important because the geometric shapes in a GeoDataFrame are simply a
+collection of coordinates in an arbitrary space. A CRS tells Python how those coordinates related to places on
+the Earth. A map projection (or a projected coordinate system) is a systematic transformation of the latitudes and
+longitudes into a plain surface where units are quite commonly represented as meters (instead of decimal degrees).</p>
+<p>As map projections of gis-layers are fairly often defined differently (i.e. they do not match), it is a
+common procedure to redefine the map projections to be identical in both
+layers. It is important that the layers have the same projection as it
+makes it possible to analyze the spatial relationships between layer,
+such as conduct the Point in Polygon spatial query.</p>
+<p>Luckily, defining and changing projections is easy in Geopandas. In this tutorial we will see how to retrieve the
+coordinate reference system information from the data, and how to change it. We will re-project a data file from
+WGS84 (lat, lon coordinates) into a Lambert Azimuthal Equal Area projection which is the <a class="reference external" href="http://mapref.org/LinkedDocuments/MapProjectionsForEurope-EUR-20120.pdf">recommended projection for
+Europe</a> by European Commission.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Choosing an appropriate projection for your map is not always straightforward because it depends on what you actually want
+to represent with your map, and what is the spatial scale of your data. In fact, there does not exist a “perfect projection”
+since each one of them has some strengths and weaknesses, and you should choose such projection that fits best for your needs.
+You can read more about <a class="reference external" href="http://www.georeference.org/doc/guide_to_selecting_map_projections.htm">how to choose a map projection from here</a>,
+and a nice <a class="reference external" href="http://usersguidetotheuniverse.com/index.php/2011/03/03/whats-the-best-map-projection/">blog post about the strengths and weaknesses of few commonly used projections</a>.</p>
+</div>
+<div class="section" id="download-data">
+<h2>Download data<a class="headerlink" href="#download-data" title="Permalink to this headline">¶</a></h2>
+<p>For this tutorial we will be using a Shapefile representing Europe. Download and extract <a class="reference external" href="../../_static/data/L2/Europe_borders.zip">Europe_borders.zip</a> file
+that contains a Shapefile with following files:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> <span class="nv">$HOME</span>
+$ unzip Europe_borders.zip
+$ <span class="nb">cd</span> Europe_borders
+$ ls
+Europe_borders.cpg  Europe_borders.prj  Europe_borders.sbx  Europe_borders.shx
+Europe_borders.dbf  Europe_borders.sbn  Europe_borders.shp
+</pre></div>
+</div>
+</div>
+<div class="section" id="coordinate-reference-system-crs">
+<h2>Coordinate reference system (CRS)<a class="headerlink" href="#coordinate-reference-system-crs" title="Permalink to this headline">¶</a></h2>
+<p>GeoDataFrame that is read from a Shapefile contains <em>always</em> (well not
+always but should) information about the coordinate system in which the
+data is projected.</p>
+<p>Let’s start by reading the data from the <code class="docutils literal notranslate"><span class="pre">Europe_borders.shp</span></code> file.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+
+<span class="go"># Filepath to the Europe borders Shapefile</span>
+<span class="gp">In [2]: </span><span class="n">fp</span> <span class="o">=</span> <span class="s2">&quot;/home/geo/Europe_borders.shp&quot;</span>
+
+<span class="go"># Read data</span>
+<span class="gp">In [3]: </span><span class="n">data</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We can see the current coordinate reference system from <code class="docutils literal notranslate"><span class="pre">.crs</span></code>
+attribute:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="n">data</span><span class="o">.</span><span class="n">crs</span>
+<span class="gh">Out[4]: </span><span class="go">{&#39;init&#39;: &#39;epsg:4326&#39;}</span>
+</pre></div>
+</div>
+<p>Okey, so from this disctionary we can see that the data is something called
+<strong>epsg:4326</strong>. The EPSG number (<em>“European Petroleum Survey Group”</em>) is
+a code that tells about the coordinate system of the dataset. “<a class="reference external" href="http://www.epsg.org/">EPSG
+Geodetic Parameter Dataset</a> is a collection of
+definitions of coordinate reference systems and coordinate
+transformations which may be global, regional, national or local in
+application”. EPSG-number 4326 that we have here belongs to the WGS84
+coordinate system (i.e. coordinates are in decimal degrees (lat, lon)).</p>
+<p>You can find a lot of information about different available coordinate reference systems from:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="http://spatialreference.org/">www.spatialreference.org</a></li>
+<li><a class="reference external" href="http://proj4.org/projections/index.html">www.proj4.org</a></li>
+<li><a class="reference external" href="http://mapref.org/CollectionofCRSinEurope.html">www.mapref.org</a></li>
+</ul>
+</div></blockquote>
+<p>Let’s also check the values in our <code class="docutils literal notranslate"><span class="pre">geometry</span></code> column.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[5]: </span><span class="go"></span>
+<span class="go">0    POLYGON ((8.457777976989746 54.56236267089844,...</span>
+<span class="go">1    POLYGON ((8.71992015838623 47.69664382934571, ...</span>
+<span class="go">2    POLYGON ((6.733166694641113 53.5740852355957, ...</span>
+<span class="go">3    POLYGON ((6.858222007751465 53.59411239624024,...</span>
+<span class="go">4    POLYGON ((6.89894437789917 53.6256103515625, 6...</span>
+<span class="go">Name: geometry, dtype: object</span>
+</pre></div>
+</div>
+<p>Okey, so the coordinate values of the Polygons indeed look like lat-lon values.</p>
+<p>Let’s convert those geometries into Lambert Azimuthal Equal Area projection (<a class="reference external" href="http://spatialreference.org/ref/epsg/etrs89-etrs-laea/">EPSG: 3035</a>).
+Changing the projection is really easy to <a class="reference external" href="http://geopandas.org/projections.html#re-projecting">do in Geopandas</a>
+with <code class="docutils literal notranslate"><span class="pre">.to_crs()</span></code> -function. As an input for the function, you
+should define the column containing the geometries, i.e. <code class="docutils literal notranslate"><span class="pre">geometry</span></code>
+in this case, and a <code class="docutils literal notranslate"><span class="pre">epgs</span></code> value of the projection that you want to use.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Let&#39;s take a copy of our layer</span>
+<span class="gp">In [6]: </span><span class="n">data_proj</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="go"># Reproject the geometries by replacing the values with projected ones</span>
+<span class="gp">In [7]: </span><span class="n">data_proj</span> <span class="o">=</span> <span class="n">data_proj</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">epsg</span><span class="o">=</span><span class="mi">3035</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s see how the coordinates look now.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [8]: </span><span class="n">data_proj</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[8]: </span><span class="go"></span>
+<span class="go">0    POLYGON ((4221214.558088431 3496203.404338956,...</span>
+<span class="go">1    POLYGON ((4224860.478308966 2732279.319617757,...</span>
+<span class="go">2    POLYGON ((4104652.175545862 3390034.953002084,...</span>
+<span class="go">3    POLYGON ((4113025.664284974 3391895.755505159,...</span>
+<span class="go">4    POLYGON ((4115871.227627173 3395282.099288368,...</span>
+<span class="go">Name: geometry, dtype: object</span>
+</pre></div>
+</div>
+<p>And here we go, the numbers have changed! Now we have successfully
+changed the projection of our layer into a new one, i.e. to ETRS-LAEA projection.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">There is also possibility to pass the projection information as proj4 strings or dictionaries, see more <a class="reference external" href="http://geopandas.org/projections.html#coordinate-reference-systems">here</a></p>
+</div>
+<p>To really understand what is going on, it is good to explore our data visually. Hence, let’s compare the datasets by making
+maps out of them.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Plot the WGS84</span>
+<span class="n">data</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">);</span>
+
+<span class="c1"># Add title</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;WGS84 projection&quot;</span><span class="p">);</span>
+
+<span class="c1"># Remove empty white space around the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+<span class="c1"># Plot the one with ETRS-LAEA projection</span>
+<span class="n">data_proj</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">);</span>
+
+<span class="c1"># Add title</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;ETRS Lambert Azimuthal Equal Area projection&quot;</span><span class="p">);</span>
+
+<span class="c1"># Remove empty white space around the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/wgs84.png"><img alt="../../_images/wgs84.png" src="../../_images/wgs84.png" style="width: 3.5in;" /></a>
+<a class="reference internal image-reference" href="../../_images/projected.png"><img alt="../../_images/projected.png" src="../../_images/projected.png" style="width: 3.5in;" /></a>
+<p>Indeed, they look quite different and our re-projected one looks much better
+in Europe as the areas especially in the north are more realistic and not so stretched as in WGS84.</p>
+<p>Next, we still need to change the crs of our GeoDataFrame into EPSG
+3035 as now we only modified the values of the <code class="docutils literal notranslate"><span class="pre">geometry</span></code> column.
+We can take use of fiona’s <code class="docutils literal notranslate"><span class="pre">from_epsg</span></code> -function.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="kn">from</span> <span class="nn">fiona.crs</span> <span class="kn">import</span> <span class="n">from_epsg</span>
+
+<span class="go"># Determine the CRS of the GeoDataFrame</span>
+<span class="gp">In [10]: </span><span class="n">data_proj</span><span class="o">.</span><span class="n">crs</span> <span class="o">=</span> <span class="n">from_epsg</span><span class="p">(</span><span class="mi">3035</span><span class="p">)</span>
+
+<span class="go"># Let&#39;s see what we have</span>
+<span class="gp">In [11]: </span><span class="n">data_proj</span><span class="o">.</span><span class="n">crs</span>
+<span class="gh">Out[11]: </span><span class="go">{&#39;init&#39;: &#39;epsg:3035&#39;, &#39;no_defs&#39;: True}</span>
+</pre></div>
+</div>
+<p>Finally, let’s save our projected layer into a Shapefile so that we can use it later.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ouput file path</span>
+<span class="n">outfp</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;/home/geo/Europe_borders_epsg3035.shp&quot;</span>
+
+<span class="c1"># Save to disk</span>
+<span class="n">data_proj</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">outfp</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>On Windows, the prj -file might NOT update with the new CRS value when using the <code class="docutils literal notranslate"><span class="pre">from_epsg()</span></code> -function. If this happens
+it is possible to fix the prj by passing the coordinate reference information as proj4 text, like following.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [12]: </span><span class="n">data_proj</span><span class="o">.</span><span class="n">crs</span> <span class="o">=</span> <span class="s1">&#39;+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs&#39;</span>
+</pre></div>
+</div>
+<p class="last">You can find <code class="docutils literal notranslate"><span class="pre">proj4</span></code> text versions for different projection from <a class="reference external" href="http://spatialreference.org">spatialreference.org</a>.
+Each page showing spatial reference information has links for different formats for the CRS. Click a link that says <code class="docutils literal notranslate"><span class="pre">Proj4</span></code> and
+you will get the correct proj4 text presentation for your projection.</p>
+</div>
+</div>
+<div class="section" id="calculating-distances">
+<h2>Calculating distances<a class="headerlink" href="#calculating-distances" title="Permalink to this headline">¶</a></h2>
+<p>Let’s, continue working with our <code class="docutils literal notranslate"><span class="pre">Europe_borders.shp</span></code> file and find out the Euclidean distances from
+the centroids of the European countries to Helsinki, Finland. We will calculate the distance between Helsinki and
+other European countries (centroids) using a metric projection (World Equidistant Cylindrical) that gives us the distance
+in meters.</p>
+<ul class="simple">
+<li>Let’s first import necessary packages.</li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [13]: </span><span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Point</span>
+
+<span class="gp">In [14]: </span><span class="kn">from</span> <span class="nn">fiona.crs</span> <span class="kn">import</span> <span class="n">from_epsg</span>
+</pre></div>
+</div>
+<p>Next we need to specify our projection to metric system using <a class="reference external" href="http://spatialreference.org/ref/esri/world-azimuthal-equidistant/">World Equidistant Cylindrical -projection</a> where distances are represented correctly from the center longitude and latitude.</p>
+<ul class="simple">
+<li>Let’s specify our target location to be the coordinates of Helsinki (lon=24.9417 and lat=60.1666).</li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [15]: </span><span class="n">hki_lon</span> <span class="o">=</span> <span class="mf">24.9417</span>
+
+<span class="gp">In [16]: </span><span class="n">hki_lat</span> <span class="o">=</span> <span class="mf">60.1666</span>
+</pre></div>
+</div>
+<p>Next we need to specify a Proj4 string to reproject our data into World Equidistant Cylindrical
+in which we want to center our projection to Helsinki. We need to specify the <code class="docutils literal notranslate"><span class="pre">+lat_0</span></code> and <code class="docutils literal notranslate"><span class="pre">+lon_0</span></code> parameters in Proj4 string to do this.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [17]: </span><span class="n">proj4_txt</span> <span class="o">=</span> <span class="s1">&#39;+proj=eqc +lat_ts=60 +lat_0=60.1666 +lon_0=24.9417 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs&#39;</span>
+</pre></div>
+</div>
+<p>Okey, now we are ready to transform our <code class="docutils literal notranslate"><span class="pre">Europe_borders.shp</span></code> data into the desired projection. Let’s create a new
+copy of our GeoDataFrame called <code class="docutils literal notranslate"><span class="pre">data_d</span></code> (d for ‘distance’).</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="n">data_d</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">proj4_txt</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s take a look of our data and create a map, so we can see what we have now.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [19]: </span><span class="n">data_d</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">);</span>
+
+<span class="gp">In [20]: </span><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/europe_euqdist.png"><img alt="../../_images/europe_euqdist.png" src="../../_images/europe_euqdist.png" style="width: 4.5in;" /></a>
+<p>Okey, from here we can see that indeed our map is now centered to Helsinki as the 0-position in both x and y is on top of Helsinki.</p>
+<ul class="simple">
+<li>Let’s continue our analysis by creating a Point object from Helsinki and insert it into a GeoPandas GeoSeries. We also specify that the CRS of the GeoSeries is WGS84. You can do this by using <code class="docutils literal notranslate"><span class="pre">crs</span></code> parameter when creating the GeoSeries.</li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [21]: </span><span class="n">hki</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoSeries</span><span class="p">([</span><span class="n">Point</span><span class="p">(</span><span class="n">hki_lon</span><span class="p">,</span> <span class="n">hki_lat</span><span class="p">)],</span> <span class="n">crs</span><span class="o">=</span><span class="n">from_epsg</span><span class="p">(</span><span class="mi">4326</span><span class="p">))</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Let’s convert this point to the same projection as our Europe data is.</li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [22]: </span><span class="n">hki</span> <span class="o">=</span> <span class="n">hki</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">proj4_txt</span><span class="p">)</span>
+
+<span class="gp">In [23]: </span><span class="k">print</span><span class="p">(</span><span class="n">hki</span><span class="p">)</span>
+<span class="go">0    POINT (0 0)</span>
+<span class="go">dtype: object</span>
+</pre></div>
+</div>
+<p>Aha! So the Point coordinates of Helsinki are 0. This confirms us that the center point of our projection is indeed Helsinki.</p>
+<p>Next we need to calculate the centroids for all the Polygons of the European countries. This can be done easily in Geopandas by using the <code class="docutils literal notranslate"><span class="pre">centroid</span></code> attribute.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [24]: </span><span class="n">data_d</span><span class="p">[</span><span class="s1">&#39;country_centroid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_d</span><span class="o">.</span><span class="n">centroid</span>
+
+<span class="gp">In [25]: </span><span class="n">data_d</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gh">Out[25]: </span><span class="go"></span>
+<span class="go">            TZID                      ...                                                     country_centroid</span>
+<span class="go">0  Europe/Berlin                      ...                        POINT (-917903.9422464954 -622642.5405510699)</span>
+<span class="go">1  Europe/Berlin                      ...                        POINT (-904392.5030473378 -1387445.472292878)</span>
+
+<span class="go">[2 rows x 3 columns]</span>
+</pre></div>
+</div>
+<p>Okey, so now we have a new column <code class="docutils literal notranslate"><span class="pre">country_centroid</span></code> that has the Point geometries representing the centroids of each Polygon.</p>
+<p>Now we can calculate the distances between the centroids and Helsinki.
+At the end of <a class="reference external" href="https://geo-python.github.io/2017/lessons/L6/pandas-analysis.html#repeating-the-data-analysis-with-larger-dataset">Lesson 6 of Geo-Python course</a>
+we saw an example where we used <code class="docutils literal notranslate"><span class="pre">apply()</span></code> function for doing the loop instead of using the <code class="docutils literal notranslate"><span class="pre">iterrows()</span></code> function.</p>
+<p>In (Geo)Pandas, the <code class="docutils literal notranslate"><span class="pre">apply()</span></code> function takes advantage of numpy when looping, and is hence much faster
+which can give a lot of speed benefit when you have many rows to iterate over. Here, we will see how we can use that
+to calculate the distance between the centroids and Helsinki. We will create our own function to do this calculation.</p>
+<blockquote>
+<div><ul class="simple">
+<li>Let’s first create our function called <code class="docutils literal notranslate"><span class="pre">calculateDistance()</span></code>.</li>
+</ul>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calculateDistance</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">dest_geom</span><span class="p">,</span> <span class="n">src_col</span><span class="o">=</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span> <span class="n">target_col</span><span class="o">=</span><span class="s1">&#39;distance&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculates the distance between a single Shapely Point geometry and a GeoDataFrame with Point geometries.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dest_geom : shapely.Point</span>
+<span class="sd">        A single Shapely Point geometry to which the distances will be calculated to.</span>
+<span class="sd">    src_col : str</span>
+<span class="sd">        A name of the column that has the Shapely Point objects from where the distances will be calculated from.</span>
+<span class="sd">    target_col : str</span>
+<span class="sd">        A name of the target column where the result will be stored.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Calculate the distances</span>
+    <span class="n">dist</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="n">src_col</span><span class="p">]</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">dest_geom</span><span class="p">)</span>
+    <span class="c1"># Tranform into kilometers</span>
+    <span class="n">dist_km</span> <span class="o">=</span> <span class="n">dist</span><span class="o">/</span><span class="mi">1000</span>
+    <span class="c1"># Assign the distance to the original data</span>
+    <span class="n">row</span><span class="p">[</span><span class="n">target_col</span><span class="p">]</span> <span class="o">=</span> <span class="n">dist_km</span>
+    <span class="k">return</span> <span class="n">row</span>
+</pre></div>
+</div>
+<p>The parameter row is used to pass the data from each row of our GeoDataFrame into our function and then the other paramaters are used for passing other necessary information for using our function.</p>
+<ul class="simple">
+<li>Before using our function and calculating the distances between Helsinki and centroids, we need to get the Shapely point geometry from the re-projected Helsinki center point. We can use the <code class="docutils literal notranslate"><span class="pre">get()</span></code> function to retrieve a value from specific index (here index 0).</li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [26]: </span><span class="n">hki_geom</span> <span class="o">=</span> <span class="n">hki</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="gp">In [27]: </span><span class="k">print</span><span class="p">(</span><span class="n">hki_geom</span><span class="p">)</span>
+<span class="go">POINT (0 0)</span>
+</pre></div>
+</div>
+<p>Now we are ready to use our function with <code class="docutils literal notranslate"><span class="pre">apply()</span></code> function. When using the function, it is important to specify that the <code class="docutils literal notranslate"><span class="pre">axis=1</span></code>.
+This specifies that the calculations should be done row by row (instead of column-wise).</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [28]: </span><span class="n">data_d</span> <span class="o">=</span> <span class="n">data_d</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">calculateDistance</span><span class="p">,</span> <span class="n">dest_geom</span><span class="o">=</span><span class="n">hki_geom</span><span class="p">,</span> <span class="n">src_col</span><span class="o">=</span><span class="s1">&#39;country_centroid&#39;</span><span class="p">,</span> <span class="n">target_col</span><span class="o">=</span><span class="s1">&#39;dist_to_Hki&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="gp">In [29]: </span><span class="n">data_d</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="gh">Out[29]: </span><span class="go"></span>
+<span class="go">             TZID     ...       dist_to_Hki</span>
+<span class="go">0   Europe/Berlin     ...       1109.157960</span>
+<span class="go">1   Europe/Berlin     ...       1656.179561</span>
+<span class="go">2   Europe/Berlin     ...       1249.979421</span>
+<span class="go">3   Europe/Berlin     ...       1243.676322</span>
+<span class="go">4   Europe/Berlin     ...       1239.567840</span>
+<span class="go">5   Europe/Berlin     ...       1233.398514</span>
+<span class="go">6   Europe/Berlin     ...       1219.015820</span>
+<span class="go">7   Europe/Berlin     ...       1193.458319</span>
+<span class="go">8   Europe/Berlin     ...       1184.692488</span>
+<span class="go">9   Europe/Berlin     ...        933.192649</span>
+<span class="go">10  Europe/Berlin     ...       1177.796732</span>
+<span class="go">11  Europe/Berlin     ...       1210.850218</span>
+<span class="go">12  Europe/Berlin     ...       1203.885991</span>
+<span class="go">13  Europe/Berlin     ...       1111.298075</span>
+<span class="go">14  Europe/Berlin     ...        909.114086</span>
+<span class="go">15  Europe/Berlin     ...       1102.821109</span>
+<span class="go">16  Europe/Berlin     ...        907.927492</span>
+<span class="go">17  Europe/Berlin     ...       1093.321509</span>
+<span class="go">18  Europe/Berlin     ...       1104.650594</span>
+<span class="go">19  Europe/Berlin     ...       1109.059306</span>
+
+<span class="go">[20 rows x 4 columns]</span>
+</pre></div>
+</div>
+<p>Great! Now we have successfully calculated the distances between the Polygon centroids and Helsinki. :)</p>
+<p>Let’s check what is the longest and mean distance to Helsinki from the centroids of other European countries.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [30]: </span><span class="n">max_dist</span> <span class="o">=</span> <span class="n">data_d</span><span class="p">[</span><span class="s1">&#39;dist_to_Hki&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+
+<span class="gp">In [31]: </span><span class="n">mean_dist</span> <span class="o">=</span> <span class="n">data_d</span><span class="p">[</span><span class="s1">&#39;dist_to_Hki&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="gp">In [32]: </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Maximum distance to Helsinki is </span><span class="si">%.0f</span><span class="s2"> km, and the mean distance is </span><span class="si">%.0f</span><span class="s2"> km.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">max_dist</span><span class="p">,</span> <span class="n">mean_dist</span><span class="p">))</span>
+<span class="go">Maximum distance to Helsinki is 3199 km, and the mean distance is 1185 km.</span>
+</pre></div>
+</div>
+<p>Okey, it seems that we finns in the North are fairly far away from all other European countries as the mean distance to other countries is 1185 kilometers.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you would like to calculate distances between multiple locations across the globe, it is recommended to use
+<a class="reference external" href="https://en.wikipedia.org/wiki/Haversine_formula">Haversine formula</a> to do the calculations.
+<a class="reference external" href="https://github.com/mapado/haversine">Haversine</a> package in Python provides an easy-to-use function for calculating these
+based on latitude and longitude values.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Henrikki Tenkanen
+      Last updated on Oct 31, 2018.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+    <p> <br/> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /> </a></p>
+     
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: master
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../../2017/lessons/L2/projections.html">2017</a></dd>
+            <dd><a href="../../develop/lessons/L2/projections.html">develop</a></dd>
+            <dd><a href="../../drafts/lessons/L2/projections.html">drafts</a></dd>
+            <dd><a href="../../master/lessons/L2/projections.html">master</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'2018',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
