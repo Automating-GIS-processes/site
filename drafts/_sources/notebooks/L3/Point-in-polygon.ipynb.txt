@@ -1,0 +1,716 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "deletable": true,
+    "editable": true
+   },
+   "source": [
+    "# Point in Polygon & Intersect\n",
+    "\n",
+    "Finding out if a certain point is located inside or outside of an area,\n",
+    "or finding out if a line intersects with another line or polygon are\n",
+    "fundamental geospatial operations that are often used e.g. to select\n",
+    "data based on location. Such spatial queries are one of the typical\n",
+    "first steps of the workflow when doing spatial analysis. Performing a\n",
+    "spatial join (will be introduced later) between two spatial datasets is\n",
+    "one of the most typical applications where Point in Polygon (PIP) query\n",
+    "is used.\n",
+    "\n",
+    "## How to check if point is inside a polygon?\n",
+    "\n",
+    "Computationally, detecting if a point is inside a polygon is most commonly done using a specific formula called [Ray Casting algorithm](https://en.wikipedia.org/wiki/Point_in_polygon#Ray_casting_algorithm).\n",
+    "Luckily, we do not need to create such a function ourselves for\n",
+    "conducting the Point in Polygon (PIP) query. Instead, we can take\n",
+    "advantage of [Shapely's binary predicates](http://toblerity.org/shapely/manual.html#binary-predicates)\n",
+    "that can evaluate the topolocical relationships between geographical\n",
+    "objects, such as the PIP as we're interested here.\n",
+    "\n",
+    "There are basically two ways of conducting PIP in Shapely:\n",
+    "\n",
+    "1. using a function called\n",
+    "   [.within()](http://toblerity.org/shapely/manual.html#object.within)\n",
+    "   that checks if a point is within a polygon\n",
+    "2. using a function called\n",
+    "   [.contains()](http://toblerity.org/shapely/manual.html#object.contains)_\n",
+    "   that checks if a polygon contains a point\n",
+    "\n",
+    "Notice: even though we are talking here about **Point** in Polygon\n",
+    "operation, it is also possible to check if a LineString or Polygon is\n",
+    "inside another Polygon.\n",
+    "\n",
+    "-  Let's first create a Polygon using a list of coordinate-tuples and a\n",
+    "   couple of Point objects"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {
+    "collapsed": false,
+    "deletable": true,
+    "editable": true
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "POINT (24.952242 60.1696017)\n",
+      "POINT (24.976567 60.16125)\n",
+      "POLYGON ((24.950899 60.169158, 24.953492 60.169158, 24.95351 60.170104, 24.950958 60.16999, 24.950899 60.169158))\n"
+     ]
+    }
+   ],
+   "source": [
+    "from shapely.geometry import Point, Polygon\n",
+    "\n",
+    "# Create Point objects\n",
+    "p1 = Point(24.952242, 60.1696017)\n",
+    "p2 = Point(24.976567, 60.1612500)\n",
+    "\n",
+    "# Create a Polygon\n",
+    "coords = [(24.950899, 60.169158), (24.953492, 60.169158), (24.953510, 60.170104), (24.950958, 60.169990)]\n",
+    "poly = Polygon(coords)\n",
+    "\n",
+    "# Let's check what we have\n",
+    "print(p1)\n",
+    "print(p2)\n",
+    "print(poly)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "deletable": true,
+    "editable": true
+   },
+   "source": [
+    "Let's check if those points are ``within`` the polygon"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {
+    "collapsed": false,
+    "deletable": true,
+    "editable": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "False"
+      ]
+     },
+     "execution_count": 2,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Check if p1 is within the polygon using the within function\n",
+    "p1.within(poly)\n",
+    "\n",
+    "# Check if p2 is within the polygon\n",
+    "p2.within(poly)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "deletable": true,
+    "editable": true
+   },
+   "source": [
+    "Okey, so we can see that the first point seems to be inside that polygon\n",
+    "and the other one doesn't.\n",
+    "\n",
+    "-  In fact, the first point is close to the center of the polygon as we\n",
+    "   can see:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {
+    "collapsed": false,
+    "deletable": true,
+    "editable": true
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "POINT (24.952242 60.1696017)\n",
+      "POINT (24.95224242849236 60.16960179038188)\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Our point\n",
+    "print(p1)\n",
+    "\n",
+    "# The centroid\n",
+    "print(poly.centroid)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "deletable": true,
+    "editable": true
+   },
+   "source": [
+    "-  It is also possible to do PIP other way around, i.e. to check if\n",
+    "   polygon contains a point:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {
+    "collapsed": false,
+    "deletable": true,
+    "editable": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "False"
+      ]
+     },
+     "execution_count": 6,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Does polygon contain p1?\n",
+    "poly.contains(p1)\n",
+    "\n",
+    "# Does polygon contain p2?\n",
+    "poly.contains(p2)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "deletable": true,
+    "editable": true
+   },
+   "source": [
+    "Thus, both ways of checking the spatial relationship results in the same way.\n",
+    "\n",
+    "Which one should you use then? Well, it depends:\n",
+    "\n",
+    "-  if you have many points and just one polygon and you try to find out\n",
+    "   which one of them is inside the polygon:\n",
+    "\n",
+    "   -  you need to iterate over the points and check one at a time if it\n",
+    "      is **within()** the polygon specified\n",
+    "\n",
+    "-  if you have many polygons and just one point and you want to find out\n",
+    "   which polygon contains the point\n",
+    "\n",
+    "    -  you need to iterate over the polygons until you find a polygon that\n",
+    "       **contains()** the point specified (assuming there are no overlapping\n",
+    "       polygons)\n",
+    "        \n",
+    "## Intersect\n",
+    "\n",
+    "\n",
+    "Another typical geospatial operation is to see if a geometry\n",
+    "[intersect](http://toblerity.org/shapely/manual.html#object.intersects)\n",
+    "or [touches](http://toblerity.org/shapely/manual.html#object.touches)\n",
+    "another one. The difference between these two is that:\n",
+    "\n",
+    "-  if objects intersect, the boundary and interior of an object needs to\n",
+    "   intersect in any way with those of the other.\n",
+    "\n",
+    "-  If an object touches the other one, it is only necessary to have (at\n",
+    "   least) a single point of their boundaries in common but their\n",
+    "   interiors shoud NOT intersect.\n",
+    "\n",
+    "Let's try these out.\n",
+    "\n",
+    "-  Let's create two LineStrings"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {
+    "collapsed": true,
+    "deletable": true,
+    "editable": true
+   },
+   "outputs": [],
+   "source": [
+    "from shapely.geometry import LineString, MultiLineString\n",
+    "\n",
+    "# Create two lines\n",
+    "line_a = LineString([(0, 0), (1, 1)])\n",
+    "line_b = LineString([(1, 1), (0, 2)])\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "deletable": true,
+    "editable": true
+   },
+   "source": [
+    "-  Let's see if they intersect"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "metadata": {
+    "collapsed": false,
+    "deletable": true,
+    "editable": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "True"
+      ]
+     },
+     "execution_count": 8,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "line_a.intersects(line_b)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "deletable": true,
+    "editable": true
+   },
+   "source": [
+    "-  Do they also touch each other?"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "metadata": {
+    "collapsed": false,
+    "deletable": true,
+    "editable": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "True"
+      ]
+     },
+     "execution_count": 9,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "line_a.touches(line_b)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "deletable": true,
+    "editable": true
+   },
+   "source": [
+    "Indeed, they do and we can see this by plotting the features together"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "metadata": {
+    "collapsed": false,
+    "deletable": true,
+    "editable": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "image/svg+xml": [
+       "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"100.0\" height=\"100.0\" viewBox=\"-0.08 -0.08 1.1600000000000001 2.16\" preserveAspectRatio=\"xMinYMin meet\"><g transform=\"matrix(1,0,0,-1,0,2.0)\"><g><polyline fill=\"none\" stroke=\"#66cc99\" stroke-width=\"0.0432\" points=\"0.0,0.0 1.0,1.0\" opacity=\"0.8\" /><polyline fill=\"none\" stroke=\"#66cc99\" stroke-width=\"0.0432\" points=\"1.0,1.0 0.0,2.0\" opacity=\"0.8\" /></g></g></svg>"
+      ],
+      "text/plain": [
+       "<shapely.geometry.multilinestring.MultiLineString at 0x13cf55b6cc0>"
+      ]
+     },
+     "execution_count": 10,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Create a MultiLineString\n",
+    "multi_line = MultiLineString([line_a, line_b])\n",
+    "multi_line"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "deletable": true,
+    "editable": true
+   },
+   "source": [
+    "Thus, the ``line_b`` continues from the same node ( (1,1) ) where ``line_a`` ends.\n",
+    "\n",
+    "However, if the lines overlap fully, they don't touch due to the spatial relationship rule, as we can see:\n",
+    "\n",
+    "- Check if line_a touches itself"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "metadata": {
+    "collapsed": false,
+    "deletable": true,
+    "editable": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "False"
+      ]
+     },
+     "execution_count": 11,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Does the line touch with itself?\n",
+    "line_a.touches(line_a)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "deletable": true,
+    "editable": true
+   },
+   "source": [
+    "- It does not. However, it does intersect"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "metadata": {
+    "collapsed": false,
+    "deletable": true,
+    "editable": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "True"
+      ]
+     },
+     "execution_count": 12,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Does the line intersect with itself?\n",
+    "line_a.intersects(line_a)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "deletable": true,
+    "editable": true
+   },
+   "source": [
+    "## Point in Polygon using Geopandas\n",
+    "\n",
+    "Next we will do a practical example where we check which of the addresses from [previous tutorial]() are located in Southern district of Helsinki. Let's start by `downloading a KML-file <../../_static/data/L3/PKS_suuralue.kml>`__ that has the Polygons for districts of Helsinki Region (data openly available from [Helsinki Region Infoshare](http://www.hri.fi/fi/dataset/paakaupunkiseudun-aluejakokartat).\n",
+    "\n",
+    "- Let's start by reading the addresses from the Shapefile that we saved earlier."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true,
+    "deletable": true,
+    "editable": true
+   },
+   "outputs": [],
+   "source": [
+    "import geopandas as gpd\n",
+    "fp = \"/home/geo/addresses.shp\"\n",
+    "data = gpd.read_file(fp)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "deletable": true,
+    "editable": true
+   },
+   "source": [
+    "\n",
+    "### Reading KML-files in Geopandas\n",
+    "\n",
+    "It is possible to read the data from KML-file in a similar manner as Shapefile. However, we need to first, enable the KML-driver which is not enabled by default (because KML-files can contain unsupported data structures, nested folders etc., hence be careful when reading KML-files).\n",
+    "\n",
+    "- Let's enable the read and write functionalities for KML-driver by passing ``'rw'`` to whitelist of fiona's supported drivers:\n",
+    "\n",
+    "\n",
+    "\n",
+    "\n",
+    "\n",
+    "\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true,
+    "deletable": true,
+    "editable": true
+   },
+   "outputs": [],
+   "source": [
+    "import geopandas as gpd\n",
+    "import matplotlib.pyplot as plt\n",
+    "gpd.io.file.fiona.drvsupport.supported_drivers['KML'] = 'rw'"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "deletable": true,
+    "editable": true
+   },
+   "source": [
+    "Now we should be able to read a KML file with Geopandas.\n",
+    "\n",
+    "- Let's read the data from a following KML -file:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true,
+    "deletable": true,
+    "editable": true
+   },
+   "outputs": [],
+   "source": [
+    "# Filepath to KML file\n",
+    "fp = \"/home/geo/PKS_suuralue.kml\"\n",
+    "\n",
+    "polys = gpd.read_file(fp, driver='KML')\n",
+    "polys"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "deletable": true,
+    "editable": true
+   },
+   "source": [
+    "Nice, now we can see that we have 22 districts in our area. We are interested in an area that is called ``Eteläinen`` (*'Southern'* in english).\n",
+    "\n",
+    "- Let's select that one and see where it is located, and plot also the points on top of the map."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true,
+    "deletable": true,
+    "editable": true
+   },
+   "outputs": [],
+   "source": [
+    "southern = polys.ix[polys['Name']=='Eteläinen']\n",
+    "southern.reset_index(drop=True, inplace=True)\n",
+    "fig, ax = plt.subplots()\n",
+    "polys.plot(ax=ax, facecolor='gray');\n",
+    "southern.plot(ax=ax, facecolor='red');\n",
+    "data.plot(ax=ax, color='blue', markersize=5);\n",
+    "@savefig helsinki_districts.png width=7in\n",
+    "plt.tight_layout();"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "deletable": true,
+    "editable": true
+   },
+   "source": [
+    "Okey, so we can see that, indeed, certain points are within the selected red Polygon.\n",
+    "\n",
+    "Let's find out which one of them are located within the Polygon. Hence, we are conducting a Point in Polygon query.\n",
+    "\n",
+    "- Let's first enable shapely.speedups which makes some of the spatial queries running faster."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true,
+    "deletable": true,
+    "editable": true
+   },
+   "outputs": [],
+   "source": [
+    "import shapely.speedups\n",
+    "shapely.speedups.enable()\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true,
+    "deletable": true,
+    "editable": true
+   },
+   "outputs": [],
+   "source": [
+    "- Let's check which Points are within the ``southern`` Polygon. Notice, that here we check if the Points are ``within`` the **geometry**\n",
+    "  of the ``southern`` GeoDataFrame. Hence, we use the ``loc[0, 'geometry']`` to parse the actual Polygon geometry object from the GeoDataFrame."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true,
+    "deletable": true,
+    "editable": true
+   },
+   "outputs": [],
+   "source": [
+    "\n",
+    "pip_mask = data.within(southern.loc[0, 'geometry'])\n",
+    "print(pip_mask)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "deletable": true,
+    "editable": true
+   },
+   "source": [
+    "As we can see, we now have an array of boolean values for each row, where the result is ``True``\n",
+    "if Point was inside the Polygon, and ``False`` if it was not.\n",
+    "\n",
+    "- We can now use this mask array to select the Points that are inside the Polygon. Selecting data with this kind of mask array (of boolean values) is\n",
+    "  easy by passing the array inside the ``loc`` indexing function of Pandas.\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true,
+    "deletable": true,
+    "editable": true
+   },
+   "outputs": [],
+   "source": [
+    "pip_data = data.loc[pip_mask]\n",
+    "pip_data"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "deletable": true,
+    "editable": true
+   },
+   "source": [
+    "Let's finally confirm that our Point in Polygon query worked as it should by plotting the data."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true,
+    "deletable": true,
+    "editable": true
+   },
+   "outputs": [],
+   "source": [
+    "southern = polys.ix[polys['Name']=='Eteläinen']\n",
+    "southern.reset_index(drop=True, inplace=True)\n",
+    "fig, ax = plt.subplots()\n",
+    "polys.plot(ax=ax, facecolor='gray');\n",
+    "southern.plot(ax=ax, facecolor='red');\n",
+    "pip_data.plot(ax=ax, color='gold', markersize=2);\n",
+    "@savefig helsinki_districts_pip.png width=7in\n",
+    "plt.tight_layout();"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "deletable": true,
+    "editable": true
+   },
+   "source": [
+    "Perfect! Now we only have the (golden) points that, indeed, are inside the red Polygon which is exactly what we wanted!"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python [default]",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.5.2"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}

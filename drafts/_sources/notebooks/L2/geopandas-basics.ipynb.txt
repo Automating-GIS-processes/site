@@ -1,0 +1,1030 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Introduction to Geopandas\n",
+    "\n",
+    "\n",
+    "## Downloading data\n",
+    "\n",
+    "For this lesson we are using data in Shapefile format representing distributions of specific beautifully colored fish species called [Damselfish](https://en.wikipedia.org/wiki/Damselfish) and the country borders of Europe. From now on, we are going to download the datafiles at the start of each lesson because of the large size of the data. It is also a good practice to know how to download files from terminal. \n",
+    "\n",
+    "On Binder and CSC Notebook environment, you can use `wget` programn to download the data. Let's download the [data](https://github.com/AutoGIS/data/raw/master/L2_data.zip) into folder `/home/jovyan/notebooks/L2` by running following commands in the Terminal ([see here](https://jupyterlab.readthedocs.io/en/stable/user/terminal.html) if you don't know how to launch a terminal):\n",
+    "\n",
+    "```\n",
+    "# Change directory to directory with Lesson 2 materials\n",
+    "$ cd /home/jovyan/notebooks/L2\n",
+    "$ wget https://github.com/AutoGIS/data/raw/master/L2_data.zip\n",
+    "    \n",
+    "```\n",
+    "*Hint: you can copy/paste things to JupyterLab Terminal by pressing SHIFT + RIGHT-CLICK on your mouse and choosing 'Paste'.*\n",
+    "\n",
+    "Once you have downloaded the `L2_data.zip` file into your home directory, you can unzip the file using `unzip` command from Terminal (or e.g. 7zip on Windows if working with own computer). Following assumes that the file was downloaded to `/home/jovyan/notebooks/L2` -directory:\n",
+    "\n",
+    "``` \n",
+    "$ cd /home/jovyan/notebooks/L2\n",
+    "$ unzip L2_data.zip\n",
+    "$ ls L2_data\n",
+    "DAMSELFISH_distributions.cpg  DAMSELFISH_distributions.shp  Europe_borders.dbf  Europe_borders.sbx\n",
+    "DAMSELFISH_distributions.dbf  DAMSELFISH_distributions.shx  Europe_borders.prj  Europe_borders.shp\n",
+    "DAMSELFISH_distributions.prj  Europe_borders.cpg            Europe_borders.sbn  Europe_borders.shx\n",
+    "```\n",
+    "\n",
+    "\n",
+    "As we can see, the `L2_data` folder includes Shapefiles called `DAMSELFISH_distribution.shp` and `Europe_borders.shp`. Notice that Shapefile -fileformat is constituted of many separate files such as `.dbf` that contains the attribute information, and `.prj` -file that contains information about coordinate reference system."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Reading a Shapefile\n",
+    "\n",
+    "Typically reading the data into Python is the first step of the analysis pipeline. In GIS, there exists various dataformats such as [Shapefile](https://en.wikipedia.org/wiki/Shapefile), [GeoJSON](https://en.wikipedia.org/wiki/GeoJSON), [KML](https://en.wikipedia.org/wiki/Keyhole_Markup_Language), and [GPKG](https://en.wikipedia.org/wiki/GeoPackage) that are probably the most common vector data formats. [Geopandas](http://geopandas.org/io.html) is capable of reading data from all of these formats (plus many more). Reading spatial data can be done easily with geopandas using `gpd.from_file()` -function:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": [
+    "# Import necessary modules\n",
+    "import geopandas as gpd\n",
+    "\n",
+    "# Set filepath \n",
+    "fp = \"L2_data/DAMSELFISH_distributions.shp\"\n",
+    "\n",
+    "# Read file using gpd.read_file()\n",
+    "data = gpd.read_file(fp)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Now we read the data from a Shapefile into variable `data`. \n",
+    "\n",
+    "- Let's see check the data type of it"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "geopandas.geodataframe.GeoDataFrame"
+      ]
+     },
+     "execution_count": 3,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "type(data)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Okey so from the above we can see that our `data` -variable is a `GeoDataFrame`. GeoDataFrame extends the functionalities of\n",
+    "`pandas.DataFrame` in a way that it is possible to use and handle spatial data using similar approaches and datastructures as in Pandas (hence the name geopandas). GeoDataFrame have some special features and functions that are useful in GIS.\n",
+    "\n",
+    "- Let's take a look at our data and print the first 2 rows using the `head()` -function:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "      ID_NO            BINOMIAL  ORIGIN COMPILER  YEAR  \\\n",
+      "0  183963.0  Stegastes leucorus       1     IUCN  2010   \n",
+      "1  183963.0  Stegastes leucorus       1     IUCN  2010   \n",
+      "\n",
+      "                                            CITATION SOURCE DIST_COMM ISLAND  \\\n",
+      "0  International Union for Conservation of Nature...   None      None   None   \n",
+      "1  International Union for Conservation of Nature...   None      None   None   \n",
+      "\n",
+      "  SUBSPECIES                        ...                         RL_UPDATE  \\\n",
+      "0       None                        ...                            2012.1   \n",
+      "1       None                        ...                            2012.1   \n",
+      "\n",
+      "  KINGDOM_NA  PHYLUM_NAM      CLASS_NAME   ORDER_NAME     FAMILY_NAM  \\\n",
+      "0   ANIMALIA    CHORDATA  ACTINOPTERYGII  PERCIFORMES  POMACENTRIDAE   \n",
+      "1   ANIMALIA    CHORDATA  ACTINOPTERYGII  PERCIFORMES  POMACENTRIDAE   \n",
+      "\n",
+      "  GENUS_NAME SPECIES_NA CATEGORY  \\\n",
+      "0  Stegastes   leucorus       VU   \n",
+      "1  Stegastes   leucorus       VU   \n",
+      "\n",
+      "                                            geometry  \n",
+      "0  POLYGON ((-115.6437454219999 29.71392059300007...  \n",
+      "1  POLYGON ((-105.589950704 21.89339825500002, -1...  \n",
+      "\n",
+      "[2 rows x 24 columns]\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(data.head(2))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "As we can see, there exists multiple columns in our data related to our Damselfish -fish.\n",
+    "\n",
+    "When having spatial data, it is always a good idea to explore your data on a map. Creating a simple map from a `GeoDataFrame` is really easy: you can use ``.plot()`` -function from geopandas that creates a map based on the geometries of the data. Geopandas actually uses Matplotlib for creating the map that was introduced in [Lesson 7 of Geo-Python course](https://geo-python.github.io/2018/notebooks/L7/matplotlib.html).\n",
+    "\n",
+    "- Let's try it out, and take a look how our data looks like on a map:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "<matplotlib.axes._subplots.AxesSubplot at 0x18feb9164a8>"
+      ]
+     },
+     "execution_count": 7,
+     "metadata": {},
+     "output_type": "execute_result"
+    },
+    {
+     "data": {
+      "image/png": "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\nTkSuQmCC\n",
+      "text/plain": [
+       "<matplotlib.figure.Figure at 0x18fe7e49160>"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "%matplotlib inline\n",
+    "data.plot()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Voilá! As we can see, it is really easy to produce a map out of your Shapefile with geopandas. Geopandas automatically positions your map in a way that it covers the whole extent of your data."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Writing a Shapefile\n",
+    "\n",
+    "Writing the spatial data into disk for example as a new Shapefile is also something that is needed frequently.\n",
+    "\n",
+    "- Let's select 50 first rows of the input data and write those into a new Shapefile by first selecting the data using index slicing and\n",
+    "then write the selection into a Shapefile with ``gpd.to_file()`` -function:\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": [
+    "# Create a output path for the data\n",
+    "outfp = \"L2_data/DAMSELFISH_distributions_SELECTION.shp\"\n",
+    "\n",
+    "# Select first 50 rows\n",
+    "selection = data[0:50]\n",
+    "\n",
+    "# Write those rows into a new Shapefile (the default output file format is Shapefile)\n",
+    "selection.to_file(outfp)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "**TASK:** Read the newly created Shapefile with geopandas, and see how the data looks like."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Geometries in Geopandas\n",
+    "\n",
+    "Geopandas takes advantage of Shapely's geometric objects. Geometries are stored in a column called *geometry* that is a default column name for\n",
+    "storing geometric information in geopandas.\n",
+    "\n",
+    "-  Let's print the first 5 rows of the column 'geometry':"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "0    POLYGON ((-115.6437454219999 29.71392059300007...\n",
+      "1    POLYGON ((-105.589950704 21.89339825500002, -1...\n",
+      "2    POLYGON ((-111.159618439 19.01535626700007, -1...\n",
+      "3    POLYGON ((-80.86500229899997 -0.77894492099994...\n",
+      "4    POLYGON ((-67.33922225599997 -55.6761029239999...\n",
+      "Name: geometry, dtype: object\n"
+     ]
+    }
+   ],
+   "source": [
+    "# It is possible to get a specific column by specifying the column name within square brackets []\n",
+    "print(data['geometry'].head())"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "As we can see the `geometry` column contains familiar looking values, namely Shapely `Polygon` -objects that we [learned to use last week](https://automating-gis-processes.github.io/2018/notebooks/L1/geometric-objects.html#Polygon). Since the spatial data is stored as Shapely objects, **it is possible to use all of the functionalities of Shapely module**.\n",
+    "\n",
+    "- Let's prove that this really is the case by iterating over a sample of the data, and printing the `area` of first five polygons. \n",
+    "\n",
+    "  - We can iterate over the rows by using the `iterrows()` -function that we learned [during the Lesson 6 of the Geo-Python course](https://geo-python.github.io/2018/notebooks/L6/pandas/advanced-data-processing-with-pandas.html#Iterating-rows-and-using-self-made-functions-in-Pandas)."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Polygon area at index 0 is: 19.396\n",
+      "Polygon area at index 1 is: 6.146\n",
+      "Polygon area at index 2 is: 2.697\n",
+      "Polygon area at index 3 is: 87.461\n",
+      "Polygon area at index 4 is: 0.001\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Make a selection that contains only the first five rows\n",
+    "selection = data[0:5]\n",
+    "\n",
+    "# Iterate over rows and print the area of a Polygon\n",
+    "for index, row in selection.iterrows():\n",
+    "    # Get the area of the polygon\n",
+    "    poly_area = row['geometry'].area\n",
+    "    # Print information for the user\n",
+    "    print(\"Polygon area at index {index} is: {area:.3f}\".format(index=index, area=poly_area))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "As you might guess from here, all the functionalities of **Pandas**, such as the `iterrows()` function, are directly available in Geopandas without the need to call pandas separately because Geopandas is an **extension** for Pandas. \n",
+    "\n",
+    "- Let's next create a new column into our GeoDataFrame where we calculate and store the areas of individual polygons into that column. Calculating the areas of polygons is really easy in geopandas by using ``GeoDataFrame.area`` attribute. Hence, it is not needed to actually iterate over the rows line by line as we did previously:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "0    19.396254\n",
+      "1     6.145902\n",
+      "Name: area, dtype: float64\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Create a new column called 'area' and assign the area of the Polygons into it\n",
+    "data['area'] = data.area\n",
+    "\n",
+    "# Print first 2 rows of the area column\n",
+    "print(data['area'].head(2))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "As we can see, the area of our first polygon seems to be approximately `19.396` and `6.146` for the second polygon. They correspond to the ones we saw in previous step when iterating rows, hence, everything seems to work as should.\n",
+    "\n",
+    "- Let's check what is the `min`, `max` and `mean` of those areas using familiar functions from our previous Pandas lessions.\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Max area: 1493.2\n",
+      "Min area: 0.0\n",
+      "Mean area: 19.96\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Maximum area\n",
+    "max_area = data['area'].max()\n",
+    "\n",
+    "# Minimum area\n",
+    "min_area = data['area'].min()\n",
+    "\n",
+    "# Mean area\n",
+    "mean_area = data['area'].mean()\n",
+    "\n",
+    "print(\"Max area: {max}\\nMin area: {min}\\nMean area: {mean}\".format(max=round(max_area, 2), min=round(min_area, 2), mean=round(mean_area, 2)))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The largest Polygon in our dataset seems to be around 1494 square decimal degrees (~ 165 000 km2) and the average size is ~20 square decimal degrees (~2200 km2). The minimum polygon size seems to be `0.0`, hence it seems that there exists really small polygons as well in the data as well (rounds to 0 with 2 decimals). "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Creating geometries into a GeoDataFrame\n",
+    "\n",
+    "Since geopandas takes advantage of Shapely geometric objects, it is possible to create a Shapefile from a scratch by passing Shapely's\n",
+    "geometric objects into the GeoDataFrame. This is useful as it makes it easy to convert e.g. a text file that contains coordinates into a\n",
+    "Shapefile. Next we will see how to create a Shapefile from scratch. \n",
+    "\n",
+    "- Let's create an empty `GeoDataFrame`."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 28,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Empty GeoDataFrame\n",
+      "Columns: []\n",
+      "Index: []\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Import necessary modules first\n",
+    "import geopandas as gpd\n",
+    "from shapely.geometry import Point, Polygon\n",
+    "\n",
+    "# Create an empty geopandas GeoDataFrame\n",
+    "newdata = gpd.GeoDataFrame()\n",
+    "\n",
+    "# Let's see what we have at the moment\n",
+    "print(newdata)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "As we can see, the GeoDataFrame is empty since we haven't yet stored any data into it.\n",
+    "\n",
+    "- Let's create a new column called `geometry` that will contain our Shapely objects:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 29,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Empty GeoDataFrame\n",
+      "Columns: [geometry]\n",
+      "Index: []\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Create a new column called 'geometry' to the GeoDataFrame\n",
+    "newdata['geometry'] = None\n",
+    "\n",
+    "# Let's again see what's inside\n",
+    "print(newdata)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Now we have a `geometry` column in our GeoDataFrame but we don't have any data stored yet.\n",
+    "\n",
+    "- Let's create a Shapely `Polygon` repsenting the Helsinki Senate square that we can later insert to our GeoDataFrame:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 30,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "POLYGON ((24.950899 60.169158, 24.953492 60.169158, 24.95351 60.170104, 24.950958 60.16999, 24.950899 60.169158))\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Coordinates of the Helsinki Senate square in Decimal Degrees\n",
+    "coordinates = [(24.950899, 60.169158), (24.953492, 60.169158), (24.953510, 60.170104), (24.950958, 60.169990)]\n",
+    "\n",
+    "# Create a Shapely polygon from the coordinate-tuple list\n",
+    "poly = Polygon(coordinates)\n",
+    "\n",
+    "# Let's see what we have\n",
+    "print(poly)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Okay, now we have an appropriate `Polygon` -object.\n",
+    "\n",
+    "- Let's insert the polygon into our 'geometry' column of our GeoDataFrame at position 0:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 31,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "                                            geometry\n",
+      "0  POLYGON ((24.950899 60.169158, 24.953492 60.16...\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Insert the polygon into 'geometry' -column at index 0\n",
+    "newdata.loc[0, 'geometry'] = poly\n",
+    "\n",
+    "# Let's see what we have now\n",
+    "print(newdata)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Great, now we have a GeoDataFrame with a Polygon that we could already now export to a Shapefile. However, typically you might want to include some useful information with your geometry. \n",
+    "\n",
+    "- Hence, let's add another column to our GeoDataFrame called `location` with text `Senaatintori` that describes the location of the feature."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 32,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "                                            geometry      location\n",
+      "0  POLYGON ((24.950899 60.169158, 24.953492 60.16...  Senaatintori\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Add a new column and insert data \n",
+    "newdata.loc[0, 'location'] = 'Senaatintori'\n",
+    "\n",
+    "# Let's check the data\n",
+    "print(newdata)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Okay, now we have additional information that is useful for recognicing what the feature represents. \n",
+    "\n",
+    "Before exporting the data it is always good (basically necessary) to **determine the coordinate reference system (projection) for the GeoDataFrame.** GeoDataFrame has an attribute called `.crs` that shows the coordinate system of the data which is empty (None) in our case since we are creating the data from the scratch (more about projection on next tutorial):"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 33,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "None\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(newdata.crs)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "-  Let's add a crs for our GeoDataFrame. A Python module called **fiona** has a nice function called ``from_epsg()`` for passing the coordinate reference system information for the GeoDataFrame. Next we will use that and determine the projection to WGS84 (epsg code: 4326):"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 34,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "{'init': 'epsg:4326', 'no_defs': True}\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Import specific function 'from_epsg' from fiona module\n",
+    "from fiona.crs import from_epsg\n",
+    "\n",
+    "# Set the GeoDataFrame's coordinate system to WGS84 (i.e. epsg code 4326)\n",
+    "newdata.crs = from_epsg(4326)\n",
+    "\n",
+    "# Let's see how the crs definition looks like\n",
+    "print(newdata.crs)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "As we can see, now we have associated coordinate reference system information (i.e. `CRS`) into our `GeoDataFrame`. The CRS information here, is a Python `dictionary` containing necessary values for geopandas to create a `.prj` file for our Shapefile that contains the CRS info. \n",
+    "\n",
+    "-  Finally, we can export the GeoDataFrame using `.to_file()` -function. The function works quite similarly as the export functions in numpy or pandas, but here we only need to provide the output path for the Shapefile. Easy isn't it!:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 35,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": [
+    "# Determine the output path for the Shapefile\n",
+    "outfp = \"L2_data/Senaatintori.shp\"\n",
+    "\n",
+    "# Write the data into that Shapefile\n",
+    "newdata.to_file(outfp)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Now we have successfully created a Shapefile from the scratch using only Python programming. Similar approach can be used to for example to read\n",
+    "coordinates from a text file (e.g. points) and create Shapefiles from those automatically.\n",
+    "\n",
+    "**TASK:** Check the output Shapefile by reading it with geopandas and make sure that the attribute table and geometry seems correct."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Practical example: Saving multiple Shapefiles\n",
+    "\n",
+    "One really useful function that can be used in Pandas/Geopandas is [.groupby()](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.groupby.html). We saw and used this function already in [Lesson 6 of the Geo-Python course](https://geo-python.github.io/2018/notebooks/L6/pandas/advanced-data-processing-with-pandas.html#Aggregating-data-in-Pandas-by-grouping). Group by function is useful to group data based on values on selected column(s).\n",
+    "\n",
+    "Next we will take a practical example by automating the file export task. We will group individual fish subspecies in our `DAMSELFISH_distribution.shp` and export those into separate Shapefiles.\n",
+    "\n",
+    "- Let's start from scratch and read the Shapefile into GeoDataFrame\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 37,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Index(['ID_NO', 'BINOMIAL', 'ORIGIN', 'COMPILER', 'YEAR', 'CITATION', 'SOURCE',\n",
+      "       'DIST_COMM', 'ISLAND', 'SUBSPECIES', 'SUBPOP', 'LEGEND', 'SEASONAL',\n",
+      "       'TAX_COMM', 'RL_UPDATE', 'KINGDOM_NA', 'PHYLUM_NAM', 'CLASS_NAME',\n",
+      "       'ORDER_NAME', 'FAMILY_NAM', 'GENUS_NAME', 'SPECIES_NA', 'CATEGORY',\n",
+      "       'geometry'],\n",
+      "      dtype='object')\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Read Damselfish data\n",
+    "fp = \"L2_data/DAMSELFISH_distributions.shp\"\n",
+    "data = gpd.read_file(fp)\n",
+    "\n",
+    "# Print columns\n",
+    "print(data.columns)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The `BINOMIAL` column in the data contains information about different fish subspecies (their latin name). With `.unique()` -function we can quickly see all different names in that column:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 38,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "['Stegastes leucorus' 'Chromis intercrusma' 'Stegastes beebei'\n",
+      " 'Stegastes rectifraenum' 'Chromis punctipinnis' 'Chromis crusma'\n",
+      " 'Chromis pembae' 'Stegastes redemptus' 'Teixeirichthys jordani'\n",
+      " 'Chromis limbaughi' 'Microspathodon dorsalis' 'Chromis cyanea'\n",
+      " 'Amphiprion sandaracinos' 'Nexilosus latifrons' 'Stegastes baldwini'\n",
+      " 'Microspathodon bairdii' 'Azurina eupalama' 'Chromis flavicauda'\n",
+      " 'Stegastes arcifrons' 'Chromis alta' 'Abudefduf declivifrons'\n",
+      " 'Chromis alpha' 'Stegastes flavilatus' 'Abudefduf concolor'\n",
+      " 'Abudefduf troschelii' 'Chrysiptera flavipinnis' 'Chromis atrilobata'\n",
+      " 'Stegastes acapulcoensis' 'Hypsypops rubicundus' 'Azurina hirundo']\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Print all unique fish subspecies in 'BINOMIAL' column\n",
+    "print(data['BINOMIAL'].unique())"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "- Now we can use that information to group our data and save all individual fish subspecies as separate Shapefiles:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 39,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "<pandas.core.groupby.groupby.DataFrameGroupBy object at 0x0000018FF1F87208>"
+      ]
+     },
+     "execution_count": 39,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Group the data by column 'BINOMIAL'\n",
+    "grouped = data.groupby('BINOMIAL')\n",
+    "\n",
+    "# Let's see what we have\n",
+    "grouped"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "As we can see, `groupby` -function gives us an object called `DataFrameGroupBy` which is similar to list of keys and values (in a dictionary) that we can iterate over. This is again exactly similar thing that we already practiced during [Lesson 6 of the Geo-Python course](https://geo-python.github.io/2018/notebooks/L6/pandas/advanced-data-processing-with-pandas.html#Aggregating-data-in-Pandas-by-grouping).\n",
+    "\n",
+    "- Let's iterate over the groups and see what our variables `key` and `values` contain"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 41,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Key: Teixeirichthys jordani\n",
+      "       ID_NO                BINOMIAL  ORIGIN COMPILER  YEAR  \\\n",
+      "27  154915.0  Teixeirichthys jordani       1     None  2012   \n",
+      "28  154915.0  Teixeirichthys jordani       1     None  2012   \n",
+      "29  154915.0  Teixeirichthys jordani       1     None  2012   \n",
+      "30  154915.0  Teixeirichthys jordani       1     None  2012   \n",
+      "31  154915.0  Teixeirichthys jordani       1     None  2012   \n",
+      "32  154915.0  Teixeirichthys jordani       1     None  2012   \n",
+      "33  154915.0  Teixeirichthys jordani       1     None  2012   \n",
+      "\n",
+      "                                             CITATION SOURCE DIST_COMM ISLAND  \\\n",
+      "27  Red List Index (Sampled Approach), Zoological ...   None      None   None   \n",
+      "28  Red List Index (Sampled Approach), Zoological ...   None      None   None   \n",
+      "29  Red List Index (Sampled Approach), Zoological ...   None      None   None   \n",
+      "30  Red List Index (Sampled Approach), Zoological ...   None      None   None   \n",
+      "31  Red List Index (Sampled Approach), Zoological ...   None      None   None   \n",
+      "32  Red List Index (Sampled Approach), Zoological ...   None      None   None   \n",
+      "33  Red List Index (Sampled Approach), Zoological ...   None      None   None   \n",
+      "\n",
+      "   SUBSPECIES                        ...                         RL_UPDATE  \\\n",
+      "27       None                        ...                            2012.2   \n",
+      "28       None                        ...                            2012.2   \n",
+      "29       None                        ...                            2012.2   \n",
+      "30       None                        ...                            2012.2   \n",
+      "31       None                        ...                            2012.2   \n",
+      "32       None                        ...                            2012.2   \n",
+      "33       None                        ...                            2012.2   \n",
+      "\n",
+      "   KINGDOM_NA  PHYLUM_NAM      CLASS_NAME   ORDER_NAME     FAMILY_NAM  \\\n",
+      "27   ANIMALIA    CHORDATA  ACTINOPTERYGII  PERCIFORMES  POMACENTRIDAE   \n",
+      "28   ANIMALIA    CHORDATA  ACTINOPTERYGII  PERCIFORMES  POMACENTRIDAE   \n",
+      "29   ANIMALIA    CHORDATA  ACTINOPTERYGII  PERCIFORMES  POMACENTRIDAE   \n",
+      "30   ANIMALIA    CHORDATA  ACTINOPTERYGII  PERCIFORMES  POMACENTRIDAE   \n",
+      "31   ANIMALIA    CHORDATA  ACTINOPTERYGII  PERCIFORMES  POMACENTRIDAE   \n",
+      "32   ANIMALIA    CHORDATA  ACTINOPTERYGII  PERCIFORMES  POMACENTRIDAE   \n",
+      "33   ANIMALIA    CHORDATA  ACTINOPTERYGII  PERCIFORMES  POMACENTRIDAE   \n",
+      "\n",
+      "        GENUS_NAME SPECIES_NA CATEGORY  \\\n",
+      "27  Teixeirichthys    jordani       LC   \n",
+      "28  Teixeirichthys    jordani       LC   \n",
+      "29  Teixeirichthys    jordani       LC   \n",
+      "30  Teixeirichthys    jordani       LC   \n",
+      "31  Teixeirichthys    jordani       LC   \n",
+      "32  Teixeirichthys    jordani       LC   \n",
+      "33  Teixeirichthys    jordani       LC   \n",
+      "\n",
+      "                                             geometry  \n",
+      "27  POLYGON ((121.6300326400001 33.04248618400004,...  \n",
+      "28  POLYGON ((32.56219482400007 29.97488975500005,...  \n",
+      "29  POLYGON ((130.9052090560001 34.02498196400006,...  \n",
+      "30  POLYGON ((56.32233070000007 -3.707270205999976...  \n",
+      "31  POLYGON ((40.64476131800006 -10.85502363999996...  \n",
+      "32  POLYGON ((48.11258402900006 -9.335103113999935...  \n",
+      "33  POLYGON ((51.75403543100003 -9.21679305899994,...  \n",
+      "\n",
+      "[7 rows x 24 columns]\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Iterate over the group object\n",
+    "for key, values in grouped:\n",
+    "    individual_fish = values\n",
+    "\n",
+    "# Let's see what is the LAST item and key that we iterated\n",
+    "print('Key:', key)\n",
+    "print(individual_fish)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "From here we can see that the `individual_fish` -variable contains all the rows that belongs to a fish called `Teixeirichthys jordani` that is the `key` for conducting the grouping. Notice that the index numbers refer to the row numbers in the original data -GeoDataFrame.\n",
+    "\n",
+    "- Let's check the datatype of the grouped object:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 42,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "geopandas.geodataframe.GeoDataFrame"
+      ]
+     },
+     "execution_count": 42,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "type(individual_fish)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "As we can see, each set of data are now grouped into separate GeoDataFrames that we can export into Shapefiles using the variable `key`\n",
+    "for creating the output filename. Next, we use a specific string formatting method to produce the output filename using `% operator` ([read more here]( https://www.learnpython.org/en/String_Formatting)).\n",
+    "\n",
+    "- Let's now export all individual subspecies into separate Shapefiles:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 45,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Processing: Abudefduf concolor\n",
+      "Processing: Abudefduf declivifrons\n",
+      "Processing: Abudefduf troschelii\n",
+      "Processing: Amphiprion sandaracinos\n",
+      "Processing: Azurina eupalama\n",
+      "Processing: Azurina hirundo\n",
+      "Processing: Chromis alpha\n",
+      "Processing: Chromis alta\n",
+      "Processing: Chromis atrilobata\n",
+      "Processing: Chromis crusma\n",
+      "Processing: Chromis cyanea\n",
+      "Processing: Chromis flavicauda\n",
+      "Processing: Chromis intercrusma\n",
+      "Processing: Chromis limbaughi\n",
+      "Processing: Chromis pembae\n",
+      "Processing: Chromis punctipinnis\n",
+      "Processing: Chrysiptera flavipinnis\n",
+      "Processing: Hypsypops rubicundus\n",
+      "Processing: Microspathodon bairdii\n",
+      "Processing: Microspathodon dorsalis\n",
+      "Processing: Nexilosus latifrons\n",
+      "Processing: Stegastes acapulcoensis\n",
+      "Processing: Stegastes arcifrons\n",
+      "Processing: Stegastes baldwini\n",
+      "Processing: Stegastes beebei\n",
+      "Processing: Stegastes flavilatus\n",
+      "Processing: Stegastes leucorus\n",
+      "Processing: Stegastes rectifraenum\n",
+      "Processing: Stegastes redemptus\n",
+      "Processing: Teixeirichthys jordani\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Import os -module that is useful for parsing filepaths\n",
+    "import os\n",
+    "\n",
+    "# Determine output directory\n",
+    "out_directory = \"L2_data\"\n",
+    "\n",
+    "# Create a new folder called 'Results' \n",
+    "result_folder = os.path.join(out_directory, 'Results')\n",
+    "\n",
+    "# Check if the folder exists already\n",
+    "if not os.path.exists(result_folder):\n",
+    "    # If it does not exist, create one\n",
+    "    os.makedirs(result_folder)\n",
+    "\n",
+    "# Iterate over the groups\n",
+    "for key, values in grouped:\n",
+    "    # Format the filename (replace spaces with underscores using 'replace()' -function)\n",
+    "    output_name = \"%s.shp\" % key.replace(\" \", \"_\")\n",
+    "\n",
+    "    # Print some information for the user\n",
+    "    print(\"Processing: %s\" % key)\n",
+    "\n",
+    "    # Create an output path\n",
+    "    outpath = os.path.join(result_folder, output_name)\n",
+    "\n",
+    "    # Export the data\n",
+    "    values.to_file(outpath)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Excellent! Now we have saved those individual fishes into separate Shapefiles and named the file according to the species name. These kind of grouping operations can be really handy when dealing with Shapefiles. Doing similar process manually would be really laborious and error-prone."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Summary\n",
+    "\n",
+    "In this tutorial we introduced the first steps of using geopandas. More specifically you should know how to:\n",
+    "\n",
+    "**1)** Read data from Shapefile using geopandas,\n",
+    "\n",
+    "**2)** Write GeoDataFrame data from Shapefile using geopandas,\n",
+    "\n",
+    "**3)** Create a GeoDataFrame from scratch, and\n",
+    "\n",
+    "**4)** automate a task to save specific rows from data into Shapefile based on specific key using `groupby()` -function. "
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.6.0"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 0
+}
