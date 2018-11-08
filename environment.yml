@@ -2,7 +2,11 @@ name: autogis-environment
 
 channels:
   - conda-forge
-  - defaults
-
+  
 dependencies:
+  - python=3.5
   - geopandas
+  - geopy
+  - osmnx
+  - pip:
+    - pip install https://github.com/mullenkamp/PyCRS/archive/master.zip
