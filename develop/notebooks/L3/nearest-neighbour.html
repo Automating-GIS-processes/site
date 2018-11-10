@@ -1,0 +1,973 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-88382509-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Nearest Neighbour Analysis &mdash; AutoGIS 2018 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link href="../../_static/geo-python.css" rel="stylesheet" type="text/css">
+     
+
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> AutoGIS
+          
+
+          
+            
+            <img src="../../_static/logo_hy_geo_135.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2018
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Course information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/course-info.html">General info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/course-environment-components.html">Course environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/grading.html">Grading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/learning-goals.html">Learning goals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/Installing_Anacondas_GIS.html">Installing Python + GIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/License-terms.html">License and terms of usage</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 1</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L1/Intro-Python-GIS.html">Motivation for the course</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L1/overview.html">Lesson overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1/geometric-objects.html">Geometric objects - Spatial data model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L1/exercise-1.html">Exercise 1</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 2</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L2/overview.html">Lesson 2 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/geopandas-basics.html">Introduction to Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/projections.html">Map projections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L2/exercise-2.html">Exercise 2</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 3</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L3/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L3/geocoding.html">Geocoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geocoding_in_geopandas.html">Geocoding in Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="point-in-polygon.html">Point in Polygon &amp; Intersect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spatial-join.html">Spatial join</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L3/exercise-3.html">Exercise 3</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AutoGIS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Nearest Neighbour Analysis</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/Automating-GIS-processes/2018/blob/develop/source/notebooks/L3/nearest-neighbour.ipynb" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+
+
+    
+    
+
+
+
+    <p class="scv-banner scv-sphinx_rtd_theme"><b>Warning:</b> This document is for the development version of AutoGIS.</p>
+
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #303F9F;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #D84315;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 8ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: #f7f7f7;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.pngmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="admonition note">
+This page was generated from <a class="reference external" href="https://github.com/Automating-GIS-processes/2018/blob/master/source/notebooks/L3/nearest-neighbour.ipynb">source/notebooks/L3/nearest-neighbour.ipynb</a>.
+<span class="raw-html"><br/><a href="https://mybinder.org/v2/gh/Automating-GIS-processes/2018/master?urlpath=lab/tree/source/notebooks/L3/nearest-neighbour.ipynb"><img alt="Binder badge" src="https://img.shields.io/badge/launch-full%20binder-red.svg" style="vertical-align:text-bottom"></a></span>
+<span class="raw-html"><a href="https://mybinder.org/v2/gh/Automating-GIS-processes/notebooks/master?urlpath=lab/tree/notebooks/L3/nearest-neighbour.ipynb"><img alt="Binder badge" src="https://img.shields.io/badge/launch-student%20binder-red.svg" style="vertical-align:text-bottom"></a></span>
+<span class="raw-html"><a href="https://notebooks.csc.fi/#/blueprint/d71cd2d26d924f48820dc22b67a87d8e"><img alt="CSC badge" src="https://img.shields.io/badge/launch-CSC%20notebook-blue.svg" style="vertical-align:text-bottom"></a></span></div>
+<div class="section" id="Nearest-Neighbour-Analysis">
+<h1>Nearest Neighbour Analysis<a class="headerlink" href="#Nearest-Neighbour-Analysis" title="Permalink to this headline">¶</a></h1>
+<p>One commonly used GIS task is to be able to find the nearest neighbour.
+For instance, you might have a single Point object representing your
+home location, and then another set of locations representing
+e.g.&nbsp;public transport stops. Then, quite typical question is <em>“which of
+the stops is closest one to my home?”</em> This is a typical nearest
+neighbour analysis, where the aim is to find the closest geometry to
+another geometry.</p>
+<p>In Python this kind of analysis can be done with shapely function called
+<code class="docutils literal notranslate"><span class="pre">nearest_points()</span></code> that <a class="reference external" href="https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.nearest_points">returns a tuple of the nearest points in the
+input
+geometries</a>.</p>
+<div class="section" id="Nearest-point-using-Shapely">
+<h2>Nearest point using Shapely<a class="headerlink" href="#Nearest-point-using-Shapely" title="Permalink to this headline">¶</a></h2>
+<p>Let’s start by testing how we can find the nearest Point using the
+<code class="docutils literal notranslate"><span class="pre">nearest_points()</span></code> function of Shapely.</p>
+<p>Let’s create an origin Point and a few destination Points and find out
+the closest destination.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Point</span><span class="p">,</span> <span class="n">MultiPoint</span>
+<span class="kn">from</span> <span class="nn">shapely.ops</span> <span class="kn">import</span> <span class="n">nearest_points</span>
+
+<span class="n">orig</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.67</span><span class="p">)</span>
+<span class="n">dest1</span><span class="p">,</span> <span class="n">dest2</span><span class="p">,</span> <span class="n">dest3</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.45</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>To be able to find out the closest destination point from the origin, we
+need to create a MultiPoint object from the destination points.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">destinations</span> <span class="o">=</span> <span class="n">MultiPoint</span><span class="p">([</span><span class="n">dest1</span><span class="p">,</span> <span class="n">dest2</span><span class="p">,</span> <span class="n">dest3</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">destinations</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+MULTIPOINT (0 1.45, 2 2, 0 2.5)
+</pre></div></div>
+</div>
+<p>Okey, now we can see that all the destination points are represented as
+a single MultiPoint object.</p>
+<ul class="simple">
+<li>Now we can find out the nearest destination point by using
+<code class="docutils literal notranslate"><span class="pre">nearest_points()</span></code> function.</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">nearest_geoms</span> <span class="o">=</span> <span class="n">nearest_points</span><span class="p">(</span><span class="n">orig</span><span class="p">,</span> <span class="n">destinations</span><span class="p">)</span>
+<span class="n">near_idx0</span> <span class="o">=</span> <span class="n">nearest_geoms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">near_idx1</span> <span class="o">=</span> <span class="n">nearest_geoms</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">nearest_geoms</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">near_idx0</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">near_idx1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(&lt;shapely.geometry.point.Point object at 0x7f1428afceb8&gt;, &lt;shapely.geometry.point.Point object at 0x7f1428afcef0&gt;)
+POINT (1 1.67)
+POINT (0 1.45)
+</pre></div></div>
+</div>
+<p>As you can see the <code class="docutils literal notranslate"><span class="pre">nearest_points()</span></code> function returns a tuple of
+geometries where the first item is the geometry of our origin point and
+the second item (at index 1) is the actual nearest geometry from the
+destination points. Hence, the closest destination point seems to be the
+one located at coordinates (0, 1.45).</p>
+<p>This is the basic logic how we can find the nearest point from a set of
+points.</p>
+</div>
+<div class="section" id="Nearest-points-using-Geopandas">
+<h2>Nearest points using Geopandas<a class="headerlink" href="#Nearest-points-using-Geopandas" title="Permalink to this headline">¶</a></h2>
+<p>Of course, the previous example is not really useful yet. Hence, next I
+show, how it is possible to find nearest points from a set of origin
+points to a set of destination points using GeoDataFrames. If you don’t
+already have the addresses and PKS_suuralueet.kml datasets, you can find
+and download them from :doc:<code class="docutils literal notranslate"><span class="pre">geocoding</span> <span class="pre">&lt;geocoding&gt;</span></code> and
+:doc:<code class="docutils literal notranslate"><span class="pre">Point</span> <span class="pre">in</span> <span class="pre">Polygon</span> <span class="pre">&lt;point-in-polygon&gt;</span></code> tutorials.</p>
+<ul class="simple">
+<li>First we need to create a function that takes advantage of the
+previous function but is tailored to work with two GeoDataFrames.</li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">nearest</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">geom_union</span><span class="p">,</span> <span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">,</span> <span class="n">geom1_col</span><span class="o">=</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span> <span class="n">geom2_col</span><span class="o">=</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span> <span class="n">src_column</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Find the nearest point and return the corresponding value from specified column.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Find the geometry that is closest</span>
+    <span class="n">nearest</span> <span class="o">=</span> <span class="n">df2</span><span class="p">[</span><span class="n">geom2_col</span><span class="p">]</span> <span class="o">==</span> <span class="n">nearest_points</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">geom1_col</span><span class="p">],</span> <span class="n">geom_union</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># Get the corresponding value from df2 (matching is based on the geometry)</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">df2</span><span class="p">[</span><span class="n">nearest</span><span class="p">][</span><span class="n">src_column</span><span class="p">]</span><span class="o">.</span><span class="n">get_values</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">value</span>
+</pre></div>
+</div>
+</div>
+<p>Next we read the address data and the Helsinki districts data and find
+out the closest address to the centroid of each district.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Define filepaths</span>
+<span class="n">fp1</span> <span class="o">=</span> <span class="s2">&quot;data/PKS_suuralue.kml&quot;</span>
+<span class="n">fp2</span> <span class="o">=</span> <span class="s2">&quot;data/addresses.shp&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">gpd</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">fiona</span><span class="o">.</span><span class="n">drvsupport</span><span class="o">.</span><span class="n">supported_drivers</span><span class="p">[</span><span class="s1">&#39;KML&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;rw&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Read in data with geopandas</span>
+<span class="n">df1</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">fp1</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s1">&#39;KML&#39;</span><span class="p">)</span>
+<span class="n">df2</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">fp2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Create unary union from Points, which basically creates a MultiPoint
+object from the Point geometries.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">unary_union</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">unary_union</span>
+<span class="k">print</span><span class="p">(</span><span class="n">unary_union</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+MULTIPOINT (24.8610322 60.224006, 24.8667825 60.2517419, 24.8710287 60.222498, 24.8769977 60.2397435, 24.8838413 60.230578, 24.8941806817097 60.21721545, 24.9155624 60.1632015, 24.9212065 60.1587845, 24.9216003 60.1566475, 24.9252584 60.1648863, 24.9316914 60.1690222, 24.9331155798105 60.1690911, 24.9339225 60.1995792, 24.9416849 60.1699637, 24.9440942536239 60.17130125, 24.9473289 60.1718719, 24.9480051 60.2217879, 24.9495338 60.1794339, 24.9607487 60.1882163, 24.9655307 60.2294746, 24.9768441 60.1941864, 24.9936217 60.2436491, 25.0068082 60.1887169, 25.0130341 60.2513441, 25.0204879 60.243423, 25.026632061488 60.1944775, 25.0291169 60.2636285, 25.0331561080774 60.2777903, 25.0747841 60.2253109, 25.0783462 60.209819, 25.0916737 60.237548, 25.1098071 60.2380653, 25.1108711 60.2217791, 25.1368583 60.2070309)
+</pre></div></div>
+</div>
+<p>Calculate the centroids for each district area.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">df1</span><span class="p">[</span><span class="s1">&#39;centroid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">centroid</span>
+<span class="n">df1</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[13]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>geometry</th>
+      <th>centroid</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Suur-Espoonlahti</td>
+      <td></td>
+      <td>POLYGON Z ((24.775059677807 60.1090604462157 0...</td>
+      <td>POINT (24.76754037242762 60.0440879200116)</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Suur-Kauklahti</td>
+      <td></td>
+      <td>POLYGON Z ((24.6157775254076 60.1725681273527 ...</td>
+      <td>POINT (24.57415010885406 60.19764302289445)</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Vanha-Espoo</td>
+      <td></td>
+      <td>POLYGON Z ((24.6757633262026 60.2120070032819 ...</td>
+      <td>POINT (24.60400724339237 60.25253297356344)</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Pohjois-Espoo</td>
+      <td></td>
+      <td>POLYGON Z ((24.767921197401 60.2691954732391 0...</td>
+      <td>POINT (24.68682879841453 60.30649462398335)</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Suur-Matinkylä</td>
+      <td></td>
+      <td>POLYGON Z ((24.7536131356802 60.1663051341717 ...</td>
+      <td>POINT (24.76063843560942 60.15018263640097)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>Okey now we are ready to use our function and find closest Points
+(taking the value from id column) from df2 to df1 centroids</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">df1</span><span class="p">[</span><span class="s1">&#39;nearest_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">nearest</span><span class="p">,</span> <span class="n">geom_union</span><span class="o">=</span><span class="n">unary_union</span><span class="p">,</span> <span class="n">df1</span><span class="o">=</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="o">=</span><span class="n">df2</span><span class="p">,</span> <span class="n">geom1_col</span><span class="o">=</span><span class="s1">&#39;centroid&#39;</span><span class="p">,</span> <span class="n">src_column</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df1</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[14]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>geometry</th>
+      <th>centroid</th>
+      <th>nearest_id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Suur-Espoonlahti</td>
+      <td></td>
+      <td>POLYGON Z ((24.775059677807 60.1090604462157 0...</td>
+      <td>POINT (24.76754037242762 60.0440879200116)</td>
+      <td>1000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Suur-Kauklahti</td>
+      <td></td>
+      <td>POLYGON Z ((24.6157775254076 60.1725681273527 ...</td>
+      <td>POINT (24.57415010885406 60.19764302289445)</td>
+      <td>1020</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Vanha-Espoo</td>
+      <td></td>
+      <td>POLYGON Z ((24.6757633262026 60.2120070032819 ...</td>
+      <td>POINT (24.60400724339237 60.25253297356344)</td>
+      <td>1020</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Pohjois-Espoo</td>
+      <td></td>
+      <td>POLYGON Z ((24.767921197401 60.2691954732391 0...</td>
+      <td>POINT (24.68682879841453 60.30649462398335)</td>
+      <td>1017</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Suur-Matinkylä</td>
+      <td></td>
+      <td>POLYGON Z ((24.7536131356802 60.1663051341717 ...</td>
+      <td>POINT (24.76063843560942 60.15018263640097)</td>
+      <td>1020</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Kauniainen</td>
+      <td></td>
+      <td>POLYGON Z ((24.6907528033566 60.2195779731868 ...</td>
+      <td>POINT (24.71357964516679 60.21457067576294)</td>
+      <td>1020</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Suur-Leppävaara</td>
+      <td></td>
+      <td>POLYGON Z ((24.797472695835 60.2082651196077 0...</td>
+      <td>POINT (24.77910492134015 60.22913609608545)</td>
+      <td>1020</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Suur-Tapiola</td>
+      <td></td>
+      <td>POLYGON Z ((24.8443596422129 60.1659790707387 ...</td>
+      <td>POINT (24.79937514852226 60.17816655223976)</td>
+      <td>1020</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Myyrmäki</td>
+      <td></td>
+      <td>POLYGON Z ((24.8245867448802 60.2902531157585 ...</td>
+      <td>POINT (24.81763652589348 60.27819504217397)</td>
+      <td>1017</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Kivistö</td>
+      <td></td>
+      <td>POLYGON Z ((24.9430919106369 60.3384471629062 ...</td>
+      <td>POINT (24.84180592296876 60.34358057021768)</td>
+      <td>1017</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Eteläinen</td>
+      <td></td>
+      <td>POLYGON Z ((24.7827651307035 60.09997268858 0,...</td>
+      <td>POINT (24.90837930087519 60.10976339578206)</td>
+      <td>1005</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Kaakkoinen</td>
+      <td></td>
+      <td>POLYGON Z ((24.8480782099727 60.0275589731893 ...</td>
+      <td>POINT (25.05325169482274 60.05155324331345)</td>
+      <td>1029</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Keskinen</td>
+      <td></td>
+      <td>POLYGON Z ((24.9085548098731 60.2082029641503 ...</td>
+      <td>POINT (24.95489633637751 60.20067297308771)</td>
+      <td>1027</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Läntinen</td>
+      <td></td>
+      <td>POLYGON Z ((24.832174555671 60.2516121985945 0...</td>
+      <td>POINT (24.87614770011878 60.21754287289237)</td>
+      <td>1010</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Pohjoinen</td>
+      <td></td>
+      <td>POLYGON Z ((24.8992644865152 60.2689368800439 ...</td>
+      <td>POINT (24.94156264995636 60.24654213027523)</td>
+      <td>1014</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Koillinen</td>
+      <td></td>
+      <td>POLYGON Z ((24.9722813313308 60.2432476462193 ...</td>
+      <td>POINT (25.02148999795968 60.25026309396886)</td>
+      <td>1022</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Aviapolis</td>
+      <td></td>
+      <td>POLYGON Z ((24.9430919106369 60.3384471629062 ...</td>
+      <td>POINT (24.93554952483983 60.30204064147746)</td>
+      <td>1018</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Tikkurila</td>
+      <td></td>
+      <td>POLYGON Z ((24.9764047156358 60.2896890295612 ...</td>
+      <td>POINT (25.03931014564627 60.29804037805193)</td>
+      <td>1008</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>Koivukylä</td>
+      <td></td>
+      <td>POLYGON Z ((24.9942315864552 60.3329637072809 ...</td>
+      <td>POINT (25.05766837333244 60.32582581576258)</td>
+      <td>1008</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>Itäinen</td>
+      <td></td>
+      <td>POLYGON Z ((25.0351655840904 60.23627484214 0,...</td>
+      <td>POINT (25.12590828372607 60.20923259104367)</td>
+      <td>1024</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>That’s it! Now we found the closest point for each centroid and got the
+<code class="docutils literal notranslate"><span class="pre">id</span></code> value from our addresses into the <code class="docutils literal notranslate"><span class="pre">df1</span></code> GeoDataFrame.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Henrikki Tenkanen
+      Last updated on Nov 10, 2018.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+    <p> <br/> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /> </a></p>
+     
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: develop
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../../../2017/index.html">2017</a></dd>
+            <dd><a href="nearest-neighbour.html">develop</a></dd>
+            <dd><a href="../../../drafts/index.html">drafts</a></dd>
+            <dd><a href="../../../master/index.html">master</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'2018',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
