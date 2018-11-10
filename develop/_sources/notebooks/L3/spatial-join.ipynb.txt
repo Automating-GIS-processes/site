@@ -1,0 +1,781 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Spatial join\n",
+    "\n",
+    "[Spatial join](http://wiki.gis.com/wiki/index.php/Spatial_Join) is\n",
+    "yet another classic GIS problem. Getting attributes from one layer and\n",
+    "transferring them into another layer based on their spatial relationship\n",
+    "is something you most likely need to do on a regular basis.\n",
+    "\n",
+    "The previous materials focused on learning how to perform a `Point in Polygon query <Lesson3-point-in-polygon.html#how-to-check-if-point-is-inside-a-polygon>`__.\n",
+    "We could now apply those techniques and create our own function to perform a spatial join between two layers based on their\n",
+    "spatial relationship. We could for example join the attributes of a polygon layer into a point layer where each point would get the\n",
+    "attributes of a polygon that ``contains`` the point.\n",
+    "\n",
+    "Luckily, [spatial join is already implemented in Geopandas](http://geopandas.org/mergingdata.html#spatial-joins)\n",
+    ", thus we do not need to create it ourselves. There are three possible types of\n",
+    "join that can be applied in spatial join that are determined with ``op`` -parameter in the ``gpd.sjoin()`` -function:\n",
+    "\n",
+    "-  ``\"intersects\"``\n",
+    "-  ``\"within\"``\n",
+    "-  ``\"contains\"``\n",
+    "\n",
+    "Sounds familiar? Yep, all of those spatial relationships were discussed\n",
+    "in the `previous materials <Lesson3-point-in-polygon.html>`__, thus you should know how they work.\n",
+    "\n",
+    "Let's perform a spatial join between these two layers:\n",
+    "- **Addresses:** the address-point Shapefile that we `created <Lesson3-table-join.html>`__ and then `reprojected <Lesson3-projections.html>`__ \n",
+    "- **Population grid:** a Polygon layer that is a 250m x 250m grid showing the amount of people living in the Helsinki Region.\n",
+    "    - The population grid a dataset is produced by the **Helsinki Region Environmental\n",
+    "Services Authority (HSY)** (see [this page](https://www.hsy.fi/fi/asiantuntijalle/avoindata/Sivut/AvoinData.aspx?dataID=7) to access data from different years).\n",
+    "    - For this lesson we will use the population grid for year 2015, which can be dowloaded as a shapefile [from this link](https://www.hsy.fi/sites/AvoinData/AvoinData/SYT/Tietoyhteistyoyksikko/Shape%20(Esri)/V%C3%A4est%C3%B6tietoruudukko/Vaestotietoruudukko_2015.zip) in the  [Helsinki Region Infroshare\n",
+    "(HRI) open data portal](http://www.hri.fi/en/dataset/vaestotietoruudukko) \n",
+    "\n",
+    "\n",
+    "## Download and clean the data\n",
+    "\n",
+    "**Execute the following steps in a terminal window**\n",
+    "\n",
+    "- Navigate to the data folder\n",
+    "\n",
+    "```\n",
+    "    cd data\n",
+    "```\n",
+    "\n",
+    "- Download the population grid using wget:\n",
+    "\n",
+    "```\n",
+    "    wget https://www.hsy.fi/sites/AvoinData/AvoinData/SYT/Tietoyhteistyoyksikko/Shape%20(Esri)/V%C3%A4est%C3%B6tietoruudukko/Vaestotietoruudukko_2015.zip\n",
+    "\n",
+    "```\n",
+    "\n",
+    "-  Unzip the file in Terminal into a folder called Pop15 (using -d flag)\n",
+    "\n",
+    "```\n",
+    "    $ unzip Vaestotietoruudukko_2015.zip -d Pop15\n",
+    "    $ ls Pop15\n",
+    "    Vaestotietoruudukko_2015.dbf  Vaestotietoruudukko_2015.shp\n",
+    "    Vaestotietoruudukko_2015.prj  Vaestotietoruudukko_2015.shx\n",
+    "```\n",
+    "\n",
+    "You should now have a folder ``/data/Pop15`` with files listed\n",
+    "above.\n",
+    "\n",
+    "-  Let's read the data into memory and see what we have.\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>INDEX</th>\n",
+       "      <th>ASUKKAITA</th>\n",
+       "      <th>ASVALJYYS</th>\n",
+       "      <th>IKA0_9</th>\n",
+       "      <th>IKA10_19</th>\n",
+       "      <th>IKA20_29</th>\n",
+       "      <th>IKA30_39</th>\n",
+       "      <th>IKA40_49</th>\n",
+       "      <th>IKA50_59</th>\n",
+       "      <th>IKA60_69</th>\n",
+       "      <th>IKA70_79</th>\n",
+       "      <th>IKA_YLI80</th>\n",
+       "      <th>geometry</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>688</td>\n",
+       "      <td>8</td>\n",
+       "      <td>31.0</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>POLYGON ((25472499.99532626 6689749.005069185,...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>703</td>\n",
+       "      <td>6</td>\n",
+       "      <td>42.0</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>POLYGON ((25472499.99532626 6685998.998064222,...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>710</td>\n",
+       "      <td>8</td>\n",
+       "      <td>44.0</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>POLYGON ((25472499.99532626 6684249.004130407,...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>711</td>\n",
+       "      <td>7</td>\n",
+       "      <td>64.0</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>POLYGON ((25472499.99532626 6683999.004997005,...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>715</td>\n",
+       "      <td>19</td>\n",
+       "      <td>23.0</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>POLYGON ((25472499.99532626 6682998.998461431,...</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "   INDEX  ASUKKAITA  ASVALJYYS  IKA0_9  IKA10_19  IKA20_29  IKA30_39  \\\n",
+       "0    688          8       31.0      99        99        99        99   \n",
+       "1    703          6       42.0      99        99        99        99   \n",
+       "2    710          8       44.0      99        99        99        99   \n",
+       "3    711          7       64.0      99        99        99        99   \n",
+       "4    715         19       23.0      99        99        99        99   \n",
+       "\n",
+       "   IKA40_49  IKA50_59  IKA60_69  IKA70_79  IKA_YLI80  \\\n",
+       "0        99        99        99        99         99   \n",
+       "1        99        99        99        99         99   \n",
+       "2        99        99        99        99         99   \n",
+       "3        99        99        99        99         99   \n",
+       "4        99        99        99        99         99   \n",
+       "\n",
+       "                                            geometry  \n",
+       "0  POLYGON ((25472499.99532626 6689749.005069185,...  \n",
+       "1  POLYGON ((25472499.99532626 6685998.998064222,...  \n",
+       "2  POLYGON ((25472499.99532626 6684249.004130407,...  \n",
+       "3  POLYGON ((25472499.99532626 6683999.004997005,...  \n",
+       "4  POLYGON ((25472499.99532626 6682998.998461431,...  "
+      ]
+     },
+     "execution_count": 3,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "import geopandas as gpd\n",
+    "\n",
+    "# Filepath\n",
+    "fp = \"data/Pop15/Vaestotietoruudukko_2015.shp\"\n",
+    "\n",
+    "# Read the data\n",
+    "pop = gpd.read_file(fp)\n",
+    "\n",
+    "# See the first rows\n",
+    "pop.head()\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Okey so we have multiple columns in the dataset but the most important\n",
+    "one here is the column ``ASUKKAITA`` (*population in Finnish*) that\n",
+    "tells the amount of inhabitants living under that polygon.\n",
+    "\n",
+    "-  Let's change the name of that columns into ``pop15`` so that it is\n",
+    "   more intuitive. Changing column names is easy in Pandas / Geopandas\n",
+    "   using a function called ``rename()`` where we pass a dictionary to a\n",
+    "   parameter ``columns={'oldname': 'newname'}``."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Index(['pop15', 'geometry'], dtype='object')"
+      ]
+     },
+     "execution_count": 16,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Change the name of a column\n",
+    "pop = pop.rename(columns={'ASUKKAITA': 'pop15'})\n",
+    "\n",
+    "# See the column names and confirm that we now have a column called 'pop15'\n",
+    "pop.columns"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "-  Let's also get rid of all unnecessary columns by selecting only\n",
+    "   columns that we need i.e. ``pop15`` and ``geometry``"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>pop15</th>\n",
+       "      <th>geometry</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>5782</th>\n",
+       "      <td>9</td>\n",
+       "      <td>POLYGON ((25513499.99632164 6685498.999797418,...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5783</th>\n",
+       "      <td>30244</td>\n",
+       "      <td>POLYGON ((25513999.999929 6659998.998172711, 2...</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "      pop15                                           geometry\n",
+       "5782      9  POLYGON ((25513499.99632164 6685498.999797418,...\n",
+       "5783  30244  POLYGON ((25513999.999929 6659998.998172711, 2..."
+      ]
+     },
+     "execution_count": 17,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Columns that will be sected\n",
+    "selected_cols = ['pop15', 'geometry']\n",
+    "\n",
+    "# Select those columns\n",
+    "pop = pop[selected_cols]\n",
+    "\n",
+    "# Let's see the last 2 rows\n",
+    "pop.tail(2)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Now we have cleaned the data and have only those columns that we need\n",
+    "for our analysis."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Join the layers\n",
+    "\n",
+    "Now we are ready to perform the spatial join between the two layers that\n",
+    "we have. The aim here is to get information about **how many people live\n",
+    "in a polygon that contains an individual address-point** . Thus, we want\n",
+    "to join attributes from the population layer we just modified into the\n",
+    "addresses point layer ``addresses_epsg3879.shp``.\n",
+    "\n",
+    "-  Read the addresses layer into memory"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 18,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>address</th>\n",
+       "      <th>id</th>\n",
+       "      <th>addr</th>\n",
+       "      <th>geometry</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>Ruoholahti, 14, Itämerenkatu, Ruoholahti, Läns...</td>\n",
+       "      <td>1000</td>\n",
+       "      <td>Itämerenkatu 14, 00101 Helsinki, Finland</td>\n",
+       "      <td>POINT (24.9155624 60.1632015)</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>Kamppi, 1, Kampinkuja, Kamppi, Eteläinen suurp...</td>\n",
+       "      <td>1001</td>\n",
+       "      <td>Kampinkuja 1, 00100 Helsinki, Finland</td>\n",
+       "      <td>POINT (24.9316914 60.1690222)</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "                                             address    id  \\\n",
+       "0  Ruoholahti, 14, Itämerenkatu, Ruoholahti, Läns...  1000   \n",
+       "1  Kamppi, 1, Kampinkuja, Kamppi, Eteläinen suurp...  1001   \n",
+       "\n",
+       "                                       addr                       geometry  \n",
+       "0  Itämerenkatu 14, 00101 Helsinki, Finland  POINT (24.9155624 60.1632015)  \n",
+       "1     Kampinkuja 1, 00100 Helsinki, Finland  POINT (24.9316914 60.1690222)  "
+      ]
+     },
+     "execution_count": 18,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Addresses filpath\n",
+    "addr_fp = r\"data/addresses.shp\"\n",
+    "\n",
+    "# Read data\n",
+    "addresses = gpd.read_file(addr_fp)\n",
+    "\n",
+    "# Check the head of the file\n",
+    "addresses.head(2)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "In order to do a spatial join, the layers need to be in the same projection"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 21,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "False"
+      ]
+     },
+     "execution_count": 21,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Do they match? - We can test that\n",
+    "addresses.crs == pop.crs"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Re-project addresses to the projection of the population layer:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 22,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "addresses = addresses.to_crs(pop.crs)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "-  Let's make sure that the coordinate reference system of the layers\n",
+    "are identical"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 23,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "{'proj': 'tmerc', 'lat_0': 0, 'lon_0': 25, 'k': 1, 'x_0': 25500000, 'y_0': 0, 'ellps': 'GRS80', 'units': 'm', 'no_defs': True}\n",
+      "{'proj': 'tmerc', 'lat_0': 0, 'lon_0': 25, 'k': 1, 'x_0': 25500000, 'y_0': 0, 'ellps': 'GRS80', 'units': 'm', 'no_defs': True}\n"
+     ]
+    },
+    {
+     "data": {
+      "text/plain": [
+       "True"
+      ]
+     },
+     "execution_count": 23,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Check the crs of address points\n",
+    "print(addresses.crs)\n",
+    "\n",
+    "# Check the crs of population layer\n",
+    "print(pop.crs)\n",
+    "\n",
+    "# Do they match now?\n",
+    "addresses.crs == pop.crs"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Indeed they are identical. Thus, we can be sure that when doing spatial\n",
+    "queries between layers the locations match and we get the right results\n",
+    "e.g. from the spatial join that we are conducting here.\n",
+    "\n",
+    "-  Let's now join the attributes from ``pop`` GeoDataFrame into\n",
+    "   ``addresses`` GeoDataFrame by using ``gpd.sjoin()`` -function"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>address</th>\n",
+       "      <th>id</th>\n",
+       "      <th>addr</th>\n",
+       "      <th>geometry</th>\n",
+       "      <th>index_right</th>\n",
+       "      <th>pop15</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>Ruoholahti, 14, Itämerenkatu, Ruoholahti, Läns...</td>\n",
+       "      <td>1000</td>\n",
+       "      <td>Itämerenkatu 14, 00101 Helsinki, Finland</td>\n",
+       "      <td>POINT (25495311.60802662 6672258.694634228)</td>\n",
+       "      <td>3214</td>\n",
+       "      <td>521</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>Kamppi, 1, Kampinkuja, Kamppi, Eteläinen suurp...</td>\n",
+       "      <td>1001</td>\n",
+       "      <td>Kampinkuja 1, 00100 Helsinki, Finland</td>\n",
+       "      <td>POINT (25496207.84010911 6672906.172794735)</td>\n",
+       "      <td>3326</td>\n",
+       "      <td>173</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>Bangkok9, 8, Kaivokatu, Keskusta, Kluuvi, Etel...</td>\n",
+       "      <td>1002</td>\n",
+       "      <td>Kaivokatu 8, 00101 Helsinki, Finland</td>\n",
+       "      <td>POINT (25496762.72293893 6673010.538330208)</td>\n",
+       "      <td>3449</td>\n",
+       "      <td>31</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>10</th>\n",
+       "      <td>Rautatientori, Keskusta, Kluuvi, Eteläinen suu...</td>\n",
+       "      <td>1011</td>\n",
+       "      <td>Rautatientori 1, 00100 Helsinki, Finland</td>\n",
+       "      <td>POINT (25496896.60078502 6673159.446016792)</td>\n",
+       "      <td>3449</td>\n",
+       "      <td>31</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>Hermannin rantatie, Hermanninranta, Hermanni, ...</td>\n",
+       "      <td>1003</td>\n",
+       "      <td>Hermannin rantatie 1, 00580 Helsinki, Finland</td>\n",
+       "      <td>POINT (25498715.48045845 6675708.115636756)</td>\n",
+       "      <td>3749</td>\n",
+       "      <td>183</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "                                              address    id  \\\n",
+       "0   Ruoholahti, 14, Itämerenkatu, Ruoholahti, Läns...  1000   \n",
+       "1   Kamppi, 1, Kampinkuja, Kamppi, Eteläinen suurp...  1001   \n",
+       "2   Bangkok9, 8, Kaivokatu, Keskusta, Kluuvi, Etel...  1002   \n",
+       "10  Rautatientori, Keskusta, Kluuvi, Eteläinen suu...  1011   \n",
+       "3   Hermannin rantatie, Hermanninranta, Hermanni, ...  1003   \n",
+       "\n",
+       "                                             addr  \\\n",
+       "0        Itämerenkatu 14, 00101 Helsinki, Finland   \n",
+       "1           Kampinkuja 1, 00100 Helsinki, Finland   \n",
+       "2            Kaivokatu 8, 00101 Helsinki, Finland   \n",
+       "10       Rautatientori 1, 00100 Helsinki, Finland   \n",
+       "3   Hermannin rantatie 1, 00580 Helsinki, Finland   \n",
+       "\n",
+       "                                       geometry  index_right  pop15  \n",
+       "0   POINT (25495311.60802662 6672258.694634228)         3214    521  \n",
+       "1   POINT (25496207.84010911 6672906.172794735)         3326    173  \n",
+       "2   POINT (25496762.72293893 6673010.538330208)         3449     31  \n",
+       "10  POINT (25496896.60078502 6673159.446016792)         3449     31  \n",
+       "3   POINT (25498715.48045845 6675708.115636756)         3749    183  "
+      ]
+     },
+     "execution_count": 24,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Make a spatial join\n",
+    "join = gpd.sjoin(addresses, pop, how=\"inner\", op=\"within\")\n",
+    "\n",
+    "# Let's check the result\n",
+    "join.head()\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Awesome! Now we have performed a successful spatial join where we got\n",
+    "two new columns into our ``join`` GeoDataFrame, i.e. ``index_right``\n",
+    "that tells the index of the matching polygon in the ``pop`` layer and\n",
+    "``pop15`` which is the population in the cell where the address-point is\n",
+    "located.\n",
+    "\n",
+    "-  Let's save this layer into a new Shapefile"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 26,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Output path\n",
+    "outfp = r\"data/addresses_pop15_epsg3979.shp\"\n",
+    "\n",
+    "# Save to disk\n",
+    "join.to_file(outfp)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Do the results make sense? Let's evaluate this a bit by plotting the\n",
+    "points where color intensity indicates the population numbers.\n",
+    "\n",
+    "-  Plot the points and use the ``pop15`` column to indicate the color.\n",
+    "   ``cmap`` -parameter tells to use a sequential colormap for the\n",
+    "   values, ``markersize`` adjusts the size of a point, ``scheme`` parameter can be used to adjust the classification method based on `pysal <http://pysal.readthedocs.io/en/latest/library/esda/mapclassify.html>`_, and ``legend`` tells that we want to have a legend.\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 27,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "/opt/conda/lib/python3.6/site-packages/pysal/__init__.py:65: VisibleDeprecationWarning: PySAL's API will be changed on 2018-12-31. The last release made with this API is version 1.14.4. A preview of the next API version is provided in the `pysal` 2.0 prelease candidate. The API changes and a guide on how to change imports is provided at https://pysal.org/about\n",
+      "  ), VisibleDeprecationWarning)\n"
+     ]
+    },
+    {
+     "ename": "ValueError",
+     "evalue": "Invalid scheme. Scheme must be in the set: dict_keys(['equal_interval', 'quantiles', 'fisher_jenks'])",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[0;31mValueError\u001b[0m                                Traceback (most recent call last)",
+      "\u001b[0;32m<ipython-input-27-4ad174f1cc20>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m()\u001b[0m\n\u001b[1;32m      2\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      3\u001b[0m \u001b[0;31m# Plot the points with population info\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m----> 4\u001b[0;31m \u001b[0mjoin\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mplot\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mcolumn\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;34m'pop15'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mcmap\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;34m\"Reds\"\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mmarkersize\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;36m7\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mscheme\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;34m'natural_breaks'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mlegend\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;32mTrue\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m;\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m      5\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      6\u001b[0m \u001b[0;31m# Add title\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;32m/opt/conda/lib/python3.6/site-packages/geopandas/geodataframe.py\u001b[0m in \u001b[0;36mplot\u001b[0;34m(self, *args, **kwargs)\u001b[0m\n\u001b[1;32m    532\u001b[0m         \u001b[0;32mfrom\u001b[0m \u001b[0mthere\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    533\u001b[0m         \"\"\"\n\u001b[0;32m--> 534\u001b[0;31m         \u001b[0;32mreturn\u001b[0m \u001b[0mplot_dataframe\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m*\u001b[0m\u001b[0margs\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m**\u001b[0m\u001b[0mkwargs\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    535\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    536\u001b[0m     \u001b[0mplot\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m__doc__\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mplot_dataframe\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m__doc__\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;32m/opt/conda/lib/python3.6/site-packages/geopandas/plotting.py\u001b[0m in \u001b[0;36mplot_dataframe\u001b[0;34m(df, column, cmap, color, ax, categorical, legend, scheme, k, vmin, vmax, markersize, figsize, legend_kwds, **style_kwds)\u001b[0m\n\u001b[1;32m    443\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    444\u001b[0m     \u001b[0;32mif\u001b[0m \u001b[0mscheme\u001b[0m \u001b[0;32mis\u001b[0m \u001b[0;32mnot\u001b[0m \u001b[0;32mNone\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--> 445\u001b[0;31m         \u001b[0mbinning\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0m__pysal_choro\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mvalues\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mscheme\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mk\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0mk\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    446\u001b[0m         \u001b[0;31m# set categorical to True for creating the legend\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    447\u001b[0m         \u001b[0mcategorical\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;32mTrue\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;32m/opt/conda/lib/python3.6/site-packages/geopandas/plotting.py\u001b[0m in \u001b[0;36m__pysal_choro\u001b[0;34m(values, scheme, k)\u001b[0m\n\u001b[1;32m    541\u001b[0m         \u001b[0;32mif\u001b[0m \u001b[0mscheme\u001b[0m \u001b[0;32mnot\u001b[0m \u001b[0;32min\u001b[0m \u001b[0mschemes\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    542\u001b[0m             raise ValueError(\"Invalid scheme. Scheme must be in the\"\n\u001b[0;32m--> 543\u001b[0;31m                              \" set: %r\" % schemes.keys())\n\u001b[0m\u001b[1;32m    544\u001b[0m         \u001b[0mbinning\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mschemes\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0mscheme\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mvalues\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mk\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    545\u001b[0m         \u001b[0;32mreturn\u001b[0m \u001b[0mbinning\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;31mValueError\u001b[0m: Invalid scheme. Scheme must be in the set: dict_keys(['equal_interval', 'quantiles', 'fisher_jenks'])"
+     ]
+    }
+   ],
+   "source": [
+    "import matplotlib.pyplot as plt\n",
+    "\n",
+    "# Plot the points with population info\n",
+    "join.plot(column='pop15', cmap=\"Reds\", markersize=7, scheme='natural_breaks', legend=True);\n",
+    "\n",
+    "# Add title\n",
+    "plt.title(\"Amount of inhabitants living close the the point\");\n",
+    "\n",
+    "# Remove white space around the figure\n",
+    "plt.tight_layout()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "By knowing approximately how population is distributed in Helsinki, it\n",
+    "seems that the results do make sense as the points with highest\n",
+    "population are located in the south where the city center of Helsinki\n",
+    "is."
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.6.5"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}

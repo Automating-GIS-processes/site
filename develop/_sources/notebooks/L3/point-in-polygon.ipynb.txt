@@ -1,0 +1,1055 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "deletable": true,
+    "editable": true
+   },
+   "source": [
+    "# Point in Polygon & Intersect\n",
+    "\n",
+    "Finding out if a certain point is located inside or outside of an area,\n",
+    "or finding out if a line intersects with another line or polygon are\n",
+    "fundamental geospatial operations that are often used e.g. to select\n",
+    "data based on location. Such spatial queries are one of the typical\n",
+    "first steps of the workflow when doing spatial analysis. Performing a\n",
+    "spatial join (will be introduced later) between two spatial datasets is\n",
+    "one of the most typical applications where Point in Polygon (PIP) query\n",
+    "is used.\n",
+    "\n",
+    "## How to check if point is inside a polygon?\n",
+    "\n",
+    "Computationally, detecting if a point is inside a polygon is most commonly done using a specific formula called [Ray Casting algorithm](https://en.wikipedia.org/wiki/Point_in_polygon#Ray_casting_algorithm).\n",
+    "Luckily, we do not need to create such a function ourselves for\n",
+    "conducting the Point in Polygon (PIP) query. Instead, we can take\n",
+    "advantage of [Shapely's binary predicates](http://toblerity.org/shapely/manual.html#binary-predicates)\n",
+    "that can evaluate the topolocical relationships between geographical\n",
+    "objects, such as the PIP as we're interested here.\n",
+    "\n",
+    "There are basically two ways of conducting PIP in Shapely:\n",
+    "\n",
+    "1. using a function called\n",
+    "   [.within()](http://toblerity.org/shapely/manual.html#object.within)\n",
+    "   that checks if a point is within a polygon\n",
+    "2. using a function called\n",
+    "   [.contains()](http://toblerity.org/shapely/manual.html#object.contains)_\n",
+    "   that checks if a polygon contains a point\n",
+    "\n",
+    "Notice: even though we are talking here about **Point** in Polygon\n",
+    "operation, it is also possible to check if a LineString or Polygon is\n",
+    "inside another Polygon.\n",
+    "\n",
+    "-  Let's first create a Polygon using a list of coordinate-tuples and a\n",
+    "   couple of Point objects"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {
+    "collapsed": false,
+    "deletable": true,
+    "editable": true
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "POINT (24.952242 60.1696017)\n",
+      "POINT (24.976567 60.16125)\n",
+      "POLYGON ((24.950899 60.169158, 24.953492 60.169158, 24.95351 60.170104, 24.950958 60.16999, 24.950899 60.169158))\n"
+     ]
+    }
+   ],
+   "source": [
+    "from shapely.geometry import Point, Polygon\n",
+    "\n",
+    "# Create Point objects\n",
+    "p1 = Point(24.952242, 60.1696017)\n",
+    "p2 = Point(24.976567, 60.1612500)\n",
+    "\n",
+    "# Create a Polygon\n",
+    "coords = [(24.950899, 60.169158), (24.953492, 60.169158), (24.953510, 60.170104), (24.950958, 60.169990)]\n",
+    "poly = Polygon(coords)\n",
+    "\n",
+    "# Let's check what we have\n",
+    "print(p1)\n",
+    "print(p2)\n",
+    "print(poly)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "deletable": true,
+    "editable": true
+   },
+   "source": [
+    "Let's check if those points are ``within`` the polygon"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {
+    "collapsed": false,
+    "deletable": true,
+    "editable": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "False"
+      ]
+     },
+     "execution_count": 2,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Check if p1 is within the polygon using the within function\n",
+    "p1.within(poly)\n",
+    "\n",
+    "# Check if p2 is within the polygon\n",
+    "p2.within(poly)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "deletable": true,
+    "editable": true
+   },
+   "source": [
+    "Okey, so we can see that the first point seems to be inside that polygon\n",
+    "and the other one doesn't.\n",
+    "\n",
+    "-  In fact, the first point is close to the center of the polygon as we\n",
+    "   can see:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {
+    "collapsed": false,
+    "deletable": true,
+    "editable": true
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "POINT (24.952242 60.1696017)\n",
+      "POINT (24.95224242849236 60.16960179038188)\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Our point\n",
+    "print(p1)\n",
+    "\n",
+    "# The centroid\n",
+    "print(poly.centroid)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "deletable": true,
+    "editable": true
+   },
+   "source": [
+    "-  It is also possible to do PIP other way around, i.e. to check if\n",
+    "   polygon contains a point:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {
+    "collapsed": false,
+    "deletable": true,
+    "editable": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "False"
+      ]
+     },
+     "execution_count": 4,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Does polygon contain p1?\n",
+    "poly.contains(p1)\n",
+    "\n",
+    "# Does polygon contain p2?\n",
+    "poly.contains(p2)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "deletable": true,
+    "editable": true
+   },
+   "source": [
+    "Thus, both ways of checking the spatial relationship results in the same way.\n",
+    "\n",
+    "Which one should you use then? Well, it depends:\n",
+    "\n",
+    "-  if you have many points and just one polygon and you try to find out\n",
+    "   which one of them is inside the polygon:\n",
+    "\n",
+    "   -  you need to iterate over the points and check one at a time if it\n",
+    "      is **within()** the polygon specified\n",
+    "\n",
+    "-  if you have many polygons and just one point and you want to find out\n",
+    "   which polygon contains the point\n",
+    "\n",
+    "    -  you need to iterate over the polygons until you find a polygon that\n",
+    "       **contains()** the point specified (assuming there are no overlapping\n",
+    "       polygons)\n",
+    "        \n",
+    "## Intersect\n",
+    "\n",
+    "\n",
+    "Another typical geospatial operation is to see if a geometry\n",
+    "[intersect](http://toblerity.org/shapely/manual.html#object.intersects)\n",
+    "or [touches](http://toblerity.org/shapely/manual.html#object.touches)\n",
+    "another one. The difference between these two is that:\n",
+    "\n",
+    "-  if objects intersect, the boundary and interior of an object needs to\n",
+    "   intersect in any way with those of the other.\n",
+    "\n",
+    "-  If an object touches the other one, it is only necessary to have (at\n",
+    "   least) a single point of their boundaries in common but their\n",
+    "   interiors shoud NOT intersect.\n",
+    "\n",
+    "Let's try these out.\n",
+    "\n",
+    "-  Let's create two LineStrings"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {
+    "collapsed": true,
+    "deletable": true,
+    "editable": true
+   },
+   "outputs": [],
+   "source": [
+    "from shapely.geometry import LineString, MultiLineString\n",
+    "\n",
+    "# Create two lines\n",
+    "line_a = LineString([(0, 0), (1, 1)])\n",
+    "line_b = LineString([(1, 1), (0, 2)])"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "deletable": true,
+    "editable": true
+   },
+   "source": [
+    "-  Let's see if they intersect"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {
+    "collapsed": false,
+    "deletable": true,
+    "editable": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "True"
+      ]
+     },
+     "execution_count": 6,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "line_a.intersects(line_b)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "deletable": true,
+    "editable": true
+   },
+   "source": [
+    "-  Do they also touch each other?"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {
+    "collapsed": false,
+    "deletable": true,
+    "editable": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "True"
+      ]
+     },
+     "execution_count": 7,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "line_a.touches(line_b)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "deletable": true,
+    "editable": true
+   },
+   "source": [
+    "Indeed, they do and we can see this by plotting the features together"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "metadata": {
+    "collapsed": false,
+    "deletable": true,
+    "editable": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "image/svg+xml": [
+       "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"100.0\" height=\"100.0\" viewBox=\"-0.08 -0.08 1.1600000000000001 2.16\" preserveAspectRatio=\"xMinYMin meet\"><g transform=\"matrix(1,0,0,-1,0,2.0)\"><g><polyline fill=\"none\" stroke=\"#66cc99\" stroke-width=\"0.0432\" points=\"0.0,0.0 1.0,1.0\" opacity=\"0.8\" /><polyline fill=\"none\" stroke=\"#66cc99\" stroke-width=\"0.0432\" points=\"1.0,1.0 0.0,2.0\" opacity=\"0.8\" /></g></g></svg>"
+      ],
+      "text/plain": [
+       "<shapely.geometry.multilinestring.MultiLineString at 0x7f39986fe470>"
+      ]
+     },
+     "execution_count": 8,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Create a MultiLineString\n",
+    "multi_line = MultiLineString([line_a, line_b])\n",
+    "multi_line"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "deletable": true,
+    "editable": true
+   },
+   "source": [
+    "Thus, the ``line_b`` continues from the same node ( (1,1) ) where ``line_a`` ends.\n",
+    "\n",
+    "However, if the lines overlap fully, they don't touch due to the spatial relationship rule, as we can see:\n",
+    "\n",
+    "- Check if line_a touches itself"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "metadata": {
+    "collapsed": false,
+    "deletable": true,
+    "editable": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "False"
+      ]
+     },
+     "execution_count": 9,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Does the line touch with itself?\n",
+    "line_a.touches(line_a)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "deletable": true,
+    "editable": true
+   },
+   "source": [
+    "- It does not. However, it does intersect"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "metadata": {
+    "collapsed": false,
+    "deletable": true,
+    "editable": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "True"
+      ]
+     },
+     "execution_count": 10,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Does the line intersect with itself?\n",
+    "line_a.intersects(line_a)"
+   ]
+  },
+  {
+   "cell_type": "raw",
+   "metadata": {
+    "deletable": true,
+    "editable": true
+   },
+   "source": [
+    "## Point in Polygon using Geopandas\n",
+    "\n",
+    "Next we will do a practical example where we check which of the addresses from [previous tutorial]() are located in Southern district of Helsinki. Let's start by reading a KML-file ``PKS_suuralue.kml`` that has the Polygons for districts of Helsinki Region (data openly available from [Helsinki Region Infoshare](http://www.hri.fi/fi/dataset/paakaupunkiseudun-aluejakokartat).\n",
+    "\n",
+    "- Let's start by reading the addresses from the Shapefile that we saved earlier."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "metadata": {
+    "collapsed": true,
+    "deletable": true,
+    "editable": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>address</th>\n",
+       "      <th>id</th>\n",
+       "      <th>addr</th>\n",
+       "      <th>geometry</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>Ruoholahti, 14, Itämerenkatu, Ruoholahti, Läns...</td>\n",
+       "      <td>1000</td>\n",
+       "      <td>Itämerenkatu 14, 00101 Helsinki, Finland</td>\n",
+       "      <td>POINT (24.9155624 60.1632015)</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>Kamppi, 1, Kampinkuja, Kamppi, Eteläinen suurp...</td>\n",
+       "      <td>1001</td>\n",
+       "      <td>Kampinkuja 1, 00100 Helsinki, Finland</td>\n",
+       "      <td>POINT (24.9316914 60.1690222)</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>Bangkok9, 8, Kaivokatu, Keskusta, Kluuvi, Etel...</td>\n",
+       "      <td>1002</td>\n",
+       "      <td>Kaivokatu 8, 00101 Helsinki, Finland</td>\n",
+       "      <td>POINT (24.9416849 60.1699637)</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>Hermannin rantatie, Hermanninranta, Hermanni, ...</td>\n",
+       "      <td>1003</td>\n",
+       "      <td>Hermannin rantatie 1, 00580 Helsinki, Finland</td>\n",
+       "      <td>POINT (24.9768441 60.1941864)</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>Hesburger, 9, Tyynenmerenkatu, Jätkäsaari, Län...</td>\n",
+       "      <td>1005</td>\n",
+       "      <td>Tyynenmerenkatu 9, 00220 Helsinki, Finland</td>\n",
+       "      <td>POINT (24.9216003 60.1566475)</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "                                             address    id  \\\n",
+       "0  Ruoholahti, 14, Itämerenkatu, Ruoholahti, Läns...  1000   \n",
+       "1  Kamppi, 1, Kampinkuja, Kamppi, Eteläinen suurp...  1001   \n",
+       "2  Bangkok9, 8, Kaivokatu, Keskusta, Kluuvi, Etel...  1002   \n",
+       "3  Hermannin rantatie, Hermanninranta, Hermanni, ...  1003   \n",
+       "4  Hesburger, 9, Tyynenmerenkatu, Jätkäsaari, Län...  1005   \n",
+       "\n",
+       "                                            addr  \\\n",
+       "0       Itämerenkatu 14, 00101 Helsinki, Finland   \n",
+       "1          Kampinkuja 1, 00100 Helsinki, Finland   \n",
+       "2           Kaivokatu 8, 00101 Helsinki, Finland   \n",
+       "3  Hermannin rantatie 1, 00580 Helsinki, Finland   \n",
+       "4     Tyynenmerenkatu 9, 00220 Helsinki, Finland   \n",
+       "\n",
+       "                        geometry  \n",
+       "0  POINT (24.9155624 60.1632015)  \n",
+       "1  POINT (24.9316914 60.1690222)  \n",
+       "2  POINT (24.9416849 60.1699637)  \n",
+       "3  POINT (24.9768441 60.1941864)  \n",
+       "4  POINT (24.9216003 60.1566475)  "
+      ]
+     },
+     "execution_count": 14,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "import geopandas as gpd\n",
+    "\n",
+    "fp = \"data/addresses.shp\"\n",
+    "data = gpd.read_file(fp)\n",
+    "\n",
+    "data.head()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "deletable": true,
+    "editable": true
+   },
+   "source": [
+    "\n",
+    "### Reading KML-files in Geopandas\n",
+    "\n",
+    "It is possible to read the data from KML-file in a similar manner as Shapefile. However, we need to first, enable the KML-driver which is not enabled by default (because KML-files can contain unsupported data structures, nested folders etc., hence be careful when reading KML-files).\n",
+    "\n",
+    "- Let's enable the read and write functionalities for KML-driver by passing ``'rw'`` to whitelist of fiona's supported drivers:\n",
+    "\n",
+    "\n",
+    "\n",
+    "\n",
+    "\n",
+    "\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "metadata": {
+    "collapsed": true,
+    "deletable": true,
+    "editable": true
+   },
+   "outputs": [],
+   "source": [
+    "import geopandas as gpd\n",
+    "import matplotlib.pyplot as plt\n",
+    "\n",
+    "gpd.io.file.fiona.drvsupport.supported_drivers['KML'] = 'rw'"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "deletable": true,
+    "editable": true
+   },
+   "source": [
+    "Now we should be able to read a KML file with Geopandas.\n",
+    "\n",
+    "- Let's read the data from a following KML -file:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "metadata": {
+    "collapsed": true,
+    "deletable": true,
+    "editable": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>Name</th>\n",
+       "      <th>Description</th>\n",
+       "      <th>geometry</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>Suur-Espoonlahti</td>\n",
+       "      <td></td>\n",
+       "      <td>POLYGON Z ((24.775059677807 60.1090604462157 0...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>Suur-Kauklahti</td>\n",
+       "      <td></td>\n",
+       "      <td>POLYGON Z ((24.6157775254076 60.1725681273527 ...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>Vanha-Espoo</td>\n",
+       "      <td></td>\n",
+       "      <td>POLYGON Z ((24.6757633262026 60.2120070032819 ...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>Pohjois-Espoo</td>\n",
+       "      <td></td>\n",
+       "      <td>POLYGON Z ((24.767921197401 60.2691954732391 0...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>Suur-Matinkylä</td>\n",
+       "      <td></td>\n",
+       "      <td>POLYGON Z ((24.7536131356802 60.1663051341717 ...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>Kauniainen</td>\n",
+       "      <td></td>\n",
+       "      <td>POLYGON Z ((24.6907528033566 60.2195779731868 ...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>6</th>\n",
+       "      <td>Suur-Leppävaara</td>\n",
+       "      <td></td>\n",
+       "      <td>POLYGON Z ((24.797472695835 60.2082651196077 0...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>7</th>\n",
+       "      <td>Suur-Tapiola</td>\n",
+       "      <td></td>\n",
+       "      <td>POLYGON Z ((24.8443596422129 60.1659790707387 ...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>8</th>\n",
+       "      <td>Myyrmäki</td>\n",
+       "      <td></td>\n",
+       "      <td>POLYGON Z ((24.8245867448802 60.2902531157585 ...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>9</th>\n",
+       "      <td>Kivistö</td>\n",
+       "      <td></td>\n",
+       "      <td>POLYGON Z ((24.9430919106369 60.3384471629062 ...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>10</th>\n",
+       "      <td>Eteläinen</td>\n",
+       "      <td></td>\n",
+       "      <td>POLYGON Z ((24.7827651307035 60.09997268858 0,...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>11</th>\n",
+       "      <td>Kaakkoinen</td>\n",
+       "      <td></td>\n",
+       "      <td>POLYGON Z ((24.8480782099727 60.0275589731893 ...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>12</th>\n",
+       "      <td>Keskinen</td>\n",
+       "      <td></td>\n",
+       "      <td>POLYGON Z ((24.9085548098731 60.2082029641503 ...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>13</th>\n",
+       "      <td>Läntinen</td>\n",
+       "      <td></td>\n",
+       "      <td>POLYGON Z ((24.832174555671 60.2516121985945 0...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>14</th>\n",
+       "      <td>Pohjoinen</td>\n",
+       "      <td></td>\n",
+       "      <td>POLYGON Z ((24.8992644865152 60.2689368800439 ...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>15</th>\n",
+       "      <td>Koillinen</td>\n",
+       "      <td></td>\n",
+       "      <td>POLYGON Z ((24.9722813313308 60.2432476462193 ...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>16</th>\n",
+       "      <td>Aviapolis</td>\n",
+       "      <td></td>\n",
+       "      <td>POLYGON Z ((24.9430919106369 60.3384471629062 ...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>17</th>\n",
+       "      <td>Tikkurila</td>\n",
+       "      <td></td>\n",
+       "      <td>POLYGON Z ((24.9764047156358 60.2896890295612 ...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>18</th>\n",
+       "      <td>Koivukylä</td>\n",
+       "      <td></td>\n",
+       "      <td>POLYGON Z ((24.9942315864552 60.3329637072809 ...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>19</th>\n",
+       "      <td>Itäinen</td>\n",
+       "      <td></td>\n",
+       "      <td>POLYGON Z ((25.0351655840904 60.23627484214 0,...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>20</th>\n",
+       "      <td>Östersundom</td>\n",
+       "      <td></td>\n",
+       "      <td>POLYGON Z ((25.233518559787 60.2565486562817 0...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>21</th>\n",
+       "      <td>Hakunila</td>\n",
+       "      <td></td>\n",
+       "      <td>POLYGON Z ((25.0847165922124 60.2724847557756 ...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>22</th>\n",
+       "      <td>Korso</td>\n",
+       "      <td></td>\n",
+       "      <td>POLYGON Z ((25.1238010972777 60.341907177167 0...</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "                Name Description  \\\n",
+       "0   Suur-Espoonlahti               \n",
+       "1     Suur-Kauklahti               \n",
+       "2        Vanha-Espoo               \n",
+       "3      Pohjois-Espoo               \n",
+       "4     Suur-Matinkylä               \n",
+       "5         Kauniainen               \n",
+       "6    Suur-Leppävaara               \n",
+       "7       Suur-Tapiola               \n",
+       "8           Myyrmäki               \n",
+       "9            Kivistö               \n",
+       "10         Eteläinen               \n",
+       "11        Kaakkoinen               \n",
+       "12          Keskinen               \n",
+       "13          Läntinen               \n",
+       "14         Pohjoinen               \n",
+       "15         Koillinen               \n",
+       "16         Aviapolis               \n",
+       "17         Tikkurila               \n",
+       "18         Koivukylä               \n",
+       "19           Itäinen               \n",
+       "20       Östersundom               \n",
+       "21          Hakunila               \n",
+       "22             Korso               \n",
+       "\n",
+       "                                             geometry  \n",
+       "0   POLYGON Z ((24.775059677807 60.1090604462157 0...  \n",
+       "1   POLYGON Z ((24.6157775254076 60.1725681273527 ...  \n",
+       "2   POLYGON Z ((24.6757633262026 60.2120070032819 ...  \n",
+       "3   POLYGON Z ((24.767921197401 60.2691954732391 0...  \n",
+       "4   POLYGON Z ((24.7536131356802 60.1663051341717 ...  \n",
+       "5   POLYGON Z ((24.6907528033566 60.2195779731868 ...  \n",
+       "6   POLYGON Z ((24.797472695835 60.2082651196077 0...  \n",
+       "7   POLYGON Z ((24.8443596422129 60.1659790707387 ...  \n",
+       "8   POLYGON Z ((24.8245867448802 60.2902531157585 ...  \n",
+       "9   POLYGON Z ((24.9430919106369 60.3384471629062 ...  \n",
+       "10  POLYGON Z ((24.7827651307035 60.09997268858 0,...  \n",
+       "11  POLYGON Z ((24.8480782099727 60.0275589731893 ...  \n",
+       "12  POLYGON Z ((24.9085548098731 60.2082029641503 ...  \n",
+       "13  POLYGON Z ((24.832174555671 60.2516121985945 0...  \n",
+       "14  POLYGON Z ((24.8992644865152 60.2689368800439 ...  \n",
+       "15  POLYGON Z ((24.9722813313308 60.2432476462193 ...  \n",
+       "16  POLYGON Z ((24.9430919106369 60.3384471629062 ...  \n",
+       "17  POLYGON Z ((24.9764047156358 60.2896890295612 ...  \n",
+       "18  POLYGON Z ((24.9942315864552 60.3329637072809 ...  \n",
+       "19  POLYGON Z ((25.0351655840904 60.23627484214 0,...  \n",
+       "20  POLYGON Z ((25.233518559787 60.2565486562817 0...  \n",
+       "21  POLYGON Z ((25.0847165922124 60.2724847557756 ...  \n",
+       "22  POLYGON Z ((25.1238010972777 60.341907177167 0...  "
+      ]
+     },
+     "execution_count": 17,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Filepath to KML file\n",
+    "fp = \"data/PKS_suuralue.kml\"\n",
+    "\n",
+    "polys = gpd.read_file(fp, driver='KML')\n",
+    "polys"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "deletable": true,
+    "editable": true
+   },
+   "source": [
+    "Nice, now we can see that we have 22 districts in our area. We are interested in an area that is called ``Eteläinen`` (*'Southern'* in english).\n",
+    "\n",
+    "- Let's select that one and see where it is located, and plot also the points on top of the map."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 19,
+   "metadata": {
+    "collapsed": true,
+    "deletable": true,
+    "editable": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "image/png": "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\n",
+      "text/plain": [
+       "<Figure size 432x288 with 1 Axes>"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "# Select data and reset index\n",
+    "southern = polys.loc[polys['Name']=='Eteläinen']\n",
+    "southern.reset_index(drop=True, inplace=True)\n",
+    "\n",
+    "# Plot\n",
+    "fig, ax = plt.subplots()\n",
+    "polys.plot(ax=ax, facecolor='gray');\n",
+    "southern.plot(ax=ax, facecolor='red');\n",
+    "data.plot(ax=ax, color='blue', markersize=5);\n",
+    "#@savefig helsinki_districts.png width=7in\n",
+    "plt.tight_layout();"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "deletable": true,
+    "editable": true
+   },
+   "source": [
+    "Okey, so we can see that, indeed, certain points are within the selected red Polygon.\n",
+    "\n",
+    "Let's find out which one of them are located within the Polygon. Hence, we are conducting a Point in Polygon query.\n",
+    "\n",
+    "- Let's first enable shapely.speedups which makes some of the spatial queries running faster."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true,
+    "deletable": true,
+    "editable": true
+   },
+   "outputs": [],
+   "source": [
+    "import shapely.speedups\n",
+    "shapely.speedups.enable()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "deletable": true,
+    "editable": true
+   },
+   "source": [
+    "- Let's check which Points are within the ``southern`` Polygon. Notice, that here we check if the Points are ``within`` the **geometry**\n",
+    "  of the ``southern`` GeoDataFrame. Hence, we use the ``loc[0, 'geometry']`` to parse the actual Polygon geometry object from the GeoDataFrame."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true,
+    "deletable": true,
+    "editable": true
+   },
+   "outputs": [],
+   "source": [
+    "pip_mask = data.within(southern.loc[0, 'geometry'])\n",
+    "print(pip_mask)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "deletable": true,
+    "editable": true
+   },
+   "source": [
+    "As we can see, we now have an array of boolean values for each row, where the result is ``True``\n",
+    "if Point was inside the Polygon, and ``False`` if it was not.\n",
+    "\n",
+    "- We can now use this mask array to select the Points that are inside the Polygon. Selecting data with this kind of mask array (of boolean values) is\n",
+    "  easy by passing the array inside the ``loc`` indexing function of Pandas.\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true,
+    "deletable": true,
+    "editable": true
+   },
+   "outputs": [],
+   "source": [
+    "pip_data = data.loc[pip_mask]\n",
+    "pip_data"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "deletable": true,
+    "editable": true
+   },
+   "source": [
+    "Let's finally confirm that our Point in Polygon query worked as it should by plotting the data."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true,
+    "deletable": true,
+    "editable": true
+   },
+   "outputs": [],
+   "source": [
+    "# Select data and reset index\n",
+    "southern = polys.ix[polys['Name']=='Eteläinen']\n",
+    "southern.reset_index(drop=True, inplace=True)\n",
+    "\n",
+    "# Plot\n",
+    "fig, ax = plt.subplots()\n",
+    "polys.plot(ax=ax, facecolor='gray');\n",
+    "southern.plot(ax=ax, facecolor='red');\n",
+    "pip_data.plot(ax=ax, color='gold', markersize=2);\n",
+    "@savefig helsinki_districts_pip.png width=7in\n",
+    "plt.tight_layout();"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "deletable": true,
+    "editable": true
+   },
+   "source": [
+    "Perfect! Now we only have the (golden) points that, indeed, are inside the red Polygon which is exactly what we wanted!"
+   ]
+  }
+ ],
+ "metadata": {
+  "anaconda-cloud": {},
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.6.5"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
