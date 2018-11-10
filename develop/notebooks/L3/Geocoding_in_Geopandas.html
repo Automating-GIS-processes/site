@@ -391,9 +391,9 @@ functionalities of geopy. Geopandas has a function called <code class="docutils 
 that can geocode a list of addresses (strings) and return a GeoDataFrame
 containing the resulting point objects in <code class="docutils literal notranslate"><span class="pre">geometry</span></code> column.</p>
 <p>Nice, isn’t it! Let’s try this out.</p>
-<p>Download a text file called
-<code class="docutils literal notranslate"><span class="pre">addresses.txt</span> <span class="pre">&lt;../../_static/data/L3/addresses.txt&gt;</span></code>__ that
-contains few addresses around Helsinki Region.</p>
+<p>We will geocode addresses stored in a text file called
+<code class="docutils literal notranslate"><span class="pre">addresses.txt</span></code>. The addresses are located in the Helsinki Region in
+Southern Finland.</p>
 <p>The first rows of the data looks like following:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">id</span><span class="p">;</span><span class="n">addr</span>
 <span class="mi">1000</span><span class="p">;</span><span class="n">Itämerenkatu</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">00101</span> <span class="n">Helsinki</span><span class="p">,</span> <span class="n">Finland</span>
@@ -409,7 +409,7 @@ contains few addresses around Helsinki Region.</p>
 </ul>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [3]:
+<span></span>In [1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -419,7 +419,7 @@ contains few addresses around Helsinki Region.</p>
 <span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Point</span>
 
 <span class="c1"># Filepath</span>
-<span class="n">fp</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;addresses.txt&quot;</span>
+<span class="n">fp</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;data/addresses.txt&quot;</span>
 
 <span class="c1"># Read the data</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>
@@ -428,7 +428,7 @@ contains few addresses around Helsinki Region.</p>
 </div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [4]:
+<span></span>In [2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -439,7 +439,7 @@ contains few addresses around Helsinki Region.</p>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[4]:
+<span></span>Out[2]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -499,7 +499,7 @@ contains few addresses around Helsinki Region.</p>
 addresses.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [14]:
+<span></span>In [3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -523,7 +523,7 @@ addresses.</p>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[14]:
+<span></span>Out[3]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -576,8 +576,9 @@ a <strong>Table Join</strong>.</p>
 might remember from our earlier lessons, combining data from different
 tables based on common <code class="docutils literal notranslate"><span class="pre">key</span></code> attribute can be done easily in
 Pandas/Geopandas using
-<code class="docutils literal notranslate"><span class="pre">.merge()</span> <span class="pre">&lt;https://geo-python.github.io/2018/lessons/L6/exercise-6.html?highlight=merge#joining-data-from-one-dataframe-to-another&gt;</span></code>__
--function.</p>
+<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.merge.html">.merge()</a>
+-function. We used this approach in the geo-python course <a class="reference external" href="https://geo-python.github.io/2018/lessons/L6/exercise-6.html#joining-data-from-one-dataframe-to-another">exercise
+6</a>.</p>
 <p>However, sometimes it is useful to join two tables together based on the
 <strong>index</strong> of those DataFrames. In such case, we assume that there is
 <strong>same number of records</strong> in our DataFrames and that the <strong>order of the
@@ -589,7 +590,7 @@ original <code class="docutils literal notranslate"><span class="pre">data</span
 merges the two DataFrames together based on index by default.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [19]:
+<span></span>In [4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -600,7 +601,7 @@ merges the two DataFrames together based on index by default.</p>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[19]:
+<span></span>Out[4]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -673,7 +674,7 @@ merges the two DataFrames together based on index by default.</p>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [20]:
+<span></span>In [5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -683,7 +684,7 @@ merges the two DataFrames together based on index by default.</p>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[20]:
+<span></span>Out[5]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -698,12 +699,12 @@ all original columns plus a new column for <code class="docutils literal notrans
 </ul>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [22]:
+<span></span>In [7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Output file path</span>
-<span class="n">outfp</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;addresses.shp&quot;</span>
+<span class="n">outfp</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;data/addresses.shp&quot;</span>
 
 <span class="c1"># Save to Shapefile</span>
 <span class="n">join</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">outfp</span><span class="p">)</span>
@@ -741,7 +742,7 @@ in a similar manner as we used Nominatim here.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2018, Henrikki Tenkanen
-      Last updated on Nov 08, 2018.
+      Last updated on Nov 10, 2018.
 
     </p>
   </div>
