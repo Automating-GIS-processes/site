@@ -429,7 +429,7 @@ objects, such as the PIP as we’re interested here.</p>
 <a class="reference external" href="http://toblerity.org/shapely/manual.html#object.within">.within()</a>
 that checks if a point is within a polygon</li>
 <li>using a function called
-<a class="reference external" href="http://toblerity.org/shapely/manual.html#object.contains">.contains()</a>_
+<a class="reference external" href="http://toblerity.org/shapely/manual.html#object.contains">.contains()</a>
 that checks if a polygon contains a point</li>
 </ol>
 <p>Notice: even though we are talking here about <strong>Point</strong> in Polygon
@@ -729,7 +729,7 @@ Next we will do a practical example where we check which of the addresses from [
 
 - Let's start by reading the addresses from the Shapefile that we saved earlier.<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [14]:
+<span></span>In [11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -744,7 +744,7 @@ Next we will do a practical example where we check which of the addresses from [
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[14]:
+<span></span>Out[11]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -796,10 +796,10 @@ Next we will do a practical example where we check which of the addresses from [
     </tr>
     <tr>
       <th>3</th>
-      <td>Hermannin rantatie, Hermanninranta, Hermanni, ...</td>
+      <td>1, Hermannin rantatie, Hermanninmäki, Hermanni...</td>
       <td>1003</td>
       <td>Hermannin rantatie 1, 00580 Helsinki, Finland</td>
-      <td>POINT (24.9768441 60.1941864)</td>
+      <td>POINT (24.9655355 60.2008878)</td>
     </tr>
     <tr>
       <th>4</th>
@@ -825,7 +825,7 @@ passing <code class="docutils literal notranslate"><span class="pre">'rw'</span>
 </ul>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [16]:
+<span></span>In [12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -842,7 +842,7 @@ passing <code class="docutils literal notranslate"><span class="pre">'rw'</span>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [17]:
+<span></span>In [13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -856,7 +856,7 @@ passing <code class="docutils literal notranslate"><span class="pre">'rw'</span>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[17]:
+<span></span>Out[13]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -1035,7 +1035,7 @@ points on top of the map.</li>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [19]:
+<span></span>In [14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1048,7 +1048,6 @@ points on top of the map.</li>
 <span class="n">polys</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">);</span>
 <span class="n">southern</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">);</span>
 <span class="n">data</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">5</span><span class="p">);</span>
-<span class="c1">#@savefig helsinki_districts.png width=7in</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span>
 </pre></div>
 </div>
@@ -1070,7 +1069,7 @@ queries running faster.</li>
 </ul>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [ ]:
+<span></span>In [15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1086,9 +1085,9 @@ the <code class="docutils literal notranslate"><span class="pre">southern</span>
 <code class="docutils literal notranslate"><span class="pre">loc[0,</span> <span class="pre">'geometry']</span></code> to parse the actual Polygon geometry object
 from the GeoDataFrame.</li>
 </ul>
-<div class="nbinput nblast docutils container">
+<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [ ]:
+<span></span>In [16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1096,6 +1095,48 @@ from the GeoDataFrame.</li>
 <span class="k">print</span><span class="p">(</span><span class="n">pip_mask</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0      True
+1      True
+2      True
+3     False
+4      True
+5     False
+6     False
+7     False
+8     False
+9     False
+10     True
+11    False
+12    False
+13    False
+14    False
+15    False
+16    False
+17    False
+18    False
+19    False
+20    False
+21    False
+22    False
+23    False
+24    False
+25    False
+26    False
+27    False
+28    False
+29    False
+30     True
+31     True
+32     True
+33     True
+dtype: bool
+</pre></div></div>
 </div>
 <p>As we can see, we now have an array of boolean values for each row,
 where the result is <code class="docutils literal notranslate"><span class="pre">True</span></code> if Point was inside the Polygon, and
@@ -1106,9 +1147,9 @@ the Polygon. Selecting data with this kind of mask array (of boolean
 values) is easy by passing the array inside the <code class="docutils literal notranslate"><span class="pre">loc</span></code> indexing
 function of Pandas.</li>
 </ul>
-<div class="nbinput nblast docutils container">
+<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [ ]:
+<span></span>In [17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1117,16 +1158,114 @@ function of Pandas.</li>
 </pre></div>
 </div>
 </div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[17]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>address</th>
+      <th>id</th>
+      <th>addr</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Ruoholahti, 14, Itämerenkatu, Ruoholahti, Läns...</td>
+      <td>1000</td>
+      <td>Itämerenkatu 14, 00101 Helsinki, Finland</td>
+      <td>POINT (24.9155624 60.1632015)</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Kamppi, 1, Kampinkuja, Kamppi, Eteläinen suurp...</td>
+      <td>1001</td>
+      <td>Kampinkuja 1, 00100 Helsinki, Finland</td>
+      <td>POINT (24.9316914 60.1690222)</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Bangkok9, 8, Kaivokatu, Keskusta, Kluuvi, Etel...</td>
+      <td>1002</td>
+      <td>Kaivokatu 8, 00101 Helsinki, Finland</td>
+      <td>POINT (24.9416849 60.1699637)</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Hesburger, 9, Tyynenmerenkatu, Jätkäsaari, Län...</td>
+      <td>1005</td>
+      <td>Tyynenmerenkatu 9, 00220 Helsinki, Finland</td>
+      <td>POINT (24.9216003 60.1566475)</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Rautatientori, Keskusta, Kluuvi, Eteläinen suu...</td>
+      <td>1011</td>
+      <td>Rautatientori 1, 00100 Helsinki, Finland</td>
+      <td>POINT (24.9440942536239 60.17130125)</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>Kampin keskus, 1, Urho Kekkosen katu, Kamppi, ...</td>
+      <td>1031</td>
+      <td>Urho Kekkosen katu 1, 00100 Helsinki, Finland</td>
+      <td>POINT (24.9331155798105 60.1690911)</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>Ruoholahdenkatu, Hietalahti, Kamppi, Eteläinen...</td>
+      <td>1032</td>
+      <td>Ruoholahdenkatu 17, 00101 Helsinki, Finland</td>
+      <td>POINT (24.9252584 60.1648863)</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>3, Tyynenmerenkatu, Jätkäsaari, Länsisatama, E...</td>
+      <td>1033</td>
+      <td>Tyynenmerenkatu 3, 00220 Helsinki, Finland</td>
+      <td>POINT (24.9212065 60.1587845)</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>4, Vilhonkatu, Keskusta, Kluuvi, Eteläinen suu...</td>
+      <td>1034</td>
+      <td>Vilhonkatu 4, 00101 Helsinki, Finland</td>
+      <td>POINT (24.9473289 60.1718719)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
 <p>Let’s finally confirm that our Point in Polygon query worked as it
 should by plotting the data.</p>
-<div class="nbinput nblast docutils container">
+<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [ ]:
+<span></span>In [18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Select data and reset index</span>
-<span class="n">southern</span> <span class="o">=</span> <span class="n">polys</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">polys</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Eteläinen&#39;</span><span class="p">]</span>
+<span class="n">southern</span> <span class="o">=</span> <span class="n">polys</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">polys</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Eteläinen&#39;</span><span class="p">]</span>
 <span class="n">southern</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
 <span class="c1"># Plot</span>
@@ -1134,9 +1273,15 @@ should by plotting the data.</p>
 <span class="n">polys</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">);</span>
 <span class="n">southern</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">);</span>
 <span class="n">pip_data</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gold&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">2</span><span class="p">);</span>
-<span class="nd">@savefig</span> <span class="n">helsinki_districts_pip</span><span class="o">.</span><span class="n">png</span> <span class="n">width</span><span class="o">=</span><span class="mi">7</span><span class="ow">in</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span>
 </pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L3_point-in-polygon_35_0.png" src="../../_images/notebooks_L3_point-in-polygon_35_0.png" />
 </div>
 </div>
 <p>Perfect! Now we only have the (golden) points that, indeed, are inside
@@ -1166,7 +1311,7 @@ the red Polygon which is exactly what we wanted!</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2018, Henrikki Tenkanen
-      Last updated on Nov 10, 2018.
+      Last updated on Nov 11, 2018.
 
     </p>
   </div>

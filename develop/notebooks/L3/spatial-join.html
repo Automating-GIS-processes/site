@@ -446,22 +446,19 @@ portal</a></p>
 <ul class="simple">
 <li>Navigate to the data folder</li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">data</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd data
 </pre></div>
 </div>
 <ul class="simple">
 <li>Download the population grid using wget:</li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">hsy</span><span class="o">.</span><span class="n">fi</span><span class="o">/</span><span class="n">sites</span><span class="o">/</span><span class="n">AvoinData</span><span class="o">/</span><span class="n">AvoinData</span><span class="o">/</span><span class="n">SYT</span><span class="o">/</span><span class="n">Tietoyhteistyoyksikko</span><span class="o">/</span><span class="n">Shape</span><span class="o">%</span><span class="mi">20</span><span class="p">(</span><span class="n">Esri</span><span class="p">)</span><span class="o">/</span><span class="n">V</span><span class="o">%</span><span class="n">C3</span><span class="o">%</span><span class="n">A4est</span><span class="o">%</span><span class="n">C3</span><span class="o">%</span><span class="n">B6tietoruudukko</span><span class="o">/</span><span class="n">Vaestotietoruudukko_2015</span><span class="o">.</span><span class="n">zip</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ wget https://www.hsy.fi/sites/AvoinData/AvoinData/SYT/Tietoyhteistyoyksikko/Shape%20(Esri)/V%C3%A4est%C3%B6tietoruudukko/Vaestotietoruudukko_2015.zip
 </pre></div>
 </div>
 <ul class="simple">
 <li>Unzip the file in Terminal into a folder called Pop15 (using -d flag)</li>
 </ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ unzip Vaestotietoruudukko_2015.zip -d Pop15
-$ ls Pop15
-Vaestotietoruudukko_2015.dbf  Vaestotietoruudukko_2015.shp
-Vaestotietoruudukko_2015.prj  Vaestotietoruudukko_2015.shx
 </pre></div>
 </div>
 <p>You should now have a folder <code class="docutils literal notranslate"><span class="pre">/data/Pop15</span></code> with files listed above.</p>
@@ -470,7 +467,7 @@ Vaestotietoruudukko_2015.prj  Vaestotietoruudukko_2015.shx
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [3]:
+<span></span>In [1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -490,7 +487,7 @@ Vaestotietoruudukko_2015.prj  Vaestotietoruudukko_2015.shx
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[3]:
+<span></span>Out[1]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -623,7 +620,7 @@ parameter <code class="docutils literal notranslate"><span class="pre">columns={
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [16]:
+<span></span>In [2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -637,11 +634,14 @@ parameter <code class="docutils literal notranslate"><span class="pre">columns={
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[16]:
+<span></span>Out[2]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Index([&#39;pop15&#39;, &#39;geometry&#39;], dtype=&#39;object&#39;)
+<span></span>Index([&#39;INDEX&#39;, &#39;pop15&#39;, &#39;ASVALJYYS&#39;, &#39;IKA0_9&#39;, &#39;IKA10_19&#39;, &#39;IKA20_29&#39;,
+       &#39;IKA30_39&#39;, &#39;IKA40_49&#39;, &#39;IKA50_59&#39;, &#39;IKA60_69&#39;, &#39;IKA70_79&#39;, &#39;IKA_YLI80&#39;,
+       &#39;geometry&#39;],
+      dtype=&#39;object&#39;)
 </pre></div>
 </div>
 </div>
@@ -651,7 +651,7 @@ columns that we need i.e. <code class="docutils literal notranslate"><span class
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [17]:
+<span></span>In [5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -662,13 +662,13 @@ columns that we need i.e. <code class="docutils literal notranslate"><span class
 <span class="n">pop</span> <span class="o">=</span> <span class="n">pop</span><span class="p">[</span><span class="n">selected_cols</span><span class="p">]</span>
 
 <span class="c1"># Let&#39;s see the last 2 rows</span>
-<span class="n">pop</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">pop</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[17]:
+<span></span>Out[5]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -696,14 +696,29 @@ columns that we need i.e. <code class="docutils literal notranslate"><span class
   </thead>
   <tbody>
     <tr>
-      <th>5782</th>
-      <td>9</td>
-      <td>POLYGON ((25513499.99632164 6685498.999797418,...</td>
+      <th>0</th>
+      <td>8</td>
+      <td>POLYGON ((25472499.99532626 6689749.005069185,...</td>
     </tr>
     <tr>
-      <th>5783</th>
-      <td>30244</td>
-      <td>POLYGON ((25513999.999929 6659998.998172711, 2...</td>
+      <th>1</th>
+      <td>6</td>
+      <td>POLYGON ((25472499.99532626 6685998.998064222,...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>8</td>
+      <td>POLYGON ((25472499.99532626 6684249.004130407,...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>7</td>
+      <td>POLYGON ((25472499.99532626 6683999.004997005,...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>19</td>
+      <td>POLYGON ((25472499.99532626 6682998.998461431,...</td>
     </tr>
   </tbody>
 </table>
@@ -724,7 +739,7 @@ addresses point layer <code class="docutils literal notranslate"><span class="pr
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [18]:
+<span></span>In [6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -735,13 +750,13 @@ addresses point layer <code class="docutils literal notranslate"><span class="pr
 <span class="n">addresses</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">addr_fp</span><span class="p">)</span>
 
 <span class="c1"># Check the head of the file</span>
-<span class="n">addresses</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">addresses</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[18]:
+<span></span>Out[6]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -784,6 +799,27 @@ addresses point layer <code class="docutils literal notranslate"><span class="pr
       <td>Kampinkuja 1, 00100 Helsinki, Finland</td>
       <td>POINT (24.9316914 60.1690222)</td>
     </tr>
+    <tr>
+      <th>2</th>
+      <td>Bangkok9, 8, Kaivokatu, Keskusta, Kluuvi, Etel...</td>
+      <td>1002</td>
+      <td>Kaivokatu 8, 00101 Helsinki, Finland</td>
+      <td>POINT (24.9416849 60.1699637)</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1, Hermannin rantatie, Hermanninmäki, Hermanni...</td>
+      <td>1003</td>
+      <td>Hermannin rantatie 1, 00580 Helsinki, Finland</td>
+      <td>POINT (24.9655355 60.2008878)</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Hesburger, 9, Tyynenmerenkatu, Jätkäsaari, Län...</td>
+      <td>1005</td>
+      <td>Tyynenmerenkatu 9, 00220 Helsinki, Finland</td>
+      <td>POINT (24.9216003 60.1566475)</td>
+    </tr>
   </tbody>
 </table>
 </div></div>
@@ -792,7 +828,7 @@ addresses point layer <code class="docutils literal notranslate"><span class="pr
 projection</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [21]:
+<span></span>In [7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -803,7 +839,7 @@ projection</p>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[21]:
+<span></span>Out[7]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -814,7 +850,7 @@ projection</p>
 <p>Re-project addresses to the projection of the population layer:</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [22]:
+<span></span>In [8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -828,7 +864,7 @@ are identical</li>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [23]:
+<span></span>In [9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -854,7 +890,7 @@ are identical</li>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[23]:
+<span></span>Out[9]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -871,7 +907,7 @@ e.g.&nbsp;from the spatial join that we are conducting here.</p>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [24]:
+<span></span>In [10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -880,13 +916,12 @@ e.g.&nbsp;from the spatial join that we are conducting here.</p>
 
 <span class="c1"># Let&#39;s check the result</span>
 <span class="n">join</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[24]:
+<span></span>Out[10]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -955,12 +990,12 @@ e.g.&nbsp;from the spatial join that we are conducting here.</p>
     </tr>
     <tr>
       <th>3</th>
-      <td>Hermannin rantatie, Hermanninranta, Hermanni, ...</td>
+      <td>1, Hermannin rantatie, Hermanninmäki, Hermanni...</td>
       <td>1003</td>
       <td>Hermannin rantatie 1, 00580 Helsinki, Finland</td>
-      <td>POINT (25498715.48045845 6675708.115636756)</td>
-      <td>3749</td>
-      <td>183</td>
+      <td>POINT (25498088.55200266 6676455.030033929)</td>
+      <td>3684</td>
+      <td>139</td>
     </tr>
   </tbody>
 </table>
@@ -976,7 +1011,7 @@ located.</p>
 </ul>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [26]:
+<span></span>In [11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1000,14 +1035,14 @@ and <code class="docutils literal notranslate"><span class="pre">legend</span></
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [27]:
+<span></span>In [12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
 <span class="c1"># Plot the points with population info</span>
-<span class="n">join</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;pop15&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Reds&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s1">&#39;natural_breaks&#39;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="bp">True</span><span class="p">);</span>
+<span class="n">join</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;pop15&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Reds&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s1">&#39;quantiles&#39;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="bp">True</span><span class="p">);</span>
 
 <span class="c1"># Add title</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Amount of inhabitants living close the the point&quot;</span><span class="p">);</span>
@@ -1017,51 +1052,15 @@ and <code class="docutils literal notranslate"><span class="pre">legend</span></
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
+<div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="stderr output_area docutils container">
 <div class="highlight"><pre>
 /opt/conda/lib/python3.6/site-packages/pysal/__init__.py:65: VisibleDeprecationWarning: PySAL&#39;s API will be changed on 2018-12-31. The last release made with this API is version 1.14.4. A preview of the next API version is provided in the `pysal` 2.0 prelease candidate. The API changes and a guide on how to change imports is provided at https://pysal.org/about
   ), VisibleDeprecationWarning)
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">ValueError</span>                                Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-27-4ad174f1cc20&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">      2</span>
-<span class="ansi-green-intense-fg ansi-bold">      3</span> <span class="ansi-red-fg"># Plot the points with population info</span>
-<span class="ansi-green-fg">----&gt; 4</span><span class="ansi-red-fg"> </span>join<span class="ansi-blue-fg">.</span>plot<span class="ansi-blue-fg">(</span>column<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#39;pop15&#39;</span><span class="ansi-blue-fg">,</span> cmap<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#34;Reds&#34;</span><span class="ansi-blue-fg">,</span> markersize<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">7</span><span class="ansi-blue-fg">,</span> scheme<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#39;natural_breaks&#39;</span><span class="ansi-blue-fg">,</span> legend<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">;</span>
-<span class="ansi-green-intense-fg ansi-bold">      5</span>
-<span class="ansi-green-intense-fg ansi-bold">      6</span> <span class="ansi-red-fg"># Add title</span>
-
-<span class="ansi-green-fg">/opt/conda/lib/python3.6/site-packages/geopandas/geodataframe.py</span> in <span class="ansi-cyan-fg">plot</span><span class="ansi-blue-fg">(self, *args, **kwargs)</span>
-<span class="ansi-green-intense-fg ansi-bold">    532</span>         <span class="ansi-green-fg">from</span> there<span class="ansi-blue-fg">.</span>
-<span class="ansi-green-intense-fg ansi-bold">    533</span>         &#34;&#34;&#34;
-<span class="ansi-green-fg">--&gt; 534</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> plot_dataframe<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    535</span>
-<span class="ansi-green-intense-fg ansi-bold">    536</span>     plot<span class="ansi-blue-fg">.</span>__doc__ <span class="ansi-blue-fg">=</span> plot_dataframe<span class="ansi-blue-fg">.</span>__doc__
-
-<span class="ansi-green-fg">/opt/conda/lib/python3.6/site-packages/geopandas/plotting.py</span> in <span class="ansi-cyan-fg">plot_dataframe</span><span class="ansi-blue-fg">(df, column, cmap, color, ax, categorical, legend, scheme, k, vmin, vmax, markersize, figsize, legend_kwds, **style_kwds)</span>
-<span class="ansi-green-intense-fg ansi-bold">    443</span>
-<span class="ansi-green-intense-fg ansi-bold">    444</span>     <span class="ansi-green-fg">if</span> scheme <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">not</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 445</span><span class="ansi-red-fg">         </span>binning <span class="ansi-blue-fg">=</span> __pysal_choro<span class="ansi-blue-fg">(</span>values<span class="ansi-blue-fg">,</span> scheme<span class="ansi-blue-fg">,</span> k<span class="ansi-blue-fg">=</span>k<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    446</span>         <span class="ansi-red-fg"># set categorical to True for creating the legend</span>
-<span class="ansi-green-intense-fg ansi-bold">    447</span>         categorical <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">True</span>
-
-<span class="ansi-green-fg">/opt/conda/lib/python3.6/site-packages/geopandas/plotting.py</span> in <span class="ansi-cyan-fg">__pysal_choro</span><span class="ansi-blue-fg">(values, scheme, k)</span>
-<span class="ansi-green-intense-fg ansi-bold">    541</span>         <span class="ansi-green-fg">if</span> scheme <span class="ansi-green-fg">not</span> <span class="ansi-green-fg">in</span> schemes<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    542</span>             raise ValueError(&#34;Invalid scheme. Scheme must be in the&#34;
-<span class="ansi-green-fg">--&gt; 543</span><span class="ansi-red-fg">                              &#34; set: %r&#34; % schemes.keys())
-</span><span class="ansi-green-intense-fg ansi-bold">    544</span>         binning <span class="ansi-blue-fg">=</span> schemes<span class="ansi-blue-fg">[</span>scheme<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">(</span>values<span class="ansi-blue-fg">,</span> k<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    545</span>         <span class="ansi-green-fg">return</span> binning
-
-<span class="ansi-red-fg">ValueError</span>: Invalid scheme. Scheme must be in the set: dict_keys([&#39;equal_interval&#39;, &#39;quantiles&#39;, &#39;fisher_jenks&#39;])
+/opt/conda/lib/python3.6/site-packages/scipy/stats/stats.py:1713: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
+  return np.add.reduce(sorted[indexer] * weights, axis=axis) / sumval
 </pre></div></div>
 </div>
 <p>By knowing approximately how population is distributed in Helsinki, it
@@ -1092,7 +1091,7 @@ is.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2018, Henrikki Tenkanen
-      Last updated on Nov 10, 2018.
+      Last updated on Nov 11, 2018.
 
     </p>
   </div>

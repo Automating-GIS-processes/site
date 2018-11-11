@@ -411,7 +411,7 @@ containing the resulting point objects in <code class="docutils literal notransl
 <p>We will geocode addresses stored in a text file called
 <code class="docutils literal notranslate"><span class="pre">addresses.txt</span></code>. The addresses are located in the Helsinki Region in
 Southern Finland.</p>
-<p>The first rows of the data looks like following:</p>
+<p>The first rows of the data look like this:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">id</span><span class="p">;</span><span class="n">addr</span>
 <span class="mi">1000</span><span class="p">;</span><span class="n">Itämerenkatu</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">00101</span> <span class="n">Helsinki</span><span class="p">,</span> <span class="n">Finland</span>
 <span class="mi">1001</span><span class="p">;</span><span class="n">Kampinkuja</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">00100</span> <span class="n">Helsinki</span><span class="p">,</span> <span class="n">Finland</span>
@@ -525,7 +525,7 @@ addresses.</p>
 
 <span class="c1"># Geocode addresses with Nominatim backend</span>
 <span class="n">geo</span> <span class="o">=</span> <span class="n">geocode</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;addr&#39;</span><span class="p">],</span> <span class="n">provider</span><span class="o">=</span><span class="s1">&#39;nominatim&#39;</span><span class="p">)</span>
-<span class="n">geo</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">geo</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -577,6 +577,21 @@ addresses.</p>
       <td>POINT (24.9316914 60.1690222)</td>
       <td>Kamppi, 1, Kampinkuja, Kamppi, Eteläinen suurp...</td>
     </tr>
+    <tr>
+      <th>2</th>
+      <td>POINT (24.9416849 60.1699637)</td>
+      <td>Bangkok9, 8, Kaivokatu, Keskusta, Kluuvi, Etel...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>POINT (24.9655355 60.2008878)</td>
+      <td>1, Hermannin rantatie, Hermanninmäki, Hermanni...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>POINT (24.9216003 60.1566475)</td>
+      <td>Hesburger, 9, Tyynenmerenkatu, Jätkäsaari, Län...</td>
+    </tr>
   </tbody>
 </table>
 </div></div>
@@ -591,7 +606,7 @@ a <strong>Table Join</strong>.</p>
 <h2>Table join<a class="headerlink" href="#Table-join" title="Permalink to this headline">¶</a></h2>
 <p>Table joins are really common procedures when doing GIS analyses. As you
 might remember from our earlier lessons, combining data from different
-tables based on common <code class="docutils literal notranslate"><span class="pre">key</span></code> attribute can be done easily in
+tables based on common <strong>key</strong> attribute can be done easily in
 Pandas/Geopandas using
 <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.merge.html">.merge()</a>
 -function. We used this approach in the geo-python course <a class="reference external" href="https://geo-python.github.io/2018/lessons/L6/exercise-6.html#joining-data-from-one-dataframe-to-another">exercise
@@ -670,8 +685,8 @@ merges the two DataFrames together based on index by default.</p>
     </tr>
     <tr>
       <th>3</th>
-      <td>POINT (24.9768441 60.1941864)</td>
-      <td>Hermannin rantatie, Hermanninranta, Hermanni, ...</td>
+      <td>POINT (24.9655355 60.2008878)</td>
+      <td>1, Hermannin rantatie, Hermanninmäki, Hermanni...</td>
       <td>1003</td>
       <td>Hermannin rantatie 1, 00580 Helsinki, Finland</td>
     </tr>
@@ -716,7 +731,7 @@ all original columns plus a new column for <code class="docutils literal notrans
 </ul>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [7]:
+<span></span>In [6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -768,7 +783,7 @@ in a similar manner as we used Nominatim here.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2018, Henrikki Tenkanen
-      Last updated on Nov 10, 2018.
+      Last updated on Nov 11, 2018.
 
     </p>
   </div>
