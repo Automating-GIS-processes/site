@@ -46,7 +46,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 1,
+   "execution_count": 48,
    "metadata": {
     "collapsed": false,
     "deletable": true,
@@ -92,7 +92,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 2,
+   "execution_count": 49,
    "metadata": {
     "collapsed": false,
     "deletable": true,
@@ -105,7 +105,7 @@
        "False"
       ]
      },
-     "execution_count": 2,
+     "execution_count": 49,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -129,12 +129,12 @@
     "and the other one doesn't.\n",
     "\n",
     "-  In fact, the first point is close to the center of the polygon as we\n",
-    "   can see:"
+    "   can see if we compare the point location to the centroid of the polygon:"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 3,
+   "execution_count": 50,
    "metadata": {
     "collapsed": false,
     "deletable": true,
@@ -171,7 +171,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 4,
+   "execution_count": 51,
    "metadata": {
     "collapsed": false,
     "deletable": true,
@@ -184,7 +184,7 @@
        "False"
       ]
      },
-     "execution_count": 4,
+     "execution_count": 51,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -243,7 +243,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 5,
+   "execution_count": 52,
    "metadata": {
     "collapsed": true,
     "deletable": true,
@@ -270,7 +270,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 6,
+   "execution_count": 53,
    "metadata": {
     "collapsed": false,
     "deletable": true,
@@ -283,7 +283,7 @@
        "True"
       ]
      },
-     "execution_count": 6,
+     "execution_count": 53,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -304,7 +304,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 7,
+   "execution_count": 54,
    "metadata": {
     "collapsed": false,
     "deletable": true,
@@ -317,7 +317,7 @@
        "True"
       ]
      },
-     "execution_count": 7,
+     "execution_count": 54,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -338,7 +338,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 8,
+   "execution_count": 55,
    "metadata": {
     "collapsed": false,
     "deletable": true,
@@ -351,16 +351,16 @@
        "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"100.0\" height=\"100.0\" viewBox=\"-0.08 -0.08 1.1600000000000001 2.16\" preserveAspectRatio=\"xMinYMin meet\"><g transform=\"matrix(1,0,0,-1,0,2.0)\"><g><polyline fill=\"none\" stroke=\"#66cc99\" stroke-width=\"0.0432\" points=\"0.0,0.0 1.0,1.0\" opacity=\"0.8\" /><polyline fill=\"none\" stroke=\"#66cc99\" stroke-width=\"0.0432\" points=\"1.0,1.0 0.0,2.0\" opacity=\"0.8\" /></g></g></svg>"
       ],
       "text/plain": [
-       "<shapely.geometry.multilinestring.MultiLineString at 0x7f4004658320>"
+       "<shapely.geometry.multilinestring.MultiLineString at 0x7f32c41206a0>"
       ]
      },
-     "execution_count": 8,
+     "execution_count": 55,
      "metadata": {},
      "output_type": "execute_result"
     }
    ],
    "source": [
-    "# Create a MultiLineString\n",
+    "# Create a MultiLineString from line_a and line_b\n",
     "multi_line = MultiLineString([line_a, line_b])\n",
     "multi_line"
    ]
@@ -381,7 +381,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 9,
+   "execution_count": 56,
    "metadata": {
     "collapsed": false,
     "deletable": true,
@@ -394,7 +394,7 @@
        "False"
       ]
      },
-     "execution_count": 9,
+     "execution_count": 56,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -416,7 +416,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 10,
+   "execution_count": 57,
    "metadata": {
     "collapsed": false,
     "deletable": true,
@@ -429,7 +429,7 @@
        "True"
       ]
      },
-     "execution_count": 10,
+     "execution_count": 57,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -440,11 +440,8 @@
    ]
   },
   {
-   "cell_type": "raw",
-   "metadata": {
-    "deletable": true,
-    "editable": true
-   },
+   "cell_type": "markdown",
+   "metadata": {},
    "source": [
     "## Point in Polygon using Geopandas\n",
     "\n",
@@ -455,7 +452,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 11,
+   "execution_count": 58,
    "metadata": {
     "collapsed": true,
     "deletable": true,
@@ -552,7 +549,7 @@
        "4  POINT (24.9216003 60.1566475)  "
       ]
      },
-     "execution_count": 11,
+     "execution_count": 58,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -576,21 +573,56 @@
     "\n",
     "### Reading KML-files in Geopandas\n",
     "\n",
-    "It is possible to read the data from KML-file in a similar manner as Shapefile. However, we need to first, enable the KML-driver which is not enabled by default (because KML-files can contain unsupported data structures, nested folders etc., hence be careful when reading KML-files).\n",
-    "\n",
-    "- Let's enable the read and write functionalities for KML-driver by passing ``'rw'`` to whitelist of fiona's supported drivers:\n",
-    "\n",
-    "\n",
-    "\n",
-    "\n",
-    "\n",
-    "\n",
-    "\n"
+    "It is possible to read the data from KML-files with GeoPandas in a similar manner as Shapefiles. However, we need to first, enable the KML-driver which is not enabled by default (because KML-files can contain unsupported data structures, nested folders etc., hence be careful when reading KML-files). Supported drivers are managed with [`fiona.supported_drivers`](https://github.com/Toblerity/Fiona/blob/master/fiona/drvsupport.py), which is integrated in geopandas. Let's first check which formats are currently supported:"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 12,
+   "execution_count": 59,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "{'AeronavFAA': 'r',\n",
+       " 'ARCGEN': 'r',\n",
+       " 'BNA': 'raw',\n",
+       " 'DXF': 'raw',\n",
+       " 'OpenFileGDB': 'r',\n",
+       " 'ESRI Shapefile': 'raw',\n",
+       " 'GeoJSON': 'rw',\n",
+       " 'GPKG': 'rw',\n",
+       " 'GPX': 'raw',\n",
+       " 'GPSTrackMaker': 'raw',\n",
+       " 'Idrisi': 'r',\n",
+       " 'MapInfo File': 'raw',\n",
+       " 'DGN': 'raw',\n",
+       " 'PCIDSK': 'r',\n",
+       " 'SEGY': 'r',\n",
+       " 'SUA': 'r',\n",
+       " 'KML': 'rw'}"
+      ]
+     },
+     "execution_count": 59,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "import geopandas as gpd\n",
+    "gpd.io.file.fiona.drvsupport.supported_drivers"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "- Let's enable the read and write functionalities for KML-driver by passing ``'rw'`` to whitelist of fiona's supported drivers:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 60,
    "metadata": {
     "collapsed": true,
     "deletable": true,
@@ -598,10 +630,50 @@
    },
    "outputs": [],
    "source": [
-    "import geopandas as gpd\n",
-    "import matplotlib.pyplot as plt\n",
-    "\n",
     "gpd.io.file.fiona.drvsupport.supported_drivers['KML'] = 'rw'"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Let's check again the supported drivers:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 61,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "{'AeronavFAA': 'r',\n",
+       " 'ARCGEN': 'r',\n",
+       " 'BNA': 'raw',\n",
+       " 'DXF': 'raw',\n",
+       " 'OpenFileGDB': 'r',\n",
+       " 'ESRI Shapefile': 'raw',\n",
+       " 'GeoJSON': 'rw',\n",
+       " 'GPKG': 'rw',\n",
+       " 'GPX': 'raw',\n",
+       " 'GPSTrackMaker': 'raw',\n",
+       " 'Idrisi': 'r',\n",
+       " 'MapInfo File': 'raw',\n",
+       " 'DGN': 'raw',\n",
+       " 'PCIDSK': 'r',\n",
+       " 'SEGY': 'r',\n",
+       " 'SUA': 'r',\n",
+       " 'KML': 'rw'}"
+      ]
+     },
+     "execution_count": 61,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "gpd.io.file.fiona.drvsupport.supported_drivers"
    ]
   },
   {
@@ -611,20 +683,27 @@
     "editable": true
    },
    "source": [
-    "Now we should be able to read a KML file with Geopandas.\n",
+    "Now we should be able to read a KML file with [geopandas.read_file](http://geopandas.org/reference/geopandas.read_file.html#geopandas.read_file).\n",
     "\n",
     "- Let's read the data from a following KML -file:"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 13,
+   "execution_count": 62,
    "metadata": {
     "collapsed": true,
     "deletable": true,
     "editable": true
    },
    "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Number of rows: 23\n"
+     ]
+    },
     {
      "data": {
       "text/html": [
@@ -718,78 +797,6 @@
        "      <td></td>\n",
        "      <td>POLYGON Z ((24.7827651307035 60.09997268858 0,...</td>\n",
        "    </tr>\n",
-       "    <tr>\n",
-       "      <th>11</th>\n",
-       "      <td>Kaakkoinen</td>\n",
-       "      <td></td>\n",
-       "      <td>POLYGON Z ((24.8480782099727 60.0275589731893 ...</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>12</th>\n",
-       "      <td>Keskinen</td>\n",
-       "      <td></td>\n",
-       "      <td>POLYGON Z ((24.9085548098731 60.2082029641503 ...</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>13</th>\n",
-       "      <td>Läntinen</td>\n",
-       "      <td></td>\n",
-       "      <td>POLYGON Z ((24.832174555671 60.2516121985945 0...</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>14</th>\n",
-       "      <td>Pohjoinen</td>\n",
-       "      <td></td>\n",
-       "      <td>POLYGON Z ((24.8992644865152 60.2689368800439 ...</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>15</th>\n",
-       "      <td>Koillinen</td>\n",
-       "      <td></td>\n",
-       "      <td>POLYGON Z ((24.9722813313308 60.2432476462193 ...</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>16</th>\n",
-       "      <td>Aviapolis</td>\n",
-       "      <td></td>\n",
-       "      <td>POLYGON Z ((24.9430919106369 60.3384471629062 ...</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>17</th>\n",
-       "      <td>Tikkurila</td>\n",
-       "      <td></td>\n",
-       "      <td>POLYGON Z ((24.9764047156358 60.2896890295612 ...</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>18</th>\n",
-       "      <td>Koivukylä</td>\n",
-       "      <td></td>\n",
-       "      <td>POLYGON Z ((24.9942315864552 60.3329637072809 ...</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>19</th>\n",
-       "      <td>Itäinen</td>\n",
-       "      <td></td>\n",
-       "      <td>POLYGON Z ((25.0351655840904 60.23627484214 0,...</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>20</th>\n",
-       "      <td>Östersundom</td>\n",
-       "      <td></td>\n",
-       "      <td>POLYGON Z ((25.233518559787 60.2565486562817 0...</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>21</th>\n",
-       "      <td>Hakunila</td>\n",
-       "      <td></td>\n",
-       "      <td>POLYGON Z ((25.0847165922124 60.2724847557756 ...</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>22</th>\n",
-       "      <td>Korso</td>\n",
-       "      <td></td>\n",
-       "      <td>POLYGON Z ((25.1238010972777 60.341907177167 0...</td>\n",
-       "    </tr>\n",
        "  </tbody>\n",
        "</table>\n",
        "</div>"
@@ -807,18 +814,6 @@
        "8           Myyrmäki               \n",
        "9            Kivistö               \n",
        "10         Eteläinen               \n",
-       "11        Kaakkoinen               \n",
-       "12          Keskinen               \n",
-       "13          Läntinen               \n",
-       "14         Pohjoinen               \n",
-       "15         Koillinen               \n",
-       "16         Aviapolis               \n",
-       "17         Tikkurila               \n",
-       "18         Koivukylä               \n",
-       "19           Itäinen               \n",
-       "20       Östersundom               \n",
-       "21          Hakunila               \n",
-       "22             Korso               \n",
        "\n",
        "                                             geometry  \n",
        "0   POLYGON Z ((24.775059677807 60.1090604462157 0...  \n",
@@ -831,22 +826,10 @@
        "7   POLYGON Z ((24.8443596422129 60.1659790707387 ...  \n",
        "8   POLYGON Z ((24.8245867448802 60.2902531157585 ...  \n",
        "9   POLYGON Z ((24.9430919106369 60.3384471629062 ...  \n",
-       "10  POLYGON Z ((24.7827651307035 60.09997268858 0,...  \n",
-       "11  POLYGON Z ((24.8480782099727 60.0275589731893 ...  \n",
-       "12  POLYGON Z ((24.9085548098731 60.2082029641503 ...  \n",
-       "13  POLYGON Z ((24.832174555671 60.2516121985945 0...  \n",
-       "14  POLYGON Z ((24.8992644865152 60.2689368800439 ...  \n",
-       "15  POLYGON Z ((24.9722813313308 60.2432476462193 ...  \n",
-       "16  POLYGON Z ((24.9430919106369 60.3384471629062 ...  \n",
-       "17  POLYGON Z ((24.9764047156358 60.2896890295612 ...  \n",
-       "18  POLYGON Z ((24.9942315864552 60.3329637072809 ...  \n",
-       "19  POLYGON Z ((25.0351655840904 60.23627484214 0,...  \n",
-       "20  POLYGON Z ((25.233518559787 60.2565486562817 0...  \n",
-       "21  POLYGON Z ((25.0847165922124 60.2724847557756 ...  \n",
-       "22  POLYGON Z ((25.1238010972777 60.341907177167 0...  "
+       "10  POLYGON Z ((24.7827651307035 60.09997268858 0,...  "
       ]
      },
-     "execution_count": 13,
+     "execution_count": 62,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -856,7 +839,10 @@
     "fp = \"data/PKS_suuralue.kml\"\n",
     "\n",
     "polys = gpd.read_file(fp, driver='KML')\n",
-    "polys"
+    "\n",
+    "#Check the data\n",
+    "print(\"Number of rows:\",len(polys))\n",
+    "polys.head(11)"
    ]
   },
   {
@@ -866,14 +852,32 @@
     "editable": true
    },
    "source": [
-    "Nice, now we can see that we have 22 districts in our area. We are interested in an area that is called ``Eteläinen`` (*'Southern'* in english).\n",
+    "Nice, now we can see that we have 23 districts in our area. We are interested in an area that is called ``Eteläinen`` (*'Southern'* in english).\n",
     "\n",
-    "- Let's select that one and see where it is located, and plot also the points on top of the map."
+    "- Let's select the ``Eteläinen`` district and see where it is located on a map\n"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 14,
+   "execution_count": 63,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Select data and reset index\n",
+    "southern = polys.loc[polys['Name']=='Eteläinen']\n",
+    "southern.reset_index(drop=True, inplace=True)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Let's create a map which shows the location of the selected district, and let's also plot the address points on top of the map"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 64,
    "metadata": {
     "collapsed": true,
     "deletable": true,
@@ -892,16 +896,19 @@
     }
    ],
    "source": [
-    "# Select data and reset index\n",
-    "southern = polys.loc[polys['Name']=='Eteläinen']\n",
-    "southern.reset_index(drop=True, inplace=True)\n",
+    "import matplotlib.pyplot as plt\n",
     "\n",
-    "# Plot\n",
+    "# Create a figure with one subplot\n",
     "fig, ax = plt.subplots()\n",
-    "polys.plot(ax=ax, facecolor='gray');\n",
-    "southern.plot(ax=ax, facecolor='red');\n",
-    "data.plot(ax=ax, color='blue', markersize=5);\n",
-    "plt.tight_layout();"
+    "\n",
+    "# Plot polygons\n",
+    "polys.plot(ax=ax, facecolor='gray')\n",
+    "southern.plot(ax=ax, facecolor='red')\n",
+    "\n",
+    "# Plot points\n",
+    "data.plot(ax=ax, color='blue', markersize=5)\n",
+    "\n",
+    "plt.tight_layout()"
    ]
   },
   {
@@ -913,14 +920,14 @@
    "source": [
     "Okey, so we can see that, indeed, certain points are within the selected red Polygon.\n",
     "\n",
-    "Let's find out which one of them are located within the Polygon. Hence, we are conducting a Point in Polygon query.\n",
+    "Let's find out which one of them are located within the Polygon. Hence, we are conducting a **Point in Polygon query**.\n",
     "\n",
     "- Let's first enable shapely.speedups which makes some of the spatial queries running faster."
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 15,
+   "execution_count": 65,
    "metadata": {
     "collapsed": true,
     "deletable": true,
@@ -940,12 +947,13 @@
    },
    "source": [
     "- Let's check which Points are within the ``southern`` Polygon. Notice, that here we check if the Points are ``within`` the **geometry**\n",
-    "  of the ``southern`` GeoDataFrame. Hence, we use the ``loc[0, 'geometry']`` to parse the actual Polygon geometry object from the GeoDataFrame."
+    "  of the ``southern`` GeoDataFrame. \n",
+    "- Hence, we use the ``.loc[0, 'geometry']`` to parse the actual Polygon geometry object from the GeoDataFrame."
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 16,
+   "execution_count": 66,
    "metadata": {
     "collapsed": true,
     "deletable": true,
@@ -1015,7 +1023,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 17,
+   "execution_count": 67,
    "metadata": {
     "collapsed": true,
     "deletable": true,
@@ -1152,7 +1160,7 @@
        "33         POINT (24.9473289 60.1718719)  "
       ]
      },
-     "execution_count": 17,
+     "execution_count": 67,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -1169,12 +1177,12 @@
     "editable": true
    },
    "source": [
-    "Let's finally confirm that our Point in Polygon query worked as it should by plotting the data."
+    "Let's finally confirm that our Point in Polygon query worked as it should by plotting the points that are within the southern district:"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 18,
+   "execution_count": 68,
    "metadata": {
     "collapsed": true,
     "deletable": true,
@@ -1193,16 +1201,17 @@
     }
    ],
    "source": [
-    "# Select data and reset index\n",
-    "southern = polys.loc[polys['Name']=='Eteläinen']\n",
-    "southern.reset_index(drop=True, inplace=True)\n",
-    "\n",
-    "# Plot\n",
+    "# Create a figure with one subplot\n",
     "fig, ax = plt.subplots()\n",
-    "polys.plot(ax=ax, facecolor='gray');\n",
-    "southern.plot(ax=ax, facecolor='red');\n",
-    "pip_data.plot(ax=ax, color='gold', markersize=2);\n",
-    "plt.tight_layout();"
+    "\n",
+    "# Plot polygons\n",
+    "polys.plot(ax=ax, facecolor='gray')\n",
+    "southern.plot(ax=ax, facecolor='red')\n",
+    "\n",
+    "# Plot points\n",
+    "pip_data.plot(ax=ax, color='gold', markersize=2)\n",
+    "\n",
+    "plt.tight_layout()"
    ]
   },
   {

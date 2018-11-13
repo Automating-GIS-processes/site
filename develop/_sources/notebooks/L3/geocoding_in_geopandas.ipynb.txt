@@ -157,14 +157,6 @@
    },
    "outputs": [
     {
-     "name": "stderr",
-     "output_type": "stream",
-     "text": [
-      "/opt/conda/lib/python3.6/site-packages/geopy/geocoders/osm.py:143: UserWarning: Using Nominatim with the default \"geopy/1.17.0\" `user_agent` is strongly discouraged, as it violates Nominatim's ToS https://operations.osmfoundation.org/policies/nominatim/ and may possibly cause 403 and 429 HTTP errors. Please specify a custom `user_agent` with `Nominatim(user_agent=\"my-application\")` or by overriding the default `user_agent`: `geopy.geocoders.options.default_user_agent = \"my-application\"`. In geopy 2.0 this will become an exception.\n",
-      "  UserWarning\n"
-     ]
-    },
-    {
      "data": {
       "text/html": [
        "<div>\n",
@@ -245,7 +237,7 @@
     "from geopandas.tools import geocode\n",
     "\n",
     "# Geocode addresses with Nominatim backend\n",
-    "geo = geocode(data['addr'], provider='nominatim')\n",
+    "geo = geocode(data['addr'], provider = 'nominatim', user_agent = 'autogis_course')\n",
     "geo.head()"
    ]
   },
@@ -275,7 +267,7 @@
     "\n",
     "\n",
     "Table joins are really common procedures when doing GIS analyses. As you might remember from our earlier lessons, combining data from different tables based on common\n",
-    "**key** attribute can be done easily in Pandas/Geopandas using [.merge()](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.merge.html) -function. We used this approach in the geo-python course [exercise 6](https://geo-python.github.io/2018/lessons/L6/exercise-6.html#joining-data-from-one-dataframe-to-another).\n",
+    "**key** attribute can be done easily in Pandas/Geopandas using the [.merge()](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.merge.html) -function. We used this approach in the geo-python course [exercise 6](https://geo-python.github.io/2018/lessons/L6/exercise-6.html#joining-data-from-one-dataframe-to-another).\n",
     "\n",
     "However, sometimes it is useful to join two tables together based on the **index** of those DataFrames. In such case, we assume\n",
     "that there is **same number of records** in our DataFrames and that the **order of the records should be the same** in both DataFrames.\n",

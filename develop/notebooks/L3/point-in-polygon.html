@@ -131,7 +131,8 @@
 <li class="toctree-l1"><a class="reference internal" href="geocoding_in_geopandas.html">Geocoding in Geopandas</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Point in Polygon &amp; Intersect</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#How-to-check-if-point-is-inside-a-polygon?">How to check if point is inside a polygon?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#Intersect">Intersect</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Intersect">Intersect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Point-in-Polygon-using-Geopandas">Point in Polygon using Geopandas</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#Reading-KML-files-in-Geopandas">Reading KML-files in Geopandas</a></li>
 </ul>
 </li>
@@ -398,7 +399,7 @@ div.nboutput div.output_area.stderr {
 }
 </style>
 <div class="admonition note">
-This page was generated from <a class="reference external" href="https://github.com/Automating-GIS-processes/2018/blob/master/source/notebooks/L3/point-in-polygon.ipynb">source/notebooks/L3/point-in-polygon.ipynb</a>.
+This page was generated from <a href="#id2"><span class="problematic" id="id3">`source/notebooks/L3/point-in-polygon.ipynb`__</span></a>.
 <span class="raw-html"><br/><a href="https://mybinder.org/v2/gh/Automating-GIS-processes/2018/master?urlpath=lab/tree/source/notebooks/L3/point-in-polygon.ipynb"><img alt="Binder badge" src="https://img.shields.io/badge/launch-full%20binder-red.svg" style="vertical-align:text-bottom"></a></span>
 <span class="raw-html"><a href="https://mybinder.org/v2/gh/Automating-GIS-processes/notebooks/master?urlpath=lab/tree/notebooks/L3/point-in-polygon.ipynb"><img alt="Binder badge" src="https://img.shields.io/badge/launch-student%20binder-red.svg" style="vertical-align:text-bottom"></a></span>
 <span class="raw-html"><a href="https://notebooks.csc.fi/#/blueprint/d71cd2d26d924f48820dc22b67a87d8e"><img alt="CSC badge" src="https://img.shields.io/badge/launch-CSC%20notebook-blue.svg" style="vertical-align:text-bottom"></a></span></div>
@@ -441,7 +442,7 @@ couple of Point objects</li>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [1]:
+<span></span>In [48]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -475,7 +476,7 @@ POLYGON ((24.950899 60.169158, 24.953492 60.169158, 24.95351 60.170104, 24.95095
 <p>Let’s check if those points are <code class="docutils literal notranslate"><span class="pre">within</span></code> the polygon</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [2]:
+<span></span>In [49]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -489,7 +490,7 @@ POLYGON ((24.950899 60.169158, 24.953492 60.169158, 24.95351 60.170104, 24.95095
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[2]:
+<span></span>Out[49]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -501,11 +502,12 @@ POLYGON ((24.950899 60.169158, 24.953492 60.169158, 24.95351 60.170104, 24.95095
 and the other one doesn’t.</p>
 <ul class="simple">
 <li>In fact, the first point is close to the center of the polygon as we
-can see:</li>
+can see if we compare the point location to the centroid of the
+polygon:</li>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [3]:
+<span></span>In [50]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -532,7 +534,7 @@ polygon contains a point:</li>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [4]:
+<span></span>In [51]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -546,7 +548,7 @@ polygon contains a point:</li>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[4]:
+<span></span>Out[51]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -592,7 +594,7 @@ interiors shoud NOT intersect.</li>
 </ul>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [5]:
+<span></span>In [52]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -609,7 +611,7 @@ interiors shoud NOT intersect.</li>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [6]:
+<span></span>In [53]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -619,7 +621,7 @@ interiors shoud NOT intersect.</li>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[6]:
+<span></span>Out[53]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -632,7 +634,7 @@ interiors shoud NOT intersect.</li>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [7]:
+<span></span>In [54]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -642,7 +644,7 @@ interiors shoud NOT intersect.</li>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[7]:
+<span></span>Out[54]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -653,11 +655,11 @@ interiors shoud NOT intersect.</li>
 <p>Indeed, they do and we can see this by plotting the features together</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [8]:
+<span></span>In [55]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Create a MultiLineString</span>
+<span></span><span class="c1"># Create a MultiLineString from line_a and line_b</span>
 <span class="n">multi_line</span> <span class="o">=</span> <span class="n">MultiLineString</span><span class="p">([</span><span class="n">line_a</span><span class="p">,</span> <span class="n">line_b</span><span class="p">])</span>
 <span class="n">multi_line</span>
 </pre></div>
@@ -665,7 +667,7 @@ interiors shoud NOT intersect.</li>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[8]:
+<span></span>Out[55]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -680,7 +682,7 @@ relationship rule, as we can see:</p>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [9]:
+<span></span>In [56]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -691,7 +693,7 @@ relationship rule, as we can see:</p>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[9]:
+<span></span>Out[56]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -704,7 +706,7 @@ relationship rule, as we can see:</p>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [10]:
+<span></span>In [57]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -715,7 +717,7 @@ relationship rule, as we can see:</p>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[10]:
+<span></span>Out[57]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -723,13 +725,22 @@ relationship rule, as we can see:</p>
 </pre></div>
 </div>
 </div>
-## Point in Polygon using Geopandas
-
-Next we will do a practical example where we check which of the addresses from [previous tutorial]() are located in Southern district of Helsinki. Let's start by reading a KML-file ``PKS_suuralue.kml`` that has the Polygons for districts of Helsinki Region (data openly available from [Helsinki Region Infoshare](http://www.hri.fi/fi/dataset/paakaupunkiseudun-aluejakokartat).
-
-- Let's start by reading the addresses from the Shapefile that we saved earlier.<div class="nbinput docutils container">
+</div>
+<div class="section" id="Point-in-Polygon-using-Geopandas">
+<h2>Point in Polygon using Geopandas<a class="headerlink" href="#Point-in-Polygon-using-Geopandas" title="Permalink to this headline">¶</a></h2>
+<p>Next we will do a practical example where we check which of the
+addresses from <a href="#id2"><span class="problematic" id="id4">`previous tutorial &lt;&gt;`__</span></a> are located in Southern district
+of Helsinki. Let’s start by reading a KML-file <code class="docutils literal notranslate"><span class="pre">PKS_suuralue.kml</span></code> that
+has the Polygons for districts of Helsinki Region (data openly available
+from <a class="reference external" href="http://www.hri.fi/fi/dataset/paakaupunkiseudun-aluejakokartat">Helsinki Region
+Infoshare</a>.</p>
+<ul class="simple">
+<li>Let’s start by reading the addresses from the Shapefile that we saved
+earlier.</li>
+</ul>
+<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [11]:
+<span></span>In [58]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -744,7 +755,7 @@ Next we will do a practical example where we check which of the addresses from [
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[11]:
+<span></span>Out[58]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -814,35 +825,110 @@ Next we will do a practical example where we check which of the addresses from [
 </div>
 <div class="section" id="Reading-KML-files-in-Geopandas">
 <h3>Reading KML-files in Geopandas<a class="headerlink" href="#Reading-KML-files-in-Geopandas" title="Permalink to this headline">¶</a></h3>
-<p>It is possible to read the data from KML-file in a similar manner as
-Shapefile. However, we need to first, enable the KML-driver which is not
-enabled by default (because KML-files can contain unsupported data
-structures, nested folders etc., hence be careful when reading
-KML-files).</p>
+<p>It is possible to read the data from KML-files with GeoPandas in a
+similar manner as Shapefiles. However, we need to first, enable the
+KML-driver which is not enabled by default (because KML-files can
+contain unsupported data structures, nested folders etc., hence be
+careful when reading KML-files). Supported drivers are managed with
+<code class="docutils literal notranslate"><span class="pre">`fiona.supported_drivers</span></code> &lt;<a class="reference external" href="https://github.com/Toblerity/Fiona/blob/master/fiona/drvsupport.py">https://github.com/Toblerity/Fiona/blob/master/fiona/drvsupport.py</a>&gt;`__,
+which is integrated in geopandas. Let’s first check which formats are
+currently supported:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [59]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span class="n">gpd</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">fiona</span><span class="o">.</span><span class="n">drvsupport</span><span class="o">.</span><span class="n">supported_drivers</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[59]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>{&#39;AeronavFAA&#39;: &#39;r&#39;,
+ &#39;ARCGEN&#39;: &#39;r&#39;,
+ &#39;BNA&#39;: &#39;raw&#39;,
+ &#39;DXF&#39;: &#39;raw&#39;,
+ &#39;OpenFileGDB&#39;: &#39;r&#39;,
+ &#39;ESRI Shapefile&#39;: &#39;raw&#39;,
+ &#39;GeoJSON&#39;: &#39;rw&#39;,
+ &#39;GPKG&#39;: &#39;rw&#39;,
+ &#39;GPX&#39;: &#39;raw&#39;,
+ &#39;GPSTrackMaker&#39;: &#39;raw&#39;,
+ &#39;Idrisi&#39;: &#39;r&#39;,
+ &#39;MapInfo File&#39;: &#39;raw&#39;,
+ &#39;DGN&#39;: &#39;raw&#39;,
+ &#39;PCIDSK&#39;: &#39;r&#39;,
+ &#39;SEGY&#39;: &#39;r&#39;,
+ &#39;SUA&#39;: &#39;r&#39;,
+ &#39;KML&#39;: &#39;rw&#39;}
+</pre></div>
+</div>
+</div>
 <ul class="simple">
 <li>Let’s enable the read and write functionalities for KML-driver by
 passing <code class="docutils literal notranslate"><span class="pre">'rw'</span></code> to whitelist of fiona’s supported drivers:</li>
 </ul>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [12]:
+<span></span>In [60]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-
-<span class="n">gpd</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">fiona</span><span class="o">.</span><span class="n">drvsupport</span><span class="o">.</span><span class="n">supported_drivers</span><span class="p">[</span><span class="s1">&#39;KML&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;rw&#39;</span>
+<span></span><span class="n">gpd</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">fiona</span><span class="o">.</span><span class="n">drvsupport</span><span class="o">.</span><span class="n">supported_drivers</span><span class="p">[</span><span class="s1">&#39;KML&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;rw&#39;</span>
 </pre></div>
 </div>
 </div>
-<p>Now we should be able to read a KML file with Geopandas.</p>
+<p>Let’s check again the supported drivers:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [61]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">gpd</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">fiona</span><span class="o">.</span><span class="n">drvsupport</span><span class="o">.</span><span class="n">supported_drivers</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[61]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>{&#39;AeronavFAA&#39;: &#39;r&#39;,
+ &#39;ARCGEN&#39;: &#39;r&#39;,
+ &#39;BNA&#39;: &#39;raw&#39;,
+ &#39;DXF&#39;: &#39;raw&#39;,
+ &#39;OpenFileGDB&#39;: &#39;r&#39;,
+ &#39;ESRI Shapefile&#39;: &#39;raw&#39;,
+ &#39;GeoJSON&#39;: &#39;rw&#39;,
+ &#39;GPKG&#39;: &#39;rw&#39;,
+ &#39;GPX&#39;: &#39;raw&#39;,
+ &#39;GPSTrackMaker&#39;: &#39;raw&#39;,
+ &#39;Idrisi&#39;: &#39;r&#39;,
+ &#39;MapInfo File&#39;: &#39;raw&#39;,
+ &#39;DGN&#39;: &#39;raw&#39;,
+ &#39;PCIDSK&#39;: &#39;r&#39;,
+ &#39;SEGY&#39;: &#39;r&#39;,
+ &#39;SUA&#39;: &#39;r&#39;,
+ &#39;KML&#39;: &#39;rw&#39;}
+</pre></div>
+</div>
+</div>
+<p>Now we should be able to read a KML file with
+<a class="reference external" href="http://geopandas.org/reference/geopandas.read_file.html#geopandas.read_file">geopandas.read_file</a>.</p>
 <ul class="simple">
 <li>Let’s read the data from a following KML -file:</li>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [13]:
+<span></span>In [62]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -850,13 +936,24 @@ passing <code class="docutils literal notranslate"><span class="pre">'rw'</span>
 <span class="n">fp</span> <span class="o">=</span> <span class="s2">&quot;data/PKS_suuralue.kml&quot;</span>
 
 <span class="n">polys</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s1">&#39;KML&#39;</span><span class="p">)</span>
-<span class="n">polys</span>
+
+<span class="c1">#Check the data</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Number of rows:&quot;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">polys</span><span class="p">))</span>
+<span class="n">polys</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Number of rows: 23
+</pre></div></div>
+</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[13]:
+<span></span>Out[62]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -950,105 +1047,50 @@ passing <code class="docutils literal notranslate"><span class="pre">'rw'</span>
       <td></td>
       <td>POLYGON Z ((24.7827651307035 60.09997268858 0,...</td>
     </tr>
-    <tr>
-      <th>11</th>
-      <td>Kaakkoinen</td>
-      <td></td>
-      <td>POLYGON Z ((24.8480782099727 60.0275589731893 ...</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>Keskinen</td>
-      <td></td>
-      <td>POLYGON Z ((24.9085548098731 60.2082029641503 ...</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>Läntinen</td>
-      <td></td>
-      <td>POLYGON Z ((24.832174555671 60.2516121985945 0...</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>Pohjoinen</td>
-      <td></td>
-      <td>POLYGON Z ((24.8992644865152 60.2689368800439 ...</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>Koillinen</td>
-      <td></td>
-      <td>POLYGON Z ((24.9722813313308 60.2432476462193 ...</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>Aviapolis</td>
-      <td></td>
-      <td>POLYGON Z ((24.9430919106369 60.3384471629062 ...</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>Tikkurila</td>
-      <td></td>
-      <td>POLYGON Z ((24.9764047156358 60.2896890295612 ...</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>Koivukylä</td>
-      <td></td>
-      <td>POLYGON Z ((24.9942315864552 60.3329637072809 ...</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>Itäinen</td>
-      <td></td>
-      <td>POLYGON Z ((25.0351655840904 60.23627484214 0,...</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>Östersundom</td>
-      <td></td>
-      <td>POLYGON Z ((25.233518559787 60.2565486562817 0...</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>Hakunila</td>
-      <td></td>
-      <td>POLYGON Z ((25.0847165922124 60.2724847557756 ...</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>Korso</td>
-      <td></td>
-      <td>POLYGON Z ((25.1238010972777 60.341907177167 0...</td>
-    </tr>
   </tbody>
 </table>
 </div></div>
 </div>
-<p>Nice, now we can see that we have 22 districts in our area. We are
+<p>Nice, now we can see that we have 23 districts in our area. We are
 interested in an area that is called <code class="docutils literal notranslate"><span class="pre">Eteläinen</span></code> (<em>‘Southern’</em> in
 english).</p>
 <ul class="simple">
-<li>Let’s select that one and see where it is located, and plot also the
-points on top of the map.</li>
+<li>Let’s select the <code class="docutils literal notranslate"><span class="pre">Eteläinen</span></code> district and see where it is located
+on a map</li>
 </ul>
-<div class="nbinput docutils container">
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [14]:
+<span></span>In [63]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Select data and reset index</span>
 <span class="n">southern</span> <span class="o">=</span> <span class="n">polys</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">polys</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Eteläinen&#39;</span><span class="p">]</span>
 <span class="n">southern</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Let’s create a map which shows the location of the selected district,
+and let’s also plot the address points on top of the map</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [64]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
-<span class="c1"># Plot</span>
+<span class="c1"># Create a figure with one subplot</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">polys</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">);</span>
-<span class="n">southern</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">);</span>
-<span class="n">data</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">5</span><span class="p">);</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span>
+
+<span class="c1"># Plot polygons</span>
+<span class="n">polys</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">southern</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot points</span>
+<span class="n">data</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1056,20 +1098,20 @@ points on top of the map.</li>
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/notebooks_L3_point-in-polygon_27_0.png" src="../../_images/notebooks_L3_point-in-polygon_27_0.png" />
+<img alt="../../_images/notebooks_L3_point-in-polygon_33_0.png" src="../../_images/notebooks_L3_point-in-polygon_33_0.png" />
 </div>
 </div>
 <p>Okey, so we can see that, indeed, certain points are within the selected
 red Polygon.</p>
 <p>Let’s find out which one of them are located within the Polygon. Hence,
-we are conducting a Point in Polygon query.</p>
+we are conducting a <strong>Point in Polygon query</strong>.</p>
 <ul class="simple">
 <li>Let’s first enable shapely.speedups which makes some of the spatial
 queries running faster.</li>
 </ul>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [15]:
+<span></span>In [65]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1081,13 +1123,13 @@ queries running faster.</li>
 <ul class="simple">
 <li>Let’s check which Points are within the <code class="docutils literal notranslate"><span class="pre">southern</span></code> Polygon. Notice,
 that here we check if the Points are <code class="docutils literal notranslate"><span class="pre">within</span></code> the <strong>geometry</strong> of
-the <code class="docutils literal notranslate"><span class="pre">southern</span></code> GeoDataFrame. Hence, we use the
-<code class="docutils literal notranslate"><span class="pre">loc[0,</span> <span class="pre">'geometry']</span></code> to parse the actual Polygon geometry object
-from the GeoDataFrame.</li>
+the <code class="docutils literal notranslate"><span class="pre">southern</span></code> GeoDataFrame.</li>
+<li>Hence, we use the <code class="docutils literal notranslate"><span class="pre">.loc[0,</span> <span class="pre">'geometry']</span></code> to parse the actual Polygon
+geometry object from the GeoDataFrame.</li>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [16]:
+<span></span>In [66]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1149,7 +1191,7 @@ function of Pandas.</li>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [17]:
+<span></span>In [67]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1160,7 +1202,7 @@ function of Pandas.</li>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[17]:
+<span></span>Out[67]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -1257,23 +1299,24 @@ function of Pandas.</li>
 </div></div>
 </div>
 <p>Let’s finally confirm that our Point in Polygon query worked as it
-should by plotting the data.</p>
+should by plotting the points that are within the southern district:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [18]:
+<span></span>In [68]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Select data and reset index</span>
-<span class="n">southern</span> <span class="o">=</span> <span class="n">polys</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">polys</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Eteläinen&#39;</span><span class="p">]</span>
-<span class="n">southern</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-
-<span class="c1"># Plot</span>
+<span></span><span class="c1"># Create a figure with one subplot</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">polys</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">);</span>
-<span class="n">southern</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">);</span>
-<span class="n">pip_data</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gold&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">2</span><span class="p">);</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span>
+
+<span class="c1"># Plot polygons</span>
+<span class="n">polys</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">southern</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot points</span>
+<span class="n">pip_data</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gold&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1281,7 +1324,7 @@ should by plotting the data.</p>
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/notebooks_L3_point-in-polygon_35_0.png" src="../../_images/notebooks_L3_point-in-polygon_35_0.png" />
+<img alt="../../_images/notebooks_L3_point-in-polygon_41_0.png" src="../../_images/notebooks_L3_point-in-polygon_41_0.png" />
 </div>
 </div>
 <p>Perfect! Now we only have the (golden) points that, indeed, are inside
@@ -1311,7 +1354,7 @@ the red Polygon which is exactly what we wanted!</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2018, Henrikki Tenkanen
-      Last updated on Nov 11, 2018.
+      Last updated on Nov 13, 2018.
 
     </p>
   </div>

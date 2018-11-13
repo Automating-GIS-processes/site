@@ -414,7 +414,7 @@ geometries</a>.</p>
 the closest destination.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [2]:
+<span></span>In [19]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -430,7 +430,7 @@ the closest destination.</p>
 need to create a MultiPoint object from the destination points.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [3]:
+<span></span>In [20]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -455,7 +455,7 @@ a single MultiPoint object.</p>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [4]:
+<span></span>In [21]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -473,7 +473,7 @@ a single MultiPoint object.</p>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-(&lt;shapely.geometry.point.Point object at 0x7f1428afceb8&gt;, &lt;shapely.geometry.point.Point object at 0x7f1428afcef0&gt;)
+(&lt;shapely.geometry.point.Point object at 0x7f212747aba8&gt;, &lt;shapely.geometry.point.Point object at 0x7f212747aa20&gt;)
 POINT (1 1.67)
 POINT (0 1.45)
 </pre></div></div>
@@ -490,17 +490,14 @@ points.</p>
 <h2>Nearest points using Geopandas<a class="headerlink" href="#Nearest-points-using-Geopandas" title="Permalink to this headline">¶</a></h2>
 <p>Of course, the previous example is not really useful yet. Hence, next I
 show, how it is possible to find nearest points from a set of origin
-points to a set of destination points using GeoDataFrames. If you don’t
-already have the addresses and PKS_suuralueet.kml datasets, you can find
-and download them from :doc:<code class="docutils literal notranslate"><span class="pre">geocoding</span> <span class="pre">&lt;geocoding&gt;</span></code> and
-:doc:<code class="docutils literal notranslate"><span class="pre">Point</span> <span class="pre">in</span> <span class="pre">Polygon</span> <span class="pre">&lt;point-in-polygon&gt;</span></code> tutorials.</p>
-<ul class="simple">
-<li>First we need to create a function that takes advantage of the
-previous function but is tailored to work with two GeoDataFrames.</li>
-</ul>
+points to a set of destination points using GeoDataFrames. Here, we will
+use the <code class="docutils literal notranslate"><span class="pre">PKS_suuralueet.kml</span></code> district data, and the <code class="docutils literal notranslate"><span class="pre">addresses.shp</span></code>
+address points from previous sections. - First we need to create a
+function that takes advantage of the previous function but is tailored
+to work with two GeoDataFrames.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [7]:
+<span></span>In [22]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -521,17 +518,18 @@ previous function but is tailored to work with two GeoDataFrames.</li>
 out the closest address to the centroid of each district.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [8]:
+<span></span>In [23]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span></span><span class="c1"># Import geopandas</span>
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
 </pre></div>
 </div>
 </div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [9]:
+<span></span>In [24]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -543,17 +541,18 @@ out the closest address to the centroid of each district.</p>
 </div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [10]:
+<span></span>In [25]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">gpd</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">fiona</span><span class="o">.</span><span class="n">drvsupport</span><span class="o">.</span><span class="n">supported_drivers</span><span class="p">[</span><span class="s1">&#39;KML&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;rw&#39;</span>
+<span></span><span class="c1"># Enable KML driver</span>
+<span class="n">gpd</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">fiona</span><span class="o">.</span><span class="n">drvsupport</span><span class="o">.</span><span class="n">supported_drivers</span><span class="p">[</span><span class="s1">&#39;KML&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;rw&#39;</span>
 </pre></div>
 </div>
 </div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [11]:
+<span></span>In [26]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -563,11 +562,11 @@ out the closest address to the centroid of each district.</p>
 </pre></div>
 </div>
 </div>
-<p>Create unary union from Points, which basically creates a MultiPoint
-object from the Point geometries.</p>
+<p>Create unary union from the address points, which basically creates a
+MultiPoint object from the Point geometries.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [12]:
+<span></span>In [29]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -581,13 +580,13 @@ object from the Point geometries.</p>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-MULTIPOINT (24.8610322 60.224006, 24.8667825 60.2517419, 24.8710287 60.222498, 24.8769977 60.2397435, 24.8838413 60.230578, 24.8941806817097 60.21721545, 24.9155624 60.1632015, 24.9212065 60.1587845, 24.9216003 60.1566475, 24.9252584 60.1648863, 24.9316914 60.1690222, 24.9331155798105 60.1690911, 24.9339225 60.1995792, 24.9416849 60.1699637, 24.9440942536239 60.17130125, 24.9473289 60.1718719, 24.9480051 60.2217879, 24.9495338 60.1794339, 24.9607487 60.1882163, 24.9655307 60.2294746, 24.9768441 60.1941864, 24.9936217 60.2436491, 25.0068082 60.1887169, 25.0130341 60.2513441, 25.0204879 60.243423, 25.026632061488 60.1944775, 25.0291169 60.2636285, 25.0331561080774 60.2777903, 25.0747841 60.2253109, 25.0783462 60.209819, 25.0916737 60.237548, 25.1098071 60.2380653, 25.1108711 60.2217791, 25.1368583 60.2070309)
+MULTIPOINT (24.8610322 60.224006, 24.8667825 60.2517419, 24.8710287 60.222498, 24.8769977 60.2397435, 24.8838413 60.230578, 24.8941806817097 60.21721545, 24.9155624 60.1632015, 24.9212065 60.1587845, 24.9216003 60.1566475, 24.9252584 60.1648863, 24.9316914 60.1690222, 24.9331155798105 60.1690911, 24.9339225 60.1995792, 24.9416849 60.1699637, 24.9440942536239 60.17130125, 24.9473289 60.1718719, 24.9480051 60.2217879, 24.9495338 60.1794339, 24.9607487 60.1882163, 24.9655307 60.2294746, 24.9655355 60.2008878, 24.9936217 60.2436491, 25.0068082 60.1887169, 25.0130341 60.2513441, 25.0204879 60.243423, 25.026632061488 60.1944775, 25.0291169 60.2636285, 25.0331561080774 60.2777903, 25.0747841 60.2253109, 25.0783462 60.209819, 25.0916737 60.237548, 25.1098071 60.2380653, 25.1108711 60.2217791, 25.1368583 60.2070309)
 </pre></div></div>
 </div>
 <p>Calculate the centroids for each district area.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [13]:
+<span></span>In [30]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -598,7 +597,7 @@ MULTIPOINT (24.8610322 60.224006, 24.8667825 60.2517419, 24.8710287 60.222498, 2
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[13]:
+<span></span>Out[30]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -667,10 +666,11 @@ MULTIPOINT (24.8610322 60.224006, 24.8667825 60.2517419, 24.8710287 60.222498, 2
 </div></div>
 </div>
 <p>Okey now we are ready to use our function and find closest Points
-(taking the value from id column) from df2 to df1 centroids</p>
+(taking the value from id column) from df2 to df1 centroids. Let’s store
+the id of the nearest address into a new column <code class="docutils literal notranslate"><span class="pre">&quot;nearest_id&quot;</span></code> in df1:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [14]:
+<span></span>In [31]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -681,7 +681,7 @@ MULTIPOINT (24.8610322 60.224006, 24.8667825 60.2517419, 24.8710287 60.222498, 2
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[14]:
+<span></span>Out[31]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -813,7 +813,7 @@ MULTIPOINT (24.8610322 60.224006, 24.8667825 60.2517419, 24.8710287 60.222498, 2
       <td></td>
       <td>POLYGON Z ((24.9085548098731 60.2082029641503 ...</td>
       <td>POINT (24.95489633637751 60.20067297308771)</td>
-      <td>1027</td>
+      <td>1003</td>
     </tr>
     <tr>
       <th>13</th>
@@ -877,16 +877,6 @@ MULTIPOINT (24.8610322 60.224006, 24.8667825 60.2517419, 24.8710287 60.222498, 2
 </div>
 <p>That’s it! Now we found the closest point for each centroid and got the
 <code class="docutils literal notranslate"><span class="pre">id</span></code> value from our addresses into the <code class="docutils literal notranslate"><span class="pre">df1</span></code> GeoDataFrame.</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>
-</pre></div>
-</div>
-</div>
 </div>
 </div>
 
@@ -902,7 +892,7 @@ MULTIPOINT (24.8610322 60.224006, 24.8667825 60.2517419, 24.8710287 60.222498, 2
   <div role="contentinfo">
     <p>
         &copy; Copyright 2018, Henrikki Tenkanen
-      Last updated on Nov 11, 2018.
+      Last updated on Nov 13, 2018.
 
     </p>
   </div>
