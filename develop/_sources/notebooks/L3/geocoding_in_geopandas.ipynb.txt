@@ -237,7 +237,7 @@
     "from geopandas.tools import geocode\n",
     "\n",
     "# Geocode addresses with Nominatim backend\n",
-    "geo = geocode(data['addr'], provider = 'nominatim', user_agent = 'autogis_course')\n",
+    "geo = geocode(data['addr'], provider = 'nominatim', user_agent = 'autogis_student_xx')\n",
     "geo.head()"
    ]
   },

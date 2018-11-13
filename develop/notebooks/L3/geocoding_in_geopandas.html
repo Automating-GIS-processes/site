@@ -137,6 +137,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="point-in-polygon.html">Point in Polygon &amp; Intersect</a></li>
 <li class="toctree-l1"><a class="reference internal" href="spatial-join.html">Spatial join</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nearest-neighbour.html">Nearest Neighbour Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/L3/exercise-3.html">Exercise 3</a></li>
 </ul>
 
@@ -524,7 +525,7 @@ addresses.</p>
 <span class="kn">from</span> <span class="nn">geopandas.tools</span> <span class="kn">import</span> <span class="n">geocode</span>
 
 <span class="c1"># Geocode addresses with Nominatim backend</span>
-<span class="n">geo</span> <span class="o">=</span> <span class="n">geocode</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;addr&#39;</span><span class="p">],</span> <span class="n">provider</span> <span class="o">=</span> <span class="s1">&#39;nominatim&#39;</span><span class="p">,</span> <span class="n">user_agent</span> <span class="o">=</span> <span class="s1">&#39;autogis_course&#39;</span><span class="p">)</span>
+<span class="n">geo</span> <span class="o">=</span> <span class="n">geocode</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;addr&#39;</span><span class="p">],</span> <span class="n">provider</span> <span class="o">=</span> <span class="s1">&#39;nominatim&#39;</span><span class="p">,</span> <span class="n">user_agent</span> <span class="o">=</span> <span class="s1">&#39;autogis_student_xx&#39;</span><span class="p">)</span>
 <span class="n">geo</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
