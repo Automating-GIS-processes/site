@@ -4,9 +4,9 @@ Overview
 During this week we will learn a few really useful and commonly used GIS functionalities using Geopandas, namely:
 
 1. :doc:`Geocoding <geocoding>` / `Geocoding in Geopandas <../../notebooks/L3/geocoding_in_geopandas.ipynb>`__
-3. `Conducting Point in Polygon queries <../../notebooks/L3/point-in-polygon.ipynb>`__
-4. `Making Spatial joins <../../notebooks/L3/spatial-join.ipynb>`__
-5. `Finding Nearest neighbour of a geometry <../../notebooks/L3/nearest-neighbour.ipynb>`__
+2. `Conducting Point in Polygon queries <../../notebooks/L3/point-in-polygon.ipynb>`__
+3. `Making Spatial joins <../../notebooks/L3/spatial-join.ipynb>`__
+4. `Finding Nearest neighbour of a geometry <../../notebooks/L3/nearest-neighbour.ipynb>`__
 
 Learning goals
 --------------
