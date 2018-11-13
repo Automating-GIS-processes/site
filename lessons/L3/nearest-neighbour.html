@@ -1,0 +1,442 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-88382509-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Nearest Neighbour Analysis &mdash; AutoGIS 2018 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link href="../../_static/geo-python.css" rel="stylesheet" type="text/css">
+     
+
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> AutoGIS
+          
+
+          
+            
+            <img src="../../_static/logo_hy_geo_135.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2018
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Course information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/course-info.html">General info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/course-environment-components.html">Course environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/grading.html">Grading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/learning-goals.html">Learning goals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/Installing_Anacondas_GIS.html">Installing Python + GIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/License-terms.html">License and terms of usage</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 1</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L1/Intro-Python-GIS.html">Motivation for the course</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1/overview.html">Lesson overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L1/geometric-objects.html">Geometric objects - Spatial data model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1/exercise-1.html">Exercise 1</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 2</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L2/overview.html">Lesson 2 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L2/geopandas-basics.html">Introduction to Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L2/projections.html">Map projections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/exercise-2.html">Exercise 2</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 3</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geocoding.html">Geocoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L3/geocoding_in_geopandas.html">Geocoding in Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L3/point-in-polygon.html">Point in Polygon &amp; Intersect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L3/spatial-join.html">Spatial join</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L3/nearest-neighbour.html">Nearest Neighbour Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercise-3.html">Exercise 3</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AutoGIS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Nearest Neighbour Analysis</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/Automating-GIS-processes/2018/blob/master/source/lessons/L3/nearest-neighbour.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+
+
+
+
+
+
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="nearest-neighbour-analysis">
+<h1>Nearest Neighbour Analysis<a class="headerlink" href="#nearest-neighbour-analysis" title="Permalink to this headline">¶</a></h1>
+<p>One commonly used GIS task is to be able to find the nearest neighbour. For instance, you might have a single Point object
+representing your home location, and then another set of locations representing e.g. public transport stops. Then, quite typical question is <em>“which of the stops is closest one to my home?”</em>
+This is a typical nearest neighbour analysis, where the aim is to find the closest geometry to another geometry.</p>
+<p>In Python this kind of analysis can be done with shapely function called <code class="docutils literal notranslate"><span class="pre">nearest_points()</span></code> that <a class="reference external" href="https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.nearest_points">returns a tuple of the nearest points in the input geometrie</a>.</p>
+<div class="section" id="nearest-point-using-shapely">
+<h2>Nearest point using Shapely<a class="headerlink" href="#nearest-point-using-shapely" title="Permalink to this headline">¶</a></h2>
+<p>Let’s start by testing how we can find the nearest Point using the <code class="docutils literal notranslate"><span class="pre">nearest_points()</span></code> function of Shapely.</p>
+<p>Let’s create an origin Point and a few destination Points and find out the closest destination.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Point</span><span class="p">,</span> <span class="n">MultiPoint</span>
+
+<span class="gp">In [2]: </span><span class="kn">from</span> <span class="nn">shapely.ops</span> <span class="kn">import</span> <span class="n">nearest_points</span>
+
+<span class="gp">In [3]: </span><span class="n">orig</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.67</span><span class="p">)</span>
+
+<span class="gp">In [4]: </span><span class="n">dest1</span><span class="p">,</span> <span class="n">dest2</span><span class="p">,</span> <span class="n">dest3</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.45</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To be able to find out the closest destination point from the origin, we need to create a MultiPoint object from the destination points.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="n">destinations</span> <span class="o">=</span> <span class="n">MultiPoint</span><span class="p">([</span><span class="n">dest1</span><span class="p">,</span> <span class="n">dest2</span><span class="p">,</span> <span class="n">dest3</span><span class="p">])</span>
+
+<span class="gp">In [6]: </span><span class="k">print</span><span class="p">(</span><span class="n">destinations</span><span class="p">)</span>
+<span class="go">MULTIPOINT (0 1.45, 2 2, 0 2.5)</span>
+</pre></div>
+</div>
+<p>Okey, now we can see that all the destination points are represented as a single MultiPoint object.</p>
+<ul class="simple">
+<li>Now we can find out the nearest destination point by using <code class="docutils literal notranslate"><span class="pre">nearest_points()</span></code> function.</li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [7]: </span><span class="n">nearest_geoms</span> <span class="o">=</span> <span class="n">nearest_points</span><span class="p">(</span><span class="n">orig</span><span class="p">,</span> <span class="n">destinations</span><span class="p">)</span>
+
+<span class="gp">In [8]: </span><span class="n">near_idx0</span> <span class="o">=</span> <span class="n">nearest_geoms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="gp">In [9]: </span><span class="n">near_idx1</span> <span class="o">=</span> <span class="n">nearest_geoms</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="gp">In [10]: </span><span class="k">print</span><span class="p">(</span><span class="n">nearest_geoms</span><span class="p">)</span>
+<span class="go">(&lt;shapely.geometry.point.Point object at 0x7fbf5ba2e940&gt;, &lt;shapely.geometry.point.Point object at 0x7fbf5ba2e780&gt;)</span>
+
+<span class="gp">In [11]: </span><span class="k">print</span><span class="p">(</span><span class="n">near_idx0</span><span class="p">)</span>
+<span class="go">                                                                                                                   POINT (1 1.67)</span>
+
+<span class="gp">In [12]: </span><span class="k">print</span><span class="p">(</span><span class="n">near_idx1</span><span class="p">)</span>
+<span class="go">                                                                                                                                  POINT (0 1.45)</span>
+</pre></div>
+</div>
+<p>As you can see the <code class="docutils literal notranslate"><span class="pre">nearest_points()</span></code> function returns a tuple of geometries where the first item is the geometry
+of our origin point and the second item (at index 1) is the actual nearest geometry from the destination points.
+Hence, the closest destination point seems to be the one located at coordinates (0, 1.45).</p>
+<p>This is the basic logic how we can find the nearest point from a set of points.</p>
+</div>
+<div class="section" id="nearest-points-using-geopandas">
+<h2>Nearest points using Geopandas<a class="headerlink" href="#nearest-points-using-geopandas" title="Permalink to this headline">¶</a></h2>
+<p>Of course, the previous example is not really useful yet. Hence, next I show, how it is possible to find nearest points
+from a set of origin points to a set of destination points using GeoDataFrames. If you don’t already have the addresses and PKS_suuralueet.kml datasets,
+you can find and download them from <a class="reference internal" href="geocoding.html"><span class="doc">geocoding</span></a> and <span class="xref std std-doc">Point in Polygon</span> tutorials.</p>
+<ul class="simple">
+<li>First we need to create a function that takes advantage of the previous function but is tailored to work with two GeoDataFrames.</li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">nearest</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">geom_union</span><span class="p">,</span> <span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">,</span> <span class="n">geom1_col</span><span class="o">=</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span> <span class="n">geom2_col</span><span class="o">=</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span> <span class="n">src_column</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Find the nearest point and return the corresponding value from specified column.&quot;&quot;&quot;</span>
+    <span class="c1"># Find the geometry that is closest</span>
+    <span class="n">nearest</span> <span class="o">=</span> <span class="n">df2</span><span class="p">[</span><span class="n">geom2_col</span><span class="p">]</span> <span class="o">==</span> <span class="n">nearest_points</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">geom1_col</span><span class="p">],</span> <span class="n">geom_union</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="c1"># Get the corresponding value from df2 (matching is based on the geometry)</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">df2</span><span class="p">[</span><span class="n">nearest</span><span class="p">][</span><span class="n">src_column</span><span class="p">]</span><span class="o">.</span><span class="n">get_values</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">value</span>
+</pre></div>
+</div>
+<p>Next we read the address data and the Helsinki districts data and find out the closest address to the centroid of each district.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">7</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">8</span><span class="p">]:</span> <span class="n">fp1</span> <span class="o">=</span> <span class="s2">&quot;/home/geo/PKS_suuralue.kml&quot;</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">9</span><span class="p">]:</span> <span class="n">fp2</span> <span class="o">=</span> <span class="s2">&quot;/home/geo/addresses.shp&quot;</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">10</span><span class="p">]:</span> <span class="n">gpd</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">fiona</span><span class="o">.</span><span class="n">drvsupport</span><span class="o">.</span><span class="n">supported_drivers</span><span class="p">[</span><span class="s1">&#39;KML&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;rw&#39;</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">11</span><span class="p">]:</span> <span class="n">df1</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">fp1</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s1">&#39;KML&#39;</span><span class="p">)</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">12</span><span class="p">]:</span> <span class="n">df2</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">fp2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Create unary union from Points, which basically creates a MultiPoint object from the Point geometries.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [13]: </span><span class="n">unary_union</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">unary_union</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-13-93318693fea5&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">unary_union</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">unary_union</span>
+
+<span class="ne">NameError</span>: name &#39;df2&#39; is not defined
+
+<span class="gp">In [14]: </span><span class="k">print</span><span class="p">(</span><span class="n">unary_union</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                  ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-14-af0fcf0d8792&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 print(unary_union)</span>
+
+<span class="go">NameError: name &#39;unary_union&#39; is not defined</span>
+</pre></div>
+</div>
+<p>Calculate the centroids for each district area.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [15]: </span><span class="n">df1</span><span class="p">[</span><span class="s1">&#39;centroid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">centroid</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-15-5617b26f4d80&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">df1</span><span class="p">[</span><span class="s1">&#39;centroid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">centroid</span>
+
+<span class="ne">NameError</span>: name &#39;df1&#39; is not defined
+
+<span class="gp">In [16]: </span><span class="n">df1</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="go">                                                                                                                                                                                                                                                                                   ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-16-eda2b5cc1a42&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 df1.head()</span>
+
+<span class="go">NameError: name &#39;df1&#39; is not defined</span>
+</pre></div>
+</div>
+<p>Okey now we are ready to use our function and find closest Points (taking the value from id column) from df2 to df1 centroids</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [17]: </span><span class="n">df1</span><span class="p">[</span><span class="s1">&#39;nearest_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">nearest</span><span class="p">,</span> <span class="n">geom_union</span><span class="o">=</span><span class="n">unary_union</span><span class="p">,</span> <span class="n">df1</span><span class="o">=</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="o">=</span><span class="n">df2</span><span class="p">,</span> <span class="n">geom1_col</span><span class="o">=</span><span class="s1">&#39;centroid&#39;</span><span class="p">,</span> <span class="n">src_column</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-17-805322955fd3&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">df1</span><span class="p">[</span><span class="s1">&#39;nearest_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">nearest</span><span class="p">,</span> <span class="n">geom_union</span><span class="o">=</span><span class="n">unary_union</span><span class="p">,</span> <span class="n">df1</span><span class="o">=</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="o">=</span><span class="n">df2</span><span class="p">,</span> <span class="n">geom1_col</span><span class="o">=</span><span class="s1">&#39;centroid&#39;</span><span class="p">,</span> <span class="n">src_column</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;df1&#39; is not defined
+
+<span class="gp">In [18]: </span><span class="n">df1</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                    ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-18-16ec5d44525a&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 df1.head(20)</span>
+
+<span class="go">NameError: name &#39;df1&#39; is not defined</span>
+</pre></div>
+</div>
+<p>That’s it! Now we found the closest point for each centroid and got the <code class="docutils literal notranslate"><span class="pre">id</span></code> value from our addresses into the <code class="docutils literal notranslate"><span class="pre">df1</span></code> GeoDataFrame.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Henrikki Tenkanen
+      Last updated on Nov 02, 2018.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+    <p> <br/> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /> </a></p>
+     
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: master
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../../2017/lessons/L3/nearest-neighbour.html">2017</a></dd>
+            <dd><a href="../../develop/lessons/L3/nearest-neighbour.html">develop</a></dd>
+            <dd><a href="../../drafts/lessons/L3/nearest-neighbour.html">drafts</a></dd>
+            <dd><a href="../../master/lessons/L3/nearest-neighbour.html">master</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'2018',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

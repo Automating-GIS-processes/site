@@ -1,0 +1,1164 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-88382509-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Spatial join &mdash; AutoGIS 2018 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Nearest Neighbour Analysis" href="nearest-neighbour.html" />
+    <link rel="prev" title="Point in Polygon &amp; Intersect" href="point-in-polygon.html" />
+    <link href="../../_static/geo-python.css" rel="stylesheet" type="text/css">
+     
+
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> AutoGIS
+          
+
+          
+            
+            <img src="../../_static/logo_hy_geo_135.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2018
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Course information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/course-info.html">General info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/course-environment-components.html">Course environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/grading.html">Grading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/learning-goals.html">Learning goals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/Installing_Anacondas_GIS.html">Installing Python + GIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/License-terms.html">License and terms of usage</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 1</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L1/Intro-Python-GIS.html">Motivation for the course</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L1/overview.html">Lesson overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1/geometric-objects.html">Geometric objects - Spatial data model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L1/exercise-1.html">Exercise 1</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 2</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L2/overview.html">Lesson 2 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/geopandas-basics.html">Introduction to Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/projections.html">Map projections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L2/exercise-2.html">Exercise 2</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 3</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L3/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L3/geocoding.html">Geocoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geocoding_in_geopandas.html">Geocoding in Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="point-in-polygon.html">Point in Polygon &amp; Intersect</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Spatial join</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Download-and-clean-the-data">Download and clean the data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Join-the-layers">Join the layers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="nearest-neighbour.html">Nearest Neighbour Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L3/exercise-3.html">Exercise 3</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AutoGIS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Spatial join</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/Automating-GIS-processes/2018/blob/master/source/notebooks/L3/spatial-join.ipynb" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+
+
+
+
+
+
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #303F9F;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #D84315;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 8ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: #f7f7f7;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.pngmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="admonition note">
+This page was generated from <a class="reference external" href="https://github.com/Automating-GIS-processes/2018/blob/master/source/notebooks/L3/spatial-join.ipynb">source/notebooks/L3/spatial-join.ipynb</a>.
+<span class="raw-html"><br/><a href="https://mybinder.org/v2/gh/Automating-GIS-processes/2018/master?urlpath=lab/tree/source/notebooks/L3/spatial-join.ipynb"><img alt="Binder badge" src="https://img.shields.io/badge/launch-full%20binder-red.svg" style="vertical-align:text-bottom"></a></span>
+<span class="raw-html"><a href="https://mybinder.org/v2/gh/Automating-GIS-processes/notebooks/master?urlpath=lab/tree/notebooks/L3/spatial-join.ipynb"><img alt="Binder badge" src="https://img.shields.io/badge/launch-student%20binder-red.svg" style="vertical-align:text-bottom"></a></span>
+<span class="raw-html"><a href="https://notebooks.csc.fi/#/blueprint/d71cd2d26d924f48820dc22b67a87d8e"><img alt="CSC badge" src="https://img.shields.io/badge/launch-CSC%20notebook-blue.svg" style="vertical-align:text-bottom"></a></span></div>
+<div class="section" id="Spatial-join">
+<h1>Spatial join<a class="headerlink" href="#Spatial-join" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="http://wiki.gis.com/wiki/index.php/Spatial_Join">Spatial join</a> is
+yet another classic GIS problem. Getting attributes from one layer and
+transferring them into another layer based on their spatial relationship
+is something you most likely need to do on a regular basis.</p>
+<p>In the previous section we learned how to perform <strong>a Point in Polygon
+query</strong>. We could now apply those techniques and create our own function
+to perform <strong>a spatial join</strong> between two layers based on their spatial
+relationship. We could, for example, join the attributes of a polygon
+layer into a point layer where each point would get the attributes of a
+polygon that <code class="docutils literal notranslate"><span class="pre">contains</span></code> the point.</p>
+<p>Luckily, <a class="reference external" href="http://geopandas.org/mergingdata.html#spatial-joins">spatial join is already implemented in
+Geopandas</a> ,
+thus we do not need to create it ourselves. There are three possible
+types of join that can be applied in spatial join that are determined
+with <code class="docutils literal notranslate"><span class="pre">op</span></code> -parameter in the <code class="docutils literal notranslate"><span class="pre">gpd.sjoin()</span></code> -function:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">&quot;intersects&quot;</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">&quot;within&quot;</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">&quot;contains&quot;</span></code></li>
+</ul>
+<p>Sounds familiar? Yep, all of those spatial relationships were discussed
+in the <a class="reference internal" href="point-in-polygon.html"><span class="doc">Point in Polygon lesson</span></a>, thus you
+should know how they work.</p>
+<p>Let’s perform a spatial join between these two layers: - <strong>Addresses:</strong>
+the address-point Shapefile that we created trough geocoding -
+<strong>Population grid:</strong> a Polygon layer that is a 250m x 250m grid showing
+the amount of people living in the Helsinki Region. - The population
+grid a dataset is produced by the <strong>Helsinki Region Environmental
+Services Authority (HSY)</strong> (see <a class="reference external" href="https://www.hsy.fi/fi/asiantuntijalle/avoindata/Sivut/AvoinData.aspx?dataID=7">this
+page</a>
+to access data from different years). - For this lesson we will use the
+population grid for year 2017, which can be dowloaded as a shapefile
+<a class="reference external" href="https://www.hsy.fi/sites/AvoinData/AvoinData/SYT/Tietoyhteistyoyksikko/Shape%20(Esri)/V%C3%A4est%C3%B6tietoruudukko/Vaestotietoruudukko_2017_SHP.zip">from this
+link</a>
+in the <a class="reference external" href="https://hri.fi/en_gb/">Helsinki Region Infroshare (HRI) open data
+portal</a></p>
+<div class="section" id="Download-and-clean-the-data">
+<h2>Download and clean the data<a class="headerlink" href="#Download-and-clean-the-data" title="Permalink to this headline">¶</a></h2>
+<p><strong>Execute the following steps in a terminal window</strong></p>
+<ul class="simple">
+<li>Navigate to the data folder</li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd data
+</pre></div>
+</div>
+<ul class="simple">
+<li>Download the population grid using wget:</li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ wget &quot;https://www.hsy.fi/sites/AvoinData/AvoinData/SYT/Tietoyhteistyoyksikko/Shape%20(Esri)/V%C3%A4est%C3%B6tietoruudukko/Vaestotietoruudukko_2017_SHP.zip&quot;
+</pre></div>
+</div>
+<ul class="simple">
+<li>Unzip the file in Terminal into a folder called Pop17 (using -d flag)</li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ unzip Vaestotietoruudukko_2017_SHP.zip -d Pop17
+</pre></div>
+</div>
+<p>You should now have a folder <code class="docutils literal notranslate"><span class="pre">/data/Pop17</span></code> containing the population
+grid shapefile.</p>
+<ul class="simple">
+<li>Let’s read the data into memory and see what we have.</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+
+<span class="c1"># Filepath</span>
+<span class="n">fp</span> <span class="o">=</span> <span class="s2">&quot;data/Pop17/Vaestoruudukko_2017.shp&quot;</span>
+
+<span class="c1"># Read the data</span>
+<span class="n">pop</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+
+<span class="c1"># See the first rows</span>
+<span class="n">pop</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[22]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>INDEX</th>
+      <th>ASUKKAITA</th>
+      <th>ASVALJYYS</th>
+      <th>IKA0_9</th>
+      <th>IKA10_19</th>
+      <th>IKA20_29</th>
+      <th>IKA30_39</th>
+      <th>IKA40_49</th>
+      <th>IKA50_59</th>
+      <th>IKA60_69</th>
+      <th>IKA70_79</th>
+      <th>IKA_YLI80</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>688</td>
+      <td>9</td>
+      <td>28.0</td>
+      <td>99</td>
+      <td>99</td>
+      <td>99</td>
+      <td>99</td>
+      <td>99</td>
+      <td>99</td>
+      <td>99</td>
+      <td>99</td>
+      <td>99</td>
+      <td>POLYGON Z ((25472499.99532626 6689749.00506918...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>710</td>
+      <td>8</td>
+      <td>44.0</td>
+      <td>99</td>
+      <td>99</td>
+      <td>99</td>
+      <td>99</td>
+      <td>99</td>
+      <td>99</td>
+      <td>99</td>
+      <td>99</td>
+      <td>99</td>
+      <td>POLYGON Z ((25472499.99532626 6684249.00413040...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>711</td>
+      <td>5</td>
+      <td>90.0</td>
+      <td>99</td>
+      <td>99</td>
+      <td>99</td>
+      <td>99</td>
+      <td>99</td>
+      <td>99</td>
+      <td>99</td>
+      <td>99</td>
+      <td>99</td>
+      <td>POLYGON Z ((25472499.99532626 6683999.00499700...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>715</td>
+      <td>12</td>
+      <td>37.0</td>
+      <td>99</td>
+      <td>99</td>
+      <td>99</td>
+      <td>99</td>
+      <td>99</td>
+      <td>99</td>
+      <td>99</td>
+      <td>99</td>
+      <td>99</td>
+      <td>POLYGON Z ((25472499.99532626 6682998.99846143...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>848</td>
+      <td>6</td>
+      <td>44.0</td>
+      <td>99</td>
+      <td>99</td>
+      <td>99</td>
+      <td>99</td>
+      <td>99</td>
+      <td>99</td>
+      <td>99</td>
+      <td>99</td>
+      <td>99</td>
+      <td>POLYGON Z ((25472749.99291839 6690249.00333598...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>Okey so we have multiple columns in the dataset but the most important
+one here is the column <code class="docutils literal notranslate"><span class="pre">ASUKKAITA</span></code> (<em>“population” in Finnish</em>) that
+tells the amount of inhabitants living under that polygon.</p>
+<ul class="simple">
+<li>Let’s change the name of that columns into <code class="docutils literal notranslate"><span class="pre">pop17</span></code> so that it is
+more intuitive. Changing column names is easy in Pandas / Geopandas
+using a function called <code class="docutils literal notranslate"><span class="pre">rename()</span></code> where we pass a dictionary to a
+parameter <code class="docutils literal notranslate"><span class="pre">columns={'oldname':</span> <span class="pre">'newname'}</span></code>.</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Change the name of a column</span>
+<span class="n">pop</span> <span class="o">=</span> <span class="n">pop</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;ASUKKAITA&#39;</span><span class="p">:</span> <span class="s1">&#39;pop17&#39;</span><span class="p">})</span>
+
+<span class="c1"># See the column names and confirm that we now have a column called &#39;pop17&#39;</span>
+<span class="n">pop</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[23]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Index([&#39;INDEX&#39;, &#39;pop17&#39;, &#39;ASVALJYYS&#39;, &#39;IKA0_9&#39;, &#39;IKA10_19&#39;, &#39;IKA20_29&#39;,
+       &#39;IKA30_39&#39;, &#39;IKA40_49&#39;, &#39;IKA50_59&#39;, &#39;IKA60_69&#39;, &#39;IKA70_79&#39;, &#39;IKA_YLI80&#39;,
+       &#39;geometry&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li>Let’s also get rid of all unnecessary columns by selecting only
+columns that we need i.e. <code class="docutils literal notranslate"><span class="pre">pop17</span></code> and <code class="docutils literal notranslate"><span class="pre">geometry</span></code></li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Columns that will be sected</span>
+<span class="n">selected_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;pop17&#39;</span><span class="p">,</span> <span class="s1">&#39;geometry&#39;</span><span class="p">]</span>
+
+<span class="c1"># Select those columns</span>
+<span class="n">pop</span> <span class="o">=</span> <span class="n">pop</span><span class="p">[</span><span class="n">selected_cols</span><span class="p">]</span>
+
+<span class="c1"># Let&#39;s see the last 2 rows</span>
+<span class="n">pop</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[24]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>pop17</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>9</td>
+      <td>POLYGON Z ((25472499.99532626 6689749.00506918...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>8</td>
+      <td>POLYGON Z ((25472499.99532626 6684249.00413040...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>5</td>
+      <td>POLYGON Z ((25472499.99532626 6683999.00499700...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>12</td>
+      <td>POLYGON Z ((25472499.99532626 6682998.99846143...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>6</td>
+      <td>POLYGON Z ((25472749.99291839 6690249.00333598...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>Now we have cleaned the data and have only those columns that we need
+for our analysis.</p>
+</div>
+<div class="section" id="Join-the-layers">
+<h2>Join the layers<a class="headerlink" href="#Join-the-layers" title="Permalink to this headline">¶</a></h2>
+<p>Now we are ready to perform the spatial join between the two layers that
+we have. The aim here is to get information about <strong>how many people live
+in a polygon that contains an individual address-point</strong> . Thus, we want
+to join attributes from the population layer we just modified into the
+addresses point layer <code class="docutils literal notranslate"><span class="pre">addresses.shp</span></code> that we created trough gecoding
+in the previous section.</p>
+<ul class="simple">
+<li>Read the addresses layer into memory</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Addresses filpath</span>
+<span class="n">addr_fp</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;data/addresses.shp&quot;</span>
+
+<span class="c1"># Read data</span>
+<span class="n">addresses</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">addr_fp</span><span class="p">)</span>
+
+<span class="c1"># Check the head of the file</span>
+<span class="n">addresses</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[25]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>address</th>
+      <th>id</th>
+      <th>addr</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Ruoholahti, 14, Itämerenkatu, Ruoholahti, Läns...</td>
+      <td>1000</td>
+      <td>Itämerenkatu 14, 00101 Helsinki, Finland</td>
+      <td>POINT (24.9155624 60.1632015)</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Kamppi, 1, Kampinkuja, Kamppi, Eteläinen suurp...</td>
+      <td>1001</td>
+      <td>Kampinkuja 1, 00100 Helsinki, Finland</td>
+      <td>POINT (24.9316914 60.1690222)</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Bangkok9, 8, Kaivokatu, Keskusta, Kluuvi, Etel...</td>
+      <td>1002</td>
+      <td>Kaivokatu 8, 00101 Helsinki, Finland</td>
+      <td>POINT (24.9416849 60.1699637)</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1, Hermannin rantatie, Hermanninmäki, Hermanni...</td>
+      <td>1003</td>
+      <td>Hermannin rantatie 1, 00580 Helsinki, Finland</td>
+      <td>POINT (24.9655355 60.2008878)</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Hesburger, 9, Tyynenmerenkatu, Jätkäsaari, Län...</td>
+      <td>1005</td>
+      <td>Tyynenmerenkatu 9, 00220 Helsinki, Finland</td>
+      <td>POINT (24.9216003 60.1566475)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>In order to do a spatial join, the layers need to be in the same
+projection</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Are the layers in the same projection?</span>
+<span class="n">addresses</span><span class="o">.</span><span class="n">crs</span> <span class="o">==</span> <span class="n">pop</span><span class="o">.</span><span class="n">crs</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[26]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>False
+</pre></div>
+</div>
+</div>
+<p>Let’s re-project addresses to the projection of the population layer:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">addresses</span> <span class="o">=</span> <span class="n">addresses</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">pop</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li>Let’s make sure that the coordinate reference system of the layers
+are identical</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Check the crs of address points</span>
+<span class="k">print</span><span class="p">(</span><span class="n">addresses</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+
+<span class="c1"># Check the crs of population layer</span>
+<span class="k">print</span><span class="p">(</span><span class="n">pop</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+
+<span class="c1"># Do they match now?</span>
+<span class="n">addresses</span><span class="o">.</span><span class="n">crs</span> <span class="o">==</span> <span class="n">pop</span><span class="o">.</span><span class="n">crs</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;proj&#39;: &#39;tmerc&#39;, &#39;lat_0&#39;: 0, &#39;lon_0&#39;: 25, &#39;k&#39;: 1, &#39;x_0&#39;: 25500000, &#39;y_0&#39;: 0, &#39;ellps&#39;: &#39;GRS80&#39;, &#39;units&#39;: &#39;m&#39;, &#39;no_defs&#39;: True}
+{&#39;proj&#39;: &#39;tmerc&#39;, &#39;lat_0&#39;: 0, &#39;lon_0&#39;: 25, &#39;k&#39;: 1, &#39;x_0&#39;: 25500000, &#39;y_0&#39;: 0, &#39;ellps&#39;: &#39;GRS80&#39;, &#39;units&#39;: &#39;m&#39;, &#39;no_defs&#39;: True}
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[28]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>True
+</pre></div>
+</div>
+</div>
+<p>Now they should be identical. Thus, we can be sure that when doing
+spatial queries between layers the locations match and we get the right
+results e.g.&nbsp;from the spatial join that we are conducting here.</p>
+<ul class="simple">
+<li>Let’s now join the attributes from <code class="docutils literal notranslate"><span class="pre">pop</span></code> GeoDataFrame into
+<code class="docutils literal notranslate"><span class="pre">addresses</span></code> GeoDataFrame by using <code class="docutils literal notranslate"><span class="pre">gpd.sjoin()</span></code> -function</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Make a spatial join</span>
+<span class="n">join</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span><span class="n">addresses</span><span class="p">,</span> <span class="n">pop</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;inner&quot;</span><span class="p">,</span> <span class="n">op</span><span class="o">=</span><span class="s2">&quot;within&quot;</span><span class="p">)</span>
+
+<span class="c1"># Let&#39;s check the result</span>
+<span class="n">join</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[29]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>address</th>
+      <th>id</th>
+      <th>addr</th>
+      <th>geometry</th>
+      <th>index_right</th>
+      <th>pop17</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Ruoholahti, 14, Itämerenkatu, Ruoholahti, Läns...</td>
+      <td>1000</td>
+      <td>Itämerenkatu 14, 00101 Helsinki, Finland</td>
+      <td>POINT (25495311.60802662 6672258.694634228)</td>
+      <td>3238</td>
+      <td>501</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Kamppi, 1, Kampinkuja, Kamppi, Eteläinen suurp...</td>
+      <td>1001</td>
+      <td>Kampinkuja 1, 00100 Helsinki, Finland</td>
+      <td>POINT (25496207.84010911 6672906.172794735)</td>
+      <td>3350</td>
+      <td>190</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Bangkok9, 8, Kaivokatu, Keskusta, Kluuvi, Etel...</td>
+      <td>1002</td>
+      <td>Kaivokatu 8, 00101 Helsinki, Finland</td>
+      <td>POINT (25496762.72293893 6673010.538330208)</td>
+      <td>3474</td>
+      <td>37</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Rautatientori, Keskusta, Kluuvi, Eteläinen suu...</td>
+      <td>1011</td>
+      <td>Rautatientori 1, 00100 Helsinki, Finland</td>
+      <td>POINT (25496896.60078502 6673159.446016792)</td>
+      <td>3474</td>
+      <td>37</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1, Hermannin rantatie, Hermanninmäki, Hermanni...</td>
+      <td>1003</td>
+      <td>Hermannin rantatie 1, 00580 Helsinki, Finland</td>
+      <td>POINT (25498088.55200266 6676455.030033929)</td>
+      <td>3711</td>
+      <td>133</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>Awesome! Now we have performed a successful spatial join where we got
+two new columns into our <code class="docutils literal notranslate"><span class="pre">join</span></code> GeoDataFrame, i.e. <code class="docutils literal notranslate"><span class="pre">index_right</span></code>
+that tells the index of the matching polygon in the population grid and
+<code class="docutils literal notranslate"><span class="pre">pop17</span></code> which is the population in the cell where the address-point is
+located.</p>
+<ul class="simple">
+<li>Let’s save this layer into a new Shapefile</li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [30]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Output path</span>
+<span class="n">outfp</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;data/addresses_pop17_epsg3979.shp&quot;</span>
+
+<span class="c1"># Save to disk</span>
+<span class="n">join</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">outfp</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Do the results make sense? Let’s evaluate this a bit by plotting the
+points where color intensity indicates the population numbers.</p>
+<ul class="simple">
+<li>Plot the points and use the <code class="docutils literal notranslate"><span class="pre">pop17</span></code> column to indicate the color.
+<code class="docutils literal notranslate"><span class="pre">cmap</span></code> -parameter tells to use a sequential colormap for the
+values, <code class="docutils literal notranslate"><span class="pre">markersize</span></code> adjusts the size of a point, <code class="docutils literal notranslate"><span class="pre">scheme</span></code>
+parameter can be used to adjust the classification method based on
+<a class="reference external" href="http://pysal.readthedocs.io/en/latest/library/esda/mapclassify.html">pysal</a>,
+and <code class="docutils literal notranslate"><span class="pre">legend</span></code> tells that we want to have a legend.</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [31]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Plot the points with population info</span>
+<span class="n">join</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;pop17&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Reds&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s1">&#39;quantiles&#39;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="bp">True</span><span class="p">);</span>
+
+<span class="c1"># Add title</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Amount of inhabitants living close the the point&quot;</span><span class="p">);</span>
+
+<span class="c1"># Remove white space around the figure</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+/opt/conda/lib/python3.6/site-packages/scipy/stats/stats.py:1713: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
+  return np.add.reduce(sorted[indexer] * weights, axis=axis) / sumval
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L3_spatial-join_20_1.png" src="../../_images/notebooks_L3_spatial-join_20_1.png" />
+</div>
+</div>
+<p>By knowing approximately how population is distributed in Helsinki, it
+seems that the results do make sense as the points with highest
+population are located in the south where the city center of Helsinki
+is.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="nearest-neighbour.html" class="btn btn-neutral float-right" title="Nearest Neighbour Analysis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="point-in-polygon.html" class="btn btn-neutral" title="Point in Polygon &amp; Intersect" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Henrikki Tenkanen
+      Last updated on Nov 13, 2018.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+    <p> <br/> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /> </a></p>
+     
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: master
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../../2017/index.html">2017</a></dd>
+            <dd><a href="../../develop/notebooks/L3/spatial-join.html">develop</a></dd>
+            <dd><a href="../../drafts/index.html">drafts</a></dd>
+            <dd><a href="../../master/notebooks/L3/spatial-join.html">master</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'2018',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

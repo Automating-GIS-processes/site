@@ -1,0 +1,1423 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-88382509-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Point in Polygon &amp; Intersect &mdash; AutoGIS 2018 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Spatial join" href="spatial-join.html" />
+    <link rel="prev" title="Geocoding in Geopandas" href="geocoding_in_geopandas.html" />
+    <link href="../../_static/geo-python.css" rel="stylesheet" type="text/css">
+     
+
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> AutoGIS
+          
+
+          
+            
+            <img src="../../_static/logo_hy_geo_135.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2018
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Course information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/course-info.html">General info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/course-environment-components.html">Course environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/grading.html">Grading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/learning-goals.html">Learning goals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/Installing_Anacondas_GIS.html">Installing Python + GIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/License-terms.html">License and terms of usage</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 1</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L1/Intro-Python-GIS.html">Motivation for the course</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L1/overview.html">Lesson overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1/geometric-objects.html">Geometric objects - Spatial data model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L1/exercise-1.html">Exercise 1</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 2</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L2/overview.html">Lesson 2 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/geopandas-basics.html">Introduction to Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/projections.html">Map projections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L2/exercise-2.html">Exercise 2</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 3</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L3/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L3/geocoding.html">Geocoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geocoding_in_geopandas.html">Geocoding in Geopandas</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Point in Polygon &amp; Intersect</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#How-to-check-if-point-is-inside-a-polygon?">How to check if point is inside a polygon?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Intersect">Intersect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Point-in-Polygon-using-Geopandas">Point in Polygon using Geopandas</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Reading-KML-files-in-Geopandas">Reading KML-files in Geopandas</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="spatial-join.html">Spatial join</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nearest-neighbour.html">Nearest Neighbour Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L3/exercise-3.html">Exercise 3</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AutoGIS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Point in Polygon &amp; Intersect</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/Automating-GIS-processes/2018/blob/master/source/notebooks/L3/point-in-polygon.ipynb" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+
+
+
+
+
+
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #303F9F;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #D84315;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 8ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: #f7f7f7;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.pngmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="admonition note">
+This page was generated from <a href="#id2"><span class="problematic" id="id3">`source/notebooks/L3/point-in-polygon.ipynb`__</span></a>.
+<span class="raw-html"><br/><a href="https://mybinder.org/v2/gh/Automating-GIS-processes/2018/master?urlpath=lab/tree/source/notebooks/L3/point-in-polygon.ipynb"><img alt="Binder badge" src="https://img.shields.io/badge/launch-full%20binder-red.svg" style="vertical-align:text-bottom"></a></span>
+<span class="raw-html"><a href="https://mybinder.org/v2/gh/Automating-GIS-processes/notebooks/master?urlpath=lab/tree/notebooks/L3/point-in-polygon.ipynb"><img alt="Binder badge" src="https://img.shields.io/badge/launch-student%20binder-red.svg" style="vertical-align:text-bottom"></a></span>
+<span class="raw-html"><a href="https://notebooks.csc.fi/#/blueprint/d71cd2d26d924f48820dc22b67a87d8e"><img alt="CSC badge" src="https://img.shields.io/badge/launch-CSC%20notebook-blue.svg" style="vertical-align:text-bottom"></a></span></div>
+<div class="section" id="Point-in-Polygon-&amp;-Intersect">
+<h1>Point in Polygon &amp; Intersect<a class="headerlink" href="#Point-in-Polygon-&-Intersect" title="Permalink to this headline">¶</a></h1>
+<p>Finding out if a certain point is located inside or outside of an area,
+or finding out if a line intersects with another line or polygon are
+fundamental geospatial operations that are often used e.g.&nbsp;to select
+data based on location. Such spatial queries are one of the typical
+first steps of the workflow when doing spatial analysis. Performing a
+spatial join (will be introduced later) between two spatial datasets is
+one of the most typical applications where Point in Polygon (PIP) query
+is used.</p>
+<div class="section" id="How-to-check-if-point-is-inside-a-polygon?">
+<h2>How to check if point is inside a polygon?<a class="headerlink" href="#How-to-check-if-point-is-inside-a-polygon?" title="Permalink to this headline">¶</a></h2>
+<p>Computationally, detecting if a point is inside a polygon is most
+commonly done using a specific formula called <a class="reference external" href="https://en.wikipedia.org/wiki/Point_in_polygon#Ray_casting_algorithm">Ray Casting
+algorithm</a>.
+Luckily, we do not need to create such a function ourselves for
+conducting the Point in Polygon (PIP) query. Instead, we can take
+advantage of <a class="reference external" href="http://toblerity.org/shapely/manual.html#binary-predicates">Shapely’s binary
+predicates</a>
+that can evaluate the topolocical relationships between geographical
+objects, such as the PIP as we’re interested here.</p>
+<p>There are basically two ways of conducting PIP in Shapely:</p>
+<ol class="arabic simple">
+<li>using a function called
+<a class="reference external" href="http://toblerity.org/shapely/manual.html#object.within">.within()</a>
+that checks if a point is within a polygon</li>
+<li>using a function called
+<a class="reference external" href="http://toblerity.org/shapely/manual.html#object.contains">.contains()</a>
+that checks if a polygon contains a point</li>
+</ol>
+<p>Notice: even though we are talking here about <strong>Point</strong> in Polygon
+operation, it is also possible to check if a LineString or Polygon is
+inside another Polygon.</p>
+<ul class="simple">
+<li>Let’s first create a Polygon using a list of coordinate-tuples and a
+couple of Point objects</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [48]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Point</span><span class="p">,</span> <span class="n">Polygon</span>
+
+<span class="c1"># Create Point objects</span>
+<span class="n">p1</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mf">24.952242</span><span class="p">,</span> <span class="mf">60.1696017</span><span class="p">)</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mf">24.976567</span><span class="p">,</span> <span class="mf">60.1612500</span><span class="p">)</span>
+
+<span class="c1"># Create a Polygon</span>
+<span class="n">coords</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">24.950899</span><span class="p">,</span> <span class="mf">60.169158</span><span class="p">),</span> <span class="p">(</span><span class="mf">24.953492</span><span class="p">,</span> <span class="mf">60.169158</span><span class="p">),</span> <span class="p">(</span><span class="mf">24.953510</span><span class="p">,</span> <span class="mf">60.170104</span><span class="p">),</span> <span class="p">(</span><span class="mf">24.950958</span><span class="p">,</span> <span class="mf">60.169990</span><span class="p">)]</span>
+<span class="n">poly</span> <span class="o">=</span> <span class="n">Polygon</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span>
+
+<span class="c1"># Let&#39;s check what we have</span>
+<span class="k">print</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+POINT (24.952242 60.1696017)
+POINT (24.976567 60.16125)
+POLYGON ((24.950899 60.169158, 24.953492 60.169158, 24.95351 60.170104, 24.950958 60.16999, 24.950899 60.169158))
+</pre></div></div>
+</div>
+<p>Let’s check if those points are <code class="docutils literal notranslate"><span class="pre">within</span></code> the polygon</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [49]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Check if p1 is within the polygon using the within function</span>
+<span class="n">p1</span><span class="o">.</span><span class="n">within</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
+
+<span class="c1"># Check if p2 is within the polygon</span>
+<span class="n">p2</span><span class="o">.</span><span class="n">within</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[49]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>False
+</pre></div>
+</div>
+</div>
+<p>Okey, so we can see that the first point seems to be inside that polygon
+and the other one doesn’t.</p>
+<ul class="simple">
+<li>In fact, the first point is close to the center of the polygon as we
+can see if we compare the point location to the centroid of the
+polygon:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [50]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Our point</span>
+<span class="k">print</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
+
+<span class="c1"># The centroid</span>
+<span class="k">print</span><span class="p">(</span><span class="n">poly</span><span class="o">.</span><span class="n">centroid</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+POINT (24.952242 60.1696017)
+POINT (24.95224242849236 60.16960179038188)
+</pre></div></div>
+</div>
+<ul class="simple">
+<li>It is also possible to do PIP other way around, i.e.&nbsp;to check if
+polygon contains a point:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [51]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Does polygon contain p1?</span>
+<span class="n">poly</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
+
+<span class="c1"># Does polygon contain p2?</span>
+<span class="n">poly</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[51]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>False
+</pre></div>
+</div>
+</div>
+<p>Thus, both ways of checking the spatial relationship results in the same
+way.</p>
+<p>Which one should you use then? Well, it depends:</p>
+<ul class="simple">
+<li>if you have many points and just one polygon and you try to find out
+which one of them is inside the polygon:<ul>
+<li>you need to iterate over the points and check one at a time if it
+is <strong>within()</strong> the polygon specified</li>
+</ul>
+</li>
+<li>if you have many polygons and just one point and you want to find out
+which polygon contains the point<ul>
+<li>you need to iterate over the polygons until you find a polygon
+that <strong>contains()</strong> the point specified (assuming there are no
+overlapping polygons)</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="Intersect">
+<h2>Intersect<a class="headerlink" href="#Intersect" title="Permalink to this headline">¶</a></h2>
+<p>Another typical geospatial operation is to see if a geometry
+<a class="reference external" href="http://toblerity.org/shapely/manual.html#object.intersects">intersect</a>
+or <a class="reference external" href="http://toblerity.org/shapely/manual.html#object.touches">touches</a>
+another one. The difference between these two is that:</p>
+<ul class="simple">
+<li>if objects intersect, the boundary and interior of an object needs to
+intersect in any way with those of the other.</li>
+<li>If an object touches the other one, it is only necessary to have (at
+least) a single point of their boundaries in common but their
+interiors shoud NOT intersect.</li>
+</ul>
+<p>Let’s try these out.</p>
+<ul class="simple">
+<li>Let’s create two LineStrings</li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [52]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">LineString</span><span class="p">,</span> <span class="n">MultiLineString</span>
+
+<span class="c1"># Create two lines</span>
+<span class="n">line_a</span> <span class="o">=</span> <span class="n">LineString</span><span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)])</span>
+<span class="n">line_b</span> <span class="o">=</span> <span class="n">LineString</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)])</span>
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li>Let’s see if they intersect</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [53]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">line_a</span><span class="o">.</span><span class="n">intersects</span><span class="p">(</span><span class="n">line_b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[53]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>True
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li>Do they also touch each other?</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [54]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">line_a</span><span class="o">.</span><span class="n">touches</span><span class="p">(</span><span class="n">line_b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[54]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>True
+</pre></div>
+</div>
+</div>
+<p>Indeed, they do and we can see this by plotting the features together</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [55]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Create a MultiLineString from line_a and line_b</span>
+<span class="n">multi_line</span> <span class="o">=</span> <span class="n">MultiLineString</span><span class="p">([</span><span class="n">line_a</span><span class="p">,</span> <span class="n">line_b</span><span class="p">])</span>
+<span class="n">multi_line</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[55]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L3_point-in-polygon_15_0.svg" src="../../_images/notebooks_L3_point-in-polygon_15_0.svg" /></div>
+</div>
+<p>Thus, the <code class="docutils literal notranslate"><span class="pre">line_b</span></code> continues from the same node ( (1,1) ) where
+<code class="docutils literal notranslate"><span class="pre">line_a</span></code> ends.</p>
+<p>However, if the lines overlap fully, they don’t touch due to the spatial
+relationship rule, as we can see:</p>
+<ul class="simple">
+<li>Check if line_a touches itself</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [56]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Does the line touch with itself?</span>
+<span class="n">line_a</span><span class="o">.</span><span class="n">touches</span><span class="p">(</span><span class="n">line_a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[56]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>False
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li>It does not. However, it does intersect</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [57]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Does the line intersect with itself?</span>
+<span class="n">line_a</span><span class="o">.</span><span class="n">intersects</span><span class="p">(</span><span class="n">line_a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[57]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Point-in-Polygon-using-Geopandas">
+<h2>Point in Polygon using Geopandas<a class="headerlink" href="#Point-in-Polygon-using-Geopandas" title="Permalink to this headline">¶</a></h2>
+<p>Next we will do a practical example where we check which of the
+addresses from <a href="#id2"><span class="problematic" id="id4">`previous tutorial &lt;&gt;`__</span></a> are located in Southern district
+of Helsinki. Let’s start by reading a KML-file <code class="docutils literal notranslate"><span class="pre">PKS_suuralue.kml</span></code> that
+has the Polygons for districts of Helsinki Region (data openly available
+from <a class="reference external" href="http://www.hri.fi/fi/dataset/paakaupunkiseudun-aluejakokartat">Helsinki Region
+Infoshare</a>.</p>
+<ul class="simple">
+<li>Let’s start by reading the addresses from the Shapefile that we saved
+earlier.</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [58]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+
+<span class="n">fp</span> <span class="o">=</span> <span class="s2">&quot;data/addresses.shp&quot;</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+
+<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[58]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>address</th>
+      <th>id</th>
+      <th>addr</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Ruoholahti, 14, Itämerenkatu, Ruoholahti, Läns...</td>
+      <td>1000</td>
+      <td>Itämerenkatu 14, 00101 Helsinki, Finland</td>
+      <td>POINT (24.9155624 60.1632015)</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Kamppi, 1, Kampinkuja, Kamppi, Eteläinen suurp...</td>
+      <td>1001</td>
+      <td>Kampinkuja 1, 00100 Helsinki, Finland</td>
+      <td>POINT (24.9316914 60.1690222)</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Bangkok9, 8, Kaivokatu, Keskusta, Kluuvi, Etel...</td>
+      <td>1002</td>
+      <td>Kaivokatu 8, 00101 Helsinki, Finland</td>
+      <td>POINT (24.9416849 60.1699637)</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1, Hermannin rantatie, Hermanninmäki, Hermanni...</td>
+      <td>1003</td>
+      <td>Hermannin rantatie 1, 00580 Helsinki, Finland</td>
+      <td>POINT (24.9655355 60.2008878)</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Hesburger, 9, Tyynenmerenkatu, Jätkäsaari, Län...</td>
+      <td>1005</td>
+      <td>Tyynenmerenkatu 9, 00220 Helsinki, Finland</td>
+      <td>POINT (24.9216003 60.1566475)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="section" id="Reading-KML-files-in-Geopandas">
+<h3>Reading KML-files in Geopandas<a class="headerlink" href="#Reading-KML-files-in-Geopandas" title="Permalink to this headline">¶</a></h3>
+<p>It is possible to read the data from KML-files with GeoPandas in a
+similar manner as Shapefiles. However, we need to first, enable the
+KML-driver which is not enabled by default (because KML-files can
+contain unsupported data structures, nested folders etc., hence be
+careful when reading KML-files). Supported drivers are managed with
+<code class="docutils literal notranslate"><span class="pre">`fiona.supported_drivers</span></code> &lt;<a class="reference external" href="https://github.com/Toblerity/Fiona/blob/master/fiona/drvsupport.py">https://github.com/Toblerity/Fiona/blob/master/fiona/drvsupport.py</a>&gt;`__,
+which is integrated in geopandas. Let’s first check which formats are
+currently supported:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [59]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span class="n">gpd</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">fiona</span><span class="o">.</span><span class="n">drvsupport</span><span class="o">.</span><span class="n">supported_drivers</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[59]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>{&#39;AeronavFAA&#39;: &#39;r&#39;,
+ &#39;ARCGEN&#39;: &#39;r&#39;,
+ &#39;BNA&#39;: &#39;raw&#39;,
+ &#39;DXF&#39;: &#39;raw&#39;,
+ &#39;OpenFileGDB&#39;: &#39;r&#39;,
+ &#39;ESRI Shapefile&#39;: &#39;raw&#39;,
+ &#39;GeoJSON&#39;: &#39;rw&#39;,
+ &#39;GPKG&#39;: &#39;rw&#39;,
+ &#39;GPX&#39;: &#39;raw&#39;,
+ &#39;GPSTrackMaker&#39;: &#39;raw&#39;,
+ &#39;Idrisi&#39;: &#39;r&#39;,
+ &#39;MapInfo File&#39;: &#39;raw&#39;,
+ &#39;DGN&#39;: &#39;raw&#39;,
+ &#39;PCIDSK&#39;: &#39;r&#39;,
+ &#39;SEGY&#39;: &#39;r&#39;,
+ &#39;SUA&#39;: &#39;r&#39;,
+ &#39;KML&#39;: &#39;rw&#39;}
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li>Let’s enable the read and write functionalities for KML-driver by
+passing <code class="docutils literal notranslate"><span class="pre">'rw'</span></code> to whitelist of fiona’s supported drivers:</li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [60]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">gpd</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">fiona</span><span class="o">.</span><span class="n">drvsupport</span><span class="o">.</span><span class="n">supported_drivers</span><span class="p">[</span><span class="s1">&#39;KML&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;rw&#39;</span>
+</pre></div>
+</div>
+</div>
+<p>Let’s check again the supported drivers:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [61]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">gpd</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">fiona</span><span class="o">.</span><span class="n">drvsupport</span><span class="o">.</span><span class="n">supported_drivers</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[61]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>{&#39;AeronavFAA&#39;: &#39;r&#39;,
+ &#39;ARCGEN&#39;: &#39;r&#39;,
+ &#39;BNA&#39;: &#39;raw&#39;,
+ &#39;DXF&#39;: &#39;raw&#39;,
+ &#39;OpenFileGDB&#39;: &#39;r&#39;,
+ &#39;ESRI Shapefile&#39;: &#39;raw&#39;,
+ &#39;GeoJSON&#39;: &#39;rw&#39;,
+ &#39;GPKG&#39;: &#39;rw&#39;,
+ &#39;GPX&#39;: &#39;raw&#39;,
+ &#39;GPSTrackMaker&#39;: &#39;raw&#39;,
+ &#39;Idrisi&#39;: &#39;r&#39;,
+ &#39;MapInfo File&#39;: &#39;raw&#39;,
+ &#39;DGN&#39;: &#39;raw&#39;,
+ &#39;PCIDSK&#39;: &#39;r&#39;,
+ &#39;SEGY&#39;: &#39;r&#39;,
+ &#39;SUA&#39;: &#39;r&#39;,
+ &#39;KML&#39;: &#39;rw&#39;}
+</pre></div>
+</div>
+</div>
+<p>Now we should be able to read a KML file with
+<a class="reference external" href="http://geopandas.org/reference/geopandas.read_file.html#geopandas.read_file">geopandas.read_file</a>.</p>
+<ul class="simple">
+<li>Let’s read the data from a following KML -file:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [62]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Filepath to KML file</span>
+<span class="n">fp</span> <span class="o">=</span> <span class="s2">&quot;data/PKS_suuralue.kml&quot;</span>
+
+<span class="n">polys</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s1">&#39;KML&#39;</span><span class="p">)</span>
+
+<span class="c1">#Check the data</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Number of rows:&quot;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">polys</span><span class="p">))</span>
+<span class="n">polys</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Number of rows: 23
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[62]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Suur-Espoonlahti</td>
+      <td></td>
+      <td>POLYGON Z ((24.775059677807 60.1090604462157 0...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Suur-Kauklahti</td>
+      <td></td>
+      <td>POLYGON Z ((24.6157775254076 60.1725681273527 ...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Vanha-Espoo</td>
+      <td></td>
+      <td>POLYGON Z ((24.6757633262026 60.2120070032819 ...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Pohjois-Espoo</td>
+      <td></td>
+      <td>POLYGON Z ((24.767921197401 60.2691954732391 0...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Suur-Matinkylä</td>
+      <td></td>
+      <td>POLYGON Z ((24.7536131356802 60.1663051341717 ...</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Kauniainen</td>
+      <td></td>
+      <td>POLYGON Z ((24.6907528033566 60.2195779731868 ...</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Suur-Leppävaara</td>
+      <td></td>
+      <td>POLYGON Z ((24.797472695835 60.2082651196077 0...</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Suur-Tapiola</td>
+      <td></td>
+      <td>POLYGON Z ((24.8443596422129 60.1659790707387 ...</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Myyrmäki</td>
+      <td></td>
+      <td>POLYGON Z ((24.8245867448802 60.2902531157585 ...</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Kivistö</td>
+      <td></td>
+      <td>POLYGON Z ((24.9430919106369 60.3384471629062 ...</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Eteläinen</td>
+      <td></td>
+      <td>POLYGON Z ((24.7827651307035 60.09997268858 0,...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>Nice, now we can see that we have 23 districts in our area. We are
+interested in an area that is called <code class="docutils literal notranslate"><span class="pre">Eteläinen</span></code> (<em>‘Southern’</em> in
+english).</p>
+<ul class="simple">
+<li>Let’s select the <code class="docutils literal notranslate"><span class="pre">Eteläinen</span></code> district and see where it is located
+on a map</li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [63]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Select data and reset index</span>
+<span class="n">southern</span> <span class="o">=</span> <span class="n">polys</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">polys</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Eteläinen&#39;</span><span class="p">]</span>
+<span class="n">southern</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Let’s create a map which shows the location of the selected district,
+and let’s also plot the address points on top of the map</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [64]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Create a figure with one subplot</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="c1"># Plot polygons</span>
+<span class="n">polys</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">southern</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot points</span>
+<span class="n">data</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L3_point-in-polygon_33_0.png" src="../../_images/notebooks_L3_point-in-polygon_33_0.png" />
+</div>
+</div>
+<p>Okey, so we can see that, indeed, certain points are within the selected
+red Polygon.</p>
+<p>Let’s find out which one of them are located within the Polygon. Hence,
+we are conducting a <strong>Point in Polygon query</strong>.</p>
+<ul class="simple">
+<li>Let’s first enable shapely.speedups which makes some of the spatial
+queries running faster.</li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [65]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">shapely.speedups</span>
+<span class="n">shapely</span><span class="o">.</span><span class="n">speedups</span><span class="o">.</span><span class="n">enable</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li>Let’s check which Points are within the <code class="docutils literal notranslate"><span class="pre">southern</span></code> Polygon. Notice,
+that here we check if the Points are <code class="docutils literal notranslate"><span class="pre">within</span></code> the <strong>geometry</strong> of
+the <code class="docutils literal notranslate"><span class="pre">southern</span></code> GeoDataFrame.</li>
+<li>Hence, we use the <code class="docutils literal notranslate"><span class="pre">.loc[0,</span> <span class="pre">'geometry']</span></code> to parse the actual Polygon
+geometry object from the GeoDataFrame.</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [66]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">pip_mask</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">within</span><span class="p">(</span><span class="n">southern</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;geometry&#39;</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">pip_mask</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0      True
+1      True
+2      True
+3     False
+4      True
+5     False
+6     False
+7     False
+8     False
+9     False
+10     True
+11    False
+12    False
+13    False
+14    False
+15    False
+16    False
+17    False
+18    False
+19    False
+20    False
+21    False
+22    False
+23    False
+24    False
+25    False
+26    False
+27    False
+28    False
+29    False
+30     True
+31     True
+32     True
+33     True
+dtype: bool
+</pre></div></div>
+</div>
+<p>As we can see, we now have an array of boolean values for each row,
+where the result is <code class="docutils literal notranslate"><span class="pre">True</span></code> if Point was inside the Polygon, and
+<code class="docutils literal notranslate"><span class="pre">False</span></code> if it was not.</p>
+<ul class="simple">
+<li>We can now use this mask array to select the Points that are inside
+the Polygon. Selecting data with this kind of mask array (of boolean
+values) is easy by passing the array inside the <code class="docutils literal notranslate"><span class="pre">loc</span></code> indexing
+function of Pandas.</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [67]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">pip_data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pip_mask</span><span class="p">]</span>
+<span class="n">pip_data</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[67]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>address</th>
+      <th>id</th>
+      <th>addr</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Ruoholahti, 14, Itämerenkatu, Ruoholahti, Läns...</td>
+      <td>1000</td>
+      <td>Itämerenkatu 14, 00101 Helsinki, Finland</td>
+      <td>POINT (24.9155624 60.1632015)</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Kamppi, 1, Kampinkuja, Kamppi, Eteläinen suurp...</td>
+      <td>1001</td>
+      <td>Kampinkuja 1, 00100 Helsinki, Finland</td>
+      <td>POINT (24.9316914 60.1690222)</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Bangkok9, 8, Kaivokatu, Keskusta, Kluuvi, Etel...</td>
+      <td>1002</td>
+      <td>Kaivokatu 8, 00101 Helsinki, Finland</td>
+      <td>POINT (24.9416849 60.1699637)</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Hesburger, 9, Tyynenmerenkatu, Jätkäsaari, Län...</td>
+      <td>1005</td>
+      <td>Tyynenmerenkatu 9, 00220 Helsinki, Finland</td>
+      <td>POINT (24.9216003 60.1566475)</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Rautatientori, Keskusta, Kluuvi, Eteläinen suu...</td>
+      <td>1011</td>
+      <td>Rautatientori 1, 00100 Helsinki, Finland</td>
+      <td>POINT (24.9440942536239 60.17130125)</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>Kampin keskus, 1, Urho Kekkosen katu, Kamppi, ...</td>
+      <td>1031</td>
+      <td>Urho Kekkosen katu 1, 00100 Helsinki, Finland</td>
+      <td>POINT (24.9331155798105 60.1690911)</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>Ruoholahdenkatu, Hietalahti, Kamppi, Eteläinen...</td>
+      <td>1032</td>
+      <td>Ruoholahdenkatu 17, 00101 Helsinki, Finland</td>
+      <td>POINT (24.9252584 60.1648863)</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>3, Tyynenmerenkatu, Jätkäsaari, Länsisatama, E...</td>
+      <td>1033</td>
+      <td>Tyynenmerenkatu 3, 00220 Helsinki, Finland</td>
+      <td>POINT (24.9212065 60.1587845)</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>4, Vilhonkatu, Keskusta, Kluuvi, Eteläinen suu...</td>
+      <td>1034</td>
+      <td>Vilhonkatu 4, 00101 Helsinki, Finland</td>
+      <td>POINT (24.9473289 60.1718719)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>Let’s finally confirm that our Point in Polygon query worked as it
+should by plotting the points that are within the southern district:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [68]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Create a figure with one subplot</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="c1"># Plot polygons</span>
+<span class="n">polys</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">southern</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot points</span>
+<span class="n">pip_data</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gold&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L3_point-in-polygon_41_0.png" src="../../_images/notebooks_L3_point-in-polygon_41_0.png" />
+</div>
+</div>
+<p>Perfect! Now we only have the (golden) points that, indeed, are inside
+the red Polygon which is exactly what we wanted!</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="spatial-join.html" class="btn btn-neutral float-right" title="Spatial join" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="geocoding_in_geopandas.html" class="btn btn-neutral" title="Geocoding in Geopandas" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Henrikki Tenkanen
+      Last updated on Nov 13, 2018.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+    <p> <br/> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /> </a></p>
+     
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: master
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../../2017/index.html">2017</a></dd>
+            <dd><a href="../../develop/notebooks/L3/point-in-polygon.html">develop</a></dd>
+            <dd><a href="../../drafts/index.html">drafts</a></dd>
+            <dd><a href="../../master/notebooks/L3/point-in-polygon.html">master</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'2018',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
