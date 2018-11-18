@@ -87,7 +87,7 @@
    "source": [
     "import geopandas as gpd\n",
     "\n",
-    "fp = \"L3_data/TravelTimes_to_5975375_RailwayStation_Helsinki.geojson\"\n",
+    "fp = \"data/TravelTimes_to_5975375_RailwayStation_Helsinki.geojson\"\n",
     "\n",
     "# Read the GeoJSON file similarly as Shapefile\n",
     "acc = gpd.read_file(fp)\n",
@@ -834,7 +834,7 @@
   "language_info": {
    "codemirror_mode": {
     "name": "ipython",
-    "version": 3.0
+    "version": 3
    },
    "file_extension": ".py",
    "mimetype": "text/x-python",
@@ -845,5 +845,5 @@
   }
  },
  "nbformat": 4,
- "nbformat_minor": 0
+ "nbformat_minor": 2
 }
