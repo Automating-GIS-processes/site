@@ -143,8 +143,9 @@ Contents
 
 .. toctree::
    :maxdepth: 2
-   :caption: Lesson 3
+   :caption: Lesson 4
 
    lessons/L4/overview
    notebooks/L4/reclassify.ipynb
+   notebooks/L4/geometric-operations.ipynb
    lessons/L4/exercise-4
