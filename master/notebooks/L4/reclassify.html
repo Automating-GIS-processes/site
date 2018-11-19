@@ -1,0 +1,1229 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-88382509-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Data reclassification &mdash; AutoGIS 2018 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Geometric operations" href="geometric-operations.html" />
+    <link rel="prev" title="Overview" href="../../lessons/L4/overview.html" />
+    <link href="../../_static/geo-python.css" rel="stylesheet" type="text/css">
+     
+
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> AutoGIS
+          
+
+          
+            
+            <img src="../../_static/logo_hy_geo_135.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2018
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Course information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/course-info.html">General info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/course-environment-components.html">Course environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/grading.html">Grading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/learning-goals.html">Learning goals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/Installing_Anacondas_GIS.html">Installing Python + GIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/License-terms.html">License and terms of usage</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 1</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L1/Intro-Python-GIS.html">Motivation for the course</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L1/overview.html">Lesson overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1/geometric-objects.html">Geometric objects - Spatial data model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L1/exercise-1.html">Exercise 1</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 2</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L2/overview.html">Lesson 2 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/geopandas-basics.html">Introduction to Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/projections.html">Map projections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L2/exercise-2.html">Exercise 2</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 3</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L3/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L3/geocoding.html">Geocoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L3/geocoding_in_geopandas.html">Geocoding in Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L3/point-in-polygon.html">Point in Polygon &amp; Intersect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L3/spatial-join.html">Spatial join</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L3/nearest-neighbour.html">Nearest Neighbour Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L3/exercise-3.html">Exercise 3</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 4</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L4/overview.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Data reclassification</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Classifying-data">Classifying data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Classification-based-on-common-classifiers">Classification based on common classifiers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Creating-a-custom-classifier">Creating a custom classifier</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="geometric-operations.html">Geometric operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L4/exercise-4.html">Exercise 4</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AutoGIS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Data reclassification</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/Automating-GIS-processes/2018/blob/master/source/notebooks/L4/reclassify.ipynb" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+
+
+
+
+
+
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #303F9F;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #D84315;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 8ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: #f7f7f7;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.pngmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="admonition note">
+This page was generated from <a class="reference external" href="https://github.com/Automating-GIS-processes/2018/blob/master/source/notebooks/L4/reclassify.ipynb">source/notebooks/L4/reclassify.ipynb</a>.
+<span class="raw-html"><br/><a href="https://mybinder.org/v2/gh/Automating-GIS-processes/2018/master?urlpath=lab/tree/source/notebooks/L4/reclassify.ipynb"><img alt="Binder badge" src="https://img.shields.io/badge/launch-full%20binder-red.svg" style="vertical-align:text-bottom"></a></span>
+<span class="raw-html"><a href="https://mybinder.org/v2/gh/Automating-GIS-processes/notebooks/master?urlpath=lab/tree/notebooks/L4/reclassify.ipynb"><img alt="Binder badge" src="https://img.shields.io/badge/launch-student%20binder-red.svg" style="vertical-align:text-bottom"></a></span>
+<span class="raw-html"><a href="https://notebooks.csc.fi/#/blueprint/d71cd2d26d924f48820dc22b67a87d8e"><img alt="CSC badge" src="https://img.shields.io/badge/launch-CSC%20notebook-blue.svg" style="vertical-align:text-bottom"></a></span></div>
+<div class="section" id="Data-reclassification">
+<h1>Data reclassification<a class="headerlink" href="#Data-reclassification" title="Permalink to this headline">¶</a></h1>
+<p>Reclassifying data based on specific criteria is a common task when
+doing GIS analysis. The purpose of this lesson is to see how we can
+reclassify values based on some criteria which can be whatever, such as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>1. if travel time to my work is less than 30 minutes
+
+    AND
+
+    2. the rent of the apartment is less than 1000 € per month
+
+    ------------------------------------------------------
+
+    IF TRUE: ==&gt; I go to view it and try to rent the apartment
+    IF NOT TRUE: ==&gt; I continue looking for something else
+</pre></div>
+</div>
+<p>In this tutorial, we will use Travel Time Matrix data from Helsinki to
+classify some features of the data based on map classifiers that are
+commonly used e.g.&nbsp;when doing visualizations, and our own self-made
+classifier where we determine how the data should be classified.</p>
+<ol class="arabic simple">
+<li>use ready made classifiers from pysal -module to classify travel
+times into multiple classes.</li>
+<li>use travel times and distances to find out<ul>
+<li>good locations to buy an apartment with good public transport
+accessibility to city center</li>
+<li>but from a bit further away from city center where the prices are
+presumably lower.</li>
+</ul>
+</li>
+</ol>
+<p><em>Note, during this intensive course we won’t be using the Corine2012
+data.</em></p>
+<div class="section" id="Classifying-data">
+<h2>Classifying data<a class="headerlink" href="#Classifying-data" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="Classification-based-on-common-classifiers">
+<h3>Classification based on common classifiers<a class="headerlink" href="#Classification-based-on-common-classifiers" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="http://pysal.readthedocs.io/en/latest">Pysal</a> -module is an
+extensive Python library including various functions and tools to do
+spatial data analysis. It also includes all of the most common data
+classifiers that are used commonly e.g.&nbsp;when visualizing data. Available
+map classifiers in pysal -module are (<a class="reference external" href="http://pysal.readthedocs.io/en/latest/library/esda/mapclassify.html">see here for more
+details</a>):</p>
+<ul class="simple">
+<li>Box_Plot</li>
+<li>Equal_Interval</li>
+<li>Fisher_Jenks</li>
+<li>Fisher_Jenks_Sampled</li>
+<li>HeadTail_Breaks</li>
+<li>Jenks_Caspall</li>
+<li>Jenks_Caspall_Forced</li>
+<li>Jenks_Caspall_Sampled</li>
+<li>Max_P_Classifier</li>
+<li>Maximum_Breaks</li>
+<li>Natural_Breaks</li>
+<li>Quantiles</li>
+<li>Percentiles</li>
+<li>Std_Mean</li>
+<li>User_Defined</li>
+<li>First, we need to read our Travel Time data from Helsinki into memory
+from a GeoJSON file.</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+
+<span class="n">fp</span> <span class="o">=</span> <span class="s2">&quot;data/TravelTimes_to_5975375_RailwayStation_Helsinki.geojson&quot;</span>
+
+<span class="c1"># Read the GeoJSON file similarly as Shapefile</span>
+<span class="n">acc</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+
+<span class="c1"># Let&#39;s see what we have</span>
+<span class="k">print</span><span class="p">(</span><span class="n">acc</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+   car_m_d  car_m_t  car_r_d  car_r_t  from_id  pt_m_d  pt_m_t  pt_m_tt  \
+0    15981       36    15988       41  6002702   14698      65       73
+1    16190       34    16197       39  6002701   14661      64       73
+
+   pt_r_d  pt_r_t  pt_r_tt    to_id  walk_d  walk_t    GML_ID   NAMEFIN  \
+0   14698      61       72  5975375   14456     207  27517366  Helsinki
+1   14661      60       72  5975375   14419     206  27517366  Helsinki
+
+       NAMESWE NATCODE          area  \
+0  Helsingfors     091  62499.999976
+1  Helsingfors     091  62499.999977
+
+                                            geometry
+0  POLYGON ((391000.0001349226 6667750.00004299, ...
+1  POLYGON ((390750.0001349644 6668000.000042951,...
+</pre></div></div>
+</div>
+<p>As we can see, there exist plenty of different variables (see <a class="reference external" href="http://blogs.helsinki.fi/accessibility/helsinki-region-travel-time-matrix-2015">from here
+the
+description</a>
+for all attributes) but what we are interested in are columns called
+<code class="docutils literal notranslate"><span class="pre">pt_r_tt</span></code> which is telling the time in minutes that it takes to reach
+city center from different parts of the city, and <code class="docutils literal notranslate"><span class="pre">walk_d</span></code> that tells
+the network distance by roads to reach city center from different parts
+of the city (almost equal to Euclidian distance).</p>
+<p><strong>The NoData values are presented with value -1</strong>.</p>
+<ul class="simple">
+<li>Thus we need to remove the No Data values first.</li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Include only data that is above or equal to 0</span>
+<span class="n">acc</span> <span class="o">=</span> <span class="n">acc</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">acc</span><span class="p">[</span><span class="s1">&#39;pt_r_tt&#39;</span><span class="p">]</span> <span class="o">&gt;=</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li>Let’s plot the data and see how it looks like.</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Plot using 9 classes and classify the values using &quot;Fisher Jenks&quot; classification</span>
+<span class="n">acc</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;pt_r_tt&quot;</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s2">&quot;Fisher_Jenks&quot;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdYlBu&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># Use tight layout</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L4_reclassify_5_0.png" src="../../_images/notebooks_L4_reclassify_5_0.png" />
+</div>
+</div>
+<p>As we can see from this map, the travel times are lower in the south
+where the city center is located but there are some areas of “good”
+accessibility also in some other areas (where the color is red).</p>
+<ul class="simple">
+<li>Let’s also make a plot about walking distances:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Plot walking distance</span>
+<span class="n">acc</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;walk_d&quot;</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s2">&quot;Fisher_Jenks&quot;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdYlBu&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># Use tight layour</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L4_reclassify_7_0.png" src="../../_images/notebooks_L4_reclassify_7_0.png" />
+</div>
+</div>
+<p>Okay, from here we can see that the walking distances (along road
+network) reminds more or less Euclidian distances.</p>
+<ul class="simple">
+<li>Let’s apply one of the <code class="docutils literal notranslate"><span class="pre">Pysal</span></code> classifiers into our data and
+classify the travel times by public transport into 9 classes</li>
+<li>The classifier needs to be initialized first with <code class="docutils literal notranslate"><span class="pre">make()</span></code> function
+that takes the number of desired classes as input parameter</li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">pysal</span> <span class="kn">as</span> <span class="nn">ps</span>
+
+<span class="c1"># Define the number of classes</span>
+<span class="n">n_classes</span> <span class="o">=</span> <span class="mi">9</span>
+
+<span class="c1"># Create a Natural Breaks classifier</span>
+<span class="n">classifier</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="n">Natural_Breaks</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="n">n_classes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li>Now we can apply that classifier into our data by using <code class="docutils literal notranslate"><span class="pre">apply</span></code>
+-function</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Classify the data</span>
+<span class="n">classifications</span> <span class="o">=</span> <span class="n">acc</span><span class="p">[[</span><span class="s1">&#39;pt_r_tt&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">classifier</span><span class="p">)</span>
+
+<span class="c1"># Let&#39;s see what we have</span>
+<span class="n">classifications</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[10]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>pt_r_tt</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>7</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>Okay, so now we have a DataFrame where our input column was classified
+into 9 different classes (numbers 1-9) based on <a class="reference external" href="http://wiki-1-1930356585.us-east-1.elb.amazonaws.com/wiki/index.php/Jenks_Natural_Breaks_Classification">Natural Breaks
+classification</a>.</p>
+<ul class="simple">
+<li>Now we want to join that reclassification into our original data but
+let’s first rename the column so that we recognize it later on:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Rename the column so that we know that it was classified with natural breaks</span>
+<span class="n">classifications</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;nb_pt_r_tt&#39;</span><span class="p">]</span>
+
+<span class="c1"># Join with our original data (here index is the key</span>
+<span class="n">acc</span> <span class="o">=</span> <span class="n">acc</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">classifications</span><span class="p">)</span>
+
+<span class="c1"># Let&#39;s see how our data looks like</span>
+<span class="n">acc</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[11]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>car_m_d</th>
+      <th>car_m_t</th>
+      <th>car_r_d</th>
+      <th>car_r_t</th>
+      <th>from_id</th>
+      <th>pt_m_d</th>
+      <th>pt_m_t</th>
+      <th>pt_m_tt</th>
+      <th>pt_r_d</th>
+      <th>pt_r_t</th>
+      <th>...</th>
+      <th>to_id</th>
+      <th>walk_d</th>
+      <th>walk_t</th>
+      <th>GML_ID</th>
+      <th>NAMEFIN</th>
+      <th>NAMESWE</th>
+      <th>NATCODE</th>
+      <th>area</th>
+      <th>geometry</th>
+      <th>nb_pt_r_tt</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>15981</td>
+      <td>36</td>
+      <td>15988</td>
+      <td>41</td>
+      <td>6002702</td>
+      <td>14698</td>
+      <td>65</td>
+      <td>73</td>
+      <td>14698</td>
+      <td>61</td>
+      <td>...</td>
+      <td>5975375</td>
+      <td>14456</td>
+      <td>207</td>
+      <td>27517366</td>
+      <td>Helsinki</td>
+      <td>Helsingfors</td>
+      <td>091</td>
+      <td>62499.999976</td>
+      <td>POLYGON ((391000.0001349226 6667750.00004299, ...</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>16190</td>
+      <td>34</td>
+      <td>16197</td>
+      <td>39</td>
+      <td>6002701</td>
+      <td>14661</td>
+      <td>64</td>
+      <td>73</td>
+      <td>14661</td>
+      <td>60</td>
+      <td>...</td>
+      <td>5975375</td>
+      <td>14419</td>
+      <td>206</td>
+      <td>27517366</td>
+      <td>Helsinki</td>
+      <td>Helsingfors</td>
+      <td>091</td>
+      <td>62499.999977</td>
+      <td>POLYGON ((390750.0001349644 6668000.000042951,...</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>15727</td>
+      <td>33</td>
+      <td>15733</td>
+      <td>37</td>
+      <td>6001132</td>
+      <td>14256</td>
+      <td>59</td>
+      <td>69</td>
+      <td>14256</td>
+      <td>55</td>
+      <td>...</td>
+      <td>5975375</td>
+      <td>14014</td>
+      <td>200</td>
+      <td>27517366</td>
+      <td>Helsinki</td>
+      <td>Helsingfors</td>
+      <td>091</td>
+      <td>62499.999977</td>
+      <td>POLYGON ((391000.0001349143 6668000.000042943,...</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>15975</td>
+      <td>33</td>
+      <td>15982</td>
+      <td>37</td>
+      <td>6001131</td>
+      <td>14512</td>
+      <td>62</td>
+      <td>73</td>
+      <td>14512</td>
+      <td>58</td>
+      <td>...</td>
+      <td>5975375</td>
+      <td>14270</td>
+      <td>204</td>
+      <td>27517366</td>
+      <td>Helsinki</td>
+      <td>Helsingfors</td>
+      <td>091</td>
+      <td>62499.999976</td>
+      <td>POLYGON ((390750.0001349644 6668000.000042951,...</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>16136</td>
+      <td>35</td>
+      <td>16143</td>
+      <td>40</td>
+      <td>6001138</td>
+      <td>14730</td>
+      <td>65</td>
+      <td>73</td>
+      <td>14730</td>
+      <td>61</td>
+      <td>...</td>
+      <td>5975375</td>
+      <td>14212</td>
+      <td>203</td>
+      <td>27517366</td>
+      <td>Helsinki</td>
+      <td>Helsingfors</td>
+      <td>091</td>
+      <td>62499.999977</td>
+      <td>POLYGON ((392500.0001346234 6668000.000042901,...</td>
+      <td>7</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 21 columns</p>
+</div></div>
+</div>
+<p>Great, now we have those values in our accessibility GeoDataFrame. Let’s
+visualize the results and see how they look.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Plot</span>
+<span class="n">acc</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;nb_pt_r_tt&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># Use tight layout</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L4_reclassify_15_0.png" src="../../_images/notebooks_L4_reclassify_15_0.png" />
+</div>
+</div>
+<p>And here we go, now we have a map where we have used one of the common
+classifiers to classify our data into 9 classes.</p>
+</div>
+<div class="section" id="Creating-a-custom-classifier">
+<h3>Creating a custom classifier<a class="headerlink" href="#Creating-a-custom-classifier" title="Permalink to this headline">¶</a></h3>
+<p><strong>Multicriteria data classification</strong></p>
+<p>Let’s create a function where we classify the geometries into two
+classes based on a given <code class="docutils literal notranslate"><span class="pre">threshold</span></code> -parameter. If the area of a
+polygon is lower than the threshold value (average size of the lake),
+the output column will get a value 0, if it is larger, it will get a
+value 1. This kind of classification is often called a <a class="reference external" href="https://en.wikipedia.org/wiki/Binary_classification">binary
+classification</a>.</p>
+<p>First we need to create a function for our classification task. This
+function takes a single row of the GeoDataFrame as input, plus few other
+parameters that we can use.</p>
+<p>It also possible to do classifiers with multiple criteria easily in
+Pandas/Geopandas by extending the example that we started earlier. Now
+we will modify our binaryClassifier function a bit so that it classifies
+the data based on two columns.</p>
+<ul class="simple">
+<li>Let’s call it <code class="docutils literal notranslate"><span class="pre">custom_classifier</span></code> that takes into account two
+criteria:</li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">custom_classifier</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">src_col1</span><span class="p">,</span> <span class="n">src_col2</span><span class="p">,</span> <span class="n">threshold1</span><span class="p">,</span> <span class="n">threshold2</span><span class="p">,</span> <span class="n">output_col</span><span class="p">):</span>
+   <span class="c1"># 1. If the value in src_col1 is LOWER than the threshold1 value</span>
+   <span class="c1"># 2. AND the value in src_col2 is HIGHER than the threshold2 value, give value 1, otherwise give 0</span>
+   <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="n">src_col1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">threshold1</span> <span class="ow">and</span> <span class="n">row</span><span class="p">[</span><span class="n">src_col2</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">threshold2</span><span class="p">:</span>
+       <span class="c1"># Update the output column with value 0</span>
+       <span class="n">row</span><span class="p">[</span><span class="n">output_col</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+   <span class="c1"># If area of input geometry is higher than the threshold value update with value 1</span>
+   <span class="k">else</span><span class="p">:</span>
+       <span class="n">row</span><span class="p">[</span><span class="n">output_col</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+   <span class="c1"># Return the updated row</span>
+   <span class="k">return</span> <span class="n">row</span>
+</pre></div>
+</div>
+</div>
+<p>Now we have defined the function, and we can start using it.</p>
+<ul class="simple">
+<li>Let’s do our classification based on two criteria and find out grid
+cells where the <strong>travel time is lower or equal to 20 minutes</strong> but
+they are further away <strong>than 4 km (4000 meters) from city center</strong>.</li>
+<li>Let’s create an empty column for our classification results called
+<code class="docutils literal notranslate"><span class="pre">&quot;suitable_area&quot;</span></code>.</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Create column for the classification results</span>
+<span class="n">acc</span><span class="p">[</span><span class="s2">&quot;suitable_area&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+
+<span class="c1"># Use the function</span>
+<span class="n">acc</span> <span class="o">=</span> <span class="n">acc</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">custom_classifier</span><span class="p">,</span> <span class="n">src_col1</span><span class="o">=</span><span class="s1">&#39;pt_r_tt&#39;</span><span class="p">,</span>
+                <span class="n">src_col2</span><span class="o">=</span><span class="s1">&#39;walk_d&#39;</span><span class="p">,</span> <span class="n">threshold1</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">threshold2</span><span class="o">=</span><span class="mi">4000</span><span class="p">,</span>
+                <span class="n">output_col</span><span class="o">=</span><span class="s2">&quot;suitable_area&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># See the first rows</span>
+<span class="n">acc</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[14]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>car_m_d</th>
+      <th>car_m_t</th>
+      <th>car_r_d</th>
+      <th>car_r_t</th>
+      <th>from_id</th>
+      <th>pt_m_d</th>
+      <th>pt_m_t</th>
+      <th>pt_m_tt</th>
+      <th>pt_r_d</th>
+      <th>pt_r_t</th>
+      <th>...</th>
+      <th>walk_d</th>
+      <th>walk_t</th>
+      <th>GML_ID</th>
+      <th>NAMEFIN</th>
+      <th>NAMESWE</th>
+      <th>NATCODE</th>
+      <th>area</th>
+      <th>geometry</th>
+      <th>nb_pt_r_tt</th>
+      <th>suitable_area</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>15981</td>
+      <td>36</td>
+      <td>15988</td>
+      <td>41</td>
+      <td>6002702</td>
+      <td>14698</td>
+      <td>65</td>
+      <td>73</td>
+      <td>14698</td>
+      <td>61</td>
+      <td>...</td>
+      <td>14456</td>
+      <td>207</td>
+      <td>27517366</td>
+      <td>Helsinki</td>
+      <td>Helsingfors</td>
+      <td>091</td>
+      <td>62499.999976</td>
+      <td>POLYGON ((391000.0001349226 6667750.00004299, ...</td>
+      <td>7</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>16190</td>
+      <td>34</td>
+      <td>16197</td>
+      <td>39</td>
+      <td>6002701</td>
+      <td>14661</td>
+      <td>64</td>
+      <td>73</td>
+      <td>14661</td>
+      <td>60</td>
+      <td>...</td>
+      <td>14419</td>
+      <td>206</td>
+      <td>27517366</td>
+      <td>Helsinki</td>
+      <td>Helsingfors</td>
+      <td>091</td>
+      <td>62499.999977</td>
+      <td>POLYGON ((390750.0001349644 6668000.000042951,...</td>
+      <td>7</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>2 rows × 22 columns</p>
+</div></div>
+</div>
+<p>Okey we have new values in <code class="docutils literal notranslate"><span class="pre">suitable_area</span></code> -column.</p>
+<ul class="simple">
+<li>How many Polygons are suitable for us? Let’s find out by using a
+Pandas function called <code class="docutils literal notranslate"><span class="pre">value_counts()</span></code> that return the count of
+different values in our column.</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Get value counts</span>
+<span class="n">acc</span><span class="p">[</span><span class="s1">&#39;suitable_area&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[15]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>0    3808
+1       9
+Name: suitable_area, dtype: int64
+</pre></div>
+</div>
+</div>
+<p>Okay, so there seems to be nine suitable locations for us where we can
+try to find an appartment to buy.</p>
+<ul class="simple">
+<li>Let’s see where they are located:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Plot</span>
+<span class="n">acc</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;suitable_area&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">);</span>
+
+<span class="c1"># Use tight layour</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L4_reclassify_24_0.png" src="../../_images/notebooks_L4_reclassify_24_0.png" />
+</div>
+</div>
+<p>A-haa, okay so we can see that suitable places for us with our criteria
+seem to be located in the eastern part from the city center. Actually,
+those locations are along the metro line which makes them good locations
+in terms of travel time to city center since metro is really fast travel
+mode.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="geometric-operations.html" class="btn btn-neutral float-right" title="Geometric operations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../../lessons/L4/overview.html" class="btn btn-neutral" title="Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Henrikki Tenkanen
+      Last updated on Nov 19, 2018.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+    <p> <br/> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /> </a></p>
+     
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: master
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../../../2017/index.html">2017</a></dd>
+            <dd><a href="../../../develop/notebooks/L4/reclassify.html">develop</a></dd>
+            <dd><a href="../../../drafts/index.html">drafts</a></dd>
+            <dd><a href="reclassify.html">master</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'2018',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

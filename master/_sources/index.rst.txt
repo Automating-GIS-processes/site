@@ -140,3 +140,12 @@ Contents
    notebooks/L3/spatial-join.ipynb
    notebooks/L3/nearest-neighbour.ipynb
    lessons/L3/exercise-3
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Lesson 4
+
+   lessons/L4/overview
+   notebooks/L4/reclassify.ipynb
+   notebooks/L4/geometric-operations.ipynb
+   lessons/L4/exercise-4
