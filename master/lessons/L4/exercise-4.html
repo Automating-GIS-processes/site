@@ -139,6 +139,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../../notebooks/L4/reclassify.html">Data reclassification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../notebooks/L4/geometric-operations.html">Geometric operations</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Exercise 4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#exercise-4-hints">Exercise 4 hints</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#general">General</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#problem-1">Problem 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#problem-2">Problem 2</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#reading-multiple-files-efficiently">Reading multiple files efficiently</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#finding-out-which-shopping-center-is-the-closest">Finding out which shopping center is the closest</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
             
@@ -234,10 +244,100 @@
 <h1>Exercise 4<a class="headerlink" href="#exercise-4" title="Permalink to this headline">¶</a></h1>
 <div class="admonition-start-your-assignment admonition">
 <p class="first admonition-title">Start your assignment</p>
-<p class="last">You can start working on your copy of Exercise 4 by <em>accepting the GitHub Classroom assignment</em> (will be added soon).</p>
+<p class="last">You can start working on your copy of Exercise 4 by <a class="reference external" href="https://classroom.github.com/a/v7kgQTuF">accepting the GitHub Classroom assignment</a>.</p>
 </div>
-<p>You can also take a look at the open course copy of Exercise 4 in the course GitHub repository (will be added soon, does not require logging in).
+<p>You can also take a look at the open course copy of <a class="reference external" href="https://github.com/AutoGIS-2018/Exercise-4">Exercise 4 in the course GitHub repository</a>.
 Note that you should not try to make changes to this copy of the exercise, but rather only to the copy available via GitHub Classroom.</p>
+</div>
+<div class="section" id="exercise-4-hints">
+<h1>Exercise 4 hints<a class="headerlink" href="#exercise-4-hints" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="general">
+<h2>General<a class="headerlink" href="#general" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Documentation of the Travel Time Matrix dataset and explanation for different column names can be found at the Accessibility Research Group website: <a class="reference external" href="http://blogs.helsinki.fi/accessibility/helsinki-region-travel-time-matrix-2015">Helsinki Region Travel Time Matrix 2015</a></li>
+</ul>
+</div>
+<div class="section" id="problem-1">
+<h2>Problem 1<a class="headerlink" href="#problem-1" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Note that the input travel time data is stored in text files when reading in the data.</li>
+<li>Keep columns <cite>‘from_id’</cite>,`’to_id’<cite>,</cite>’pt_r_tt’` and <cite>‘car_r_t’</cite> in the travel time data files</li>
+<li>Join the data using columns <cite>‘from_id’</cite> from the travel time data, and <cite>‘YKR_ID’</cite> in the grid-shapefile</li>
+<li>See hints for joining the travel time data to the grid shapefile from our earlier materials from first period (Geo-Python course): <a class="reference external" href="https://geo-python.github.io/2017/lessons/L6/exercise-6-hints.html?highlight=merge#joining-data-from-one-dataframe-to-another">Table join</a></li>
+<li>Plotting the data takes a while (be patient!)</li>
+</ul>
+</div>
+<div class="section" id="problem-2">
+<h2>Problem 2<a class="headerlink" href="#problem-2" title="Permalink to this headline">¶</a></h2>
+<p><strong>General steps</strong>:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Read the files and prepare a single DataFrame where you have travel times for all shopping centers</li>
+<li>Find out for each row what is the minimum travel time from those shopping centers</li>
+<li>Find out for each row what is the column name of that shopping center that had the minimum travel time</li>
+<li>Make maps from the results</li>
+</ol>
+</div></blockquote>
+<div class="section" id="reading-multiple-files-efficiently">
+<h3>Reading multiple files efficiently<a class="headerlink" href="#reading-multiple-files-efficiently" title="Permalink to this headline">¶</a></h3>
+<p>Here we are reading multiple files from a folder. We could write the filepaths to all of those files but <strong>it is not efficient!</strong>
+Instead, you should use <cite>glob()</cite> -function from module glob to get a filtered list of those files that you want to read and then read the files by iterating over the list.</p>
+<p>Listing and searching for file path names from file system can be done using a specific module called <a class="reference external" href="https://docs.python.org/3/library/glob.html">glob</a>.</p>
+<p>The glob library contains a function, also called glob, that finds files and directories whose names match a pattern.
+We provide those patterns as strings: the character * matches zero or more characters, while ? matches any one character.</p>
+<ul class="simple">
+<li>We can use this to get the names of all files in the data directory (‘/home/geo/data’):</li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">glob</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">my_files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;/home/geo/data/*&#39;</span><span class="p">)</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="k">print</span><span class="p">(</span><span class="n">my_files</span><span class="p">)</span>
+<span class="p">[</span><span class="s1">&#39;/home/geo/data/inflammation-08.csv&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;/home/geo/data/inflammation-10.csv&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;/home/geo/data/inflammation-11.csv&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;/home/geo/data/inflammation-06.csv&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;/home/geo/data/inflammation-12.csv&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;/home/geo/data/small-03.csv&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;/home/geo/data/small-02.csv&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;/home/geo/data/inflammation-07.csv&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;/home/geo/data/inflammation-05.csv&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;/home/geo/data/small-01.csv&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;/home/geo/data/inflammation-03.csv&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;/home/geo/data/inflammation-04.csv&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;/home/geo/data/inflammation-02.csv&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;/home/geo/data/inflammation-01.csv&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;/home/geo/data/inflammation-09.csv&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>We can also search for only specific files and file formats. Here, we search for files that starts with the word ‘small’ and ends with file format ‘.csv’:</li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">csv_files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;/home/geo/data/small*.csv&#39;</span><span class="p">)</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="k">print</span><span class="p">(</span><span class="n">csv_files</span><span class="p">)</span>
+ <span class="p">[</span><span class="s1">&#39;/home/geo/data/small-03.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;/home/geo/data/small-02.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;/home/geo/data/small-01.csv&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Now we have successfully filtered only certain types of files and as a result we have a list of files that we
+can loop over and process.</p>
+</div>
+<div class="section" id="finding-out-which-shopping-center-is-the-closest">
+<h3>Finding out which shopping center is the closest<a class="headerlink" href="#finding-out-which-shopping-center-is-the-closest" title="Permalink to this headline">¶</a></h3>
+<p>We can find out the minimum value from multiple columns simply by applying a <cite>.min()</cite> function to those columns of a row that we are interessted in:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the columns that are used in the query</span>
+<span class="n">value_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;center1&#39;</span><span class="p">,</span> <span class="s1">&#39;center2&#39;</span><span class="p">,</span> <span class="s1">&#39;center3&#39;</span><span class="p">]</span>
+
+<span class="c1"># Find out the minimum value of those column of a given row in the DataFrame</span>
+<span class="n">minimum_values</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="n">value_columns</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>It is also possible to find out which column contains that value by applying <code class="docutils literal notranslate"><span class="pre">.idxmin()</span></code> -function (<a class="reference external" href="http://pandas.pydata.org/pandas-docs/version/0.18.1/generated/pandas.DataFrame.idxmin.html">see Pandas docs</a>).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Find out which column contains the minimum value</span>
+<span class="n">closest_center</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="n">value_columns</span><span class="p">]</span><span class="o">.</span><span class="n">idxmin</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>In order to calculate the results for each row, you can take advantage of the <cite>.iterrows()</cite> and <cite>.loc()</cite> -functions in (geo)pandas.
+See example from Geo-Python course: <a class="reference external" href="https://geo-python.github.io/2017/lessons/L5/pandas-basic-operations.html#selecting-data-using-indices">Lesson 5: Selecting data</a></p>
+</div>
+</div>
 </div>
 
 
@@ -259,7 +359,7 @@ Note that you should not try to make changes to this copy of the exercise, but r
   <div role="contentinfo">
     <p>
         &copy; Copyright 2018, Henrikki Tenkanen
-      Last updated on Nov 18, 2018.
+      Last updated on Nov 22, 2018.
 
     </p>
   </div>
