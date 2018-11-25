@@ -2,7 +2,16 @@ name: autogis-environment
 
 channels:
   - conda-forge
-  - defaults
 
 dependencies:
+  - python 3.5
   - geopandas
+  - geopy
+  - bokeh
+  - contextily
+  - matplotlib
+  - folium
+  - mplleaflet
+  - geoplot
+  - pip:
+    - git+https://github.com/mullenkamp/PyCRS
