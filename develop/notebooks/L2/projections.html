@@ -781,7 +781,7 @@ here.</p>
 Equidistant
 projection</a>:<ul>
 <li><code class="docutils literal notranslate"><span class="pre">proj='aeqd'</span></code> refers to <em>projection specifier</em> that we determine
-to be Azimuthal Equidistant (‘aeqd’)</li>
+to be Azimuthal Equidistant (’aeqd’)</li>
 <li><code class="docutils literal notranslate"><span class="pre">ellps='WGS84'</span></code> refers to the <a class="reference external" href="https://en.wikipedia.org/wiki/Reference_ellipsoid">reference
 ellipsoid</a>
 that is a mathematically modelled (based on measurements) surface
@@ -1148,8 +1148,8 @@ based on latitude and longitude values.</p>
 <p><strong>1)</strong> define the coordinate reference system with a few different
 approaches, mainly by:</p>
 <ul class="simple">
-<li>specifying the coordinate reference system with crs dictionary e.g.
-<code class="docutils literal notranslate"><span class="pre">{'init':</span> <span class="pre">'epsg:4326'}</span></code></li>
+<li>specifying the coordinate reference system with crs dictionary
+e.g.&nbsp;<code class="docutils literal notranslate"><span class="pre">{'init':</span> <span class="pre">'epsg:4326'}</span></code></li>
 <li>specifying CRS with Proj4-string using PyCRS library:
 <code class="docutils literal notranslate"><span class="pre">pycrs.parser.from_epsg_code(4326).to_proj4()</span></code></li>
 <li>specifying slightly less common CRS (Azimuthal Equidistant) with
@@ -1191,7 +1191,7 @@ the <code class="docutils literal notranslate"><span class="pre">to_crs()</span>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2018, Henrikki Tenkanen
-      Last updated on Nov 22, 2018.
+      Last updated on Nov 25, 2018.
 
     </p>
   </div>
