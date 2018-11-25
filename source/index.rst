@@ -156,9 +156,9 @@ Contents
 
    lessons/L5/overview
    lessons/L5/lecture
-   lessons/L5/static-maps
+   notebooks/L5/static-maps.ipynb
    lessons/L5/interactive-map-bokeh
    lessons/L5/advanced-bokeh
-   lessons/L5/interactive-map-folium
+   notebooks/L5/interactive-map-folium.ipynb
    lessons/L5/share-on-github
    lessons/L5/exercise-5
