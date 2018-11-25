@@ -1,0 +1,380 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Interactive maps on Leaflet\n",
+    "===========================\n",
+    "\n",
+    "Whenever you go into a website that has some kind of interactive map, it\n",
+    "is quite probable that you are wittnessing a map that has been made with\n",
+    "a JavaScipt library called [Leaflet](http://leafletjs.com/) (the\n",
+    "other popular one that you might have wittnessed is called\n",
+    "[OpenLayers](https://openlayers.org/).\n",
+    "\n",
+    "There is also a Python module called\n",
+    "[Folium](https://github.com/python-visualization/folium) that makes\n",
+    "it possible visualize data that's been manipulated in Python on an\n",
+    "interactive Leaflet map.\n",
+    "\n",
+    "Creating a simple interactive web-map\n",
+    "-------------------------------------\n",
+    "\n",
+    "Let's first see how we can do a simple interactive web-map without any data on it. We just visualize OpenStreetMap on a specific location of the a world.\n",
+    "\n",
+    "- First thing that we need to do is to create a Map instance. There are few parameters that we can use to adjust how in our Map instance that will affect how the background map will look like.\n",
+    "- See documentation of [class folium.folium.Map()](http://python-visualization.github.io/folium/docs-v0.5.0/modules.html) for all avaiable options."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": [
+    "import folium\n",
+    "\n",
+    "# Create a Map instance\n",
+    "m = folium.Map(location=[60.25, 24.8],\n",
+    "    zoom_start=10, control_scale=True)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The first parameter ``location`` takes a pair of lat, lon values as list as an input which will determine where the map will be positioned when user opens up the map. ``zoom_start`` -parameter adjusts the default zoom-level for the map (the higher the number the closer the zoom is). ``control_scale`` defines if map should have a scalebar or not."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "- Let's see what our map looks like: "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div style=\"width:100%;\"><div style=\"position:relative;width:100%;height:0;padding-bottom:60%;\"><iframe src=\"data:text/html;charset=utf-8;base64,PCFET0NUWVBFIGh0bWw+CjxoZWFkPiAgICAKICAgIDxtZXRhIGh0dHAtZXF1aXY9ImNvbnRlbnQtdHlwZSIgY29udGVudD0idGV4dC9odG1sOyBjaGFyc2V0PVVURi04IiAvPgogICAgPHNjcmlwdD5MX1BSRUZFUl9DQU5WQVM9ZmFsc2U7IExfTk9fVE9VQ0g9ZmFsc2U7IExfRElTQUJMRV8zRD1mYWxzZTs8L3NjcmlwdD4KICAgIDxzY3JpcHQgc3JjPSJodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvbnBtL2xlYWZsZXRAMS4yLjAvZGlzdC9sZWFmbGV0LmpzIj48L3NjcmlwdD4KICAgIDxzY3JpcHQgc3JjPSJodHRwczovL2FqYXguZ29vZ2xlYXBpcy5jb20vYWpheC9saWJzL2pxdWVyeS8xLjExLjEvanF1ZXJ5Lm1pbi5qcyI+PC9zY3JpcHQ+CiAgICA8c2NyaXB0IHNyYz0iaHR0cHM6Ly9tYXhjZG4uYm9vdHN0cmFwY2RuLmNvbS9ib290c3RyYXAvMy4yLjAvanMvYm9vdHN0cmFwLm1pbi5qcyI+PC9zY3JpcHQ+CiAgICA8c2NyaXB0IHNyYz0iaHR0cHM6Ly9jZG5qcy5jbG91ZGZsYXJlLmNvbS9hamF4L2xpYnMvTGVhZmxldC5hd2Vzb21lLW1hcmtlcnMvMi4wLjIvbGVhZmxldC5hd2Vzb21lLW1hcmtlcnMuanMiPjwvc2NyaXB0PgogICAgPGxpbmsgcmVsPSJzdHlsZXNoZWV0IiBocmVmPSJodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvbnBtL2xlYWZsZXRAMS4yLjAvZGlzdC9sZWFmbGV0LmNzcyIvPgogICAgPGxpbmsgcmVsPSJzdHlsZXNoZWV0IiBocmVmPSJodHRwczovL21heGNkbi5ib290c3RyYXBjZG4uY29tL2Jvb3RzdHJhcC8zLjIuMC9jc3MvYm9vdHN0cmFwLm1pbi5jc3MiLz4KICAgIDxsaW5rIHJlbD0ic3R5bGVzaGVldCIgaHJlZj0iaHR0cHM6Ly9tYXhjZG4uYm9vdHN0cmFwY2RuLmNvbS9ib290c3RyYXAvMy4yLjAvY3NzL2Jvb3RzdHJhcC10aGVtZS5taW4uY3NzIi8+CiAgICA8bGluayByZWw9InN0eWxlc2hlZXQiIGhyZWY9Imh0dHBzOi8vbWF4Y2RuLmJvb3RzdHJhcGNkbi5jb20vZm9udC1hd2Vzb21lLzQuNi4zL2Nzcy9mb250LWF3ZXNvbWUubWluLmNzcyIvPgogICAgPGxpbmsgcmVsPSJzdHlsZXNoZWV0IiBocmVmPSJodHRwczovL2NkbmpzLmNsb3VkZmxhcmUuY29tL2FqYXgvbGlicy9MZWFmbGV0LmF3ZXNvbWUtbWFya2Vycy8yLjAuMi9sZWFmbGV0LmF3ZXNvbWUtbWFya2Vycy5jc3MiLz4KICAgIDxsaW5rIHJlbD0ic3R5bGVzaGVldCIgaHJlZj0iaHR0cHM6Ly9yYXdnaXQuY29tL3B5dGhvbi12aXN1YWxpemF0aW9uL2ZvbGl1bS9tYXN0ZXIvZm9saXVtL3RlbXBsYXRlcy9sZWFmbGV0LmF3ZXNvbWUucm90YXRlLmNzcyIvPgogICAgPHN0eWxlPmh0bWwsIGJvZHkge3dpZHRoOiAxMDAlO2hlaWdodDogMTAwJTttYXJnaW46IDA7cGFkZGluZzogMDt9PC9zdHlsZT4KICAgIDxzdHlsZT4jbWFwIHtwb3NpdGlvbjphYnNvbHV0ZTt0b3A6MDtib3R0b206MDtyaWdodDowO2xlZnQ6MDt9PC9zdHlsZT4KICAgIAogICAgPHN0eWxlPiNtYXBfOTBmMzZiMzMxYTRmNDU2YjgzODk3YTYzMmQ5Y2RmOGIgewogICAgICAgIHBvc2l0aW9uOiByZWxhdGl2ZTsKICAgICAgICB3aWR0aDogMTAwLjAlOwogICAgICAgIGhlaWdodDogMTAwLjAlOwogICAgICAgIGxlZnQ6IDAuMCU7CiAgICAgICAgdG9wOiAwLjAlOwogICAgICAgIH0KICAgIDwvc3R5bGU+CjwvaGVhZD4KPGJvZHk+ICAgIAogICAgCiAgICA8ZGl2IGNsYXNzPSJmb2xpdW0tbWFwIiBpZD0ibWFwXzkwZjM2YjMzMWE0ZjQ1NmI4Mzg5N2E2MzJkOWNkZjhiIiA+PC9kaXY+CjwvYm9keT4KPHNjcmlwdD4gICAgCiAgICAKICAgIAogICAgICAgIHZhciBib3VuZHMgPSBudWxsOwogICAgCgogICAgdmFyIG1hcF85MGYzNmIzMzFhNGY0NTZiODM4OTdhNjMyZDljZGY4YiA9IEwubWFwKAogICAgICAgICdtYXBfOTBmMzZiMzMxYTRmNDU2YjgzODk3YTYzMmQ5Y2RmOGInLCB7CiAgICAgICAgY2VudGVyOiBbNjAuMjUsIDI0LjhdLAogICAgICAgIHpvb206IDEwLAogICAgICAgIG1heEJvdW5kczogYm91bmRzLAogICAgICAgIGxheWVyczogW10sCiAgICAgICAgd29ybGRDb3B5SnVtcDogZmFsc2UsCiAgICAgICAgY3JzOiBMLkNSUy5FUFNHMzg1NywKICAgICAgICB6b29tQ29udHJvbDogdHJ1ZSwKICAgICAgICB9KTsKTC5jb250cm9sLnNjYWxlKCkuYWRkVG8obWFwXzkwZjM2YjMzMWE0ZjQ1NmI4Mzg5N2E2MzJkOWNkZjhiKTsKICAgIAogICAgCiAgICB2YXIgdGlsZV9sYXllcl82OTM3OTM0NzA0ZDY0NGY1YTE0OGY1ZDUzMDg0NWJkMyA9IEwudGlsZUxheWVyKAogICAgICAgICdodHRwczovL3tzfS50aWxlLm9wZW5zdHJlZXRtYXAub3JnL3t6fS97eH0ve3l9LnBuZycsCiAgICAgICAgewogICAgICAgICJhdHRyaWJ1dGlvbiI6IG51bGwsCiAgICAgICAgImRldGVjdFJldGluYSI6IGZhbHNlLAogICAgICAgICJtYXhOYXRpdmVab29tIjogMTgsCiAgICAgICAgIm1heFpvb20iOiAxOCwKICAgICAgICAibWluWm9vbSI6IDAsCiAgICAgICAgIm5vV3JhcCI6IGZhbHNlLAogICAgICAgICJzdWJkb21haW5zIjogImFiYyIKfSkuYWRkVG8obWFwXzkwZjM2YjMzMWE0ZjQ1NmI4Mzg5N2E2MzJkOWNkZjhiKTsKPC9zY3JpcHQ+\" style=\"position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;\" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe></div></div>"
+      ],
+      "text/plain": [
+       "<folium.folium.Map at 0xa7ebd68>"
+      ]
+     },
+     "execution_count": 10,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "m"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "- We can also save the map already now \n",
+    "- Let's save the map as a html file ``base_map.html``:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": [
+    "outfp = \"base_map.html\"\n",
+    "m.save(outfp)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Navigate to the location where you saved the html file and open it in a web browser (preferably Google Chrome) to see the output.\n",
+    "\n",
+    "- Let's change the basemap style to ``Stamen Toner`` and change the location of our map slightly. The ``tiles`` -parameter is used for changing the background map provider and map style (see the [documentation](http://python-visualization.github.io/folium/docs-v0.5.0/modules.html) for all possible ones)."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div style=\"width:100%;\"><div style=\"position:relative;width:100%;height:0;padding-bottom:60%;\"><iframe src=\"data:text/html;charset=utf-8;base64,PCFET0NUWVBFIGh0bWw+CjxoZWFkPiAgICAKICAgIDxtZXRhIGh0dHAtZXF1aXY9ImNvbnRlbnQtdHlwZSIgY29udGVudD0idGV4dC9odG1sOyBjaGFyc2V0PVVURi04IiAvPgogICAgPHNjcmlwdD5MX1BSRUZFUl9DQU5WQVM9dHJ1ZTsgTF9OT19UT1VDSD1mYWxzZTsgTF9ESVNBQkxFXzNEPWZhbHNlOzwvc2NyaXB0PgogICAgPHNjcmlwdCBzcmM9Imh0dHBzOi8vY2RuLmpzZGVsaXZyLm5ldC9ucG0vbGVhZmxldEAxLjIuMC9kaXN0L2xlYWZsZXQuanMiPjwvc2NyaXB0PgogICAgPHNjcmlwdCBzcmM9Imh0dHBzOi8vYWpheC5nb29nbGVhcGlzLmNvbS9hamF4L2xpYnMvanF1ZXJ5LzEuMTEuMS9qcXVlcnkubWluLmpzIj48L3NjcmlwdD4KICAgIDxzY3JpcHQgc3JjPSJodHRwczovL21heGNkbi5ib290c3RyYXBjZG4uY29tL2Jvb3RzdHJhcC8zLjIuMC9qcy9ib290c3RyYXAubWluLmpzIj48L3NjcmlwdD4KICAgIDxzY3JpcHQgc3JjPSJodHRwczovL2NkbmpzLmNsb3VkZmxhcmUuY29tL2FqYXgvbGlicy9MZWFmbGV0LmF3ZXNvbWUtbWFya2Vycy8yLjAuMi9sZWFmbGV0LmF3ZXNvbWUtbWFya2Vycy5qcyI+PC9zY3JpcHQ+CiAgICA8bGluayByZWw9InN0eWxlc2hlZXQiIGhyZWY9Imh0dHBzOi8vY2RuLmpzZGVsaXZyLm5ldC9ucG0vbGVhZmxldEAxLjIuMC9kaXN0L2xlYWZsZXQuY3NzIi8+CiAgICA8bGluayByZWw9InN0eWxlc2hlZXQiIGhyZWY9Imh0dHBzOi8vbWF4Y2RuLmJvb3RzdHJhcGNkbi5jb20vYm9vdHN0cmFwLzMuMi4wL2Nzcy9ib290c3RyYXAubWluLmNzcyIvPgogICAgPGxpbmsgcmVsPSJzdHlsZXNoZWV0IiBocmVmPSJodHRwczovL21heGNkbi5ib290c3RyYXBjZG4uY29tL2Jvb3RzdHJhcC8zLjIuMC9jc3MvYm9vdHN0cmFwLXRoZW1lLm1pbi5jc3MiLz4KICAgIDxsaW5rIHJlbD0ic3R5bGVzaGVldCIgaHJlZj0iaHR0cHM6Ly9tYXhjZG4uYm9vdHN0cmFwY2RuLmNvbS9mb250LWF3ZXNvbWUvNC42LjMvY3NzL2ZvbnQtYXdlc29tZS5taW4uY3NzIi8+CiAgICA8bGluayByZWw9InN0eWxlc2hlZXQiIGhyZWY9Imh0dHBzOi8vY2RuanMuY2xvdWRmbGFyZS5jb20vYWpheC9saWJzL0xlYWZsZXQuYXdlc29tZS1tYXJrZXJzLzIuMC4yL2xlYWZsZXQuYXdlc29tZS1tYXJrZXJzLmNzcyIvPgogICAgPGxpbmsgcmVsPSJzdHlsZXNoZWV0IiBocmVmPSJodHRwczovL3Jhd2dpdC5jb20vcHl0aG9uLXZpc3VhbGl6YXRpb24vZm9saXVtL21hc3Rlci9mb2xpdW0vdGVtcGxhdGVzL2xlYWZsZXQuYXdlc29tZS5yb3RhdGUuY3NzIi8+CiAgICA8c3R5bGU+aHRtbCwgYm9keSB7d2lkdGg6IDEwMCU7aGVpZ2h0OiAxMDAlO21hcmdpbjogMDtwYWRkaW5nOiAwO308L3N0eWxlPgogICAgPHN0eWxlPiNtYXAge3Bvc2l0aW9uOmFic29sdXRlO3RvcDowO2JvdHRvbTowO3JpZ2h0OjA7bGVmdDowO308L3N0eWxlPgogICAgCiAgICA8c3R5bGU+I21hcF82MDA4ODNlNmUzZmM0NzVlYTM3OTExYTEzNWZmM2ZhMyB7CiAgICAgICAgcG9zaXRpb246IHJlbGF0aXZlOwogICAgICAgIHdpZHRoOiAxMDAuMCU7CiAgICAgICAgaGVpZ2h0OiAxMDAuMCU7CiAgICAgICAgbGVmdDogMC4wJTsKICAgICAgICB0b3A6IDAuMCU7CiAgICAgICAgfQogICAgPC9zdHlsZT4KPC9oZWFkPgo8Ym9keT4gICAgCiAgICAKICAgIDxkaXYgY2xhc3M9ImZvbGl1bS1tYXAiIGlkPSJtYXBfNjAwODgzZTZlM2ZjNDc1ZWEzNzkxMWExMzVmZjNmYTMiID48L2Rpdj4KPC9ib2R5Pgo8c2NyaXB0PiAgICAKICAgIAogICAgCiAgICAgICAgdmFyIGJvdW5kcyA9IG51bGw7CiAgICAKCiAgICB2YXIgbWFwXzYwMDg4M2U2ZTNmYzQ3NWVhMzc5MTFhMTM1ZmYzZmEzID0gTC5tYXAoCiAgICAgICAgJ21hcF82MDA4ODNlNmUzZmM0NzVlYTM3OTExYTEzNWZmM2ZhMycsIHsKICAgICAgICBjZW50ZXI6IFs0MC43MzA2MSwgLTczLjkzNTI0Ml0sCiAgICAgICAgem9vbTogMTIsCiAgICAgICAgbWF4Qm91bmRzOiBib3VuZHMsCiAgICAgICAgbGF5ZXJzOiBbXSwKICAgICAgICB3b3JsZENvcHlKdW1wOiBmYWxzZSwKICAgICAgICBjcnM6IEwuQ1JTLkVQU0czODU3LAogICAgICAgIHpvb21Db250cm9sOiB0cnVlLAogICAgICAgIH0pOwpMLmNvbnRyb2wuc2NhbGUoKS5hZGRUbyhtYXBfNjAwODgzZTZlM2ZjNDc1ZWEzNzkxMWExMzVmZjNmYTMpOwogICAgCiAgICAKICAgIHZhciB0aWxlX2xheWVyX2Q1NDM1OTQyZmVkODQwOWRiYTJiNWY5MDZjODEzZmI5ID0gTC50aWxlTGF5ZXIoCiAgICAgICAgJ2h0dHBzOi8vc3RhbWVuLXRpbGVzLXtzfS5hLnNzbC5mYXN0bHkubmV0L3RvbmVyL3t6fS97eH0ve3l9LnBuZycsCiAgICAgICAgewogICAgICAgICJhdHRyaWJ1dGlvbiI6IG51bGwsCiAgICAgICAgImRldGVjdFJldGluYSI6IGZhbHNlLAogICAgICAgICJtYXhOYXRpdmVab29tIjogMTgsCiAgICAgICAgIm1heFpvb20iOiAxOCwKICAgICAgICAibWluWm9vbSI6IDAsCiAgICAgICAgIm5vV3JhcCI6IGZhbHNlLAogICAgICAgICJzdWJkb21haW5zIjogImFiYyIKfSkuYWRkVG8obWFwXzYwMDg4M2U2ZTNmYzQ3NWVhMzc5MTFhMTM1ZmYzZmEzKTsKPC9zY3JpcHQ+\" style=\"position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;\" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe></div></div>"
+      ],
+      "text/plain": [
+       "<folium.folium.Map at 0xa7fe668>"
+      ]
+     },
+     "execution_count": 11,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Let's change the basemap style to 'Stamen Toner'\n",
+    "m = folium.Map(location=[40.730610, -73.935242], tiles='Stamen Toner',\n",
+    "                zoom_start=12, control_scale=True, prefer_canvas=True)\n",
+    "\n",
+    "m"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "- let's also save this map as a html file:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": [
+    "# Filepath to the output\n",
+    "outfp = \"base_map2.html\"\n",
+    "\n",
+    "# Save the map\n",
+    "m.save(outfp)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Task\n",
+    "Let's take a few moments and play around with the parameters. Save the map and see how those changes affect the look of the map.\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Adding layers to the map\n",
+    "------------------------\n",
+    "\n",
+    "Adding layers to a web-map is fairly straightforward and similar procedure as with Bokeh and we can use familiar tools to handle the data, i.e. Geopandas.\n",
+    "Our ultimate aim is to create a plot like this where population in Helsinki and the address points are plotted on top of a web-map:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Let's first practice by adding the address points onto the Helsinki basemap:\n",
+    "- read input points using Geopandas:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 56,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>address</th>\n",
+       "      <th>id</th>\n",
+       "      <th>geometry</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>Kampinkuja 1, 00100 Helsinki, Finland</td>\n",
+       "      <td>1001</td>\n",
+       "      <td>POINT (24.9301701 60.1683731)</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>Kaivokatu 8, 00101 Helsinki, Finland</td>\n",
+       "      <td>1002</td>\n",
+       "      <td>POINT (24.9418933 60.1698665)</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>Hermanstads strandsväg 1, 00580 Helsingfors, F...</td>\n",
+       "      <td>1003</td>\n",
+       "      <td>POINT (24.9774004 60.18735880000001)</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>Itäväylä, 00900 Helsinki, Finland</td>\n",
+       "      <td>1004</td>\n",
+       "      <td>POINT (25.0919641 60.21448089999999)</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>Tyynenmerenkatu 9, 00220 Helsinki, Finland</td>\n",
+       "      <td>1005</td>\n",
+       "      <td>POINT (24.9214846 60.1565781)</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "                                             address    id  \\\n",
+       "0              Kampinkuja 1, 00100 Helsinki, Finland  1001   \n",
+       "1               Kaivokatu 8, 00101 Helsinki, Finland  1002   \n",
+       "2  Hermanstads strandsväg 1, 00580 Helsingfors, F...  1003   \n",
+       "3                  Itäväylä, 00900 Helsinki, Finland  1004   \n",
+       "4         Tyynenmerenkatu 9, 00220 Helsinki, Finland  1005   \n",
+       "\n",
+       "                               geometry  \n",
+       "0         POINT (24.9301701 60.1683731)  \n",
+       "1         POINT (24.9418933 60.1698665)  \n",
+       "2  POINT (24.9774004 60.18735880000001)  \n",
+       "3  POINT (25.0919641 60.21448089999999)  \n",
+       "4         POINT (24.9214846 60.1565781)  "
+      ]
+     },
+     "execution_count": 56,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "import geopandas as gpd\n",
+    "\n",
+    "# File path\n",
+    "points_fp = r\"dataE5/addresses.shp\"\n",
+    "\n",
+    "# Read the data\n",
+    "points = gpd.read_file(points_fp)\n",
+    "\n",
+    "#Check input data\n",
+    "points.head()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "- add the points onto the Helsinki basemap"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 58,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div style=\"width:100%;\"><div style=\"position:relative;width:100%;height:0;padding-bottom:60%;\"><iframe src=\"data:text/html;charset=utf-8;base64,PCFET0NUWVBFIGh0bWw+CjxoZWFkPiAgICAKICAgIDxtZXRhIGh0dHAtZXF1aXY9ImNvbnRlbnQtdHlwZSIgY29udGVudD0idGV4dC9odG1sOyBjaGFyc2V0PVVURi04IiAvPgogICAgPHNjcmlwdD5MX1BSRUZFUl9DQU5WQVM9ZmFsc2U7IExfTk9fVE9VQ0g9ZmFsc2U7IExfRElTQUJMRV8zRD1mYWxzZTs8L3NjcmlwdD4KICAgIDxzY3JpcHQgc3JjPSJodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvbnBtL2xlYWZsZXRAMS4yLjAvZGlzdC9sZWFmbGV0LmpzIj48L3NjcmlwdD4KICAgIDxzY3JpcHQgc3JjPSJodHRwczovL2FqYXguZ29vZ2xlYXBpcy5jb20vYWpheC9saWJzL2pxdWVyeS8xLjExLjEvanF1ZXJ5Lm1pbi5qcyI+PC9zY3JpcHQ+CiAgICA8c2NyaXB0IHNyYz0iaHR0cHM6Ly9tYXhjZG4uYm9vdHN0cmFwY2RuLmNvbS9ib290c3RyYXAvMy4yLjAvanMvYm9vdHN0cmFwLm1pbi5qcyI+PC9zY3JpcHQ+CiAgICA8c2NyaXB0IHNyYz0iaHR0cHM6Ly9jZG5qcy5jbG91ZGZsYXJlLmNvbS9hamF4L2xpYnMvTGVhZmxldC5hd2Vzb21lLW1hcmtlcnMvMi4wLjIvbGVhZmxldC5hd2Vzb21lLW1hcmtlcnMuanMiPjwvc2NyaXB0PgogICAgPGxpbmsgcmVsPSJzdHlsZXNoZWV0IiBocmVmPSJodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvbnBtL2xlYWZsZXRAMS4yLjAvZGlzdC9sZWFmbGV0LmNzcyIvPgogICAgPGxpbmsgcmVsPSJzdHlsZXNoZWV0IiBocmVmPSJodHRwczovL21heGNkbi5ib290c3RyYXBjZG4uY29tL2Jvb3RzdHJhcC8zLjIuMC9jc3MvYm9vdHN0cmFwLm1pbi5jc3MiLz4KICAgIDxsaW5rIHJlbD0ic3R5bGVzaGVldCIgaHJlZj0iaHR0cHM6Ly9tYXhjZG4uYm9vdHN0cmFwY2RuLmNvbS9ib290c3RyYXAvMy4yLjAvY3NzL2Jvb3RzdHJhcC10aGVtZS5taW4uY3NzIi8+CiAgICA8bGluayByZWw9InN0eWxlc2hlZXQiIGhyZWY9Imh0dHBzOi8vbWF4Y2RuLmJvb3RzdHJhcGNkbi5jb20vZm9udC1hd2Vzb21lLzQuNi4zL2Nzcy9mb250LWF3ZXNvbWUubWluLmNzcyIvPgogICAgPGxpbmsgcmVsPSJzdHlsZXNoZWV0IiBocmVmPSJodHRwczovL2NkbmpzLmNsb3VkZmxhcmUuY29tL2FqYXgvbGlicy9MZWFmbGV0LmF3ZXNvbWUtbWFya2Vycy8yLjAuMi9sZWFmbGV0LmF3ZXNvbWUtbWFya2Vycy5jc3MiLz4KICAgIDxsaW5rIHJlbD0ic3R5bGVzaGVldCIgaHJlZj0iaHR0cHM6Ly9yYXdnaXQuY29tL3B5dGhvbi12aXN1YWxpemF0aW9uL2ZvbGl1bS9tYXN0ZXIvZm9saXVtL3RlbXBsYXRlcy9sZWFmbGV0LmF3ZXNvbWUucm90YXRlLmNzcyIvPgogICAgPHN0eWxlPmh0bWwsIGJvZHkge3dpZHRoOiAxMDAlO2hlaWdodDogMTAwJTttYXJnaW46IDA7cGFkZGluZzogMDt9PC9zdHlsZT4KICAgIDxzdHlsZT4jbWFwIHtwb3NpdGlvbjphYnNvbHV0ZTt0b3A6MDtib3R0b206MDtyaWdodDowO2xlZnQ6MDt9PC9zdHlsZT4KICAgIAogICAgPHN0eWxlPiNtYXBfMjYwZWJmNWFjZGNhNDAzZmJmYmY2NjRhZDJkYzhiNjMgewogICAgICAgIHBvc2l0aW9uOiByZWxhdGl2ZTsKICAgICAgICB3aWR0aDogMTAwLjAlOwogICAgICAgIGhlaWdodDogMTAwLjAlOwogICAgICAgIGxlZnQ6IDAuMCU7CiAgICAgICAgdG9wOiAwLjAlOwogICAgICAgIH0KICAgIDwvc3R5bGU+CjwvaGVhZD4KPGJvZHk+ICAgIAogICAgCiAgICA8ZGl2IGNsYXNzPSJmb2xpdW0tbWFwIiBpZD0ibWFwXzI2MGViZjVhY2RjYTQwM2ZiZmJmNjY0YWQyZGM4YjYzIiA+PC9kaXY+CjwvYm9keT4KPHNjcmlwdD4gICAgCiAgICAKICAgIAogICAgICAgIHZhciBib3VuZHMgPSBudWxsOwogICAgCgogICAgdmFyIG1hcF8yNjBlYmY1YWNkY2E0MDNmYmZiZjY2NGFkMmRjOGI2MyA9IEwubWFwKAogICAgICAgICdtYXBfMjYwZWJmNWFjZGNhNDAzZmJmYmY2NjRhZDJkYzhiNjMnLCB7CiAgICAgICAgY2VudGVyOiBbNjAuMjUsIDI0LjhdLAogICAgICAgIHpvb206IDEwLAogICAgICAgIG1heEJvdW5kczogYm91bmRzLAogICAgICAgIGxheWVyczogW10sCiAgICAgICAgd29ybGRDb3B5SnVtcDogZmFsc2UsCiAgICAgICAgY3JzOiBMLkNSUy5FUFNHMzg1NywKICAgICAgICB6b29tQ29udHJvbDogdHJ1ZSwKICAgICAgICB9KTsKTC5jb250cm9sLnNjYWxlKCkuYWRkVG8obWFwXzI2MGViZjVhY2RjYTQwM2ZiZmJmNjY0YWQyZGM4YjYzKTsKICAgIAogICAgCiAgICB2YXIgdGlsZV9sYXllcl9iNmNkNGVkYTU4NWI0ZDNiOGJlNzM3NjA0ZmEzMzQ3MyA9IEwudGlsZUxheWVyKAogICAgICAgICdodHRwczovL2NhcnRvZGItYmFzZW1hcHMte3N9Lmdsb2JhbC5zc2wuZmFzdGx5Lm5ldC9saWdodF9hbGwve3p9L3t4fS97eX0ucG5nJywKICAgICAgICB7CiAgICAgICAgImF0dHJpYnV0aW9uIjogbnVsbCwKICAgICAgICAiZGV0ZWN0UmV0aW5hIjogZmFsc2UsCiAgICAgICAgIm1heE5hdGl2ZVpvb20iOiAxOCwKICAgICAgICAibWF4Wm9vbSI6IDE4LAogICAgICAgICJtaW5ab29tIjogMCwKICAgICAgICAibm9XcmFwIjogZmFsc2UsCiAgICAgICAgInN1YmRvbWFpbnMiOiAiYWJjIgp9KS5hZGRUbyhtYXBfMjYwZWJmNWFjZGNhNDAzZmJmYmY2NjRhZDJkYzhiNjMpOwogICAgCiAgICAgICAgCiAgICAgICAgdmFyIGdlb19qc29uXzc2ZTg4YmZlZTQyMDRjOTNiZWRkODE5MDQyYzk5M2M2ID0gTC5nZW9Kc29uKAogICAgICAgICAgICB7ImZlYXR1cmVzIjogW3siZ2VvbWV0cnkiOiB7ImNvb3JkaW5hdGVzIjogWzI0LjkzMDE3MDEsIDYwLjE2ODM3MzFdLCAidHlwZSI6ICJQb2ludCJ9LCAiaWQiOiAiMCIsICJwcm9wZXJ0aWVzIjogeyJhZGRyZXNzIjogIkthbXBpbmt1amEgMSwgMDAxMDAgSGVsc2lua2ksIEZpbmxhbmQiLCAiaGlnaGxpZ2h0Ijoge30sICJpZCI6IDEwMDEsICJzdHlsZSI6IHt9fSwgInR5cGUiOiAiRmVhdHVyZSJ9LCB7Imdlb21ldHJ5IjogeyJjb29yZGluYXRlcyI6IFsyNC45NDE4OTMzLCA2MC4xNjk4NjY1XSwgInR5cGUiOiAiUG9pbnQifSwgImlkIjogIjEiLCAicHJvcGVydGllcyI6IHsiYWRkcmVzcyI6ICJLYWl2b2thdHUgOCwgMDAxMDEgSGVsc2lua2ksIEZpbmxhbmQiLCAiaGlnaGxpZ2h0Ijoge30sICJpZCI6IDEwMDIsICJzdHlsZSI6IHt9fSwgInR5cGUiOiAiRmVhdHVyZSJ9LCB7Imdlb21ldHJ5IjogeyJjb29yZGluYXRlcyI6IFsyNC45Nzc0MDA0LCA2MC4xODczNTg4MDAwMDAwMV0sICJ0eXBlIjogIlBvaW50In0sICJpZCI6ICIyIiwgInByb3BlcnRpZXMiOiB7ImFkZHJlc3MiOiAiSGVybWFuc3RhZHMgc3RyYW5kc3ZcdTAwZTRnIDEsIDAwNTgwIEhlbHNpbmdmb3JzLCBGaW5sYW5kIiwgImhpZ2hsaWdodCI6IHt9LCAiaWQiOiAxMDAzLCAic3R5bGUiOiB7fX0sICJ0eXBlIjogIkZlYXR1cmUifSwgeyJnZW9tZXRyeSI6IHsiY29vcmRpbmF0ZXMiOiBbMjUuMDkxOTY0MSwgNjAuMjE0NDgwODk5OTk5OTldLCAidHlwZSI6ICJQb2ludCJ9LCAiaWQiOiAiMyIsICJwcm9wZXJ0aWVzIjogeyJhZGRyZXNzIjogIkl0XHUwMGU0dlx1MDBlNHlsXHUwMGU0LCAwMDkwMCBIZWxzaW5raSwgRmlubGFuZCIsICJoaWdobGlnaHQiOiB7fSwgImlkIjogMTAwNCwgInN0eWxlIjoge319LCAidHlwZSI6ICJGZWF0dXJlIn0sIHsiZ2VvbWV0cnkiOiB7ImNvb3JkaW5hdGVzIjogWzI0LjkyMTQ4NDYsIDYwLjE1NjU3ODFdLCAidHlwZSI6ICJQb2ludCJ9LCAiaWQiOiAiNCIsICJwcm9wZXJ0aWVzIjogeyJhZGRyZXNzIjogIlR5eW5lbm1lcmVua2F0dSA5LCAwMDIyMCBIZWxzaW5raSwgRmlubGFuZCIsICJoaWdobGlnaHQiOiB7fSwgImlkIjogMTAwNSwgInN0eWxlIjoge319LCAidHlwZSI6ICJGZWF0dXJlIn0sIHsiZ2VvbWV0cnkiOiB7ImNvb3JkaW5hdGVzIjogWzI1LjA4MTY5MjMsIDYwLjIzNDg5MDYwMDAwMDAxXSwgInR5cGUiOiAiUG9pbnQifSwgImlkIjogIjUiLCAicHJvcGVydGllcyI6IHsiYWRkcmVzcyI6ICJLb250dWxhbnRpZSAxOCwgMDA5NDAgSGVsc2lua2ksIEZpbmxhbmQiLCAiaGlnaGxpZ2h0Ijoge30sICJpZCI6IDEwMDYsICJzdHlsZSI6IHt9fSwgInR5cGUiOiAiRmVhdHVyZSJ9LCB7Imdlb21ldHJ5IjogeyJjb29yZGluYXRlcyI6IFsyNS4wNDIyMzksIDYwLjIwMzM4NzldLCAidHlwZSI6ICJQb2ludCJ9LCAiaWQiOiAiNiIsICJwcm9wZXJ0aWVzIjogeyJhZGRyZXNzIjogIkl0XHUwMGU0dlx1MDBlNHlsXHUwMGU0LCAwMDgwMCBIZWxzaW5raSwgRmlubGFuZCIsICJoaWdobGlnaHQiOiB7fSwgImlkIjogMTAwNywgInN0eWxlIjoge319LCAidHlwZSI6ICJGZWF0dXJlIn0sIHsiZ2VvbWV0cnkiOiB7ImNvb3JkaW5hdGVzIjogWzI1LjAzNTg1NSwgNjAuMjc1Mzg5MV0sICJ0eXBlIjogIlBvaW50In0sICJpZCI6ICI3IiwgInByb3BlcnRpZXMiOiB7ImFkZHJlc3MiOiAiVGFwdWxpa2F1cHVuZ2ludGllIDMsIDAwNzUwIEhlbHNpbmtpLCBGaW5sYW5kIiwgImhpZ2hsaWdodCI6IHt9LCAiaWQiOiAxMDA4LCAic3R5bGUiOiB7fX0sICJ0eXBlIjogIkZlYXR1cmUifSwgeyJnZW9tZXRyeSI6IHsiY29vcmRpbmF0ZXMiOiBbMjUuMDI5MTA3OCwgNjAuMjYzMzc5OV0sICJ0eXBlIjogIlBvaW50In0sICJpZCI6ICI4IiwgInByb3BlcnRpZXMiOiB7ImFkZHJlc3MiOiAiU29tcGlvbnBvbGt1IDIsIDAwNzMwIEhlbHNpbmtpLCBGaW5sYW5kIiwgImhpZ2hsaWdodCI6IHt9LCAiaWQiOiAxMDA5LCAic3R5bGUiOiB7fX0sICJ0eXBlIjogIkZlYXR1cmUifSwgeyJnZW9tZXRyeSI6IHsiY29vcmRpbmF0ZXMiOiBbMjQuODcxODU5OCwgNjAuMjIyNDM2MzAwMDAwMDFdLCAidHlwZSI6ICJQb2ludCJ9LCAiaWQiOiAiOSIsICJwcm9wZXJ0aWVzIjogeyJhZGRyZXNzIjogIkF0b21pdGllIDUsIDAwMzcwIEhlbHNpbmtpLCBGaW5sYW5kIiwgImhpZ2hsaWdodCI6IHt9LCAiaWQiOiAxMDEwLCAic3R5bGUiOiB7fX0sICJ0eXBlIjogIkZlYXR1cmUifSwgeyJnZW9tZXRyeSI6IHsiY29vcmRpbmF0ZXMiOiBbMjQuOTQyNTEsIDYwLjE3MTE4NzRdLCAidHlwZSI6ICJQb2ludCJ9LCAiaWQiOiAiMTAiLCAicHJvcGVydGllcyI6IHsiYWRkcmVzcyI6ICJSYXV0YXRpZW50b3JpIDEsIDAwMTAwIEhlbHNpbmtpLCBGaW5sYW5kIiwgImhpZ2hsaWdodCI6IHt9LCAiaWQiOiAxMDExLCAic3R5bGUiOiB7fX0sICJ0eXBlIjogIkZlYXR1cmUifSwgeyJnZW9tZXRyeSI6IHsiY29vcmRpbmF0ZXMiOiBbMjQuODg0MDUwNCwgNjAuMjMwNjQ3NF0sICJ0eXBlIjogIlBvaW50In0sICJpZCI6ICIxMSIsICJwcm9wZXJ0aWVzIjogeyJhZGRyZXNzIjogIkt1cGFyaXRpZSA4LCAwMDQ0MCBIZWxzaW5raSwgRmlubGFuZCIsICJoaWdobGlnaHQiOiB7fSwgImlkIjogMTAxMiwgInN0eWxlIjoge319LCAidHlwZSI6ICJGZWF0dXJlIn0sIHsiZ2VvbWV0cnkiOiB7ImNvb3JkaW5hdGVzIjogWzI0Ljg3NzM4MywgNjAuMjQwMTYzXSwgInR5cGUiOiAiUG9pbnQifSwgImlkIjogIjEyIiwgInByb3BlcnRpZXMiOiB7ImFkZHJlc3MiOiAiVHJ1bXN0aWdlbiA4LCAwMDQyMCBIZWxzaW5nZm9ycywgRmlubGFuZCIsICJoaWdobGlnaHQiOiB7fSwgImlkIjogMTAxMywgInN0eWxlIjoge319LCAidHlwZSI6ICJGZWF0dXJlIn0sIHsiZ2VvbWV0cnkiOiB7ImNvb3JkaW5hdGVzIjogWzI0Ljk0ODMyMDIsIDYwLjIyMTYzMzM5OTk5OTk5XSwgInR5cGUiOiAiUG9pbnQifSwgImlkIjogIjEzIiwgInByb3BlcnRpZXMiOiB7ImFkZHJlc3MiOiAiS3VsbGF0b3Jwc3ZcdTAwZTRnZW4gMSwgMDA2MjAgSGVsc2luZ2ZvcnMsIEZpbmxhbmQiLCAiaGlnaGxpZ2h0Ijoge30sICJpZCI6IDEwMTQsICJzdHlsZSI6IHt9fSwgInR5cGUiOiAiRmVhdHVyZSJ9LCB7Imdlb21ldHJ5IjogeyJjb29yZGluYXRlcyI6IFsyNS4wMTI1NjU1LCA2MC4yNTE0OTgyOTk5OTk5OV0sICJ0eXBlIjogIlBvaW50In0sICJpZCI6ICIxNCIsICJwcm9wZXJ0aWVzIjogeyJhZGRyZXNzIjogIk1hbG1pbmthYXJpIDE1LCAwMDcwMCBIZWxzaW5raSwgRmlubGFuZCIsICJoaWdobGlnaHQiOiB7fSwgImlkIjogMTAxNSwgInN0eWxlIjoge319LCAidHlwZSI6ICJGZWF0dXJlIn0sIHsiZ2VvbWV0cnkiOiB7ImNvb3JkaW5hdGVzIjogWzI0Ljg5MzE1MywgNjAuMjE3NzgyM10sICJ0eXBlIjogIlBvaW50In0sICJpZCI6ICIxNSIsICJwcm9wZXJ0aWVzIjogeyJhZGRyZXNzIjogIkt5bFx1MDBlNHRpZSAyMywgMDAzMjAgSGVsc2lua2ksIEZpbmxhbmQiLCAiaGlnaGxpZ2h0Ijoge30sICJpZCI6IDEwMTYsICJzdHlsZSI6IHt9fSwgInR5cGUiOiAiRmVhdHVyZSJ9LCB7Imdlb21ldHJ5IjogeyJjb29yZGluYXRlcyI6IFsyNC44NjE4NiwgNjAuMjQ4NTQ3MV0sICJ0eXBlIjogIlBvaW50In0sICJpZCI6ICIxNiIsICJwcm9wZXJ0aWVzIjogeyJhZGRyZXNzIjogIk1hbG1pbmthcnRhbm9udGllIDE3LCAwMDQxMCBIZWxzaW5raSwgRmlubGFuZCIsICJoaWdobGlnaHQiOiB7fSwgImlkIjogMTAxNywgInN0eWxlIjoge319LCAidHlwZSI6ICJGZWF0dXJlIn0sIHsiZ2VvbWV0cnkiOiB7ImNvb3JkaW5hdGVzIjogWzI0Ljk2NzA1MzMsIDYwLjIyOTExMzVdLCAidHlwZSI6ICJQb2ludCJ9LCAiaWQiOiAiMTciLCAicHJvcGVydGllcyI6IHsiYWRkcmVzcyI6ICJcdTAwYzVnZ2VsYnkgdG9yZyAyYiwgMDA2NDAgSGVsc2luZ2ZvcnMsIEZpbmxhbmQiLCAiaGlnaGxpZ2h0Ijoge30sICJpZCI6IDEwMTgsICJzdHlsZSI6IHt9fSwgInR5cGUiOiAiRmVhdHVyZSJ9LCB7Imdlb21ldHJ5IjogeyJjb29yZGluYXRlcyI6IFsyNC45MzM0MDUxLCA2MC4xOTg2ODU2XSwgInR5cGUiOiAiUG9pbnQifSwgImlkIjogIjE4IiwgInByb3BlcnRpZXMiOiB7ImFkZHJlc3MiOiAiQmFuZ1x1MDBlNXJkc3ZcdTAwZTRnZW4gNiwgMDAxMDEgSGVsc2luZ2ZvcnMsIEZpbmxhbmQiLCAiaGlnaGxpZ2h0Ijoge30sICJpZCI6IDEwMTksICJzdHlsZSI6IHt9fSwgInR5cGUiOiAiRmVhdHVyZSJ9LCB7Imdlb21ldHJ5IjogeyJjb29yZGluYXRlcyI6IFsyNC44NjA5MzM1LCA2MC4yMjQwMTM4OTk5OTk5OV0sICJ0eXBlIjogIlBvaW50In0sICJpZCI6ICIxOSIsICJwcm9wZXJ0aWVzIjogeyJhZGRyZXNzIjogIlBpdFx1MDBlNGpcdTAwZTRubVx1MDBlNGVudGllIDE1LCAwMDM3MCBIZWxzaW5raSwgRmlubGFuZCIsICJoaWdobGlnaHQiOiB7fSwgImlkIjogMTAyMCwgInN0eWxlIjoge319LCAidHlwZSI6ICJGZWF0dXJlIn0sIHsiZ2VvbWV0cnkiOiB7ImNvb3JkaW5hdGVzIjogWzI0Ljk5MzQ5NzksIDYwLjI0MzY5NjFdLCAidHlwZSI6ICJQb2ludCJ9LCAiaWQiOiAiMjAiLCAicHJvcGVydGllcyI6IHsiYWRkcmVzcyI6ICJFc2tvbGFudGllIDIsIDAwNzIwIEhlbHNpbmtpLCBGaW5sYW5kIiwgImhpZ2hsaWdodCI6IHt9LCAiaWQiOiAxMDIxLCAic3R5bGUiOiB7fX0sICJ0eXBlIjogIkZlYXR1cmUifSwgeyJnZW9tZXRyeSI6IHsiY29vcmRpbmF0ZXMiOiBbMjUuMDQwNTgzLCA2MC4yNDQ0NDIzOTk5OTk5OV0sICJ0eXBlIjogIlBvaW50In0sICJpZCI6ICIyMSIsICJwcm9wZXJ0aWVzIjogeyJhZGRyZXNzIjogIlRhdHRhcmloYXJqdW50aWUsIDAwNzAwIEhlbHNpbmtpLCBGaW5sYW5kIiwgImhpZ2hsaWdodCI6IHt9LCAiaWQiOiAxMDIyLCAic3R5bGUiOiB7fX0sICJ0eXBlIjogIkZlYXR1cmUifSwgeyJnZW9tZXRyeSI6IHsiY29vcmRpbmF0ZXMiOiBbMjUuMDc3ODA5NCwgNjAuMjA5NjY2MDk5OTk5OTldLCAidHlwZSI6ICJQb2ludCJ9LCAiaWQiOiAiMjIiLCAicHJvcGVydGllcyI6IHsiYWRkcmVzcyI6ICJUYWxsaW5uYW5hdWtpbyAxLCAwMDkzMCBIZWxzaW5raSwgRmlubGFuZCIsICJoaWdobGlnaHQiOiB7fSwgImlkIjogMTAyMywgInN0eWxlIjoge319LCAidHlwZSI6ICJGZWF0dXJlIn0sIHsiZ2VvbWV0cnkiOiB7ImNvb3JkaW5hdGVzIjogWzI1LjE0MjQ5MzYsIDYwLjIwNzUxMDE5OTk5OTk5XSwgInR5cGUiOiAiUG9pbnQifSwgImlkIjogIjIzIiwgInByb3BlcnRpZXMiOiB7ImFkZHJlc3MiOiAiVHl5bnlsYWF2YW50aWUgNywgMDA5ODAgSGVsc2lua2ksIEZpbmxhbmQiLCAiaGlnaGxpZ2h0Ijoge30sICJpZCI6IDEwMjQsICJzdHlsZSI6IHt9fSwgInR5cGUiOiAiRmVhdHVyZSJ9LCB7Imdlb21ldHJ5IjogeyJjb29yZGluYXRlcyI6IFsyNS4wNzU2NTQ3LCA2MC4yMjU1OTldLCAidHlwZSI6ICJQb2ludCJ9LCAiaWQiOiAiMjQiLCAicHJvcGVydGllcyI6IHsiYWRkcmVzcyI6ICJWYXJ2YXNtXHUwMGU0ZW5rdWphLCAwMDkyMCBIZWxzaW5raSwgRmlubGFuZCIsICJoaWdobGlnaHQiOiB7fSwgImlkIjogMTAyNSwgInN0eWxlIjoge319LCAidHlwZSI6ICJGZWF0dXJlIn0sIHsiZ2VvbWV0cnkiOiB7ImNvb3JkaW5hdGVzIjogWzI1LjEwODAwNTQsIDYwLjIzODIwNTRdLCAidHlwZSI6ICJQb2ludCJ9LCAiaWQiOiAiMjUiLCAicHJvcGVydGllcyI6IHsiYWRkcmVzcyI6ICJNZWxsdW5nc2JhY2thc3RyXHUwMGU1a2V0IDYsIDAwOTcwIEhlbHNpbmdmb3JzLCBGaW5sYW5kIiwgImhpZ2hsaWdodCI6IHt9LCAiaWQiOiAxMDI2LCAic3R5bGUiOiB7fX0sICJ0eXBlIjogIkZlYXR1cmUifSwgeyJnZW9tZXRyeSI6IHsiY29vcmRpbmF0ZXMiOiBbMjQuOTYwOTEyMiwgNjAuMTg3ODkwMzAwMDAwMDFdLCAidHlwZSI6ICJQb2ludCJ9LCAiaWQiOiAiMjYiLCAicHJvcGVydGllcyI6IHsiYWRkcmVzcyI6ICJWYXNhc3RpZ2VuIDIsIDAwMTAxIEhlbHNpbmdmb3JzLCBGaW5sYW5kIiwgImhpZ2hsaWdodCI6IHt9LCAiaWQiOiAxMDI3LCAic3R5bGUiOiB7fX0sICJ0eXBlIjogIkZlYXR1cmUifSwgeyJnZW9tZXRyeSI6IHsiY29vcmRpbmF0ZXMiOiBbMjUuMDI5MTI2MywgNjAuMTk0MTM5Mzk5OTk5OTldLCAidHlwZSI6ICJQb2ludCJ9LCAiaWQiOiAiMjciLCAicHJvcGVydGllcyI6IHsiYWRkcmVzcyI6ICJIaWlodFx1MDBlNGpcdTAwZTRudGllIDIsIDAwODEwIEhlbHNpbmtpLCBGaW5sYW5kIiwgImhpZ2hsaWdodCI6IHt9LCAiaWQiOiAxMDI4LCAic3R5bGUiOiB7fX0sICJ0eXBlIjogIkZlYXR1cmUifSwgeyJnZW9tZXRyeSI6IHsiY29vcmRpbmF0ZXMiOiBbMjUuMDA2ODM5OSwgNjAuMTg4Mzc1MTk5OTk5OTldLCAidHlwZSI6ICJQb2ludCJ9LCAiaWQiOiAiMjgiLCAicHJvcGVydGllcyI6IHsiYWRkcmVzcyI6ICJVa2tvLVBla2FuIHBvcnJhcywgMDA1NzAgSGVsc2lua2ksIEZpbmxhbmQiLCAiaGlnaGxpZ2h0Ijoge30sICJpZCI6IDEwMjksICJzdHlsZSI6IHt9fSwgInR5cGUiOiAiRmVhdHVyZSJ9LCB7Imdlb21ldHJ5IjogeyJjb29yZGluYXRlcyI6IFsyNC45NDk0ODc0LCA2MC4xNzkzODYyXSwgInR5cGUiOiAiUG9pbnQifSwgImlkIjogIjI5IiwgInByb3BlcnRpZXMiOiB7ImFkZHJlc3MiOiAiU2lsdGFzYWFyZW5rYXR1IDE2LCAwMDUzMCBIZWxzaW5raSwgRmlubGFuZCIsICJoaWdobGlnaHQiOiB7fSwgImlkIjogMTAzMCwgInN0eWxlIjoge319LCAidHlwZSI6ICJGZWF0dXJlIn0sIHsiZ2VvbWV0cnkiOiB7ImNvb3JkaW5hdGVzIjogWzI0LjkzMzc1NjksIDYwLjE2OTQ4MDldLCAidHlwZSI6ICJQb2ludCJ9LCAiaWQiOiAiMzAiLCAicHJvcGVydGllcyI6IHsiYWRkcmVzcyI6ICJVcmhvIEtla2tvc2VuIGthdHUgMSwgMDAxMDAgSGVsc2lua2ksIEZpbmxhbmQiLCAiaGlnaGxpZ2h0Ijoge30sICJpZCI6IDEwMzEsICJzdHlsZSI6IHt9fSwgInR5cGUiOiAiRmVhdHVyZSJ9LCB7Imdlb21ldHJ5IjogeyJjb29yZGluYXRlcyI6IFsyNC45MjUwMDcyLCA2MC4xNjUwMDEzOTk5OTk5OV0sICJ0eXBlIjogIlBvaW50In0sICJpZCI6ICIzMSIsICJwcm9wZXJ0aWVzIjogeyJhZGRyZXNzIjogIkdyXHUwMGU0c3Zpa3NnYXRhbiAxNywgMDAxMDEgSGVsc2luZ2ZvcnMsIEZpbmxhbmQiLCAiaGlnaGxpZ2h0Ijoge30sICJpZCI6IDEwMzIsICJzdHlsZSI6IHt9fSwgInR5cGUiOiAiRmVhdHVyZSJ9LCB7Imdlb21ldHJ5IjogeyJjb29yZGluYXRlcyI6IFsyNC45MjE0MDQ2LCA2MC4xNTkwNjldLCAidHlwZSI6ICJQb2ludCJ9LCAiaWQiOiAiMzIiLCAicHJvcGVydGllcyI6IHsiYWRkcmVzcyI6ICJTdGlsbGFoYXZzZ2F0YW4gMywgMDAyMjAgSGVsc2luZ2ZvcnMsIEZpbmxhbmQiLCAiaGlnaGxpZ2h0Ijoge30sICJpZCI6IDEwMzMsICJzdHlsZSI6IHt9fSwgInR5cGUiOiAiRmVhdHVyZSJ9LCB7Imdlb21ldHJ5IjogeyJjb29yZGluYXRlcyI6IFsyNC45NDY4NTE0LCA2MC4xNzE5MTA4XSwgInR5cGUiOiAiUG9pbnQifSwgImlkIjogIjMzIiwgInByb3BlcnRpZXMiOiB7ImFkZHJlc3MiOiAiVmlsaGVsbXNnYXRhbiA0LCAwMDEwMSBIZWxzaW5nZm9ycywgRmlubGFuZCIsICJoaWdobGlnaHQiOiB7fSwgImlkIjogMTAzNCwgInN0eWxlIjoge319LCAidHlwZSI6ICJGZWF0dXJlIn0sIHsiZ2VvbWV0cnkiOiB7ImNvb3JkaW5hdGVzIjogWzI1LjEyMDQ5NjYsIDYwLjIwNTQ4OTc5OTk5OTk5XSwgInR5cGUiOiAiUG9pbnQifSwgImlkIjogIjM0IiwgInByb3BlcnRpZXMiOiB7ImFkZHJlc3MiOiAiVG9yaXNpbHRhLCAwMDk4MCBIZWxzaW5raSwgRmlubGFuZCIsICJoaWdobGlnaHQiOiB7fSwgImlkIjogMTAzNSwgInN0eWxlIjoge319LCAidHlwZSI6ICJGZWF0dXJlIn1dLCAidHlwZSI6ICJGZWF0dXJlQ29sbGVjdGlvbiJ9CiAgICAgICAgICAgIAogICAgICAgICAgICApLmFkZFRvKG1hcF8yNjBlYmY1YWNkY2E0MDNmYmZiZjY2NGFkMmRjOGI2Myk7CiAgICAgICAgZ2VvX2pzb25fNzZlODhiZmVlNDIwNGM5M2JlZGQ4MTkwNDJjOTkzYzYuc2V0U3R5bGUoZnVuY3Rpb24oZmVhdHVyZSkge3JldHVybiBmZWF0dXJlLnByb3BlcnRpZXMuc3R5bGU7fSk7CiAgICAgICAgCjwvc2NyaXB0Pg==\" style=\"position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;\" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe></div></div>"
+      ],
+      "text/plain": [
+       "<folium.folium.Map at 0xa7fecf8>"
+      ]
+     },
+     "execution_count": 58,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Create a Map instance\n",
+    "m = folium.Map(location=[60.25, 24.8], tiles = 'cartodbpositron', zoom_start=10, control_scale=True)\n",
+    "\n",
+    "# Convert points to GeoJson\n",
+    "points_gjson = points.to_json()\n",
+    "points_gjson = folium.features.GeoJson(points_gjson)\n",
+    "\n",
+    "# Add points to the map instance\n",
+    "points_gjson.add_to(m)\n",
+    "\n",
+    "# Alternative syntax for adding points to the map instance\n",
+    "#m.add_child(points_gjson)\n",
+    "\n",
+    "#Show map\n",
+    "m"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "anaconda-cloud": {},
+  "kernelspec": {
+   "display_name": "Python [default]",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.5.2"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
