@@ -3,7 +3,7 @@ Lesson 5 Overview
 
 This week we will focus on learning how to create beautiful maps in Python and how to share them on GitHub using `GitHub Pages <https://pages.github.com/>`_.
 
-1. `Static maps  <../../notebooks/L5/static-maps.ipynb>`__
+1. `Static maps  <../../notebooks/L5/static_maps.ipynb>`__
 2. `Interactive Leaflet maps (Folium and mplleaflet)  <../../notebooks/L5/interactive-map-folium.ipynb>`__
 3. :doc:`Sharing interactive maps on GitHub <share-on-github>`
 4. :doc:`Exercise 5 <exercise-5>`
