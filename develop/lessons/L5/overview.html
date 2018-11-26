@@ -40,7 +40,7 @@
   <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Lecture" href="lecture.html" />
+    <link rel="next" title="Interactive maps on Leaflet" href="../../notebooks/L5/interactive-map-folium.html" />
     <link rel="prev" title="Exercise 4" href="../L4/exercise-4.html" />
     <link href="../../_static/geo-python.css" rel="stylesheet" type="text/css">
      
@@ -146,13 +146,13 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Lesson 5 Overview</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#learning-goals">Learning goals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lecture-videos">Lecture videos</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="lecture.html">Lecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="interactive-map-bokeh.html">Interactive maps with Bokeh</a></li>
-<li class="toctree-l1"><a class="reference internal" href="advanced-bokeh.html">Advanced plotting with Bokeh</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../notebooks/L5/interactive-map-folium.html">Interactive maps on Leaflet</a></li>
 <li class="toctree-l1"><a class="reference internal" href="share-on-github.html">Sharing interactive plots on GitHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interactive-map-bokeh.html">Interactive maps with Bokeh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced-bokeh.html">Advanced plotting with Bokeh</a></li>
 <li class="toctree-l1"><a class="reference internal" href="exercise-5.html">Exercise 5</a></li>
 </ul>
 
@@ -252,45 +252,39 @@
 <h1>Lesson 5 Overview<a class="headerlink" href="#lesson-5-overview" title="Permalink to this headline">¶</a></h1>
 <p>This week we will focus on learning how to create beautiful maps in Python and how to share them on GitHub using <a class="reference external" href="https://pages.github.com/">GitHub Pages</a>.</p>
 <ol class="arabic simple">
-<li><a class="reference internal" href="static-maps.html"><span class="doc">Static maps</span></a></li>
-<li><dl class="first docutils">
-<dt><a class="reference internal" href="interactive-map-bokeh.html"><span class="doc">Interactive maps with bokeh</span></a></dt>
-<dd>2.1 <a class="reference internal" href="advanced-bokeh.html"><span class="doc">Advanced map features in bokeh</span></a></dd>
-</dl>
-</li>
-<li><a class="reference internal" href="interactive-map-folium.html"><span class="doc">Interactive Leaflet maps with Folium</span></a></li>
+<li><a class="reference external" href="../../notebooks/L5/static-maps.ipynb">Static maps</a></li>
+<li><a class="reference internal" href="../../notebooks/L5/interactive-map-folium.html"><span class="doc">Interactive Leaflet maps (Folium and mplleaflet)</span></a></li>
 <li><a class="reference internal" href="share-on-github.html"><span class="doc">Sharing interactive maps on GitHub</span></a></li>
-<li><span class="xref std std-doc">Exercise 5</span></li>
-<li><span class="xref std std-doc">Exercise 5 hints</span></li>
+<li><a class="reference internal" href="exercise-5.html"><span class="doc">Exercise 5</span></a></li>
 </ol>
 <p>As you might remember from our earlier <a class="reference external" href="https://github.com/Python-for-geo-people/Lesson-7-Plotting">plotting lesson</a>
 during the Period I, there are many different Python modules that can be used for making visualizations.</p>
-<p>Quite many of them allows you to create also different kinds of maps. During this lesson we will focus on few of them, namely:</p>
+<p>Quite many of them allows you to create also different kinds of maps.</p>
 <blockquote>
 <div><ul class="simple">
 <li><a class="reference external" href="http://matplotlib.org/">Matplotlib</a> (static maps, integrated into <a class="reference external" href="http://geopandas.org/">Geopandas</a>)</li>
 <li><a class="reference external" href="http://bokeh.pydata.org/en/latest/">Bokeh</a> (interactive plots)</li>
 <li><a class="reference external" href="https://github.com/python-visualization/folium">Folium</a> (interactive Web maps on Leaflet)</li>
-</ul>
-</div></blockquote>
-<p>In addition to these modules, there are also at least a few good and interesting modules for making maps that we cannot cover today:</p>
-<blockquote>
-<div><ul class="simple">
 <li><a class="reference external" href="https://github.com/jwass/mplleaflet">mplleaflet</a> (converts Matplotlib plots easily to interactive Leaflet maps)</li>
 <li><a class="reference external" href="http://matplotlib.org/basemap/index.html">Basemap</a> (Matplotlib’s own mapping module)</li>
 <li><a class="reference external" href="http://geo.holoviews.org/">GeoViews</a></li>
 </ul>
 </div></blockquote>
+<p>During this lesson we will cover some of these modules in more detail.</p>
 <div class="section" id="learning-goals">
 <h2>Learning goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
 <p>After this weeks lesson you should be able to (at least):</p>
 <blockquote>
 <div><ul class="simple">
 <li>Create a static map using Geopandas</li>
-<li>Create a simple interactive map using either Bokeh or Folium (or both).</li>
+<li>Create a simple interactive map using Folium (or matplotlib + mplleaflet).</li>
 <li>Share your maps (static / interactive) on GitHub using GitHub pages.</li>
 </ul>
 </div></blockquote>
+</div>
+<div class="section" id="lecture-videos">
+<h2>Lecture videos<a class="headerlink" href="#lecture-videos" title="Permalink to this headline">¶</a></h2>
+<p>Lecture videos will be added soon.</p>
 </div>
 </div>
 
@@ -302,7 +296,7 @@ during the Period I, there are many different Python modules that can be used fo
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="lecture.html" class="btn btn-neutral float-right" title="Lecture" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../../notebooks/L5/interactive-map-folium.html" class="btn btn-neutral float-right" title="Interactive maps on Leaflet" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../L4/exercise-4.html" class="btn btn-neutral" title="Exercise 4" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -315,7 +309,7 @@ during the Period I, there are many different Python modules that can be used fo
   <div role="contentinfo">
     <p>
         &copy; Copyright 2018, Henrikki Tenkanen
-      Last updated on Nov 24, 2018.
+      Last updated on Nov 26, 2018.
 
     </p>
   </div>
