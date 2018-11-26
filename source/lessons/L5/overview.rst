@@ -33,3 +33,10 @@ After this weeks lesson you should be able to (at least):
  - Create a simple interactive map using Folium (or matplotlib + mplleaflet).
 
  - Share your maps (static / interactive) on GitHub using GitHub pages.
+
+
+Lecture videos
+--------------
+
+Lecture videos will be added soon.
+
