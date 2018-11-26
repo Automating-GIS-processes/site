@@ -3,7 +3,7 @@ name: gis
 channels:
   - conda-forge
 dependencies:
-  - python 3.5
+  - python=3.5
   - geopandas
   - geopy
   - bokeh
@@ -12,6 +12,5 @@ dependencies:
   - folium
   - mplleaflet
   - geoplot
-  - osmnx
   - pip:
     - git+https://github.com/mullenkamp/PyCRS
