@@ -249,36 +249,12 @@ in Bokeh and add a legend into the map which is one of the key elements of a goo
 <li>Let’s import the modules and functions that we need</li>
 </ul>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">from</span> <span class="nn">bokeh.palettes</span> <span class="kn">import</span> <span class="n">YlOrRd6</span> <span class="k">as</span> <span class="n">palette</span>
-<span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-1-4aa48223d2c3&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">bokeh.palettes</span> <span class="kn">import</span> <span class="n">YlOrRd6</span> <span class="k">as</span> <span class="n">palette</span>
-
-<span class="ne">ImportError</span>: No module named &#39;bokeh&#39;
 
 <span class="gp">In [2]: </span><span class="kn">from</span> <span class="nn">bokeh.plotting</span> <span class="kn">import</span> <span class="n">figure</span><span class="p">,</span> <span class="n">save</span>
-<span class="go">                                                                                                                                                                                                                                                                                                 ---------------------------------------------------------------------------</span>
-<span class="go">ImportError                               Traceback (most recent call last)</span>
-<span class="go">&lt;ipython-input-2-4b999efac454&gt; in &lt;module&gt;()</span>
-<span class="go">----&gt; 1 from bokeh.plotting import figure, save</span>
-
-<span class="go">ImportError: No module named &#39;bokeh&#39;</span>
 
 <span class="gp">In [3]: </span><span class="kn">from</span> <span class="nn">bokeh.models</span> <span class="kn">import</span> <span class="n">ColumnDataSource</span><span class="p">,</span> <span class="n">HoverTool</span><span class="p">,</span> <span class="n">LogColorMapper</span><span class="p">,</span> <span class="n">GeoJSONDataSource</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ---------------------------------------------------------------------------</span>
-<span class="go">ImportError                               Traceback (most recent call last)</span>
-<span class="go">&lt;ipython-input-3-934e064937f6&gt; in &lt;module&gt;()</span>
-<span class="go">----&gt; 1 from bokeh.models import ColumnDataSource, HoverTool, LogColorMapper, GeoJSONDataSource</span>
-
-<span class="go">ImportError: No module named &#39;bokeh&#39;</span>
 
 <span class="gp">In [4]: </span><span class="kn">from</span> <span class="nn">bokeh.palettes</span> <span class="kn">import</span> <span class="n">RdYlGn10</span> <span class="k">as</span> <span class="n">palette</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ---------------------------------------------------------------------------</span>
-<span class="go">ImportError                               Traceback (most recent call last)</span>
-<span class="go">&lt;ipython-input-4-976c5fe21bdf&gt; in &lt;module&gt;()</span>
-<span class="go">----&gt; 1 from bokeh.palettes import RdYlGn10 as palette</span>
-
-<span class="go">ImportError: No module named &#39;bokeh&#39;</span>
 
 <span class="gp">In [5]: </span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
 
