@@ -25,7 +25,6 @@ which should be located on the root of your repository. The Exercise 5 repositor
 the folder ``docs``:
 
 .. image:: img/Github-pages-repo-root.PNG
-    :scale: 50 %
 
 |
 
@@ -43,7 +42,7 @@ Thus, there is already a single map that I have made called *test_map.html*, a h
 Let's see how does the ``index.md`` file look like (here is a `link <https://github.com/Automating-GIS-processes/Exercise-5/blob/master/docs/index.md>`_ to the actual page on our public repository):
 
 .. image:: img/index-md.PNG
-    :scale: 50 %
+    :scale: 80 %
 
 |
 
@@ -63,8 +62,7 @@ Activating GitHub Pages
 First, you should navigate into the **Settings** of your Exercise 5 repository by clicking following tab on the right side of the upper panel:
 
 .. image:: img/github-settings.PNG
-    :width: 1500 px
-    :scale: 50 %
+    :scale: 80 %
 
 |
 
@@ -72,8 +70,7 @@ In there you can adjust different Setting regarding your repository but what we 
 It looks like following:
 
 .. image:: img/Github-pages-settings.PNG
-    :width: 1500 px
-    :scale: 50 %
+    :scale: 80 %
 
 |
 
@@ -81,16 +78,14 @@ From there you should choose the **source for your pages**, i.e. the place where
 that we just visited earlier and where we should store our html files:
 
 .. image:: img/github-pages-docs-folder.PNG
-    :width: 1500 px
-    :scale: 50 %
+    :scale: 80 %
 
 |
 
 Finally, you should press the **Save** button and after that GitHub Pages are activated for you!
 
 .. image:: img/Github-pages-activated.PNG
-    :width: 1500 px
-    :scale: 50 %
+    :scale: 80 %
 
 |
 
@@ -100,12 +95,13 @@ Accessing GitHub Pages
 Now if I press the link that is shown above I will arrive into a following page:
 
 .. image:: img/index_HTML.PNG
-    :width: 1500 px
-    :scale: 50 %
+    :scale: 80 %
 
 |
 
 This page is showing the contents of the ``index.html`` file that was also located in our ``docs`` folder.
+
+Note, that in this exercise we won't be practicing how to write HTML code and therefore **we will use the index.md file under the docs-folder to maintain the links**, as you already know how to write Markdown.
 
 We can now **navigate to whatever file that is located under that folder.** Thus, we can for example access the test_map.html by typing:
 `https://autogis-2018.github.io/exercise-5-VuokkoH/test_map.html <https://autogis-2018.github.io/exercise-5-VuokkoH/test_map.html>`_
