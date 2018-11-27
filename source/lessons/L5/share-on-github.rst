@@ -17,18 +17,14 @@ Here is a short video demonstrating what all you can do with GitHub pages:
 How the repository should be organized?
 ---------------------------------------
 
-For the purpose of sharing our maps on GitHub, we will use the Exercise 5 repository where we will upload our maps. Thus, let's already now start with our **Exercise 5** by
-`accepting the GitHub classroom assignment <https://classroom.github.com/assignment-invitations/89827a0c6532a4910690c43c821445da>`_.
+For the purpose of sharing our maps on GitHub, we will use the Exercise 5 repository where we will upload our maps. You can follow these instructions on GitHub after accepting the Github classroom invitation link for :doc:`Exercise 5 <exercise-5>`.
 
-In the following examples I have accepted the Exercise 5 and what you will see are based on my personal Exercise-5 repository. You will see yours in a similar manner but under your
-GitHub account.
 
 When you want to publish something on GitHub Pages, it is generally a good idea to store your html files (such as the ones we made earlier) under a single folder called ``docs``
-which should be located on the root of your repository. In the Exercise 5 I have created such a folder for you, thus my Exercise 5 repository looks like following where I have
+which should be located on the root of your repository. The Exercise 5 repository already contains such a folder:
 the folder ``docs``:
 
 .. image:: img/Github-pages-repo-root.PNG
-    :width: 1500 px
     :scale: 50 %
 
 |
@@ -39,8 +35,6 @@ keeps things nicely organized.
 What is currently located there are following files:
 
 .. image:: img/docs-contents.PNG
-    :width: 1500 px
-    :scale: 50 %
 
 |
 
@@ -49,13 +43,12 @@ Thus, there is already a single map that I have made called *test_map.html*, a h
 Let's see how does the ``index.md`` file look like (here is a `link <https://github.com/Automating-GIS-processes/Exercise-5/blob/master/docs/index.md>`_ to the actual page on our public repository):
 
 .. image:: img/index-md.PNG
-    :width: 1500 px
     :scale: 50 %
 
 |
 
 Okey, so we can see that this is a familiar looking page with some Markdown text and links. What is the purpose of this page is to serve as an **entrance page** for you interactive plots.
-Thus as the page say, you should add links to your personal Exercise 5 page such as mine which is located at ``http://automating-gis-processes.github.io/exercise-5-HTenkanen``.
+Thus as the page say, you should add links to your maps that are published from your personal Exercise 5 located at ``https://autogis-2018.github.io/exercise-5-YourUserName/`` (for example, the address for vuokko's exercise 5 submission is ``https://autogis-2018.github.io/exercise-5-VuokkoH/``).
 
 **Okey but how does that work, how do I get a page with such an address?**
 
@@ -115,7 +108,7 @@ Now if I press the link that is shown above I will arrive into a following page:
 This page is showing the contents of the ``index.html`` file that was also located in our ``docs`` folder.
 
 We can now **navigate to whatever file that is located under that folder.** Thus, we can for example access the test_map.html by typing:
-`https://automating-gis-processes.github.io/exercise-5-HTenkanen/test_map.html <https://automating-gis-processes.github.io/exercise-5-HTenkanen/test_map.html>`_
+`https://autogis-2018.github.io/exercise-5-VuokkoH/test_map.html <https://autogis-2018.github.io/exercise-5-VuokkoH/test_map.html>`_
 
 **Ahaa!** So this means that if you upload e.g. an interactive map that you have prepared into that folder you are able to access it also from anywhere. And also share it with your
 friends! You just need to change the name of the html file according the filename that you have uploaded. So this is how we can easily share interactive maps on GitHub for anyone.
