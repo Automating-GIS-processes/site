@@ -166,4 +166,5 @@ Contents
 
    lessons/L6/overview
    notebooks/L6/retrieve_osm_data.ipynb
+   notebooks/L6/network-analysis.ipynb
    lessons/L6/exercise-6
