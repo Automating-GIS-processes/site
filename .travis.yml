@@ -18,11 +18,11 @@ install:
   - conda info -a
 
   # Install packages
-  - conda create -q -n autogis-environment python=$TRAVIS_PYTHON_VERSION sphinx==1.7.9 sphinx_rtd_theme nbsphinx IPython==6.5.0 jupyter_client ipykernel matplotlib geopandas imageio
+  - conda create -q -n autogis-environment python=$TRAVIS_PYTHON_VERSION sphinx==1.7.9 sphinx_rtd_theme nbsphinx IPython==6.5.0 jupyter_client ipykernel matplotlib geopandas
   - source activate autogis-environment
   - pip install git+https://github.com/HTenkanen/sphinxcontrib-versioning.git
   - pip install sphinxcontrib-googleanalytics
-
+  
 script: sphinx-versioning build source build/html
 after_success:
   - ./push.sh
