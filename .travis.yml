@@ -3,7 +3,7 @@ python:
   # We don't actually use the Travis Python, but this keeps it organized.
   - "3.5"
 before_install:
-  - hg clone https://bitbucket.org/birkenfeld/sphinx-contrib/
+  - hg clone https://bitbucket.org/birkenfeld/sphinx-contrib/ --insecure
   - chmod +x push.sh
 install:
   - sudo apt-get update
