@@ -159,3 +159,11 @@ Contents
    notebooks/L5/interactive-map-folium.ipynb
    lessons/L5/share-on-github
    lessons/L5/exercise-5
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Lesson 6
+
+   lessons/L6/overview
+   notebooks/L6/retrieve_osm_data.ipynb
+   lessons/L6/exercise-6
