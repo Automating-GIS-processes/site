@@ -1,0 +1,1197 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-88382509-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Network analysis in Python &mdash; AutoGIS 2018 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link href="../../_static/geo-python.css" rel="stylesheet" type="text/css">
+     
+
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> AutoGIS
+          
+
+          
+            
+            <img src="../../_static/logo_hy_geo_135.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2018
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Course information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/course-info.html">General info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/course-environment-components.html">Course environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/grading.html">Grading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/learning-goals.html">Learning goals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/Installing_Anacondas_GIS.html">Installing Python + GIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/License-terms.html">License and terms of usage</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 1</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L1/Intro-Python-GIS.html">Motivation for the course</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1/overview.html">Lesson overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L1/geometric-objects.html">Geometric objects - Spatial data model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1/exercise-1.html">Exercise 1</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 2</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L2/overview.html">Lesson 2 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L2/geopandas-basics.html">Introduction to Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L2/projections.html">Map projections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/exercise-2.html">Exercise 2</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 3</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L3/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L3/geocoding.html">Geocoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L3/geocoding_in_geopandas.html">Geocoding in Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L3/point-in-polygon.html">Point in Polygon &amp; Intersect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L3/spatial-join.html">Spatial join</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L3/nearest-neighbour.html">Nearest Neighbour Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L3/exercise-3.html">Exercise 3</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 4</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L4/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L4/reclassify.html">Data reclassification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L4/geometric-operations.html">Geometric operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L4/exercise-4.html">Exercise 4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L4/exercise-4.html#exercise-4-hints">Exercise 4 hints</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 5</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L5/overview.html">Lesson 5 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L5/static_maps.html">Static maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L5/interactive-map-folium.html">Interactive maps on Leaflet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/share-on-github.html">Sharing interactive plots on GitHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/exercise-5.html">Exercise 5</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 6</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L6/retrieve_osm_data.html">Retrieving OpenStreetMap data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercise-6.html">Exercise 6</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AutoGIS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Network analysis in Python</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/Automating-GIS-processes/2018/blob/master/source/lessons/L6/network-analysis.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+
+
+
+
+
+
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="network-analysis-in-python">
+<h1>Network analysis in Python<a class="headerlink" href="#network-analysis-in-python" title="Permalink to this headline">¶</a></h1>
+<p>Finding a shortest path using a specific street network is a common GIS problem that has many practical
+applications. For example navigators are one of those “every-day” applications where <strong>routing</strong> using specific algorithms is used
+to find the optimal route between two (or multiple) points.</p>
+<p>It is also possible to perform network analysis such as tranposrtation routing in Python.
+<a class="reference external" href="https://networkx.github.io/documentation/stable/">Networkx</a> is a Python module that provides
+a lot tools that can be used to analyze networks on various different ways. It also contains algorithms
+such as <a class="reference external" href="https://networkx.github.io/documentation/networkx-1.10/reference/generated/networkx.algorithms.shortest_paths.weighted.single_source_dijkstra.html#networkx.algorithms.shortest_paths.weighted.single_source_dijkstra">Dijkstras algorithm</a> or
+<a class="reference external" href="https://networkx.github.io/documentation/networkx-1.10/reference/generated/networkx.algorithms.shortest_paths.astar.astar_path.html#networkx.algorithms.shortest_paths.astar.astar_path">A*</a> algoritm that are commonly used to find shortest paths along transportation network.</p>
+<p>To be able to conduct network analysis, it is, of course, necessary to have a network that is used for the analyses.
+<a class="reference external" href="https://github.com/gboeing/osmnx">Osmnx</a> package that we just explored in previous tutorial, makes it really easy to
+retrieve routable networks from OpenStreetMap with different transport modes (walking, cycling and driving). Osmnx also
+combines some functionalities from <code class="docutils literal notranslate"><span class="pre">networkx</span></code> module to make it straightforward to conduct routing along OpenStreetMap data.</p>
+<p>Next we will test the routing functionalities of osmnx by finding a shortest path between two points based on drivable roads.</p>
+<p>Let’s first download the OSM data from Kamppi but this time include only such street segments that are walkable.
+In omsnx it is possible to retrieve only such streets that are drivable by specifying <code class="docutils literal notranslate"><span class="pre">'drive'</span></code> into <code class="docutils literal notranslate"><span class="pre">network_type</span></code> parameter that can be used to
+specify what kind of streets are retrieved from OpenStreetMap (other possibilities are <code class="docutils literal notranslate"><span class="pre">walk</span></code> and <code class="docutils literal notranslate"><span class="pre">bike</span></code>).</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">osmnx</span> <span class="kn">as</span> <span class="nn">ox</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-1-d4a103aeed40&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">osmnx</span> <span class="kn">as</span> <span class="nn">ox</span>
+
+<span class="ne">ImportError</span>: No module named &#39;osmnx&#39;
+
+<span class="gp">In [2]: </span><span class="kn">import</span> <span class="nn">networkx</span> <span class="kn">as</span> <span class="nn">nx</span>
+<span class="go">                                                                                                                                                                                                                                                                      ---------------------------------------------------------------------------</span>
+<span class="go">ImportError                               Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-2-f17d728e971c&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 import networkx as nx</span>
+
+<span class="go">ImportError: No module named &#39;networkx&#39;</span>
+
+<span class="gp">In [3]: </span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+
+<span class="gp">In [4]: </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="gp">In [5]: </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="gp">In [6]: </span><span class="n">place_name</span> <span class="o">=</span> <span class="s2">&quot;Kamppi, Helsinki, Finland&quot;</span>
+
+<span class="gp">In [7]: </span><span class="n">graph</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">graph_from_place</span><span class="p">(</span><span class="n">place_name</span><span class="p">,</span> <span class="n">network_type</span><span class="o">=</span><span class="s1">&#39;drive&#39;</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-7-6971e62eba9c&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">graph</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">graph_from_place</span><span class="p">(</span><span class="n">place_name</span><span class="p">,</span> <span class="n">network_type</span><span class="o">=</span><span class="s1">&#39;drive&#39;</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;ox&#39; is not defined
+
+<span class="gp">In [8]: </span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">plot_graph</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-8-559a0acfe53a&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 fig, ax = ox.plot_graph(graph)</span>
+
+<span class="go">NameError: name &#39;ox&#39; is not defined</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/street_network.png"><img alt="../../_images/street_network.png" src="../../_images/street_network.png" style="width: 7in;" /></a>
+<p>Okey so now we have retrieved only such streets where it is possible to drive with a car. Let’s confirm
+this by taking a look at the attributes of the street network. Easiest way to do this is to convert the
+graph (nodes and edges) into GeoDataFrames.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">edges</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">graph_to_gdfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-9-0827673b34d9&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">edges</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">graph_to_gdfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;ox&#39; is not defined
+</pre></div>
+</div>
+<ul class="simple">
+<li>Let’s check what columns do we have in our data</li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [10]: </span><span class="n">edges</span><span class="o">.</span><span class="n">columns</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-10-e8ff5e30b0ef&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">edges</span><span class="o">.</span><span class="n">columns</span>
+
+<span class="ne">NameError</span>: name &#39;edges&#39; is not defined
+</pre></div>
+</div>
+<p>Okey, so we have quite many columns in our GeoDataFrame. Most of the columns are fairly self-explanatory but the following table describes all of them.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="31%" />
+<col width="19%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Column</th>
+<th class="head">Description</th>
+<th class="head">Data type</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:bridge">bridge</a></td>
+<td>Bridge feature</td>
+<td>boolean</td>
+</tr>
+<tr class="row-odd"><td>geometry</td>
+<td>Geometry of the feature</td>
+<td>Shapely.geometry</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:highway">highway</a></td>
+<td>Tag for roads, paths (road type)</td>
+<td>str (list if multiple)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:lanes">lanes</a></td>
+<td>Number of lanes</td>
+<td>int (or nan)</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:length">lenght</a></td>
+<td>The length of a feature in meters</td>
+<td>float</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:maxspeed">maxspeed</a></td>
+<td>maximum legal speed limit</td>
+<td>int (list if multiple)</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:name">name</a></td>
+<td>Name of the (street) element</td>
+<td>str (or nan)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:oneway">oneway</a></td>
+<td>Street is usable only in one direction</td>
+<td>boolean</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="http://wiki.openstreetmap.org/wiki/Node">osmid</a></td>
+<td>Unique node ids of the element</td>
+<td>list</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="http://ow.ly/bV8n30h7Ufm">u</a></td>
+<td>The first node of networkx edge tuple</td>
+<td>int</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="http://ow.ly/bV8n30h7Ufm">v</a></td>
+<td>The last node of networkx edge tuple</td>
+<td>int</td>
+</tr>
+</tbody>
+</table>
+<p>Most of the attributes comes directly from the OpenStreetMap, however, columns <code class="docutils literal notranslate"><span class="pre">u</span></code> and <code class="docutils literal notranslate"><span class="pre">v</span></code> are networkx specific ids.</p>
+<ul class="simple">
+<li>Let’s take a look what kind of features we have in <code class="docutils literal notranslate"><span class="pre">highway</span></code> column.</li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="n">edges</span><span class="p">[</span><span class="s1">&#39;highway&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-11-a75d66d5e3a5&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">edges</span><span class="p">[</span><span class="s1">&#39;highway&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+
+<span class="ne">NameError</span>: name &#39;edges&#39; is not defined
+
+<span class="gp">In [12]: </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Coordinate system:&quot;</span><span class="p">,</span> <span class="n">edges</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                      ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-12-d299701ae08f&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 print(&quot;Coordinate system:&quot;, edges.crs)</span>
+
+<span class="go">NameError: name &#39;edges&#39; is not defined</span>
+</pre></div>
+</div>
+<p>Okey, now we can confirm that as a result our street network indeed only contains such streets where it is allowed to drive with a car as there are no e.g. cycleways of footways included in the data.
+We can also see that the CRS of the GeoDataFrame seems to be WGS84 (i.e. epsg: 4326).</p>
+<p>Let’s continue and find the shortest path between two points based on the distance. As the data is in WGS84 format, we might first want to reproject our data into metric system so that our map looks better.
+Luckily there is a handy function in osmnx called <code class="docutils literal notranslate"><span class="pre">project_graph()</span></code> to project the graph data in UTM format.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [13]: </span><span class="n">graph_proj</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">project_graph</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-13-1dc9213ee568&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">graph_proj</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">project_graph</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;ox&#39; is not defined
+
+<span class="gp">In [14]: </span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">plot_graph</span><span class="p">(</span><span class="n">graph_proj</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                        ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-14-6fc1b15e7db8&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 fig, ax = ox.plot_graph(graph_proj)</span>
+
+<span class="go">NameError: name &#39;ox&#39; is not defined</span>
+
+<span class="gp">In [15]: </span><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/proj_graph.png"><img alt="../../_images/proj_graph.png" src="../../_images/proj_graph.png" style="width: 5in;" /></a>
+<ul class="simple">
+<li>Let’s see how our data looks like now.</li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [16]: </span><span class="n">nodes_proj</span><span class="p">,</span> <span class="n">edges_proj</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">graph_to_gdfs</span><span class="p">(</span><span class="n">graph_proj</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-16-592e516826c0&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">nodes_proj</span><span class="p">,</span> <span class="n">edges_proj</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">graph_to_gdfs</span><span class="p">(</span><span class="n">graph_proj</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;ox&#39; is not defined
+
+<span class="gp">In [17]: </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Coordinate system:&quot;</span><span class="p">,</span> <span class="n">edges_proj</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                 ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-17-f7c1c3156b7f&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 print(&quot;Coordinate system:&quot;, edges_proj.crs)</span>
+
+<span class="go">NameError: name &#39;edges_proj&#39; is not defined</span>
+
+<span class="gp">In [18]: </span><span class="n">edges_proj</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-18-62ace842b14d&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 edges_proj.head()</span>
+
+<span class="go">NameError: name &#39;edges_proj&#39; is not defined</span>
+</pre></div>
+</div>
+<p>Okey, as we can see from the CRS the data is now in <a class="reference external" href="https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system">UTM projection</a> using zone 35 which is the one used for Finland,
+and indeed the orientation of the map and the geometry values also confirm this.</p>
+<div class="section" id="analyzing-the-network-properties">
+<h2>Analyzing the network properties<a class="headerlink" href="#analyzing-the-network-properties" title="Permalink to this headline">¶</a></h2>
+<p>Now as we have seen some of the basic functionalities of osmnx such as downloading the data and converting data from graph to GeoDataFrame,
+we can take a look some of the analytical features of omsnx. Osmnx includes many useful functionalities to
+extract information about the network.</p>
+<ul class="simple">
+<li>To calculate some of the basic street network measures we can use <code class="docutils literal notranslate"><span class="pre">basic_stats()</span></code> function of osmnx</li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [19]: </span><span class="n">stats</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">basic_stats</span><span class="p">(</span><span class="n">graph_proj</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-19-ea6233ea7373&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">stats</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">basic_stats</span><span class="p">(</span><span class="n">graph_proj</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;ox&#39; is not defined
+
+<span class="gp">In [20]: </span><span class="n">stats</span>
+<span class="go">                                                                                                                                                                                                                                                                                      ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-20-1a184b985731&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 stats</span>
+
+<span class="go">NameError: name &#39;stats&#39; is not defined</span>
+</pre></div>
+</div>
+<p>To be able to extract the more advanced statistics (and some of the missing ones above) from the street network, it is required to have information
+about the coverage area of the network. Let’s calculate the area of the <a class="reference external" href="https://en.wikipedia.org/wiki/Convex_hull">convex hull</a> of the street network and see what we can get.
+As certain statistics are produced separately for each node, they produce a lot of output. Let’s merge both stats and put them into Pandas Series to keep things mroe compact.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [21]: </span><span class="n">area</span> <span class="o">=</span> <span class="n">edges_proj</span><span class="o">.</span><span class="n">unary_union</span><span class="o">.</span><span class="n">convex_hull</span><span class="o">.</span><span class="n">area</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-21-93a6b6961d20&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">area</span> <span class="o">=</span> <span class="n">edges_proj</span><span class="o">.</span><span class="n">unary_union</span><span class="o">.</span><span class="n">convex_hull</span><span class="o">.</span><span class="n">area</span>
+
+<span class="ne">NameError</span>: name &#39;edges_proj&#39; is not defined
+
+<span class="gp">In [22]: </span><span class="n">stats</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">basic_stats</span><span class="p">(</span><span class="n">graph_proj</span><span class="p">,</span> <span class="n">area</span><span class="o">=</span><span class="n">area</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                                          ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-22-74c49b1fbe08&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 stats = ox.basic_stats(graph_proj, area=area)</span>
+
+<span class="go">NameError: name &#39;ox&#39; is not defined</span>
+
+<span class="gp">In [23]: </span><span class="n">extended_stats</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">extended_stats</span><span class="p">(</span><span class="n">graph_proj</span><span class="p">,</span> <span class="n">ecc</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">bc</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">cc</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-23-1bfaf9a84bd5&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 extended_stats = ox.extended_stats(graph_proj, ecc=True, bc=True, cc=True)</span>
+
+<span class="go">NameError: name &#39;ox&#39; is not defined</span>
+
+<span class="gp">In [24]: </span><span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">extended_stats</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="gp">   ....: </span>    <span class="n">stats</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+<span class="gp">   ....: </span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-24-d8e85c0ea513&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 for key, value in extended_stats.items():</span>
+<span class="go">      2     stats[key] = value</span>
+
+<span class="go">NameError: name &#39;extended_stats&#39; is not defined</span>
+
+<span class="gp">In [25]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">stats</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-25-29f36c3c1406&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 pd.Series(stats)</span>
+
+<span class="go">NameError: name &#39;stats&#39; is not defined</span>
+</pre></div>
+</div>
+<p>Okey, now we have a <strong>LOT</strong> of information about our street network that can be used to understand its structure.
+We can for example see that the average node density in our network is <code class="docutils literal notranslate"><span class="pre">153</span> <span class="pre">nodes/km</span></code> and that the total edge length of our network is <code class="docutils literal notranslate"><span class="pre">19787.7</span> <span class="pre">meters</span></code>.
+Furthermore, we can see that the <a class="reference external" href="https://en.wikipedia.org/wiki/Centrality">degree centrality</a> of our network is
+on average <code class="docutils literal notranslate"><span class="pre">0.0334533</span></code>. Degree is a simple centrality measure that counts how many neighbors a node has (here a fraction of nodes it is connected to).
+Another interesting measure is the <a class="reference external" href="https://en.wikipedia.org/wiki/PageRank">PageRank</a> that measures the importance of specific node
+in the graph. Here we can see that the most important node in our graph seem to a node with osmid <code class="docutils literal notranslate"><span class="pre">25416262</span></code>.
+PageRank was the algorithm that Google first developed (Larry Page &amp; Sergei Brin) to order the search engine results and became famous for.</p>
+<p>You can read the <a class="reference external" href="https://en.wikipedia.org/wiki/Centrality">Wikipedia article about different centrality measures</a> if you are interested what the other centrality measures mean.</p>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">There are a lot of good examples of different ways to analyze the network properties with osmnx.
+Take a look at the <a class="reference external" href="https://github.com/gboeing/osmnx-examples">Osmnx examples repository</a>.</p>
+</div>
+</div>
+<div class="section" id="shortest-path-analysis">
+<h2>Shortest path analysis<a class="headerlink" href="#shortest-path-analysis" title="Permalink to this headline">¶</a></h2>
+<p>Let’s now calculate the shortest path between two points. First we need to specify the source and target locations
+for our route. Let’s use the centroid of our network as the source location and the furthest point in East in our network as the target location.</p>
+<p>Let’s first determine the centroid of our network. We can take advantage of the <code class="docutils literal notranslate"><span class="pre">bounds</span></code> attribute to find out the bounding boxes for each feature in our data. We then make a unary union of those features and make a bounding box geometry out of those values that enables us to determine the centroid of our data.</p>
+<ul class="simple">
+<li>This is what the bounds command gives us.</li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [26]: </span><span class="n">edges_proj</span><span class="o">.</span><span class="n">bounds</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-26-7c733b304ff4&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">edges_proj</span><span class="o">.</span><span class="n">bounds</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+
+<span class="ne">NameError</span>: name &#39;edges_proj&#39; is not defined
+</pre></div>
+</div>
+<p>Okey so it is a DataFrame of minimum and maximum x- and y coordinates.</p>
+<ul class="simple">
+<li>Let’s create a bounding box out of those.</li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [27]: </span><span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">box</span>
+
+<span class="gp">In [28]: </span><span class="n">bbox</span> <span class="o">=</span> <span class="n">box</span><span class="p">(</span><span class="o">*</span><span class="n">edges_proj</span><span class="o">.</span><span class="n">unary_union</span><span class="o">.</span><span class="n">bounds</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-28-8966184fc979&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">bbox</span> <span class="o">=</span> <span class="n">box</span><span class="p">(</span><span class="o">*</span><span class="n">edges_proj</span><span class="o">.</span><span class="n">unary_union</span><span class="o">.</span><span class="n">bounds</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;edges_proj&#39; is not defined
+
+<span class="gp">In [29]: </span><span class="k">print</span><span class="p">(</span><span class="n">bbox</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                                      ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-29-53e77a9d99fb&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 print(bbox)</span>
+
+<span class="go">NameError: name &#39;bbox&#39; is not defined</span>
+</pre></div>
+</div>
+<p>Okey so as a result we seem to have a Polygon, but what actually happened here? First of all, we took the Geometries from our <code class="docutils literal notranslate"><span class="pre">edges_proj</span></code> GeoDataFrame (123 features) and made a unary union of those features (as a result we have a MultiLineString).
+From the MultiLineString we can retrieve the maximum and minimum x and y coordinates of the geometry using the <code class="docutils literal notranslate"><span class="pre">bounds</span></code> attribute.
+The bounds command returns a tuple of four coordinates (minx, miny, maxx, maxy). As a final step we feed those coordinates into box() function that creates a shapely.Polygon object out of those coordinates.
+The * -character is used to unpack the values from the tuple (<a class="reference external" href="https://docs.python.org/3/tutorial/controlflow.html#unpacking-argument-lists">see details</a>)</p>
+<ul class="simple">
+<li>Now we can extract the centroid of our bounding box as the source location.</li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [30]: </span><span class="n">orig_point</span> <span class="o">=</span> <span class="n">bbox</span><span class="o">.</span><span class="n">centroid</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-30-7a4873ddc099&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">orig_point</span> <span class="o">=</span> <span class="n">bbox</span><span class="o">.</span><span class="n">centroid</span>
+
+<span class="ne">NameError</span>: name &#39;bbox&#39; is not defined
+
+<span class="gp">In [31]: </span><span class="k">print</span><span class="p">(</span><span class="n">orig_point</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-31-b086af955744&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 print(orig_point)</span>
+
+<span class="go">NameError: name &#39;orig_point&#39; is not defined</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Let’s now find the easternmost node in our street network. We can do this by calculating the x coordinates and finding out which node has the largest x-coordinate value. Let’s ensure that the values are floats.</li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [32]: </span><span class="n">nodes_proj</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nodes_proj</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-32-a93a008337a8&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">nodes_proj</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nodes_proj</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;nodes_proj&#39; is not defined
+
+<span class="gp">In [33]: </span><span class="n">maxx</span> <span class="o">=</span> <span class="n">nodes_proj</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="go">                                                                                                                                                                                                                                                                                                        ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-33-8d4d9ff8b650&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 maxx = nodes_proj[&#39;x&#39;].max()</span>
+
+<span class="go">NameError: name &#39;nodes_proj&#39; is not defined</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Let’s retrieve the target Point having the largest x-coordinate. We can do this by using the .loc function of Pandas that we have used already many times in earlier tutorials.</li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [34]: </span><span class="n">target_loc</span> <span class="o">=</span> <span class="n">nodes_proj</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">nodes_proj</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">maxx</span><span class="p">,</span> <span class="p">:]</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-34-f621adddc8e0&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">target_loc</span> <span class="o">=</span> <span class="n">nodes_proj</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">nodes_proj</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">maxx</span><span class="p">,</span> <span class="p">:]</span>
+
+<span class="ne">NameError</span>: name &#39;nodes_proj&#39; is not defined
+
+<span class="gp">In [35]: </span><span class="k">print</span><span class="p">(</span><span class="n">target_loc</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                 ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-35-7be5c3ba9d89&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 print(target_loc)</span>
+
+<span class="go">NameError: name &#39;target_loc&#39; is not defined</span>
+</pre></div>
+</div>
+<p>Okey now we can see that as a result we have a GeoDataFrame with only one node and the information associated with it.</p>
+<ul class="simple">
+<li>Let’s extract the Point geometry from the data.</li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [36]: </span><span class="n">target_point</span> <span class="o">=</span> <span class="n">target_loc</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-36-767a3379b93a&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">target_point</span> <span class="o">=</span> <span class="n">target_loc</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="ne">NameError</span>: name &#39;target_loc&#39; is not defined
+
+<span class="gp">In [37]: </span><span class="k">print</span><span class="p">(</span><span class="n">target_point</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                                        ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-37-e9287086c9fb&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 print(target_point)</span>
+
+<span class="go">NameError: name &#39;target_point&#39; is not defined</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Let’s now find the nearest graph nodes (and their node-ids) to these points. For osmnx we need to parse the coordinates of the Point as coordinate-tuple with Latitude, Longitude coordinates.</li>
+</ul>
+<p>As our data is now projected to UTM projection, we need to specify with <code class="docutils literal notranslate"><span class="pre">method</span></code> parameter that the function uses
+‘euclidean’ distances to calculate the distance from the point to the closest node.
+This becomes important if you want to know the actual distance between the Point and the closest node which you can retrieve by specifying parameter <code class="docutils literal notranslate"><span class="pre">return_dist=True</span></code>.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [38]: </span><span class="n">orig_xy</span> <span class="o">=</span> <span class="p">(</span><span class="n">orig_point</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">orig_point</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-38-4fe8e6b6f0b1&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">orig_xy</span> <span class="o">=</span> <span class="p">(</span><span class="n">orig_point</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">orig_point</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;orig_point&#39; is not defined
+
+<span class="gp">In [39]: </span><span class="n">target_xy</span> <span class="o">=</span> <span class="p">(</span><span class="n">target_point</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">target_point</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                                  ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-39-12f628946822&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 target_xy = (target_point.y, target_point.x)</span>
+
+<span class="go">NameError: name &#39;target_point&#39; is not defined</span>
+
+<span class="gp">In [40]: </span><span class="n">orig_node</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">get_nearest_node</span><span class="p">(</span><span class="n">graph_proj</span><span class="p">,</span> <span class="n">orig_xy</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;euclidean&#39;</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-40-204a902edb49&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 orig_node = ox.get_nearest_node(graph_proj, orig_xy, method=&#39;euclidean&#39;)</span>
+
+<span class="go">NameError: name &#39;ox&#39; is not defined</span>
+
+<span class="gp">In [41]: </span><span class="n">target_node</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">get_nearest_node</span><span class="p">(</span><span class="n">graph_proj</span><span class="p">,</span> <span class="n">target_xy</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;euclidean&#39;</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-41-83ddd688182f&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 target_node = ox.get_nearest_node(graph_proj, target_xy, method=&#39;euclidean&#39;)</span>
+
+<span class="go">NameError: name &#39;ox&#39; is not defined</span>
+
+<span class="gp">In [42]: </span><span class="n">o_closest</span> <span class="o">=</span> <span class="n">nodes_proj</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">orig_node</span><span class="p">]</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-42-9026e9a2db8f&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 o_closest = nodes_proj.loc[orig_node]</span>
+
+<span class="go">NameError: name &#39;nodes_proj&#39; is not defined</span>
+
+<span class="gp">In [43]: </span><span class="n">t_closest</span> <span class="o">=</span> <span class="n">nodes_proj</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">target_node</span><span class="p">]</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-43-3cffc340419a&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 t_closest = nodes_proj.loc[target_node]</span>
+
+<span class="go">NameError: name &#39;nodes_proj&#39; is not defined</span>
+
+<span class="gp">In [44]: </span><span class="k">print</span><span class="p">(</span><span class="n">orig_node</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-44-d57e9c62020e&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 print(orig_node)</span>
+
+<span class="go">NameError: name &#39;orig_node&#39; is not defined</span>
+
+<span class="gp">In [45]: </span><span class="k">print</span><span class="p">(</span><span class="n">target_node</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-45-ff46ea287d2c&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 print(target_node)</span>
+
+<span class="go">NameError: name &#39;target_node&#39; is not defined</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Let’s make a GeoDataFrame out of these series</li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [46]: </span><span class="n">od_nodes</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">([</span><span class="n">o_closest</span><span class="p">,</span> <span class="n">t_closest</span><span class="p">],</span> <span class="n">geometry</span><span class="o">=</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="n">nodes_proj</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-46-ccbbec43a13a&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">od_nodes</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">([</span><span class="n">o_closest</span><span class="p">,</span> <span class="n">t_closest</span><span class="p">],</span> <span class="n">geometry</span><span class="o">=</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="n">nodes_proj</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;o_closest&#39; is not defined
+</pre></div>
+</div>
+<p>Okey, as a result we got now the closest node-ids of our origin and target locations.</p>
+<ul class="simple">
+<li>Now we are ready to do the routing and find the shortest path between the origin and target locations</li>
+</ul>
+<p>by using the <code class="docutils literal notranslate"><span class="pre">shortest_path()</span></code> <a class="reference external" href="https://networkx.github.io/documentation/networkx-1.10/reference/generated/networkx.algorithms.shortest_paths.generic.shortest_path.html">function</a> of networkx.
+With <code class="docutils literal notranslate"><span class="pre">weight</span></code> -parameter we can specify that <code class="docutils literal notranslate"><span class="pre">'length'</span></code> attribute should be used as the cost impedance in the routing.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [47]: </span><span class="n">route</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">shortest_path</span><span class="p">(</span><span class="n">G</span><span class="o">=</span><span class="n">graph_proj</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">orig_node</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">target_node</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s1">&#39;length&#39;</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-47-14fd94c75242&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">route</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">shortest_path</span><span class="p">(</span><span class="n">G</span><span class="o">=</span><span class="n">graph_proj</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">orig_node</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">target_node</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s1">&#39;length&#39;</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;nx&#39; is not defined
+
+<span class="gp">In [48]: </span><span class="k">print</span><span class="p">(</span><span class="n">route</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                 ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-48-544347202193&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 print(route)</span>
+
+<span class="go">NameError: name &#39;route&#39; is not defined</span>
+</pre></div>
+</div>
+<p>Okey, as a result we get a list of all the nodes that are along the shortest path. We could extract the locations of those nodes from the <code class="docutils literal notranslate"><span class="pre">nodes_proj</span></code> GeoDataFrame and create a LineString presentation of the points,
+but luckily, osmnx can do that for us and we can plot shortest path by using <code class="docutils literal notranslate"><span class="pre">plot_graph_route()</span></code> function.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [49]: </span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">plot_graph_route</span><span class="p">(</span><span class="n">graph_proj</span><span class="p">,</span> <span class="n">route</span><span class="p">,</span> <span class="n">origin_point</span><span class="o">=</span><span class="n">orig_xy</span><span class="p">,</span> <span class="n">destination_point</span><span class="o">=</span><span class="n">target_xy</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-49-2d7102a316df&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">plot_graph_route</span><span class="p">(</span><span class="n">graph_proj</span><span class="p">,</span> <span class="n">route</span><span class="p">,</span> <span class="n">origin_point</span><span class="o">=</span><span class="n">orig_xy</span><span class="p">,</span> <span class="n">destination_point</span><span class="o">=</span><span class="n">target_xy</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;ox&#39; is not defined
+
+<span class="gp">In [50]: </span><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/routing.png"><img alt="../../_images/routing.png" src="../../_images/routing.png" style="width: 5in;" /></a>
+<p>Awesome! Now we have a the shortest path between our origin and target locations.
+Being able to analyze shortest paths between locations can be valuable information for many applications.
+Here, we only analyzed the shortest paths based on distance but quite often it is more useful to find the
+optimal routes between locations based on the travelled time. Here, for example we could calculate the time that it takes
+to cross each road segment by dividing the length of the road segment with the speed limit and calculate the optimal routes by
+taking into account the speed limits as well that might alter the result especially on longer trips than here.</p>
+</div>
+<div class="section" id="saving-shortest-paths-to-disk">
+<h2>Saving shortest paths to disk<a class="headerlink" href="#saving-shortest-paths-to-disk" title="Permalink to this headline">¶</a></h2>
+<p>Quite often you need to save the route e.g. as a Shapefile.
+Hence, let’s continue still a bit and see how we can make a Shapefile of our route with some information associated with it.</p>
+<ul class="simple">
+<li>First we need to get the nodes that belong to the shortest path.</li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [51]: </span><span class="n">route_nodes</span> <span class="o">=</span> <span class="n">nodes_proj</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">route</span><span class="p">]</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-51-20eeec428856&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">route_nodes</span> <span class="o">=</span> <span class="n">nodes_proj</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">route</span><span class="p">]</span>
+
+<span class="ne">NameError</span>: name &#39;nodes_proj&#39; is not defined
+
+<span class="gp">In [52]: </span><span class="k">print</span><span class="p">(</span><span class="n">route_nodes</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                               ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-52-4bc24f683008&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 print(route_nodes)</span>
+
+<span class="go">NameError: name &#39;route_nodes&#39; is not defined</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Now we can create a LineString out of the Point geometries of the nodes</li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [53]: </span><span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">LineString</span><span class="p">,</span> <span class="n">Point</span>
+
+<span class="gp">In [54]: </span><span class="n">route_line</span> <span class="o">=</span> <span class="n">LineString</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">route_nodes</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">values</span><span class="p">))</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-54-cde4f4559acf&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">route_line</span> <span class="o">=</span> <span class="n">LineString</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">route_nodes</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">values</span><span class="p">))</span>
+
+<span class="ne">NameError</span>: name &#39;route_nodes&#39; is not defined
+
+<span class="gp">In [55]: </span><span class="k">print</span><span class="p">(</span><span class="n">route_line</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                       ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-55-c3c6500f93b3&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 print(route_line)</span>
+
+<span class="go">NameError: name &#39;route_line&#39; is not defined</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Let’s make a GeoDataFrame having some useful information about our route such as a list of the osmids that are part of the route and the length of the route.</li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [56]: </span><span class="n">route_geom</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">crs</span><span class="o">=</span><span class="n">edges_proj</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-56-d0a9086e68af&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">route_geom</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">crs</span><span class="o">=</span><span class="n">edges_proj</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;edges_proj&#39; is not defined
+
+<span class="gp">In [57]: </span><span class="n">route_geom</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="go">                                                                                                                                                                                                                                                                                                             ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-57-4e4fbf92b5ef&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 route_geom[&#39;geometry&#39;] = None</span>
+
+<span class="go">NameError: name &#39;route_geom&#39; is not defined</span>
+
+<span class="gp">In [58]: </span><span class="n">route_geom</span><span class="p">[</span><span class="s1">&#39;osmids&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-58-e69a0564ee3c&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 route_geom[&#39;osmids&#39;] = None</span>
+
+<span class="go">NameError: name &#39;route_geom&#39; is not defined</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Let’s add the information: geometry, a list of osmids and the length of the route.</li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [59]: </span><span class="n">route_geom</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">route_line</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-59-f33bd87f8cf8&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">route_geom</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">route_line</span>
+
+<span class="ne">NameError</span>: name &#39;route_line&#39; is not defined
+
+<span class="gp">In [60]: </span><span class="n">route_geom</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;osmids&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">route_nodes</span><span class="p">[</span><span class="s1">&#39;osmid&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">))</span>
+<span class="go">                                                                                                                                                                                                                                                                                                      ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-60-69741bea798e&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 route_geom.loc[0, &#39;osmids&#39;] = str(list(route_nodes[&#39;osmid&#39;].values))</span>
+
+<span class="go">NameError: name &#39;route_nodes&#39; is not defined</span>
+
+<span class="gp">In [61]: </span><span class="n">route_geom</span><span class="p">[</span><span class="s1">&#39;length_m&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">route_geom</span><span class="o">.</span><span class="n">length</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-61-2766a6bd46a8&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 route_geom[&#39;length_m&#39;] = route_geom.length</span>
+
+<span class="go">NameError: name &#39;route_geom&#39; is not defined</span>
+</pre></div>
+</div>
+<p>Now we have a GeoDataFrame that we can save to disk. Let’s still confirm that everything is okey by plotting our route
+on top of our street network, and plot also the origin and target points on top of our map.</p>
+<ul class="simple">
+<li>Let’s first prepare a GeoDataFrame for our origin and target points.</li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [62]: </span><span class="n">od_points</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">crs</span><span class="o">=</span><span class="n">edges_proj</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-62-48a651fcb170&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">od_points</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">crs</span><span class="o">=</span><span class="n">edges_proj</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;edges_proj&#39; is not defined
+
+<span class="gp">In [63]: </span><span class="n">od_points</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="go">                                                                                                                                                                                                                                                                                                            ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-63-e91fa0e5a655&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 od_points[&#39;geometry&#39;] = None</span>
+
+<span class="go">NameError: name &#39;od_points&#39; is not defined</span>
+
+<span class="gp">In [64]: </span><span class="n">od_points</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-64-abb036819171&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 od_points[&#39;type&#39;] = None</span>
+
+<span class="go">NameError: name &#39;od_points&#39; is not defined</span>
+
+<span class="gp">In [65]: </span><span class="n">od_points</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">orig_point</span><span class="p">,</span> <span class="s1">&#39;Origin&#39;</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-65-c0a7ab9ac53d&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 od_points.loc[0, [&#39;geometry&#39;, &#39;type&#39;]] = orig_point, &#39;Origin&#39;</span>
+
+<span class="go">NameError: name &#39;orig_point&#39; is not defined</span>
+
+<span class="gp">In [66]: </span><span class="n">od_points</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">target_point</span><span class="p">,</span> <span class="s1">&#39;Target&#39;</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-66-bed80fa5faec&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 od_points.loc[1, [&#39;geometry&#39;, &#39;type&#39;]] = target_point, &#39;Target&#39;</span>
+
+<span class="go">NameError: name &#39;target_point&#39; is not defined</span>
+
+<span class="gp">In [67]: </span><span class="n">od_points</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-67-f8d012ff3dc9&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 od_points.head()</span>
+
+<span class="go">NameError: name &#39;od_points&#39; is not defined</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Let’s also get the buildings for our area and plot them as well.</li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [68]: </span><span class="n">buildings</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">buildings_from_place</span><span class="p">(</span><span class="n">place_name</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-68-5cba73cb9448&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">buildings</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">buildings_from_place</span><span class="p">(</span><span class="n">place_name</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;ox&#39; is not defined
+
+<span class="gp">In [69]: </span><span class="n">buildings_proj</span> <span class="o">=</span> <span class="n">buildings</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">crs</span><span class="o">=</span><span class="n">edges_proj</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                                   ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-69-58d73220fae6&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 buildings_proj = buildings.to_crs(crs=edges_proj.crs)</span>
+
+<span class="go">NameError: name &#39;buildings&#39; is not defined</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Let’s now plot the route and the street network elements to verify that everything is as it should.</li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [70]: </span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="gp">In [71]: </span><span class="n">edges_proj</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-71-58c3b0555989&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">edges_proj</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;edges_proj&#39; is not defined
+
+<span class="gp">In [72]: </span><span class="n">nodes_proj</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-72-2bea27872292&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 nodes_proj.plot(ax=ax, markersize=2, color=&#39;gray&#39;)</span>
+
+<span class="go">NameError: name &#39;nodes_proj&#39; is not defined</span>
+
+<span class="gp">In [73]: </span><span class="n">buildings_proj</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;khaki&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-73-93a53bbddd36&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 buildings_proj.plot(ax=ax, facecolor=&#39;khaki&#39;, alpha=0.7)</span>
+
+<span class="go">NameError: name &#39;buildings_proj&#39; is not defined</span>
+
+<span class="gp">In [74]: </span><span class="n">route_geom</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-74-0e120fbd2e10&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 route_geom.plot(ax=ax, linewidth=4, linestyle=&#39;--&#39;, color=&#39;red&#39;)</span>
+
+<span class="go">NameError: name &#39;route_geom&#39; is not defined</span>
+
+<span class="gp">In [75]: </span><span class="n">od_points</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-75-0a0c636e7cf0&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 od_points.plot(ax=ax, markersize=24, color=&#39;green&#39;)</span>
+
+<span class="go">NameError: name &#39;od_points&#39; is not defined</span>
+
+<span class="gp">In [76]: </span><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/routing_with_buildings.png"><img alt="../../_images/routing_with_buildings.png" src="../../_images/routing_with_buildings.png" style="width: 6in;" /></a>
+<p>Great everything seems to be in order! As you can see, now we have a full
+control of all the elements of our map and we can use all the aesthetic
+properties that matplotlib provides to modify how our map will look like.
+Now we can save to disk all the elements that we want.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Parse the place name for the output file names (replace spaces with underscores and remove commas)</span>
+<span class="gp">In [77]: </span><span class="n">place_name_out</span> <span class="o">=</span> <span class="n">place_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+<span class="gp">In [78]: </span><span class="n">streets_out</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;/home/geo/</span><span class="si">%s</span><span class="s2">_streets.shp&quot;</span> <span class="o">%</span> <span class="n">place_name_out</span>
+
+<span class="gp">In [79]: </span><span class="n">route_out</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;/home/geo/Route_from_a_to_b_at_</span><span class="si">%s</span><span class="s2">.shp&quot;</span> <span class="o">%</span> <span class="n">place_name_out</span>
+
+<span class="gp">In [80]: </span><span class="n">nodes_out</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;/home/geo/</span><span class="si">%s</span><span class="s2">_nodes.shp&quot;</span> <span class="o">%</span> <span class="n">place_name_out</span>
+
+<span class="gp">In [81]: </span><span class="n">buildings_out</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;/home/geo/</span><span class="si">%s</span><span class="s2">_buildings.shp&quot;</span> <span class="o">%</span> <span class="n">place_name_out</span>
+
+<span class="gp">In [82]: </span><span class="n">od_out</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;/home/geo/</span><span class="si">%s</span><span class="s2">_route_OD_points.shp&quot;</span> <span class="o">%</span> <span class="n">place_name_out</span>
+</pre></div>
+</div>
+<p>As there are certain columns with such data values that Shapefile format does not support (such as <code class="docutils literal notranslate"><span class="pre">list</span></code> or <code class="docutils literal notranslate"><span class="pre">boolean</span></code>), we need to convert those into strings to be able to export the data to Shapefile.</p>
+<ul class="simple">
+<li>Columns with invalid values</li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [83]: </span><span class="n">invalid_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lanes&#39;</span><span class="p">,</span> <span class="s1">&#39;maxspeed&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;oneway&#39;</span><span class="p">,</span> <span class="s1">&#39;osmid&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Iterate over invalid columns and convert them to string format</li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [84]: </span><span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">invalid_cols</span><span class="p">:</span>
+<span class="gp">   ....: </span>    <span class="n">edges_proj</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">edges_proj</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<span class="gp">   ....: </span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-84-6edb75fcf559&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">invalid_cols</span><span class="p">:</span>
+<span class="ne">----&gt; </span><span class="mi">2</span>     <span class="n">edges_proj</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">edges_proj</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;edges_proj&#39; is not defined
+</pre></div>
+</div>
+<ul class="simple">
+<li>Save the data</li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [85]: </span><span class="n">edges_proj</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">streets_out</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-85-fb10a4a52626&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">edges_proj</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">streets_out</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;edges_proj&#39; is not defined
+
+<span class="gp">In [86]: </span><span class="n">route_geom</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">route_out</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                           ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-86-2c929e1f8e92&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 route_geom.to_file(route_out)</span>
+
+<span class="go">NameError: name &#39;route_geom&#39; is not defined</span>
+
+<span class="gp">In [87]: </span><span class="n">nodes_proj</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">nodes_out</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-87-30e09433071a&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 nodes_proj.to_file(nodes_out)</span>
+
+<span class="go">NameError: name &#39;nodes_proj&#39; is not defined</span>
+
+<span class="gp">In [88]: </span><span class="n">od_points</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">od_out</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-88-e0bca6ac1fea&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 od_points.to_file(od_out)</span>
+
+<span class="go">NameError: name &#39;od_points&#39; is not defined</span>
+
+<span class="gp">In [89]: </span><span class="n">buildings</span><span class="p">[[</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;addr:street&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">buildings_out</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-89-86e19d295d46&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 buildings[[&#39;geometry&#39;, &#39;name&#39;, &#39;addr:street&#39;]].to_file(buildings_out)</span>
+
+<span class="go">NameError: name &#39;buildings&#39; is not defined</span>
+</pre></div>
+</div>
+<p>Great now we have saved all the data that was used to produce the maps as Shapefiles.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Henrikki Tenkanen
+      Last updated on Dec 02, 2018.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+    <p> <br/> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /> </a></p>
+     
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: master
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../../2017/index.html">2017</a></dd>
+            <dd><a href="../../develop/lessons/L6/network-analysis.html">develop</a></dd>
+            <dd><a href="../../drafts/index.html">drafts</a></dd>
+            <dd><a href="../../master/lessons/L6/network-analysis.html">master</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'2018',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

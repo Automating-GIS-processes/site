@@ -1,0 +1,1029 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-88382509-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Retrieving OpenStreetMap data &mdash; AutoGIS 2018 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Exercise 6" href="../../lessons/L6/exercise-6.html" />
+    <link rel="prev" title="Overview" href="../../lessons/L6/overview.html" />
+    <link href="../../_static/geo-python.css" rel="stylesheet" type="text/css">
+     
+
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> AutoGIS
+          
+
+          
+            
+            <img src="../../_static/logo_hy_geo_135.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2018
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Course information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/course-info.html">General info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/course-environment-components.html">Course environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/grading.html">Grading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/learning-goals.html">Learning goals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/Installing_Anacondas_GIS.html">Installing Python + GIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/License-terms.html">License and terms of usage</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 1</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L1/Intro-Python-GIS.html">Motivation for the course</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L1/overview.html">Lesson overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1/geometric-objects.html">Geometric objects - Spatial data model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L1/exercise-1.html">Exercise 1</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 2</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L2/overview.html">Lesson 2 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/geopandas-basics.html">Introduction to Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/projections.html">Map projections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L2/exercise-2.html">Exercise 2</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 3</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L3/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L3/geocoding.html">Geocoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L3/geocoding_in_geopandas.html">Geocoding in Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L3/point-in-polygon.html">Point in Polygon &amp; Intersect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L3/spatial-join.html">Spatial join</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L3/nearest-neighbour.html">Nearest Neighbour Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L3/exercise-3.html">Exercise 3</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 4</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L4/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L4/reclassify.html">Data reclassification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L4/geometric-operations.html">Geometric operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L4/exercise-4.html">Exercise 4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L4/exercise-4.html#exercise-4-hints">Exercise 4 hints</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 5</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L5/overview.html">Lesson 5 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/static_maps.html">Static maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/interactive-map-folium.html">Interactive maps on Leaflet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L5/share-on-github.html">Sharing interactive plots on GitHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L5/exercise-5.html">Exercise 5</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 6</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L6/overview.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Retrieving OpenStreetMap data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#What-is-OpenStreetMap?">What is OpenStreetMap?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#OSMnx">OSMnx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Download-and-visualize-OpenStreetMap-data-with-OSMnx">Download and visualize OpenStreetMap data with OSMnx</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L6/exercise-6.html">Exercise 6</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AutoGIS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Retrieving OpenStreetMap data</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/Automating-GIS-processes/2018/blob/master/source/notebooks/L6/retrieve_osm_data.ipynb" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+
+
+
+
+
+
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #303F9F;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #D84315;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 8ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: #f7f7f7;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.pngmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="admonition note">
+This page was generated from <a class="reference external" href="https://github.com/Automating-GIS-processes/2018/blob/master/source/notebooks/L6/retrieve_osm_data.ipynb">source/notebooks/L6/retrieve_osm_data.ipynb</a>.
+<span class="raw-html"><br/><a href="https://mybinder.org/v2/gh/Automating-GIS-processes/2018/master?urlpath=lab/tree/source/notebooks/L6/retrieve_osm_data.ipynb"><img alt="Binder badge" src="https://img.shields.io/badge/launch-full%20binder-red.svg" style="vertical-align:text-bottom"></a></span>
+<span class="raw-html"><a href="https://mybinder.org/v2/gh/Automating-GIS-processes/notebooks/master?urlpath=lab/tree/notebooks/L6/retrieve_osm_data.ipynb"><img alt="Binder badge" src="https://img.shields.io/badge/launch-student%20binder-red.svg" style="vertical-align:text-bottom"></a></span>
+<span class="raw-html"><a href="https://notebooks.csc.fi/#/blueprint/d71cd2d26d924f48820dc22b67a87d8e"><img alt="CSC badge" src="https://img.shields.io/badge/launch-CSC%20notebook-blue.svg" style="vertical-align:text-bottom"></a></span></div>
+<div class="section" id="Retrieving-OpenStreetMap-data">
+<h1>Retrieving OpenStreetMap data<a class="headerlink" href="#Retrieving-OpenStreetMap-data" title="Permalink to this headline">¶</a></h1>
+<p><img alt="image0" src="../../_images/OSM_logo1.png" /></p>
+<div class="section" id="What-is-OpenStreetMap?">
+<h2>What is OpenStreetMap?<a class="headerlink" href="#What-is-OpenStreetMap?" title="Permalink to this headline">¶</a></h2>
+<p>OpenStreetMap (OSM) is a global collaborative (crowd-sourced) dataset
+and project that aims at creating a free editable map of the world
+containing a lot of information about our environment. It contains data
+for example about streets, buildings, different services, and landuse to
+mention a few.</p>
+<p>OSM has a large userbase with more than 4 million users and over a
+million contributers that update actively the OSM database with 3
+million changesets per day. In total OSM contains more than 4 billion
+nodes that form the basis of the digitally mapped world that OSM
+provides (<a class="reference external" href="http://wiki.openstreetmap.org/wiki/Stats">stats from November
+2017</a>).</p>
+<p>OpenStreetMap is used not only for integrating the <strong>OSM maps</strong> as
+background maps to visualizations or online maps, but also for many
+other purposes such as <strong>routing</strong>, <strong>geocoding</strong>, <strong>education</strong>, and
+<strong>research</strong>. OSM is also widely used for humanitarian response e.g.&nbsp;in
+crisis areas (e.g.&nbsp;after natural disasters) and for fostering economic
+development (see more from <a class="reference external" href="https://www.hotosm.org">Humanitarian OpenStreetMap Team (HOTOSM)
+website</a>).</p>
+</div>
+<div class="section" id="OSMnx">
+<h2>OSMnx<a class="headerlink" href="#OSMnx" title="Permalink to this headline">¶</a></h2>
+<p>This week we will explore a Python module called
+<a class="reference external" href="https://github.com/gboeing/osmnx">OSMnx</a> that can be used to
+retrieve, construct, analyze, and visualize street networks from
+OpenStreetMap, and also retrieve data about Points of Interest such as
+restaurants, schools, and lots of different kind of services. It is also
+easy to conduct network routing based on walking, cycling or driving by
+combining OSMnx functionalities with a package called
+<a class="reference external" href="https://networkx.github.io/documentation/stable/">NetworkX</a>.</p>
+<p>To get an overview of the capabilities of the package, see an
+introductory video given by the lead developer of the package,
+Prof.&nbsp;Geoff Boeing: <a class="reference external" href="https://www.youtube.com/watch?v=Q0uxu25ddc4&amp;list=PLs9D4XVqc6dCAhhvhZB7aHGD8fCeCC_6N">“Meet the developer: Introduction to OSMnx package
+by Geoff
+Boeing”</a>.</p>
+<p>There is also a scientific article available describing the package:</p>
+<ul class="simple">
+<li>Boeing, G. 2017. <a class="reference external" href="https://www.researchgate.net/publication/309738462_OSMnx_New_Methods_for_Acquiring_Constructing_Analyzing_and_Visualizing_Complex_Street_Networks">“OSMnx: New Methods for Acquiring, Constructing,
+Analyzing, and Visualizing Complex Street
+Networks.”</a>
+Computers, Environment and Urban Systems 65, 126-139.
+doi:10.1016/j.compenvurbsys.2017.05.004</li>
+</ul>
+</div>
+<div class="section" id="Download-and-visualize-OpenStreetMap-data-with-OSMnx">
+<h2>Download and visualize OpenStreetMap data with OSMnx<a class="headerlink" href="#Download-and-visualize-OpenStreetMap-data-with-OSMnx" title="Permalink to this headline">¶</a></h2>
+<p>One the most useful features that OSMnx provides is an easy-to-use way
+of retrieving <a class="reference external" href="http://www.openstreetmap.org">OpenStreetMap</a> data
+(using <a class="reference external" href="http://wiki.openstreetmap.org/wiki/Overpass_API">OverPass
+API</a>).</p>
+<p>In this tutorial, we will learn how to download and visualize OSM data
+covering a specified area of interest: a district of Kamppi in Helsinki,
+Finland.</p>
+<p>OSMnx makes it really easy to do that as it allows you to specify an
+address to retrieve the OpenStreetMap data around that area. In fact,
+OSMnx uses the same Nominatim Geocoding API to do this, which we tested
+during the Lesson 2.</p>
+<ul class="simple">
+<li>Let’s retrieve OpenStreetMap (OSM) data by specifying
+<code class="docutils literal notranslate"><span class="pre">&quot;Kamppi,</span> <span class="pre">Helsinki,</span> <span class="pre">Finland&quot;</span></code> as the address where the data should
+be downloaded.</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">osmnx</span> <span class="kn">as</span> <span class="nn">ox</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="c1"># Specify the name that is used to seach for the data</span>
+<span class="n">place_name</span> <span class="o">=</span> <span class="s2">&quot;Kamppi, Helsinki, Finland&quot;</span>
+
+<span class="c1"># Fetch OSM street network from the location</span>
+<span class="n">graph</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">graph_from_place</span><span class="p">(</span><span class="n">place_name</span><span class="p">)</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[2]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>networkx.classes.multidigraph.MultiDiGraph
+</pre></div>
+</div>
+</div>
+<p>Okey, as we can see the data that we retrieved is a special data object
+called <code class="docutils literal notranslate"><span class="pre">networkx.classes.multidigraph.MultiDiGraph</span></code>. A DiGraph is a
+data type that stores nodes and edges with optional data, or attributes.
+What we can see here is that this data type belongs to a Python module
+called <a class="reference external" href="https://networkx.github.io/documentation/stable/">networkx</a>
+that can be used to create, manipulate, and study the structure,
+dynamics, and functions of complex networks. Networkx module contains
+algorithms that can be used to calculate <a class="reference external" href="https://networkx.github.io/documentation/networkx-1.10/reference/algorithms.shortest_paths.html">shortest
+paths</a>
+along road networks using
+e.g.&nbsp;<a class="reference external" href="https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm">Dijkstra’s</a>
+or <a class="reference external" href="https://en.wikipedia.org/wiki/A*_search_algorithm">A*
+algorithm</a>.</p>
+<ul class="simple">
+<li>Let’s see how our street network looks like. It is easy to visualize
+the graph with osmnx with <code class="docutils literal notranslate"><span class="pre">plot_graph()</span></code> function. The function
+utilizes Matplotlib for visualizing the data, hence as a result it
+returns a matplotlib figure and axis objects:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Plot the streets</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">plot_graph</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L6_retrieve_osm_data_5_0.png" src="../../_images/notebooks_L6_retrieve_osm_data_5_0.png" />
+</div>
+</div>
+<p>Great! Now we can see that our graph contains the nodes (blue circles)
+and the edges (gray lines) that connects those nodes to each other.</p>
+<p>It is also possible to retrieve other types of OSM data features with
+osmnx such as buildings or points of interest (POIs).</p>
+<ul class="simple">
+<li>Let’s download the buildings with <code class="docutils literal notranslate"><span class="pre">buildings_from_place()</span></code>
+-function and plot them on top of our street network in Kamppi. Let’s
+also plot the Polygon that represents the area of Kamppi, Helsinki
+that can be retrieved with <code class="docutils literal notranslate"><span class="pre">gdf_from_place</span></code> -function.</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Retrieve the footprint of our location</span>
+<span class="n">area</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">gdf_from_place</span><span class="p">(</span><span class="n">place_name</span><span class="p">)</span>
+
+<span class="c1"># Retrieve buildings from the area</span>
+<span class="n">buildings</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">buildings_from_place</span><span class="p">(</span><span class="n">place_name</span><span class="p">)</span>
+
+<span class="c1"># What types are those?</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">area</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">buildings</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;class &#39;geopandas.geodataframe.GeoDataFrame&#39;&gt;
+&lt;class &#39;geopandas.geodataframe.GeoDataFrame&#39;&gt;
+</pre></div></div>
+</div>
+<p>As a result we got the data as GeoDataFrames.</p>
+<p>OSMnx has a nice function called <code class="docutils literal notranslate"><span class="pre">ox.pois_from_place()</span></code> that can be
+used in a similar manner as the previous function to retrieve specific
+POI data from OpenStreetMap such as <code class="docutils literal notranslate"><span class="pre">restaurants</span></code>. With parameter
+<code class="docutils literal notranslate"><span class="pre">amenities</span></code> we can pass a list of OSM amenity categories that we are
+interested in retrieving.</p>
+<ul class="simple">
+<li>Let’s also retrieve restaurants that are located on the area:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Retrieve restaurants</span>
+<span class="n">restaurants</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">pois_from_place</span><span class="p">(</span><span class="n">place_name</span><span class="p">,</span> <span class="n">amenities</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;restaurant&#39;</span><span class="p">])</span>
+
+<span class="c1"># How many restaurants do we have?</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">restaurants</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[8]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>199
+</pre></div>
+</div>
+</div>
+<p>As we can see, there exist quite many restaurants in the area.</p>
+<ul class="simple">
+<li>Let’s explore what kind of attributes we have in our restaurants
+GeoDataFrame</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Available columns</span>
+<span class="n">restaurants</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[9]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Index([&#39;access:dog&#39;, &#39;addr:city&#39;, &#39;addr:country&#39;, &#39;addr:floor&#39;,
+       &#39;addr:housename&#39;, &#39;addr:housenumber&#39;, &#39;addr:place&#39;, &#39;addr:postcode&#39;,
+       &#39;addr:street&#39;, &#39;address&#39;, &#39;alt_name&#39;, &#39;amenity&#39;, &#39;brunch&#39;, &#39;capacity&#39;,
+       &#39;contact:email&#39;, &#39;contact:foursquare&#39;, &#39;contact:phone&#39;,
+       &#39;contact:website&#39;, &#39;contact:yelp&#39;, &#39;created_by&#39;, &#39;cuisine&#39;, &#39;delivery&#39;,
+       &#39;description&#39;, &#39;description:en&#39;, &#39;diet:vegan&#39;, &#39;diet:vegetarian&#39;,
+       &#39;element_type&#39;, &#39;email&#39;, &#39;entrance&#39;, &#39;established&#39;, &#39;geometry&#39;,
+       &#39;highchair&#39;, &#39;internet_access&#39;, &#39;is_in&#39;, &#39;layer&#39;, &#39;level&#39;, &#39;lunch&#39;,
+       &#39;name&#39;, &#39;name:en&#39;, &#39;name:fi&#39;, &#39;name:sv&#39;, &#39;name:zh&#39;, &#39;note&#39;, &#39;office&#39;,
+       &#39;opening_hours&#39;, &#39;opening_hours:brunch&#39;, &#39;opening_hours:lunch&#39;,
+       &#39;opening_hours:lunch_buffet&#39;, &#39;operator&#39;, &#39;osmid&#39;, &#39;outdoor_seating&#39;,
+       &#39;phone&#39;, &#39;ref:vatin&#39;, &#39;shop&#39;, &#39;smoking&#39;, &#39;source&#39;, &#39;takeaway&#39;,
+       &#39;toilets:wheelchair&#39;, &#39;url&#39;, &#39;was:name&#39;, &#39;website&#39;, &#39;website:en&#39;,
+       &#39;wheelchair&#39;, &#39;wheelchair:description&#39;, &#39;wikidata&#39;, &#39;building&#39;,
+       &#39;nodes&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+<p>Wow, there exists quite a lot of information related to the POIs. One of
+the useful ones might be for example the <code class="docutils literal notranslate"><span class="pre">name</span></code>,
+<code class="docutils literal notranslate"><span class="pre">address</span> <span class="pre">information</span></code> and <code class="docutils literal notranslate"><span class="pre">opening_hours</span></code> information:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Select some useful cols and print</span>
+<span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;opening_hours&#39;</span><span class="p">,</span> <span class="s1">&#39;addr:city&#39;</span><span class="p">,</span> <span class="s1">&#39;addr:country&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;addr:housenumber&#39;</span><span class="p">,</span> <span class="s1">&#39;addr:postcode&#39;</span><span class="p">,</span> <span class="s1">&#39;addr:street&#39;</span><span class="p">]</span>
+<span class="c1"># Print only selected cols</span>
+<span class="n">restaurants</span><span class="p">[</span><span class="n">cols</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[16]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>opening_hours</th>
+      <th>addr:city</th>
+      <th>addr:country</th>
+      <th>addr:housenumber</th>
+      <th>addr:postcode</th>
+      <th>addr:street</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>60062502</th>
+      <td>Kabuki</td>
+      <td>NaN</td>
+      <td>Helsinki</td>
+      <td>FI</td>
+      <td>12</td>
+      <td>00180</td>
+      <td>Lapinlahdenkatu</td>
+    </tr>
+    <tr>
+      <th>60133792</th>
+      <td>Ateljé Finne</td>
+      <td>NaN</td>
+      <td>Helsinki</td>
+      <td>FI</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>62965963</th>
+      <td>Empire Plaza</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>62967659</th>
+      <td>Ravintola Pääposti</td>
+      <td>NaN</td>
+      <td>Helsinki</td>
+      <td>NaN</td>
+      <td>1 B</td>
+      <td>00100</td>
+      <td>Mannerheiminaukio</td>
+    </tr>
+    <tr>
+      <th>68734026</th>
+      <td>Hampton Bay</td>
+      <td>NaN</td>
+      <td>Helsinki</td>
+      <td>FI</td>
+      <td>6</td>
+      <td>00120</td>
+      <td>Hietalahdenranta</td>
+    </tr>
+    <tr>
+      <th>76617692</th>
+      <td>Johan Ludvig</td>
+      <td>NaN</td>
+      <td>Helsinki</td>
+      <td>FI</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>76624339</th>
+      <td>Ravintola Rivoletto</td>
+      <td>Mo-Th 11:00-23:00; Fr 11:00-24:00; Sa 15:00-24...</td>
+      <td>Helsinki</td>
+      <td>FI</td>
+      <td>38</td>
+      <td>00120</td>
+      <td>Albertinkatu</td>
+    </tr>
+    <tr>
+      <th>76624351</th>
+      <td>Pueblo</td>
+      <td>NaN</td>
+      <td>Helsinki</td>
+      <td>FI</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Eerikinkatu</td>
+    </tr>
+    <tr>
+      <th>76627823</th>
+      <td>Atabar</td>
+      <td>NaN</td>
+      <td>Helsinki</td>
+      <td>FI</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Eerikinkatu</td>
+    </tr>
+    <tr>
+      <th>89074039</th>
+      <td>Papa Albert</td>
+      <td>Mo-Th 10:00-14:00, 17:30-22:00; Fr 11:00-23:00...</td>
+      <td>Helsinki</td>
+      <td>FI</td>
+      <td>30</td>
+      <td>00120</td>
+      <td>Albertinkatu</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>As we can see, there exists a lot of useful information about
+restaurants that can be retrieved easily with OSMnx.</p>
+<p>We can now plot all these different OSM layers by using the familiar
+<code class="docutils literal notranslate"><span class="pre">plot()</span></code> function of Geopandas. As you might remember, the street
+network data was not in GeoDataFrame format (it was
+networkx.MultiDiGraph). Luckily, osmnx provides a convenient function
+<code class="docutils literal notranslate"><span class="pre">graph_to_gdfs()</span></code> that can convert the graph into two separate
+GeoDataFrames where the first one contains the information about the
+nodes and the second one about the edge.</p>
+<ul class="simple">
+<li>Let’s extract the nodes and edges from the graph as GeoDataFrames:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Retrieve nodes and edges</span>
+<span class="n">nodes</span><span class="p">,</span> <span class="n">edges</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">graph_to_gdfs</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Nodes:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">nodes</span><span class="o">.</span><span class="n">head</span><span class="p">(),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Edges:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">edges</span><span class="o">.</span><span class="n">head</span><span class="p">(),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Type:&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">edges</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Nodes:
+                    highway       osmid  ref        x        y  \
+3216400385  turning_circle  3216400385  NaN   24.934  60.1676
+1372233731        crossing  1372233731  NaN  24.9293  60.1623
+3216400394             NaN  3216400394  NaN  24.9339  60.1676
+1372233748             NaN  1372233748  NaN  24.9299  60.1632
+3216400409             NaN  3216400409  NaN  24.9337  60.1678
+
+                                 geometry
+3216400385  POINT (24.9340047 60.1675525)
+1372233731  POINT (24.9292726 60.1622912)
+3216400394  POINT (24.9339275 60.1676411)
+1372233748  POINT (24.9299486 60.1632382)
+3216400409  POINT (24.9337467 60.1678235)
+
+Edges:
+   access bridge                                           geometry  \
+0    NaN    NaN  LINESTRING (24.9340047 60.1675525, 24.9339332 ...
+1    NaN    NaN  LINESTRING (24.9292726 60.1622912, 24.9294092 ...
+2    NaN    NaN  LINESTRING (24.9292726 60.1622912, 24.9291752 ...
+3    NaN    NaN  LINESTRING (24.9292726 60.1622912, 24.9293 60....
+4    NaN    NaN  LINESTRING (24.9292726 60.1622912, 24.9293795 ...
+
+        highway junction  key lanes  length maxspeed             name  oneway  \
+0   residential      NaN    0   NaN  11.431       30   Kansakoulukuja   False
+1       footway      NaN    0   NaN   9.323      NaN              NaN   False
+2       footway      NaN    0   NaN   6.855      NaN              NaN   False
+3  primary_link      NaN    0     2  34.508       40              NaN    True
+4       primary      NaN    0     2  38.872       40  Hietalahdenkatu    True
+
+      osmid  ref service tunnel           u           v
+0  15240373  NaN     NaN    NaN  3216400385   301360890
+1  86533507  NaN     NaN    NaN  1372233731  1005727584
+2  86533507  NaN     NaN    NaN  1372233731   298367080
+3  15103120  NaN     NaN    NaN  1372233731   292859610
+4  86533509  NaN     NaN    NaN  1372233731   311043714
+
+Type: &lt;class &#39;geopandas.geodataframe.GeoDataFrame&#39;&gt;
+</pre></div></div>
+</div>
+<p>Nice! Now, as we can see, we have our graph as GeoDataFrames and we can
+plot them using the same functions and tools as we have used before.</p>
+<p><strong>Note:</strong> There are also other ways of retrieving the data from
+OpenStreetMap with osmnx such as passing a Polygon to extract the data
+from that area, or passing a Point coordinates and retrieving data
+around that location with specific radius. Take a look of this <a class="reference external" href="https://github.com/gboeing/osmnx-examples/blob/master/notebooks/01-overview-osmnx.ipynb">tutorial
+to find out how to use those features of
+osmnx</a>.</p>
+<ul class="simple">
+<li>Let’s create a map out of the streets, buildings, restaurants, and
+the area Polygon but let’s exclude the nodes (to keep the figure
+clearer).</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [34]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Plot the footprint</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">area</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot street edges</span>
+<span class="n">edges</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;#BC8F8F&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot buildings</span>
+<span class="n">buildings</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;khaki&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+<span class="c1"># Plot restaurants</span>
+<span class="n">restaurants</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L6_retrieve_osm_data_18_0.png" src="../../_images/notebooks_L6_retrieve_osm_data_18_0.png" />
+</div>
+</div>
+<p>Cool! Now we have a map where we have plotted the restaurants,
+buildings, streets and the boundaries of the selected region of ‘Kamppi’
+in Helsinki. And all of this required only a few lines of code. Pretty
+neat!</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../lessons/L6/exercise-6.html" class="btn btn-neutral float-right" title="Exercise 6" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../../lessons/L6/overview.html" class="btn btn-neutral" title="Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Henrikki Tenkanen
+      Last updated on Dec 02, 2018.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+    <p> <br/> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /> </a></p>
+     
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: master
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../../2017/index.html">2017</a></dd>
+            <dd><a href="../../develop/notebooks/L6/retrieve_osm_data.html">develop</a></dd>
+            <dd><a href="../../drafts/index.html">drafts</a></dd>
+            <dd><a href="../../master/notebooks/L6/retrieve_osm_data.html">master</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'2018',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

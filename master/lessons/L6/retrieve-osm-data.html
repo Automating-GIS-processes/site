@@ -1,0 +1,555 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-88382509-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Retrieving OpenStreetMap data &mdash; AutoGIS 2018 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link href="../../_static/geo-python.css" rel="stylesheet" type="text/css">
+     
+
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> AutoGIS
+          
+
+          
+            
+            <img src="../../_static/logo_hy_geo_135.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2018
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Course information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/course-info.html">General info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/course-environment-components.html">Course environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/grading.html">Grading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/learning-goals.html">Learning goals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/Installing_Anacondas_GIS.html">Installing Python + GIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/License-terms.html">License and terms of usage</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 1</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L1/Intro-Python-GIS.html">Motivation for the course</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1/overview.html">Lesson overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L1/geometric-objects.html">Geometric objects - Spatial data model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1/exercise-1.html">Exercise 1</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 2</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L2/overview.html">Lesson 2 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L2/geopandas-basics.html">Introduction to Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L2/projections.html">Map projections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/exercise-2.html">Exercise 2</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 3</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L3/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L3/geocoding.html">Geocoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L3/geocoding_in_geopandas.html">Geocoding in Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L3/point-in-polygon.html">Point in Polygon &amp; Intersect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L3/spatial-join.html">Spatial join</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L3/nearest-neighbour.html">Nearest Neighbour Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L3/exercise-3.html">Exercise 3</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 4</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L4/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L4/reclassify.html">Data reclassification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L4/geometric-operations.html">Geometric operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L4/exercise-4.html">Exercise 4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L4/exercise-4.html#exercise-4-hints">Exercise 4 hints</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 5</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L5/overview.html">Lesson 5 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L5/static_maps.html">Static maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L5/interactive-map-folium.html">Interactive maps on Leaflet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/share-on-github.html">Sharing interactive plots on GitHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/exercise-5.html">Exercise 5</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 6</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L6/retrieve_osm_data.html">Retrieving OpenStreetMap data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercise-6.html">Exercise 6</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AutoGIS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Retrieving OpenStreetMap data</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/Automating-GIS-processes/2018/blob/master/source/lessons/L6/retrieve-osm-data.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+
+
+
+
+
+
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="retrieving-openstreetmap-data">
+<h1>Retrieving OpenStreetMap data<a class="headerlink" href="#retrieving-openstreetmap-data" title="Permalink to this headline">¶</a></h1>
+<div class="figure">
+<img alt="../../_images/OSM_logo.png" src="../../_images/OSM_logo.png" />
+</div>
+<div class="section" id="what-is-openstreetmap">
+<h2>What is OpenStreetMap?<a class="headerlink" href="#what-is-openstreetmap" title="Permalink to this headline">¶</a></h2>
+<p>OpenStreetMap (OSM) is a global collaborative (crowd-sourced) dataset and project that aims at creating a free editable map of the world
+containing a lot of information about our environment.
+It contains data for example about streets, buildings, different services, and landuse to mention a few.</p>
+<p>OSM has a large userbase with more than 4 million users that contribute actively on OSM by updating the OSM database
+with 3 million changesets per day. In total OSM contains more than 4 billion nodes that form the basis of the digitally
+mapped world that OSM provides (<a class="reference external" href="http://wiki.openstreetmap.org/wiki/Stats">stats from November 2017</a>.</p>
+<p>OpenStreetMap is used not only for integrating the <strong>OSM maps</strong> as background maps to visualizations or online maps,
+but also for many other purposes such as <strong>routing</strong>, <strong>geocoding</strong>, <strong>education</strong>, and <strong>research</strong>. OSM is also widely used for
+humanitarian response e.g. in crisis areas (e.g. after natural disasters) and for fostering economic development
+(see more from <a class="reference external" href="https://www.hotosm.org/">Humanitarian OpenStreetMap Team (HOTOSM) website</a>.</p>
+</div>
+<div class="section" id="osmnx">
+<h2>Osmnx<a class="headerlink" href="#osmnx" title="Permalink to this headline">¶</a></h2>
+<p>This week we will explore a new and exciting Python module called <a class="reference external" href="https://github.com/gboeing/osmnx">osmnx</a>
+that can be used to retrieve, construct, analyze, and visualize street networks from OpenStreetMap.
+In short it offers really handy functions to download data from OpenStreet map, analyze the properties of the OSM street networks,
+and conduct network routing based on walking, cycling or driving.</p>
+<p>There is also a scientific article available describing the package:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Boeing, G. 2017. <a class="reference external" href="https://www.researchgate.net/publication/309738462_OSMnx_New_Methods_for_Acquiring_Constructing_Analyzing_and_Visualizing_Complex_Street_Networks">“OSMnx: New Methods for Acquiring, Constructing, Analyzing, and Visualizing Complex Street Networks.”</a> Computers, Environment and Urban Systems 65, 126-139. doi:10.1016/j.compenvurbsys.2017.05.004</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="download-and-visualize-openstreetmap-data-with-osmnx">
+<h2>Download and visualize OpenStreetMap data with osmnx<a class="headerlink" href="#download-and-visualize-openstreetmap-data-with-osmnx" title="Permalink to this headline">¶</a></h2>
+<p>As said, one the most useful features that osmnx provides is an easy-to-use way of retrieving <a class="reference external" href="http://www.openstreetmap.org/">OpenStreetMap</a> data
+(using <a class="reference external" href="http://wiki.openstreetmap.org/wiki/Overpass_API">OverPass API</a> ).</p>
+<p>Let’s see how we can download and visualize street network data from a district of Kamppi in Helsinki, Finland.
+Osmnx makes it really easy to do that as it allows you to specify an address to retrieve the OpenStreetMap data around that area.
+In fact, osmnx uses the same Nominatim Geocoding API to achieve this which we tested during the Lesson 2.</p>
+<ul class="simple">
+<li>Let’s retrieve OpenStreetMap (OSM) data by specifying <code class="docutils literal notranslate"><span class="pre">&quot;Kamppi,</span> <span class="pre">Helsinki,</span> <span class="pre">Finland&quot;</span></code> as the address where the data should be downloaded.</li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">osmnx</span> <span class="kn">as</span> <span class="nn">ox</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-1-d4a103aeed40&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">osmnx</span> <span class="kn">as</span> <span class="nn">ox</span>
+
+<span class="ne">ImportError</span>: No module named &#39;osmnx&#39;
+
+<span class="gp">In [2]: </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="gp">In [3]: </span><span class="n">place_name</span> <span class="o">=</span> <span class="s2">&quot;Kamppi, Helsinki, Finland&quot;</span>
+
+<span class="gp">In [4]: </span><span class="n">graph</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">graph_from_place</span><span class="p">(</span><span class="n">place_name</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-4-2fe842a0d6eb&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">graph</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">graph_from_place</span><span class="p">(</span><span class="n">place_name</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;ox&#39; is not defined
+
+<span class="gp">In [5]: </span><span class="nb">type</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                          ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-5-e279804376b1&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 type(graph)</span>
+
+<span class="go">NameError: name &#39;graph&#39; is not defined</span>
+</pre></div>
+</div>
+<p>Okey, as we can see the data that we retrieved is a special data object called <code class="docutils literal notranslate"><span class="pre">networkx.classes.multidigraph.MultiDiGraph</span></code>. A DiGraph is a data type that stores nodes and edges with optional data, or attributes.
+What we can see here is that this data type belongs to a Python module called <a class="reference external" href="https://networkx.github.io/documentation/stable/">networkx</a>
+that can be used to create, manipulate, and study the structure, dynamics, and functions of complex networks.
+Networkx module contains algorithms that can be used to calculate <a class="reference external" href="https://networkx.github.io/documentation/networkx-1.10/reference/algorithms.shortest_paths.html">shortest paths</a>
+along networks using e.g. <a class="reference external" href="https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm">Dijkstra’s</a> or <a class="reference external" href="https://en.wikipedia.org/wiki/A*_search_algorithm">A* algorithm</a>.</p>
+<ul class="simple">
+<li>Let’s see how our street network looks like. It is easy to visualize the graph with osmnx with <code class="docutils literal notranslate"><span class="pre">plot_graph()</span></code> function. The function utilizes Matplotlib for visualizing the data,</li>
+</ul>
+<p>hence as a result it returns a matplotlib figure and axis objects.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [6]: </span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">plot_graph</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-6-559a0acfe53a&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">plot_graph</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;ox&#39; is not defined
+
+<span class="gp">In [7]: </span><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/graph.png"><img alt="../../_images/graph.png" src="../../_images/graph.png" style="width: 5in;" /></a>
+<p>Great! Now we can see that our graph contains the nodes (blue circles) and the edges (gray lines) that connects those nodes to each other.</p>
+<p>It is also possible to retrieve other types of OSM data features with osmnx.</p>
+<ul class="simple">
+<li>Let’s download the buildings with <code class="docutils literal notranslate"><span class="pre">buildings_from_place()</span></code> function and plot them on top of our street network in Kamppi. Let’s also plot the Polygon that represents the area of Kamppi,</li>
+</ul>
+<p>Helsinki that can be retrieved with <code class="docutils literal notranslate"><span class="pre">gdf_from_place</span></code> function.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [8]: </span><span class="n">area</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">gdf_from_place</span><span class="p">(</span><span class="n">place_name</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-8-62d509989fb5&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">area</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">gdf_from_place</span><span class="p">(</span><span class="n">place_name</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;ox&#39; is not defined
+
+<span class="gp">In [9]: </span><span class="n">buildings</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">buildings_from_place</span><span class="p">(</span><span class="n">place_name</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                       ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-9-5cba73cb9448&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 buildings = ox.buildings_from_place(place_name)</span>
+
+<span class="go">NameError: name &#39;ox&#39; is not defined</span>
+
+<span class="gp">In [10]: </span><span class="nb">type</span><span class="p">(</span><span class="n">area</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-10-368c4fa0b8ee&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 type(area)</span>
+
+<span class="go">NameError: name &#39;area&#39; is not defined</span>
+
+<span class="gp">In [11]: </span><span class="nb">type</span><span class="p">(</span><span class="n">buildings</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-11-ee532beaa4de&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 type(buildings)</span>
+
+<span class="go">NameError: name &#39;buildings&#39; is not defined</span>
+</pre></div>
+</div>
+<p>As a result we got the data as GeoDataFrames. Hence, we can plot them using the familiar <code class="docutils literal notranslate"><span class="pre">plot()</span></code> function of Geopandas.
+As you might remember the street network data was not in GeoDataFrame. Luckily, osmnx provides a convenient function <code class="docutils literal notranslate"><span class="pre">graph_to_gdfs()</span></code>
+that can convert the graph into two separate GeoDataFrames where the first one contains the information about the nodes and the second one
+about the edges.</p>
+<ul class="simple">
+<li>Let’s extract the nodes and edges from the graph as GeoDataFrames.</li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [12]: </span><span class="n">nodes</span><span class="p">,</span> <span class="n">edges</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">graph_to_gdfs</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-12-3de8ab08da95&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">edges</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">graph_to_gdfs</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;ox&#39; is not defined
+
+<span class="gp">In [13]: </span><span class="n">nodes</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="go">                                                                                                                                                                                                                                                                                          ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-13-47083f45a780&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 nodes.head()</span>
+
+<span class="go">NameError: name &#39;nodes&#39; is not defined</span>
+
+<span class="gp">In [14]: </span><span class="n">edges</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-14-74fa6e7602a3&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 edges.head()</span>
+
+<span class="go">NameError: name &#39;edges&#39; is not defined</span>
+
+<span class="gp">In [15]: </span><span class="nb">type</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-15-520b6b5f2c05&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 type(edges)</span>
+
+<span class="go">NameError: name &#39;edges&#39; is not defined</span>
+</pre></div>
+</div>
+<p>Nice! Now, as we can see, we have our graph as GeoDataFrames and we can plot them using the same functions and tools as we have used before.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">There are also other ways of retrieving the data from OpenStreetMap with osmnx such as passing a Polygon to extract the data from that area,
+or passing a Point coordinates and retrieving data around that location with specific radius.
+Take a look of this <a class="reference external" href="https://github.com/gboeing/osmnx-examples/blob/master/notebooks/01-overview-osmnx.ipynb">tutorial to find out how to use those features of osmnx</a>.</p>
+</div>
+<ul class="simple">
+<li>Let’s create a map out of the streets, buildings, and the area Polygon but let’s exclude the nodes (to keep the figure clearer).</li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [16]: </span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="gp">In [17]: </span><span class="n">area</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-17-ef660def8d05&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">area</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;area&#39; is not defined
+
+<span class="gp">In [18]: </span><span class="n">edges</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;#BC8F8F&#39;</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                         ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-18-c0ea898698f4&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 edges.plot(ax=ax, linewidth=1, edgecolor=&#39;#BC8F8F&#39;)</span>
+
+<span class="go">NameError: name &#39;edges&#39; is not defined</span>
+
+<span class="gp">In [19]: </span><span class="n">buildings</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;khaki&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-19-65971f202ae8&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 buildings.plot(ax=ax, facecolor=&#39;khaki&#39;, alpha=0.7)</span>
+
+<span class="go">NameError: name &#39;buildings&#39; is not defined</span>
+
+<span class="gp">In [20]: </span><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/city_plot.png"><img alt="../../_images/city_plot.png" src="../../_images/city_plot.png" style="width: 5in;" /></a>
+<p>Cool! Now we have a map where we have plotted the buildings, streets and the boundaries of the selected region of ‘Kamppi’ in Helsinki.
+And all of this required only a few lines of code. Pretty neat! Next, we will start exploring how we can use OSM
+data to do network analysis.</p>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last"><strong>Task</strong>
+Column <code class="docutils literal notranslate"><span class="pre">highway</span></code> in our <code class="docutils literal notranslate"><span class="pre">edges</span></code> GeoDataFrame contains information about the type of the street (such as <code class="docutils literal notranslate"><span class="pre">primacy,</span> <span class="pre">cycleway</span> <span class="pre">or</span> <span class="pre">footway</span></code>).
+Select the streets that are walkable or that can be used with cycle and visualize only them with the buildings and the area polygon. Use different colors and line widths for the cycleways and footways.</p>
+</div>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">There are a few nice and convenient high-level functions in <a class="reference external" href="https://github.com/gboeing/osmnx">osmnx</a> that can be used to produce nice maps directly just by using a single function that might be useful.
+If you are interested take a look of <a class="reference external" href="https://github.com/gboeing/osmnx-examples/blob/master/notebooks/10-building-footprints.ipynb">this tutorial</a>.
+In the lesson we won’t cover these, because we wanted to keep as much control to ourselves as possible, hence using lower-level functions.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Henrikki Tenkanen
+      Last updated on Dec 02, 2018.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+    <p> <br/> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /> </a></p>
+     
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: master
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../../../2017/index.html">2017</a></dd>
+            <dd><a href="../../../develop/lessons/L6/retrieve-osm-data.html">develop</a></dd>
+            <dd><a href="../../../drafts/index.html">drafts</a></dd>
+            <dd><a href="retrieve-osm-data.html">master</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'2018',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
