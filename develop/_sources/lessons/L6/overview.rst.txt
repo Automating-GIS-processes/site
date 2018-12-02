@@ -4,8 +4,8 @@ Overview
 In this week we will see how to easily retrieve OpenStreetMap data and how to do simple
 network analysis such analyze different network statistics and calculate shortest paths along street network in Python.
 
-1. :doc:`Retrieving OpenStreetMap data <retrieve-osm-data>`
-2. :doc:`Network analysis in Python <network-analysis>`
+1. `Retrieving OpenStreetMap data <../../notebooks/L6/retrieve_osm_data.ipynb>`__
+2. `Network analysis in Python <../../notebooks/L6/network-analysis.ipynb>`__
 3. :doc:`Exercise 6 <exercise-6>`
 
 Learning goals
@@ -15,7 +15,7 @@ After this week's lesson you should be able to:
 
 - Retrieve and save data from OpenStreetMap using Python
 - Extract simple street network properties and statistics (centrality measures etc.)
-- Do simple route optimization using shortest path algorithm in osmnx / networkx
+- Do simple route optimization using shortest path algorithm in OSMnx / Networkx
 
 Sources
 -------
