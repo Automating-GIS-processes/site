@@ -1,0 +1,1496 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-88382509-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Network analysis in Python &mdash; AutoGIS 2018 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Exercise 6" href="../../lessons/L6/exercise-6.html" />
+    <link rel="prev" title="Retrieving OpenStreetMap data" href="retrieve_osm_data.html" />
+    <link href="../../_static/geo-python.css" rel="stylesheet" type="text/css">
+     
+
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> AutoGIS
+          
+
+          
+            
+            <img src="../../_static/logo_hy_geo_135.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2018
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Course information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/course-info.html">General info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/course-environment-components.html">Course environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/grading.html">Grading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/learning-goals.html">Learning goals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/Installing_Anacondas_GIS.html">Installing Python + GIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/License-terms.html">License and terms of usage</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 1</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L1/Intro-Python-GIS.html">Motivation for the course</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L1/overview.html">Lesson overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1/geometric-objects.html">Geometric objects - Spatial data model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L1/exercise-1.html">Exercise 1</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 2</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L2/overview.html">Lesson 2 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/geopandas-basics.html">Introduction to Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/projections.html">Map projections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L2/exercise-2.html">Exercise 2</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 3</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L3/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L3/geocoding.html">Geocoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L3/geocoding_in_geopandas.html">Geocoding in Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L3/point-in-polygon.html">Point in Polygon &amp; Intersect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L3/spatial-join.html">Spatial join</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L3/nearest-neighbour.html">Nearest Neighbour Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L3/exercise-3.html">Exercise 3</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 4</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L4/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L4/reclassify.html">Data reclassification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L4/geometric-operations.html">Geometric operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L4/exercise-4.html">Exercise 4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L4/exercise-4.html#exercise-4-hints">Exercise 4 hints</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 5</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L5/overview.html">Lesson 5 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/static_maps.html">Static maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/interactive-map-folium.html">Interactive maps on Leaflet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L5/share-on-github.html">Sharing interactive plots on GitHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L5/exercise-5.html">Exercise 5</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 6</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L6/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="retrieve_osm_data.html">Retrieving OpenStreetMap data</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Network analysis in Python</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Analyzing-the-network-properties">Analyzing the network properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Shortest-path-analysis">Shortest path analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Saving-shortest-paths-to-disk">Saving shortest paths to disk</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L6/exercise-6.html">Exercise 6</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AutoGIS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Network analysis in Python</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/Automating-GIS-processes/2018/blob/develop/source/notebooks/L6/network-analysis.ipynb" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+
+
+    
+    
+
+
+
+    <p class="scv-banner scv-sphinx_rtd_theme"><b>Warning:</b> This document is for the development version of AutoGIS.</p>
+
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #303F9F;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #D84315;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 8ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: #f7f7f7;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.pngmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="admonition note">
+This page was generated from <a class="reference external" href="https://github.com/Automating-GIS-processes/2018/blob/master/source/notebooks/L6/network-analysis.ipynb">source/notebooks/L6/network-analysis.ipynb</a>.
+<span class="raw-html"><br/><a href="https://mybinder.org/v2/gh/Automating-GIS-processes/2018/master?urlpath=lab/tree/source/notebooks/L6/network-analysis.ipynb"><img alt="Binder badge" src="https://img.shields.io/badge/launch-full%20binder-red.svg" style="vertical-align:text-bottom"></a></span>
+<span class="raw-html"><a href="https://mybinder.org/v2/gh/Automating-GIS-processes/notebooks/master?urlpath=lab/tree/notebooks/L6/network-analysis.ipynb"><img alt="Binder badge" src="https://img.shields.io/badge/launch-student%20binder-red.svg" style="vertical-align:text-bottom"></a></span>
+<span class="raw-html"><a href="https://notebooks.csc.fi/#/blueprint/d71cd2d26d924f48820dc22b67a87d8e"><img alt="CSC badge" src="https://img.shields.io/badge/launch-CSC%20notebook-blue.svg" style="vertical-align:text-bottom"></a></span></div>
+<div class="section" id="Network-analysis-in-Python">
+<h1>Network analysis in Python<a class="headerlink" href="#Network-analysis-in-Python" title="Permalink to this headline">¶</a></h1>
+<p>Finding a shortest path using a specific street network is a common GIS
+problem that has many practical applications. For example navigators are
+one of those “every-day” applications where <strong>routing</strong> using specific
+algorithms is used to find the optimal route between two (or multiple)
+points.</p>
+<p>It is also possible to perform network analysis such as tranposrtation
+routing in Python.
+<a class="reference external" href="https://networkx.github.io/documentation/stable/">Networkx</a> is a
+Python module that provides a lot tools that can be used to analyze
+networks on various different ways. It also contains algorithms such as
+<a class="reference external" href="https://networkx.github.io/documentation/networkx-1.10/reference/generated/networkx.algorithms.shortest_paths.weighted.single_source_dijkstra.html#networkx.algorithms.shortest_paths.weighted.single_source_dijkstra">Dijkstra’s
+algorithm</a>
+or
+<a class="reference external" href="https://networkx.github.io/documentation/networkx-1.10/reference/generated/networkx.algorithms.shortest_paths.astar.astar_path.html#networkx.algorithms.shortest_paths.astar.astar_path">A*</a>
+algoritm that are commonly used to find shortest paths along
+transportation network.</p>
+<p>To be able to conduct network analysis, it is, of course, necessary to
+have a network that is used for the analyses.
+<a class="reference external" href="https://github.com/gboeing/osmnx">OSMnx</a> package that we just
+explored in previous tutorial, makes it really easy to retrieve routable
+networks from OpenStreetMap with different transport modes (walking,
+cycling and driving). Osmnx also combines some functionalities from
+<code class="docutils literal notranslate"><span class="pre">networkx</span></code> module to make it straightforward to conduct routing along
+OpenStreetMap data.</p>
+<p>Next we will test the routing functionalities of osmnx by finding a
+shortest path between two points based on drivable roads.</p>
+<ul class="simple">
+<li>Let’s first download the OSM data from Kamppi but this time include
+only such street segments that are walkable. In omsnx it is possible
+to retrieve only such streets that are drivable by specifying
+<code class="docutils literal notranslate"><span class="pre">'drive'</span></code> into <code class="docutils literal notranslate"><span class="pre">network_type</span></code> parameter that can be used to
+specify what kind of streets are retrieved from OpenStreetMap (other
+possibilities are <code class="docutils literal notranslate"><span class="pre">walk</span></code> and <code class="docutils literal notranslate"><span class="pre">bike</span></code>).</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">osmnx</span> <span class="kn">as</span> <span class="nn">ox</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="kn">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="n">place_name</span> <span class="o">=</span> <span class="s2">&quot;Kamppi, Helsinki, Finland&quot;</span>
+<span class="n">graph</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">graph_from_place</span><span class="p">(</span><span class="n">place_name</span><span class="p">,</span> <span class="n">network_type</span><span class="o">=</span><span class="s1">&#39;drive&#39;</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">plot_graph</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L6_network-analysis_1_0.png" src="../../_images/notebooks_L6_network-analysis_1_0.png" />
+</div>
+</div>
+<p>Okey so now we have retrieved only such streets where it is possible to
+drive with a car. Let’s confirm this by taking a look at the attributes
+of the street network. Easiest way to do this is to convert the graph
+(nodes and edges) into GeoDataFrames.</p>
+<ul class="simple">
+<li>Converting graph into a GeoDataFrame can be done with function
+<code class="docutils literal notranslate"><span class="pre">graph_to_gdfs()</span></code> that we already used in previous tutorial. With
+parameters <code class="docutils literal notranslate"><span class="pre">nodes</span></code> and <code class="docutils literal notranslate"><span class="pre">edges</span></code>, it is possible to control whether
+to retrieve both nodes and edges from the graph. Here, we only
+retrieve edges:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Retrieve only edges from the graph</span>
+<span class="n">edges</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">graph_to_gdfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># Check columns</span>
+<span class="k">print</span><span class="p">(</span><span class="n">edges</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+
+<span class="c1"># Check crs</span>
+<span class="k">print</span><span class="p">(</span><span class="n">edges</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Index([&#39;access&#39;, &#39;bridge&#39;, &#39;geometry&#39;, &#39;highway&#39;, &#39;junction&#39;, &#39;key&#39;, &#39;lanes&#39;,
+       &#39;length&#39;, &#39;maxspeed&#39;, &#39;name&#39;, &#39;oneway&#39;, &#39;osmid&#39;, &#39;u&#39;, &#39;v&#39;],
+      dtype=&#39;object&#39;)
+{&#39;init&#39;: &#39;epsg:4326&#39;}
+</pre></div></div>
+</div>
+<p>Okey, so we have quite many columns in our GeoDataFrame. Most of the
+columns are fairly self-explanatory but the following table describes
+all of them. We can also see that the CRS of the GeoDataFrame seems to
+be WGS84 (i.e.&nbsp;epsg: 4326).</p>
+<p>geometry                                                       Geometry of the feature      Shapely.geometry
+<a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:highway">highway</a>   Tag for roads (road type)    str / list
+<a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:lanes">lanes</a>       Number of lanes              int (or nan)
+<a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:length">lenght</a>     Length of feature (meters)   float
+<a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:maxspeed">maxspeed</a> maximum legal speed limit    int /list
+<a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:name">name</a>         Name of the (street) element str (or nan)
+<a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:oneway">oneway</a>     One way road                 boolean
+<a class="reference external" href="http://wiki.openstreetmap.org/wiki/Node">osmid</a>            Unique ids for the element   list
+<a class="reference external" href="http://ow.ly/bV8n30h7Ufm">u</a>                               The first node of edge       int
+<a class="reference external" href="http://ow.ly/bV8n30h7Ufm">v</a>                               The last node of edge        int
+==============================================================
+============================ ================</p>
+<p>Most of the attributes above comes directly from the OpenStreetMap,
+however, columns <code class="docutils literal notranslate"><span class="pre">u</span></code> and <code class="docutils literal notranslate"><span class="pre">v</span></code> are Networkx specific ids.</p>
+<ul class="simple">
+<li>Let’s take a look what kind of features we have in the <code class="docutils literal notranslate"><span class="pre">highway</span></code>
+column:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">print</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="s1">&#39;highway&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[7]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>residential      112
+tertiary          78
+primary           26
+secondary         17
+unclassified      11
+living_street      4
+primary_link       1
+Name: highway, dtype: int64
+</pre></div>
+</div>
+</div>
+<p>Okey, now we can confirm that as a result our street network indeed only
+contains such streets where it is allowed to drive with a car as there
+are no e.g.&nbsp;cycleways or footways included in the data.</p>
+<ul class="simple">
+<li>Let’s continue and find the shortest path between two points based on
+the distance. As the data is in WGS84 format, we might first want to
+reproject our data into metric system so that our map looks better.
+Luckily there is a handy function in OSMnx called <code class="docutils literal notranslate"><span class="pre">project_graph()</span></code>
+to project the graph data in UTM format.</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">graph_proj</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">project_graph</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">plot_graph</span><span class="p">(</span><span class="n">graph_proj</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L6_network-analysis_8_0.png" src="../../_images/notebooks_L6_network-analysis_8_0.png" />
+</div>
+</div>
+<p>We can see a modest change in the appearance of the graph. But let’s
+take a closer look by seeing how the data values look now:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Get Edges and Nodes</span>
+<span class="n">nodes_proj</span><span class="p">,</span> <span class="n">edges_proj</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">graph_to_gdfs</span><span class="p">(</span><span class="n">graph_proj</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Coordinate system:&quot;</span><span class="p">,</span> <span class="n">edges_proj</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">edges_proj</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Coordinate system: {&#39;zone&#39;: 35, &#39;units&#39;: &#39;m&#39;, &#39;proj&#39;: &#39;utm&#39;, &#39;ellps&#39;: &#39;WGS84&#39;, &#39;datum&#39;: &#39;WGS84&#39;}
+  access bridge                                           geometry  \
+0    NaN    NaN  LINESTRING (385359.3161680779 6671864.64583349...
+1    NaN    NaN  LINESTRING (385078.4206660209 6671287.11004645...
+2    NaN    NaN  LINESTRING (385154.9188669115 6671743.59020305...
+3    NaN    NaN  LINESTRING (385122.9978634067 6671765.36403810...
+4    NaN    NaN  LINESTRING (385122.9978634067 6671765.36403810...
+
+        highway    junction  key lanes   length maxspeed             name  \
+0   residential         NaN    0   NaN   38.739       30   Kansakoulukuja
+1  primary_link         NaN    0     2   55.594       40              NaN
+2      tertiary  roundabout    0     1    3.875       30              NaN
+3   residential         NaN    0   NaN  140.354       30  Lapinlahdenkatu
+4   residential         NaN    0   NaN   13.671       40              NaN
+
+   oneway                                              osmid           u  \
+0   False                                           15240373  3216400385
+1    True                                           15103120  1372233731
+2    True                                           71082025   267117317
+3   False  [124066018, 37135578, 124066019, 37135577, 124...   267117319
+4    True                                           24568161   267117319
+
+           v
+0  150983569
+1  266159814
+2  846597945
+3   60072524
+4  724233143
+</pre></div></div>
+</div>
+<p>Okey, as we can see from the CRS the data is now in <a class="reference external" href="https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system">UTM
+projection</a>
+using zone 35 which is the one used for Finland, and indeed the
+orientation of the map and the geometry values also confirm this.</p>
+<div class="section" id="Analyzing-the-network-properties">
+<h2>Analyzing the network properties<a class="headerlink" href="#Analyzing-the-network-properties" title="Permalink to this headline">¶</a></h2>
+<p>Now as we have seen some of the basic functionalities of osmnx such as
+downloading the data and converting data from graph to GeoDataFrame, we
+can take a look some of the analytical features of omsnx. Osmnx includes
+many useful functionalities to extract information about the network.</p>
+<ul class="simple">
+<li>To calculate some of the basic street network measures we can use
+<code class="docutils literal notranslate"><span class="pre">basic_stats()</span></code> function in OSMnx:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Calculate network statistics</span>
+<span class="n">stats</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">basic_stats</span><span class="p">(</span><span class="n">graph_proj</span><span class="p">)</span>
+<span class="n">stats</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[12]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>{&#39;circuity_avg&#39;: 1.2711348550352305e-05,
+ &#39;clean_intersection_count&#39;: None,
+ &#39;clean_intersection_density_km&#39;: None,
+ &#39;edge_density_km&#39;: None,
+ &#39;edge_length_avg&#39;: 80.16320481927708,
+ &#39;edge_length_total&#39;: 19960.637999999995,
+ &#39;intersection_count&#39;: 116,
+ &#39;intersection_density_km&#39;: None,
+ &#39;k_avg&#39;: 4.016129032258065,
+ &#39;m&#39;: 249,
+ &#39;n&#39;: 124,
+ &#39;node_density_km&#39;: None,
+ &#39;self_loop_proportion&#39;: 0.0,
+ &#39;street_density_km&#39;: None,
+ &#39;street_length_avg&#39;: 74.59165573770494,
+ &#39;street_length_total&#39;: 13650.273000000003,
+ &#39;street_segments_count&#39;: 183,
+ &#39;streets_per_node_avg&#39;: 3.217741935483871,
+ &#39;streets_per_node_counts&#39;: {0: 0, 1: 8, 2: 1, 3: 71, 4: 44},
+ &#39;streets_per_node_proportion&#39;: {0: 0.0,
+  1: 0.06451612903225806,
+  2: 0.008064516129032258,
+  3: 0.5725806451612904,
+  4: 0.3548387096774194}}
+</pre></div>
+</div>
+</div>
+<p>To be able to extract the more advanced statistics (and some of the
+missing ones above) from the street network, it is required to have
+information about the coverage area of the network. Let’s calculate the
+area of the <a class="reference external" href="https://en.wikipedia.org/wiki/Convex_hull">convex hull</a>
+of the street network and see what we can get. As certain statistics are
+produced separately for each node, they produce a lot of output. Let’s
+merge both stats and put them into Pandas Series to keep things in more
+compact form.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Get the Convex Hull of the network</span>
+<span class="n">convex_hull</span> <span class="o">=</span> <span class="n">edges_proj</span><span class="o">.</span><span class="n">unary_union</span><span class="o">.</span><span class="n">convex_hull</span>
+<span class="c1"># Show output</span>
+<span class="n">convex_hull</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[14]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L6_network-analysis_15_0.svg" src="../../_images/notebooks_L6_network-analysis_15_0.svg" /></div>
+</div>
+<p>Now we can use the Convex Hull above to calculate e.g.&nbsp;denisity
+statistics:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Calculate the area</span>
+<span class="n">area</span> <span class="o">=</span> <span class="n">convex_hull</span><span class="o">.</span><span class="n">area</span>
+
+<span class="c1"># Calculate statistics with density information</span>
+<span class="n">stats</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">basic_stats</span><span class="p">(</span><span class="n">graph_proj</span><span class="p">,</span> <span class="n">area</span><span class="o">=</span><span class="n">area</span><span class="p">)</span>
+<span class="n">extended_stats</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">extended_stats</span><span class="p">(</span><span class="n">graph_proj</span><span class="p">,</span> <span class="n">ecc</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">bc</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">cc</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">extended_stats</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">stats</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">stats</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[15]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>avg_neighbor_degree                    {3216400385: 3.0, 1372233731: 1.0, 267117317: ...
+avg_neighbor_degree_avg                                                          2.14315
+avg_weighted_neighbor_degree           {3216400385: 0.07744133818632387, 1372233731: ...
+avg_weighted_neighbor_degree_avg                                               0.0784928
+betweenness_centrality                 {3216400385: 0.0, 1372233731: 0.00766360122617...
+betweenness_centrality_avg                                                     0.0670253
+center                                                                      [1372376937]
+circuity_avg                                                                 1.27113e-05
+clean_intersection_count                                                            None
+clean_intersection_density_km                                                       None
+closeness_centrality                   {3216400385: 0.0014752477711614846, 1372233731...
+closeness_centrality_avg                                                      0.00144168
+clustering_coefficient                 {3216400385: 0, 1372233731: 0, 267117317: 0, 3...
+clustering_coefficient_avg                                                     0.0954301
+clustering_coefficient_weighted        {3216400385: 0, 1372233731: 0, 267117317: 0, 3...
+clustering_coefficient_weighted_avg                                            0.0163891
+degree_centrality                      {3216400385: 0.016260162601626018, 1372233731:...
+degree_centrality_avg                                                          0.0326515
+diameter                                                                         2156.78
+eccentricity                           {3216400385: 1654.45, 1372233731: 1597.883, 26...
+edge_density_km                                                                  23963.1
+edge_length_avg                                                                  80.1632
+edge_length_total                                                                19960.6
+intersection_count                                                                   116
+intersection_density_km                                                           139.26
+k_avg                                                                            4.01613
+m                                                                                    249
+n                                                                                    124
+node_density_km                                                                  148.864
+pagerank                               {3216400385: 0.0027157574570511583, 1372233731...
+pagerank_max                                                                   0.0238936
+pagerank_max_node                                                               25416262
+pagerank_min                                                                  0.00148918
+pagerank_min_node                                                             1861896879
+periphery                                                                    [319896278]
+radius                                                                           1007.95
+self_loop_proportion                                                                   0
+street_density_km                                                                16387.4
+street_length_avg                                                                74.5917
+street_length_total                                                              13650.3
+street_segments_count                                                                183
+streets_per_node_avg                                                             3.21774
+streets_per_node_counts                                 {0: 0, 1: 8, 2: 1, 3: 71, 4: 44}
+streets_per_node_proportion            {0: 0.0, 1: 0.06451612903225806, 2: 0.00806451...
+dtype: object
+</pre></div>
+</div>
+</div>
+<p>As we can see, now we have a <strong>LOT</strong> of information about our street
+network that can be used to understand its structure. We can for example
+see that the average node density in our network is <code class="docutils literal notranslate"><span class="pre">149</span> <span class="pre">nodes/km</span></code> and
+that the total edge length of our network is <code class="docutils literal notranslate"><span class="pre">19960.6</span> <span class="pre">meters</span></code>.</p>
+<p>Furthermore, we can see that the <a class="reference external" href="https://en.wikipedia.org/wiki/Centrality">degree
+centrality</a> of our network
+is on average <code class="docutils literal notranslate"><span class="pre">0.0326515</span></code>. Degree is a simple centrality measure that
+counts how many neighbors a node has (here a fraction of nodes it is
+connected to). Another interesting measure is the
+<a class="reference external" href="https://en.wikipedia.org/wiki/PageRank">PageRank</a> that measures the
+importance of specific node in the graph. Here we can see that the most
+important node in our graph seem to a node with osmid <code class="docutils literal notranslate"><span class="pre">25416262</span></code>.
+PageRank was the algorithm that Google first developed (Larry Page &amp;
+Sergei Brin) to order the search engine results and became famous for.</p>
+<p>You can read the <a class="reference external" href="https://en.wikipedia.org/wiki/Centrality">Wikipedia article about different centrality
+measures</a> if you are
+interested what the other centrality measures mean.</p>
+</div>
+<div class="section" id="Shortest-path-analysis">
+<h2>Shortest path analysis<a class="headerlink" href="#Shortest-path-analysis" title="Permalink to this headline">¶</a></h2>
+<p>Let’s now calculate the shortest path between two points. First we need
+to specify the source and target locations for our route. Let’s use the
+centroid of our network as the source location and the furthest point in
+East in our network as the target location.</p>
+<p>Let’s first determine the centroid of our network. We can take advantage
+of the same <code class="docutils literal notranslate"><span class="pre">Convex</span> <span class="pre">Hull</span></code> that we used previously to determine the
+centroid of our data.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Get the Convex Hull of the network</span>
+<span class="n">convex_hull</span> <span class="o">=</span> <span class="n">edges_proj</span><span class="o">.</span><span class="n">unary_union</span><span class="o">.</span><span class="n">convex_hull</span>
+
+<span class="c1"># Centroid</span>
+<span class="n">centroid</span> <span class="o">=</span> <span class="n">convex_hull</span><span class="o">.</span><span class="n">centroid</span>
+
+<span class="c1"># Show</span>
+<span class="k">print</span><span class="p">(</span><span class="n">centroid</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+POINT (385170.115258674 6671717.254450418)
+</pre></div></div>
+</div>
+<p>As we can see, now we have a centroid of our network determined. We will
+use this later as an origin point in our routing operation.</p>
+<ul class="simple">
+<li>Let’s now find the easternmost node in our street network. We can do
+this by calculating the x coordinates and finding out which node has
+the largest x-coordinate value. Let’s ensure that the values are
+floats.</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Get the x coordinates of the nodes</span>
+<span class="n">nodes_proj</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nodes_proj</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+
+<span class="c1"># Retrieve the maximum x value (i.e. the most eastern)</span>
+<span class="n">maxx</span> <span class="o">=</span> <span class="n">nodes_proj</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">maxx</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+385855.0300992895
+</pre></div></div>
+</div>
+<ul class="simple">
+<li>Let’s retrieve the target Point having the largest x-coordinate. We
+can do this by using the <code class="docutils literal notranslate"><span class="pre">.loc</span></code> function of Pandas that we have
+used already many times in earlier tutorials.</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Retrieve the node that is the most eastern one and get the Shapely Point geometry out of it</span>
+<span class="n">target</span> <span class="o">=</span> <span class="n">nodes_proj</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">nodes_proj</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">maxx</span><span class="p">,</span> <span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+POINT (385855.0300992895 6671721.810323974)
+</pre></div></div>
+</div>
+<p>Okey now we can see that as a result we have a Shapely Point that we can
+use as a target point in our routing.</p>
+<ul class="simple">
+<li>Let’s now find the nearest graph nodes (and their node-ids) to these
+points. For OSMnx we need to parse the coordinates of the Point as
+coordinate-tuple with Latitude, Longitude coordinates. As our data is
+now projected to UTM projection, we need to specify with <code class="docutils literal notranslate"><span class="pre">method</span></code>
+parameter that the function uses <code class="docutils literal notranslate"><span class="pre">'euclidean'</span></code> distances to
+calculate the distance from the point to the closest node. This
+becomes important if you want to know the actual distance between the
+Point and the closest node which you can retrieve by specifying
+parameter <code class="docutils literal notranslate"><span class="pre">return_dist=True</span></code>.</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Get origin x and y coordinates</span>
+<span class="n">orig_xy</span> <span class="o">=</span> <span class="p">(</span><span class="n">centroid</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">centroid</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Get target x and y coordinates</span>
+<span class="n">target_xy</span> <span class="o">=</span> <span class="p">(</span><span class="n">target</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">target</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Find the closest origin and target nodes from the graph (the ids of them)</span>
+<span class="n">orig_node</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">get_nearest_node</span><span class="p">(</span><span class="n">graph_proj</span><span class="p">,</span> <span class="n">orig_xy</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;euclidean&#39;</span><span class="p">)</span>
+<span class="n">target_node</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">get_nearest_node</span><span class="p">(</span><span class="n">graph_proj</span><span class="p">,</span> <span class="n">target_xy</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;euclidean&#39;</span><span class="p">)</span>
+
+<span class="c1"># Show the results</span>
+<span class="k">print</span><span class="p">(</span><span class="n">orig_node</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">target_node</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+301360197
+317703609
+</pre></div></div>
+</div>
+<p>Now we have the IDs for the closest nodes that were found from the graph
+to the origin and target points that we specified.</p>
+<ul class="simple">
+<li>Let’s retrieve the node information from the <code class="docutils literal notranslate"><span class="pre">nodes_proj</span></code>
+GeoDataFrame by passing the ids to the <code class="docutils literal notranslate"><span class="pre">loc</span></code> indexer, and make a
+GeoDataFrame out of them:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [31]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Retrieve the rows from the nodes GeoDataFrame</span>
+<span class="n">o_closest</span> <span class="o">=</span> <span class="n">nodes_proj</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">orig_node</span><span class="p">]</span>
+<span class="n">t_closest</span> <span class="o">=</span> <span class="n">nodes_proj</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">target_node</span><span class="p">]</span>
+
+<span class="c1"># Create a GeoDataFrame from the origin and target points</span>
+<span class="n">od_nodes</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">([</span><span class="n">o_closest</span><span class="p">,</span> <span class="n">t_closest</span><span class="p">],</span> <span class="n">geometry</span><span class="o">=</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="n">nodes_proj</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+
+<span class="n">od_nodes</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[31]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>highway</th>
+      <th>lat</th>
+      <th>lon</th>
+      <th>osmid</th>
+      <th>x</th>
+      <th>y</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>301360197</th>
+      <td>NaN</td>
+      <td>60.166212</td>
+      <td>24.930617</td>
+      <td>301360197</td>
+      <td>385166.707932</td>
+      <td>6.671721e+06</td>
+      <td>POINT (385166.7079315781 6671721.244047897)</td>
+    </tr>
+    <tr>
+      <th>317703609</th>
+      <td>traffic_signals</td>
+      <td>60.166410</td>
+      <td>24.943012</td>
+      <td>317703609</td>
+      <td>385855.030099</td>
+      <td>6.671722e+06</td>
+      <td>POINT (385855.0300992895 6671721.810323974)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>Okay, as a result we got now the closest node-ids of our origin and
+target locations. As you can see, the <code class="docutils literal notranslate"><span class="pre">index</span></code> in this GeoDataFrame
+corresponds to the IDs that we found with <code class="docutils literal notranslate"><span class="pre">get_nearest_node()</span></code>
+function.</p>
+<ul class="simple">
+<li>Now we are ready to do the routing and find the shortest path between
+the origin and target locations by using the <code class="docutils literal notranslate"><span class="pre">shortest_path()</span></code>
+<a class="reference external" href="https://networkx.github.io/documentation/networkx-1.10/reference/generated/networkx.algorithms.shortest_paths.generic.shortest_path.html">function</a>
+of networkx. With <code class="docutils literal notranslate"><span class="pre">weight</span></code> -parameter we can specify that
+<code class="docutils literal notranslate"><span class="pre">'length'</span></code> attribute should be used as the cost impedance in the
+routing. If specifying the weight parameter, NetworkX will use by
+default Dijkstra’s algorithm to find the optimal route. We need to
+specify the graph that is used for routing, and the origin <code class="docutils literal notranslate"><span class="pre">ID</span></code>
+(<em>source</em>) and the target <code class="docutils literal notranslate"><span class="pre">ID</span></code> in between the shortest path will be
+calculated:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [33]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Calculate the shortest path</span>
+<span class="n">route</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">shortest_path</span><span class="p">(</span><span class="n">G</span><span class="o">=</span><span class="n">graph_proj</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">orig_node</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">target_node</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s1">&#39;length&#39;</span><span class="p">)</span>
+
+<span class="c1"># Show what we have</span>
+<span class="k">print</span><span class="p">(</span><span class="n">route</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[301360197, 1372441183, 1372441170, 60170471, 1377211668, 1377211666, 25291565, 25291564, 317703609]
+</pre></div></div>
+</div>
+<p>As a result we get a list of all the nodes that are along the shortest
+path.</p>
+<ul class="simple">
+<li>We could extract the locations of those nodes from the <code class="docutils literal notranslate"><span class="pre">nodes_proj</span></code>
+GeoDataFrame and create a LineString presentation of the points, but
+luckily, OSMnx can do that for us and we can plot shortest path by
+using <code class="docutils literal notranslate"><span class="pre">plot_graph_route()</span></code> function:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [34]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Plot the shortest path</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">plot_graph_route</span><span class="p">(</span><span class="n">graph_proj</span><span class="p">,</span> <span class="n">route</span><span class="p">,</span> <span class="n">origin_point</span><span class="o">=</span><span class="n">orig_xy</span><span class="p">,</span> <span class="n">destination_point</span><span class="o">=</span><span class="n">target_xy</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L6_network-analysis_33_0.png" src="../../_images/notebooks_L6_network-analysis_33_0.png" />
+</div>
+</div>
+<p>Nice! Now we have the shortest path between our origin and target
+locations. Being able to analyze shortest paths between locations can be
+valuable information for many applications. Here, we only analyzed the
+shortest paths based on distance but quite often it is more useful to
+find the optimal routes between locations based on the travelled time.
+Here, for example we could calculate the time that it takes to cross
+each road segment by dividing the length of the road segment with the
+speed limit and calculate the optimal routes by taking into account the
+speed limits as well that might alter the result especially on longer
+trips than here.</p>
+</div>
+<div class="section" id="Saving-shortest-paths-to-disk">
+<h2>Saving shortest paths to disk<a class="headerlink" href="#Saving-shortest-paths-to-disk" title="Permalink to this headline">¶</a></h2>
+<p>Quite often you need to save the route e.g.&nbsp;as a Shapefile. Hence, let’s
+continue still a bit and see how we can make a Shapefile of our route
+with some information associated with it.</p>
+<ul class="simple">
+<li>First we need to get the nodes that belong to the shortest path:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [35]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Get the nodes along the shortest path</span>
+<span class="n">route_nodes</span> <span class="o">=</span> <span class="n">nodes_proj</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">route</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">route_nodes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+                    highway      lat      lon       osmid              x  \
+301360197               NaN  60.1662  24.9306   301360197  385166.707932
+1372441183              NaN  60.1658  24.9312  1372441183  385199.040423
+1372441170              NaN  60.1652   24.932  1372441170  385239.956998
+60170471                NaN  60.1661  24.9345    60170471  385382.590391
+1377211668              NaN  60.1669  24.9368  1377211668  385514.080702
+1377211666              NaN  60.1662  24.9379  1377211666  385570.886277
+25291565    traffic_signals  60.1651  24.9393    25291565  385647.135653
+25291564                NaN  60.1659  24.9417    25291564  385779.465694
+317703609   traffic_signals  60.1664   24.943   317703609  385855.030099
+
+                      y                                     geometry
+301360197   6.67172e+06  POINT (385166.7079315781 6671721.244047897)
+1372441183  6.67167e+06  POINT (385199.0404225526 6671671.819812791)
+1372441170  6.67161e+06  POINT (385239.9569982953 6671610.080006042)
+60170471     6.6717e+06  POINT (385382.5903912748 6671704.041456302)
+1377211668  6.67179e+06  POINT (385514.0807023764 6671789.786422228)
+1377211666   6.6717e+06  POINT (385570.8862774068 6671702.891685122)
+25291565    6.67159e+06   POINT (385647.135653317 6671586.226479715)
+25291564    6.67167e+06   POINT (385779.465694473 6671672.812754458)
+317703609   6.67172e+06  POINT (385855.0300992895 6671721.810323974)
+</pre></div></div>
+</div>
+<p>As we can see, now we have all the nodes that were part of the shortest
+path as a GeoDataFrame.</p>
+<ul class="simple">
+<li>Now we can create a LineString out of the Point geometries of the
+nodes:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [37]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">LineString</span><span class="p">,</span> <span class="n">Point</span>
+
+<span class="c1"># Create a geometry for the shortest path</span>
+<span class="n">route_line</span> <span class="o">=</span> <span class="n">LineString</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">route_nodes</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">values</span><span class="p">))</span>
+<span class="n">route_line</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[37]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L6_network-analysis_38_0.svg" src="../../_images/notebooks_L6_network-analysis_38_0.svg" /></div>
+</div>
+<p>Now we have the route as a LineString geometry.</p>
+<ul class="simple">
+<li>Let’s make a GeoDataFrame out of it having some useful information
+about our route such as a list of the osmids that are part of the
+route and the length of the route.</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [39]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Create a GeoDataFrame</span>
+<span class="n">route_geom</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">([[</span><span class="n">route_line</span><span class="p">]],</span> <span class="n">geometry</span><span class="o">=</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="n">edges_proj</span><span class="o">.</span><span class="n">crs</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">])</span>
+
+<span class="c1"># Add a list of osmids associated with the route</span>
+<span class="n">route_geom</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;osmids&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">route_nodes</span><span class="p">[</span><span class="s1">&#39;osmid&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">))</span>
+
+<span class="c1"># Calculate the route length</span>
+<span class="n">route_geom</span><span class="p">[</span><span class="s1">&#39;length_m&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">route_geom</span><span class="o">.</span><span class="n">length</span>
+
+<span class="n">route_geom</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[39]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>geometry</th>
+      <th>osmids</th>
+      <th>length_m</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>LINESTRING (385166.7079315781 6671721.24404789...</td>
+      <td>['301360197', '1372441183', '1372441170', '601...</td>
+      <td>952.294307</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>Now we have a GeoDataFrame that we can save to disk. Let’s still confirm
+that everything is okey by plotting our route on top of our street
+network and some buildings, and plot also the origin and target points
+on top of our map.</p>
+<ul class="simple">
+<li>Get buildings:</li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [40]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Retrieve buildings and reproject</span>
+<span class="n">buildings</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">buildings_from_place</span><span class="p">(</span><span class="n">place_name</span><span class="p">)</span>
+<span class="n">buildings_proj</span> <span class="o">=</span> <span class="n">buildings</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">crs</span><span class="o">=</span><span class="n">edges_proj</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li>Let’s now plot the route and the street network elements to verify
+that everything is as it should:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [44]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Plot edges and nodes</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">edges_proj</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">nodes_proj</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add buildings</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">buildings_proj</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;khaki&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+<span class="c1"># Add the route</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">route_geom</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add the origin and destination nodes of the route</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">od_nodes</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L6_network-analysis_44_0.png" src="../../_images/notebooks_L6_network-analysis_44_0.png" />
+</div>
+</div>
+<p>Great everything seems to be in order! As you can see, now we have a
+full control of all the elements of our map and we can use all the
+aesthetic properties that matplotlib provides to modify how our map will
+look like. Now we are almost ready to save our data into disk.</p>
+<ul class="simple">
+<li>As there are certain columns with such data values that Shapefile
+format does not support (such as <code class="docutils literal notranslate"><span class="pre">list</span></code> or <code class="docutils literal notranslate"><span class="pre">boolean</span></code>), we need to
+convert those into strings to be able to export the data to
+Shapefile:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [47]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Columns with invalid values</span>
+<span class="n">invalid_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lanes&#39;</span><span class="p">,</span> <span class="s1">&#39;maxspeed&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;oneway&#39;</span><span class="p">,</span> <span class="s1">&#39;osmid&#39;</span><span class="p">]</span>
+
+<span class="c1"># Iterate over invalid columns and convert them to string format</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">invalid_cols</span><span class="p">:</span>
+    <span class="n">edges_proj</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">edges_proj</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">edges_proj</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+access       object
+bridge       object
+geometry     object
+highway      object
+junction     object
+key           int64
+lanes        object
+length      float64
+maxspeed     object
+name         object
+oneway       object
+osmid        object
+u             int64
+v             int64
+dtype: object
+</pre></div></div>
+</div>
+<p>Now we can see that most of the attributes are of type <code class="docutils literal notranslate"><span class="pre">object</span></code> that
+quite often (such as ours here) refers to a string type of data.</p>
+<ul class="simple">
+<li>Now we are finally ready to parse the output filepaths and save the
+data into disk:</li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [49]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="c1"># Parse the place name for the output file names (replace spaces with underscores and remove commas)</span>
+<span class="n">place_name_out</span> <span class="o">=</span> <span class="n">place_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+<span class="c1"># Output directory</span>
+<span class="n">out_dir</span> <span class="o">=</span> <span class="s2">&quot;data&quot;</span>
+
+<span class="c1"># Parse output file paths</span>
+<span class="n">streets_out</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">_streets.shp&quot;</span> <span class="o">%</span> <span class="n">place_name_out</span><span class="p">)</span>
+<span class="n">route_out</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;Route_from_a_to_b_at_</span><span class="si">%s</span><span class="s2">.shp&quot;</span> <span class="o">%</span> <span class="n">place_name_out</span><span class="p">)</span>
+<span class="n">nodes_out</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">_nodes.shp&quot;</span> <span class="o">%</span> <span class="n">place_name_out</span><span class="p">)</span>
+<span class="n">buildings_out</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">_buildings.shp&quot;</span> <span class="o">%</span> <span class="n">place_name_out</span><span class="p">)</span>
+<span class="n">od_out</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">_route_OD_points.shp&quot;</span> <span class="o">%</span> <span class="n">place_name_out</span><span class="p">)</span>
+
+<span class="c1"># Save files</span>
+<span class="n">edges_proj</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">streets_out</span><span class="p">)</span>
+<span class="n">route_geom</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">route_out</span><span class="p">)</span>
+<span class="n">nodes_proj</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">nodes_out</span><span class="p">)</span>
+<span class="n">od_nodes</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">od_out</span><span class="p">)</span>
+<span class="n">buildings</span><span class="p">[[</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;addr:street&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">buildings_out</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Great, now we have saved all the data that was used to produce the maps
+as Shapefiles.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../lessons/L6/exercise-6.html" class="btn btn-neutral float-right" title="Exercise 6" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="retrieve_osm_data.html" class="btn btn-neutral" title="Retrieving OpenStreetMap data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Henrikki Tenkanen
+      Last updated on Dec 02, 2018.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+    <p> <br/> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /> </a></p>
+     
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: develop
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../../../2017/index.html">2017</a></dd>
+            <dd><a href="network-analysis.html">develop</a></dd>
+            <dd><a href="../../../drafts/index.html">drafts</a></dd>
+            <dd><a href="../../../master/index.html">master</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'2018',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
