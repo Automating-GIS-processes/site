@@ -38,9 +38,6 @@ After this weeks lesson you should be able to (at least):
 Lecture videos
 --------------
 
-Lecture videos
---------------
-
 .. admonition:: Lesson 5.1 - Making maps: Static maps & Adding basemap from Web Map Tiles
 
     .. raw:: html
