@@ -38,5 +38,19 @@ After this weeks lesson you should be able to (at least):
 Lecture videos
 --------------
 
-Lecture videos will be added soon.
+.. admonition:: Lesson 5.1 - Making maps: Static maps & Adding basemap from Web Map Tiles
+
+    .. raw:: html
+
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/XhGYUMg4FF0" frameborder="0" allowfullscreen></iframe>
+        <p>Henrikki Tenkanen, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p>
+
+
+.. admonition:: Lesson 5.2 - Making interactive maps with Folium; Sharing interactive visualizations online
+
+    .. raw:: html
+
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/p0QmTCjlX54" frameborder="0" allowfullscreen></iframe>
+        <p>Henrikki Tenkanen, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p>
+
 

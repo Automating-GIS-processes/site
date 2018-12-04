@@ -34,18 +34,18 @@ Lecture videos
         <p>Henrikki Tenkanen, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p>
 
 
-.. admonition:: Lesson 6.2 - Downloading and working with OpenStreetMap data in Python; Osmnx -package
+.. admonition:: Lesson 6.2 - Downloading and working with OpenStreetMap data in Python; OSMnx -package
 
     .. raw:: html
 
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/LRmYjyHk94U?start=1" frameborder="0" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/hejWa-vbWfU" frameborder="0" allowfullscreen></iframe>
         <p>Henrikki Tenkanen, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p>
 
 
-.. admonition:: Lesson 6.3 - Network analysis and routing in Python; Osmnx and Networkx -packages
+.. admonition:: Lesson 6.3 - Network analysis and routing in Python using OSMnx and Networkx -packagess
 
     .. raw:: html
 
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/C4o6w33NzGw?start=1" frameborder="0" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/g65MkpcjEpM" frameborder="0" allowfullscreen></iframe>
         <p>Henrikki Tenkanen, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p>
 
