@@ -8,12 +8,12 @@ Managing and organising complex composite algorithms in the *Graphical Modeler* 
 
 To add a new python script to the processing toolbox, choose *Scripts → Tools → Create new script* from the toolbox. It is advisable to try parts of the script in the interactive **IPyConsole** first, though.
 
-*Processing* in the IPython console
+*Processing* in a Python console
 -----------------------------------
 
-.. note:: In this course, we use version 3.4 of QGIS. There have been major changes in QGIS, one of them being a complete rewrite of the *processing API*. At the time of this writing, documentation is still incomplete. The best source of information on the Python bindings of *Processing* algorithms is the *online help[1]_* on an interactive Python console.
+.. note:: In this course, we use version 3.4 of QGIS. There have been major changes in QGIS, one of them being a complete rewrite of the *processing API*. At the time of this writing, documentation is still incomplete. The best source of information on the Python bindings of *Processing* algorithms is the *online help* [1]_ on an interactive Python console.
 
-.. [1] “online” in the sense of context-sensitive help from within the command line interface. Not necessarily refering to the internet in any way.
+   .. [1] “online” in the sense of context-sensitive help from within the command line interface. Not necessarily refering to the internet in any way.
 
 Import the ``processing`` module to use its algorithms:
 
@@ -110,7 +110,7 @@ We want to create a script which for our example *damselfish* dataset or any sim
 
 .. note:: Scripts in the processing toolbox are now implemented as *classes* inheriting from ``QgsProcessingAlgorithm``. *Classes* can be interpreted as blueprints from which *objects* are instantiated at a program’s runtime. *Objects*, in turn, are the corner stone of `object-oriented programming <http://ee402.eeng.dcu.ie/introduction/chapter-1---introduction-to-object-oriented-programming>`_. They are entities containing data (variables) and code (methods).
 
-Object-oriented programming is the prevailing paradigm of software development. It is an extremely valuable skill, but teaching it is outside of the scope of this course. We provide the following template structure[2]_ which allows us to dive into implementing the actual algorithm. Feel free to use at for any other project! 
+Object-oriented programming is the prevailing paradigm of software development. It is an extremely valuable skill, but teaching it is outside of the scope of this course. We provide the following template structure [2]_ which allows us to dive into implementing the actual algorithm. Feel free to use at for any other project! 
 
 .. [2] This is a minimal template, sufficient for this exercise. You can also use the built-in template by choosing *Create new script from template …*. The resulting skeleton script is more complex, but also more comprehensive.
 
@@ -160,16 +160,76 @@ Open the *Processing toolbox* and select *Create new script …* from the Python
       :width: 374 px
 
 Copy-and-paste the template code from before into the editor window that opens and immediately make the following changes:
-   1. **Rename the class from `RENAME_THIS` to a meaningful name.** (line 12) 
-         `Python code style guidelines <https://www.python.org/dev/peps/pep-0008/#class-names>`_ recommend a *CapWords* style, i.e. each word in the class name starts with an uppercase letter. The class name should refer to the function of the class. We are building a tool, let’s revisit how we call physical-world tools: a good example is *Screwdriver*: It’s a tool to drive (inserting) a screw (into some material). Were it a software tool, a good class name would be `ScrewDriver`. Our tool rasterises species range maps, let’s call it `SpeciesRangeMapsRasteriser`.
-   2. **Change the *display name* of our tool.** (line 21) 
+1. **Rename the class from** ``RENAME_THIS`` **to a meaningful name.** (line 12) 
+         `Python code style guidelines <https://www.python.org/dev/peps/pep-0008/#class-names>`_ recommend a *CapWords* style, i.e. each word in the class name starts with an uppercase letter. The class name should refer to the function of the class. We are building a tool, let’s revisit how we call physical-world tools: a good example is *Screwdriver*: It’s a tool to drive (inserting) a screw (into some material). Were it a software tool, a good class name would be ``ScrewDriver``. Our tool rasterises species range maps, let’s call it ``SpeciesRangeMapsRasteriser``.
+2. **Change the display name of our tool.** (line 21) 
          The names of most of the algorithms in the *processing* toolbox consist of a verb and an object (e.g. “Create spatial index”). Let’s stick with this concept and call our tool “Rasterise species range maps”.
+3. **Save these changes.**
+         Choose a filename representing the tool (e.g. `SpeciesRangeMapsRasteriser.py`, and save it in the default directory.
+
+You can now already run the script (press the *play* button in the editor window) and find it in the toolbox (in *scripts*). Since we did not define any parameters or algorithms, the script does nothing, though.
+
+Defining script parameters
+--------------------------
+
+The class method `initAlgorithm()` defines general characteristics of a toolbox algorithm, such as which parameters are accepted. It is being run whenever QGIS updates the list of algorithms installed, for instance when QGIS starts or when a script is saved in the editor.
+
+Use the ``self.addParameter()`` `method <https://qgis.org/pyqgis/3.0/core/Processing/QgsProcessingAlgorithm.html#qgis.core.QgsProcessingAlgorithm.addParameter>`_ to define parameters, ``self.addOutput()`` `to define outputs<https://qgis.org/pyqgis/3.0/core/Processing/QgsProcessingAlgorithm.html#qgis.core.QgsProcessingAlgorithm.addOutput>`_ of the algorithm.
+
+Our script has three parameters:
+- An input vector layer
+- The name of the field containing the species name
+- A directory to save the output to (for practical reasons, in this example, this is an input parameter, it can also be implemented as an output)
+
+The parameters are objects (instances) of one of the classes ``QgsProcessingParameter*``, documented in `qgis.org/pyqgis/3.0/core/Processing/ <https://qgis.org/pyqgis/3.0/core/Processing/>`_, and have to be import ed from ``qgis.core`` at the beginning of the script. We will use ``QgsProcessingParameterVectorLayer``, ``QgsProcessingParameterField`` and ``QgsProcessingParameterFolderDestination``. We can add them to the existing ``import`` statement:
+
+.. code:: python
+   from qgis.core import (
+        QgsProcessing,
+        QgsProcessingAlgorithm,
+        QgsProcessingParameterField,
+        QgsProcessingParameterFolderDestination,
+        QgsProcessingParameterVectorLayer
+    )
+
+For each of the parameters, we call ``self.addParameter()`` inside ``initAlgorithm()``:
+
+.. code:: python
+        def initAlgorithm(self, config=None):
+            self.addParameter(
+                QgsProcessingParameterVectorLayer(
+                    name="SpeciesRangePolygons",
+                    description="Species range polygons",
+                    types=[QgsProcessing.SourceType.TypeVectorPolygon]
+                )
+            )
+            self.addParameter(
+                QgsProcessingParameterField(
+                    name="SpeciesAttribute",
+                    description="Species attribute",
+                    parentLayerParameterName="SpeciesRangePolygons",
+                    type=QgsProcessingParameterField.String
+                )
+            )
+            self.addParameter(
+                QgsProcessingParameterFolderDestination(
+                    name="OutputFolder",
+                    description="Output folder"
+                )
+            )
+
+As you can see, the ``QgsProcessingParameter*`` classes need to be initialised with arguments. All of them share ``name`` and ``description``, which will be used for labelling the controls in the user interface. We can specify the geometry type of the vector layer, and define which layer the field should be chosen from, and which type of field is allowed.
+
+Save the script and try to run it: You’ll see the user interface asking for input.
 
 
+Programming the algorithm
+-------------------------
 
+All of the following will be added to the ``processAlgorithm()`` method.
 
 Adding a new field and updating its value
------------------------------------------
+.........................................
 
 We need to add a new field with a user-defined name. This field name is stored in ``Presence_Field_Name``. We use the *field calculator* algorithm of the processing toolbox. To find its scripting name (``id``), search for it, then display its help text:
 
@@ -245,7 +305,7 @@ We use ``processing.run()`` to run the algorithm, and have to supply the algorit
 
 
 Finding unique species
-----------------------
+......................
 
 As we wanted to save individual species into separate raster files, we need to determine the unique species in our attribute table. For this, we will use the layer’s ``uniqueValues()`` function, which requires a field’s index instead of its name. This function is somewhat equivalent to Geopandas ``unique()``.
 
@@ -259,7 +319,7 @@ As we wanted to save individual species into separate raster files, we need to d
     uniqueSpecies = Species_Range_Polygons.uniqueValues(fieldIndex)
 
 Select by attribute and rasterise
----------------------------------
+.................................
 
 Now, for each species we run three algorithms: we use *select by attribute* (``qgis:selectbyattribute``) to save the features belonging to the current species into a new layer. Because the *rasterize* algorithm does not understand the default in-memory vector file format, we write the vector data to an intermediate file and then convert the vector data into a raster file using the *rasterize (vector to raster)* tool (``gdal:rasterize``). Before that, we have to define an output file name for our raster.
 
@@ -312,7 +372,7 @@ Now, for each species we run three algorithms: we use *select by attribute* (``q
 
 
 Adding the script to the toolbox
---------------------------------
+................................
 
 After developing the script in the *IPython console*, let’s create a proper *processing toolbox* script. Open the processing script editor (*Scripts → Tools → Create new script* in the toolbox) and paste the code. Save it in the default directory.
 The only changes are in the very top of the file: we have to add metadata to describe which parameters our script accepts, plus its name and category. The syntax for this information is ``##[Variable name]=[Variable type] [optional default value and/or type]``. Valid variable types include ``vector`` and ``raster``, ``number`` and ``string`` and a view more. Find a more complete list in the `QGIS user manual <http://docs.qgis.org/testing/en/docs/user_manual/processing/console.html#creating-scripts-and-running-them-from-the-toolbox>`_. Finally, there is ``name`` and ``group``.

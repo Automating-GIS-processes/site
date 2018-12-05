@@ -164,12 +164,16 @@
 <li class="toctree-l1"><a class="reference internal" href="02-pyqgis.html">Python in QGIS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03-processing-toolbox.html">The QGIS Processing Toolbox</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Processing toolbox scripts</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#processing-in-the-ipython-console"><em>Processing</em> in the IPython console</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#processing-in-a-python-console"><em>Processing</em> in a Python console</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#rasterise-species-range-maps">Rasterise Species Range Maps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#adding-a-new-field-and-updating-its-value">Adding a new field and updating its value</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#finding-unique-species">Finding unique species</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#select-by-attribute-and-rasterise">Select by attribute and rasterise</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#adding-the-script-to-the-toolbox">Adding the script to the toolbox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#defining-script-parameters">Defining script parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#programming-the-algorithm">Programming the algorithm</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#adding-a-new-field-and-updating-its-value">Adding a new field and updating its value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#finding-unique-species">Finding unique species</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#select-by-attribute-and-rasterise">Select by attribute and rasterise</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adding-the-script-to-the-toolbox">Adding the script to the toolbox</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="#run-the-script">Run the script</a><ul>
@@ -280,18 +284,18 @@
 On Microsoft Windows, unfortunately, most programs ship with their private python enviroment which is difficult to access outside of the respective program and even harder to install additional packages into. For instance, ESRI ArcGIS and QGIS use entirely separate python installations. On Linux and macOS, QGIS typically uses the system python environment, but QGIS’ own packages are per-default only accessible from within the program.</p>
 </div>
 <p>To add a new python script to the processing toolbox, choose <em>Scripts → Tools → Create new script</em> from the toolbox. It is advisable to try parts of the script in the interactive <strong>IPyConsole</strong> first, though.</p>
-<div class="section" id="processing-in-the-ipython-console">
-<h2><em>Processing</em> in the IPython console<a class="headerlink" href="#processing-in-the-ipython-console" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="processing-in-a-python-console">
+<h2><em>Processing</em> in a Python console<a class="headerlink" href="#processing-in-a-python-console" title="Permalink to this headline">¶</a></h2>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">In this course, we use version 3.4 of QGIS. There have been major changes in QGIS, one of them being a complete rewrite of the <em>processing API</em>. At the time of this writing, documentation is still incomplete. The best source of information on the Python bindings of <em>Processing</em> algorithms is the <em>online help[1]_</em> on an interactive Python console.</p>
-</div>
-<table class="docutils footnote" frame="void" id="id1" rules="none">
+<p>In this course, we use version 3.4 of QGIS. There have been major changes in QGIS, one of them being a complete rewrite of the <em>processing API</em>. At the time of this writing, documentation is still incomplete. The best source of information on the Python bindings of <em>Processing</em> algorithms is the <em>online help</em> <a class="footnote-reference" href="#id2" id="id1">[1]</a> on an interactive Python console.</p>
+<table class="last docutils footnote" frame="void" id="id2" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[1]</td><td>“online” in the sense of context-sensitive help from within the command line interface. Not necessarily refering to the internet in any way.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>“online” in the sense of context-sensitive help from within the command line interface. Not necessarily refering to the internet in any way.</td></tr>
 </tbody>
 </table>
+</div>
 <p>Import the <code class="docutils literal notranslate"><span class="pre">processing</span></code> module to use its algorithms:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">processing</span>
 </pre></div>
@@ -382,11 +386,11 @@ On Microsoft Windows, unfortunately, most programs ship with their private pytho
 <p class="first admonition-title">Note</p>
 <p class="last">Scripts in the processing toolbox are now implemented as <em>classes</em> inheriting from <code class="docutils literal notranslate"><span class="pre">QgsProcessingAlgorithm</span></code>. <em>Classes</em> can be interpreted as blueprints from which <em>objects</em> are instantiated at a program’s runtime. <em>Objects</em>, in turn, are the corner stone of <a class="reference external" href="http://ee402.eeng.dcu.ie/introduction/chapter-1---introduction-to-object-oriented-programming">object-oriented programming</a>. They are entities containing data (variables) and code (methods).</p>
 </div>
-<p>Object-oriented programming is the prevailing paradigm of software development. It is an extremely valuable skill, but teaching it is outside of the scope of this course. We provide the following template structure[2]_ which allows us to dive into implementing the actual algorithm. Feel free to use at for any other project!</p>
-<table class="docutils footnote" frame="void" id="id2" rules="none">
+<p>Object-oriented programming is the prevailing paradigm of software development. It is an extremely valuable skill, but teaching it is outside of the scope of this course. We provide the following template structure <a class="footnote-reference" href="#id4" id="id3">[2]</a> which allows us to dive into implementing the actual algorithm. Feel free to use at for any other project!</p>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[2]</td><td>This is a minimal template, sufficient for this exercise. You can also use the built-in template by choosing <em>Create new script from template …</em>. The resulting skeleton script is more complex, but also more comprehensive.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id3">[2]</a></td><td>This is a minimal template, sufficient for this exercise. You can also use the built-in template by choosing <em>Create new script from template …</em>. The resulting skeleton script is more complex, but also more comprehensive.</td></tr>
 </tbody>
 </table>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/env python</span>
@@ -431,25 +435,42 @@ On Microsoft Windows, unfortunately, most programs ship with their private pytho
 <div class="figure">
 <a class="reference internal image-reference" href="../../_images/L7-04-create-new-script.png"><img alt="../../_images/L7-04-create-new-script.png" src="../../_images/L7-04-create-new-script.png" style="width: 374px;" /></a>
 </div>
-<dl class="docutils">
-<dt>Copy-and-paste the template code from before into the editor window that opens and immediately make the following changes:</dt>
-<dd><ol class="first last arabic simple">
+<p>Copy-and-paste the template code from before into the editor window that opens and immediately make the following changes:
+1. <strong>Rename the class from</strong> <code class="docutils literal notranslate"><span class="pre">RENAME_THIS</span></code> <strong>to a meaningful name.</strong> (line 12)</p>
+<blockquote>
+<div><a class="reference external" href="https://www.python.org/dev/peps/pep-0008/#class-names">Python code style guidelines</a> recommend a <em>CapWords</em> style, i.e. each word in the class name starts with an uppercase letter. The class name should refer to the function of the class. We are building a tool, let’s revisit how we call physical-world tools: a good example is <em>Screwdriver</em>: It’s a tool to drive (inserting) a screw (into some material). Were it a software tool, a good class name would be <code class="docutils literal notranslate"><span class="pre">ScrewDriver</span></code>. Our tool rasterises species range maps, let’s call it <code class="docutils literal notranslate"><span class="pre">SpeciesRangeMapsRasteriser</span></code>.</div></blockquote>
+<ol class="arabic simple" start="2">
 <li><dl class="first docutils">
-<dt><strong>Rename the class from `RENAME_THIS` to a meaningful name.</strong> (line 12)</dt>
-<dd><a class="reference external" href="https://www.python.org/dev/peps/pep-0008/#class-names">Python code style guidelines</a> recommend a <em>CapWords</em> style, i.e. each word in the class name starts with an uppercase letter. The class name should refer to the function of the class. We are building a tool, let’s revisit how we call physical-world tools: a good example is <em>Screwdriver</em>: It’s a tool to drive (inserting) a screw (into some material). Were it a software tool, a good class name would be <cite>ScrewDriver</cite>. Our tool rasterises species range maps, let’s call it <cite>SpeciesRangeMapsRasteriser</cite>.</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt><strong>Change the *display name* of our tool.</strong> (line 21)</dt>
+<dt><strong>Change the display name of our tool.</strong> (line 21)</dt>
 <dd>The names of most of the algorithms in the <em>processing</em> toolbox consist of a verb and an object (e.g. “Create spatial index”). Let’s stick with this concept and call our tool “Rasterise species range maps”.</dd>
 </dl>
 </li>
-</ol>
-</dd>
+<li><dl class="first docutils">
+<dt><strong>Save these changes.</strong></dt>
+<dd>Choose a filename representing the tool (e.g. <cite>SpeciesRangeMapsRasteriser.py</cite>, and save it in the default directory.</dd>
 </dl>
+</li>
+</ol>
+<p>You can now already run the script (press the <em>play</em> button in the editor window) and find it in the toolbox (in <em>scripts</em>). Since we did not define any parameters or algorithms, the script does nothing, though.</p>
 </div>
+<div class="section" id="defining-script-parameters">
+<h2>Defining script parameters<a class="headerlink" href="#defining-script-parameters" title="Permalink to this headline">¶</a></h2>
+<p>The class method <cite>initAlgorithm()</cite> defines general characteristics of a toolbox algorithm, such as which parameters are accepted. It is being run whenever QGIS updates the list of algorithms installed, for instance when QGIS starts or when a script is saved in the editor.</p>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">self.addParameter()</span></code> <a class="reference external" href="https://qgis.org/pyqgis/3.0/core/Processing/QgsProcessingAlgorithm.html#qgis.core.QgsProcessingAlgorithm.addParameter">method</a> to define parameters, <code class="docutils literal notranslate"><span class="pre">self.addOutput()</span></code> <a href="#id5"><span class="problematic" id="id6">`to define outputs&lt;https://qgis.org/pyqgis/3.0/core/Processing/QgsProcessingAlgorithm.html#qgis.core.QgsProcessingAlgorithm.addOutput&gt;`_</span></a> of the algorithm.</p>
+<p>Our script has three parameters:
+- An input vector layer
+- The name of the field containing the species name
+- A directory to save the output to (for practical reasons, in this example, this is an input parameter, it can also be implemented as an output)</p>
+<p>The parameters are objects (instances) of one of the classes <code class="docutils literal notranslate"><span class="pre">QgsProcessingParameter*</span></code>, documented in <a class="reference external" href="https://qgis.org/pyqgis/3.0/core/Processing/">qgis.org/pyqgis/3.0/core/Processing/</a>, and have to be import ed from <code class="docutils literal notranslate"><span class="pre">qgis.core</span></code> at the beginning of the script. We will use <code class="docutils literal notranslate"><span class="pre">QgsProcessingParameterVectorLayer</span></code>, <code class="docutils literal notranslate"><span class="pre">QgsProcessingParameterField</span></code> and <code class="docutils literal notranslate"><span class="pre">QgsProcessingParameterFolderDestination</span></code>. We can add them to the existing <code class="docutils literal notranslate"><span class="pre">import</span></code> statement:</p>
+<p>For each of the parameters, we call <code class="docutils literal notranslate"><span class="pre">self.addParameter()</span></code> inside <code class="docutils literal notranslate"><span class="pre">initAlgorithm()</span></code>:</p>
+<p>As you can see, the <code class="docutils literal notranslate"><span class="pre">QgsProcessingParameter*</span></code> classes need to be initialised with arguments. All of them share <code class="docutils literal notranslate"><span class="pre">name</span></code> and <code class="docutils literal notranslate"><span class="pre">description</span></code>, which will be used for labelling the controls in the user interface. We can specify the geometry type of the vector layer, and define which layer the field should be chosen from, and which type of field is allowed.</p>
+<p>Save the script and try to run it: You’ll see the user interface asking for input.</p>
+</div>
+<div class="section" id="programming-the-algorithm">
+<h2>Programming the algorithm<a class="headerlink" href="#programming-the-algorithm" title="Permalink to this headline">¶</a></h2>
+<p>All of the following will be added to the <code class="docutils literal notranslate"><span class="pre">processAlgorithm()</span></code> method.</p>
 <div class="section" id="adding-a-new-field-and-updating-its-value">
-<h2>Adding a new field and updating its value<a class="headerlink" href="#adding-a-new-field-and-updating-its-value" title="Permalink to this headline">¶</a></h2>
+<h3>Adding a new field and updating its value<a class="headerlink" href="#adding-a-new-field-and-updating-its-value" title="Permalink to this headline">¶</a></h3>
 <p>We need to add a new field with a user-defined name. This field name is stored in <code class="docutils literal notranslate"><span class="pre">Presence_Field_Name</span></code>. We use the <em>field calculator</em> algorithm of the processing toolbox. To find its scripting name (<code class="docutils literal notranslate"><span class="pre">id</span></code>), search for it, then display its help text:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># search for “buffer” algorithms:</span>
 <span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">searchTerm</span> <span class="o">=</span> <span class="s2">&quot;calculator&quot;</span>
@@ -520,7 +541,7 @@ On Microsoft Windows, unfortunately, most programs ship with their private pytho
 </div>
 </div>
 <div class="section" id="finding-unique-species">
-<h2>Finding unique species<a class="headerlink" href="#finding-unique-species" title="Permalink to this headline">¶</a></h2>
+<h3>Finding unique species<a class="headerlink" href="#finding-unique-species" title="Permalink to this headline">¶</a></h3>
 <p>As we wanted to save individual species into separate raster files, we need to determine the unique species in our attribute table. For this, we will use the layer’s <code class="docutils literal notranslate"><span class="pre">uniqueValues()</span></code> function, which requires a field’s index instead of its name. This function is somewhat equivalent to Geopandas <code class="docutils literal notranslate"><span class="pre">unique()</span></code>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># get the field index for the column &quot;Species_Attribute&quot;</span>
 <span class="n">fields</span> <span class="o">=</span> <span class="n">speciesRangePolygonsWithPresenceValue</span><span class="o">.</span><span class="n">fields</span><span class="p">()</span>
@@ -532,7 +553,7 @@ On Microsoft Windows, unfortunately, most programs ship with their private pytho
 </div>
 </div>
 <div class="section" id="select-by-attribute-and-rasterise">
-<h2>Select by attribute and rasterise<a class="headerlink" href="#select-by-attribute-and-rasterise" title="Permalink to this headline">¶</a></h2>
+<h3>Select by attribute and rasterise<a class="headerlink" href="#select-by-attribute-and-rasterise" title="Permalink to this headline">¶</a></h3>
 <p>Now, for each species we run three algorithms: we use <em>select by attribute</em> (<code class="docutils literal notranslate"><span class="pre">qgis:selectbyattribute</span></code>) to save the features belonging to the current species into a new layer. Because the <em>rasterize</em> algorithm does not understand the default in-memory vector file format, we write the vector data to an intermediate file and then convert the vector data into a raster file using the <em>rasterize (vector to raster)</em> tool (<code class="docutils literal notranslate"><span class="pre">gdal:rasterize</span></code>). Before that, we have to define an output file name for our raster.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># loop over unique species</span>
 <span class="k">for</span> <span class="n">species</span> <span class="ow">in</span> <span class="n">uniqueSpecies</span><span class="p">:</span>
@@ -582,7 +603,7 @@ On Microsoft Windows, unfortunately, most programs ship with their private pytho
 </div>
 </div>
 <div class="section" id="adding-the-script-to-the-toolbox">
-<h2>Adding the script to the toolbox<a class="headerlink" href="#adding-the-script-to-the-toolbox" title="Permalink to this headline">¶</a></h2>
+<h3>Adding the script to the toolbox<a class="headerlink" href="#adding-the-script-to-the-toolbox" title="Permalink to this headline">¶</a></h3>
 <p>After developing the script in the <em>IPython console</em>, let’s create a proper <em>processing toolbox</em> script. Open the processing script editor (<em>Scripts → Tools → Create new script</em> in the toolbox) and paste the code. Save it in the default directory.
 The only changes are in the very top of the file: we have to add metadata to describe which parameters our script accepts, plus its name and category. The syntax for this information is <code class="docutils literal notranslate"><span class="pre">##[Variable</span> <span class="pre">name]=[Variable</span> <span class="pre">type]</span> <span class="pre">[optional</span> <span class="pre">default</span> <span class="pre">value</span> <span class="pre">and/or</span> <span class="pre">type]</span></code>. Valid variable types include <code class="docutils literal notranslate"><span class="pre">vector</span></code> and <code class="docutils literal notranslate"><span class="pre">raster</span></code>, <code class="docutils literal notranslate"><span class="pre">number</span></code> and <code class="docutils literal notranslate"><span class="pre">string</span></code> and a view more. Find a more complete list in the <a class="reference external" href="http://docs.qgis.org/testing/en/docs/user_manual/processing/console.html#creating-scripts-and-running-them-from-the-toolbox">QGIS user manual</a>. Finally, there is <code class="docutils literal notranslate"><span class="pre">name</span></code> and <code class="docutils literal notranslate"><span class="pre">group</span></code>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">##Rasterize Species Range Maps=name</span>
@@ -593,6 +614,7 @@ The only changes are in the very top of the file: we have to add metadata to des
 <span class="c1">##Presence_Field_Value=expression 1</span>
 <span class="c1">##Output_Directory=folder /tmp/</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>
