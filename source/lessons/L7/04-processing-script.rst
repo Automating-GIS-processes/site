@@ -169,8 +169,8 @@ Copy-and-paste the template code from before into the editor window that opens a
 
 You can now already run the script (press the *play* button in the editor window) and find it in the toolbox (in *scripts*). Since we did not define any parameters or algorithms, the script does nothing, though.
 
-Defining script parameters
---------------------------
+Define script parameters
+------------------------
 
 The class method `initAlgorithm()` defines general characteristics of a toolbox algorithm, such as which parameters are accepted. It is being run whenever QGIS updates the list of algorithms installed, for instance when QGIS starts or when a script is saved in the editor.
 
@@ -223,12 +223,12 @@ As you can see, the ``QgsProcessingParameter*`` classes need to be initialised w
 Save the script and try to run it: You’ll see the user interface asking for input.
 
 
-Programming the algorithm
--------------------------
+Program the algorithm
+---------------------
 
 All of the following will be added to the ``processAlgorithm()`` method.
 
-Adding a new field and updating its value
+Add a new field and update its value
 .........................................
 
 We need to add a new field with a user-defined name. This field name is stored in ``Presence_Field_Name``. We use the *field calculator* algorithm of the processing toolbox. To find its scripting name (``id``), search for it, then display its help text:
@@ -304,7 +304,7 @@ We use ``processing.run()`` to run the algorithm, and have to supply the algorit
     speciesRangePolygonsWithPresenceValue = algorithmOutput["OUTPUT"]
 
 
-Finding unique species
+Find unique species
 ......................
 
 As we wanted to save individual species into separate raster files, we need to determine the unique species in our attribute table. For this, we will use the layer’s ``uniqueValues()`` function, which requires a field’s index instead of its name. This function is somewhat equivalent to Geopandas ``unique()``.
@@ -371,24 +371,6 @@ Now, for each species we run three algorithms: we use *select by attribute* (``q
         )
 
 
-Adding the script to the toolbox
-................................
-
-After developing the script in the *IPython console*, let’s create a proper *processing toolbox* script. Open the processing script editor (*Scripts → Tools → Create new script* in the toolbox) and paste the code. Save it in the default directory.
-The only changes are in the very top of the file: we have to add metadata to describe which parameters our script accepts, plus its name and category. The syntax for this information is ``##[Variable name]=[Variable type] [optional default value and/or type]``. Valid variable types include ``vector`` and ``raster``, ``number`` and ``string`` and a view more. Find a more complete list in the `QGIS user manual <http://docs.qgis.org/testing/en/docs/user_manual/processing/console.html#creating-scripts-and-running-them-from-the-toolbox>`_. Finally, there is ``name`` and ``group``.
-
-.. code:: python
-
-    ##Rasterize Species Range Maps=name
-    ##Conservation Geography=group
-    ##Species_Range_Polygons=vector polygon
-    ##Species_Attribute=field Species_Range_Polygons
-    ##Presence_Field_Name=string presence
-    ##Presence_Field_Value=expression 1
-    ##Output_Directory=folder /tmp/
-
-
-
 Run the script
 ==============
 
@@ -400,83 +382,158 @@ The full script
 ---------------
 
 .. code:: python
+    #!/bin/env python
 
-    ##Rasterize Species Range Maps=name
-    ##Conservation Geography=group
-    ##Species_Range_Polygons=vector polygon
-    ##Species_Attribute=field Species_Range_Polygons
-    ##Presence_Field_Name=string presence
-    ##Presence_Field_Value=expression 1
-    ##Output_Directory=folder /tmp/
-
-
+    import os
     import os.path
+    import processing
+    import string
 
-
-    algorithmOutput = processing.run(
-        "qgis:fieldcalculator",
-        {
-            "INPUT": Species_Range_Polygons,
-            "FIELD_NAME": Presence_Field_Name,
-            "FIELD_TYPE": 1,
-            "FIELD_LENGTH": 5,
-            "FIELD_PRECISION": 0,
-            "NEW_FIELD": True,
-            "FORMULA": Presence_Field_Value,
-            "OUTPUT": "memory:speciesRangePolygonsWithPresenceValue"
-        }
+    from qgis.core import (
+        QgsProcessing,
+        QgsProcessingAlgorithm,
+        QgsProcessingParameterField,
+        QgsProcessingParameterFolderDestination,
+        QgsProcessingParameterVectorLayer
     )
-    speciesRangePolygonsWithPresenceValue = algorithmOutput["OUTPUT"]
 
-    # get the field index for the column "Species_Attribute"
-    fields = speciesRangePolygonsWithPresenceValue.fields()
-    fieldIndex = fields.indexFromName(Species_Attribute)
+    class RasteriseSpeciesRangeMaps(QgsProcessingAlgorithm):
 
-    # get unique values for this columns
-    uniqueSpecies = Species_Range_Polygons.uniqueValues(fieldIndex)
+        def __init__(self):
+            super().__init__()
 
-    # loop over unique species
-    for species in uniqueSpecies:
+        def createInstance(self):
+            return type(self)()
 
-        # define output file name:
-        outputFile = os.path.join(
-            Output_Directory,
-            species.replace(" ","_")
-        )
+        def displayName(self):
+            return "Rasterise species range maps"
 
-        # select only feature with the current species
-        algorithmOutput = processing.run(
-            "qgis:selectbyattribute",
-            {
-                "INPUT": speciesRangePolygonsWithPresenceValue,
-                "FIELD": Species_Attribute,
-                "OPERATOR": 0,
-                "VALUE": species
-            }
-        )
-        oneSpeciesRangePolygons = algorithmOutput["OUTPUT"]
+        def name(self):
+            name = "".join([
+                character for character in self.displayName().lower()
+                if character in string.ascii_letters
+            ])
+            return name
 
-        # save intermediate vector file
-        algorithmOutput = processing.run(
-            "native:saveselectedfeatures",
-            {
-                "INPUT": oneSpeciesRangePolygons,
-                "OUTPUT": outputFile + ".shp"
-            }
-        )
-        oneSpeciesRangePolygons = algorithmOutput["OUTPUT"]
+        def initAlgorithm(self, config=None):
+            self.addParameter(
+                QgsProcessingParameterVectorLayer(
+                    name="SpeciesRangePolygons",
+                    description="Species range polygons",
+                    types=[QgsProcessing.SourceType.TypeVectorPolygon]
+                )
+            )
+            self.addParameter(
+                QgsProcessingParameterField(
+                    name="SpeciesAttribute",
+                    description="Species attribute",
+                    parentLayerParameterName="SpeciesRangePolygons",
+                    type=QgsProcessingParameterField.String
+                )
+            )
+            self.addParameter(
+                QgsProcessingParameterFolderDestination(
+                    name="OutputFolder",
+                    description="Output folder"
+                )
+            )
 
-        # rasterise the vector layer
-        algorithmOutput = processing.run(
-            "gdal:rasterize",
-            {
-                "INPUT": oneSpeciesRangePolygons,
-                "FIELD": Presence_Field_Name,
-                "DIMENSIONS": 0,
-                "WIDTH": 2000,
-                "HEIGHT": 1000,
-                "RAST_EXT": "",
-                "RTYPE": 0,
-                "OUTPUT": outputFile + ".tif"
-            }
-        )
+        def processAlgorithm(self, parameters, context, feedback):
+            # 0)
+            # create destination directory
+            os.makedirs(
+                parameters["OutputFolder"],
+                exist_ok=True
+            )
+
+            # 1)
+            # add a new integer field `presence` with value 1
+            # (input for rasterising later on)
+            algorithmOutput = processing.run(
+                "qgis:fieldcalculator",
+                {
+                    "INPUT": parameters["SpeciesRangePolygons"],
+                    "NEW_FIELD": True,
+                    "FIELD_NAME": "presence",
+                    "FIELD_TYPE": 1,
+                    "FORMULA": "1",
+                    "OUTPUT": "memory:speciesRangePolygonsWithPresenceValue"
+                },
+                context=context,
+                feedback=feedback
+            )
+            speciesRangePolygonsWithPresenceValue = algorithmOutput["OUTPUT"]
+
+            # 2)
+            # Find all distinct species names
+            fields = parameters["SpeciesRangePolygons"].fields()
+            fieldIndex = fields.indexFromName(parameters["SpeciesAttribute"])
+            speciesNames = \
+                parameters["SpeciesRangePolygons"].uniqueValues(fieldIndex)
+
+            # 3)
+            # Loop over all species
+            for speciesName in speciesNames:
+                if speciesName is not None:
+
+                    # 3a)
+                    # define output file name:
+                    outputFile = os.path.join(
+                        parameters["OutputFolder"],
+                        speciesName.replace(" ", "_")
+                    )
+
+                    # 3b)
+                    # select all features with current `speciesName`
+                    algorithmOutput = processing.run(
+                        "qgis:selectbyattribute",
+                        {
+                            "INPUT": speciesRangePolygonsWithPresenceValue,
+                            "FIELD": parameters["SpeciesAttribute"],
+                            "OPERATOR": 0,
+                            "VALUE": speciesName,
+                            "METHOD": 0
+                        },
+                        context=context,
+                        feedback=feedback                )
+                    singleSpeciesRangePolygons = algorithmOutput["OUTPUT"]
+
+                    # 3c)
+                    # save intermediate vector file
+                    algorithmOutput = processing.run(
+                        "native:saveselectedfeatures",
+                        {
+                            "INPUT": singleSpeciesRangePolygons,
+                            "OUTPUT": outputFile + ".shp"
+                        },
+                        context=context,
+                        feedback=feedback
+                    )
+                    singleSpeciesRangePolygons = algorithmOutput["OUTPUT"]
+
+                    # 3d)
+                    # rasterise the vector layer
+                    algorithmOutput = processing.run(
+                        "gdal:rasterize",
+                        {
+                            "INPUT": singleSpeciesRangePolygons,
+
+                            "FIELD": "presence",
+
+                            "UNITS": 0,
+                            "WIDTH": 2000,
+                            "HEIGHT": 1000,
+                            "EXTENT": "-180, 180, -90, 90",
+
+                            "RTYPE": 0,
+                            "OUTPUT": outputFile + ".tif"
+                        },
+                        context=context,
+                        feedback=feedback
+                    )
+
+                    # 3f)
+                    # delete intermediate vector file
+                    os.remove(outputFile + ".shp")
+
+            return {}
