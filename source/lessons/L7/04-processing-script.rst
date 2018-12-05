@@ -340,7 +340,7 @@ Now, for each species we run three algorithms: we use *select by attribute* (``q
 
 .. code:: python
 
-       # 3)
+        # 3)
         # Loop over all species
         for speciesName in speciesNames:
             if speciesName is not None:
