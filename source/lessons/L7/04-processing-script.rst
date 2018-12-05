@@ -297,7 +297,7 @@ For this step, we use the *field calculator* algorithm of the processing toolbox
     OUTPUT:  <QgsProcessingOutputVectorLayer>
             Calculated
 
-We use ``processing.run()`` to run the algorithm, and have to supply the algorithm’s ``id`` and *input parameters* in a dictionary. ``run()`` returns a dictionary with all *output values*, amongst them the output layer.
+We use ``processing.run()`` to run the algorithm, and have to supply the algorithm’s ``id`` and *input parameters* in a dictionary. ``run()`` returns a dictionary with all *output values*, amongst them the output layer. Add the following section of code to the ``processAlgorithm()`` method (in the editor window).
 
 .. code:: python
 
