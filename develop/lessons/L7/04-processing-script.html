@@ -160,18 +160,16 @@
 <p class="caption"><span class="caption-text">Lesson 7</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="01-overview.html">Lesson 7 Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lecture.html">Lecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02-pyqgis.html">Python in QGIS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03-processing-toolbox.html">The QGIS Processing Toolbox</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Processing toolbox scripts</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#processing-in-a-python-console"><em>Processing</em> in a Python console</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#rasterise-species-range-maps">Rasterise Species Range Maps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#defining-script-parameters">Defining script parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#programming-the-algorithm">Programming the algorithm</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#adding-a-new-field-and-updating-its-value">Adding a new field and updating its value</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#finding-unique-species">Finding unique species</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#define-script-parameters">Define script parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#program-the-algorithm">Program the algorithm</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#add-a-new-field-and-update-its-value">Add a new field and update its value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#find-unique-species">Find unique species</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#select-by-attribute-and-rasterise">Select by attribute and rasterise</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#adding-the-script-to-the-toolbox">Adding the script to the toolbox</a></li>
 </ul>
 </li>
 </ul>
@@ -453,8 +451,8 @@ On Microsoft Windows, unfortunately, most programs ship with their private pytho
 </ol>
 <p>You can now already run the script (press the <em>play</em> button in the editor window) and find it in the toolbox (in <em>scripts</em>). Since we did not define any parameters or algorithms, the script does nothing, though.</p>
 </div>
-<div class="section" id="defining-script-parameters">
-<h2>Defining script parameters<a class="headerlink" href="#defining-script-parameters" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="define-script-parameters">
+<h2>Define script parameters<a class="headerlink" href="#define-script-parameters" title="Permalink to this headline">¶</a></h2>
 <p>The class method <cite>initAlgorithm()</cite> defines general characteristics of a toolbox algorithm, such as which parameters are accepted. It is being run whenever QGIS updates the list of algorithms installed, for instance when QGIS starts or when a script is saved in the editor.</p>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">self.addParameter()</span></code> <a class="reference external" href="https://qgis.org/pyqgis/3.0/core/Processing/QgsProcessingAlgorithm.html#qgis.core.QgsProcessingAlgorithm.addParameter">method</a> to define parameters, <code class="docutils literal notranslate"><span class="pre">self.addOutput()</span></code> <a href="#id5"><span class="problematic" id="id6">`to define outputs&lt;https://qgis.org/pyqgis/3.0/core/Processing/QgsProcessingAlgorithm.html#qgis.core.QgsProcessingAlgorithm.addOutput&gt;`_</span></a> of the algorithm.</p>
 <p>Our script has three parameters:
@@ -466,11 +464,11 @@ On Microsoft Windows, unfortunately, most programs ship with their private pytho
 <p>As you can see, the <code class="docutils literal notranslate"><span class="pre">QgsProcessingParameter*</span></code> classes need to be initialised with arguments. All of them share <code class="docutils literal notranslate"><span class="pre">name</span></code> and <code class="docutils literal notranslate"><span class="pre">description</span></code>, which will be used for labelling the controls in the user interface. We can specify the geometry type of the vector layer, and define which layer the field should be chosen from, and which type of field is allowed.</p>
 <p>Save the script and try to run it: You’ll see the user interface asking for input.</p>
 </div>
-<div class="section" id="programming-the-algorithm">
-<h2>Programming the algorithm<a class="headerlink" href="#programming-the-algorithm" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="program-the-algorithm">
+<h2>Program the algorithm<a class="headerlink" href="#program-the-algorithm" title="Permalink to this headline">¶</a></h2>
 <p>All of the following will be added to the <code class="docutils literal notranslate"><span class="pre">processAlgorithm()</span></code> method.</p>
-<div class="section" id="adding-a-new-field-and-updating-its-value">
-<h3>Adding a new field and updating its value<a class="headerlink" href="#adding-a-new-field-and-updating-its-value" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="add-a-new-field-and-update-its-value">
+<h3>Add a new field and update its value<a class="headerlink" href="#add-a-new-field-and-update-its-value" title="Permalink to this headline">¶</a></h3>
 <p>We need to add a new field with a user-defined name. This field name is stored in <code class="docutils literal notranslate"><span class="pre">Presence_Field_Name</span></code>. We use the <em>field calculator</em> algorithm of the processing toolbox. To find its scripting name (<code class="docutils literal notranslate"><span class="pre">id</span></code>), search for it, then display its help text:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># search for “buffer” algorithms:</span>
 <span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">searchTerm</span> <span class="o">=</span> <span class="s2">&quot;calculator&quot;</span>
@@ -540,8 +538,8 @@ On Microsoft Windows, unfortunately, most programs ship with their private pytho
 </pre></div>
 </div>
 </div>
-<div class="section" id="finding-unique-species">
-<h3>Finding unique species<a class="headerlink" href="#finding-unique-species" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="find-unique-species">
+<h3>Find unique species<a class="headerlink" href="#find-unique-species" title="Permalink to this headline">¶</a></h3>
 <p>As we wanted to save individual species into separate raster files, we need to determine the unique species in our attribute table. For this, we will use the layer’s <code class="docutils literal notranslate"><span class="pre">uniqueValues()</span></code> function, which requires a field’s index instead of its name. This function is somewhat equivalent to Geopandas <code class="docutils literal notranslate"><span class="pre">unique()</span></code>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># get the field index for the column &quot;Species_Attribute&quot;</span>
 <span class="n">fields</span> <span class="o">=</span> <span class="n">speciesRangePolygonsWithPresenceValue</span><span class="o">.</span><span class="n">fields</span><span class="p">()</span>
@@ -602,20 +600,6 @@ On Microsoft Windows, unfortunately, most programs ship with their private pytho
 </pre></div>
 </div>
 </div>
-<div class="section" id="adding-the-script-to-the-toolbox">
-<h3>Adding the script to the toolbox<a class="headerlink" href="#adding-the-script-to-the-toolbox" title="Permalink to this headline">¶</a></h3>
-<p>After developing the script in the <em>IPython console</em>, let’s create a proper <em>processing toolbox</em> script. Open the processing script editor (<em>Scripts → Tools → Create new script</em> in the toolbox) and paste the code. Save it in the default directory.
-The only changes are in the very top of the file: we have to add metadata to describe which parameters our script accepts, plus its name and category. The syntax for this information is <code class="docutils literal notranslate"><span class="pre">##[Variable</span> <span class="pre">name]=[Variable</span> <span class="pre">type]</span> <span class="pre">[optional</span> <span class="pre">default</span> <span class="pre">value</span> <span class="pre">and/or</span> <span class="pre">type]</span></code>. Valid variable types include <code class="docutils literal notranslate"><span class="pre">vector</span></code> and <code class="docutils literal notranslate"><span class="pre">raster</span></code>, <code class="docutils literal notranslate"><span class="pre">number</span></code> and <code class="docutils literal notranslate"><span class="pre">string</span></code> and a view more. Find a more complete list in the <a class="reference external" href="http://docs.qgis.org/testing/en/docs/user_manual/processing/console.html#creating-scripts-and-running-them-from-the-toolbox">QGIS user manual</a>. Finally, there is <code class="docutils literal notranslate"><span class="pre">name</span></code> and <code class="docutils literal notranslate"><span class="pre">group</span></code>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">##Rasterize Species Range Maps=name</span>
-<span class="c1">##Conservation Geography=group</span>
-<span class="c1">##Species_Range_Polygons=vector polygon</span>
-<span class="c1">##Species_Attribute=field Species_Range_Polygons</span>
-<span class="c1">##Presence_Field_Name=string presence</span>
-<span class="c1">##Presence_Field_Value=expression 1</span>
-<span class="c1">##Output_Directory=folder /tmp/</span>
-</pre></div>
-</div>
-</div>
 </div>
 </div>
 <div class="section" id="run-the-script">
@@ -626,87 +610,6 @@ The only changes are in the very top of the file: we have to add metadata to des
 </div>
 <div class="section" id="the-full-script">
 <h2>The full script<a class="headerlink" href="#the-full-script" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">##Rasterize Species Range Maps=name</span>
-<span class="c1">##Conservation Geography=group</span>
-<span class="c1">##Species_Range_Polygons=vector polygon</span>
-<span class="c1">##Species_Attribute=field Species_Range_Polygons</span>
-<span class="c1">##Presence_Field_Name=string presence</span>
-<span class="c1">##Presence_Field_Value=expression 1</span>
-<span class="c1">##Output_Directory=folder /tmp/</span>
-
-
-<span class="kn">import</span> <span class="nn">os.path</span>
-
-
-<span class="n">algorithmOutput</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
-    <span class="s2">&quot;qgis:fieldcalculator&quot;</span><span class="p">,</span>
-    <span class="p">{</span>
-        <span class="s2">&quot;INPUT&quot;</span><span class="p">:</span> <span class="n">Species_Range_Polygons</span><span class="p">,</span>
-        <span class="s2">&quot;FIELD_NAME&quot;</span><span class="p">:</span> <span class="n">Presence_Field_Name</span><span class="p">,</span>
-        <span class="s2">&quot;FIELD_TYPE&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s2">&quot;FIELD_LENGTH&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
-        <span class="s2">&quot;FIELD_PRECISION&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;NEW_FIELD&quot;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
-        <span class="s2">&quot;FORMULA&quot;</span><span class="p">:</span> <span class="n">Presence_Field_Value</span><span class="p">,</span>
-        <span class="s2">&quot;OUTPUT&quot;</span><span class="p">:</span> <span class="s2">&quot;memory:speciesRangePolygonsWithPresenceValue&quot;</span>
-    <span class="p">}</span>
-<span class="p">)</span>
-<span class="n">speciesRangePolygonsWithPresenceValue</span> <span class="o">=</span> <span class="n">algorithmOutput</span><span class="p">[</span><span class="s2">&quot;OUTPUT&quot;</span><span class="p">]</span>
-
-<span class="c1"># get the field index for the column &quot;Species_Attribute&quot;</span>
-<span class="n">fields</span> <span class="o">=</span> <span class="n">speciesRangePolygonsWithPresenceValue</span><span class="o">.</span><span class="n">fields</span><span class="p">()</span>
-<span class="n">fieldIndex</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">indexFromName</span><span class="p">(</span><span class="n">Species_Attribute</span><span class="p">)</span>
-
-<span class="c1"># get unique values for this columns</span>
-<span class="n">uniqueSpecies</span> <span class="o">=</span> <span class="n">Species_Range_Polygons</span><span class="o">.</span><span class="n">uniqueValues</span><span class="p">(</span><span class="n">fieldIndex</span><span class="p">)</span>
-
-<span class="c1"># loop over unique species</span>
-<span class="k">for</span> <span class="n">species</span> <span class="ow">in</span> <span class="n">uniqueSpecies</span><span class="p">:</span>
-
-    <span class="c1"># define output file name:</span>
-    <span class="n">outputFile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-        <span class="n">Output_Directory</span><span class="p">,</span>
-        <span class="n">species</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span><span class="s2">&quot;_&quot;</span><span class="p">)</span>
-    <span class="p">)</span>
-
-    <span class="c1"># select only feature with the current species</span>
-    <span class="n">algorithmOutput</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
-        <span class="s2">&quot;qgis:selectbyattribute&quot;</span><span class="p">,</span>
-        <span class="p">{</span>
-            <span class="s2">&quot;INPUT&quot;</span><span class="p">:</span> <span class="n">speciesRangePolygonsWithPresenceValue</span><span class="p">,</span>
-            <span class="s2">&quot;FIELD&quot;</span><span class="p">:</span> <span class="n">Species_Attribute</span><span class="p">,</span>
-            <span class="s2">&quot;OPERATOR&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="s2">&quot;VALUE&quot;</span><span class="p">:</span> <span class="n">species</span>
-        <span class="p">}</span>
-    <span class="p">)</span>
-    <span class="n">oneSpeciesRangePolygons</span> <span class="o">=</span> <span class="n">algorithmOutput</span><span class="p">[</span><span class="s2">&quot;OUTPUT&quot;</span><span class="p">]</span>
-
-    <span class="c1"># save intermediate vector file</span>
-    <span class="n">algorithmOutput</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
-        <span class="s2">&quot;native:saveselectedfeatures&quot;</span><span class="p">,</span>
-        <span class="p">{</span>
-            <span class="s2">&quot;INPUT&quot;</span><span class="p">:</span> <span class="n">oneSpeciesRangePolygons</span><span class="p">,</span>
-            <span class="s2">&quot;OUTPUT&quot;</span><span class="p">:</span> <span class="n">outputFile</span> <span class="o">+</span> <span class="s2">&quot;.shp&quot;</span>
-        <span class="p">}</span>
-    <span class="p">)</span>
-    <span class="n">oneSpeciesRangePolygons</span> <span class="o">=</span> <span class="n">algorithmOutput</span><span class="p">[</span><span class="s2">&quot;OUTPUT&quot;</span><span class="p">]</span>
-
-    <span class="c1"># rasterise the vector layer</span>
-    <span class="n">algorithmOutput</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
-        <span class="s2">&quot;gdal:rasterize&quot;</span><span class="p">,</span>
-        <span class="p">{</span>
-            <span class="s2">&quot;INPUT&quot;</span><span class="p">:</span> <span class="n">oneSpeciesRangePolygons</span><span class="p">,</span>
-            <span class="s2">&quot;FIELD&quot;</span><span class="p">:</span> <span class="n">Presence_Field_Name</span><span class="p">,</span>
-            <span class="s2">&quot;DIMENSIONS&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="s2">&quot;WIDTH&quot;</span><span class="p">:</span> <span class="mi">2000</span><span class="p">,</span>
-            <span class="s2">&quot;HEIGHT&quot;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
-            <span class="s2">&quot;RAST_EXT&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;RTYPE&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="s2">&quot;OUTPUT&quot;</span><span class="p">:</span> <span class="n">outputFile</span> <span class="o">+</span> <span class="s2">&quot;.tif&quot;</span>
-        <span class="p">}</span>
-    <span class="p">)</span>
-</pre></div>
-</div>
 </div>
 </div>
 

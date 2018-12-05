@@ -174,7 +174,6 @@ Contents
    :caption: Lesson 7
 
    lessons/L7/01-overview
-   lessons/L7/lecture
    lessons/L7/02-pyqgis
    lessons/L7/03-processing-toolbox
    lessons/L7/04-processing-script
