@@ -582,3 +582,5 @@ The full script
                     os.remove(outputFile + ".shp")
 
             return {}
+
+
