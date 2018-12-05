@@ -427,6 +427,7 @@ The full script
 ---------------
 
 .. code:: python
+
     #!/bin/env python
 
     import os
