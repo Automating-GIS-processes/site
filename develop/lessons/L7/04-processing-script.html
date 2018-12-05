@@ -1,0 +1,748 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-88382509-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Processing toolbox scripts &mdash; AutoGIS 2018 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link href="../../_static/geo-python.css" rel="stylesheet" type="text/css">
+     
+
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> AutoGIS
+          
+
+          
+            
+            <img src="../../_static/logo_hy_geo_135.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2018
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Course information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/course-info.html">General info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/course-environment-components.html">Course environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/grading.html">Grading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/learning-goals.html">Learning goals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/Installing_Anacondas_GIS.html">Installing Python + GIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/License-terms.html">License and terms of usage</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 1</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L1/Intro-Python-GIS.html">Motivation for the course</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1/overview.html">Lesson overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L1/geometric-objects.html">Geometric objects - Spatial data model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1/exercise-1.html">Exercise 1</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 2</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L2/overview.html">Lesson 2 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L2/geopandas-basics.html">Introduction to Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L2/projections.html">Map projections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/exercise-2.html">Exercise 2</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 3</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L3/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L3/geocoding.html">Geocoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L3/geocoding_in_geopandas.html">Geocoding in Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L3/point-in-polygon.html">Point in Polygon &amp; Intersect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L3/spatial-join.html">Spatial join</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L3/nearest-neighbour.html">Nearest Neighbour Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L3/exercise-3.html">Exercise 3</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 4</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L4/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L4/reclassify.html">Data reclassification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L4/geometric-operations.html">Geometric operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L4/exercise-4.html">Exercise 4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L4/exercise-4.html#exercise-4-hints">Exercise 4 hints</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 5</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L5/overview.html">Lesson 5 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L5/static_maps.html">Static maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L5/interactive-map-folium.html">Interactive maps on Leaflet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/share-on-github.html">Sharing interactive plots on GitHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/exercise-5.html">Exercise 5</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 6</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L6/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L6/retrieve_osm_data.html">Retrieving OpenStreetMap data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L6/network-analysis.html">Network analysis in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L6/exercise-6.html">Exercise 6</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AutoGIS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Processing toolbox scripts</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/Automating-GIS-processes/2018/blob/develop/source/lessons/L7/04-processing-script.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+
+
+    
+    
+
+
+
+    <p class="scv-banner scv-sphinx_rtd_theme"><b>Warning:</b> This document is for the development version of AutoGIS.</p>
+
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="processing-toolbox-scripts">
+<h1>Processing toolbox scripts<a class="headerlink" href="#processing-toolbox-scripts" title="Permalink to this headline">¶</a></h1>
+<p>Managing and organising complex composite algorithms in the <em>Graphical Modeler</em> is tedious, the possible logical operations are very limited.For more flexible and more advanced algorithms, the <em>processing toolbox</em> allows to implement python scripts. A python script integrated into the processing toolbox can access all of <em>processing</em>’s algorithms and its user interface, the entire python <em>application programming interface</em> (API) of QGIS (see. the <a class="reference external" href="http://docs.qgis.org/3.0/en/docs/pyqgis_developer_cookbook/intro.html">PyQGIS Developer Cookbook</a>), and any other python module installed in the same python environment QGIS is running it.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Python and its ecosystem are highly modular. It is not uncommon to find multiple python installations on a single computer. Many applications require specific versions of python and/or some of its modules. For developers of python-dependent software, it has become common to supply a <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> file which can be used to initialise a so-called <em>virtual environment</em>, using tools such as <a class="reference external" href="https://conda.io/">(ana)conda</a>.
+On Microsoft Windows, unfortunately, most programs ship with their private python enviroment which is difficult to access outside of the respective program and even harder to install additional packages into. For instance, ESRI ArcGIS and QGIS use entirely separate python installations. On Linux and macOS, QGIS typically uses the system python environment, but QGIS’ own packages are per-default only accessible from within the program.</p>
+</div>
+<p>To add a new python script to the processing toolbox, choose <em>Scripts → Tools → Create new script</em> from the toolbox. It is advisable to try parts of the script in the interactive <strong>IPyConsole</strong> first, though.</p>
+<div class="section" id="processing-in-the-ipython-console">
+<h2><em>Processing</em> in the IPython console<a class="headerlink" href="#processing-in-the-ipython-console" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In this course, we use version 3.4 of QGIS. There have been major changes in QGIS, one of them being a complete rewrite of the <em>processing API</em>. At the time of this writing, documentation is still incomplete. The best source of information on the Python bindings of <em>Processing</em> algorithms is the <em>online help[1]_</em> on an interactive Python console.</p>
+</div>
+<table class="docutils footnote" frame="void" id="id1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>“online” in the sense of context-sensitive help from within the command line interface. Not necessarily refering to the internet in any way.</td></tr>
+</tbody>
+</table>
+<p>Import the <code class="docutils literal notranslate"><span class="pre">processing</span></code> module to use its algorithms:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">processing</span>
+</pre></div>
+</div>
+<p>Previous to QGIS 2.99, <em>processing</em> offered a <code class="docutils literal notranslate"><span class="pre">processing.alglist()</span></code> command to list all available algorithms and search for keywords in their names. In QGIS 3.0 and later, the following two lines are an easy drop-in for the same search:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># search for “buffer” algorithms:</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">searchTerm</span> <span class="o">=</span> <span class="s2">&quot;buffer&quot;</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="k">print</span><span class="p">([</span><span class="n">a</span><span class="o">.</span><span class="n">id</span><span class="p">()</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">QgsApplication</span><span class="o">.</span><span class="n">processingRegistry</span><span class="p">()</span><span class="o">.</span><span class="n">algorithms</span><span class="p">()</span> <span class="k">if</span> <span class="n">searchTerm</span> <span class="ow">in</span> <span class="n">a</span><span class="o">.</span><span class="n">id</span><span class="p">()])</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
+    <span class="p">[</span><span class="s1">&#39;gdal:buffervectors&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;gdal:onesidebuffer&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;grass7:r.buffer&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;grass7:r.buffer.lowmem&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;grass7:v.buffer.column&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;grass7:v.buffer.distance&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;native:buffer&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;qgis:fixeddistancebuffer&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;qgis:singlesidedbuffer&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;qgis:variabledistancebuffer&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This code uses a very <em>pythonic</em> programming language feature: <em>list comprehensions</em>. A <em>list</em> is a variable containing zero, one or more values, in the order they were added to the list. To define a list, put its member values (if any) inside brackets, comma-separated: <code class="docutils literal notranslate"><span class="pre">[&quot;a&quot;,</span> <span class="pre">&quot;list&quot;,</span> <span class="pre">&quot;of&quot;,</span> <span class="pre">&quot;strings&quot;]</span></code>. In the above example, the list is filled with values created on-the-fly in a <em>for-loop</em> within these brackets. (<em>List comprehension</em> is an advanced language feature, and copy-&amp;-paste is fine for the purpose of this course)</p>
+</div>
+<p>To access more information on an individual algorithm, run <code class="docutils literal notranslate"><span class="pre">processing.algorithmHelp()</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">processing</span><span class="o">.</span><span class="n">algorithmHelp</span><span class="p">(</span><span class="s2">&quot;native:buffer&quot;</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span>
+    <span class="n">Buffer</span> <span class="p">(</span><span class="n">native</span><span class="p">:</span><span class="nb">buffer</span><span class="p">)</span>
+
+    <span class="n">This</span> <span class="n">algorithm</span> <span class="n">computes</span> <span class="n">a</span> <span class="nb">buffer</span> <span class="n">area</span> <span class="k">for</span> <span class="nb">all</span> <span class="n">the</span> <span class="n">features</span> <span class="ow">in</span> <span class="n">an</span> <span class="nb">input</span> <span class="n">layer</span><span class="p">,</span> <span class="n">using</span> <span class="n">a</span> <span class="n">fixed</span> <span class="ow">or</span> <span class="n">dynamic</span> <span class="n">distance</span><span class="o">.</span>
+
+    <span class="n">The</span> <span class="n">segments</span> <span class="n">parameter</span> <span class="n">controls</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="n">line</span> <span class="n">segments</span> <span class="n">to</span> <span class="n">use</span> <span class="n">to</span> <span class="n">approximate</span> <span class="n">a</span> <span class="n">quarter</span> <span class="n">circle</span> <span class="n">when</span> <span class="n">creating</span> <span class="n">rounded</span> <span class="n">offsets</span><span class="o">.</span>
+
+    <span class="n">The</span> <span class="n">end</span> <span class="n">cap</span> <span class="n">style</span> <span class="n">parameter</span> <span class="n">controls</span> <span class="n">how</span> <span class="n">line</span> <span class="n">endings</span> <span class="n">are</span> <span class="n">handled</span> <span class="ow">in</span> <span class="n">the</span> <span class="nb">buffer</span><span class="o">.</span>
+
+    <span class="n">The</span> <span class="n">join</span> <span class="n">style</span> <span class="n">parameter</span> <span class="n">specifies</span> <span class="n">whether</span> <span class="nb">round</span><span class="p">,</span> <span class="n">miter</span> <span class="ow">or</span> <span class="n">beveled</span> <span class="n">joins</span> <span class="n">should</span> <span class="n">be</span> <span class="n">used</span> <span class="n">when</span> <span class="n">offsetting</span> <span class="n">corners</span> <span class="ow">in</span> <span class="n">a</span> <span class="n">line</span><span class="o">.</span>
+
+    <span class="n">The</span> <span class="n">miter</span> <span class="n">limit</span> <span class="n">parameter</span> <span class="ow">is</span> <span class="n">only</span> <span class="n">applicable</span> <span class="k">for</span> <span class="n">miter</span> <span class="n">join</span> <span class="n">styles</span><span class="p">,</span> <span class="ow">and</span> <span class="n">controls</span> <span class="n">the</span> <span class="n">maximum</span> <span class="n">distance</span> <span class="kn">from</span> <span class="nn">the</span> <span class="nn">offset</span> <span class="nn">curve</span> <span class="nn">to</span> <span class="nn">use</span> <span class="nn">when</span> <span class="nn">creating</span> <span class="nn">a</span> <span class="nn">mitered</span> <span class="nn">join.</span>
+
+    <span class="o">----------------</span>
+    <span class="n">Input</span> <span class="n">parameters</span>
+    <span class="o">----------------</span>
+
+    <span class="n">INPUT</span><span class="p">:</span>  <span class="o">&lt;</span><span class="n">QgsProcessingParameterFeatureSource</span><span class="o">&gt;</span>
+            <span class="n">Input</span> <span class="n">layer</span>
+
+    <span class="n">DISTANCE</span><span class="p">:</span>  <span class="o">&lt;</span><span class="n">QgsProcessingParameterNumber</span><span class="o">&gt;</span>
+            <span class="n">Distance</span>
+
+    <span class="n">SEGMENTS</span><span class="p">:</span>  <span class="o">&lt;</span><span class="n">QgsProcessingParameterNumber</span><span class="o">&gt;</span>
+            <span class="n">Segments</span>
+
+    <span class="n">END_CAP_STYLE</span><span class="p">:</span>  <span class="o">&lt;</span><span class="n">QgsProcessingParameterEnum</span><span class="o">&gt;</span>
+            <span class="n">End</span> <span class="n">cap</span> <span class="n">style</span>
+                    <span class="mi">0</span> <span class="o">-</span> <span class="n">Round</span>
+                    <span class="mi">1</span> <span class="o">-</span> <span class="n">Flat</span>
+                    <span class="mi">2</span> <span class="o">-</span> <span class="n">Square</span>
+
+    <span class="n">JOIN_STYLE</span><span class="p">:</span>  <span class="o">&lt;</span><span class="n">QgsProcessingParameterEnum</span><span class="o">&gt;</span>
+            <span class="n">Join</span> <span class="n">style</span>
+                    <span class="mi">0</span> <span class="o">-</span> <span class="n">Round</span>
+                    <span class="mi">1</span> <span class="o">-</span> <span class="n">Miter</span>
+                    <span class="mi">2</span> <span class="o">-</span> <span class="n">Bevel</span>
+
+    <span class="n">MITER_LIMIT</span><span class="p">:</span>  <span class="o">&lt;</span><span class="n">QgsProcessingParameterNumber</span><span class="o">&gt;</span>
+            <span class="n">Miter</span> <span class="n">limit</span>
+
+    <span class="n">DISSOLVE</span><span class="p">:</span>  <span class="o">&lt;</span><span class="n">QgsProcessingParameterBoolean</span><span class="o">&gt;</span>
+            <span class="n">Dissolve</span> <span class="n">result</span>
+
+    <span class="n">OUTPUT</span><span class="p">:</span>  <span class="o">&lt;</span><span class="n">QgsProcessingParameterFeatureSink</span><span class="o">&gt;</span>
+            <span class="n">Buffered</span>
+
+    <span class="o">----------------</span>
+    <span class="n">Outputs</span>
+    <span class="o">----------------</span>
+
+    <span class="n">OUTPUT</span><span class="p">:</span>  <span class="o">&lt;</span><span class="n">QgsProcessingOutputVectorLayer</span><span class="o">&gt;</span>
+            <span class="n">Buffered</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="rasterise-species-range-maps">
+<h2>Rasterise Species Range Maps<a class="headerlink" href="#rasterise-species-range-maps" title="Permalink to this headline">¶</a></h2>
+<p>We want to create a script which for our example <em>damselfish</em> dataset or any similar dataset loops over the described species, and exports one raster dataset per species, containing its respective species range map.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Scripts in the processing toolbox are now implemented as <em>classes</em> inheriting from <code class="docutils literal notranslate"><span class="pre">QgsProcessingAlgorithm</span></code>. <em>Classes</em> can be interpreted as blueprints from which <em>objects</em> are instantiated at a program’s runtime. <em>Objects</em>, in turn, are the corner stone of <a class="reference external" href="http://ee402.eeng.dcu.ie/introduction/chapter-1---introduction-to-object-oriented-programming">object-oriented programming</a>. They are entities containing data (variables) and code (methods).</p>
+</div>
+<p>Object-oriented programming is the prevailing paradigm of software development. It is an extremely valuable skill, but teaching it is outside of the scope of this course. We provide the following template structure[2]_ which allows us to dive into implementing the actual algorithm. Feel free to use at for any other project!</p>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td>This is a minimal template, sufficient for this exercise. You can also use the built-in template by choosing <em>Create new script from template …</em>. The resulting skeleton script is more complex, but also more comprehensive.</td></tr>
+</tbody>
+</table>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/env python</span>
+
+<span class="kn">import</span> <span class="nn">processing</span>
+<span class="kn">import</span> <span class="nn">string</span>
+
+<span class="kn">from</span> <span class="nn">qgis.core</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">QgsProcessing</span><span class="p">,</span>
+    <span class="n">QgsProcessingAlgorithm</span>
+<span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">RENAME_THIS</span><span class="p">(</span><span class="n">QgsProcessingAlgorithm</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">createInstance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)()</span>
+
+    <span class="k">def</span> <span class="nf">displayName</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;NAME OF YOUR SCRIPT IN THE PROCESSING TOOLBOX&quot;</span>
+
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+            <span class="n">character</span> <span class="k">for</span> <span class="n">character</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">displayName</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">character</span> <span class="ow">in</span> <span class="n">string</span><span class="o">.</span><span class="n">ascii_letters</span>
+        <span class="p">])</span>
+        <span class="k">return</span> <span class="n">name</span>
+
+    <span class="k">def</span> <span class="nf">initAlgorithm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="c1"># specify the possible parameters for your tool here</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">processAlgorithm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">feedback</span><span class="p">):</span>
+        <span class="c1"># add the actual processing steps here</span>
+        <span class="k">return</span> <span class="p">{}</span>
+</pre></div>
+</div>
+<p>Open the <em>Processing toolbox</em> and select <em>Create new script …</em> from the Python icon in the toolbar.</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../../_images/L7-04-create-new-script.png"><img alt="../../_images/L7-04-create-new-script.png" src="../../_images/L7-04-create-new-script.png" style="width: 374px;" /></a>
+</div>
+<dl class="docutils">
+<dt>Copy-and-paste the template code from before into the editor window that opens and immediately make the following changes:</dt>
+<dd><ol class="first last arabic simple">
+<li><dl class="first docutils">
+<dt><strong>Rename the class from `RENAME_THIS` to a meaningful name.</strong> (line 12)</dt>
+<dd><a class="reference external" href="https://www.python.org/dev/peps/pep-0008/#class-names">Python code style guidelines</a> recommend a <em>CapWords</em> style, i.e. each word in the class name starts with an uppercase letter. The class name should refer to the function of the class. We are building a tool, let’s revisit how we call physical-world tools: a good example is <em>Screwdriver</em>: It’s a tool to drive (inserting) a screw (into some material). Were it a software tool, a good class name would be <cite>ScrewDriver</cite>. Our tool rasterises species range maps, let’s call it <cite>SpeciesRangeMapsRasteriser</cite>.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>Change the *display name* of our tool.</strong> (line 21)</dt>
+<dd>The names of most of the algorithms in the <em>processing</em> toolbox consist of a verb and an object (e.g. “Create spatial index”). Let’s stick with this concept and call our tool “Rasterise species range maps”.</dd>
+</dl>
+</li>
+</ol>
+</dd>
+</dl>
+</div>
+<div class="section" id="adding-a-new-field-and-updating-its-value">
+<h2>Adding a new field and updating its value<a class="headerlink" href="#adding-a-new-field-and-updating-its-value" title="Permalink to this headline">¶</a></h2>
+<p>We need to add a new field with a user-defined name. This field name is stored in <code class="docutils literal notranslate"><span class="pre">Presence_Field_Name</span></code>. We use the <em>field calculator</em> algorithm of the processing toolbox. To find its scripting name (<code class="docutils literal notranslate"><span class="pre">id</span></code>), search for it, then display its help text:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># search for “buffer” algorithms:</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">searchTerm</span> <span class="o">=</span> <span class="s2">&quot;calculator&quot;</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="k">print</span><span class="p">([</span><span class="n">a</span><span class="o">.</span><span class="n">id</span><span class="p">()</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">QgsApplication</span><span class="o">.</span><span class="n">processingRegistry</span><span class="p">()</span><span class="o">.</span><span class="n">algorithms</span><span class="p">()</span> <span class="k">if</span> <span class="n">searchTerm</span> <span class="ow">in</span> <span class="n">a</span><span class="o">.</span><span class="n">id</span><span class="p">()])</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="p">[</span><span class="s1">&#39;qgis:advancedpythonfieldcalculator&#39;</span><span class="p">,</span> <span class="s1">&#39;qgis:fieldcalculator&#39;</span><span class="p">,</span> <span class="s1">&#39;qgis:rastercalculator&#39;</span><span class="p">]</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">processing</span><span class="o">.</span><span class="n">algorithmHelp</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">Field</span> <span class="n">calculator</span> <span class="p">(</span><span class="n">qgis</span><span class="p">:</span><span class="n">fieldcalculator</span><span class="p">)</span>
+
+<span class="n">This</span> <span class="n">algorithm</span> <span class="n">computes</span> <span class="n">a</span> <span class="n">new</span> <span class="n">vector</span> <span class="n">layer</span> <span class="k">with</span> <span class="n">the</span> <span class="n">same</span> <span class="n">features</span> <span class="n">of</span> <span class="n">the</span> <span class="nb">input</span> <span class="n">layer</span><span class="p">,</span> <span class="n">but</span> <span class="k">with</span> <span class="n">an</span> <span class="n">additional</span> <span class="n">attribute</span><span class="o">.</span> <span class="n">The</span> <span class="n">values</span> <span class="n">of</span> <span class="n">this</span> <span class="n">new</span> <span class="n">attribute</span> <span class="n">are</span> <span class="n">computed</span> <span class="kn">from</span> <span class="nn">each</span> <span class="nn">feature</span> <span class="nn">using</span> <span class="nn">a</span> <span class="nn">mathematical</span> <span class="nn">formula</span><span class="p">,</span> <span class="n">based</span> <span class="n">on</span> <span class="n">the</span> <span class="n">properties</span> <span class="ow">and</span> <span class="n">attributes</span> <span class="n">of</span> <span class="n">the</span> <span class="n">feature</span><span class="o">.</span>
+
+
+<span class="o">----------------</span>
+<span class="n">Input</span> <span class="n">parameters</span>
+<span class="o">----------------</span>
+
+<span class="n">INPUT</span><span class="p">:</span>  <span class="o">&lt;</span><span class="n">QgsProcessingParameterFeatureSource</span><span class="o">&gt;</span>
+        <span class="n">Input</span> <span class="n">layer</span>
+
+<span class="n">FIELD_NAME</span><span class="p">:</span>  <span class="o">&lt;</span><span class="n">QgsProcessingParameterString</span><span class="o">&gt;</span>
+        <span class="n">Result</span> <span class="n">field</span> <span class="n">name</span>
+
+<span class="n">FIELD_TYPE</span><span class="p">:</span>  <span class="o">&lt;</span><span class="n">QgsProcessingParameterEnum</span><span class="o">&gt;</span>
+        <span class="n">Field</span> <span class="nb">type</span>
+                <span class="mi">0</span> <span class="o">-</span> <span class="n">Float</span>
+                <span class="mi">1</span> <span class="o">-</span> <span class="n">Integer</span>
+                <span class="mi">2</span> <span class="o">-</span> <span class="n">String</span>
+                <span class="mi">3</span> <span class="o">-</span> <span class="n">Date</span>
+
+<span class="n">FIELD_LENGTH</span><span class="p">:</span>  <span class="o">&lt;</span><span class="n">QgsProcessingParameterNumber</span><span class="o">&gt;</span>
+        <span class="n">Field</span> <span class="n">length</span>
+
+<span class="n">FIELD_PRECISION</span><span class="p">:</span>  <span class="o">&lt;</span><span class="n">QgsProcessingParameterNumber</span><span class="o">&gt;</span>
+        <span class="n">Field</span> <span class="n">precision</span>
+
+<span class="n">NEW_FIELD</span><span class="p">:</span>  <span class="o">&lt;</span><span class="n">QgsProcessingParameterBoolean</span><span class="o">&gt;</span>
+        <span class="n">Create</span> <span class="n">new</span> <span class="n">field</span>
+
+<span class="n">FORMULA</span><span class="p">:</span>  <span class="o">&lt;</span><span class="n">QgsProcessingParameterExpression</span><span class="o">&gt;</span>
+        <span class="n">Formula</span>
+
+<span class="n">OUTPUT</span><span class="p">:</span>  <span class="o">&lt;</span><span class="n">QgsProcessingParameterFeatureSink</span><span class="o">&gt;</span>
+        <span class="n">Calculated</span>
+
+<span class="o">----------------</span>
+<span class="n">Outputs</span>
+<span class="o">----------------</span>
+
+<span class="n">OUTPUT</span><span class="p">:</span>  <span class="o">&lt;</span><span class="n">QgsProcessingOutputVectorLayer</span><span class="o">&gt;</span>
+        <span class="n">Calculated</span>
+</pre></div>
+</div>
+<p>We use <code class="docutils literal notranslate"><span class="pre">processing.run()</span></code> to run the algorithm, and have to supply the algorithm’s <code class="docutils literal notranslate"><span class="pre">id</span></code> and all <em>input parameters</em> in a dictionary. <code class="docutils literal notranslate"><span class="pre">run()</span></code> returns a dictionary with all <em>output values</em>, amongst them the output layer.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">algorithmOutput</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="s2">&quot;qgis:fieldcalculator&quot;</span><span class="p">,</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;INPUT&quot;</span><span class="p">:</span> <span class="n">Species_Range_Polygons</span><span class="p">,</span>
+        <span class="s2">&quot;FIELD_NAME&quot;</span><span class="p">:</span> <span class="n">Presence_Field_Name</span><span class="p">,</span>
+        <span class="s2">&quot;FIELD_TYPE&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;FIELD_LENGTH&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="s2">&quot;FIELD_PRECISION&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;NEW_FIELD&quot;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+        <span class="s2">&quot;FORMULA&quot;</span><span class="p">:</span> <span class="n">Presence_Field_Value</span><span class="p">,</span>
+        <span class="s2">&quot;OUTPUT&quot;</span><span class="p">:</span> <span class="s2">&quot;memory:speciesRangePolygonsWithPresenceValue&quot;</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+<span class="n">speciesRangePolygonsWithPresenceValue</span> <span class="o">=</span> <span class="n">algorithmOutput</span><span class="p">[</span><span class="s2">&quot;OUTPUT&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="finding-unique-species">
+<h2>Finding unique species<a class="headerlink" href="#finding-unique-species" title="Permalink to this headline">¶</a></h2>
+<p>As we wanted to save individual species into separate raster files, we need to determine the unique species in our attribute table. For this, we will use the layer’s <code class="docutils literal notranslate"><span class="pre">uniqueValues()</span></code> function, which requires a field’s index instead of its name. This function is somewhat equivalent to Geopandas <code class="docutils literal notranslate"><span class="pre">unique()</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># get the field index for the column &quot;Species_Attribute&quot;</span>
+<span class="n">fields</span> <span class="o">=</span> <span class="n">speciesRangePolygonsWithPresenceValue</span><span class="o">.</span><span class="n">fields</span><span class="p">()</span>
+<span class="n">fieldIndex</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">indexFromName</span><span class="p">(</span><span class="n">Species_Attribute</span><span class="p">)</span>
+
+<span class="c1"># get unique values for this columns</span>
+<span class="n">uniqueSpecies</span> <span class="o">=</span> <span class="n">Species_Range_Polygons</span><span class="o">.</span><span class="n">uniqueValues</span><span class="p">(</span><span class="n">fieldIndex</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="select-by-attribute-and-rasterise">
+<h2>Select by attribute and rasterise<a class="headerlink" href="#select-by-attribute-and-rasterise" title="Permalink to this headline">¶</a></h2>
+<p>Now, for each species we run three algorithms: we use <em>select by attribute</em> (<code class="docutils literal notranslate"><span class="pre">qgis:selectbyattribute</span></code>) to save the features belonging to the current species into a new layer. Because the <em>rasterize</em> algorithm does not understand the default in-memory vector file format, we write the vector data to an intermediate file and then convert the vector data into a raster file using the <em>rasterize (vector to raster)</em> tool (<code class="docutils literal notranslate"><span class="pre">gdal:rasterize</span></code>). Before that, we have to define an output file name for our raster.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># loop over unique species</span>
+<span class="k">for</span> <span class="n">species</span> <span class="ow">in</span> <span class="n">uniqueSpecies</span><span class="p">:</span>
+    <span class="c1"># define output raster file name:</span>
+    <span class="n">outputFile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="n">Output_Directory</span><span class="p">,</span>
+        <span class="n">species</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span><span class="s2">&quot;_&quot;</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="c1"># select only feature with the current species</span>
+    <span class="n">algorithmOutput</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+        <span class="s2">&quot;qgis:selectbyattribute&quot;</span><span class="p">,</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;INPUT&quot;</span><span class="p">:</span> <span class="n">speciesRangePolygonsWithPresenceValue</span><span class="p">,</span>
+            <span class="s2">&quot;FIELD&quot;</span><span class="p">:</span> <span class="n">Species_Attribute</span><span class="p">,</span>
+            <span class="s2">&quot;OPERATOR&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;VALUE&quot;</span><span class="p">:</span> <span class="n">species</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+    <span class="n">oneSpeciesRangePolygons</span> <span class="o">=</span> <span class="n">algorithmOutput</span><span class="p">[</span><span class="s2">&quot;OUTPUT&quot;</span><span class="p">]</span>
+
+    <span class="c1"># save intermediate vector file</span>
+    <span class="n">algorithmOutput</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+        <span class="s2">&quot;native:saveselectedfeatures&quot;</span><span class="p">,</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;INPUT&quot;</span><span class="p">:</span> <span class="n">oneSpeciesRangePolygons</span><span class="p">,</span>
+            <span class="s2">&quot;OUTPUT&quot;</span><span class="p">:</span> <span class="n">outputFile</span> <span class="o">+</span> <span class="s2">&quot;.shp&quot;</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+    <span class="n">oneSpeciesRangePolygons</span> <span class="o">=</span> <span class="n">algorithmOutput</span><span class="p">[</span><span class="s2">&quot;OUTPUT&quot;</span><span class="p">]</span>
+
+    <span class="c1"># rasterise the vector layer</span>
+    <span class="n">algorithmOutput</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+        <span class="s2">&quot;gdal:rasterize&quot;</span><span class="p">,</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;INPUT&quot;</span><span class="p">:</span> <span class="n">oneSpeciesRangePolygons</span><span class="p">,</span>
+            <span class="s2">&quot;FIELD&quot;</span><span class="p">:</span> <span class="n">Presence_Field_Name</span><span class="p">,</span>
+            <span class="s2">&quot;DIMENSIONS&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;WIDTH&quot;</span><span class="p">:</span> <span class="mi">2000</span><span class="p">,</span>
+            <span class="s2">&quot;HEIGHT&quot;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
+            <span class="s2">&quot;RAST_EXT&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;RTYPE&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;OUTPUT&quot;</span><span class="p">:</span> <span class="n">outputFile</span> <span class="o">+</span> <span class="s2">&quot;.tif&quot;</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="adding-the-script-to-the-toolbox">
+<h2>Adding the script to the toolbox<a class="headerlink" href="#adding-the-script-to-the-toolbox" title="Permalink to this headline">¶</a></h2>
+<p>After developing the script in the <em>IPython console</em>, let’s create a proper <em>processing toolbox</em> script. Open the processing script editor (<em>Scripts → Tools → Create new script</em> in the toolbox) and paste the code. Save it in the default directory.
+The only changes are in the very top of the file: we have to add metadata to describe which parameters our script accepts, plus its name and category. The syntax for this information is <code class="docutils literal notranslate"><span class="pre">##[Variable</span> <span class="pre">name]=[Variable</span> <span class="pre">type]</span> <span class="pre">[optional</span> <span class="pre">default</span> <span class="pre">value</span> <span class="pre">and/or</span> <span class="pre">type]</span></code>. Valid variable types include <code class="docutils literal notranslate"><span class="pre">vector</span></code> and <code class="docutils literal notranslate"><span class="pre">raster</span></code>, <code class="docutils literal notranslate"><span class="pre">number</span></code> and <code class="docutils literal notranslate"><span class="pre">string</span></code> and a view more. Find a more complete list in the <a class="reference external" href="http://docs.qgis.org/testing/en/docs/user_manual/processing/console.html#creating-scripts-and-running-them-from-the-toolbox">QGIS user manual</a>. Finally, there is <code class="docutils literal notranslate"><span class="pre">name</span></code> and <code class="docutils literal notranslate"><span class="pre">group</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">##Rasterize Species Range Maps=name</span>
+<span class="c1">##Conservation Geography=group</span>
+<span class="c1">##Species_Range_Polygons=vector polygon</span>
+<span class="c1">##Species_Attribute=field Species_Range_Polygons</span>
+<span class="c1">##Presence_Field_Name=string presence</span>
+<span class="c1">##Presence_Field_Value=expression 1</span>
+<span class="c1">##Output_Directory=folder /tmp/</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="run-the-script">
+<h1>Run the script<a class="headerlink" href="#run-the-script" title="Permalink to this headline">¶</a></h1>
+<p>To run the script, find it from the toolbox, select <cite>DAMSELFISH Distributions</cite> as the input layer, <cite>BINOMIAL</cite> as the species attribute, and specify an output directory. Then click <code class="docutils literal notranslate"><span class="pre">Run</span></code>.</p>
+<div class="figure">
+<img alt="../../_images/L7-04-run-script.png" src="../../_images/L7-04-run-script.png" />
+</div>
+<div class="section" id="the-full-script">
+<h2>The full script<a class="headerlink" href="#the-full-script" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">##Rasterize Species Range Maps=name</span>
+<span class="c1">##Conservation Geography=group</span>
+<span class="c1">##Species_Range_Polygons=vector polygon</span>
+<span class="c1">##Species_Attribute=field Species_Range_Polygons</span>
+<span class="c1">##Presence_Field_Name=string presence</span>
+<span class="c1">##Presence_Field_Value=expression 1</span>
+<span class="c1">##Output_Directory=folder /tmp/</span>
+
+
+<span class="kn">import</span> <span class="nn">os.path</span>
+
+
+<span class="n">algorithmOutput</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="s2">&quot;qgis:fieldcalculator&quot;</span><span class="p">,</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;INPUT&quot;</span><span class="p">:</span> <span class="n">Species_Range_Polygons</span><span class="p">,</span>
+        <span class="s2">&quot;FIELD_NAME&quot;</span><span class="p">:</span> <span class="n">Presence_Field_Name</span><span class="p">,</span>
+        <span class="s2">&quot;FIELD_TYPE&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;FIELD_LENGTH&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="s2">&quot;FIELD_PRECISION&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;NEW_FIELD&quot;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+        <span class="s2">&quot;FORMULA&quot;</span><span class="p">:</span> <span class="n">Presence_Field_Value</span><span class="p">,</span>
+        <span class="s2">&quot;OUTPUT&quot;</span><span class="p">:</span> <span class="s2">&quot;memory:speciesRangePolygonsWithPresenceValue&quot;</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+<span class="n">speciesRangePolygonsWithPresenceValue</span> <span class="o">=</span> <span class="n">algorithmOutput</span><span class="p">[</span><span class="s2">&quot;OUTPUT&quot;</span><span class="p">]</span>
+
+<span class="c1"># get the field index for the column &quot;Species_Attribute&quot;</span>
+<span class="n">fields</span> <span class="o">=</span> <span class="n">speciesRangePolygonsWithPresenceValue</span><span class="o">.</span><span class="n">fields</span><span class="p">()</span>
+<span class="n">fieldIndex</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">indexFromName</span><span class="p">(</span><span class="n">Species_Attribute</span><span class="p">)</span>
+
+<span class="c1"># get unique values for this columns</span>
+<span class="n">uniqueSpecies</span> <span class="o">=</span> <span class="n">Species_Range_Polygons</span><span class="o">.</span><span class="n">uniqueValues</span><span class="p">(</span><span class="n">fieldIndex</span><span class="p">)</span>
+
+<span class="c1"># loop over unique species</span>
+<span class="k">for</span> <span class="n">species</span> <span class="ow">in</span> <span class="n">uniqueSpecies</span><span class="p">:</span>
+
+    <span class="c1"># define output file name:</span>
+    <span class="n">outputFile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="n">Output_Directory</span><span class="p">,</span>
+        <span class="n">species</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span><span class="s2">&quot;_&quot;</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="c1"># select only feature with the current species</span>
+    <span class="n">algorithmOutput</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+        <span class="s2">&quot;qgis:selectbyattribute&quot;</span><span class="p">,</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;INPUT&quot;</span><span class="p">:</span> <span class="n">speciesRangePolygonsWithPresenceValue</span><span class="p">,</span>
+            <span class="s2">&quot;FIELD&quot;</span><span class="p">:</span> <span class="n">Species_Attribute</span><span class="p">,</span>
+            <span class="s2">&quot;OPERATOR&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;VALUE&quot;</span><span class="p">:</span> <span class="n">species</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+    <span class="n">oneSpeciesRangePolygons</span> <span class="o">=</span> <span class="n">algorithmOutput</span><span class="p">[</span><span class="s2">&quot;OUTPUT&quot;</span><span class="p">]</span>
+
+    <span class="c1"># save intermediate vector file</span>
+    <span class="n">algorithmOutput</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+        <span class="s2">&quot;native:saveselectedfeatures&quot;</span><span class="p">,</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;INPUT&quot;</span><span class="p">:</span> <span class="n">oneSpeciesRangePolygons</span><span class="p">,</span>
+            <span class="s2">&quot;OUTPUT&quot;</span><span class="p">:</span> <span class="n">outputFile</span> <span class="o">+</span> <span class="s2">&quot;.shp&quot;</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+    <span class="n">oneSpeciesRangePolygons</span> <span class="o">=</span> <span class="n">algorithmOutput</span><span class="p">[</span><span class="s2">&quot;OUTPUT&quot;</span><span class="p">]</span>
+
+    <span class="c1"># rasterise the vector layer</span>
+    <span class="n">algorithmOutput</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+        <span class="s2">&quot;gdal:rasterize&quot;</span><span class="p">,</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;INPUT&quot;</span><span class="p">:</span> <span class="n">oneSpeciesRangePolygons</span><span class="p">,</span>
+            <span class="s2">&quot;FIELD&quot;</span><span class="p">:</span> <span class="n">Presence_Field_Name</span><span class="p">,</span>
+            <span class="s2">&quot;DIMENSIONS&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;WIDTH&quot;</span><span class="p">:</span> <span class="mi">2000</span><span class="p">,</span>
+            <span class="s2">&quot;HEIGHT&quot;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
+            <span class="s2">&quot;RAST_EXT&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;RTYPE&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;OUTPUT&quot;</span><span class="p">:</span> <span class="n">outputFile</span> <span class="o">+</span> <span class="s2">&quot;.tif&quot;</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Henrikki Tenkanen
+      Last updated on Dec 05, 2018.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+    <p> <br/> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /> </a></p>
+     
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: develop
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../../../2017/index.html">2017</a></dd>
+            <dd><a href="04-processing-script.html">develop</a></dd>
+            <dd><a href="../../../drafts/lessons/L7/04-processing-script.html">drafts</a></dd>
+            <dd><a href="../../../master/index.html">master</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'2018',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

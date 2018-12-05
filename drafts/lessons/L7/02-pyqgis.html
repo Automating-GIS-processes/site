@@ -217,7 +217,7 @@
 </style>
 <div class="section" id="python-in-qgis">
 <h1>Python in QGIS<a class="headerlink" href="#python-in-qgis" title="Permalink to this headline">¶</a></h1>
-<p>The core application and libraries of QGIS are programmed in C++. Nonwithstanding, Python plays an important role in its ecosystem: Most of the pre-installed plugins and even data provider modules are written in Python, and virtually all functions of the interface and the libraries are exported to a Python API (Advanced Programming Interface). It is fairly easy to author extensions to QGIS which integrate seamlessly into its user interface, create stand-alone applications using components of QGIS, such as a map window or a data backend, or run custom scripts within QGIS. To really dive into it, see the <a class="reference external" href="http://docs.qgis.org/2.18/en/docs/pyqgis_developer_cookbook/intro.html">PyQGIS Developer Cookbook</a> which walks you from easy <em>Hello World</em> examples to writing your own applications.</p>
+<p>The core application and libraries of QGIS are programmed in C++. Nonwithstanding, Python plays an important role in its ecosystem: Most of the pre-installed plugins and even some of the data provider modules are written in Python, and virtually all functions of the interface and the libraries are exported to a Python API (<em>Advanced Programming Interface</em>). It takes only moderate effort to author extensions to QGIS which integrate seamlessly into its user interface, create stand-alone applications using components of QGIS, such as a map window or a data backend, or run custom scripts within QGIS. To really dive into it, see the <a class="reference external" href="http://docs.qgis.org/3.0/en/docs/pyqgis_developer_cookbook/intro.html">PyQGIS Developer Cookbook</a> which walks you from easy <em>Hello World</em> examples to writing your own applications.</p>
 <p>Today, we want to concentrate on how to <strong>use Python to combine simple algorithms in scripts within QGIS to carry out more complex operations</strong>.</p>
 <div class="section" id="using-a-python-console">
 <h2>Using a Python console<a class="headerlink" href="#using-a-python-console" title="Permalink to this headline">¶</a></h2>
@@ -225,7 +225,7 @@
 <ol class="arabic">
 <li><p class="first">Access the <strong>built-in Python console</strong> from the menu <em>Plugins → Python Console</em>. It offers basic functionality, and allows to load and save scripts from and to files.</p>
 <div class="figure">
-<img alt="../../_images/L6-02-pyqgis-00-builtin-python-console.png" src="../../_images/L6-02-pyqgis-00-builtin-python-console.png" />
+<img alt="../../_images/L7-02-pyqgis-00-builtin-python-console.png" src="../../_images/L7-02-pyqgis-00-builtin-python-console.png" />
 </div>
 </li>
 <li><p class="first">The more advanced <strong>iPython console</strong> has to be installed as a Plugin before first use:
@@ -235,11 +235,15 @@
 </li>
 </ol>
 <div class="figure">
-<img alt="../../_images/L6-02-pyqgis-01-install-ipyconsole.png" src="../../_images/L6-02-pyqgis-01-install-ipyconsole.png" />
+<img alt="../../_images/L7-02-pyqgis-01-install-ipyconsole.png" src="../../_images/L7-02-pyqgis-01-install-ipyconsole.png" />
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">IPython or Jupyter have to be installed on your computer, see the plugin description for instructions on how to install these requirements.</p>
 </div>
 <p>The console is now available from the menu <em>Plugins → IPython QGIS Console → Windowed</em></p>
 <div class="figure">
-<img alt="../../_images/L6-02-pyqgis-02-ipyconsole.png" src="../../_images/L6-02-pyqgis-02-ipyconsole.png" />
+<img alt="../../_images/L7-02-pyqgis-02-ipyconsole.png" src="../../_images/L7-02-pyqgis-02-ipyconsole.png" />
 </div>
 <p>By default an <code class="docutils literal notranslate"><span class="pre">iface</span></code> object is imported, which allows the access to the currently active QGIS instance’s user interface. For example, we can easily retrieve the active (selected) layer, list its name and count its features:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get active layer:</span>
@@ -308,7 +312,7 @@ Out[1]: Help on QgsVectorLayer in module qgis._core object:
   <div role="contentinfo">
     <p>
         &copy; Copyright 2018, Henrikki Tenkanen
-      Last updated on Dec 04, 2018.
+      Last updated on Dec 05, 2018.
 
     </p>
   </div>
@@ -336,7 +340,7 @@ Out[1]: Help on QgsVectorLayer in module qgis._core object:
         <dl>
             <dt>Branches</dt>
             <dd><a href="../../../2017/index.html">2017</a></dd>
-            <dd><a href="../../../develop/index.html">develop</a></dd>
+            <dd><a href="../../../develop/lessons/L7/02-pyqgis.html">develop</a></dd>
             <dd><a href="02-pyqgis.html">drafts</a></dd>
             <dd><a href="../../../master/index.html">master</a></dd>
         </dl>

@@ -217,24 +217,30 @@
 </style>
 <div class="section" id="processing-toolbox-scripts">
 <h1>Processing toolbox scripts<a class="headerlink" href="#processing-toolbox-scripts" title="Permalink to this headline">¶</a></h1>
-<p>Managing and organising complex composite algorithms in the <em>Graphical Modeler</em> is not only tedious, it also only offers very limited logic operations. For more flexible and more advanced algorithms, the <em>processing toolbox</em> allows to implement python scripts. A python script integrated into the processing toolbox can access all of <em>processing</em>’s algorithms and its user interface, the entire python <em>application programming interface</em> (API) of QGIS (see. the <a class="reference external" href="http://docs.qgis.org/2.18/en/docs/pyqgis_developer_cookbook/intro.html">PyQGIS Developer Cookbook</a>), and any other python module installed in the same python environment QGIS is running it.</p>
+<p>Managing and organising complex composite algorithms in the <em>Graphical Modeler</em> is tedious, the possible logical operations are very limited.For more flexible and more advanced algorithms, the <em>processing toolbox</em> allows to implement python scripts. A python script integrated into the processing toolbox can access all of <em>processing</em>’s algorithms and its user interface, the entire python <em>application programming interface</em> (API) of QGIS (see. the <a class="reference external" href="http://docs.qgis.org/3.0/en/docs/pyqgis_developer_cookbook/intro.html">PyQGIS Developer Cookbook</a>), and any other python module installed in the same python environment QGIS is running it.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Python and its ecosystem are highly modular. It is not uncommon to find multiple python installations on a single computer. Many applications require specific versions of python and/or some of its modules. For developers of python-dependent software, it has become common to supply a <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> file which can be used to initialise a so-called <em>virtual environment</em>, using tools such as <a class="reference external" href="https://conda.io/">(ana)conda</a>.
-On Microsoft Windows, unfortunately most programs ship with their private python enviroment which is difficult to access outside of the respective program and even harder to install additional packages into. For instance, ESRI ArcGIS and QGIS use entirely separate python installations. On Linux and macOS, QGIS typically uses the system python environment, but QGIS’ own packages are per-default only accessible from within the program.</p>
+On Microsoft Windows, unfortunately, most programs ship with their private python enviroment which is difficult to access outside of the respective program and even harder to install additional packages into. For instance, ESRI ArcGIS and QGIS use entirely separate python installations. On Linux and macOS, QGIS typically uses the system python environment, but QGIS’ own packages are per-default only accessible from within the program.</p>
 </div>
-<p>To add a new python script to the processing toolbox, choose <em>Scripts → Tools → Create new script</em> from the toolbox. It is advisable to try the script in the interactive <strong>IPyConsole</strong> first, though.</p>
+<p>To add a new python script to the processing toolbox, choose <em>Scripts → Tools → Create new script</em> from the toolbox. It is advisable to try parts of the script in the interactive <strong>IPyConsole</strong> first, though.</p>
 <div class="section" id="processing-in-the-ipython-console">
 <h2><em>Processing</em> in the IPython console<a class="headerlink" href="#processing-in-the-ipython-console" title="Permalink to this headline">¶</a></h2>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">In this course, we use the soon-to-be-released next major QGIS version, 3.0. There have been major changes in QGIS, one of them being a complete rewrite of the <em>processing API</em>. At the time of this writing, documentation is still incomplete.</p>
+<p class="last">In this course, we use version 3.4 of QGIS. There have been major changes in QGIS, one of them being a complete rewrite of the <em>processing API</em>. At the time of this writing, documentation is still incomplete. The best source of information on the Python bindings of <em>Processing</em> algorithms is the <em>online help[1]_</em> on an interactive Python console.</p>
 </div>
+<table class="docutils footnote" frame="void" id="id1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>“online” in the sense of context-sensitive help from within the command line interface. Not necessarily refering to the internet in any way.</td></tr>
+</tbody>
+</table>
 <p>Import the <code class="docutils literal notranslate"><span class="pre">processing</span></code> module to use its algorithms:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">processing</span>
 </pre></div>
 </div>
-<p>Previous to QGIS 2.99, <em>processing</em> offered a <code class="docutils literal notranslate"><span class="pre">processing.alglist()</span></code> command to list all available algorithms and search for keywords in their names. In QGIS 3.0, the following two lines are an easy drop-in for the same search:</p>
+<p>Previous to QGIS 2.99, <em>processing</em> offered a <code class="docutils literal notranslate"><span class="pre">processing.alglist()</span></code> command to list all available algorithms and search for keywords in their names. In QGIS 3.0 and later, the following two lines are an easy drop-in for the same search:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># search for “buffer” algorithms:</span>
 <span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">searchTerm</span> <span class="o">=</span> <span class="s2">&quot;buffer&quot;</span>
 <span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="k">print</span><span class="p">([</span><span class="n">a</span><span class="o">.</span><span class="n">id</span><span class="p">()</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">QgsApplication</span><span class="o">.</span><span class="n">processingRegistry</span><span class="p">()</span><span class="o">.</span><span class="n">algorithms</span><span class="p">()</span> <span class="k">if</span> <span class="n">searchTerm</span> <span class="ow">in</span> <span class="n">a</span><span class="o">.</span><span class="n">id</span><span class="p">()])</span>
@@ -316,27 +322,75 @@ On Microsoft Windows, unfortunately most programs ship with their private python
 <div class="section" id="rasterise-species-range-maps">
 <h2>Rasterise Species Range Maps<a class="headerlink" href="#rasterise-species-range-maps" title="Permalink to this headline">¶</a></h2>
 <p>We want to create a script which for our example <em>damselfish</em> dataset or any similar dataset loops over the described species, and exports one raster dataset per species, containing its respective species range map.</p>
-<p>Let’s develop the script in the <em>IPython console</em>. Because at this stage we don’t run this script from within <em>processing</em>, we have to import <code class="docutils literal notranslate"><span class="pre">processing</span></code> manually, and manually define the input variables which will later be taken from the toolbox menu. (Make sure you have the <em>damselfish</em> data loaded.)</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os.path</span>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Scripts in the processing toolbox are now implemented as <em>classes</em> inheriting from <code class="docutils literal notranslate"><span class="pre">QgsProcessingAlgorithm</span></code>. <em>Classes</em> can be interpreted as blueprints from which <em>objects</em> are instantiated at a program’s runtime. <em>Objects</em>, in turn, are the corner stone of <a class="reference external" href="http://ee402.eeng.dcu.ie/introduction/chapter-1---introduction-to-object-oriented-programming">object-oriented programming</a>. They are entities containing data (variables) and code (methods).</p>
+</div>
+<p>Object-oriented programming is the prevailing paradigm of software development. It is an extremely valuable skill, but teaching it is outside of the scope of this course. We provide the following template structure[2]_ which allows us to dive into implementing the actual algorithm. Feel free to use at for any other project!</p>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td>This is a minimal template, sufficient for this exercise. You can also use the built-in template by choosing <em>Create new script from template …</em>. The resulting skeleton script is more complex, but also more comprehensive.</td></tr>
+</tbody>
+</table>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/env python</span>
+
 <span class="kn">import</span> <span class="nn">processing</span>
+<span class="kn">import</span> <span class="nn">string</span>
 
-<span class="c1"># define variables manually (hard-coded),</span>
-<span class="c1"># only for script development on the console</span>
-<span class="c1"># (replaced later)</span>
+<span class="kn">from</span> <span class="nn">qgis.core</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">QgsProcessing</span><span class="p">,</span>
+    <span class="n">QgsProcessingAlgorithm</span>
+<span class="p">)</span>
 
-<span class="c1"># input layer</span>
-<span class="n">Species_Range_Polygons</span> <span class="o">=</span> <span class="n">iface</span><span class="o">.</span><span class="n">activeLayer</span><span class="p">()</span>
-<span class="c1"># species column name</span>
-<span class="n">Species_Attribute</span> <span class="o">=</span> <span class="s2">&quot;BINOMIAL&quot;</span>
-<span class="c1"># column name to be added and rasterised</span>
-<span class="n">Presence_Field_Name</span> <span class="o">=</span> <span class="s2">&quot;presence&quot;</span>
-<span class="c1"># value for this column (and the later raster values)</span>
-<span class="n">Presence_Field_Value</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="c1"># output directory</span>
-<span class="n">Output_Directory</span> <span class="o">=</span> <span class="s2">&quot;/tmp&quot;</span>
+
+<span class="k">class</span> <span class="nc">RENAME_THIS</span><span class="p">(</span><span class="n">QgsProcessingAlgorithm</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">createInstance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)()</span>
+
+    <span class="k">def</span> <span class="nf">displayName</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;NAME OF YOUR SCRIPT IN THE PROCESSING TOOLBOX&quot;</span>
+
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+            <span class="n">character</span> <span class="k">for</span> <span class="n">character</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">displayName</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">character</span> <span class="ow">in</span> <span class="n">string</span><span class="o">.</span><span class="n">ascii_letters</span>
+        <span class="p">])</span>
+        <span class="k">return</span> <span class="n">name</span>
+
+    <span class="k">def</span> <span class="nf">initAlgorithm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="c1"># specify the possible parameters for your tool here</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">processAlgorithm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">feedback</span><span class="p">):</span>
+        <span class="c1"># add the actual processing steps here</span>
+        <span class="k">return</span> <span class="p">{}</span>
 </pre></div>
 </div>
-<p>The variable names are already prepared for later saving this script as a <em>processing</em> script. The variable names are cleaned (underscore is replaced by space) and used for labelling the input user interface. Thus, a variable name of <code class="docutils literal notranslate"><span class="pre">Species_Range_Polygons</span></code> will result in an input field labelled “Species Range Polygons”.</p>
+<p>Open the <em>Processing toolbox</em> and select <em>Create new script …</em> from the Python icon in the toolbar.</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../../_images/L7-04-create-new-script.png"><img alt="../../_images/L7-04-create-new-script.png" src="../../_images/L7-04-create-new-script.png" style="width: 374px;" /></a>
+</div>
+<dl class="docutils">
+<dt>Copy-and-paste the template code from before into the editor window that opens and immediately make the following changes:</dt>
+<dd><ol class="first last arabic simple">
+<li><dl class="first docutils">
+<dt><strong>Rename the class from `RENAME_THIS` to a meaningful name.</strong> (line 12)</dt>
+<dd><a class="reference external" href="https://www.python.org/dev/peps/pep-0008/#class-names">Python code style guidelines</a> recommend a <em>CapWords</em> style, i.e. each word in the class name starts with an uppercase letter. The class name should refer to the function of the class. We are building a tool, let’s revisit how we call physical-world tools: a good example is <em>Screwdriver</em>: It’s a tool to drive (inserting) a screw (into some material). Were it a software tool, a good class name would be <cite>ScrewDriver</cite>. Our tool rasterises species range maps, let’s call it <cite>SpeciesRangeMapsRasteriser</cite>.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>Change the *display name* of our tool.</strong> (line 21)</dt>
+<dd>The names of most of the algorithms in the <em>processing</em> toolbox consist of a verb and an object (e.g. “Create spatial index”). Let’s stick with this concept and call our tool “Rasterise species range maps”.</dd>
+</dl>
+</li>
+</ol>
+</dd>
+</dl>
 </div>
 <div class="section" id="adding-a-new-field-and-updating-its-value">
 <h2>Adding a new field and updating its value<a class="headerlink" href="#adding-a-new-field-and-updating-its-value" title="Permalink to this headline">¶</a></h2>
@@ -490,7 +544,7 @@ The only changes are in the very top of the file: we have to add metadata to des
 <h1>Run the script<a class="headerlink" href="#run-the-script" title="Permalink to this headline">¶</a></h1>
 <p>To run the script, find it from the toolbox, select <cite>DAMSELFISH Distributions</cite> as the input layer, <cite>BINOMIAL</cite> as the species attribute, and specify an output directory. Then click <code class="docutils literal notranslate"><span class="pre">Run</span></code>.</p>
 <div class="figure">
-<img alt="../../_images/L6-04-run-script.png" src="../../_images/L6-04-run-script.png" />
+<img alt="../../_images/L7-04-run-script.png" src="../../_images/L7-04-run-script.png" />
 </div>
 <div class="section" id="the-full-script">
 <h2>The full script<a class="headerlink" href="#the-full-script" title="Permalink to this headline">¶</a></h2>
@@ -590,7 +644,7 @@ The only changes are in the very top of the file: we have to add metadata to des
   <div role="contentinfo">
     <p>
         &copy; Copyright 2018, Henrikki Tenkanen
-      Last updated on Dec 04, 2018.
+      Last updated on Dec 05, 2018.
 
     </p>
   </div>
@@ -618,7 +672,7 @@ The only changes are in the very top of the file: we have to add metadata to des
         <dl>
             <dt>Branches</dt>
             <dd><a href="../../../2017/index.html">2017</a></dd>
-            <dd><a href="../../../develop/index.html">develop</a></dd>
+            <dd><a href="../../../develop/lessons/L7/04-processing-script.html">develop</a></dd>
             <dd><a href="04-processing-script.html">drafts</a></dd>
             <dd><a href="../../../master/index.html">master</a></dd>
         </dl>

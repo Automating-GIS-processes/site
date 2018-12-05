@@ -219,21 +219,21 @@
 <h1>The QGIS Processing Toolbox<a class="headerlink" href="#the-qgis-processing-toolbox" title="Permalink to this headline">¶</a></h1>
 <p>The QGIS Processing Toolbox is a set of geo-spatial algorithms installed with QGIS. Some of them are in fact calling external applications, such as SAGA or GRASS GIS, which is why the algorithms are organised by <em>provider</em>.</p>
 <div class="figure">
-<img alt="../../_images/L6-03-00-processing-toolbox.png" src="../../_images/L6-03-00-processing-toolbox.png" />
+<img alt="../../_images/L7-03-00-processing-toolbox.png" src="../../_images/L7-03-00-processing-toolbox.png" />
 </div>
-<p>Type in keyword into the toolbox’ search bar to see what it offers. Searching for “buffer”, for instance, you will notice the different algorithm providers have in fact different implementations of the same algorithm. Often the choice is one of your personal liking, in rare cases the implementations have subtle differences which actually make a difference for your outcomes. E.g. many of the tools from GRASS treat all data as rasters, internally, granted to GRASS’ legacy as one of the earliest GIS systems still in use and the computational limitations at its time of development.</p>
+<p>Type a keyword into the toolbox’ search bar to see what it offers. Searching for “buffer”, for instance, you will notice the different algorithm providers have in fact different implementations of the same algorithm. Often the choice is one of your personal liking, in rare cases the implementations have subtle differences which actually make a difference for your outcomes. E.g. many of the tools from GRASS treat all data as rasters, internally, granted to GRASS’ legacy as one of the earliest GIS systems still in use and the computational limitations at its time of development.</p>
 <div class="figure">
-<img alt="../../_images/L6-03-01-buffer.png" src="../../_images/L6-03-01-buffer.png" />
+<img alt="../../_images/L7-03-01-buffer.png" src="../../_images/L7-03-01-buffer.png" />
 </div>
-<p>These tools can be run one at a time, or – and that’s where we touch upon our course’s topic – be chained together to form more complex models. Apart from that all the individual algorithms and also the user-defined models can be used in batch-operations, i.e. running the same operation on a (large) number of files.</p>
+<p>These tools can be run one at a time, or – and that’s where we touch upon our course’s topic – be chained together to form more complex models. On top of that all the individual algorithms and also the user-defined models can be used in batch-operations, i.e. running the same operation on a (large) number of files and/or with changing parameters.</p>
 <p>Let’s see how we can run two operations at once: We want to save a Shapefile with the species ranges of all damselfish of the <em>Stegates</em> genus, with simplified geometries. First we select our subset of features, then we simplify the geometries. Let’s use the <em>Graphical Modeler</em> of the processing framework. Open it from the <em>Processing → Graphical Modeler</em> menu.</p>
 <ul>
-<li><p class="first">As a first step, add two input variables to the model, by drag-and-dropping them into the empty window: a <em>Vector Layer</em> named <code class="docutils literal notranslate"><span class="pre">Input</span> <span class="pre">Layer</span></code> and a <em>String</em> called <code class="docutils literal notranslate"><span class="pre">Genus</span></code>.</p>
+<li><p class="first">As a first step, add two input parameters to the model, by drag-and-dropping them onto the empty canvas: a <em>Vector Layer</em> named <code class="docutils literal notranslate"><span class="pre">Input</span> <span class="pre">Layer</span></code> and a <em>String</em> called <code class="docutils literal notranslate"><span class="pre">Genus</span></code>.</p>
 </li>
-<li><p class="first">Then, add a <em>Select by attribute</em> algorithm, and set its input layer to refer to out <code class="docutils literal notranslate"><span class="pre">Input</span> <span class="pre">Layer</span></code> variable. Enter <code class="docutils literal notranslate"><span class="pre">GENUS_NAME</span></code> for the <em>selection attribute</em> (that’s the column name in the example dataset which stores the genus information). Select <code class="docutils literal notranslate"><span class="pre">=</span></code> as a comparison <em>operator</em>, and choose the <code class="docutils literal notranslate"><span class="pre">Genus</span></code> variable as comparison <em>value</em>.</p>
+<li><p class="first">Then, add a <em>Select by attribute</em> algorithm, and set its input layer to refer to our <code class="docutils literal notranslate"><span class="pre">Input</span> <span class="pre">Layer</span></code> variable. Enter <code class="docutils literal notranslate"><span class="pre">GENUS_NAME</span></code> for the <em>selection attribute</em> (that’s the column name in the example dataset which stores the genus information). Select <code class="docutils literal notranslate"><span class="pre">=</span></code> as a comparison <em>operator</em>, and choose the <code class="docutils literal notranslate"><span class="pre">Genus</span></code> variable as comparison <em>value</em>.</p>
 <blockquote>
 <div><div class="figure">
-<img alt="../../_images/L6-03-02-select-by-attribute.png" src="../../_images/L6-03-02-select-by-attribute.png" />
+<img alt="../../_images/L7-03-02-select-by-attribute.png" src="../../_images/L7-03-02-select-by-attribute.png" />
 </div>
 </div></blockquote>
 </li>
@@ -243,7 +243,7 @@
 </li>
 </ul>
 <div class="figure">
-<img alt="../../_images/L6-03-03-graphical-model.png" src="../../_images/L6-03-03-graphical-model.png" />
+<img alt="../../_images/L7-03-03-graphical-model.png" src="../../_images/L7-03-03-graphical-model.png" />
 </div>
 <p>Run the model by finding it from the toolbox and specifying an input layer and genus name.</p>
 </div>
@@ -260,7 +260,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2018, Henrikki Tenkanen
-      Last updated on Dec 04, 2018.
+      Last updated on Dec 05, 2018.
 
     </p>
   </div>
@@ -288,7 +288,7 @@
         <dl>
             <dt>Branches</dt>
             <dd><a href="../../../2017/index.html">2017</a></dd>
-            <dd><a href="../../../develop/index.html">develop</a></dd>
+            <dd><a href="../../../develop/lessons/L7/03-processing-toolbox.html">develop</a></dd>
             <dd><a href="03-processing-toolbox.html">drafts</a></dd>
             <dd><a href="../../../master/index.html">master</a></dd>
         </dl>
