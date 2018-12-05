@@ -168,3 +168,14 @@ Contents
    notebooks/L6/retrieve_osm_data.ipynb
    notebooks/L6/network-analysis.ipynb
    lessons/L6/exercise-6
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Lesson 7
+
+   lessons/L7/01-overview
+   lessons/L7/lecture
+   lessons/L7/02-pyqgis
+   lessons/L7/03-processing-toolbox
+   lessons/L7/04-processing-script
+   lessons/L7/ex-6
