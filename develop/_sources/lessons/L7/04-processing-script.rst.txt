@@ -13,8 +13,6 @@ To add a new python script to the processing toolbox, choose *Scripts → Tools 
 
 .. note:: In this course, we use version 3.4 of QGIS. There have been major changes in QGIS, one of them being a complete rewrite of the *processing API*. At the time of this writing, documentation is still incomplete. The best source of information on the Python bindings of *Processing* algorithms is the *online help* [1]_ on an interactive Python console.
 
-   .. [1] “online” in the sense of context-sensitive help from within the command line interface. Not necessarily refering to the internet in any way.
-
 Import the ``processing`` module to use its algorithms:
 
 .. code:: python
@@ -108,11 +106,9 @@ Rasterise Species Range Maps
 
 We want to create a script which for our example *damselfish* dataset or any similar dataset loops over the described species, and exports one raster dataset per species, containing its respective species range map.
 
-.. note:: Scripts in the processing toolbox are now implemented as *classes* inheriting from ``QgsProcessingAlgorithm``. *Classes* can be interpreted as blueprints from which *objects* are instantiated at a program’s runtime. *Objects*, in turn, are the corner stone of `object-oriented programming <http://ee402.eeng.dcu.ie/introduction/chapter-1---introduction-to-object-oriented-programming>`_. They are entities containing data (variables) and code (methods).
+.. note:: Scripts in the processing toolbox are now implemented as **classes** inheriting from ``QgsProcessingAlgorithm``. *Classes* can be interpreted as blueprints from which **objects** are instantiated at a program’s runtime. *Objects*, in turn, are the corner stone of `object-oriented programming <http://ee402.eeng.dcu.ie/introduction/chapter-1---introduction-to-object-oriented-programming>`_. They are self-containing entities containing data (variables) and code (methods).
 
-Object-oriented programming is the prevailing paradigm of software development. It is an extremely valuable skill, but teaching it is outside of the scope of this course. We provide the following template structure [2]_ which allows us to dive into implementing the actual algorithm. Feel free to use at for any other project! 
-
-.. [2] This is a minimal template, sufficient for this exercise. You can also use the built-in template by choosing *Create new script from template …*. The resulting skeleton script is more complex, but also more comprehensive.
+Object-oriented programming is the prevailing paradigm of software development. It is an extremely valuable skill, but teaching it is outside of the scope of this course. We provide the following template structure [2]_ which allows us to dive into implementing the actual algorithm. Feel free to use at for any other project!
 
 .. code:: python
 
@@ -160,9 +156,10 @@ Open the *Processing toolbox* and select *Create new script …* from the Python
       :width: 374 px
 
 Copy-and-paste the template code from before into the editor window that opens and immediately make the following changes:
-1. **Rename the class from** ``RENAME_THIS`` **to a meaningful name.** (line 12) 
-         `Python code style guidelines <https://www.python.org/dev/peps/pep-0008/#class-names>`_ recommend a *CapWords* style, i.e. each word in the class name starts with an uppercase letter. The class name should refer to the function of the class. We are building a tool, let’s revisit how we call physical-world tools: a good example is *Screwdriver*: It’s a tool to drive (inserting) a screw (into some material). Were it a software tool, a good class name would be ``ScrewDriver``. Our tool rasterises species range maps, let’s call it ``SpeciesRangeMapsRasteriser``.
-2. **Change the display name of our tool.** (line 21) 
+
+1. **Rename the class from** ``RENAME_THIS`` **to a meaningful name.** (line 12)
+         `Python code style guidelines <https://www.python.org/dev/peps/pep-0008/#class-names>`_ recommend a *CapWords* style, i.e. each word in the class name starts with an uppercase letter. The class name should refer to the function of the class. We are building a tool, let’s revisit how we refer to physical-world tools: a good example is *Screwdriver* – it’s a tool to drive (insert) a screw (into some material). Were it a software tool, a good class name would be ``ScrewDriver``. Our tool rasterises species range maps, let’s call it ``SpeciesRangeMapsRasteriser``.
+2. **Change the display name of our tool.** (line 21)
          The names of most of the algorithms in the *processing* toolbox consist of a verb and an object (e.g. “Create spatial index”). Let’s stick with this concept and call our tool “Rasterise species range maps”.
 3. **Save these changes.**
          Choose a filename representing the tool (e.g. `SpeciesRangeMapsRasteriser.py`, and save it in the default directory.
@@ -174,16 +171,18 @@ Define script parameters
 
 The class method `initAlgorithm()` defines general characteristics of a toolbox algorithm, such as which parameters are accepted. It is being run whenever QGIS updates the list of algorithms installed, for instance when QGIS starts or when a script is saved in the editor.
 
-Use the ``self.addParameter()`` `method <https://qgis.org/pyqgis/3.0/core/Processing/QgsProcessingAlgorithm.html#qgis.core.QgsProcessingAlgorithm.addParameter>`_ to define parameters, ``self.addOutput()`` `to define outputs<https://qgis.org/pyqgis/3.0/core/Processing/QgsProcessingAlgorithm.html#qgis.core.QgsProcessingAlgorithm.addOutput>`_ of the algorithm.
+Use the ``self.addParameter()`` `method <https://qgis.org/pyqgis/3.0/core/Processing/QgsProcessingAlgorithm.html#qgis.core.QgsProcessingAlgorithm.addParameter>`_ to define parameters, ``self.addOutput()`` `to define outputs <https://qgis.org/pyqgis/3.0/core/Processing/QgsProcessingAlgorithm.html#qgis.core.QgsProcessingAlgorithm.addOutput>`_ of the algorithm.
 
 Our script has three parameters:
+
 - An input vector layer
 - The name of the field containing the species name
 - A directory to save the output to (for practical reasons, in this example, this is an input parameter, it can also be implemented as an output)
 
-The parameters are objects (instances) of one of the classes ``QgsProcessingParameter*``, documented in `qgis.org/pyqgis/3.0/core/Processing/ <https://qgis.org/pyqgis/3.0/core/Processing/>`_, and have to be import ed from ``qgis.core`` at the beginning of the script. We will use ``QgsProcessingParameterVectorLayer``, ``QgsProcessingParameterField`` and ``QgsProcessingParameterFolderDestination``. We can add them to the existing ``import`` statement:
+The parameters are objects (instances) of one of the classes ``QgsProcessingParameter*``, documented in `qgis.org/pyqgis/3.0/core/Processing/ <https://qgis.org/pyqgis/3.0/core/Processing/>`_, and have to be imported from ``qgis.core`` at the beginning of the script. We will use ``QgsProcessingParameterVectorLayer``, ``QgsProcessingParameterField`` and ``QgsProcessingParameterFolderDestination``. We can add them to the existing ``import`` statement:
 
 .. code:: python
+
    from qgis.core import (
         QgsProcessing,
         QgsProcessingAlgorithm,
@@ -195,6 +194,7 @@ The parameters are objects (instances) of one of the classes ``QgsProcessingPara
 For each of the parameters, we call ``self.addParameter()`` inside ``initAlgorithm()``:
 
 .. code:: python
+
         def initAlgorithm(self, config=None):
             self.addParameter(
                 QgsProcessingParameterVectorLayer(
@@ -231,6 +231,7 @@ All of the following will be added to the ``processAlgorithm()`` method. The fun
 As a very first step, we make sure the output directory exists:
 
 .. code:: python
+
         # 0)
         # create destination directory
         os.makedirs(
@@ -336,7 +337,7 @@ As we wanted to save individual species into separate raster files, we need to d
 Select by attribute and rasterise
 .................................
 
-Now, for each species we run three algorithms: we use *select by attribute* (``qgis:selectbyattribute``) to save the features belonging to the current species into a new layer. Because the *rasterize* algorithm does not understand the default in-memory vector file format, we write the vector data to an intermediate file and then convert the vector data into a raster file using the *rasterize (vector to raster)* tool (``gdal:rasterize``). Before that, we have to define an output file name for our raster. At the end of each loop, we delete the intermediate shapefile. 
+Now, for each species we run three algorithms: we use *select by attribute* (``qgis:selectbyattribute``) to save the features belonging to the current species into a new layer. Because the *rasterize* algorithm does not understand the default in-memory vector file format, we write the vector data to an intermediate file and then convert the vector data into a raster file using the *rasterize (vector to raster)* tool (``gdal:rasterize``). Before that, we have to define an output file name for our raster. At the end of each loop, we delete the intermediate shapefile.
 
 .. code:: python
 
@@ -344,14 +345,14 @@ Now, for each species we run three algorithms: we use *select by attribute* (``q
         # Loop over all species
         for speciesName in speciesNames:
             if speciesName is not None:
-                
+
                 # 3a)
                 # define output file name:
                 outputFile = os.path.join(
                     parameters["OutputFolder"],
                     speciesName.replace(" ", "_")
                 )
-                
+
                 # 3b)
                 # select all features with current `speciesName`
                 algorithmOutput = processing.run(
@@ -366,7 +367,7 @@ Now, for each species we run three algorithms: we use *select by attribute* (``q
                     context=context,
                     feedback=feedback                )
                 singleSpeciesRangePolygons = algorithmOutput["OUTPUT"]
-                
+
                 # 3c)
                 # save intermediate vector file
                 algorithmOutput = processing.run(
@@ -400,12 +401,12 @@ Now, for each species we run three algorithms: we use *select by attribute* (``q
                     context=context,
                     feedback=feedback
                 )
-                
+
                 # 3f)
                 # delete intermediate vector file
                 os.remove(outputFile + ".shp")
 
-.. note: 
+.. note:
    We used functions from the module ``os.path``. Be sure to import the module!
 
 Return the result
@@ -414,6 +415,7 @@ Return the result
 ``processAlgorithm()`` is expected to return a dictionary with computed values or layers. Since our algorithm does not have an output (except the files saved into the specified directory) we simply return an empty dictionary:
 
 .. code:: python
+
          return {}
 
 Run the script
@@ -584,4 +586,7 @@ The full script
 
             return {}
 
+
+.. [1] “online” in the sense of context-sensitive help from within the command line interface. Not necessarily refering to the internet in any way.
+.. [2] This is a minimal template, sufficient for this exercise. You can also use the built-in template by choosing *Create new script from template …*. The resulting skeleton script is more complex, but also more comprehensive.
 

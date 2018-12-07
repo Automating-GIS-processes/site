@@ -287,13 +287,7 @@ On Microsoft Windows, unfortunately, most programs ship with their private pytho
 <h2><em>Processing</em> in a Python console<a class="headerlink" href="#processing-in-a-python-console" title="Permalink to this headline">¶</a></h2>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>In this course, we use version 3.4 of QGIS. There have been major changes in QGIS, one of them being a complete rewrite of the <em>processing API</em>. At the time of this writing, documentation is still incomplete. The best source of information on the Python bindings of <em>Processing</em> algorithms is the <em>online help</em> <a class="footnote-reference" href="#id2" id="id1">[1]</a> on an interactive Python console.</p>
-<table class="last docutils footnote" frame="void" id="id2" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>“online” in the sense of context-sensitive help from within the command line interface. Not necessarily refering to the internet in any way.</td></tr>
-</tbody>
-</table>
+<p class="last">In this course, we use version 3.4 of QGIS. There have been major changes in QGIS, one of them being a complete rewrite of the <em>processing API</em>. At the time of this writing, documentation is still incomplete. The best source of information on the Python bindings of <em>Processing</em> algorithms is the <em>online help</em> <a class="footnote-reference" href="#id3" id="id1">[1]</a> on an interactive Python console.</p>
 </div>
 <p>Import the <code class="docutils literal notranslate"><span class="pre">processing</span></code> module to use its algorithms:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">processing</span>
@@ -383,15 +377,9 @@ On Microsoft Windows, unfortunately, most programs ship with their private pytho
 <p>We want to create a script which for our example <em>damselfish</em> dataset or any similar dataset loops over the described species, and exports one raster dataset per species, containing its respective species range map.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Scripts in the processing toolbox are now implemented as <em>classes</em> inheriting from <code class="docutils literal notranslate"><span class="pre">QgsProcessingAlgorithm</span></code>. <em>Classes</em> can be interpreted as blueprints from which <em>objects</em> are instantiated at a program’s runtime. <em>Objects</em>, in turn, are the corner stone of <a class="reference external" href="http://ee402.eeng.dcu.ie/introduction/chapter-1---introduction-to-object-oriented-programming">object-oriented programming</a>. They are entities containing data (variables) and code (methods).</p>
+<p class="last">Scripts in the processing toolbox are now implemented as <strong>classes</strong> inheriting from <code class="docutils literal notranslate"><span class="pre">QgsProcessingAlgorithm</span></code>. <em>Classes</em> can be interpreted as blueprints from which <strong>objects</strong> are instantiated at a program’s runtime. <em>Objects</em>, in turn, are the corner stone of <a class="reference external" href="http://ee402.eeng.dcu.ie/introduction/chapter-1---introduction-to-object-oriented-programming">object-oriented programming</a>. They are self-containing entities containing data (variables) and code (methods).</p>
 </div>
-<p>Object-oriented programming is the prevailing paradigm of software development. It is an extremely valuable skill, but teaching it is outside of the scope of this course. We provide the following template structure <a class="footnote-reference" href="#id4" id="id3">[2]</a> which allows us to dive into implementing the actual algorithm. Feel free to use at for any other project!</p>
-<table class="docutils footnote" frame="void" id="id4" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id3">[2]</a></td><td>This is a minimal template, sufficient for this exercise. You can also use the built-in template by choosing <em>Create new script from template …</em>. The resulting skeleton script is more complex, but also more comprehensive.</td></tr>
-</tbody>
-</table>
+<p>Object-oriented programming is the prevailing paradigm of software development. It is an extremely valuable skill, but teaching it is outside of the scope of this course. We provide the following template structure <a class="footnote-reference" href="#id4" id="id2">[2]</a> which allows us to dive into implementing the actual algorithm. Feel free to use at for any other project!</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/env python</span>
 
 <span class="kn">import</span> <span class="nn">processing</span>
@@ -434,11 +422,13 @@ On Microsoft Windows, unfortunately, most programs ship with their private pytho
 <div class="figure">
 <a class="reference internal image-reference" href="../../_images/L7-04-create-new-script.png"><img alt="../../_images/L7-04-create-new-script.png" src="../../_images/L7-04-create-new-script.png" style="width: 374px;" /></a>
 </div>
-<p>Copy-and-paste the template code from before into the editor window that opens and immediately make the following changes:
-1. <strong>Rename the class from</strong> <code class="docutils literal notranslate"><span class="pre">RENAME_THIS</span></code> <strong>to a meaningful name.</strong> (line 12)</p>
-<blockquote>
-<div><a class="reference external" href="https://www.python.org/dev/peps/pep-0008/#class-names">Python code style guidelines</a> recommend a <em>CapWords</em> style, i.e. each word in the class name starts with an uppercase letter. The class name should refer to the function of the class. We are building a tool, let’s revisit how we call physical-world tools: a good example is <em>Screwdriver</em>: It’s a tool to drive (inserting) a screw (into some material). Were it a software tool, a good class name would be <code class="docutils literal notranslate"><span class="pre">ScrewDriver</span></code>. Our tool rasterises species range maps, let’s call it <code class="docutils literal notranslate"><span class="pre">SpeciesRangeMapsRasteriser</span></code>.</div></blockquote>
-<ol class="arabic simple" start="2">
+<p>Copy-and-paste the template code from before into the editor window that opens and immediately make the following changes:</p>
+<ol class="arabic simple">
+<li><dl class="first docutils">
+<dt><strong>Rename the class from</strong> <code class="docutils literal notranslate"><span class="pre">RENAME_THIS</span></code> <strong>to a meaningful name.</strong> (line 12)</dt>
+<dd><a class="reference external" href="https://www.python.org/dev/peps/pep-0008/#class-names">Python code style guidelines</a> recommend a <em>CapWords</em> style, i.e. each word in the class name starts with an uppercase letter. The class name should refer to the function of the class. We are building a tool, let’s revisit how we refer to physical-world tools: a good example is <em>Screwdriver</em> – it’s a tool to drive (insert) a screw (into some material). Were it a software tool, a good class name would be <code class="docutils literal notranslate"><span class="pre">ScrewDriver</span></code>. Our tool rasterises species range maps, let’s call it <code class="docutils literal notranslate"><span class="pre">SpeciesRangeMapsRasteriser</span></code>.</dd>
+</dl>
+</li>
 <li><dl class="first docutils">
 <dt><strong>Change the display name of our tool.</strong> (line 21)</dt>
 <dd>The names of most of the algorithms in the <em>processing</em> toolbox consist of a verb and an object (e.g. “Create spatial index”). Let’s stick with this concept and call our tool “Rasterise species range maps”.</dd>
@@ -455,13 +445,48 @@ On Microsoft Windows, unfortunately, most programs ship with their private pytho
 <div class="section" id="define-script-parameters">
 <h2>Define script parameters<a class="headerlink" href="#define-script-parameters" title="Permalink to this headline">¶</a></h2>
 <p>The class method <cite>initAlgorithm()</cite> defines general characteristics of a toolbox algorithm, such as which parameters are accepted. It is being run whenever QGIS updates the list of algorithms installed, for instance when QGIS starts or when a script is saved in the editor.</p>
-<p>Use the <code class="docutils literal notranslate"><span class="pre">self.addParameter()</span></code> <a class="reference external" href="https://qgis.org/pyqgis/3.0/core/Processing/QgsProcessingAlgorithm.html#qgis.core.QgsProcessingAlgorithm.addParameter">method</a> to define parameters, <code class="docutils literal notranslate"><span class="pre">self.addOutput()</span></code> <a href="#id5"><span class="problematic" id="id6">`to define outputs&lt;https://qgis.org/pyqgis/3.0/core/Processing/QgsProcessingAlgorithm.html#qgis.core.QgsProcessingAlgorithm.addOutput&gt;`_</span></a> of the algorithm.</p>
-<p>Our script has three parameters:
-- An input vector layer
-- The name of the field containing the species name
-- A directory to save the output to (for practical reasons, in this example, this is an input parameter, it can also be implemented as an output)</p>
-<p>The parameters are objects (instances) of one of the classes <code class="docutils literal notranslate"><span class="pre">QgsProcessingParameter*</span></code>, documented in <a class="reference external" href="https://qgis.org/pyqgis/3.0/core/Processing/">qgis.org/pyqgis/3.0/core/Processing/</a>, and have to be import ed from <code class="docutils literal notranslate"><span class="pre">qgis.core</span></code> at the beginning of the script. We will use <code class="docutils literal notranslate"><span class="pre">QgsProcessingParameterVectorLayer</span></code>, <code class="docutils literal notranslate"><span class="pre">QgsProcessingParameterField</span></code> and <code class="docutils literal notranslate"><span class="pre">QgsProcessingParameterFolderDestination</span></code>. We can add them to the existing <code class="docutils literal notranslate"><span class="pre">import</span></code> statement:</p>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">self.addParameter()</span></code> <a class="reference external" href="https://qgis.org/pyqgis/3.0/core/Processing/QgsProcessingAlgorithm.html#qgis.core.QgsProcessingAlgorithm.addParameter">method</a> to define parameters, <code class="docutils literal notranslate"><span class="pre">self.addOutput()</span></code> <a class="reference external" href="https://qgis.org/pyqgis/3.0/core/Processing/QgsProcessingAlgorithm.html#qgis.core.QgsProcessingAlgorithm.addOutput">to define outputs</a> of the algorithm.</p>
+<p>Our script has three parameters:</p>
+<ul class="simple">
+<li>An input vector layer</li>
+<li>The name of the field containing the species name</li>
+<li>A directory to save the output to (for practical reasons, in this example, this is an input parameter, it can also be implemented as an output)</li>
+</ul>
+<p>The parameters are objects (instances) of one of the classes <code class="docutils literal notranslate"><span class="pre">QgsProcessingParameter*</span></code>, documented in <a class="reference external" href="https://qgis.org/pyqgis/3.0/core/Processing/">qgis.org/pyqgis/3.0/core/Processing/</a>, and have to be imported from <code class="docutils literal notranslate"><span class="pre">qgis.core</span></code> at the beginning of the script. We will use <code class="docutils literal notranslate"><span class="pre">QgsProcessingParameterVectorLayer</span></code>, <code class="docutils literal notranslate"><span class="pre">QgsProcessingParameterField</span></code> and <code class="docutils literal notranslate"><span class="pre">QgsProcessingParameterFolderDestination</span></code>. We can add them to the existing <code class="docutils literal notranslate"><span class="pre">import</span></code> statement:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qgis.core</span> <span class="kn">import</span> <span class="p">(</span>
+     <span class="n">QgsProcessing</span><span class="p">,</span>
+     <span class="n">QgsProcessingAlgorithm</span><span class="p">,</span>
+     <span class="n">QgsProcessingParameterField</span><span class="p">,</span>
+     <span class="n">QgsProcessingParameterFolderDestination</span><span class="p">,</span>
+     <span class="n">QgsProcessingParameterVectorLayer</span>
+ <span class="p">)</span>
+</pre></div>
+</div>
 <p>For each of the parameters, we call <code class="docutils literal notranslate"><span class="pre">self.addParameter()</span></code> inside <code class="docutils literal notranslate"><span class="pre">initAlgorithm()</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">initAlgorithm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">addParameter</span><span class="p">(</span>
+        <span class="n">QgsProcessingParameterVectorLayer</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;SpeciesRangePolygons&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Species range polygons&quot;</span><span class="p">,</span>
+            <span class="n">types</span><span class="o">=</span><span class="p">[</span><span class="n">QgsProcessing</span><span class="o">.</span><span class="n">SourceType</span><span class="o">.</span><span class="n">TypeVectorPolygon</span><span class="p">]</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">addParameter</span><span class="p">(</span>
+        <span class="n">QgsProcessingParameterField</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;SpeciesAttribute&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Species attribute&quot;</span><span class="p">,</span>
+            <span class="n">parentLayerParameterName</span><span class="o">=</span><span class="s2">&quot;SpeciesRangePolygons&quot;</span><span class="p">,</span>
+            <span class="nb">type</span><span class="o">=</span><span class="n">QgsProcessingParameterField</span><span class="o">.</span><span class="n">String</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">addParameter</span><span class="p">(</span>
+        <span class="n">QgsProcessingParameterFolderDestination</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;OutputFolder&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Output folder&quot;</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
 <p>As you can see, the <code class="docutils literal notranslate"><span class="pre">QgsProcessingParameter*</span></code> classes need to be initialised with arguments. All of them share <code class="docutils literal notranslate"><span class="pre">name</span></code> and <code class="docutils literal notranslate"><span class="pre">description</span></code>, which will be used for labelling the controls in the user interface. We can specify the geometry type of the vector layer, and define which layer the field should be chosen from, and which type of field is allowed.</p>
 <p>Save the script and try to run it: You’ll see the user interface asking for input.</p>
 </div>
@@ -469,6 +494,14 @@ On Microsoft Windows, unfortunately, most programs ship with their private pytho
 <h2>Program the algorithm<a class="headerlink" href="#program-the-algorithm" title="Permalink to this headline">¶</a></h2>
 <p>All of the following will be added to the <code class="docutils literal notranslate"><span class="pre">processAlgorithm()</span></code> method. The function receives a few arguments, one of them, <code class="docutils literal notranslate"><span class="pre">parameters</span></code> is a <code class="docutils literal notranslate"><span class="pre">dict</span></code> containing the parameters defined in the user interface.</p>
 <p>As a very first step, we make sure the output directory exists:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 0)</span>
+<span class="c1"># create destination directory</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span>
+    <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;OutputFolder&quot;</span><span class="p">],</span>
+    <span class="n">exist_ok</span><span class="o">=</span><span class="bp">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
 <p>We use the function <code class="docutils literal notranslate"><span class="pre">makedirs</span></code> of the <code class="docutils literal notranslate"><span class="pre">os</span></code> module, which we thus have to add to the import statements in the beginning of the file.</p>
 <div class="section" id="add-a-new-field-and-update-its-value">
 <h3>Add a new field and update its value<a class="headerlink" href="#add-a-new-field-and-update-its-value" title="Permalink to this headline">¶</a></h3>
@@ -630,6 +663,9 @@ For this step, we use the <em>field calculator</em> algorithm of the processing 
 <div class="section" id="return-the-result">
 <h3>Return the result<a class="headerlink" href="#return-the-result" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">processAlgorithm()</span></code> is expected to return a dictionary with computed values or layers. Since our algorithm does not have an output (except the files saved into the specified directory) we simply return an empty dictionary:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">return</span> <span class="p">{}</span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -798,6 +834,18 @@ For this step, we use the <em>field calculator</em> algorithm of the processing 
         <span class="k">return</span> <span class="p">{}</span>
 </pre></div>
 </div>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>“online” in the sense of context-sensitive help from within the command line interface. Not necessarily refering to the internet in any way.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>This is a minimal template, sufficient for this exercise. You can also use the built-in template by choosing <em>Create new script from template …</em>. The resulting skeleton script is more complex, but also more comprehensive.</td></tr>
+</tbody>
+</table>
 </div>
 </div>
 
@@ -822,7 +870,7 @@ For this step, we use the <em>field calculator</em> algorithm of the processing 
   <div role="contentinfo">
     <p>
         &copy; Copyright 2018, Henrikki Tenkanen
-      Last updated on Dec 05, 2018.
+      Last updated on Dec 07, 2018.
 
     </p>
   </div>
