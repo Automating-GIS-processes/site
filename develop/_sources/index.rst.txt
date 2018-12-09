@@ -173,8 +173,8 @@ Contents
    :maxdepth: 2
    :caption: Lesson 7
 
-   lessons/L7/01-overview
-   lessons/L7/02-pyqgis
-   lessons/L7/03-processing-toolbox
-   lessons/L7/04-processing-script
-   lessons/L7/ex-6
+   lessons/L7/overview
+   lessons/L7/pyqgis
+   lessons/L7/processing-toolbox
+   lessons/L7/processing-script
+   lessons/L7/exercise-7
