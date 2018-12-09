@@ -1,7 +1,7 @@
 Final assignment
 ================
 
-Start your final assignment by accepting the `GitHub Classroom <https://classroom.github.com/a/CkKpFSpn>`_ for the final work.
+Start your final assignment by accepting the `GitHub Classroom <https://classroom.github.com/a/ZsdqHr4m>`_ for the final work.
 
 Aim of the work
 ---------------
