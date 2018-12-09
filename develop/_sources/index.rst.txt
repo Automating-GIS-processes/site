@@ -178,3 +178,10 @@ Contents
    lessons/L7/processing-toolbox
    lessons/L7/processing-script
    lessons/L7/exercise-7
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Final Assignment
+
+   lessons/FA/final-assignment
+
