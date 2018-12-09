@@ -142,7 +142,17 @@ Urban indicators
 
 In this assignment, the aim is to analyze and compare **two cities or neighborhoods in Finland** (e.g. Helsinki and Tampere, or neighborhood areas in Helsinki) from different perspectives using different indicators. This assignment is not accurately defined, as the idea is to allow you to use your own imagination and interest to explore different datasets and conduct analyses that interest to you, still providing useful insights about the urban areas using specific set of indicators (you should use 2-4 different indicators, see examples from below).
 
-You can use any (spatial) data that you can find, and generate your own report describing how the cities differ from each other based on different perspectives (see below hints about possible analyses). You can use any data that is available for example from OpenStreetMap (e.g. streets, buildings, points of interest), or use data that can be found from `PaiTuli <https://avaa.tdata.fi/web/paituli/latauspalvelu>`__, `Avoindata.fi service <https://www.avoindata.fi/en>`__ or `Helsinki Region Infoshare <https://hri.fi/en_gb/>`__. Data sources are not limited to these, hence you can also use other data from any source that you can find (remember to document where the data is coming from!).
+Data
+~~~~
+
+You can use any (spatial) data that you can find, and generate your own report describing how the cities differ from each other based on different perspectives (see below hints about possible analyses). You can use any data that is available for example from OpenStreetMap (e.g. streets, buildings, points of interest), or use data that can be found (for example) from:
+
+  - `PaiTuli <https://avaa.tdata.fi/web/paituli/latauspalvelu>`__,
+  - `Avoindata.fi service <https://www.avoindata.fi/en>`__
+  - `Helsinki Region Infoshare <https://hri.fi/en_gb/>`__.
+  - `Open data service of Tampere <https://data.tampere.fi/en_gb/>`__
+
+Data sources are not limited to these, hence you can also use other data from any source that you can find (remember to document where the data is coming from!).
 
 Example analyses
 ~~~~~~~~~~~~~~~~
