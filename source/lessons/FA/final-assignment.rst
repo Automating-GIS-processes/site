@@ -77,11 +77,7 @@ Good documentation is one the most important aspect when doing any programming. 
 Commit your work frequently!
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In the previous exercises that we have done during the course, it has not maybe been that important that you commit (upload) your work frequently to GitHub because the
-size and complexity of the codes have been relatively low. However, now
-as you are doing a larger programming project, I really recommend that you **commit and upload your changes to GitHub frequently!** Whenever you get some functionality
-working in your code, it is a good time to commit your changes. In that way, your work is saved and if something goes wrong and your code does not work anymore as planned,
-you can **go back in history** and start from a state that was still working.
+In the previous exercises that we have done during the course, it has not maybe been that important that you commit (upload) your work frequently to GitHub because the size and complexity of the codes have been relatively low. However, now as you are doing a larger programming project, I really recommend that you **commit and upload your changes to GitHub frequently!** Whenever you get some functionality working in your code, it is a good time to commit your changes. In that way, your work is saved and if something goes wrong and your code does not work anymore as planned, you can **go back in history** and start from a state that was still working.
 
 Hints
 ~~~~~
@@ -144,7 +140,7 @@ This functionality can also be a separate program (it is not required to bundle 
 Urban indicators
 ----------------
 
-In this assignment, the aim is to analyze and compare **two cities or neighborhoods in Finland** (e.g. Helsinki and Tampere, or neighborhood areas in Helsinki) from different perspectives using different indicators. This assignment is not accurately defined, as the idea is to allow you to use your own imagination and interest to explore different datasets and conduct analyses that interest to you, still providing useful insights about the urban areas using specific set of indicators (you should use 3-5 different indicators, see examples from below).
+In this assignment, the aim is to analyze and compare **two cities or neighborhoods in Finland** (e.g. Helsinki and Tampere, or neighborhood areas in Helsinki) from different perspectives using different indicators. This assignment is not accurately defined, as the idea is to allow you to use your own imagination and interest to explore different datasets and conduct analyses that interest to you, still providing useful insights about the urban areas using specific set of indicators (you should use 2-4 different indicators, see examples from below).
 
 You can use any (spatial) data that you can find, and generate your own report describing how the cities differ from each other based on different perspectives (see below hints about possible analyses). You can use any data that is available for example from OpenStreetMap (e.g. streets, buildings, points of interest), or use data that can be found from `PaiTuli <https://avaa.tdata.fi/web/paituli/latauspalvelu>`__, `Avoindata.fi service <https://www.avoindata.fi/en>`__ or `Helsinki Region Infoshare <https://hri.fi/en_gb/>`__. Data sources are not limited to these, hence you can also use other data from any source that you can find (remember to document where the data is coming from!).
 
@@ -156,6 +152,7 @@ In this assignment, you can for example analyze (not limited to these ones):
  - **Population distribution and demographics**
 
    - create maps and provide some key statistical measures
+
 
  - **Building density**
 
@@ -172,6 +169,8 @@ In this assignment, you can for example analyze (not limited to these ones):
  - **Accessibility**: Travel times (walking or driving by car) e.g. from railway station to different administrative areas of the city (neighborhoods), or to certain services (e.g. health care, education)
 
     - Create e.g. a travel time map (choropleth) that shows travel times to centroids of different neighborhoods
+
+ - **Urban design**: Street network indicators (see Lesson 6 and examples from `here <https://github.com/gboeing/osmnx-examples/tree/master/notebooks>`__)
 
 Structure of the final report
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -208,7 +207,7 @@ Following readings provide you some useful backgound information and inspiration
  - `European Commission (2015). "Indicators for Sustainable Cities" <http://ec.europa.eu/environment/integration/research/newsalert/pdf/indicators_for_sustainable_cities_IR12_en.pdf>`__
 
  - Rob Kitchin, Tracey Lauriault & Gavin McArdle (2015). `"Knowing and governing cities through urban
-indicators, city benchmarking and real-time dashboards" <https://github.com/Automating-GIS-processes/2018/literature/Kitchin_et_al_(2015).pdf>`__. *Regional Studies, Regional Science,* Vol. 2, No. 1, 6–28.
+indicators, city benchmarking and real-time dashboards" <https://github.com/Automating-GIS-processes/2018/raw/develop/literature/Kitchin_et_al_(2015).pdf>`__. *Regional Studies, Regional Science,* Vol. 2, No. 1, 6–28.
 
 .. _Your-own-project:
 
