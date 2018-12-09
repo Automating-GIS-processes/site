@@ -1,0 +1,595 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-88382509-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Final assignment &mdash; AutoGIS 2018 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Exercise 7" href="../L7/exercise-7.html" />
+    <link href="../../_static/geo-python.css" rel="stylesheet" type="text/css">
+     
+
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> AutoGIS
+          
+
+          
+            
+            <img src="../../_static/logo_hy_geo_135.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2018
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Course information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/course-info.html">General info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/course-environment-components.html">Course environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/grading.html">Grading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/learning-goals.html">Learning goals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/Installing_Anacondas_GIS.html">Installing Python + GIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/License-terms.html">License and terms of usage</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 1</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L1/Intro-Python-GIS.html">Motivation for the course</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1/overview.html">Lesson overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L1/geometric-objects.html">Geometric objects - Spatial data model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1/exercise-1.html">Exercise 1</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 2</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L2/overview.html">Lesson 2 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L2/geopandas-basics.html">Introduction to Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L2/projections.html">Map projections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/exercise-2.html">Exercise 2</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 3</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L3/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L3/geocoding.html">Geocoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L3/geocoding_in_geopandas.html">Geocoding in Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L3/point-in-polygon.html">Point in Polygon &amp; Intersect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L3/spatial-join.html">Spatial join</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L3/nearest-neighbour.html">Nearest Neighbour Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L3/exercise-3.html">Exercise 3</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 4</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L4/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L4/reclassify.html">Data reclassification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L4/geometric-operations.html">Geometric operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L4/exercise-4.html">Exercise 4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L4/exercise-4.html#exercise-4-hints">Exercise 4 hints</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 5</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L5/overview.html">Lesson 5 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L5/static_maps.html">Static maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L5/interactive-map-folium.html">Interactive maps on Leaflet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/share-on-github.html">Sharing interactive plots on GitHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/exercise-5.html">Exercise 5</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 6</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L6/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L6/retrieve_osm_data.html">Retrieving OpenStreetMap data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L6/network-analysis.html">Network analysis in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L6/exercise-6.html">Exercise 6</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 7</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L7/overview.html">Lesson 7 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L7/pyqgis.html">Python in QGIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L7/processing-toolbox.html">The QGIS Processing Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L7/processing-script.html">Processing toolbox scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L7/processing-script.html#run-the-script">Run the script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L7/exercise-7.html">Exercise 7</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Final Assignment</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Final assignment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#aim-of-the-work">Aim of the work</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#what-should-be-returned">What should be returned?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#when-is-the-deadline">When is the deadline?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#grading">Grading</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#best-practices">Best practices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#documenting-your-work">Documenting your work</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#commit-your-work-frequently">Commit your work frequently!</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hints">Hints</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#accessviz">AccessViz</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#what-the-tool-should-do">What the tool should do?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#urban-indicators">Urban indicators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example-analyses">Example analyses</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#structure-of-the-final-report">Structure of the final report</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#technical-considerations">Technical considerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#literature-inspiration">Literature + inspiration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#own-project-work">Own project work</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AutoGIS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Final assignment</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/Automating-GIS-processes/2018/blob/master/source/lessons/FA/final-assignment.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+
+
+
+
+
+
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="final-assignment">
+<h1>Final assignment<a class="headerlink" href="#final-assignment" title="Permalink to this headline">¶</a></h1>
+<p>Start your final assignment by accepting the <a class="reference external" href="https://classroom.github.com/a/ZsdqHr4m">GitHub Classroom</a> for the final work.</p>
+<div class="section" id="aim-of-the-work">
+<h2>Aim of the work<a class="headerlink" href="#aim-of-the-work" title="Permalink to this headline">¶</a></h2>
+<p>The final assignment is a project of your own where the aim is to apply the programming techniques and skills that we have learned during the course and do something useful with them.</p>
+<p>You have three options for the final project that you can choose from:</p>
+<ol class="arabic simple">
+<li><a class="reference internal" href="#accessviz">AccessViz</a> which is a GIS-tool that can visualize and compare travel times by different travel modes in Helsinki Region.</li>
+<li><a class="reference internal" href="#urbanindicators">UrbanIndicators</a> which is a <em>“mini-study”</em> where the aim is to use different urban indicators to understand urban areas and compare them to each other.</li>
+<li><a class="reference internal" href="#your-own-project">Your-own-project</a>. If you have a tool, problem or analysis of your own in mind, send your idea to us by email or in Slack (before Friday 21.12.2018), and we can discuss and accept your idea if it is suitable for the final project.</li>
+</ol>
+<p>Think the final project as a challenge for yourself to show and implement the programming skills that you have learned this far. You have learned a lot already!</p>
+<div class="section" id="what-should-be-returned">
+<h3>What should be returned?<a class="headerlink" href="#what-should-be-returned" title="Permalink to this headline">¶</a></h3>
+<p>Write your codes into a single (or multiple) notebook(s) and return the codes to your GitHub repository.
+Good documentation of the code will be highly regarded and
+will affect positively in the grading of the final work. You can choose yourself what tools / techniques / modules you want to use.</p>
+</div>
+<div class="section" id="when-is-the-deadline">
+<h3>When is the deadline?<a class="headerlink" href="#when-is-the-deadline" title="Permalink to this headline">¶</a></h3>
+<p>You should <strong>return your final assignment in GitHub by 11.1.2018 at 23:59</strong> at latest. Of course, you can return your work also before the deadline! If you are ready
+before the deadline, please send us a note about it (e.g. in Slack), so that we know and can start evaluating your work.</p>
+</div>
+<div class="section" id="grading">
+<h3>Grading<a class="headerlink" href="#grading" title="Permalink to this headline">¶</a></h3>
+<p>In the evaluation of the final work different functionalities of the code are evaluated individually.
+Thus, if you do not get all different parts / functionalities of the tool working that are described below, it is not the <em>“the end of the world”</em>.
+The main idea in the final project is that you try to use your skills and do GIS analyses in Python <strong>independently</strong>.</p>
+<p><strong>Good documentation of the code and your project is highly appreciated!!!</strong> One more time: Good documentation of the code and your project is highly appreciated! You should use Markdown cells to document your work along the way (take a look of these small tutorials to see [how to add a Markdown cell to Notebook](<a class="reference external" href="http://www.firstpythonnotebook.org/markdown/">http://www.firstpythonnotebook.org/markdown/</a>) and [how to use Markdown syntax](<a class="reference external" href="https://guides.github.com/features/mastering-markdown/">https://guides.github.com/features/mastering-markdown/</a>) ).</p>
+<p>The grading is based on a typical 0-5 scale.</p>
+</div>
+</div>
+<div class="section" id="best-practices">
+<h2>Best practices<a class="headerlink" href="#best-practices" title="Permalink to this headline">¶</a></h2>
+<p>There are several guidelines how to do programming “in a proper way”. These best practices when doing programming are well described in <a class="reference external" href="http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001745">this article</a>
+Wilson et al. (2014) that include aspects such as:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><em>“Write programs for people, not computers.”</em></li>
+<li><em>“Let the computer do the work.”</em></li>
+<li><em>“Make incremental changes.”</em></li>
+<li><em>“Don’t repeat yourself (or others).”</em></li>
+<li><em>“Plan for mistakes.”</em></li>
+<li><em>“Optimize software only after it works correctly.”</em></li>
+<li><em>“Document design and purpose, not mechanics.”</em></li>
+<li><em>“Collaborate.”</em></li>
+</ol>
+</div></blockquote>
+<p>These kind of guidelines are extremely useful. I recommend that you take at least a short look at the article before starting your final project because it helps you to
+finnish your project efficiently and in such a manner that works and makes your life (and others) easier!</p>
+<p>For this final project, the most important aspects from the list above are numbers 1-4 and number 7 (although they are all important).
+Thus, at least take a look at those aspects from the article before
+starting your work.</p>
+<div class="section" id="documenting-your-work">
+<h3>Documenting your work<a class="headerlink" href="#documenting-your-work" title="Permalink to this headline">¶</a></h3>
+<p>Good documentation is one the most important aspect when doing any programming. It allows us (and also yourself) to understand what you have done, or tried to do with the code. Thus, we cannot emphasize it more to document your codes, and the work in general, properly. Hence, use comments in the code and also using Markdown cells where you explain the purpose of different parts of the code.</p>
+</div>
+<div class="section" id="commit-your-work-frequently">
+<h3>Commit your work frequently!<a class="headerlink" href="#commit-your-work-frequently" title="Permalink to this headline">¶</a></h3>
+<p>In the previous exercises that we have done during the course, it has not maybe been that important that you commit (upload) your work frequently to GitHub because the size and complexity of the codes have been relatively low. However, now as you are doing a larger programming project, I really recommend that you <strong>commit and upload your changes to GitHub frequently!</strong> Whenever you get some functionality working in your code, it is a good time to commit your changes. In that way, your work is saved and if something goes wrong and your code does not work anymore as planned, you can <strong>go back in history</strong> and start from a state that was still working.</p>
+</div>
+<div class="section" id="hints">
+<h3>Hints<a class="headerlink" href="#hints" title="Permalink to this headline">¶</a></h3>
+<p>Similarly as before, we gather hints separately to <a class="reference external" href="https://automating-gis-processes.github.io/2018/lessons/FA/fa-hints.html">here</a>. However, because this is the final work, we encourage you to try hard yourself first, find information from the internet, and ask your friends before asking help from us. However, if there is a common problem or some of the instructions needs more
+explanation, we will update those into the hints page.</p>
+</div>
+</div>
+<div class="section" id="accessviz">
+<span id="id1"></span><h2>AccessViz<a class="headerlink" href="#accessviz" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="what-the-tool-should-do">
+<h3>What the tool should do?<a class="headerlink" href="#what-the-tool-should-do" title="Permalink to this headline">¶</a></h3>
+<p><strong>AccessViz</strong> is a set of tools that can be used for managing and helping to analyze
+Helsinki Region Travel Time Matrix data (2013 / 2015 / 2018) that can be downloaded from
+<a class="reference external" href="http://blogs.helsinki.fi/accessibility/helsinki-region-travel-time-matrix/">here</a>.
+Read also the description of the dataset from the web-pages so that you get familiar with the data.</p>
+<p>AccessViz tool package (i.e. a set of Notebooks) has following main functionalities (i.e. functions) that should work independently. You should demonstrate the usage of the functionalities in your Notebook:</p>
+<p>1. AccessViz finds from the data folder all the matrices that user has specified by assigning a list of integer values that should correspond to YKR-IDs found from the attribute table of a Shapefile called <a class="reference external" href="http://www.helsinki.fi/science/accessibility/data/MetropAccess-matka-aikamatriisi/MetropAccess_YKR_grid.zip">MetropAccess_YKR_grid.shp</a>.
+If the ID-number that the user has specified does not exist in the data folders, the tools should warn about this to the user but still continue running. The tool should also inform the user about the execution process: tell the user what file is currently under process and how many files there are left
+(e.g. “Processing file travel_times_to_5797076.txt.. Progress: 3/25”).</p>
+<p>2. AccessViz can create Shapefiles from the chosen Matrix text tables (e.g. <em>travel_times_to_5797076.txt</em>) by joining the Matrix file with
+MetropAccess_YKR_grid Shapefile  where <code class="docutils literal notranslate"><span class="pre">from_id</span></code> in Matrix file corresponds to <code class="docutils literal notranslate"><span class="pre">YKR_ID</span></code> in the Shapefile. The tool saves the result in the output-folder
+that user has defined. You should name the files in a way that it is possible to identify the ID from the name (e.g. 5797076).</p>
+<ol class="arabic simple" start="3">
+<li>AccessViz can visualize the travel times of selected YKR_IDs based on the travel mode that the user specifies. It can save those maps into a folder that user specifies. The output maps can be either <strong>static</strong> or <strong>interactive</strong> and user can choose which one with a parameter. You can freely design yourself the style of the map, colors, travel time intervals (classes) etc. Try to make the map as informative as possible!</li>
+</ol>
+<p>4. AccessViz can also compare <strong>travel times</strong> or <strong>travel distances</strong> between two different travel modes (more than two travel modes are not allowed). Thus IF the user has specified two travel modes (passed in as a list) for the AccessViz, the tool will calculate the time/distance difference of those travel modes
+into a new data column that should be created in the Shapefile. The logic of the calculation is following the order of the items passed on the list where first travel mode is always subtracted by the last one: <code class="docutils literal notranslate"><span class="pre">travelmode1</span> <span class="pre">-</span> <span class="pre">travelmode2</span></code>. The tool should ensure that distances are not compared to travel times and vice versa. If the user chooses to compare travel modes to each other, you should add the travel modes to the filename such as <code class="docutils literal notranslate"><span class="pre">Accessibility_5797076_pt_vs_car.shp</span></code>. If the user has not specified any travel modes, the tool should only create the Shapefile but not execute any calculations. It should be only possible to compare two travel modes between each other at the time. Accepted travel modes are the same ones that are found in the actual TravelTimeMatrix file (pt_r_tt, car_t, etc.). If the user specifies something else, stop the program, and give advice what are the acceptable values.</p>
+<p><strong>Additionally, you should choose and implement one of the following functionalities</strong>:</p>
+<ol class="arabic simple" start="5">
+<li>(option 1). Bundled with AccessViz there is also a separate interactive map that shows the YKR grid values in Helsinki region. The purpose of the map is to help the user to choose the YKR-IDs that s/he is interested to visualize / analyze.</li>
+<li>(option 2). AccessViz can also visualize the travel mode comparisons that were described in step 4. You can design the style of the map yourself, but try to make it as informative as possible!</li>
+</ol>
+<p>7. (option 3). AccessViz can also visualize shortest path routes (walking, cycling, and/or driving) using OpenStreetMap data from Helsinki Region.
+The impedance value for the routes can be distance (as was shown in Lesson 7) or time (optional for the most advanced students).
+This functionality can also be a separate program (it is not required to bundle include this with the rest of the AccessViz tool)</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p><strong>NoData values</strong></p>
+<p class="last">Notice that there are NoData values present in the data (value -1). In such cases the result cell should always end up having a value -1 when doing travel mode comparisons. In the visualizations, the NoData values should be removed before visualizing the map.</p>
+</div>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p><strong>Modularize your code</strong></p>
+<p class="last">One of the best practice guidelines is that you should avoid repeating yourself. Thus, we recommend to modularize different tasks in your code and use functions as much as possible. Use meaningful parameter and variable names when defining the functions, so that they are intuitive but short.</p>
+</div>
+</div>
+</div>
+<div class="section" id="urban-indicators">
+<span id="urbanindicators"></span><h2>Urban indicators<a class="headerlink" href="#urban-indicators" title="Permalink to this headline">¶</a></h2>
+<p>In this assignment, the aim is to analyze and compare <strong>two cities or neighborhoods in Finland</strong> (e.g. Helsinki and Tampere, or neighborhood areas in Helsinki) from different perspectives using different indicators. This assignment is not accurately defined, as the idea is to allow you to use your own imagination and interest to explore different datasets and conduct analyses that interest to you, still providing useful insights about the urban areas using specific set of indicators (you should use 2-4 different indicators, see examples from below).</p>
+<p>You can use any (spatial) data that you can find, and generate your own report describing how the cities differ from each other based on different perspectives (see below hints about possible analyses). You can use any data that is available for example from OpenStreetMap (e.g. streets, buildings, points of interest), or use data that can be found from <a class="reference external" href="https://avaa.tdata.fi/web/paituli/latauspalvelu">PaiTuli</a>, <a class="reference external" href="https://www.avoindata.fi/en">Avoindata.fi service</a> or <a class="reference external" href="https://hri.fi/en_gb/">Helsinki Region Infoshare</a>. Data sources are not limited to these, hence you can also use other data from any source that you can find (remember to document where the data is coming from!).</p>
+<div class="section" id="example-analyses">
+<h3>Example analyses<a class="headerlink" href="#example-analyses" title="Permalink to this headline">¶</a></h3>
+<p>In this assignment, you can for example analyze (not limited to these ones):</p>
+<blockquote>
+<div><ul>
+<li><p class="first"><strong>Population distribution and demographics</strong></p>
+<ul class="simple">
+<li>create maps and provide some key statistical measures</li>
+</ul>
+</li>
+<li><p class="first"><strong>Building density</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li>create a map showing the building distribution and calculate building density indices for the cities and describe how the areas differ</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><strong>Green area index</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li>How much green area cities have (in percentages)? Create a map and statistics.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><strong>Urban population growth</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li>compare two years to each other and make a comparison map</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><strong>Accessibility</strong>: Travel times (walking or driving by car) e.g. from railway station to different administrative areas of the city (neighborhoods), or to certain services (e.g. health care, education)</p>
+<blockquote>
+<div><ul class="simple">
+<li>Create e.g. a travel time map (choropleth) that shows travel times to centroids of different neighborhoods</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><strong>Urban design</strong>: Street network indicators (see Lesson 6 and examples from <a class="reference external" href="https://github.com/gboeing/osmnx-examples/tree/master/notebooks">here</a>)</p>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="structure-of-the-final-report">
+<h3>Structure of the final report<a class="headerlink" href="#structure-of-the-final-report" title="Permalink to this headline">¶</a></h3>
+<p>In the assignment you should follow traditional structure of scientific article (conduct a <em>“mini-study”</em>) where you should provide:</p>
+<blockquote>
+<div><ul class="simple">
+<li>A short introduction to the topic (present 2-4 research questions that you aim to answer)</li>
+<li>Short description of the datasets you used</li>
+<li>Short generic description of the methods you used</li>
+<li>Actual codes and visualizations to produce the <strong>results</strong></li>
+<li>Description of the results (what should we understand and see from them?)</li>
+<li>Evaluate with <strong>healthy</strong> criticism the indicators, data and the analyses
+- What kind of assumptions, biases or uncertainties are related to the data and/or the analyses that you did?
+- Any other notes that the reader should know about the analysis</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="technical-considerations">
+<h3>Technical considerations<a class="headerlink" href="#technical-considerations" title="Permalink to this headline">¶</a></h3>
+<p>In the Notebook, you should present the previous points. Also take care that you:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Document your analyses well using the Markdown cells and describe 1) what you are doing and 2) what you can see from the data and your results.</li>
+<li>Use informative visualizations<ul>
+<li>Create maps (static or interactive)</li>
+<li>Create other kind of graphs (e.g. line plots)</li>
+<li>Create subplots that allows to easily compare the cities to each other</li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="literature-inspiration">
+<h3>Literature + inspiration<a class="headerlink" href="#literature-inspiration" title="Permalink to this headline">¶</a></h3>
+<p>Following readings provide you some useful backgound information and inspiration for the analyses (remember to cite if you use them):</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="http://ec.europa.eu/environment/integration/research/newsalert/pdf/indicators_for_sustainable_cities_IR12_en.pdf">European Commission (2015). “Indicators for Sustainable Cities”</a></li>
+<li><a class="reference external" href="https://github.com/Automating-GIS-processes/2018/raw/develop/literature/Kitchin_et_al_(2015).pdf">Rob Kitchin, Tracey Lauriault &amp; Gavin McArdle (2015). Knowing and governing cities through urban indicators, city benchmarking and real-time dashboards</a> . <em>Regional Studies, Regional Science,</em> Vol. 2, No. 1, 6–28.</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="own-project-work">
+<span id="your-own-project"></span><h2>Own project work<a class="headerlink" href="#own-project-work" title="Permalink to this headline">¶</a></h2>
+<p>If you have own idea for the final project that you would be willing to do, send us a short description of your idea and we can have a short meeting where we can chat if your project would fit the requirements for the final project. You should send us a description of your own idea <strong>before 21st of December</strong> so that we can soon decide if it meets the requirements of the final project.</p>
+<p>Your own final project could be for example:</p>
+<blockquote>
+<div><ul class="simple">
+<li>a specific tool that you would like to create for some purpose that you think would be useful</li>
+<li>a GIS analysis or a set of analyses that you would be interested to conduct and write a short report about them</li>
+</ul>
+</div></blockquote>
+<p>What is at least required from the final project, is that you have:</p>
+<blockquote>
+<div><ul class="simple">
+<li>a working piece of code for your task / problem / analyses that solves it</li>
+<li>a GOOD documentation (i.e. a tutorial) associated with your Notebook explaining how your tool works</li>
+<li>OR a report about your analyses and what we can learn from them</li>
+</ul>
+</div></blockquote>
+<p>The documentation of your tool or analysis / report needs to be written in MarkDown into the same repository
+where you upload your codes.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../L7/exercise-7.html" class="btn btn-neutral" title="Exercise 7" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Henrikki Tenkanen
+      Last updated on Dec 09, 2018.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+    <p> <br/> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /> </a></p>
+     
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: master
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../../../2017/lessons/FA/final-assignment.html">2017</a></dd>
+            <dd><a href="../../../develop/lessons/FA/final-assignment.html">develop</a></dd>
+            <dd><a href="../../../drafts/index.html">drafts</a></dd>
+            <dd><a href="final-assignment.html">master</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'2018',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
