@@ -206,8 +206,8 @@ Following readings provide you some useful backgound information and inspiration
 
  - `European Commission (2015). "Indicators for Sustainable Cities" <http://ec.europa.eu/environment/integration/research/newsalert/pdf/indicators_for_sustainable_cities_IR12_en.pdf>`__
 
- - Rob Kitchin, Tracey Lauriault & Gavin McArdle (2015). `"Knowing and governing cities through urban
-indicators, city benchmarking and real-time dashboards" <https://github.com/Automating-GIS-processes/2018/raw/develop/literature/Kitchin_et_al_(2015).pdf>`__. *Regional Studies, Regional Science,* Vol. 2, No. 1, 6–28.
+ - `Rob Kitchin, Tracey Lauriault & Gavin McArdle (2015). Knowing and governing cities through urban
+indicators, city benchmarking and real-time dashboards <https://github.com/Automating-GIS-processes/2018/raw/develop/literature/Kitchin_et_al_(2015).pdf>`__ . *Regional Studies, Regional Science,* Vol. 2, No. 1, 6–28.
 
 .. _Your-own-project:
 
