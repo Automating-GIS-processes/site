@@ -1,7 +1,7 @@
 Python in QGIS
 ==============
 
-The core application and libraries of QGIS are programmed in C++. Nonwithstanding, Python plays an important role in its ecosystem: Most of the pre-installed plugins and even some of the data provider modules are written in Python, and virtually all functions of the interface and the libraries are exported to a Python API (*Application Programming Interface*). It takes only moderate effort to author extensions to QGIS which integrate seamlessly into its user interface, create stand-alone applications using components of QGIS, such as a map window or a data backend, or run custom scripts within QGIS. To really dive into it, see the `PyQGIS Developer Cookbook <http://docs.qgis.org/3.0/en/docs/pyqgis_developer_cookbook/intro.html>`_ which walks you from easy *Hello World* examples to writing your own applications.
+The core application and libraries of QGIS are programmed in C++. Nonwithstanding, Python plays an important role in its ecosystem: Most of the pre-installed plugins and even some of the data provider modules are written in Python, and virtually all functions of the interface and the libraries are exported to a Python API (*Application Programming Interface*). It takes only moderate effort to author extensions to QGIS which integrate seamlessly into its user interface, create stand-alone applications using components of QGIS, such as a map window or a data backend, or run custom scripts within QGIS. To really dive into it, see the `PyQGIS Developer Cookbook <http://docs.qgis.org/3.4/en/docs/pyqgis_developer_cookbook/intro.html>`_ which walks you from easy *Hello World* examples to writing your own applications.
 
 Today, we want to concentrate on how to **use Python to combine simple algorithms in scripts within QGIS to carry out more complex operations**.
 
@@ -21,7 +21,7 @@ There is (at least) two different Python consoles available within QGIS:
 
 .. figure:: img/L7-02-pyqgis-01-install-ipyconsole.png
 
-.. note:: IPython or Jupyter have to be installed on your computer, see the plugin description for instructions on how to install these requirements.
+.. note:: IPython or Jupyter have to be installed on your computer, see the plugin description for instructions on how to install these requirements. On MS Windows operating systems, installing these modules unfortunately is not straightforward. `This blog post <https://www.lutraconsulting.co.uk/blog/2016/03/02/installing-third-party-python-modules-in-qgis-windows/>`_ has step-by-step instructions (replace ``lxml`` with ``qtconsole`` and ``jupyter==1.0.0``)
 
 The console is now available from the menu *Plugins → IPython QGIS Console → Windowed*
 
@@ -82,4 +82,4 @@ You can access a help text on objects using ``help()``:
                  …
                  …
 
-This help text is the same information listed in QGIS’ API documentation at `qgis.org/pyqgis <https://qgis.org/pyqgis/3.0/>`_.
+This help text is the same information listed in QGIS’ API documentation at `qgis.org/pyqgis <https://qgis.org/pyqgis/3.4/>`_.

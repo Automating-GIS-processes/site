@@ -268,7 +268,7 @@
 </style>
 <div class="section" id="python-in-qgis">
 <h1>Python in QGIS<a class="headerlink" href="#python-in-qgis" title="Permalink to this headline">¶</a></h1>
-<p>The core application and libraries of QGIS are programmed in C++. Nonwithstanding, Python plays an important role in its ecosystem: Most of the pre-installed plugins and even some of the data provider modules are written in Python, and virtually all functions of the interface and the libraries are exported to a Python API (<em>Application Programming Interface</em>). It takes only moderate effort to author extensions to QGIS which integrate seamlessly into its user interface, create stand-alone applications using components of QGIS, such as a map window or a data backend, or run custom scripts within QGIS. To really dive into it, see the <a class="reference external" href="http://docs.qgis.org/3.0/en/docs/pyqgis_developer_cookbook/intro.html">PyQGIS Developer Cookbook</a> which walks you from easy <em>Hello World</em> examples to writing your own applications.</p>
+<p>The core application and libraries of QGIS are programmed in C++. Nonwithstanding, Python plays an important role in its ecosystem: Most of the pre-installed plugins and even some of the data provider modules are written in Python, and virtually all functions of the interface and the libraries are exported to a Python API (<em>Application Programming Interface</em>). It takes only moderate effort to author extensions to QGIS which integrate seamlessly into its user interface, create stand-alone applications using components of QGIS, such as a map window or a data backend, or run custom scripts within QGIS. To really dive into it, see the <a class="reference external" href="http://docs.qgis.org/3.4/en/docs/pyqgis_developer_cookbook/intro.html">PyQGIS Developer Cookbook</a> which walks you from easy <em>Hello World</em> examples to writing your own applications.</p>
 <p>Today, we want to concentrate on how to <strong>use Python to combine simple algorithms in scripts within QGIS to carry out more complex operations</strong>.</p>
 <div class="section" id="using-a-python-console">
 <h2>Using a Python console<a class="headerlink" href="#using-a-python-console" title="Permalink to this headline">¶</a></h2>
@@ -290,7 +290,7 @@
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">IPython or Jupyter have to be installed on your computer, see the plugin description for instructions on how to install these requirements.</p>
+<p class="last">IPython or Jupyter have to be installed on your computer, see the plugin description for instructions on how to install these requirements. On MS Windows operating systems, installing these modules unfortunately is not straightforward. <a class="reference external" href="https://www.lutraconsulting.co.uk/blog/2016/03/02/installing-third-party-python-modules-in-qgis-windows/">This blog post</a> has step-by-step instructions (replace <code class="docutils literal notranslate"><span class="pre">lxml</span></code> with <code class="docutils literal notranslate"><span class="pre">qtconsole</span></code> and <code class="docutils literal notranslate"><span class="pre">jupyter==1.0.0</span></code>)</p>
 </div>
 <p>The console is now available from the menu <em>Plugins → IPython QGIS Console → Windowed</em></p>
 <div class="figure">
@@ -347,7 +347,7 @@ Out[1]: Help on QgsVectorLayer in module qgis._core object:
              …
 </pre></div>
 </div>
-<p>This help text is the same information listed in QGIS’ API documentation at <a class="reference external" href="https://qgis.org/pyqgis/3.0/">qgis.org/pyqgis</a>.</p>
+<p>This help text is the same information listed in QGIS’ API documentation at <a class="reference external" href="https://qgis.org/pyqgis/3.4/">qgis.org/pyqgis</a>.</p>
 </div>
 </div>
 
@@ -372,7 +372,7 @@ Out[1]: Help on QgsVectorLayer in module qgis._core object:
   <div role="contentinfo">
     <p>
         &copy; Copyright 2018, Henrikki Tenkanen
-      Last updated on Dec 09, 2018.
+      Last updated on Dec 10, 2018.
 
     </p>
   </div>
