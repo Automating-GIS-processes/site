@@ -13,7 +13,7 @@ or a broader GIS analysis with a short written report about the results (+ docum
 If you would like to do an own project as the final assignment:
 
  - Send me an email (or private message in Slack) to say that you are interested
- - Send me a proposal (by next week, 17.12) of your project to my email (word-doc), where you should explain:
+ - Send me a proposal (by Friday next week, 21.12.) of your project to my email (word-doc), where you should explain:
 
     - What are the aims of your project?
     - What will be the final product of the project?
