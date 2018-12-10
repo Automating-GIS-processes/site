@@ -1,7 +1,7 @@
 Processing toolbox scripts
 ==========================
 
-Managing and organising complex composite algorithms in the *Graphical Modeler* is tedious, the possible logical operations are very limited. For more flexible and more advanced algorithms, the *processing toolbox* allows to implement Python scripts. A Python script integrated into the processing toolbox can access all of *processing*’s algorithms and its user interface, the entire Python *application programming interface* (API) of QGIS (see. the `PyQGIS Developer Cookbook <http://docs.qgis.org/3.0/en/docs/pyqgis_developer_cookbook/intro.html>`_), and any other Python module installed in the same Python environment QGIS is running it.
+Managing and organising complex composite algorithms in the *Graphical Modeler* is tedious, the possible logical operations are very limited. For more flexible and more advanced algorithms, the *processing toolbox* allows to implement Python scripts. A Python script integrated into the processing toolbox can access all of *processing*’s algorithms and its user interface, the entire Python *application programming interface* (API) of QGIS (see. the `PyQGIS Developer Cookbook <http://docs.qgis.org/3.4/en/docs/pyqgis_developer_cookbook/intro.html>`_), and any other Python module installed in the same Python environment QGIS is running it.
 
 .. note:: Python and its ecosystem are highly modular. It is not uncommon to find multiple Python installations on a single computer. Many applications require specific versions of Python and/or some of its modules. For developers of Python-dependent software, it has become common to supply a ``requirements.txt`` file which can be used to initialise a so-called *virtual environment*, using tools such as `(ana)conda <https://conda.io/>`_.
         On Microsoft Windows, unfortunately, most programs ship with their private Python environment which is difficult to access outside of the respective program and even harder to install additional packages into. For instance, ESRI ArcGIS and QGIS use entirely separate Python installations. On Linux and macOS, QGIS typically uses the system Python environment, but QGIS’ own packages are per-default only accessible from within the program.
@@ -107,6 +107,7 @@ Rasterize Species Range Maps
 We want to create a script which for our example *damselfish* dataset or any similar dataset loops over the described species, and exports one raster dataset per species, containing its respective species range map.
 
 .. note:: Scripts in the processing toolbox are now implemented as **classes** inheriting from ``QgsProcessingAlgorithm``. *Classes* can be interpreted as blueprints from which **objects** are instantiated at a program’s runtime. *Objects*, in turn, are the corner stone of `object-oriented programming <http://ee402.eeng.dcu.ie/introduction/chapter-1---introduction-to-object-oriented-programming>`_. They are self-containing entities containing data (variables) and code (methods).
+   The basic principles of object-orient programming (OOP) are *encapsulation*, *abstraction*, *inheritance* and *polymorphism* (cf. `this blog post <https://medium.freecodecamp.org/object-oriented-programming-concepts-21bb035f7260#7e8c>`_ and `this excellent “explanation to grandmom” <https://www.quora.com/How-would-you-explain-an-object-oriented-programming-to-a-grandmother>`_.
 
 Object-oriented programming is the prevailing paradigm of software development. It is an extremely valuable skill, but teaching it is outside of the scope of this course. We provide the following template structure [2]_ which allows us to dive into implementing the actual algorithm. Feel free to use at for any other project!
 
@@ -171,7 +172,7 @@ Define script parameters
 
 The class method `initAlgorithm()` defines general characteristics of a toolbox algorithm, such as which parameters are accepted. It is being run whenever QGIS updates the list of algorithms installed, for instance when QGIS starts or when a script is saved in the editor.
 
-Use the ``self.addParameter()`` `method <https://qgis.org/pyqgis/3.0/core/Processing/QgsProcessingAlgorithm.html#qgis.core.QgsProcessingAlgorithm.addParameter>`_ to define parameters, ``self.addOutput()`` `to define outputs <https://qgis.org/pyqgis/3.0/core/Processing/QgsProcessingAlgorithm.html#qgis.core.QgsProcessingAlgorithm.addOutput>`_ of the algorithm.
+Use the ``self.addParameter()`` `method <https://qgis.org/pyqgis/3.4/core/Processing/QgsProcessingAlgorithm.html#qgis.core.QgsProcessingAlgorithm.addParameter>`_ to define parameters, ``self.addOutput()`` `to define outputs <https://qgis.org/pyqgis/3.4/core/Processing/QgsProcessingAlgorithm.html#qgis.core.QgsProcessingAlgorithm.addOutput>`_ of the algorithm.
 
 Our script has three parameters:
 
@@ -179,7 +180,7 @@ Our script has three parameters:
 - The name of the field containing the species name
 - A directory to save the output to (for practical reasons, in this example, this is an input parameter, it can also be implemented as an output)
 
-The parameters are objects (instances) of one of the classes ``QgsProcessingParameter*``, documented in `qgis.org/pyqgis/3.0/core/Processing/ <https://qgis.org/pyqgis/3.0/core/Processing/>`_, and have to be imported from ``qgis.core`` at the beginning of the script. We will use ``QgsProcessingParameterVectorLayer``, ``QgsProcessingParameterField`` and ``QgsProcessingParameterFolderDestination``. We can add them to the existing ``import`` statement:
+The parameters are objects (instances) of one of the classes ``QgsProcessingParameter*``, documented in `qgis.org/pyqgis/3.4/core/Processing/ <https://qgis.org/pyqgis/3.4/core/Processing/>`_, and have to be imported from ``qgis.core`` at the beginning of the script. We will use ``QgsProcessingParameterVectorLayer``, ``QgsProcessingParameterField`` and ``QgsProcessingParameterFolderDestination``. We can add them to the existing ``import`` statement:
 
 .. code:: python
 
