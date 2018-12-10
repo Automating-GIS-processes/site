@@ -5,7 +5,7 @@ Lesson 7 Overview
     :width: 500 px
 
 
-This week we will take a quick tour on **how to use Python in QGIS** using the `processing <http://docs.qgis.org/3.0/en/docs/user_manual/processing/index.html>`_ framework.
+This week we will take a quick tour on **how to use Python in QGIS** using the `processing <http://docs.qgis.org/3.4/en/docs/user_manual/processing/index.html>`_ framework.
 
 Until 2016, this course taught the use of the `arcpy <http://desktop.arcgis.com/en/arcmap/10.3/analyze/arcpy/what-is-arcpy-.htm>`_ module within ArcGIS. Since ArcGIS is a Desktop GIS widely used throughout the private and public sector, feel free to revisit `the 2016 course’s Lesson 6 <https://automating-gis-processes.github.io/2016/Lesson6-overview.html>`_.
 
@@ -37,7 +37,7 @@ Lecture videos
         <p>Christoph Fink / Henrikki Tenkanen, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p> //-->
 
 
-.. admonition:: Lesson 7.2 - Python scripting in QGIS 3.0; Creating a processing toolbox with custom Python scripts;
+.. admonition:: Lesson 7.2 - Python scripting in QGIS 3.4; Creating a processing toolbox with custom Python scripts;
 
     .. raw:: html
 

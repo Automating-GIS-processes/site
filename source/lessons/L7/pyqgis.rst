@@ -1,7 +1,7 @@
 Python in QGIS
 ==============
 
-The core application and libraries of QGIS are programmed in C++. Nonwithstanding, Python plays an important role in its ecosystem: Most of the pre-installed plugins and even some of the data provider modules are written in Python, and virtually all functions of the interface and the libraries are exported to a Python API (*Application Programming Interface*). It takes only moderate effort to author extensions to QGIS which integrate seamlessly into its user interface, create stand-alone applications using components of QGIS, such as a map window or a data backend, or run custom scripts within QGIS. To really dive into it, see the `PyQGIS Developer Cookbook <http://docs.qgis.org/3.0/en/docs/pyqgis_developer_cookbook/intro.html>`_ which walks you from easy *Hello World* examples to writing your own applications.
+The core application and libraries of QGIS are programmed in C++. Nonwithstanding, Python plays an important role in its ecosystem: Most of the pre-installed plugins and even some of the data provider modules are written in Python, and virtually all functions of the interface and the libraries are exported to a Python API (*Application Programming Interface*). It takes only moderate effort to author extensions to QGIS which integrate seamlessly into its user interface, create stand-alone applications using components of QGIS, such as a map window or a data backend, or run custom scripts within QGIS. To really dive into it, see the `PyQGIS Developer Cookbook <http://docs.qgis.org/3.4/en/docs/pyqgis_developer_cookbook/intro.html>`_ which walks you from easy *Hello World* examples to writing your own applications.
 
 Today, we want to concentrate on how to **use Python to combine simple algorithms in scripts within QGIS to carry out more complex operations**.
 
@@ -82,4 +82,4 @@ You can access a help text on objects using ``help()``:
                  …
                  …
 
-This help text is the same information listed in QGIS’ API documentation at `qgis.org/pyqgis <https://qgis.org/pyqgis/3.0/>`_.
+This help text is the same information listed in QGIS’ API documentation at `qgis.org/pyqgis <https://qgis.org/pyqgis/3.4/>`_.
