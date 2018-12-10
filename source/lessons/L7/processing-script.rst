@@ -107,6 +107,7 @@ Rasterize Species Range Maps
 We want to create a script which for our example *damselfish* dataset or any similar dataset loops over the described species, and exports one raster dataset per species, containing its respective species range map.
 
 .. note:: Scripts in the processing toolbox are now implemented as **classes** inheriting from ``QgsProcessingAlgorithm``. *Classes* can be interpreted as blueprints from which **objects** are instantiated at a program’s runtime. *Objects*, in turn, are the corner stone of `object-oriented programming <http://ee402.eeng.dcu.ie/introduction/chapter-1---introduction-to-object-oriented-programming>`_. They are self-containing entities containing data (variables) and code (methods).
+   The basic principles of object-orient programming (OOP) are *encapsulation*, *abstraction*, *inheritance* and *polymorphism* (cf. `this blog post <https://medium.freecodecamp.org/object-oriented-programming-concepts-21bb035f7260#7e8c>`_ and `this excellent “explanation to grandmom” <https://www.quora.com/How-would-you-explain-an-object-oriented-programming-to-a-grandmother>`_.
 
 Object-oriented programming is the prevailing paradigm of software development. It is an extremely valuable skill, but teaching it is outside of the scope of this course. We provide the following template structure [2]_ which allows us to dive into implementing the actual algorithm. Feel free to use at for any other project!
 
