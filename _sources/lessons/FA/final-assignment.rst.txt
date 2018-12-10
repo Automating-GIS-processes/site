@@ -209,6 +209,8 @@ In the Notebook, you should present the previous points. Also take care that you
    - Create other kind of graphs (e.g. line plots)
    - Create subplots that allows to easily compare the cities to each other
 
+ - When writing the codes, we highly recommend that you use and write functions for repetitive parts of the code. As a motivation: think that you should repeat your analyses for all cities in Finland, write your codes in a way that this would be possible. Furthermore, we recommend that you save those functions into a separate .py -script file that you import into the Notebook (`see example from Geo-Python Lesson 4 <https://geo-python.github.io/2018/notebooks/L4/functions.html#Calling-functions-from-a-script-file>`__)
+
 Literature + inspiration
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
