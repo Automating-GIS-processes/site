@@ -21,7 +21,7 @@ There is (at least) two different Python consoles available within QGIS:
 
 .. figure:: img/L7-02-pyqgis-01-install-ipyconsole.png
 
-.. note:: IPython or Jupyter have to be installed on your computer, see the plugin description for instructions on how to install these requirements.
+.. note:: IPython or Jupyter have to be installed on your computer, see the plugin description for instructions on how to install these requirements. On MS Windows operating systems, installing these modules unfortunately is not straightforward. `This blog post <https://www.lutraconsulting.co.uk/blog/2016/03/02/installing-third-party-python-modules-in-qgis-windows/>`_ has step-by-step instructions (replace ``lxml`` with ``qtconsole`` and ``jupyter==1.0.0``)
 
 The console is now available from the menu *Plugins → IPython QGIS Console → Windowed*
 
