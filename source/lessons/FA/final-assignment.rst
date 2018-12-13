@@ -16,6 +16,16 @@ You have three options for the final project that you can choose from:
 
 Think the final project as a challenge for yourself to show and implement the programming skills that you have learned this far. You have learned a lot already!
 
+Feel free to be creative with the final assignment. Here is the suggested structure of the work, that also serves as the basis for grading:
+
+1. Data acquisition (Fetching data, subsetting data, storing intermediate outputs etc.)
+2. Data analysis (Enriching and analyzing the data, eg. spatial join, overlay, buffering, other calculations..)
+3. Visualization (Visualizing main results and other relevant information as maps and graphs)
+4. Repeating the steps for another set of input data (eg. another city, or another target location)
+5. Good documentation
+
+See Grading criteria :doc:`here <final-assignment-grading>`.
+
 What should be returned?
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
