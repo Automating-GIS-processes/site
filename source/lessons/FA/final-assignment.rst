@@ -24,7 +24,6 @@ Feel free to be creative with the final assignment. Here is the suggested struct
 4. Repeating the steps for another set of input data (eg. another city, or another target location)
 5. Good documentation
 
-See Grading criteria :doc:`here <final-assignment-grading>`.
 
 What should be returned?
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -48,7 +47,7 @@ The main idea in the final project is that you try to use your skills and do GIS
 
 **Good documentation of the code and your project is highly appreciated!!!** One more time: Good documentation of the code and your project is highly appreciated! You should use Markdown cells to document your work along the way (take a look of these small tutorials to see [how to add a Markdown cell to Notebook](http://www.firstpythonnotebook.org/markdown/) and [how to use Markdown syntax](https://guides.github.com/features/mastering-markdown/) ).
 
-The grading is based on a typical 0-5 scale.
+The grading is based on a typical 0-5 scale. See detailed grading criteria :doc:`here <final-assignment-grading>`.
 
 Best practices
 --------------

@@ -1,7 +1,7 @@
 Grading criteria for the final assignment
 ==========================================
 
-**You can gain 50 points in total from the final assignment:**
+**The grading is based on a typical 0-5 scale. The grade is based on a total of 50 points:**
 
 
 **40 points points for major analysis steps/ functionality** (4 x 10 points available for each step):
@@ -38,9 +38,8 @@ This grading criteria applies to submissions which contain the following section
 In case you are creating something with a totally different structure, please discuss with the course instructors :)
 
 
-
-## Grading:
-
+Grade for the final assignment:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - 5 --> 90 % or more of the points received (i.e. > 45 points)
 
