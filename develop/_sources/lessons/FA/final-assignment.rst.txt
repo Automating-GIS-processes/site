@@ -45,7 +45,9 @@ In the evaluation of the final work different functionalities of the code are ev
 Thus, if you do not get all different parts / functionalities of the tool working that are described below, it is not the *"the end of the world"*.
 The main idea in the final project is that you try to use your skills and do GIS analyses in Python **independently**.
 
-**Good documentation of the code and your project is highly appreciated!!!** One more time: Good documentation of the code and your project is highly appreciated! You should use Markdown cells to document your work along the way (take a look of these small tutorials to see [how to add a Markdown cell to Notebook](http://www.firstpythonnotebook.org/markdown/) and [how to use Markdown syntax](https://guides.github.com/features/mastering-markdown/) ).
+**Good documentation of the code and your project is highly appreciated!!!**
+One more time: Good documentation of the code and your project is highly appreciated!
+You should use Markdown cells to document your work along the way (take a look of these small tutorials to see `how to add a Markdown cell to Notebook <http://www.firstpythonnotebook.org/markdown/>`_ and `how to use Markdown syntax <https://guides.github.com/features/mastering-markdown/>`_git st ).
 
 The grading is based on a typical 0-5 scale. See detailed grading criteria :doc:`here <final-assignment-grading>`.
 
