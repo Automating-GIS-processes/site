@@ -16,6 +16,15 @@ You have three options for the final project that you can choose from:
 
 Think the final project as a challenge for yourself to show and implement the programming skills that you have learned this far. You have learned a lot already!
 
+Feel free to be creative with the final assignment. Here is the suggested structure of the work, that also serves as the basis for grading:
+
+1. Data acquisition (Fetching data, subsetting data, storing intermediate outputs etc.)
+2. Data analysis (Enriching and analyzing the data, eg. spatial join, overlay, buffering, other calculations..)
+3. Visualization (Visualizing main results and other relevant information as maps and graphs)
+4. Repeating the steps for another set of input data (eg. another city, or another target location)
+5. Good documentation
+
+
 What should be returned?
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -36,9 +45,11 @@ In the evaluation of the final work different functionalities of the code are ev
 Thus, if you do not get all different parts / functionalities of the tool working that are described below, it is not the *"the end of the world"*.
 The main idea in the final project is that you try to use your skills and do GIS analyses in Python **independently**.
 
-**Good documentation of the code and your project is highly appreciated!!!** One more time: Good documentation of the code and your project is highly appreciated! You should use Markdown cells to document your work along the way (take a look of these small tutorials to see [how to add a Markdown cell to Notebook](http://www.firstpythonnotebook.org/markdown/) and [how to use Markdown syntax](https://guides.github.com/features/mastering-markdown/) ).
+**Good documentation of the code and your project is highly appreciated!!!**
+One more time: Good documentation of the code and your project is highly appreciated!
+You should use Markdown cells to document your work along the way (take a look of these small tutorials to see `how to add a Markdown cell to Notebook <http://www.firstpythonnotebook.org/markdown/>`_ and `how to use Markdown syntax <https://guides.github.com/features/mastering-markdown/>`_git st ).
 
-The grading is based on a typical 0-5 scale.
+The grading is based on a typical 0-5 scale. See detailed grading criteria :doc:`here <final-assignment-grading>`.
 
 Best practices
 --------------
