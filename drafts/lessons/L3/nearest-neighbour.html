@@ -214,6 +214,11 @@
 .admonition > p:before {
     margin-right: 4px;  /* make room for the exclamation icon */
 }
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
 </style>
 <div class="section" id="nearest-neighbour-analysis">
 <h1>Nearest Neighbour Analysis<a class="headerlink" href="#nearest-neighbour-analysis" title="Permalink to this headline">¶</a></h1>
@@ -252,7 +257,7 @@ This is a typical nearest neighbour analysis, where the aim is to find the close
 <span class="gp">In [9]: </span><span class="n">near_idx1</span> <span class="o">=</span> <span class="n">nearest_geoms</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
 <span class="gp">In [10]: </span><span class="k">print</span><span class="p">(</span><span class="n">nearest_geoms</span><span class="p">)</span>
-<span class="go">(&lt;shapely.geometry.point.Point object at 0x7fcab618ff98&gt;, &lt;shapely.geometry.point.Point object at 0x7fcab618f780&gt;)</span>
+<span class="go">(&lt;shapely.geometry.point.Point object at 0x7ff4f7940588&gt;, &lt;shapely.geometry.point.Point object at 0x7ff4f79402e8&gt;)</span>
 
 <span class="gp">In [11]: </span><span class="k">print</span><span class="p">(</span><span class="n">near_idx0</span><span class="p">)</span>
 <span class="go">                                                                                                                   POINT (1 1.67)</span>

@@ -304,18 +304,18 @@ div.nblast {
 
 /* input prompt */
 div.nbinput div.prompt pre {
-    color: #303F9F;
+    color: #307FC1;
 }
 
 /* output prompt */
 div.nboutput div.prompt pre {
-    color: #D84315;
+    color: #BF5B3D;
 }
 
 /* all prompts */
 div.nbinput div.prompt,
 div.nboutput div.prompt {
-    min-width: 8ex;
+    min-width: 5ex;
     padding-top: 0.4em;
     padding-right: 0.4em;
     text-align: right;
@@ -355,9 +355,9 @@ div.nboutput div.output_area {
 
 /* input area */
 div.nbinput div.input_area {
-    border: 1px solid #cfcfcf;
+    border: 1px solid #e0e0e0;
     border-radius: 2px;
-    background: #f7f7f7;
+    background: #f5f5f5;
 }
 
 /* override MathJax center alignment in output cells */
@@ -365,7 +365,7 @@ div.nboutput div[class*=MathJax] {
     text-align: left !important;
 }
 
-/* override sphinx.ext.pngmath center alignment in output cells */
+/* override sphinx.ext.imgmath center alignment in output cells */
 div.nboutput div.math p {
     text-align: left;
 }
@@ -415,6 +415,40 @@ div.nboutput div.output_area.stderr {
 .ansi-bold { font-weight: bold; }
 .ansi-underline { text-decoration: underline; }
 
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
 /* CSS overrides for sphinx_rtd_theme */
 
 /* 24px margin */
@@ -431,6 +465,11 @@ div.nboutput div.output_area.stderr {
 .admonition > p:before {
     margin-right: 4px;  /* make room for the exclamation icon */
 }
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
 </style>
 <div class="admonition note">
 This page was generated from <a class="reference external" href="https://github.com/Automating-GIS-processes/2018/blob/master/source/notebooks/L6/retrieve_osm_data.ipynb">source/notebooks/L6/retrieve_osm_data.ipynb</a>.
@@ -442,70 +481,30 @@ This page was generated from <a class="reference external" href="https://github.
 <p><img alt="image0" src="../../_images/OSM_logo.png" /></p>
 <div class="section" id="What-is-OpenStreetMap?">
 <h2>What is OpenStreetMap?<a class="headerlink" href="#What-is-OpenStreetMap?" title="Permalink to this headline">¶</a></h2>
-<p>OpenStreetMap (OSM) is a global collaborative (crowd-sourced) dataset
-and project that aims at creating a free editable map of the world
-containing a lot of information about our environment. It contains data
-for example about streets, buildings, different services, and landuse to
-mention a few.</p>
-<p>OSM has a large userbase with more than 4 million users and over a
-million contributers that update actively the OSM database with 3
-million changesets per day. In total OSM contains more than 4 billion
-nodes that form the basis of the digitally mapped world that OSM
-provides (<a class="reference external" href="http://wiki.openstreetmap.org/wiki/Stats">stats from November
-2017</a>).</p>
-<p>OpenStreetMap is used not only for integrating the <strong>OSM maps</strong> as
-background maps to visualizations or online maps, but also for many
-other purposes such as <strong>routing</strong>, <strong>geocoding</strong>, <strong>education</strong>, and
-<strong>research</strong>. OSM is also widely used for humanitarian response e.g.&nbsp;in
-crisis areas (e.g.&nbsp;after natural disasters) and for fostering economic
-development (see more from <a class="reference external" href="https://www.hotosm.org">Humanitarian OpenStreetMap Team (HOTOSM)
-website</a>).</p>
+<p>OpenStreetMap (OSM) is a global collaborative (crowd-sourced) dataset and project that aims at creating a free editable map of the world containing a lot of information about our environment. It contains data for example about streets, buildings, different services, and landuse to mention a few.</p>
+<p>OSM has a large userbase with more than 4 million users and over a million contributers that update actively the OSM database with 3 million changesets per day. In total OSM contains more than 4 billion nodes that form the basis of the digitally mapped world that OSM provides (<a class="reference external" href="http://wiki.openstreetmap.org/wiki/Stats">stats from November 2017</a>).</p>
+<p>OpenStreetMap is used not only for integrating the <strong>OSM maps</strong> as background maps to visualizations or online maps, but also for many other purposes such as <strong>routing</strong>, <strong>geocoding</strong>, <strong>education</strong>, and <strong>research</strong>. OSM is also widely used for humanitarian response e.g.&nbsp;in crisis areas (e.g.&nbsp;after natural disasters) and for fostering economic development (see more from <a class="reference external" href="https://www.hotosm.org">Humanitarian OpenStreetMap Team (HOTOSM) website</a>).</p>
 </div>
 <div class="section" id="OSMnx">
 <h2>OSMnx<a class="headerlink" href="#OSMnx" title="Permalink to this headline">¶</a></h2>
-<p>This week we will explore a Python module called
-<a class="reference external" href="https://github.com/gboeing/osmnx">OSMnx</a> that can be used to
-retrieve, construct, analyze, and visualize street networks from
-OpenStreetMap, and also retrieve data about Points of Interest such as
-restaurants, schools, and lots of different kind of services. It is also
-easy to conduct network routing based on walking, cycling or driving by
-combining OSMnx functionalities with a package called
+<p>This week we will explore a Python module called <a class="reference external" href="https://github.com/gboeing/osmnx">OSMnx</a> that can be used to retrieve, construct, analyze, and visualize street networks from OpenStreetMap, and also retrieve data about Points of Interest such as restaurants, schools, and lots of different kind of services. It is also easy to conduct network routing based on walking, cycling or driving by combining OSMnx functionalities with a package called
 <a class="reference external" href="https://networkx.github.io/documentation/stable/">NetworkX</a>.</p>
-<p>To get an overview of the capabilities of the package, see an
-introductory video given by the lead developer of the package,
-Prof.&nbsp;Geoff Boeing: <a class="reference external" href="https://www.youtube.com/watch?v=Q0uxu25ddc4&amp;list=PLs9D4XVqc6dCAhhvhZB7aHGD8fCeCC_6N">“Meet the developer: Introduction to OSMnx package
-by Geoff
-Boeing”</a>.</p>
+<p>To get an overview of the capabilities of the package, see an introductory video given by the lead developer of the package, Prof.&nbsp;Geoff Boeing: <a class="reference external" href="https://www.youtube.com/watch?v=Q0uxu25ddc4&amp;list=PLs9D4XVqc6dCAhhvhZB7aHGD8fCeCC_6N">“Meet the developer: Introduction to OSMnx package by Geoff Boeing”</a>.</p>
 <p>There is also a scientific article available describing the package:</p>
 <ul class="simple">
-<li>Boeing, G. 2017. <a class="reference external" href="https://www.researchgate.net/publication/309738462_OSMnx_New_Methods_for_Acquiring_Constructing_Analyzing_and_Visualizing_Complex_Street_Networks">“OSMnx: New Methods for Acquiring, Constructing,
-Analyzing, and Visualizing Complex Street
-Networks.”</a>
-Computers, Environment and Urban Systems 65, 126-139.
-doi:10.1016/j.compenvurbsys.2017.05.004</li>
+<li>Boeing, G. 2017. <a class="reference external" href="https://www.researchgate.net/publication/309738462_OSMnx_New_Methods_for_Acquiring_Constructing_Analyzing_and_Visualizing_Complex_Street_Networks">“OSMnx: New Methods for Acquiring, Constructing, Analyzing, and Visualizing Complex Street Networks.”</a> Computers, Environment and Urban Systems 65, 126-139. doi:10.1016/j.compenvurbsys.2017.05.004</li>
 </ul>
 </div>
 <div class="section" id="Download-and-visualize-OpenStreetMap-data-with-OSMnx">
 <h2>Download and visualize OpenStreetMap data with OSMnx<a class="headerlink" href="#Download-and-visualize-OpenStreetMap-data-with-OSMnx" title="Permalink to this headline">¶</a></h2>
-<p>One the most useful features that OSMnx provides is an easy-to-use way
-of retrieving <a class="reference external" href="http://www.openstreetmap.org">OpenStreetMap</a> data
-(using <a class="reference external" href="http://wiki.openstreetmap.org/wiki/Overpass_API">OverPass
-API</a>).</p>
-<p>In this tutorial, we will learn how to download and visualize OSM data
-covering a specified area of interest: a district of Kamppi in Helsinki,
-Finland.</p>
-<p>OSMnx makes it really easy to do that as it allows you to specify an
-address to retrieve the OpenStreetMap data around that area. In fact,
-OSMnx uses the same Nominatim Geocoding API to do this, which we tested
-during the Lesson 2.</p>
+<p>One the most useful features that OSMnx provides is an easy-to-use way of retrieving <a class="reference external" href="http://www.openstreetmap.org">OpenStreetMap</a> data (using <a class="reference external" href="http://wiki.openstreetmap.org/wiki/Overpass_API">OverPass API</a>).</p>
+<p>In this tutorial, we will learn how to download and visualize OSM data covering a specified area of interest: a district of Kamppi in Helsinki, Finland.</p>
+<p>OSMnx makes it really easy to do that as it allows you to specify an address to retrieve the OpenStreetMap data around that area. In fact, OSMnx uses the same Nominatim Geocoding API to do this, which we tested during the Lesson 2.</p>
 <ul class="simple">
-<li>Let’s retrieve OpenStreetMap (OSM) data by specifying
-<code class="docutils literal notranslate"><span class="pre">&quot;Kamppi,</span> <span class="pre">Helsinki,</span> <span class="pre">Finland&quot;</span></code> as the address where the data should
-be downloaded.</li>
+<li>Let’s retrieve OpenStreetMap (OSM) data by specifying <code class="docutils literal notranslate"><span class="pre">&quot;Kamppi,</span> <span class="pre">Helsinki,</span> <span class="pre">Finland&quot;</span></code> as the address where the data should be downloaded.</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -523,8 +522,7 @@ be downloaded.</li>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -532,28 +530,13 @@ be downloaded.</li>
 </pre></div>
 </div>
 </div>
-<p>Okey, as we can see the data that we retrieved is a special data object
-called <code class="docutils literal notranslate"><span class="pre">networkx.classes.multidigraph.MultiDiGraph</span></code>. A DiGraph is a
-data type that stores nodes and edges with optional data, or attributes.
-What we can see here is that this data type belongs to a Python module
-called <a class="reference external" href="https://networkx.github.io/documentation/stable/">networkx</a>
-that can be used to create, manipulate, and study the structure,
-dynamics, and functions of complex networks. Networkx module contains
-algorithms that can be used to calculate <a class="reference external" href="https://networkx.github.io/documentation/networkx-1.10/reference/algorithms.shortest_paths.html">shortest
-paths</a>
-along road networks using
-e.g.&nbsp;<a class="reference external" href="https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm">Dijkstra’s</a>
-or <a class="reference external" href="https://en.wikipedia.org/wiki/A*_search_algorithm">A*
-algorithm</a>.</p>
+<p>Okey, as we can see the data that we retrieved is a special data object called <code class="docutils literal notranslate"><span class="pre">networkx.classes.multidigraph.MultiDiGraph</span></code>. A DiGraph is a data type that stores nodes and edges with optional data, or attributes. What we can see here is that this data type belongs to a Python module called <a class="reference external" href="https://networkx.github.io/documentation/stable/">networkx</a> that can be used to create, manipulate, and study the structure, dynamics, and functions of complex networks. Networkx module contains
+algorithms that can be used to calculate <a class="reference external" href="https://networkx.github.io/documentation/networkx-1.10/reference/algorithms.shortest_paths.html">shortest paths</a> along road networks using e.g.&nbsp;<a class="reference external" href="https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm">Dijkstra’s</a> or <a class="reference external" href="https://en.wikipedia.org/wiki/A*_search_algorithm">A* algorithm</a>.</p>
 <ul class="simple">
-<li>Let’s see how our street network looks like. It is easy to visualize
-the graph with osmnx with <code class="docutils literal notranslate"><span class="pre">plot_graph()</span></code> function. The function
-utilizes Matplotlib for visualizing the data, hence as a result it
-returns a matplotlib figure and axis objects:</li>
+<li>Let’s see how our street network looks like. It is easy to visualize the graph with osmnx with <code class="docutils literal notranslate"><span class="pre">plot_graph()</span></code> function. The function utilizes Matplotlib for visualizing the data, hence as a result it returns a matplotlib figure and axis objects:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -569,19 +552,13 @@ returns a matplotlib figure and axis objects:</li>
 <img alt="../../_images/notebooks_L6_retrieve_osm_data_5_0.png" src="../../_images/notebooks_L6_retrieve_osm_data_5_0.png" />
 </div>
 </div>
-<p>Great! Now we can see that our graph contains the nodes (blue circles)
-and the edges (gray lines) that connects those nodes to each other.</p>
-<p>It is also possible to retrieve other types of OSM data features with
-osmnx such as buildings or points of interest (POIs).</p>
+<p>Great! Now we can see that our graph contains the nodes (blue circles) and the edges (gray lines) that connects those nodes to each other.</p>
+<p>It is also possible to retrieve other types of OSM data features with osmnx such as buildings or points of interest (POIs).</p>
 <ul class="simple">
-<li>Let’s download the buildings with <code class="docutils literal notranslate"><span class="pre">buildings_from_place()</span></code>
--function and plot them on top of our street network in Kamppi. Let’s
-also plot the Polygon that represents the area of Kamppi, Helsinki
-that can be retrieved with <code class="docutils literal notranslate"><span class="pre">gdf_from_place</span></code> -function.</li>
+<li>Let’s download the buildings with <code class="docutils literal notranslate"><span class="pre">buildings_from_place()</span></code> -function and plot them on top of our street network in Kamppi. Let’s also plot the Polygon that represents the area of Kamppi, Helsinki that can be retrieved with <code class="docutils literal notranslate"><span class="pre">gdf_from_place</span></code> -function.</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -607,17 +584,12 @@ that can be retrieved with <code class="docutils literal notranslate"><span clas
 </pre></div></div>
 </div>
 <p>As a result we got the data as GeoDataFrames.</p>
-<p>OSMnx has a nice function called <code class="docutils literal notranslate"><span class="pre">ox.pois_from_place()</span></code> that can be
-used in a similar manner as the previous function to retrieve specific
-POI data from OpenStreetMap such as <code class="docutils literal notranslate"><span class="pre">restaurants</span></code>. With parameter
-<code class="docutils literal notranslate"><span class="pre">amenities</span></code> we can pass a list of OSM amenity categories that we are
-interested in retrieving.</p>
+<p>OSMnx has a nice function called <code class="docutils literal notranslate"><span class="pre">ox.pois_from_place()</span></code> that can be used in a similar manner as the previous function to retrieve specific POI data from OpenStreetMap such as <code class="docutils literal notranslate"><span class="pre">restaurants</span></code>. With parameter <code class="docutils literal notranslate"><span class="pre">amenities</span></code> we can pass a list of OSM amenity categories that we are interested in retrieving.</p>
 <ul class="simple">
 <li>Let’s also retrieve restaurants that are located on the area:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -630,8 +602,7 @@ interested in retrieving.</p>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -641,12 +612,10 @@ interested in retrieving.</p>
 </div>
 <p>As we can see, there exist quite many restaurants in the area.</p>
 <ul class="simple">
-<li>Let’s explore what kind of attributes we have in our restaurants
-GeoDataFrame</li>
+<li>Let’s explore what kind of attributes we have in our restaurants GeoDataFrame</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -656,8 +625,7 @@ GeoDataFrame</li>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -680,12 +648,9 @@ GeoDataFrame</li>
 </pre></div>
 </div>
 </div>
-<p>Wow, there exists quite a lot of information related to the POIs. One of
-the useful ones might be for example the <code class="docutils literal notranslate"><span class="pre">name</span></code>,
-<code class="docutils literal notranslate"><span class="pre">address</span> <span class="pre">information</span></code> and <code class="docutils literal notranslate"><span class="pre">opening_hours</span></code> information:</p>
+<p>Wow, there exists quite a lot of information related to the POIs. One of the useful ones might be for example the <code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">address</span> <span class="pre">information</span></code> and <code class="docutils literal notranslate"><span class="pre">opening_hours</span></code> information:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -698,11 +663,10 @@ the useful ones might be for example the <code class="docutils literal notransla
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
-<div class="output_area docutils container">
+<div class="output_area rendered_html docutils container">
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -835,21 +799,13 @@ the useful ones might be for example the <code class="docutils literal notransla
 </table>
 </div></div>
 </div>
-<p>As we can see, there exists a lot of useful information about
-restaurants that can be retrieved easily with OSMnx.</p>
-<p>We can now plot all these different OSM layers by using the familiar
-<code class="docutils literal notranslate"><span class="pre">plot()</span></code> function of Geopandas. As you might remember, the street
-network data was not in GeoDataFrame format (it was
-networkx.MultiDiGraph). Luckily, osmnx provides a convenient function
-<code class="docutils literal notranslate"><span class="pre">graph_to_gdfs()</span></code> that can convert the graph into two separate
-GeoDataFrames where the first one contains the information about the
-nodes and the second one about the edge.</p>
+<p>As we can see, there exists a lot of useful information about restaurants that can be retrieved easily with OSMnx.</p>
+<p>We can now plot all these different OSM layers by using the familiar <code class="docutils literal notranslate"><span class="pre">plot()</span></code> function of Geopandas. As you might remember, the street network data was not in GeoDataFrame format (it was networkx.MultiDiGraph). Luckily, osmnx provides a convenient function <code class="docutils literal notranslate"><span class="pre">graph_to_gdfs()</span></code> that can convert the graph into two separate GeoDataFrames where the first one contains the information about the nodes and the second one about the edge.</p>
 <ul class="simple">
 <li>Let’s extract the nodes and edges from the graph as GeoDataFrames:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -906,22 +862,13 @@ Edges:
 Type: &lt;class &#39;geopandas.geodataframe.GeoDataFrame&#39;&gt;
 </pre></div></div>
 </div>
-<p>Nice! Now, as we can see, we have our graph as GeoDataFrames and we can
-plot them using the same functions and tools as we have used before.</p>
-<p><strong>Note:</strong> There are also other ways of retrieving the data from
-OpenStreetMap with osmnx such as passing a Polygon to extract the data
-from that area, or passing a Point coordinates and retrieving data
-around that location with specific radius. Take a look of this <a class="reference external" href="https://github.com/gboeing/osmnx-examples/blob/master/notebooks/01-overview-osmnx.ipynb">tutorial
-to find out how to use those features of
-osmnx</a>.</p>
+<p>Nice! Now, as we can see, we have our graph as GeoDataFrames and we can plot them using the same functions and tools as we have used before.</p>
+<p><strong>Note:</strong> There are also other ways of retrieving the data from OpenStreetMap with osmnx such as passing a Polygon to extract the data from that area, or passing a Point coordinates and retrieving data around that location with specific radius. Take a look of this <a class="reference external" href="https://github.com/gboeing/osmnx-examples/blob/master/notebooks/01-overview-osmnx.ipynb">tutorial to find out how to use those features of osmnx</a>.</p>
 <ul class="simple">
-<li>Let’s create a map out of the streets, buildings, restaurants, and
-the area Polygon but let’s exclude the nodes (to keep the figure
-clearer).</li>
+<li>Let’s create a map out of the streets, buildings, restaurants, and the area Polygon but let’s exclude the nodes (to keep the figure clearer).</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -947,10 +894,7 @@ clearer).</li>
 <img alt="../../_images/notebooks_L6_retrieve_osm_data_18_0.png" src="../../_images/notebooks_L6_retrieve_osm_data_18_0.png" />
 </div>
 </div>
-<p>Cool! Now we have a map where we have plotted the restaurants,
-buildings, streets and the boundaries of the selected region of ‘Kamppi’
-in Helsinki. And all of this required only a few lines of code. Pretty
-neat!</p>
+<p>Cool! Now we have a map where we have plotted the restaurants, buildings, streets and the boundaries of the selected region of ‘Kamppi’ in Helsinki. And all of this required only a few lines of code. Pretty neat!</p>
 </div>
 </div>
 
@@ -975,7 +919,7 @@ neat!</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2018, Henrikki Tenkanen
-      Last updated on Dec 13, 2018.
+      Last updated on Dec 18, 2018.
 
     </p>
   </div>

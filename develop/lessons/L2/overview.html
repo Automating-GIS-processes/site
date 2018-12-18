@@ -267,6 +267,11 @@
 .admonition > p:before {
     margin-right: 4px;  /* make room for the exclamation icon */
 }
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
 </style>
 <div class="section" id="lesson-2-overview">
 <h1>Lesson 2 Overview<a class="headerlink" href="#lesson-2-overview" title="Permalink to this headline">¶</a></h1>
@@ -326,7 +331,7 @@ and some useful data management functionalities.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2018, Henrikki Tenkanen
-      Last updated on Nov 19, 2018.
+      Last updated on Nov 27, 2018.
 
     </p>
   </div>

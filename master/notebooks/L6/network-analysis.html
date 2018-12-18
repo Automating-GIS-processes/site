@@ -301,18 +301,18 @@ div.nblast {
 
 /* input prompt */
 div.nbinput div.prompt pre {
-    color: #303F9F;
+    color: #307FC1;
 }
 
 /* output prompt */
 div.nboutput div.prompt pre {
-    color: #D84315;
+    color: #BF5B3D;
 }
 
 /* all prompts */
 div.nbinput div.prompt,
 div.nboutput div.prompt {
-    min-width: 8ex;
+    min-width: 5ex;
     padding-top: 0.4em;
     padding-right: 0.4em;
     text-align: right;
@@ -352,9 +352,9 @@ div.nboutput div.output_area {
 
 /* input area */
 div.nbinput div.input_area {
-    border: 1px solid #cfcfcf;
+    border: 1px solid #e0e0e0;
     border-radius: 2px;
-    background: #f7f7f7;
+    background: #f5f5f5;
 }
 
 /* override MathJax center alignment in output cells */
@@ -362,7 +362,7 @@ div.nboutput div[class*=MathJax] {
     text-align: left !important;
 }
 
-/* override sphinx.ext.pngmath center alignment in output cells */
+/* override sphinx.ext.imgmath center alignment in output cells */
 div.nboutput div.math p {
     text-align: left;
 }
@@ -412,6 +412,40 @@ div.nboutput div.output_area.stderr {
 .ansi-bold { font-weight: bold; }
 .ansi-underline { text-decoration: underline; }
 
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
 /* CSS overrides for sphinx_rtd_theme */
 
 /* 24px margin */
@@ -428,6 +462,11 @@ div.nboutput div.output_area.stderr {
 .admonition > p:before {
     margin-right: 4px;  /* make room for the exclamation icon */
 }
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
 </style>
 <div class="admonition note">
 This page was generated from <a class="reference external" href="https://github.com/Automating-GIS-processes/2018/blob/master/source/notebooks/L6/network-analysis.ipynb">source/notebooks/L6/network-analysis.ipynb</a>.
@@ -436,43 +475,17 @@ This page was generated from <a class="reference external" href="https://github.
 <span class="raw-html"><a href="https://notebooks.csc.fi/#/blueprint/d71cd2d26d924f48820dc22b67a87d8e"><img alt="CSC badge" src="https://img.shields.io/badge/launch-CSC%20notebook-blue.svg" style="vertical-align:text-bottom"></a></span></div>
 <div class="section" id="Network-analysis-in-Python">
 <h1>Network analysis in Python<a class="headerlink" href="#Network-analysis-in-Python" title="Permalink to this headline">¶</a></h1>
-<p>Finding a shortest path using a specific street network is a common GIS
-problem that has many practical applications. For example navigators are
-one of those “every-day” applications where <strong>routing</strong> using specific
-algorithms is used to find the optimal route between two (or multiple)
-points.</p>
-<p>It is also possible to perform network analysis such as tranposrtation
-routing in Python.
-<a class="reference external" href="https://networkx.github.io/documentation/stable/">Networkx</a> is a
-Python module that provides a lot tools that can be used to analyze
-networks on various different ways. It also contains algorithms such as
-<a class="reference external" href="https://networkx.github.io/documentation/networkx-1.10/reference/generated/networkx.algorithms.shortest_paths.weighted.single_source_dijkstra.html#networkx.algorithms.shortest_paths.weighted.single_source_dijkstra">Dijkstra’s
-algorithm</a>
-or
-<a class="reference external" href="https://networkx.github.io/documentation/networkx-1.10/reference/generated/networkx.algorithms.shortest_paths.astar.astar_path.html#networkx.algorithms.shortest_paths.astar.astar_path">A*</a>
-algoritm that are commonly used to find shortest paths along
+<p>Finding a shortest path using a specific street network is a common GIS problem that has many practical applications. For example navigators are one of those “every-day” applications where <strong>routing</strong> using specific algorithms is used to find the optimal route between two (or multiple) points.</p>
+<p>It is also possible to perform network analysis such as tranposrtation routing in Python. <a class="reference external" href="https://networkx.github.io/documentation/stable/">Networkx</a> is a Python module that provides a lot tools that can be used to analyze networks on various different ways. It also contains algorithms such as <a class="reference external" href="https://networkx.github.io/documentation/networkx-1.10/reference/generated/networkx.algorithms.shortest_paths.weighted.single_source_dijkstra.html#networkx.algorithms.shortest_paths.weighted.single_source_dijkstra">Dijkstra’s
+algorithm</a> or <a class="reference external" href="https://networkx.github.io/documentation/networkx-1.10/reference/generated/networkx.algorithms.shortest_paths.astar.astar_path.html#networkx.algorithms.shortest_paths.astar.astar_path">A*</a> algoritm that are commonly used to find shortest paths along
 transportation network.</p>
-<p>To be able to conduct network analysis, it is, of course, necessary to
-have a network that is used for the analyses.
-<a class="reference external" href="https://github.com/gboeing/osmnx">OSMnx</a> package that we just
-explored in previous tutorial, makes it really easy to retrieve routable
-networks from OpenStreetMap with different transport modes (walking,
-cycling and driving). Osmnx also combines some functionalities from
-<code class="docutils literal notranslate"><span class="pre">networkx</span></code> module to make it straightforward to conduct routing along
-OpenStreetMap data.</p>
-<p>Next we will test the routing functionalities of osmnx by finding a
-shortest path between two points based on drivable roads.</p>
+<p>To be able to conduct network analysis, it is, of course, necessary to have a network that is used for the analyses. <a class="reference external" href="https://github.com/gboeing/osmnx">OSMnx</a> package that we just explored in previous tutorial, makes it really easy to retrieve routable networks from OpenStreetMap with different transport modes (walking, cycling and driving). Osmnx also combines some functionalities from <code class="docutils literal notranslate"><span class="pre">networkx</span></code> module to make it straightforward to conduct routing along OpenStreetMap data.</p>
+<p>Next we will test the routing functionalities of osmnx by finding a shortest path between two points based on drivable roads.</p>
 <ul class="simple">
-<li>Let’s first download the OSM data from Kamppi but this time include
-only such street segments that are walkable. In omsnx it is possible
-to retrieve only such streets that are drivable by specifying
-<code class="docutils literal notranslate"><span class="pre">'drive'</span></code> into <code class="docutils literal notranslate"><span class="pre">network_type</span></code> parameter that can be used to
-specify what kind of streets are retrieved from OpenStreetMap (other
-possibilities are <code class="docutils literal notranslate"><span class="pre">walk</span></code> and <code class="docutils literal notranslate"><span class="pre">bike</span></code>).</li>
+<li>Let’s first download the OSM data from Kamppi but this time include only such street segments that are walkable. In omsnx it is possible to retrieve only such streets that are drivable by specifying <code class="docutils literal notranslate"><span class="pre">'drive'</span></code> into <code class="docutils literal notranslate"><span class="pre">network_type</span></code> parameter that can be used to specify what kind of streets are retrieved from OpenStreetMap (other possibilities are <code class="docutils literal notranslate"><span class="pre">walk</span></code> and <code class="docutils literal notranslate"><span class="pre">bike</span></code>).</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -495,20 +508,12 @@ possibilities are <code class="docutils literal notranslate"><span class="pre">w
 <img alt="../../_images/notebooks_L6_network-analysis_1_0.png" src="../../_images/notebooks_L6_network-analysis_1_0.png" />
 </div>
 </div>
-<p>Okey so now we have retrieved only such streets where it is possible to
-drive with a car. Let’s confirm this by taking a look at the attributes
-of the street network. Easiest way to do this is to convert the graph
-(nodes and edges) into GeoDataFrames.</p>
+<p>Okey so now we have retrieved only such streets where it is possible to drive with a car. Let’s confirm this by taking a look at the attributes of the street network. Easiest way to do this is to convert the graph (nodes and edges) into GeoDataFrames.</p>
 <ul class="simple">
-<li>Converting graph into a GeoDataFrame can be done with function
-<code class="docutils literal notranslate"><span class="pre">graph_to_gdfs()</span></code> that we already used in previous tutorial. With
-parameters <code class="docutils literal notranslate"><span class="pre">nodes</span></code> and <code class="docutils literal notranslate"><span class="pre">edges</span></code>, it is possible to control whether
-to retrieve both nodes and edges from the graph. Here, we only
-retrieve edges:</li>
+<li>Converting graph into a GeoDataFrame can be done with function <code class="docutils literal notranslate"><span class="pre">graph_to_gdfs()</span></code> that we already used in previous tutorial. With parameters <code class="docutils literal notranslate"><span class="pre">nodes</span></code> and <code class="docutils literal notranslate"><span class="pre">edges</span></code>, it is possible to control whether to retrieve both nodes and edges from the graph. Here, we only retrieve edges:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -534,31 +539,72 @@ Index([&#39;access&#39;, &#39;bridge&#39;, &#39;geometry&#39;, &#39;highway&#39;
 {&#39;init&#39;: &#39;epsg:4326&#39;}
 </pre></div></div>
 </div>
-<p>Okey, so we have quite many columns in our GeoDataFrame. Most of the
-columns are fairly self-explanatory but the following table describes
-all of them. We can also see that the CRS of the GeoDataFrame seems to
-be WGS84 (i.e.&nbsp;epsg: 4326).</p>
-<p>geometry                                                       Geometry of the feature      Shapely.geometry
-<a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:highway">highway</a>   Tag for roads (road type)    str / list
-<a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:lanes">lanes</a>       Number of lanes              int (or nan)
-<a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:length">lenght</a>     Length of feature (meters)   float
-<a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:maxspeed">maxspeed</a> maximum legal speed limit    int /list
-<a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:name">name</a>         Name of the (street) element str (or nan)
-<a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:oneway">oneway</a>     One way road                 boolean
-<a class="reference external" href="http://wiki.openstreetmap.org/wiki/Node">osmid</a>            Unique ids for the element   list
-<a class="reference external" href="http://ow.ly/bV8n30h7Ufm">u</a>                               The first node of edge       int
-<a class="reference external" href="http://ow.ly/bV8n30h7Ufm">v</a>                               The last node of edge        int
-==============================================================
-============================ ================</p>
-<p>Most of the attributes above comes directly from the OpenStreetMap,
-however, columns <code class="docutils literal notranslate"><span class="pre">u</span></code> and <code class="docutils literal notranslate"><span class="pre">v</span></code> are Networkx specific ids.</p>
+<p>Okey, so we have quite many columns in our GeoDataFrame. Most of the columns are fairly self-explanatory but the following table describes all of them. We can also see that the CRS of the GeoDataFrame seems to be WGS84 (i.e.&nbsp;epsg: 4326).</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="58%" />
+<col width="26%" />
+<col width="15%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Column</th>
+<th class="head">Description</th>
+<th class="head">Data type</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:bridge">bridge</a></td>
+<td>Bridge feature</td>
+<td>boolean</td>
+</tr>
+<tr class="row-odd"><td>geometry</td>
+<td>Geometry of the feature</td>
+<td>Shapely.geometry</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:highway">highway</a></td>
+<td>Tag for roads (road type)</td>
+<td>str / list</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:lanes">lanes</a></td>
+<td>Number of lanes</td>
+<td>int (or nan)</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:length">lenght</a></td>
+<td>Length of feature (meters)</td>
+<td>float</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:maxspeed">maxspeed</a></td>
+<td>maximum legal speed limit</td>
+<td>int /list</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:name">name</a></td>
+<td>Name of the (street) element</td>
+<td>str (or nan)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:oneway">oneway</a></td>
+<td>One way road</td>
+<td>boolean</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="http://wiki.openstreetmap.org/wiki/Node">osmid</a></td>
+<td>Unique ids for the element</td>
+<td>list</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="http://ow.ly/bV8n30h7Ufm">u</a></td>
+<td>The first node of edge</td>
+<td>int</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="http://ow.ly/bV8n30h7Ufm">v</a></td>
+<td>The last node of edge</td>
+<td>int</td>
+</tr>
+</tbody>
+</table>
+<p>Most of the attributes above comes directly from the OpenStreetMap, however, columns <code class="docutils literal notranslate"><span class="pre">u</span></code> and <code class="docutils literal notranslate"><span class="pre">v</span></code> are Networkx specific ids.</p>
 <ul class="simple">
-<li>Let’s take a look what kind of features we have in the <code class="docutils literal notranslate"><span class="pre">highway</span></code>
-column:</li>
+<li>Let’s take a look what kind of features we have in the <code class="docutils literal notranslate"><span class="pre">highway</span></code> column:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -567,8 +613,7 @@ column:</li>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -583,19 +628,12 @@ Name: highway, dtype: int64
 </pre></div>
 </div>
 </div>
-<p>Okey, now we can confirm that as a result our street network indeed only
-contains such streets where it is allowed to drive with a car as there
-are no e.g.&nbsp;cycleways or footways included in the data.</p>
+<p>Okey, now we can confirm that as a result our street network indeed only contains such streets where it is allowed to drive with a car as there are no e.g.&nbsp;cycleways or footways included in the data.</p>
 <ul class="simple">
-<li>Let’s continue and find the shortest path between two points based on
-the distance. As the data is in WGS84 format, we might first want to
-reproject our data into metric system so that our map looks better.
-Luckily there is a handy function in OSMnx called <code class="docutils literal notranslate"><span class="pre">project_graph()</span></code>
-to project the graph data in UTM format.</li>
+<li>Let’s continue and find the shortest path between two points based on the distance. As the data is in WGS84 format, we might first want to reproject our data into metric system so that our map looks better. Luckily there is a handy function in OSMnx called <code class="docutils literal notranslate"><span class="pre">project_graph()</span></code> to project the graph data in UTM format.</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -611,11 +649,9 @@ to project the graph data in UTM format.</li>
 <img alt="../../_images/notebooks_L6_network-analysis_8_0.png" src="../../_images/notebooks_L6_network-analysis_8_0.png" />
 </div>
 </div>
-<p>We can see a modest change in the appearance of the graph. But let’s
-take a closer look by seeing how the data values look now:</p>
+<p>We can see a modest change in the appearance of the graph. But let’s take a closer look by seeing how the data values look now:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -661,23 +697,15 @@ Coordinate system: {&#39;zone&#39;: 35, &#39;units&#39;: &#39;m&#39;, &#39;proj&
 4  724233143
 </pre></div></div>
 </div>
-<p>Okey, as we can see from the CRS the data is now in <a class="reference external" href="https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system">UTM
-projection</a>
-using zone 35 which is the one used for Finland, and indeed the
-orientation of the map and the geometry values also confirm this.</p>
+<p>Okey, as we can see from the CRS the data is now in <a class="reference external" href="https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system">UTM projection</a> using zone 35 which is the one used for Finland, and indeed the orientation of the map and the geometry values also confirm this.</p>
 <div class="section" id="Analyzing-the-network-properties">
 <h2>Analyzing the network properties<a class="headerlink" href="#Analyzing-the-network-properties" title="Permalink to this headline">¶</a></h2>
-<p>Now as we have seen some of the basic functionalities of osmnx such as
-downloading the data and converting data from graph to GeoDataFrame, we
-can take a look some of the analytical features of omsnx. Osmnx includes
-many useful functionalities to extract information about the network.</p>
+<p>Now as we have seen some of the basic functionalities of osmnx such as downloading the data and converting data from graph to GeoDataFrame, we can take a look some of the analytical features of omsnx. Osmnx includes many useful functionalities to extract information about the network.</p>
 <ul class="simple">
-<li>To calculate some of the basic street network measures we can use
-<code class="docutils literal notranslate"><span class="pre">basic_stats()</span></code> function in OSMnx:</li>
+<li>To calculate some of the basic street network measures we can use <code class="docutils literal notranslate"><span class="pre">basic_stats()</span></code> function in OSMnx:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -688,8 +716,7 @@ many useful functionalities to extract information about the network.</p>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -720,17 +747,10 @@ many useful functionalities to extract information about the network.</p>
 </pre></div>
 </div>
 </div>
-<p>To be able to extract the more advanced statistics (and some of the
-missing ones above) from the street network, it is required to have
-information about the coverage area of the network. Let’s calculate the
-area of the <a class="reference external" href="https://en.wikipedia.org/wiki/Convex_hull">convex hull</a>
-of the street network and see what we can get. As certain statistics are
-produced separately for each node, they produce a lot of output. Let’s
-merge both stats and put them into Pandas Series to keep things in more
+<p>To be able to extract the more advanced statistics (and some of the missing ones above) from the street network, it is required to have information about the coverage area of the network. Let’s calculate the area of the <a class="reference external" href="https://en.wikipedia.org/wiki/Convex_hull">convex hull</a> of the street network and see what we can get. As certain statistics are produced separately for each node, they produce a lot of output. Let’s merge both stats and put them into Pandas Series to keep things in more
 compact form.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -742,18 +762,15 @@ compact form.</p>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <img alt="../../_images/notebooks_L6_network-analysis_15_0.svg" src="../../_images/notebooks_L6_network-analysis_15_0.svg" /></div>
 </div>
-<p>Now we can use the Convex Hull above to calculate e.g.&nbsp;denisity
-statistics:</p>
+<p>Now we can use the Convex Hull above to calculate e.g.&nbsp;denisity statistics:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -770,8 +787,7 @@ statistics:</p>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -823,36 +839,17 @@ dtype: object
 </pre></div>
 </div>
 </div>
-<p>As we can see, now we have a <strong>LOT</strong> of information about our street
-network that can be used to understand its structure. We can for example
-see that the average node density in our network is <code class="docutils literal notranslate"><span class="pre">149</span> <span class="pre">nodes/km</span></code> and
-that the total edge length of our network is <code class="docutils literal notranslate"><span class="pre">19960.6</span> <span class="pre">meters</span></code>.</p>
-<p>Furthermore, we can see that the <a class="reference external" href="https://en.wikipedia.org/wiki/Centrality">degree
-centrality</a> of our network
-is on average <code class="docutils literal notranslate"><span class="pre">0.0326515</span></code>. Degree is a simple centrality measure that
-counts how many neighbors a node has (here a fraction of nodes it is
-connected to). Another interesting measure is the
-<a class="reference external" href="https://en.wikipedia.org/wiki/PageRank">PageRank</a> that measures the
-importance of specific node in the graph. Here we can see that the most
-important node in our graph seem to a node with osmid <code class="docutils literal notranslate"><span class="pre">25416262</span></code>.
-PageRank was the algorithm that Google first developed (Larry Page &amp;
-Sergei Brin) to order the search engine results and became famous for.</p>
-<p>You can read the <a class="reference external" href="https://en.wikipedia.org/wiki/Centrality">Wikipedia article about different centrality
-measures</a> if you are
-interested what the other centrality measures mean.</p>
+<p>As we can see, now we have a <strong>LOT</strong> of information about our street network that can be used to understand its structure. We can for example see that the average node density in our network is <code class="docutils literal notranslate"><span class="pre">149</span> <span class="pre">nodes/km</span></code> and that the total edge length of our network is <code class="docutils literal notranslate"><span class="pre">19960.6</span> <span class="pre">meters</span></code>.</p>
+<p>Furthermore, we can see that the <a class="reference external" href="https://en.wikipedia.org/wiki/Centrality">degree centrality</a> of our network is on average <code class="docutils literal notranslate"><span class="pre">0.0326515</span></code>. Degree is a simple centrality measure that counts how many neighbors a node has (here a fraction of nodes it is connected to). Another interesting measure is the <a class="reference external" href="https://en.wikipedia.org/wiki/PageRank">PageRank</a> that measures the importance of specific node in the graph. Here we can see that the most important node in our graph seem to a node with
+osmid <code class="docutils literal notranslate"><span class="pre">25416262</span></code>. PageRank was the algorithm that Google first developed (Larry Page &amp; Sergei Brin) to order the search engine results and became famous for.</p>
+<p>You can read the <a class="reference external" href="https://en.wikipedia.org/wiki/Centrality">Wikipedia article about different centrality measures</a> if you are interested what the other centrality measures mean.</p>
 </div>
 <div class="section" id="Shortest-path-analysis">
 <h2>Shortest path analysis<a class="headerlink" href="#Shortest-path-analysis" title="Permalink to this headline">¶</a></h2>
-<p>Let’s now calculate the shortest path between two points. First we need
-to specify the source and target locations for our route. Let’s use the
-centroid of our network as the source location and the furthest point in
-East in our network as the target location.</p>
-<p>Let’s first determine the centroid of our network. We can take advantage
-of the same <code class="docutils literal notranslate"><span class="pre">Convex</span> <span class="pre">Hull</span></code> that we used previously to determine the
-centroid of our data.</p>
+<p>Let’s now calculate the shortest path between two points. First we need to specify the source and target locations for our route. Let’s use the centroid of our network as the source location and the furthest point in East in our network as the target location.</p>
+<p>Let’s first determine the centroid of our network. We can take advantage of the same <code class="docutils literal notranslate"><span class="pre">Convex</span> <span class="pre">Hull</span></code> that we used previously to determine the centroid of our data.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [19]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -875,17 +872,12 @@ centroid of our data.</p>
 POINT (385170.115258674 6671717.254450418)
 </pre></div></div>
 </div>
-<p>As we can see, now we have a centroid of our network determined. We will
-use this later as an origin point in our routing operation.</p>
+<p>As we can see, now we have a centroid of our network determined. We will use this later as an origin point in our routing operation.</p>
 <ul class="simple">
-<li>Let’s now find the easternmost node in our street network. We can do
-this by calculating the x coordinates and finding out which node has
-the largest x-coordinate value. Let’s ensure that the values are
-floats.</li>
+<li>Let’s now find the easternmost node in our street network. We can do this by calculating the x coordinates and finding out which node has the largest x-coordinate value. Let’s ensure that the values are floats.</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [20]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -907,13 +899,10 @@ floats.</li>
 </pre></div></div>
 </div>
 <ul class="simple">
-<li>Let’s retrieve the target Point having the largest x-coordinate. We
-can do this by using the <code class="docutils literal notranslate"><span class="pre">.loc</span></code> function of Pandas that we have
-used already many times in earlier tutorials.</li>
+<li>Let’s retrieve the target Point having the largest x-coordinate. We can do this by using the <code class="docutils literal notranslate"><span class="pre">.loc</span></code> function of Pandas that we have used already many times in earlier tutorials.</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [26]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -931,22 +920,13 @@ used already many times in earlier tutorials.</li>
 POINT (385855.0300992895 6671721.810323974)
 </pre></div></div>
 </div>
-<p>Okey now we can see that as a result we have a Shapely Point that we can
-use as a target point in our routing.</p>
+<p>Okey now we can see that as a result we have a Shapely Point that we can use as a target point in our routing.</p>
 <ul class="simple">
-<li>Let’s now find the nearest graph nodes (and their node-ids) to these
-points. For OSMnx we need to parse the coordinates of the Point as
-coordinate-tuple with Latitude, Longitude coordinates. As our data is
-now projected to UTM projection, we need to specify with <code class="docutils literal notranslate"><span class="pre">method</span></code>
-parameter that the function uses <code class="docutils literal notranslate"><span class="pre">'euclidean'</span></code> distances to
-calculate the distance from the point to the closest node. This
-becomes important if you want to know the actual distance between the
-Point and the closest node which you can retrieve by specifying
-parameter <code class="docutils literal notranslate"><span class="pre">return_dist=True</span></code>.</li>
+<li>Let’s now find the nearest graph nodes (and their node-ids) to these points. For OSMnx we need to parse the coordinates of the Point as coordinate-tuple with Latitude, Longitude coordinates. As our data is now projected to UTM projection, we need to specify with <code class="docutils literal notranslate"><span class="pre">method</span></code> parameter that the function uses <code class="docutils literal notranslate"><span class="pre">'euclidean'</span></code> distances to calculate the distance from the point to the closest node. This becomes important if you want to know the actual distance between the Point and the closest node
+which you can retrieve by specifying parameter <code class="docutils literal notranslate"><span class="pre">return_dist=True</span></code>.</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [27]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -975,16 +955,12 @@ parameter <code class="docutils literal notranslate"><span class="pre">return_di
 317703609
 </pre></div></div>
 </div>
-<p>Now we have the IDs for the closest nodes that were found from the graph
-to the origin and target points that we specified.</p>
+<p>Now we have the IDs for the closest nodes that were found from the graph to the origin and target points that we specified.</p>
 <ul class="simple">
-<li>Let’s retrieve the node information from the <code class="docutils literal notranslate"><span class="pre">nodes_proj</span></code>
-GeoDataFrame by passing the ids to the <code class="docutils literal notranslate"><span class="pre">loc</span></code> indexer, and make a
-GeoDataFrame out of them:</li>
+<li>Let’s retrieve the node information from the <code class="docutils literal notranslate"><span class="pre">nodes_proj</span></code> GeoDataFrame by passing the ids to the <code class="docutils literal notranslate"><span class="pre">loc</span></code> indexer, and make a GeoDataFrame out of them:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [31]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1000,11 +976,10 @@ GeoDataFrame out of them:</li>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[31]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
 </pre></div>
 </div>
-<div class="output_area docutils container">
+<div class="output_area rendered_html docutils container">
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1057,25 +1032,13 @@ GeoDataFrame out of them:</li>
 </table>
 </div></div>
 </div>
-<p>Okay, as a result we got now the closest node-ids of our origin and
-target locations. As you can see, the <code class="docutils literal notranslate"><span class="pre">index</span></code> in this GeoDataFrame
-corresponds to the IDs that we found with <code class="docutils literal notranslate"><span class="pre">get_nearest_node()</span></code>
-function.</p>
+<p>Okay, as a result we got now the closest node-ids of our origin and target locations. As you can see, the <code class="docutils literal notranslate"><span class="pre">index</span></code> in this GeoDataFrame corresponds to the IDs that we found with <code class="docutils literal notranslate"><span class="pre">get_nearest_node()</span></code> function.</p>
 <ul class="simple">
-<li>Now we are ready to do the routing and find the shortest path between
-the origin and target locations by using the <code class="docutils literal notranslate"><span class="pre">shortest_path()</span></code>
-<a class="reference external" href="https://networkx.github.io/documentation/networkx-1.10/reference/generated/networkx.algorithms.shortest_paths.generic.shortest_path.html">function</a>
-of networkx. With <code class="docutils literal notranslate"><span class="pre">weight</span></code> -parameter we can specify that
-<code class="docutils literal notranslate"><span class="pre">'length'</span></code> attribute should be used as the cost impedance in the
-routing. If specifying the weight parameter, NetworkX will use by
-default Dijkstra’s algorithm to find the optimal route. We need to
-specify the graph that is used for routing, and the origin <code class="docutils literal notranslate"><span class="pre">ID</span></code>
-(<em>source</em>) and the target <code class="docutils literal notranslate"><span class="pre">ID</span></code> in between the shortest path will be
-calculated:</li>
+<li>Now we are ready to do the routing and find the shortest path between the origin and target locations by using the <code class="docutils literal notranslate"><span class="pre">shortest_path()</span></code> <a class="reference external" href="https://networkx.github.io/documentation/networkx-1.10/reference/generated/networkx.algorithms.shortest_paths.generic.shortest_path.html">function</a> of networkx. With <code class="docutils literal notranslate"><span class="pre">weight</span></code> -parameter we can specify that <code class="docutils literal notranslate"><span class="pre">'length'</span></code> attribute should be used as the cost impedance in the routing. If specifying the weight parameter, NetworkX will use by default
+Dijkstra’s algorithm to find the optimal route. We need to specify the graph that is used for routing, and the origin <code class="docutils literal notranslate"><span class="pre">ID</span></code> (<em>source</em>) and the target <code class="docutils literal notranslate"><span class="pre">ID</span></code> in between the shortest path will be calculated:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [33]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1095,17 +1058,12 @@ calculated:</li>
 [301360197, 1372441183, 1372441170, 60170471, 1377211668, 1377211666, 25291565, 25291564, 317703609]
 </pre></div></div>
 </div>
-<p>As a result we get a list of all the nodes that are along the shortest
-path.</p>
+<p>As a result we get a list of all the nodes that are along the shortest path.</p>
 <ul class="simple">
-<li>We could extract the locations of those nodes from the <code class="docutils literal notranslate"><span class="pre">nodes_proj</span></code>
-GeoDataFrame and create a LineString presentation of the points, but
-luckily, OSMnx can do that for us and we can plot shortest path by
-using <code class="docutils literal notranslate"><span class="pre">plot_graph_route()</span></code> function:</li>
+<li>We could extract the locations of those nodes from the <code class="docutils literal notranslate"><span class="pre">nodes_proj</span></code> GeoDataFrame and create a LineString presentation of the points, but luckily, OSMnx can do that for us and we can plot shortest path by using <code class="docutils literal notranslate"><span class="pre">plot_graph_route()</span></code> function:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [34]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1121,28 +1079,17 @@ using <code class="docutils literal notranslate"><span class="pre">plot_graph_ro
 <img alt="../../_images/notebooks_L6_network-analysis_33_0.png" src="../../_images/notebooks_L6_network-analysis_33_0.png" />
 </div>
 </div>
-<p>Nice! Now we have the shortest path between our origin and target
-locations. Being able to analyze shortest paths between locations can be
-valuable information for many applications. Here, we only analyzed the
-shortest paths based on distance but quite often it is more useful to
-find the optimal routes between locations based on the travelled time.
-Here, for example we could calculate the time that it takes to cross
-each road segment by dividing the length of the road segment with the
-speed limit and calculate the optimal routes by taking into account the
-speed limits as well that might alter the result especially on longer
-trips than here.</p>
+<p>Nice! Now we have the shortest path between our origin and target locations. Being able to analyze shortest paths between locations can be valuable information for many applications. Here, we only analyzed the shortest paths based on distance but quite often it is more useful to find the optimal routes between locations based on the travelled time. Here, for example we could calculate the time that it takes to cross each road segment by dividing the length of the road segment with the speed
+limit and calculate the optimal routes by taking into account the speed limits as well that might alter the result especially on longer trips than here.</p>
 </div>
 <div class="section" id="Saving-shortest-paths-to-disk">
 <h2>Saving shortest paths to disk<a class="headerlink" href="#Saving-shortest-paths-to-disk" title="Permalink to this headline">¶</a></h2>
-<p>Quite often you need to save the route e.g.&nbsp;as a Shapefile. Hence, let’s
-continue still a bit and see how we can make a Shapefile of our route
-with some information associated with it.</p>
+<p>Quite often you need to save the route e.g.&nbsp;as a Shapefile. Hence, let’s continue still a bit and see how we can make a Shapefile of our route with some information associated with it.</p>
 <ul class="simple">
 <li>First we need to get the nodes that belong to the shortest path:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [35]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1180,15 +1127,12 @@ with some information associated with it.</p>
 317703609   6.67172e+06  POINT (385855.0300992895 6671721.810323974)
 </pre></div></div>
 </div>
-<p>As we can see, now we have all the nodes that were part of the shortest
-path as a GeoDataFrame.</p>
+<p>As we can see, now we have all the nodes that were part of the shortest path as a GeoDataFrame.</p>
 <ul class="simple">
-<li>Now we can create a LineString out of the Point geometries of the
-nodes:</li>
+<li>Now we can create a LineString out of the Point geometries of the nodes:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [37]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1201,8 +1145,7 @@ nodes:</li>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[37]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -1210,13 +1153,10 @@ nodes:</li>
 </div>
 <p>Now we have the route as a LineString geometry.</p>
 <ul class="simple">
-<li>Let’s make a GeoDataFrame out of it having some useful information
-about our route such as a list of the osmids that are part of the
-route and the length of the route.</li>
+<li>Let’s make a GeoDataFrame out of it having some useful information about our route such as a list of the osmids that are part of the route and the length of the route.</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [39]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1234,11 +1174,10 @@ route and the length of the route.</li>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[39]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
 </pre></div>
 </div>
-<div class="output_area docutils container">
+<div class="output_area rendered_html docutils container">
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1273,16 +1212,12 @@ route and the length of the route.</li>
 </table>
 </div></div>
 </div>
-<p>Now we have a GeoDataFrame that we can save to disk. Let’s still confirm
-that everything is okey by plotting our route on top of our street
-network and some buildings, and plot also the origin and target points
-on top of our map.</p>
+<p>Now we have a GeoDataFrame that we can save to disk. Let’s still confirm that everything is okey by plotting our route on top of our street network and some buildings, and plot also the origin and target points on top of our map.</p>
 <ul class="simple">
 <li>Get buildings:</li>
 </ul>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [40]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1293,12 +1228,10 @@ on top of our map.</p>
 </div>
 </div>
 <ul class="simple">
-<li>Let’s now plot the route and the street network elements to verify
-that everything is as it should:</li>
+<li>Let’s now plot the route and the street network elements to verify that everything is as it should:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [44]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1324,19 +1257,12 @@ that everything is as it should:</li>
 <img alt="../../_images/notebooks_L6_network-analysis_44_0.png" src="../../_images/notebooks_L6_network-analysis_44_0.png" />
 </div>
 </div>
-<p>Great everything seems to be in order! As you can see, now we have a
-full control of all the elements of our map and we can use all the
-aesthetic properties that matplotlib provides to modify how our map will
-look like. Now we are almost ready to save our data into disk.</p>
+<p>Great everything seems to be in order! As you can see, now we have a full control of all the elements of our map and we can use all the aesthetic properties that matplotlib provides to modify how our map will look like. Now we are almost ready to save our data into disk.</p>
 <ul class="simple">
-<li>As there are certain columns with such data values that Shapefile
-format does not support (such as <code class="docutils literal notranslate"><span class="pre">list</span></code> or <code class="docutils literal notranslate"><span class="pre">boolean</span></code>), we need to
-convert those into strings to be able to export the data to
-Shapefile:</li>
+<li>As there are certain columns with such data values that Shapefile format does not support (such as <code class="docutils literal notranslate"><span class="pre">list</span></code> or <code class="docutils literal notranslate"><span class="pre">boolean</span></code>), we need to convert those into strings to be able to export the data to Shapefile:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [47]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[47]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1373,15 +1299,12 @@ v             int64
 dtype: object
 </pre></div></div>
 </div>
-<p>Now we can see that most of the attributes are of type <code class="docutils literal notranslate"><span class="pre">object</span></code> that
-quite often (such as ours here) refers to a string type of data.</p>
+<p>Now we can see that most of the attributes are of type <code class="docutils literal notranslate"><span class="pre">object</span></code> that quite often (such as ours here) refers to a string type of data.</p>
 <ul class="simple">
-<li>Now we are finally ready to parse the output filepaths and save the
-data into disk:</li>
+<li>Now we are finally ready to parse the output filepaths and save the data into disk:</li>
 </ul>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [49]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[49]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1409,8 +1332,7 @@ data into disk:</li>
 </pre></div>
 </div>
 </div>
-<p>Great, now we have saved all the data that was used to produce the maps
-as Shapefiles.</p>
+<p>Great, now we have saved all the data that was used to produce the maps as Shapefiles.</p>
 </div>
 </div>
 

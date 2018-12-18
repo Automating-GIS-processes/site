@@ -260,6 +260,11 @@
 .admonition > p:before {
     margin-right: 4px;  /* make room for the exclamation icon */
 }
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
 </style>
 <div class="section" id="geometric-objects-spatial-data-model">
 <h1>Geometric Objects - Spatial Data Model<a class="headerlink" href="#geometric-objects-spatial-data-model" title="Permalink to this headline">¶</a></h1>
@@ -802,7 +807,7 @@ each other.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2018, Henrikki Tenkanen
-      Last updated on Nov 10, 2018.
+      Last updated on Nov 27, 2018.
 
     </p>
   </div>

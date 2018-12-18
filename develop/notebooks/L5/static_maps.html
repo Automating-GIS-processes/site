@@ -306,18 +306,18 @@ div.nblast {
 
 /* input prompt */
 div.nbinput div.prompt pre {
-    color: #303F9F;
+    color: #307FC1;
 }
 
 /* output prompt */
 div.nboutput div.prompt pre {
-    color: #D84315;
+    color: #BF5B3D;
 }
 
 /* all prompts */
 div.nbinput div.prompt,
 div.nboutput div.prompt {
-    min-width: 8ex;
+    min-width: 5ex;
     padding-top: 0.4em;
     padding-right: 0.4em;
     text-align: right;
@@ -357,9 +357,9 @@ div.nboutput div.output_area {
 
 /* input area */
 div.nbinput div.input_area {
-    border: 1px solid #cfcfcf;
+    border: 1px solid #e0e0e0;
     border-radius: 2px;
-    background: #f7f7f7;
+    background: #f5f5f5;
 }
 
 /* override MathJax center alignment in output cells */
@@ -367,7 +367,7 @@ div.nboutput div[class*=MathJax] {
     text-align: left !important;
 }
 
-/* override sphinx.ext.pngmath center alignment in output cells */
+/* override sphinx.ext.imgmath center alignment in output cells */
 div.nboutput div.math p {
     text-align: left;
 }
@@ -417,6 +417,40 @@ div.nboutput div.output_area.stderr {
 .ansi-bold { font-weight: bold; }
 .ansi-underline { text-decoration: underline; }
 
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
 /* CSS overrides for sphinx_rtd_theme */
 
 /* 24px margin */
@@ -433,6 +467,11 @@ div.nboutput div.output_area.stderr {
 .admonition > p:before {
     margin-right: 4px;  /* make room for the exclamation icon */
 }
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
 </style>
 <div class="admonition note">
 This page was generated from <a class="reference external" href="https://github.com/Automating-GIS-processes/2018/blob/master/source/notebooks/L5/static_maps.ipynb">source/notebooks/L5/static_maps.ipynb</a>.
@@ -443,9 +482,7 @@ This page was generated from <a class="reference external" href="https://github.
 <h1>Static maps<a class="headerlink" href="#Static-maps" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="Download-data">
 <h2>Download data<a class="headerlink" href="#Download-data" title="Permalink to this headline">¶</a></h2>
-<p>Before we start you need to download (and then extract) the dataset
-zip-package used during this lesson <a class="reference external" href="https://github.com/Automating-GIS-processes/Lesson-5-Making-Maps/raw/master/data/dataE5.zip">from this
-link</a>.</p>
+<p>Before we start you need to download (and then extract) the dataset zip-package used during this lesson <a class="reference external" href="https://github.com/Automating-GIS-processes/Lesson-5-Making-Maps/raw/master/data/dataE5.zip">from this link</a>.</p>
 <p>You should have following Shapefiles in the <code class="docutils literal notranslate"><span class="pre">dataE5</span></code> folder:</p>
 <ul class="simple">
 <li>addresses.shp</li>
@@ -463,18 +500,13 @@ $ unzip dataE5.zip -d data
 </div>
 <div class="section" id="Static-maps-in-Geopandas">
 <h3>Static maps in Geopandas<a class="headerlink" href="#Static-maps-in-Geopandas" title="Permalink to this headline">¶</a></h3>
-<p>We have already seen during the previous lessons quite many examples how
-to create static maps using Geopandas.</p>
-<p>Thus, we won’t spend too much time repeating making such maps but let’s
-create a one with more layers on it than just one which kind we have
-mostly done this far.</p>
+<p>We have already seen during the previous lessons quite many examples how to create static maps using Geopandas.</p>
+<p>Thus, we won’t spend too much time repeating making such maps but let’s create a one with more layers on it than just one which kind we have mostly done this far.</p>
 <ul class="simple">
-<li>Let’s create a static accessibility map with roads and metro line on
-it.</li>
+<li>Let’s create a static accessibility map with roads and metro line on it.</li>
 </ul>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -494,14 +526,12 @@ it.</li>
 </pre></div>
 </div>
 </div>
-<p>Next, we need to be sure that the files are in the same coordinate
-system.</p>
+<p>Next, we need to be sure that the files are in the same coordinate system.</p>
 <ul class="simple">
 <li>Let’s use the crs of our travel time grid as basis:</li>
 </ul>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -515,12 +545,10 @@ system.</p>
 </div>
 </div>
 <ul class="simple">
-<li>Finally we can make a visualization using the <code class="docutils literal notranslate"><span class="pre">.plot()</span></code> -function
-in Geopandas.</li>
+<li>Finally we can make a visualization using the <code class="docutils literal notranslate"><span class="pre">.plot()</span></code> -function in Geopandas.</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [42]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[42]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -555,29 +583,14 @@ in Geopandas.</li>
 </div>
 <div class="section" id="Adding-basemap-from-external-source">
 <h3>Adding basemap from external source<a class="headerlink" href="#Adding-basemap-from-external-source" title="Permalink to this headline">¶</a></h3>
-<p>It is often useful to add a basemap to your visualization that shows
-e.g.&nbsp;streets and their names and other useful information directly
-underneath your visualization. This can be done easily by using
-ready-made background map tiles that are provided by different providers
-such as <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Tiles">OpenStreetMap</a> or
-<a class="reference external" href="http://maps.stamen.com">Stamen Design</a>. A Python library called
-<a class="reference external" href="https://github.com/darribas/contextily">contextily</a> is a handy
-package that can be used to fetch geospatial raster files and add them
-to your maps. Map tiles are typically distributed in <a class="reference external" href="http://spatialreference.org/ref/sr-org/epsg3857-wgs84-web-mercator-auxiliary-sphere/">Web Mercator
-projection
-(EPSG:3857)</a>,
-hence it is necessary to reproject all the spatial data into <a class="reference external" href="https://en.wikipedia.org/wiki/Web_Mercator_projection">Web
-Mercator</a>
-before visualizing the data.</p>
-<p>In this tutorial, we will see how to add a basemap underneath our
-previous visualization.</p>
+<p>It is often useful to add a basemap to your visualization that shows e.g.&nbsp;streets and their names and other useful information directly underneath your visualization. This can be done easily by using ready-made background map tiles that are provided by different providers such as <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Tiles">OpenStreetMap</a> or <a class="reference external" href="http://maps.stamen.com">Stamen Design</a>. A Python library called <a class="reference external" href="https://github.com/darribas/contextily">contextily</a> is a handy package that can be
+used to fetch geospatial raster files and add them to your maps. Map tiles are typically distributed in <a class="reference external" href="http://spatialreference.org/ref/sr-org/epsg3857-wgs84-web-mercator-auxiliary-sphere/">Web Mercator projection (EPSG:3857)</a>, hence it is necessary to reproject all the spatial data into <a class="reference external" href="https://en.wikipedia.org/wiki/Web_Mercator_projection">Web Mercator</a> before visualizing the data.</p>
+<p>In this tutorial, we will see how to add a basemap underneath our previous visualization.</p>
 <ul class="simple">
-<li>First, we need to read data and reproject it to ESPG 3857 projection
-(Web Mercator)</li>
+<li>First, we need to read data and reproject it to ESPG 3857 projection (Web Mercator)</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -618,16 +631,12 @@ previous visualization.</p>
 1  POLYGON ((2767726.328605124 8489095.52034446, ...
 </pre></div></div>
 </div>
-<p>Now as we can see, the data has been projected to <code class="docutils literal notranslate"><span class="pre">epsg:3857</span></code> that can
-be confirmed by looking at the coordinate values in <code class="docutils literal notranslate"><span class="pre">geometry</span></code> column
-(they are now represented in metric system).</p>
+<p>Now as we can see, the data has been projected to <code class="docutils literal notranslate"><span class="pre">epsg:3857</span></code> that can be confirmed by looking at the coordinate values in <code class="docutils literal notranslate"><span class="pre">geometry</span></code> column (they are now represented in metric system).</p>
 <ul class="simple">
-<li>Next, we can plot our data using Geopandas and add a basemap for our
-plot by using a function called <code class="docutils literal notranslate"><span class="pre">.add_basemap()</span></code> from contextily:</li>
+<li>Next, we can plot our data using Geopandas and add a basemap for our plot by using a function called <code class="docutils literal notranslate"><span class="pre">.add_basemap()</span></code> from contextily:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -640,8 +649,7 @@ plot by using a function called <code class="docutils literal notranslate"><span
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -656,19 +664,13 @@ plot by using a function called <code class="docutils literal notranslate"><span
 <img alt="../../_images/notebooks_L5_static_maps_10_1.png" src="../../_images/notebooks_L5_static_maps_10_1.png" />
 </div>
 </div>
-<p>As we can see, now the map has a background map that is by default using
-a style <code class="docutils literal notranslate"><span class="pre">ST_Terrain</span></code> fetched from <a class="reference external" href="http://maps.stamen.com/#terrain">Stymen
-Design</a>.</p>
-<p>However, there are various other possible data sources and styles that
-can be used.</p>
+<p>As we can see, now the map has a background map that is by default using a style <code class="docutils literal notranslate"><span class="pre">ST_Terrain</span></code> fetched from <a class="reference external" href="http://maps.stamen.com/#terrain">Stymen Design</a>.</p>
+<p>However, there are various other possible data sources and styles that can be used.</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">tile_providers</span></code> contain some of the basic url-addresses for
-different providers and styles that can be used to control the
-appearence of your background map:</li>
+<li><code class="docutils literal notranslate"><span class="pre">tile_providers</span></code> contain some of the basic url-addresses for different providers and styles that can be used to control the appearence of your background map:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -684,22 +686,12 @@ appearence of your background map:</li>
 [&#39;OSM_A&#39;, &#39;OSM_B&#39;, &#39;OSM_C&#39;, &#39;ST_TERRAIN&#39;, &#39;ST_TERRAIN_BACKGROUND&#39;, &#39;ST_TERRAIN_LABELS&#39;, &#39;ST_TERRAIN_LINES&#39;, &#39;ST_TONER&#39;, &#39;ST_TONER_BACKGROUND&#39;, &#39;ST_TONER_HYBRID&#39;, &#39;ST_TONER_LABELS&#39;, &#39;ST_TONER_LINES&#39;, &#39;ST_TONER_LITE&#39;, &#39;ST_WATERCOLOR&#39;, &#39;__builtins__&#39;, &#39;__cached__&#39;, &#39;__doc__&#39;, &#39;__file__&#39;, &#39;__loader__&#39;, &#39;__name__&#39;, &#39;__package__&#39;, &#39;__spec__&#39;]
 </pre></div></div>
 </div>
-<p>Here, all the names written in capital letters are the ones that can be
-used as different basemap styles. All names starting with <code class="docutils literal notranslate"><span class="pre">ST_</span></code> are
-from Stamen Design, and the <code class="docutils literal notranslate"><span class="pre">OSM_A</span></code> (B and C) are a basic map tile
-style provided by OpenStreetMap. Notice that the letters A, B, and C are
-only directing to different tile servers, they are not changing the
-style. It is also possible to pass other tile providers by passing in
-the url for the tile provider that you are interested in.</p>
+<p>Here, all the names written in capital letters are the ones that can be used as different basemap styles. All names starting with <code class="docutils literal notranslate"><span class="pre">ST_</span></code> are from Stamen Design, and the <code class="docutils literal notranslate"><span class="pre">OSM_A</span></code> (B and C) are a basic map tile style provided by OpenStreetMap. Notice that the letters A, B, and C are only directing to different tile servers, they are not changing the style. It is also possible to pass other tile providers by passing in the url for the tile provider that you are interested in.</p>
 <ul class="simple">
-<li>It is possible to change the tile provider by passing an address to
-the tile providers’ web address using <code class="docutils literal notranslate"><span class="pre">url</span></code> -parameter in
-<code class="docutils literal notranslate"><span class="pre">add_basemap()</span></code>. Let’s see how we can change the style to <code class="docutils literal notranslate"><span class="pre">OSM_A</span></code>
-which gives us a background map based on OpenStreetMap:</li>
+<li>It is possible to change the tile provider by passing an address to the tile providers’ web address using <code class="docutils literal notranslate"><span class="pre">url</span></code> -parameter in <code class="docutils literal notranslate"><span class="pre">add_basemap()</span></code>. Let’s see how we can change the style to <code class="docutils literal notranslate"><span class="pre">OSM_A</span></code> which gives us a background map based on OpenStreetMap:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [22]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -712,8 +704,7 @@ which gives us a background map based on OpenStreetMap:</li>
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[22]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -728,15 +719,12 @@ which gives us a background map based on OpenStreetMap:</li>
 <img alt="../../_images/notebooks_L5_static_maps_14_1.png" src="../../_images/notebooks_L5_static_maps_14_1.png" />
 </div>
 </div>
-<p>As we can see, now the background map changed a bit compared to the
-earlier one as it was fetched from OpenSteetMap.</p>
+<p>As we can see, now the background map changed a bit compared to the earlier one as it was fetched from OpenSteetMap.</p>
 <ul class="simple">
-<li>Let’s take a subset of our data to see a bit better the background
-map characteristics.</li>
+<li>Let’s take a subset of our data to see a bit better the background map characteristics.</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [41]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -752,8 +740,7 @@ map characteristics.</li>
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[41]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -768,20 +755,13 @@ map characteristics.</li>
 <img alt="../../_images/notebooks_L5_static_maps_16_1.png" src="../../_images/notebooks_L5_static_maps_16_1.png" />
 </div>
 </div>
-<p>As we can see now our map has much more details in it as the zoom level
-of the background map is larger. By default <code class="docutils literal notranslate"><span class="pre">contextily</span></code> sets the zoom
-level automatically but it is possible to also control that manually
-using parameter <code class="docutils literal notranslate"><span class="pre">zoom</span></code>. The zoom level is by default specified as
-<code class="docutils literal notranslate"><span class="pre">auto</span></code> but you can control that by passing in <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Zoom_levels">zoom
-level</a> as numbers
-ranging typically from 1 to 19 (the larger the number, the more details
-your basemap will have).</p>
+<p>As we can see now our map has much more details in it as the zoom level of the background map is larger. By default <code class="docutils literal notranslate"><span class="pre">contextily</span></code> sets the zoom level automatically but it is possible to also control that manually using parameter <code class="docutils literal notranslate"><span class="pre">zoom</span></code>. The zoom level is by default specified as <code class="docutils literal notranslate"><span class="pre">auto</span></code> but you can control that by passing in <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Zoom_levels">zoom level</a> as numbers ranging typically from 1 to 19 (the larger the number, the more details your basemap will
+have).</p>
 <ul class="simple">
 <li>Let’s reduce the level of detail from our map by passing <code class="docutils literal notranslate"><span class="pre">zoom=11</span></code>:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [30]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -794,8 +774,7 @@ your basemap will have).</p>
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[30]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -810,17 +789,12 @@ your basemap will have).</p>
 <img alt="../../_images/notebooks_L5_static_maps_18_1.png" src="../../_images/notebooks_L5_static_maps_18_1.png" />
 </div>
 </div>
-<p>As we can see, the map has now less detail but it also zoomed out the
-view from our data.</p>
+<p>As we can see, the map has now less detail but it also zoomed out the view from our data.</p>
 <ul class="simple">
-<li>We can use <code class="docutils literal notranslate"><span class="pre">ax.set_xlim()</span></code> and <code class="docutils literal notranslate"><span class="pre">ax.set_ylim()</span></code> -parameters to
-crop our map. The parameters takes as input the coordinates for
-minimum and maximum on both axis (x and y). We can also change /
-remove the contribution text by using parameter <code class="docutils literal notranslate"><span class="pre">attribution</span></code>:</li>
+<li>We can use <code class="docutils literal notranslate"><span class="pre">ax.set_xlim()</span></code> and <code class="docutils literal notranslate"><span class="pre">ax.set_ylim()</span></code> -parameters to crop our map. The parameters takes as input the coordinates for minimum and maximum on both axis (x and y). We can also change / remove the contribution text by using parameter <code class="docutils literal notranslate"><span class="pre">attribution</span></code>:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [28]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -838,8 +812,7 @@ remove the contribution text by using parameter <code class="docutils literal no
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[28]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -854,24 +827,12 @@ remove the contribution text by using parameter <code class="docutils literal no
 <img alt="../../_images/notebooks_L5_static_maps_20_1.png" src="../../_images/notebooks_L5_static_maps_20_1.png" />
 </div>
 </div>
-<p>As we can see now the image was cropped to fit better the extent of our
-data.</p>
-<p>It is also possible to use many other map tiles from different providers
-as the background map. A good list of different available sources can be
-found from
-<a class="reference external" href="http://leaflet-extras.github.io/leaflet-providers/preview/">here</a>.
-When using map tiles from different sources, it is necessary to parse a
-url address to the tile provider following a format defined by the
-provider.</p>
-<p>Next, we will see how to use map tiles provided by CartoDB. To do that
-we need to parse the url address following their
-<a class="reference external" href="https://github.com/CartoDB/basemap-styles#1-web-raster-basemaps">definition</a>
-<code class="docutils literal notranslate"><span class="pre">'https://{s}.basemaps.cartocdn.com/{style}/{z}/{x}/{y}{r}.png'</span></code>
-where:</p>
+<p>As we can see now the image was cropped to fit better the extent of our data.</p>
+<p>It is also possible to use many other map tiles from different providers as the background map. A good list of different available sources can be found from <a class="reference external" href="http://leaflet-extras.github.io/leaflet-providers/preview/">here</a>. When using map tiles from different sources, it is necessary to parse a url address to the tile provider following a format defined by the provider.</p>
+<p>Next, we will see how to use map tiles provided by CartoDB. To do that we need to parse the url address following their <a class="reference external" href="https://github.com/CartoDB/basemap-styles#1-web-raster-basemaps">definition</a> <code class="docutils literal notranslate"><span class="pre">'https://{s}.basemaps.cartocdn.com/{style}/{z}/{x}/{y}{r}.png'</span></code> where:</p>
 <ul class="simple">
 <li>{s}: one of the available subdomains, either [a,b,c,d]</li>
-<li>{z} : Zoom level. We support from 0 to 20 zoom levels in OSM tiling
-system.</li>
+<li>{z} : Zoom level. We support from 0 to 20 zoom levels in OSM tiling system.</li>
 <li>{x},{y}: Tile coordinates in OSM tiling system</li>
 <li>{scale}: OPTIONAL “&#64;2x” for double resolution tiles</li>
 <li>{style}: Map style, possible value is one of:<ul>
@@ -887,12 +848,10 @@ system.</li>
 <li>rastertiles/voyager_labels_under</li>
 </ul>
 </li>
-<li>We will use this information to parse the parameters in a way that
-contextily wants them:</li>
+<li>We will use this information to parse the parameters in a way that contextily wants them:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [40]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -915,8 +874,7 @@ contextily wants them:</li>
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[40]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -931,15 +889,12 @@ contextily wants them:</li>
 <img alt="../../_images/notebooks_L5_static_maps_22_1.png" src="../../_images/notebooks_L5_static_maps_22_1.png" />
 </div>
 </div>
-<p>As we can see now we have yet again different kind of background map,
-now coming from CartoDB.</p>
+<p>As we can see now we have yet again different kind of background map, now coming from CartoDB.</p>
 <ul class="simple">
-<li>Let’s make a minor modification and change the style from
-<code class="docutils literal notranslate"><span class="pre">&quot;rastertiles/voyager&quot;</span></code> to <code class="docutils literal notranslate"><span class="pre">&quot;dark_all&quot;</span></code>:</li>
+<li>Let’s make a minor modification and change the style from <code class="docutils literal notranslate"><span class="pre">&quot;rastertiles/voyager&quot;</span></code> to <code class="docutils literal notranslate"><span class="pre">&quot;dark_all&quot;</span></code>:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [39]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -962,8 +917,7 @@ now coming from CartoDB.</p>
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[39]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -978,10 +932,7 @@ now coming from CartoDB.</p>
 <img alt="../../_images/notebooks_L5_static_maps_24_1.png" src="../../_images/notebooks_L5_static_maps_24_1.png" />
 </div>
 </div>
-<p>Great! Now we have dark background map fetched from CartoDB. In a
-similar manner, you can use any map tiles from various other tile
-providers such as the ones listed in
-<a class="reference external" href="http://leaflet-extras.github.io/leaflet-providers/preview/">leaflet-providers</a>.</p>
+<p>Great! Now we have dark background map fetched from CartoDB. In a similar manner, you can use any map tiles from various other tile providers such as the ones listed in <a class="reference external" href="http://leaflet-extras.github.io/leaflet-providers/preview/">leaflet-providers</a>.</p>
 </div>
 </div>
 </div>
@@ -1007,7 +958,7 @@ providers such as the ones listed in
   <div role="contentinfo">
     <p>
         &copy; Copyright 2018, Henrikki Tenkanen
-      Last updated on Dec 13, 2018.
+      Last updated on Dec 18, 2018.
 
     </p>
   </div>

@@ -301,18 +301,18 @@ div.nblast {
 
 /* input prompt */
 div.nbinput div.prompt pre {
-    color: #303F9F;
+    color: #307FC1;
 }
 
 /* output prompt */
 div.nboutput div.prompt pre {
-    color: #D84315;
+    color: #BF5B3D;
 }
 
 /* all prompts */
 div.nbinput div.prompt,
 div.nboutput div.prompt {
-    min-width: 8ex;
+    min-width: 5ex;
     padding-top: 0.4em;
     padding-right: 0.4em;
     text-align: right;
@@ -352,9 +352,9 @@ div.nboutput div.output_area {
 
 /* input area */
 div.nbinput div.input_area {
-    border: 1px solid #cfcfcf;
+    border: 1px solid #e0e0e0;
     border-radius: 2px;
-    background: #f7f7f7;
+    background: #f5f5f5;
 }
 
 /* override MathJax center alignment in output cells */
@@ -362,7 +362,7 @@ div.nboutput div[class*=MathJax] {
     text-align: left !important;
 }
 
-/* override sphinx.ext.pngmath center alignment in output cells */
+/* override sphinx.ext.imgmath center alignment in output cells */
 div.nboutput div.math p {
     text-align: left;
 }
@@ -412,6 +412,40 @@ div.nboutput div.output_area.stderr {
 .ansi-bold { font-weight: bold; }
 .ansi-underline { text-decoration: underline; }
 
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
 /* CSS overrides for sphinx_rtd_theme */
 
 /* 24px margin */
@@ -428,6 +462,11 @@ div.nboutput div.output_area.stderr {
 .admonition > p:before {
     margin-right: 4px;  /* make room for the exclamation icon */
 }
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
 </style>
 <div class="admonition note">
 This page was generated from <a class="reference external" href="https://github.com/Automating-GIS-processes/2018/blob/master/source/notebooks/L4/geometric-operations.ipynb">source/notebooks/L4/geometric-operations.ipynb</a>.
@@ -438,22 +477,13 @@ This page was generated from <a class="reference external" href="https://github.
 <h1>Geometric operations<a class="headerlink" href="#Geometric-operations" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="Overlay-analysis">
 <h2>Overlay analysis<a class="headerlink" href="#Overlay-analysis" title="Permalink to this headline">¶</a></h2>
-<p>In this tutorial, the aim is to make an overlay analysis where we create
-a new layer based on geometries from a dataset that <code class="docutils literal notranslate"><span class="pre">intersect</span></code> with
-geometries of another layer. As our test case, we will select Polygon
-grid cells from
-<code class="docutils literal notranslate"><span class="pre">TravelTimes_to_5975375_RailwayStation_Helsinki.geojson</span></code> that
-intersects with municipality borders of Helsinki found in
-<code class="docutils literal notranslate"><span class="pre">Helsinki_borders.shp</span></code>.</p>
-<p>Typical overlay operations are (source: <a class="reference external" href="https://docs.qgis.org/2.8/en/docs/gentle_gis_introduction/vector_spatial_analysis_buffers.html#more-spatial-analysis-tools">QGIS
-docs</a>):
-<img alt="image0" src="../../_images/overlay_operations.png" /></p>
+<p>In this tutorial, the aim is to make an overlay analysis where we create a new layer based on geometries from a dataset that <code class="docutils literal notranslate"><span class="pre">intersect</span></code> with geometries of another layer. As our test case, we will select Polygon grid cells from <code class="docutils literal notranslate"><span class="pre">TravelTimes_to_5975375_RailwayStation_Helsinki.geojson</span></code> that intersects with municipality borders of Helsinki found in <code class="docutils literal notranslate"><span class="pre">Helsinki_borders.shp</span></code>.</p>
+<p>Typical overlay operations are (source: <a class="reference external" href="https://docs.qgis.org/2.8/en/docs/gentle_gis_introduction/vector_spatial_analysis_buffers.html#more-spatial-analysis-tools">QGIS docs</a>): <img alt="image0" src="../../_images/overlay_operations.png" /></p>
 <ul class="simple">
 <li>Let’s first read the data and take a look how they look:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -480,8 +510,7 @@ docs</a>):
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -496,15 +525,12 @@ docs</a>):
 <img alt="../../_images/notebooks_L4_geometric-operations_1_1.png" src="../../_images/notebooks_L4_geometric-operations_1_1.png" />
 </div>
 </div>
-<p>Here the blue area is the borders that we want to use for conducting the
-overlay analysis and select the geometries from the Polygon grid.</p>
+<p>Here the blue area is the borders that we want to use for conducting the overlay analysis and select the geometries from the Polygon grid.</p>
 <ul class="simple">
-<li>Always, when conducting GIS operations involving multiple layers, it
-is required to check that the CRS of the layers match:</li>
+<li>Always, when conducting GIS operations involving multiple layers, it is required to check that the CRS of the layers match:</li>
 </ul>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -513,22 +539,13 @@ is required to check that the CRS of the layers match:</li>
 </pre></div>
 </div>
 </div>
-<p>Indeed, they do. Hence, the pre-requisite to conduct spatial operations
-between the layers is fullfilled (also the map we plotted indicated
-this).</p>
+<p>Indeed, they do. Hence, the pre-requisite to conduct spatial operations between the layers is fullfilled (also the map we plotted indicated this).</p>
 <ul class="simple">
-<li>Let’s do an overlay analysis and create a new layer from polygons of
-the grid that <code class="docutils literal notranslate"><span class="pre">intersect</span></code> with our Helsinki layer. We can use a
-function called <code class="docutils literal notranslate"><span class="pre">overlay()</span></code> to conduct the overlay analysis that
-takes as an input 1) the GeoDataFrame where the selection is taken,
-2) the GeoDataFrame used for making the selection, and 3) parameter
-<code class="docutils literal notranslate"><span class="pre">how</span></code> that can be used to control how the overlay analysis is
-conducted (possible values are <code class="docutils literal notranslate"><span class="pre">'intersection'</span></code>, <code class="docutils literal notranslate"><span class="pre">'union'</span></code>,
-<code class="docutils literal notranslate"><span class="pre">'symmetric_difference'</span></code>, <code class="docutils literal notranslate"><span class="pre">'difference'</span></code>, and <code class="docutils literal notranslate"><span class="pre">'identity'</span></code>):</li>
+<li>Let’s do an overlay analysis and create a new layer from polygons of the grid that <code class="docutils literal notranslate"><span class="pre">intersect</span></code> with our Helsinki layer. We can use a function called <code class="docutils literal notranslate"><span class="pre">overlay()</span></code> to conduct the overlay analysis that takes as an input 1) the GeoDataFrame where the selection is taken, 2) the GeoDataFrame used for making the selection, and 3) parameter <code class="docutils literal notranslate"><span class="pre">how</span></code> that can be used to control how the overlay analysis is conducted (possible values are <code class="docutils literal notranslate"><span class="pre">'intersection'</span></code>, <code class="docutils literal notranslate"><span class="pre">'union'</span></code>, <code class="docutils literal notranslate"><span class="pre">'symmetric_difference'</span></code>,
+<code class="docutils literal notranslate"><span class="pre">'difference'</span></code>, and <code class="docutils literal notranslate"><span class="pre">'identity'</span></code>):</li>
 </ul>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -540,8 +557,7 @@ conducted (possible values are <code class="docutils literal notranslate"><span 
 <li>Let’s plot our data and see what we have:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -550,8 +566,7 @@ conducted (possible values are <code class="docutils literal notranslate"><span 
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -566,15 +581,12 @@ conducted (possible values are <code class="docutils literal notranslate"><span 
 <img alt="../../_images/notebooks_L4_geometric-operations_7_1.png" src="../../_images/notebooks_L4_geometric-operations_7_1.png" />
 </div>
 </div>
-<p>As a result, we now have only those grid cells that intersect with the
-Helsinki borders. As we can see the grid cells are clipped based on the
-boundary.</p>
+<p>As a result, we now have only those grid cells that intersect with the Helsinki borders. As we can see the grid cells are clipped based on the boundary.</p>
 <ul class="simple">
 <li>Whatabout the data attributes? Let’s see what we have:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [19]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -609,15 +621,12 @@ boundary.</p>
 193  Helsingfors     091  POLYGON ((402000.0001323065 6685500.000039622,...
 </pre></div></div>
 </div>
-<p>As we can see, due to the overlay analysis, the dataset contains the
-attributes from both input layers.</p>
+<p>As we can see, due to the overlay analysis, the dataset contains the attributes from both input layers.</p>
 <ul class="simple">
-<li>Let’s save our result grid as a GeoJSON file that is commonly used
-file format nowadays for storing spatial data.</li>
+<li>Let’s save our result grid as a GeoJSON file that is commonly used file format nowadays for storing spatial data.</li>
 </ul>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [21]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -629,28 +638,17 @@ file format nowadays for storing spatial data.</li>
 </pre></div>
 </div>
 </div>
-<p>There are many more examples for different types of overlay analysis in
-<a class="reference external" href="http://geopandas.org/set_operations.html">Geopandas documentation</a>
-where you can go and learn more.</p>
+<p>There are many more examples for different types of overlay analysis in <a class="reference external" href="http://geopandas.org/set_operations.html">Geopandas documentation</a> where you can go and learn more.</p>
 </div>
 <div class="section" id="Aggregating-data">
 <h2>Aggregating data<a class="headerlink" href="#Aggregating-data" title="Permalink to this headline">¶</a></h2>
-<p>Aggregating data can also be useful sometimes. What we mean by
-aggregation is that we basically merge Geometries into together by some
-common identifier. Suppose we are interested in studying continents, but
-we only have country-level data like the country dataset. By aggregation
-we would convert this into a continent-level dataset.</p>
-<p>In this tutorial, we will aggregate our travel time data by car travel
-times (column <code class="docutils literal notranslate"><span class="pre">car_r_t</span></code>), i.e.&nbsp;the grid cells that have the same
-travel time to Railway Station will be merged together.</p>
+<p>Aggregating data can also be useful sometimes. What we mean by aggregation is that we basically merge Geometries into together by some common identifier. Suppose we are interested in studying continents, but we only have country-level data like the country dataset. By aggregation we would convert this into a continent-level dataset.</p>
+<p>In this tutorial, we will aggregate our travel time data by car travel times (column <code class="docutils literal notranslate"><span class="pre">car_r_t</span></code>), i.e.&nbsp;the grid cells that have the same travel time to Railway Station will be merged together.</p>
 <ul class="simple">
-<li>For doing the aggregation we will use a function called
-<code class="docutils literal notranslate"><span class="pre">dissolve()</span></code> that takes as input the column that will be used for
-conducting the aggregation:</li>
+<li>For doing the aggregation we will use a function called <code class="docutils literal notranslate"><span class="pre">dissolve()</span></code> that takes as input the column that will be used for conducting the aggregation:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [23]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -693,12 +691,10 @@ car_r_t
 </pre></div></div>
 </div>
 <ul class="simple">
-<li>Let’s compare the number of cells in the layers before and after the
-aggregation:</li>
+<li>Let’s compare the number of cells in the layers before and after the aggregation:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [24]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -716,15 +712,13 @@ Rows in original intersection GeoDataFrame: 3826
 Rows in dissolved layer: 51
 </pre></div></div>
 </div>
-<p>Indeed the number of rows in our data has decreased and the Polygons
-were merged together.</p>
+<p>Indeed the number of rows in our data has decreased and the Polygons were merged together.</p>
 <p>What actually happened here? Let’s take a closer look.</p>
 <ul class="simple">
 <li>Let’s see what columns we have now in our GeoDataFrame:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [28]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -743,15 +737,12 @@ Index([&#39;geometry&#39;, &#39;car_m_d&#39;, &#39;car_m_t&#39;, &#39;car_r_d&#3
       dtype=&#39;object&#39;)
 </pre></div></div>
 </div>
-<p>As we can see, the column that we used for conducting the aggregation
-(<code class="docutils literal notranslate"><span class="pre">car_r_t</span></code>) can not be found from the columns list anymore. What
-happened to it?</p>
+<p>As we can see, the column that we used for conducting the aggregation (<code class="docutils literal notranslate"><span class="pre">car_r_t</span></code>) can not be found from the columns list anymore. What happened to it?</p>
 <ul class="simple">
 <li>Let’s take a look at the indices of our GeoDataFrame:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [29]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -771,16 +762,12 @@ Int64Index([-1,  0,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
            dtype=&#39;int64&#39;, name=&#39;car_r_t&#39;)
 </pre></div></div>
 </div>
-<p>Aha! Well now we understand where our column went. It is now used as
-index in our <code class="docutils literal notranslate"><span class="pre">dissolved</span></code> GeoDataFrame.</p>
+<p>Aha! Well now we understand where our column went. It is now used as index in our <code class="docutils literal notranslate"><span class="pre">dissolved</span></code> GeoDataFrame.</p>
 <ul class="simple">
-<li>Now, we can for example select only such geometries from the layer
-that are for example exactly 15 minutes away from the Helsinki
-Railway Station:</li>
+<li>Now, we can for example select only such geometries from the layer that are for example exactly 15 minutes away from the Helsinki Railway Station:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [51]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[51]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -809,15 +796,12 @@ from_id                                               5903886
 Name: 20, dtype: object
 </pre></div></div>
 </div>
-<p>As we can see, as a result, we have now a Pandas <code class="docutils literal notranslate"><span class="pre">Series</span></code> object
-containing basically one row from our original aggregated GeoDataFrame.</p>
+<p>As we can see, as a result, we have now a Pandas <code class="docutils literal notranslate"><span class="pre">Series</span></code> object containing basically one row from our original aggregated GeoDataFrame.</p>
 <ul class="simple">
-<li>Let’s finally convert the <code class="docutils literal notranslate"><span class="pre">Series</span></code> into GeoDataFrame and plot it to
-see where those 15 minute grid cells are located:</li>
+<li>Let’s finally convert the <code class="docutils literal notranslate"><span class="pre">Series</span></code> into GeoDataFrame and plot it to see where those 15 minute grid cells are located:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [54]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[54]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -831,8 +815,7 @@ see where those 15 minute grid cells are located:</li>
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[54]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[54]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -850,22 +833,14 @@ see where those 15 minute grid cells are located:</li>
 </div>
 <div class="section" id="Simplifying-geometries">
 <h2>Simplifying geometries<a class="headerlink" href="#Simplifying-geometries" title="Permalink to this headline">¶</a></h2>
-<p>Sometimes it might be useful to be able to simplify geometries. This
-could be something to consider for example when you have very detailed
-spatial features that cover the whole world. If you make a map that
-covers the whole world, it is unnecessary to have really detailed
-geometries because it is simply impossible to see those small details
-from your map. Furthermore, it takes a long time to actually render a
-large quantity of features into a map. Here, we will see how it is
-possible to simplify geometric features in Python.</p>
-<p>As an example we will use data representing the Amazon river in South
-America, and simplify it’s geometries.</p>
+<p>Sometimes it might be useful to be able to simplify geometries. This could be something to consider for example when you have very detailed spatial features that cover the whole world. If you make a map that covers the whole world, it is unnecessary to have really detailed geometries because it is simply impossible to see those small details from your map. Furthermore, it takes a long time to actually render a large quantity of features into a map. Here, we will see how it is possible to
+simplify geometric features in Python.</p>
+<p>As an example we will use data representing the Amazon river in South America, and simplify it’s geometries.</p>
 <ul class="simple">
 <li>Let’s first read the data and see how the river looks like:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [75]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[75]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -899,21 +874,12 @@ America, and simplify it’s geometries.</p>
 <img alt="../../_images/notebooks_L4_geometric-operations_27_1.png" src="../../_images/notebooks_L4_geometric-operations_27_1.png" />
 </div>
 </div>
-<p>The LineString that is presented here is quite detailed, so let’s see
-how we can generalize them a bit. As we can see from the coordinate
-reference system, the data is projected in a metric system using
-<a class="reference external" href="http://spatialreference.org/ref/sr-org/7868/">Mercator projection based on SIRGAS
-datum</a>.</p>
+<p>The LineString that is presented here is quite detailed, so let’s see how we can generalize them a bit. As we can see from the coordinate reference system, the data is projected in a metric system using <a class="reference external" href="http://spatialreference.org/ref/sr-org/7868/">Mercator projection based on SIRGAS datum</a>.</p>
 <ul class="simple">
-<li>Generalization can be done easily by using a Shapely function called
-<code class="docutils literal notranslate"><span class="pre">.simplify()</span></code>. The <code class="docutils literal notranslate"><span class="pre">tolerance</span></code> parameter can be used to adjusts
-how much geometries should be generalized. <strong>The tolerance value is
-tied to the coordinate system of the geometries</strong>. Hence, the value
-we pass here is 20 000 <strong>meters</strong> (20 kilometers).</li>
+<li>Generalization can be done easily by using a Shapely function called <code class="docutils literal notranslate"><span class="pre">.simplify()</span></code>. The <code class="docutils literal notranslate"><span class="pre">tolerance</span></code> parameter can be used to adjusts how much geometries should be generalized. <strong>The tolerance value is tied to the coordinate system of the geometries</strong>. Hence, the value we pass here is 20 000 <strong>meters</strong> (20 kilometers).</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [81]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[81]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -929,8 +895,7 @@ we pass here is 20 000 <strong>meters</strong> (20 kilometers).</li>
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[81]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[81]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -945,8 +910,7 @@ we pass here is 20 000 <strong>meters</strong> (20 kilometers).</li>
 <img alt="../../_images/notebooks_L4_geometric-operations_29_1.png" src="../../_images/notebooks_L4_geometric-operations_29_1.png" />
 </div>
 </div>
-<p>Nice! As a result, now we have simplified our LineString quite
-significantly as we can see from the map.</p>
+<p>Nice! As a result, now we have simplified our LineString quite significantly as we can see from the map.</p>
 </div>
 </div>
 

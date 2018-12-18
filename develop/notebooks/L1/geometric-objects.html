@@ -318,18 +318,18 @@ div.nblast {
 
 /* input prompt */
 div.nbinput div.prompt pre {
-    color: #303F9F;
+    color: #307FC1;
 }
 
 /* output prompt */
 div.nboutput div.prompt pre {
-    color: #D84315;
+    color: #BF5B3D;
 }
 
 /* all prompts */
 div.nbinput div.prompt,
 div.nboutput div.prompt {
-    min-width: 8ex;
+    min-width: 5ex;
     padding-top: 0.4em;
     padding-right: 0.4em;
     text-align: right;
@@ -369,9 +369,9 @@ div.nboutput div.output_area {
 
 /* input area */
 div.nbinput div.input_area {
-    border: 1px solid #cfcfcf;
+    border: 1px solid #e0e0e0;
     border-radius: 2px;
-    background: #f7f7f7;
+    background: #f5f5f5;
 }
 
 /* override MathJax center alignment in output cells */
@@ -379,7 +379,7 @@ div.nboutput div[class*=MathJax] {
     text-align: left !important;
 }
 
-/* override sphinx.ext.pngmath center alignment in output cells */
+/* override sphinx.ext.imgmath center alignment in output cells */
 div.nboutput div.math p {
     text-align: left;
 }
@@ -429,6 +429,40 @@ div.nboutput div.output_area.stderr {
 .ansi-bold { font-weight: bold; }
 .ansi-underline { text-decoration: underline; }
 
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
 /* CSS overrides for sphinx_rtd_theme */
 
 /* 24px margin */
@@ -445,6 +479,11 @@ div.nboutput div.output_area.stderr {
 .admonition > p:before {
     margin-right: 4px;  /* make room for the exclamation icon */
 }
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
 </style>
 <div class="admonition note">
 This page was generated from <a class="reference external" href="https://github.com/Automating-GIS-processes/2018/blob/master/source/notebooks/L1/geometric-objects.ipynb">source/notebooks/L1/geometric-objects.ipynb</a>.
@@ -454,62 +493,37 @@ This page was generated from <a class="reference external" href="https://github.
 <div class="section" id="Geometric-objects---Spatial-data-model">
 <h1>Geometric objects - Spatial data model<a class="headerlink" href="#Geometric-objects---Spatial-data-model" title="Permalink to this headline">¶</a></h1>
 <p><strong>Sources:</strong></p>
-<p>These materials are partly based on
-<a class="reference external" href="http://toblerity.org/shapely/manual.html">Shapely-documentation</a> and
-<a class="reference external" href="https://www.packtpub.com/application-development/python-geospatial-development-second-edition">Westra E. (2013), Chapter
-3</a>.</p>
+<p>These materials are partly based on <a class="reference external" href="http://toblerity.org/shapely/manual.html">Shapely-documentation</a> and <a class="reference external" href="https://www.packtpub.com/application-development/python-geospatial-development-second-edition">Westra E. (2013), Chapter 3</a>.</p>
 <div class="section" id="Overview-of-geometric-objects-and-Shapely--module">
 <h2>Overview of geometric objects and Shapely -module<a class="headerlink" href="#Overview-of-geometric-objects-and-Shapely--module" title="Permalink to this headline">¶</a></h2>
-<p><img alt="Spatial data model" src="../../_images/SpatialDataModel.PNG" /> <em>Fundamental geometric objects that can be used in
-Python with</em> <a class="reference external" href="http://toblerity.org/shapely/manual.html">Shapely</a>
-<em>module</em></p>
-<p>The most fundamental geometric objects are <code class="docutils literal notranslate"><span class="pre">Points</span></code>, <code class="docutils literal notranslate"><span class="pre">Lines</span></code> and
-<code class="docutils literal notranslate"><span class="pre">Polygons</span></code> which are the basic ingredients when working with spatial
-data in vector format. Python has a specific module called
-<a class="reference external" href="http://toblerity.org/shapely/manual.html">Shapely</a> that can be used
-to create and work with <code class="docutils literal notranslate"><span class="pre">Geometric</span> <span class="pre">Objects</span></code>. There are many useful
-functionalities that you can do with Shapely such as:</p>
+<p><img alt="Spatial data model" src="../../_images/SpatialDataModel.PNG" /> <em>Fundamental geometric objects that can be used in Python with</em> <a class="reference external" href="http://toblerity.org/shapely/manual.html">Shapely</a> <em>module</em></p>
+<p>The most fundamental geometric objects are <code class="docutils literal notranslate"><span class="pre">Points</span></code>, <code class="docutils literal notranslate"><span class="pre">Lines</span></code> and <code class="docutils literal notranslate"><span class="pre">Polygons</span></code> which are the basic ingredients when working with spatial data in vector format. Python has a specific module called <a class="reference external" href="http://toblerity.org/shapely/manual.html">Shapely</a> that can be used to create and work with <code class="docutils literal notranslate"><span class="pre">Geometric</span> <span class="pre">Objects</span></code>. There are many useful functionalities that you can do with Shapely such as:</p>
 <ul class="simple">
-<li>Create a <code class="docutils literal notranslate"><span class="pre">Line</span></code> or <code class="docutils literal notranslate"><span class="pre">Polygon</span></code> from a <code class="docutils literal notranslate"><span class="pre">Collection</span></code> of <code class="docutils literal notranslate"><span class="pre">Point</span></code>
--geometries</li>
+<li>Create a <code class="docutils literal notranslate"><span class="pre">Line</span></code> or <code class="docutils literal notranslate"><span class="pre">Polygon</span></code> from a <code class="docutils literal notranslate"><span class="pre">Collection</span></code> of <code class="docutils literal notranslate"><span class="pre">Point</span></code> -geometries</li>
 <li>Calculate areas/length/bounds etc. of input geometries</li>
-<li>Conduct geometric operations based on the input geometries such as
-<code class="docutils literal notranslate"><span class="pre">Union</span></code>, <code class="docutils literal notranslate"><span class="pre">Difference</span></code>, <code class="docutils literal notranslate"><span class="pre">Distance</span></code> etc.</li>
-<li>Conduct spatial queries between geometries such <code class="docutils literal notranslate"><span class="pre">Intersects</span></code>,
-<code class="docutils literal notranslate"><span class="pre">Touches</span></code>, <code class="docutils literal notranslate"><span class="pre">Crosses</span></code>, <code class="docutils literal notranslate"><span class="pre">Within</span></code> etc.</li>
+<li>Conduct geometric operations based on the input geometries such as <code class="docutils literal notranslate"><span class="pre">Union</span></code>, <code class="docutils literal notranslate"><span class="pre">Difference</span></code>, <code class="docutils literal notranslate"><span class="pre">Distance</span></code> etc.</li>
+<li>Conduct spatial queries between geometries such <code class="docutils literal notranslate"><span class="pre">Intersects</span></code>, <code class="docutils literal notranslate"><span class="pre">Touches</span></code>, <code class="docutils literal notranslate"><span class="pre">Crosses</span></code>, <code class="docutils literal notranslate"><span class="pre">Within</span></code> etc.</li>
 </ul>
 <p><strong>Geometric Objects consist of coordinate tuples where:</strong></p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">Point</span></code> -object represents a single point in space. Points can be
-either two-dimensional (x, y) or three dimensional (x, y, z).</li>
-<li><code class="docutils literal notranslate"><span class="pre">LineString</span></code> -object (i.e.&nbsp;a line) represents a sequence of points
-joined together to form a line. Hence, a line consist of a list of at
-least two coordinate tuples</li>
-<li><code class="docutils literal notranslate"><span class="pre">Polygon</span></code> -object represents a filled area that consists of a list
-of at least three coordinate tuples that forms the outerior ring and
-a (possible) list of hole polygons.</li>
+<li><code class="docutils literal notranslate"><span class="pre">Point</span></code> -object represents a single point in space. Points can be either two-dimensional (x, y) or three dimensional (x, y, z).</li>
+<li><code class="docutils literal notranslate"><span class="pre">LineString</span></code> -object (i.e.&nbsp;a line) represents a sequence of points joined together to form a line. Hence, a line consist of a list of at least two coordinate tuples</li>
+<li><code class="docutils literal notranslate"><span class="pre">Polygon</span></code> -object represents a filled area that consists of a list of at least three coordinate tuples that forms the outerior ring and a (possible) list of hole polygons.</li>
 </ul>
-<p><strong>It is also possible to have a collection of geometric objects
-(e.g.&nbsp;Polygons with multiple parts):</strong></p>
+<p><strong>It is also possible to have a collection of geometric objects (e.g.&nbsp;Polygons with multiple parts):</strong></p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">MultiPoint</span></code> -object represents a collection of points and consists
-of a list of coordinate-tuples</li>
-<li><code class="docutils literal notranslate"><span class="pre">MultiLineString</span></code> -object represents a collection of lines and
-consists of a list of line-like sequences</li>
-<li><code class="docutils literal notranslate"><span class="pre">MultiPolygon</span></code> -object represents a collection of polygons that
-consists of a list of polygon-like sequences that construct from
-exterior ring and (possible) hole list tuples</li>
+<li><code class="docutils literal notranslate"><span class="pre">MultiPoint</span></code> -object represents a collection of points and consists of a list of coordinate-tuples</li>
+<li><code class="docutils literal notranslate"><span class="pre">MultiLineString</span></code> -object represents a collection of lines and consists of a list of line-like sequences</li>
+<li><code class="docutils literal notranslate"><span class="pre">MultiPolygon</span></code> -object represents a collection of polygons that consists of a list of polygon-like sequences that construct from exterior ring and (possible) hole list tuples</li>
 </ul>
 </div>
 <div class="section" id="Point">
 <h2>Point<a class="headerlink" href="#Point" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Creating point is easy, you pass x and y coordinates into <code class="docutils literal notranslate"><span class="pre">Point()</span></code>
--object (+ possibly also z -coordinate):</li>
+<li>Creating point is easy, you pass x and y coordinates into <code class="docutils literal notranslate"><span class="pre">Point()</span></code> -object (+ possibly also z -coordinate):</li>
 </ul>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -531,8 +545,7 @@ exterior ring and (possible) hole list tuples</li>
 <li>Let’s see what the variables look like</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -552,25 +565,15 @@ POINT Z (9.26 -2.456 0.57)
 &lt;class &#39;shapely.geometry.point.Point&#39;&gt;
 </pre></div></div>
 </div>
-<p>We can see that the type of the point is shapely’s Point which is
-represented in a specific format that is based on
-<a class="reference external" href="https://trac.osgeo.org/geos">GEOS</a> C++ library that is one of the
-standard libraries in GIS. It runs under the hood e.g.&nbsp;in
-<a class="reference external" href="http://www.qgis.org/en/site/">QGIS</a>. 3D-point can be recognized from
-the capital Z -letter in front of the coordinates.</p>
+<p>We can see that the type of the point is shapely’s Point which is represented in a specific format that is based on <a class="reference external" href="https://trac.osgeo.org/geos">GEOS</a> C++ library that is one of the standard libraries in GIS. It runs under the hood e.g.&nbsp;in <a class="reference external" href="http://www.qgis.org/en/site/">QGIS</a>. 3D-point can be recognized from the capital Z -letter in front of the coordinates.</p>
 <div class="section" id="Point-attributes-and-functions">
 <h3>Point attributes and functions<a class="headerlink" href="#Point-attributes-and-functions" title="Permalink to this headline">¶</a></h3>
-<p>Point -object has some built-in attributes that can be accessed and also
-some useful functionalities. One of the most useful ones are the ability
-to extract the coordinates of a Point and calculate the Euclidian
-distance between points.</p>
+<p>Point -object has some built-in attributes that can be accessed and also some useful functionalities. One of the most useful ones are the ability to extract the coordinates of a Point and calculate the Euclidian distance between points.</p>
 <ul class="simple">
-<li>Extracting the coordinates of a Point can be done in a couple of
-different ways:</li>
+<li>Extracting the coordinates of a Point can be done in a couple of different ways:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -583,8 +586,7 @@ different ways:</li>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -592,14 +594,12 @@ different ways:</li>
 </pre></div>
 </div>
 </div>
-<p>As we can see, the data type of our <code class="docutils literal notranslate"><span class="pre">point_coords</span></code> variable is a
-Shapely CoordinateSequence.</p>
+<p>As we can see, the data type of our <code class="docutils literal notranslate"><span class="pre">point_coords</span></code> variable is a Shapely CoordinateSequence.</p>
 <ul class="simple">
 <li>Let’s see how we can get out the actual coordinates from this object:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -634,18 +634,12 @@ y variable:
  4.2
 </pre></div></div>
 </div>
-<p>As we can see from above the <code class="docutils literal notranslate"><span class="pre">xy</span></code> -variable contains a tuple where x
-and y coordinates are stored inside numpy arrays. Using the attributes
-<code class="docutils literal notranslate"><span class="pre">point1.x</span></code> and <code class="docutils literal notranslate"><span class="pre">point1.y</span></code> it is possible to get the coordinates
-directly as plain decimal numbers.</p>
+<p>As we can see from above the <code class="docutils literal notranslate"><span class="pre">xy</span></code> -variable contains a tuple where x and y coordinates are stored inside numpy arrays. Using the attributes <code class="docutils literal notranslate"><span class="pre">point1.x</span></code> and <code class="docutils literal notranslate"><span class="pre">point1.y</span></code> it is possible to get the coordinates directly as plain decimal numbers.</p>
 <ul class="simple">
-<li>It is also possible to calculate the distance between points which
-can be useful in many applications. The returned distance is based on
-the projection of the points (e.g.&nbsp;degrees in WGS84, meters in UTM):</li>
+<li>It is also possible to calculate the distance between points which can be useful in many applications. The returned distance is based on the projection of the points (e.g.&nbsp;degrees in WGS84, meters in UTM):</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -670,13 +664,10 @@ Distance between the points is 29.72 decimal degrees
 <h2>LineString<a class="headerlink" href="#LineString" title="Permalink to this headline">¶</a></h2>
 <p>Creating a LineString -object is fairly similar to how Point is created.</p>
 <ul class="simple">
-<li>Now instead using a single coordinate-tuple we can construct the line
-using either a list of shapely Point -objects or pass
-coordinate-tuples:</li>
+<li>Now instead using a single coordinate-tuple we can construct the line using either a list of shapely Point -objects or pass coordinate-tuples:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -708,25 +699,15 @@ type of the line:
  &lt;class &#39;shapely.geometry.linestring.LineString&#39;&gt;
 </pre></div></div>
 </div>
-<p>As we can see from above, the <code class="docutils literal notranslate"><span class="pre">line</span></code> -variable constitutes of multiple
-coordinate-pairs and the type of the data is shapely LineString.</p>
+<p>As we can see from above, the <code class="docutils literal notranslate"><span class="pre">line</span></code> -variable constitutes of multiple coordinate-pairs and the type of the data is shapely LineString.</p>
 <div class="section" id="LineString-attributes-and-functions">
 <h3>LineString attributes and functions<a class="headerlink" href="#LineString-attributes-and-functions" title="Permalink to this headline">¶</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">LineString</span></code> -object has many useful built-in attributes and
-functionalities. It is for instance possible to extract the coordinates
-or the length of a LineString (line), calculate the centroid of the
-line, create points along the line at specific distance, calculate the
-closest distance from a line to specified Point and simplify the
-geometry. See full list of functionalities from <a class="reference external" href="http://toblerity.org/shapely/manual.html">Shapely
-documentation</a>. Here, we go
-through a few of them.</p>
+<p><code class="docutils literal notranslate"><span class="pre">LineString</span></code> -object has many useful built-in attributes and functionalities. It is for instance possible to extract the coordinates or the length of a LineString (line), calculate the centroid of the line, create points along the line at specific distance, calculate the closest distance from a line to specified Point and simplify the geometry. See full list of functionalities from <a class="reference external" href="http://toblerity.org/shapely/manual.html">Shapely documentation</a>. Here, we go through a few of them.</p>
 <ul class="simple">
-<li>We can extract the coordinates of a LineString similarly as with
-<code class="docutils literal notranslate"><span class="pre">Point</span></code></li>
+<li>We can extract the coordinates of a LineString similarly as with <code class="docutils literal notranslate"><span class="pre">Point</span></code></li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -745,16 +726,12 @@ through a few of them.</p>
 (array(&#39;d&#39;, [2.2, 7.2, 9.26]), array(&#39;d&#39;, [4.2, -25.1, -2.456]))
 </pre></div></div>
 </div>
-<p>As we can see, the coordinates are again stored as a numpy arrays where
-first array includes all x-coordinates and the second one all the
-y-coordinates respectively.</p>
+<p>As we can see, the coordinates are again stored as a numpy arrays where first array includes all x-coordinates and the second one all the y-coordinates respectively.</p>
 <ul class="simple">
-<li>We can extract only x or y coordinates by referring to those arrays
-as follows</li>
+<li>We can extract only x or y coordinates by referring to those arrays as follows</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -783,13 +760,10 @@ line_y:
 </pre></div></div>
 </div>
 <ul class="simple">
-<li>It is possible to retrieve specific attributes such as lenght of the
-line and center of the line (centroid) straight from the LineString
-object itself:</li>
+<li>It is possible to retrieve specific attributes such as lenght of the line and center of the line (centroid) straight from the LineString object itself:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -819,25 +793,18 @@ Centroid of our line:  POINT (6.229961354035622 -11.89241115757239)
 Type of the centroid: &lt;class &#39;shapely.geometry.point.Point&#39;&gt;
 </pre></div></div>
 </div>
-<p>Nice! These are already fairly useful information for many different GIS
-tasks, and we didn’t even calculate anything yet! These attributes are
-built-in in every LineString object that is created.</p>
-<p>Notice that the centroid that is returned is <code class="docutils literal notranslate"><span class="pre">Point</span></code> -object that has
-its own functions as was described earlier.</p>
+<p>Nice! These are already fairly useful information for many different GIS tasks, and we didn’t even calculate anything yet! These attributes are built-in in every LineString object that is created.</p>
+<p>Notice that the centroid that is returned is <code class="docutils literal notranslate"><span class="pre">Point</span></code> -object that has its own functions as was described earlier.</p>
 </div>
 </div>
 <div class="section" id="Polygon">
 <h2>Polygon<a class="headerlink" href="#Polygon" title="Permalink to this headline">¶</a></h2>
-<p>Creating a <code class="docutils literal notranslate"><span class="pre">Polygon</span></code> -object continues the same logic of how <code class="docutils literal notranslate"><span class="pre">Point</span></code>
-and <code class="docutils literal notranslate"><span class="pre">LineString</span></code> were created but Polygon object only accepts
-coordinate-tuples as input.</p>
+<p>Creating a <code class="docutils literal notranslate"><span class="pre">Polygon</span></code> -object continues the same logic of how <code class="docutils literal notranslate"><span class="pre">Point</span></code> and <code class="docutils literal notranslate"><span class="pre">LineString</span></code> were created but Polygon object only accepts coordinate-tuples as input.</p>
 <ul class="simple">
-<li>Polygon needs at least three coordinate-tuples (that basically forms
-a triangle):</li>
+<li>Polygon needs at least three coordinate-tuples (that basically forms a triangle):</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -873,12 +840,8 @@ Geometry type as text: Polygon
 Geometry how Python shows it: &lt;class &#39;shapely.geometry.polygon.Polygon&#39;&gt;
 </pre></div></div>
 </div>
-<p>Notice that <code class="docutils literal notranslate"><span class="pre">Polygon</span></code> representation has double parentheses around the
-coordinates (i.e.&nbsp;<code class="docutils literal notranslate"><span class="pre">POLYGON</span> <span class="pre">((&lt;values</span> <span class="pre">in</span> <span class="pre">here&gt;))</span></code> ). This is because
-Polygon can also have holes inside of it.</p>
-<p>As the help of Polygon -object tells, a Polygon can be constructed using
-exterior coordinates and interior coordinates (optional) where the
-interior coordinates creates a hole inside the Polygon:</p>
+<p>Notice that <code class="docutils literal notranslate"><span class="pre">Polygon</span></code> representation has double parentheses around the coordinates (i.e.&nbsp;<code class="docutils literal notranslate"><span class="pre">POLYGON</span> <span class="pre">((&lt;values</span> <span class="pre">in</span> <span class="pre">here&gt;))</span></code> ). This is because Polygon can also have holes inside of it.</p>
+<p>As the help of Polygon -object tells, a Polygon can be constructed using exterior coordinates and interior coordinates (optional) where the interior coordinates creates a hole inside the Polygon:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Help</span> <span class="n">on</span> <span class="n">Polygon</span> <span class="ow">in</span> <span class="n">module</span> <span class="n">shapely</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">polygon</span> <span class="nb">object</span><span class="p">:</span>
      <span class="k">class</span> <span class="nc">Polygon</span><span class="p">(</span><span class="n">shapely</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">BaseGeometry</span><span class="p">)</span>
       <span class="o">|</span>  <span class="n">A</span> <span class="n">two</span><span class="o">-</span><span class="n">dimensional</span> <span class="n">figure</span> <span class="n">bounded</span> <span class="n">by</span> <span class="n">a</span> <span class="n">linear</span> <span class="n">ring</span>
@@ -899,8 +862,7 @@ interior coordinates creates a hole inside the Polygon:</p>
 <li>Let’s see how we can create a <code class="docutils literal notranslate"><span class="pre">Polygon</span></code> with a hole inside</li>
 </ul>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -925,8 +887,7 @@ interior coordinates creates a hole inside the Polygon:</p>
 <li>Let’s see what we have now:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -946,22 +907,15 @@ world_has_a_hole: POLYGON ((-180 90, -180 -90, 180 -90, 180 90, -180 90), (-170 
 type: &lt;class &#39;shapely.geometry.polygon.Polygon&#39;&gt;
 </pre></div></div>
 </div>
-<p>As we can see the <code class="docutils literal notranslate"><span class="pre">Polygon</span></code> has now two different tuples of
-coordinates. The first one represents the <strong>outerior</strong> and the second
-one represents the <strong>hole</strong> inside of the Polygon.</p>
+<p>As we can see the <code class="docutils literal notranslate"><span class="pre">Polygon</span></code> has now two different tuples of coordinates. The first one represents the <strong>outerior</strong> and the second one represents the <strong>hole</strong> inside of the Polygon.</p>
 <div class="section" id="Polygon-attributes-and-functions">
 <h3>Polygon attributes and functions<a class="headerlink" href="#Polygon-attributes-and-functions" title="Permalink to this headline">¶</a></h3>
-<p>We can again access different attributes directly from the <code class="docutils literal notranslate"><span class="pre">Polygon</span></code>
-object itself that can be really useful for many analyses, such as
-<code class="docutils literal notranslate"><span class="pre">area</span></code>, <code class="docutils literal notranslate"><span class="pre">centroid</span></code>, <code class="docutils literal notranslate"><span class="pre">bounding</span> <span class="pre">box</span></code>, <code class="docutils literal notranslate"><span class="pre">exterior</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">exterior-length</span></code>.</p>
+<p>We can again access different attributes directly from the <code class="docutils literal notranslate"><span class="pre">Polygon</span></code> object itself that can be really useful for many analyses, such as <code class="docutils literal notranslate"><span class="pre">area</span></code>, <code class="docutils literal notranslate"><span class="pre">centroid</span></code>, <code class="docutils literal notranslate"><span class="pre">bounding</span> <span class="pre">box</span></code>, <code class="docutils literal notranslate"><span class="pre">exterior</span></code>, and <code class="docutils literal notranslate"><span class="pre">exterior-length</span></code>.</p>
 <ul class="simple">
-<li>Here, we can see a few of the available attributes and how to access
-them:</li>
+<li>Here, we can see a few of the available attributes and how to access them:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1001,34 +955,18 @@ Poly Exterior:  LINEARRING (-180 90, -180 -90, 180 -90, 180 90, -180 90)
 Poly Exterior Length:  1080.0
 </pre></div></div>
 </div>
-<p>As we can see above, it is again fairly straightforward to access
-different attributes from the <code class="docutils literal notranslate"><span class="pre">Polygon</span></code> -object. Notice, that the
-extrerior lenght is given here with decimal degrees because we passed
-latitude and longitude coordinates into our Polygon.</p>
+<p>As we can see above, it is again fairly straightforward to access different attributes from the <code class="docutils literal notranslate"><span class="pre">Polygon</span></code> -object. Notice, that the extrerior lenght is given here with decimal degrees because we passed latitude and longitude coordinates into our Polygon.</p>
 </div>
 </div>
 <div class="section" id="Geometry-collections-(optional)">
 <h2>Geometry collections (optional)<a class="headerlink" href="#Geometry-collections-(optional)" title="Permalink to this headline">¶</a></h2>
-<p>In some occassions it is useful to store e.g.&nbsp;multiple lines or polygons
-under a single feature (i.e.&nbsp;a single row in a Shapefile represents more
-than one line or polygon object). Collections of points are implemented
-by using a MultiPoint -object, collections of curves by using a
-MultiLineString -object, and collections of surfaces by a MultiPolygon
--object. These collections are not computationally significant, but are
-useful for modeling certain kinds of features. A Y-shaped line feature
-(such as road), or multiple polygons (e.g.&nbsp;islands on a like), can be
-presented nicely as a whole by a using MultiLineString or MultiPolygon
-accordingly. Creating and visualizing a minimum <a class="reference external" href="https://en.wikipedia.org/wiki/Minimum_bounding_box">bounding
-box</a> e.g.&nbsp;around
-your data points is a really useful function for many purposes
-(e.g.&nbsp;trying to understand the extent of your data), here we demonstrate
-how to create one using Shapely.</p>
+<p>In some occassions it is useful to store e.g.&nbsp;multiple lines or polygons under a single feature (i.e.&nbsp;a single row in a Shapefile represents more than one line or polygon object). Collections of points are implemented by using a MultiPoint -object, collections of curves by using a MultiLineString -object, and collections of surfaces by a MultiPolygon -object. These collections are not computationally significant, but are useful for modeling certain kinds of features. A Y-shaped line feature
+(such as road), or multiple polygons (e.g.&nbsp;islands on a like), can be presented nicely as a whole by a using MultiLineString or MultiPolygon accordingly. Creating and visualizing a minimum <a class="reference external" href="https://en.wikipedia.org/wiki/Minimum_bounding_box">bounding box</a> e.g.&nbsp;around your data points is a really useful function for many purposes (e.g.&nbsp;trying to understand the extent of your data), here we demonstrate how to create one using Shapely.</p>
 <ul class="simple">
 <li>Geometry collections can be constructed in a following manner:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1091,18 +1029,14 @@ Bounding box:  POLYGON ((180 -90, 180 90, 0 90, 0 -90, 180 -90))
 MultiPoly:  MULTIPOLYGON (((-180 90, -180 -90, 0 -90, 0 90, -180 90), (-170 80, -170 -80, -10 -80, -10 80, -170 80)), ((180 -90, 180 90, 0 90, 0 -90, 180 -90)))
 </pre></div></div>
 </div>
-<p>We can see that the outputs are similar to the basic geometric objects
-that we created previously but now these objects contain multiple
-features of those points, lines or polygons.</p>
+<p>We can see that the outputs are similar to the basic geometric objects that we created previously but now these objects contain multiple features of those points, lines or polygons.</p>
 <div class="section" id="Geometry-collection--objects’-attributes-and-functions">
 <h3>Geometry collection -objects’ attributes and functions<a class="headerlink" href="#Geometry-collection--objects’-attributes-and-functions" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>We can also get many useful attributes from those objects such as
-<code class="docutils literal notranslate"><span class="pre">Convex</span> <span class="pre">Hull</span></code>:</li>
+<li>We can also get many useful attributes from those objects such as <code class="docutils literal notranslate"><span class="pre">Convex</span> <span class="pre">Hull</span></code>:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1147,12 +1081,7 @@ Area of our Western Hemisphere polygon: 6800.0
 Is polygon valid?:  False
 </pre></div></div>
 </div>
-<p>From the above we can see that MultiPolygons have exactly the same
-attributes available as single geometric objects but now the information
-such as area calculates the area of <strong>ALL</strong> of the individual -objects
-combined. There are also some extra features available such as
-<strong>is_valid</strong> -attribute that tells if the polygons or lines intersect
-with each other.</p>
+<p>From the above we can see that MultiPolygons have exactly the same attributes available as single geometric objects but now the information such as area calculates the area of <strong>ALL</strong> of the individual -objects combined. There are also some extra features available such as <strong>is_valid</strong> -attribute that tells if the polygons or lines intersect with each other.</p>
 </div>
 </div>
 </div>
@@ -1178,7 +1107,7 @@ with each other.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2018, Henrikki Tenkanen
-      Last updated on Dec 13, 2018.
+      Last updated on Dec 18, 2018.
 
     </p>
   </div>
