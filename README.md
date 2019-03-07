@@ -60,6 +60,7 @@ It is highly recommendable to use separate branches for developing the materials
 from that branch to `master` using **pull requests**.
 
 - Travis Integration is controlled from [.travis.yml](.travis.yml).
+- See a bit more documentation from [Travis-integration.md](Travis-integration.md)
 
 ## Browser based programming environment
 
