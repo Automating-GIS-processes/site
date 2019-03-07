@@ -61,6 +61,12 @@ from that branch to `master` using **pull requests**.
 
 - Travis Integration is controlled from [.travis.yml](.travis.yml).
 
+## Browser based programming environment
+
+This course site provides programming environment that allows anyone to immediately try and run all the codes directly in the browser. This functionality is done using [Binder](https://mybinder.org/) and [CSC Notebooks (for Universities in Finland)](https://notebooks.csc.fi/#/) -services.
+
+Binder environment is controlled from [environment.yml](environment.yml). CSC Notebooks are controlled separately from [https://github.com/Automating-GIS-processes/notebooks](https://github.com/Automating-GIS-processes/notebooks) -repository. 
+
 ## Contact & Developers
 
 - **Henrikki Tenkanen**
