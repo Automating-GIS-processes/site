@@ -40,7 +40,7 @@ summary write-ups that you submit must be completed individually and must clearl
 .. admonition:: For teachers
 
     If you would like to use these materials for your own teaching or develop them further, we highly support that.
-    Please read more about how to do it from `here <License-terms.html>`_.
+    Please read more about how to do it from `here <course-info/License-terms.html>`_.
 
 .. admonition:: Earlier versions of the course
 
