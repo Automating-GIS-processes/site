@@ -28,13 +28,31 @@
   
 
   
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'2018',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
@@ -45,21 +63,16 @@
     <link href="../../_static/geo-python.css" rel="stylesheet" type="text/css">
      
 
-
-  
-  <script src="../../_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -134,7 +147,6 @@
 <p class="caption"><span class="caption-text">Lesson 3</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../L3/overview.html">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../L3/geocoding.html">Geocoding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../notebooks/L3/geocoding_in_geopandas.html">Geocoding in Geopandas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../notebooks/L3/point-in-polygon.html">Point in Polygon &amp; Intersect</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../notebooks/L3/spatial-join.html">Spatial join</a></li>
@@ -359,7 +371,7 @@ from them using the same index number.</p>
         <a href="../L2/overview.html" class="btn btn-neutral float-right" title="Lesson 2 Overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../../notebooks/L1/geometric-objects.html" class="btn btn-neutral" title="Geometric objects - Spatial data model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../../notebooks/L1/geometric-objects.html" class="btn btn-neutral float-left" title="Geometric objects - Spatial data model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -369,7 +381,9 @@ from them using the same index number.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2018, Henrikki Tenkanen
-      Last updated on Nov 27, 2018.
+      <span class="lastupdated">
+        Last updated on Nov 10, 2018.
+      </span>
 
     </p>
   </div>
@@ -395,8 +409,11 @@ from them using the same index number.</p>
     </span>
     <div class="rst-other-versions">
         <dl>
+            <dt>Tags</dt>
+            <dd><a href="../../../2018/lessons/L1/exercise-1.html">2018</a></dd>
+        </dl>
+        <dl>
             <dt>Branches</dt>
-            <dd><a href="../../../2017/index.html">2017</a></dd>
             <dd><a href="exercise-1.html">develop</a></dd>
             <dd><a href="../../../drafts/lessons/L1/exercise-1.html">drafts</a></dd>
             <dd><a href="../../../master/lessons/L1/exercise-1.html">master</a></dd>
@@ -405,36 +422,16 @@ from them using the same index number.</p>
 </div>
 
 
-  
-
-    
-    
-      <script type="text/javascript">
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'../../',
-              VERSION:'2018',
-              LANGUAGE:'None',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-
-  
-
-  <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

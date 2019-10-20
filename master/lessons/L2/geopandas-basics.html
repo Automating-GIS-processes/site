@@ -28,13 +28,31 @@
   
 
   
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'2018',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
@@ -43,21 +61,16 @@
     <link href="../../_static/geo-python.css" rel="stylesheet" type="text/css">
      
 
-
-  
-  <script src="../../_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -289,19 +302,64 @@ DAMSELFISH_distributions.shx
 -function:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Import necessary modules</span>
 <span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ---------------------------------------------------------------------------</span>
+<span class="go">ImportError                               Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-1-a62d01c1d62e&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 import geopandas as gpd</span>
+
+<span class="go">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/geopandas/__init__.py in &lt;module&gt;()</span>
+<span class="go">      3 from geopandas.array import _points_from_xy as points_from_xy  # noqa</span>
+<span class="go">      4 </span>
+<span class="go">----&gt; 5 from geopandas.io.file import read_file  # noqa</span>
+<span class="go">      6 from geopandas.io.sql import read_postgis  # noqa</span>
+<span class="go">      7 from geopandas.tools import sjoin  # noqa</span>
+
+<span class="go">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/geopandas/io/file.py in &lt;module&gt;()</span>
+<span class="go">      4 import six</span>
+<span class="go">      5 </span>
+<span class="go">----&gt; 6 import fiona</span>
+<span class="go">      7 </span>
+<span class="go">      8 from geopandas import GeoDataFrame, GeoSeries</span>
+
+<span class="go">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/fiona/__init__.py in &lt;module&gt;()</span>
+<span class="go">     67 from six import string_types</span>
+<span class="go">     68 </span>
+<span class="go">---&gt; 69 from fiona.collection import Collection, BytesCollection, vsi_path</span>
+<span class="go">     70 from fiona._drivers import driver_count, GDALEnv</span>
+<span class="go">     71 from fiona.drvsupport import supported_drivers</span>
+
+<span class="go">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/fiona/collection.py in &lt;module&gt;()</span>
+<span class="go">      7 </span>
+<span class="go">      8 from fiona import compat</span>
+<span class="go">----&gt; 9 from fiona.ogrext import Iterator, ItemsIterator, KeysIterator</span>
+<span class="go">     10 from fiona.ogrext import Session, WritingSession</span>
+<span class="go">     11 from fiona.ogrext import (</span>
+
+<span class="go">ImportError: libpoppler.so.76: cannot open shared object file: No such file or directory</span>
 
 <span class="go"># Set filepath (fix path relative to yours)</span>
 <span class="gp">In [2]: </span><span class="n">fp</span> <span class="o">=</span> <span class="s2">&quot;/home/geo/Data/DAMSELFISH_distributions.shp&quot;</span>
 
 <span class="go"># Read file using gpd.read_file()</span>
 <span class="gp">In [3]: </span><span class="n">data</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-3-1ed97abf5c2e&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">data</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;gpd&#39; is not defined
 </pre></div>
 </div>
 <ul class="simple">
 <li>Let’s see what datatype is our ‘data’ variable</li>
 </ul>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="gh">Out[4]: </span><span class="go">geopandas.geodataframe.GeoDataFrame</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-4-b5f01a7c0d9a&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;data&#39; is not defined
 </pre></div>
 </div>
 <p>Okey so from the above we can see that our <code class="docutils literal notranslate"><span class="pre">data</span></code> -variable is a
@@ -314,15 +372,12 @@ some special features and functions that are useful in GIS.</p>
 </ul>
 <p><code class="docutils literal notranslate"><span class="pre">head()</span></code> -function prints the first 5 rows by default</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-<span class="gh">Out[5]: </span><span class="go"></span>
-<span class="go">      ID_NO                        ...                                                                   geometry</span>
-<span class="go">0  183963.0                        ...                          POLYGON ((-115.6437454219999 29.71392059300007...</span>
-<span class="go">1  183963.0                        ...                          POLYGON ((-105.589950704 21.89339825500002, -1...</span>
-<span class="go">2  183963.0                        ...                          POLYGON ((-111.159618439 19.01535626700007, -1...</span>
-<span class="go">3  183793.0                        ...                          POLYGON ((-80.86500229899997 -0.77894492099994...</span>
-<span class="go">4  183793.0                        ...                          POLYGON ((-67.33922225599997 -55.6761029239999...</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-5-304fa4ce4ebd&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 
-<span class="go">[5 rows x 24 columns]</span>
+<span class="ne">NameError</span>: name &#39;data&#39; is not defined
 </pre></div>
 </div>
 <ul class="simple">
@@ -367,13 +422,12 @@ storing geometric information in geopandas.</p>
 </ul>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># It is possible to use only specific columns by specifying the column name within square brackets []</span>
 <span class="gp">In [7]: </span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-<span class="gh">Out[7]: </span><span class="go"></span>
-<span class="go">0    POLYGON ((-115.6437454219999 29.71392059300007...</span>
-<span class="go">1    POLYGON ((-105.589950704 21.89339825500002, -1...</span>
-<span class="go">2    POLYGON ((-111.159618439 19.01535626700007, -1...</span>
-<span class="go">3    POLYGON ((-80.86500229899997 -0.77894492099994...</span>
-<span class="go">4    POLYGON ((-67.33922225599997 -55.6761029239999...</span>
-<span class="go">Name: geometry, dtype: object</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-7-9028551db399&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+
+<span class="ne">NameError</span>: name &#39;data&#39; is not defined
 </pre></div>
 </div>
 <p>Since spatial data is stored as Shapely objects, <strong>it is possible to use
@@ -384,6 +438,12 @@ earlier.</p>
 </ul>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Make a selection that contains only the first five rows</span>
 <span class="gp">In [8]: </span><span class="n">selection</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-8-2c8af9b7ee4d&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">selection</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+
+<span class="ne">NameError</span>: name &#39;data&#39; is not defined
 </pre></div>
 </div>
 <p>We can iterate over the selected rows using a specific
@@ -392,11 +452,14 @@ earlier.</p>
 <span class="gp">   ...: </span>    <span class="n">poly_area</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">area</span>
 <span class="gp">   ...: </span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Polygon area at index {0} is: {1:.3f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">poly_area</span><span class="p">))</span>
 <span class="gp">   ...: </span>
-<span class="go">Polygon area at index 0 is: 19.396</span>
-<span class="go">Polygon area at index 1 is: 6.146</span>
-<span class="go">Polygon area at index 2 is: 2.697</span>
-<span class="go">Polygon area at index 3 is: 87.461</span>
-<span class="go">Polygon area at index 4 is: 0.001</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-9-6688f7598c82&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">selection</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="n">poly_area</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">area</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Polygon area at index {0} is: {1:.3f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">poly_area</span><span class="p">))</span>
+
+<span class="ne">NameError</span>: name &#39;selection&#39; is not defined
 </pre></div>
 </div>
 <p>Hence, as you might guess from here, all the functionalities of <strong>Pandas</strong> are available directly in
@@ -406,14 +469,22 @@ Geopandas without the need to call pandas separately because Geopandas is an <st
 </ul>
 <p>and store the areas individual polygons. Calculating the areas of polygons is really easy in geopandas by using <code class="docutils literal notranslate"><span class="pre">GeoDataFrame.area</span></code> attribute:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [10]: </span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;area&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">area</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-10-a77912d26f76&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;area&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">area</span>
+
+<span class="ne">NameError</span>: name &#39;data&#39; is not defined
 </pre></div>
 </div>
 <p>Let’s see the first 2 rows of our ‘area’ column.</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;area&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="gh">Out[11]: </span><span class="go"></span>
-<span class="go">0    19.396254</span>
-<span class="go">1     6.145902</span>
-<span class="go">Name: area, dtype: float64</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-11-393782136325&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;area&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;data&#39; is not defined
 </pre></div>
 </div>
 <p>Okey, so we can see that the area of our first polygon seems to be 19.39 and 6.14 for the second polygon.
@@ -421,13 +492,29 @@ They correspond to the ones we saw in previous step when iterating rows, hence, 
 Let’s check what is the min and the max of those areas using familiar functions from our previous Pandas lessions.</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Maximum area</span>
 <span class="gp">In [12]: </span><span class="n">max_area</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;area&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-12-2d827ff7ad4f&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">max_area</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;area&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
 
-<span class="go"># Mean area</span>
+<span class="ne">NameError</span>: name &#39;data&#39; is not defined
+
+<span class="c1"># Mean area</span>
 <span class="gp">In [13]: </span><span class="n">mean_area</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;area&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="go">                                                                                                                                                                                                                                                                                   ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-13-20c57cfdb17f&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 mean_area = data[&#39;area&#39;].mean()</span>
+
+<span class="go">NameError: name &#39;data&#39; is not defined</span>
 
 <span class="gp">In [14]: </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Max area: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">Mean area: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">max_area</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">mean_area</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
-<span class="go">Max area: 1493.2</span>
-<span class="go">Mean area: 19.96</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-14-4124a8676ec0&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 print(&quot;Max area: %s\nMean area: %s&quot; % (round(max_area, 2), round(mean_area, 2)))</span>
+
+<span class="go">NameError: name &#39;max_area&#39; is not defined</span>
 </pre></div>
 </div>
 <p>Okey, so the largest Polygon in our dataset seems to be 1494 square decimal degrees (~ 165 000 km2) and the average size is ~20 square decimal degrees (~2200 km2).</p>
@@ -452,23 +539,33 @@ Shapefile.</p>
 </div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Let&#39;s see what&#39;s inside</span>
 <span class="gp">In [15]: </span><span class="n">newdata</span>
-<span class="gh">Out[15]: </span><span class="go"></span>
-<span class="go">Empty GeoDataFrame</span>
-<span class="go">Columns: []</span>
-<span class="go">Index: []</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-15-3b14ada056fd&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">newdata</span>
+
+<span class="ne">NameError</span>: name &#39;newdata&#39; is not defined
 </pre></div>
 </div>
 <p>The GeoDataFrame is empty since we haven’t placed any data inside.</p>
 <p>Let’s create a new column called <code class="docutils literal notranslate"><span class="pre">geometry</span></code> that will contain our Shapely objects:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Create a new column called &#39;geometry&#39; to the GeoDataFrame</span>
 <span class="gp">In [16]: </span><span class="n">newdata</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-16-3e140844bb90&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">newdata</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
 
-<span class="go"># Let&#39;s see what&#39;s inside</span>
+<span class="ne">NameError</span>: name &#39;newdata&#39; is not defined
+
+<span class="c1"># Let&#39;s see what&#39;s inside</span>
 <span class="gp">In [17]: </span><span class="n">newdata</span>
-<span class="gh">Out[17]: </span><span class="go"></span>
-<span class="go">Empty GeoDataFrame</span>
-<span class="go">Columns: [geometry]</span>
-<span class="go">Index: []</span>
+<span class="go">                                                                                                                                                                                                                                                                                   ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-17-3b14ada056fd&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 newdata</span>
+
+<span class="go">NameError: name &#39;newdata&#39; is not defined</span>
 </pre></div>
 </div>
 <p>Now we have a geometry column in our GeoDataFrame but we don’t have any
@@ -482,19 +579,28 @@ data yet.</p>
 
 <span class="go"># Let&#39;s see what we have</span>
 <span class="gp">In [20]: </span><span class="n">poly</span>
-<span class="gh">Out[20]: </span><span class="go">&lt;shapely.geometry.polygon.Polygon at 0x7ff4f7640898&gt;</span>
+<span class="gh">Out[20]: </span><span class="go">&lt;shapely.geometry.polygon.Polygon at 0x7f14c07e34e0&gt;</span>
 </pre></div>
 </div>
 <p>Okey, so now we have appropriate Polygon -object.</p>
 <p>Let’s insert the polygon into our ‘geometry’ column in our GeoDataFrame:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Insert the polygon into &#39;geometry&#39; -column at index 0</span>
 <span class="gp">In [21]: </span><span class="n">newdata</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">poly</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-21-f41190d5ee1b&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">newdata</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">poly</span>
 
-<span class="go"># Let&#39;s see what we have now</span>
+<span class="ne">NameError</span>: name &#39;newdata&#39; is not defined
+
+<span class="c1"># Let&#39;s see what we have now</span>
 <span class="gp">In [22]: </span><span class="n">newdata</span>
-<span class="gh">Out[22]: </span><span class="go"></span>
-<span class="go">                                            geometry</span>
-<span class="go">0  POLYGON ((24.950899 60.169158, 24.953492 60.16...</span>
+<span class="go">                                                                                                                                                                                                                                                                                          ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-22-3b14ada056fd&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 newdata</span>
+
+<span class="go">NameError: name &#39;newdata&#39; is not defined</span>
 </pre></div>
 </div>
 <p>Now we have a GeoDataFrame with Polygon that we can export to a
@@ -502,12 +608,21 @@ Shapefile.</p>
 <p>Let’s add another column to our GeoDataFrame called <code class="docutils literal notranslate"><span class="pre">Location</span></code> with text <em>Senaatintori</em>.</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Add a new column and insert data</span>
 <span class="gp">In [23]: </span><span class="n">newdata</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;Location&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Senaatintori&#39;</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-23-2e70fca9bb6b&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">newdata</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;Location&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Senaatintori&#39;</span>
 
-<span class="go"># Let&#39;s check the data</span>
+<span class="ne">NameError</span>: name &#39;newdata&#39; is not defined
+
+<span class="c1"># Let&#39;s check the data</span>
 <span class="gp">In [24]: </span><span class="n">newdata</span>
-<span class="gh">Out[24]: </span><span class="go"></span>
-<span class="go">                                            geometry      Location</span>
-<span class="go">0  POLYGON ((24.950899 60.169158, 24.953492 60.16...  Senaatintori</span>
+<span class="go">                                                                                                                                                                                                                                                                                                    ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-24-3b14ada056fd&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 newdata</span>
+
+<span class="go">NameError: name &#39;newdata&#39; is not defined</span>
 </pre></div>
 </div>
 <p>Okey, now we have additional information that is useful to be able to
@@ -518,7 +633,12 @@ reference system (projection) for the GeoDataFrame.</strong></p>
 shows the coordinate system of the data which is empty (None) in our
 case since we are creating the data from the scratch:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [25]: </span><span class="k">print</span><span class="p">(</span><span class="n">newdata</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
-<span class="go">None</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-25-6026b5d275d1&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="k">print</span><span class="p">(</span><span class="n">newdata</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;newdata&#39; is not defined
 </pre></div>
 </div>
 <ul class="simple">
@@ -529,13 +649,44 @@ determine the projection to WGS84 (epsg code: 4326):</li>
 </ul>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Import specific function &#39;from_epsg&#39; from fiona module</span>
 <span class="gp">In [26]: </span><span class="kn">from</span> <span class="nn">fiona.crs</span> <span class="kn">import</span> <span class="n">from_epsg</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-26-b1f6bce98ced&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">fiona.crs</span> <span class="kn">import</span> <span class="n">from_epsg</span>
 
-<span class="go"># Set the GeoDataFrame&#39;s coordinate system to WGS84</span>
+<span class="nn">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/fiona/__init__.py</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">67</span> <span class="kn">from</span> <span class="nn">six</span> <span class="kn">import</span> <span class="n">string_types</span>
+<span class="g g-Whitespace">     </span><span class="mi">68</span> 
+<span class="ne">---&gt; </span><span class="mi">69</span> <span class="kn">from</span> <span class="nn">fiona.collection</span> <span class="kn">import</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">BytesCollection</span><span class="p">,</span> <span class="n">vsi_path</span>
+<span class="g g-Whitespace">     </span><span class="mi">70</span> <span class="kn">from</span> <span class="nn">fiona._drivers</span> <span class="kn">import</span> <span class="n">driver_count</span><span class="p">,</span> <span class="n">GDALEnv</span>
+<span class="g g-Whitespace">     </span><span class="mi">71</span> <span class="kn">from</span> <span class="nn">fiona.drvsupport</span> <span class="kn">import</span> <span class="n">supported_drivers</span>
+
+<span class="nn">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/fiona/collection.py</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> 
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="kn">from</span> <span class="nn">fiona</span> <span class="kn">import</span> <span class="n">compat</span>
+<span class="ne">----&gt; </span><span class="mi">9</span> <span class="kn">from</span> <span class="nn">fiona.ogrext</span> <span class="kn">import</span> <span class="n">Iterator</span><span class="p">,</span> <span class="n">ItemsIterator</span><span class="p">,</span> <span class="n">KeysIterator</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="kn">from</span> <span class="nn">fiona.ogrext</span> <span class="kn">import</span> <span class="n">Session</span><span class="p">,</span> <span class="n">WritingSession</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="kn">from</span> <span class="nn">fiona.ogrext</span> <span class="kn">import</span> <span class="p">(</span>
+
+<span class="ne">ImportError</span>: libpoppler.so.76: cannot open shared object file: No such file or directory
+
+<span class="c1"># Set the GeoDataFrame&#39;s coordinate system to WGS84</span>
 <span class="gp">In [27]: </span><span class="n">newdata</span><span class="o">.</span><span class="n">crs</span> <span class="o">=</span> <span class="n">from_epsg</span><span class="p">(</span><span class="mi">4326</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-27-7571deef4326&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 newdata.crs = from_epsg(4326)</span>
+
+<span class="go">NameError: name &#39;from_epsg&#39; is not defined</span>
 
 <span class="go"># Let&#39;s see how the crs definition looks like</span>
 <span class="gp">In [28]: </span><span class="n">newdata</span><span class="o">.</span><span class="n">crs</span>
-<span class="gh">Out[28]: </span><span class="go">{&#39;init&#39;: &#39;epsg:4326&#39;, &#39;no_defs&#39;: True}</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-28-36fd58578998&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 newdata.crs</span>
+
+<span class="go">NameError: name &#39;newdata&#39; is not defined</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -571,10 +722,21 @@ Group by function is useful to group data based on values on selected column(s).
 </ul>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Group the data by column &#39;BINOMIAL&#39;</span>
 <span class="gp">In [29]: </span><span class="n">grouped</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;BINOMIAL&#39;</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-29-c5b2ead3a225&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">grouped</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;BINOMIAL&#39;</span><span class="p">)</span>
 
-<span class="go"># Let&#39;s see what we got</span>
+<span class="ne">NameError</span>: name &#39;data&#39; is not defined
+
+<span class="c1"># Let&#39;s see what we got</span>
 <span class="gp">In [30]: </span><span class="n">grouped</span>
-<span class="gh">Out[30]: </span><span class="go">&lt;pandas.core.groupby.groupby.DataFrameGroupBy object at 0x7ff4f72dbac8&gt;</span>
+<span class="go">                                                                                                                                                                                                                                                                                        ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-30-7cfd7f4adbb0&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 grouped</span>
+
+<span class="go">NameError: name &#39;grouped&#39; is not defined</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -584,20 +746,22 @@ Group by function is useful to group data based on values on selected column(s).
 <span class="gp">In [31]: </span><span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">grouped</span><span class="p">:</span>
 <span class="gp">   ....: </span>    <span class="n">individual_fish</span> <span class="o">=</span> <span class="n">values</span>
 <span class="gp">   ....: </span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-31-f336522fbc69&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">grouped</span><span class="p">:</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="n">individual_fish</span> <span class="o">=</span> <span class="n">values</span>
 
-<span class="go"># Let&#39;s see what is the LAST item that we iterated</span>
+<span class="ne">NameError</span>: name &#39;grouped&#39; is not defined
+
+<span class="c1"># Let&#39;s see what is the LAST item that we iterated</span>
 <span class="gp">In [32]: </span><span class="n">individual_fish</span>
-<span class="gh">Out[32]: </span><span class="go"></span>
-<span class="go">       ID_NO    ...           area</span>
-<span class="go">27  154915.0    ...      38.671198</span>
-<span class="go">28  154915.0    ...      37.445735</span>
-<span class="go">29  154915.0    ...      16.939460</span>
-<span class="go">30  154915.0    ...      10.126967</span>
-<span class="go">31  154915.0    ...       7.760303</span>
-<span class="go">32  154915.0    ...       3.434236</span>
-<span class="go">33  154915.0    ...       2.408620</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                         ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-32-d215f5ce9038&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 individual_fish</span>
 
-<span class="go">[7 rows x 25 columns]</span>
+<span class="go">NameError: name &#39;individual_fish&#39; is not defined</span>
 </pre></div>
 </div>
 <p>From here we can see that an individual_fish variable now contains all the rows that belongs to a fish called <code class="docutils literal notranslate"><span class="pre">Teixeirichthys</span> <span class="pre">jordani</span></code>. Notice that the index numbers refer to the row numbers in the
@@ -606,10 +770,20 @@ original data -GeoDataFrame.</p>
 <li>Let’s check the datatype of the grouped object and what does the <code class="docutils literal notranslate"><span class="pre">key</span></code> variable contain</li>
 </ul>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [33]: </span><span class="nb">type</span><span class="p">(</span><span class="n">individual_fish</span><span class="p">)</span>
-<span class="gh">Out[33]: </span><span class="go">geopandas.geodataframe.GeoDataFrame</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-33-9ce77aa9f035&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="nb">type</span><span class="p">(</span><span class="n">individual_fish</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;individual_fish&#39; is not defined
 
 <span class="gp">In [34]: </span><span class="k">print</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-<span class="go">                                             Teixeirichthys jordani</span>
+<span class="go">                                                                                                                                                                                                                                                                                      ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-34-3e6a9f6af8cc&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 print(key)</span>
+
+<span class="go">NameError: name &#39;key&#39; is not defined</span>
 </pre></div>
 </div>
 <p>As can be seen from the example above, each set of data are now grouped into separate GeoDataFrames that we can export into Shapefiles using the variable <code class="docutils literal notranslate"><span class="pre">key</span></code>
@@ -655,7 +829,9 @@ handy when dealing with Shapefiles. Doing similar process manually would be real
   <div role="contentinfo">
     <p>
         &copy; Copyright 2018, Henrikki Tenkanen
-      Last updated on Nov 19, 2018.
+      <span class="lastupdated">
+        Last updated on Oct 31, 2018.
+      </span>
 
     </p>
   </div>
@@ -681,9 +857,12 @@ handy when dealing with Shapefiles. Doing similar process manually would be real
     </span>
     <div class="rst-other-versions">
         <dl>
+            <dt>Tags</dt>
+            <dd><a href="../../../2018/lessons/L2/geopandas-basics.html">2018</a></dd>
+        </dl>
+        <dl>
             <dt>Branches</dt>
-            <dd><a href="../../../2017/lessons/L2/geopandas-basics.html">2017</a></dd>
-            <dd><a href="../../../develop/lessons/L2/geopandas-basics.html">develop</a></dd>
+            <dd><a href="../../../develop/index.html">develop</a></dd>
             <dd><a href="../../../drafts/lessons/L2/geopandas-basics.html">drafts</a></dd>
             <dd><a href="geopandas-basics.html">master</a></dd>
         </dl>
@@ -691,36 +870,16 @@ handy when dealing with Shapefiles. Doing similar process manually would be real
 </div>
 
 
-  
-
-    
-    
-      <script type="text/javascript">
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'../../',
-              VERSION:'2018',
-              LANGUAGE:'None',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-
-  
-
-  <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

@@ -28,13 +28,31 @@
   
 
   
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'2018',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
@@ -43,21 +61,16 @@
     <link href="../../_static/geo-python.css" rel="stylesheet" type="text/css">
      
 
-
-  
-  <script src="../../_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -306,18 +319,63 @@ always but should) information about the coordinate system in which the
 data is projected.</p>
 <p>Let’s start by reading the data from the <code class="docutils literal notranslate"><span class="pre">Europe_borders.shp</span></code> file.</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-1-a62d01c1d62e&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
 
-<span class="go"># Filepath to the Europe borders Shapefile</span>
+<span class="nn">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/geopandas/__init__.py</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">geopandas.array</span> <span class="kn">import</span> <span class="n">_points_from_xy</span> <span class="k">as</span> <span class="n">points_from_xy</span>  <span class="c1"># noqa</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> 
+<span class="ne">----&gt; </span><span class="mi">5</span> <span class="kn">from</span> <span class="nn">geopandas.io.file</span> <span class="kn">import</span> <span class="n">read_file</span>  <span class="c1"># noqa</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">from</span> <span class="nn">geopandas.io.sql</span> <span class="kn">import</span> <span class="n">read_postgis</span>  <span class="c1"># noqa</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">from</span> <span class="nn">geopandas.tools</span> <span class="kn">import</span> <span class="n">sjoin</span>  <span class="c1"># noqa</span>
+
+<span class="nn">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/geopandas/io/file.py</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">six</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> 
+<span class="ne">----&gt; </span><span class="mi">6</span> <span class="kn">import</span> <span class="nn">fiona</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> 
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="kn">from</span> <span class="nn">geopandas</span> <span class="kn">import</span> <span class="n">GeoDataFrame</span><span class="p">,</span> <span class="n">GeoSeries</span>
+
+<span class="nn">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/fiona/__init__.py</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">67</span> <span class="kn">from</span> <span class="nn">six</span> <span class="kn">import</span> <span class="n">string_types</span>
+<span class="g g-Whitespace">     </span><span class="mi">68</span> 
+<span class="ne">---&gt; </span><span class="mi">69</span> <span class="kn">from</span> <span class="nn">fiona.collection</span> <span class="kn">import</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">BytesCollection</span><span class="p">,</span> <span class="n">vsi_path</span>
+<span class="g g-Whitespace">     </span><span class="mi">70</span> <span class="kn">from</span> <span class="nn">fiona._drivers</span> <span class="kn">import</span> <span class="n">driver_count</span><span class="p">,</span> <span class="n">GDALEnv</span>
+<span class="g g-Whitespace">     </span><span class="mi">71</span> <span class="kn">from</span> <span class="nn">fiona.drvsupport</span> <span class="kn">import</span> <span class="n">supported_drivers</span>
+
+<span class="nn">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/fiona/collection.py</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> 
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="kn">from</span> <span class="nn">fiona</span> <span class="kn">import</span> <span class="n">compat</span>
+<span class="ne">----&gt; </span><span class="mi">9</span> <span class="kn">from</span> <span class="nn">fiona.ogrext</span> <span class="kn">import</span> <span class="n">Iterator</span><span class="p">,</span> <span class="n">ItemsIterator</span><span class="p">,</span> <span class="n">KeysIterator</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="kn">from</span> <span class="nn">fiona.ogrext</span> <span class="kn">import</span> <span class="n">Session</span><span class="p">,</span> <span class="n">WritingSession</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="kn">from</span> <span class="nn">fiona.ogrext</span> <span class="kn">import</span> <span class="p">(</span>
+
+<span class="ne">ImportError</span>: libpoppler.so.76: cannot open shared object file: No such file or directory
+
+<span class="c1"># Filepath to the Europe borders Shapefile</span>
 <span class="gp">In [2]: </span><span class="n">fp</span> <span class="o">=</span> <span class="s2">&quot;/home/geo/Europe_borders.shp&quot;</span>
 
 <span class="go"># Read data</span>
 <span class="gp">In [3]: </span><span class="n">data</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-3-1ed97abf5c2e&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">data</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;gpd&#39; is not defined
 </pre></div>
 </div>
 <p>We can see the current coordinate reference system from <code class="docutils literal notranslate"><span class="pre">.crs</span></code>
 attribute:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="n">data</span><span class="o">.</span><span class="n">crs</span>
-<span class="gh">Out[4]: </span><span class="go">{&#39;init&#39;: &#39;epsg:4326&#39;}</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-4-6a66de0ef478&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">data</span><span class="o">.</span><span class="n">crs</span>
+
+<span class="ne">NameError</span>: name &#39;data&#39; is not defined
 </pre></div>
 </div>
 <p>Okey, so from this disctionary we can see that the data is something called
@@ -338,13 +396,12 @@ coordinate system (i.e. coordinates are in decimal degrees (lat, lon)).</p>
 </div></blockquote>
 <p>Let’s also check the values in our <code class="docutils literal notranslate"><span class="pre">geometry</span></code> column.</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-<span class="gh">Out[5]: </span><span class="go"></span>
-<span class="go">0    POLYGON ((8.457777976989746 54.56236267089844,...</span>
-<span class="go">1    POLYGON ((8.71992015838623 47.69664382934571, ...</span>
-<span class="go">2    POLYGON ((6.733166694641113 53.5740852355957, ...</span>
-<span class="go">3    POLYGON ((6.858222007751465 53.59411239624024,...</span>
-<span class="go">4    POLYGON ((6.89894437789917 53.6256103515625, 6...</span>
-<span class="go">Name: geometry, dtype: object</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-5-9028551db399&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+
+<span class="ne">NameError</span>: name &#39;data&#39; is not defined
 </pre></div>
 </div>
 <p>Okey, so the coordinate values of the Polygons indeed look like lat-lon values.</p>
@@ -355,20 +412,31 @@ should define the column containing the geometries, i.e. <code class="docutils l
 in this case, and a <code class="docutils literal notranslate"><span class="pre">epgs</span></code> value of the projection that you want to use.</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Let&#39;s take a copy of our layer</span>
 <span class="gp">In [6]: </span><span class="n">data_proj</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-6-752bdaba4529&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">data_proj</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
-<span class="go"># Reproject the geometries by replacing the values with projected ones</span>
+<span class="ne">NameError</span>: name &#39;data&#39; is not defined
+
+<span class="c1"># Reproject the geometries by replacing the values with projected ones</span>
 <span class="gp">In [7]: </span><span class="n">data_proj</span> <span class="o">=</span> <span class="n">data_proj</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">epsg</span><span class="o">=</span><span class="mi">3035</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                            ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-7-514de6fdcfb9&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 data_proj = data_proj.to_crs(epsg=3035)</span>
+
+<span class="go">NameError: name &#39;data_proj&#39; is not defined</span>
 </pre></div>
 </div>
 <p>Let’s see how the coordinates look now.</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [8]: </span><span class="n">data_proj</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-<span class="gh">Out[8]: </span><span class="go"></span>
-<span class="go">0    POLYGON ((4221214.558088431 3496203.404338956,...</span>
-<span class="go">1    POLYGON ((4224860.478308966 2732279.319617757,...</span>
-<span class="go">2    POLYGON ((4104652.175545862 3390034.953002084,...</span>
-<span class="go">3    POLYGON ((4113025.664284974 3391895.755505159,...</span>
-<span class="go">4    POLYGON ((4115871.227627173 3395282.099288368,...</span>
-<span class="go">Name: geometry, dtype: object</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-8-99f78d217b10&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">data_proj</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+
+<span class="ne">NameError</span>: name &#39;data_proj&#39; is not defined
 </pre></div>
 </div>
 <p>And here we go, the numbers have changed! Now we have successfully
@@ -411,13 +479,44 @@ in Europe as the areas especially in the north are more realistic and not so str
 3035 as now we only modified the values of the <code class="docutils literal notranslate"><span class="pre">geometry</span></code> column.
 We can take use of fiona’s <code class="docutils literal notranslate"><span class="pre">from_epsg</span></code> -function.</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="kn">from</span> <span class="nn">fiona.crs</span> <span class="kn">import</span> <span class="n">from_epsg</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-9-b1f6bce98ced&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">fiona.crs</span> <span class="kn">import</span> <span class="n">from_epsg</span>
 
-<span class="go"># Determine the CRS of the GeoDataFrame</span>
+<span class="nn">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/fiona/__init__.py</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">67</span> <span class="kn">from</span> <span class="nn">six</span> <span class="kn">import</span> <span class="n">string_types</span>
+<span class="g g-Whitespace">     </span><span class="mi">68</span> 
+<span class="ne">---&gt; </span><span class="mi">69</span> <span class="kn">from</span> <span class="nn">fiona.collection</span> <span class="kn">import</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">BytesCollection</span><span class="p">,</span> <span class="n">vsi_path</span>
+<span class="g g-Whitespace">     </span><span class="mi">70</span> <span class="kn">from</span> <span class="nn">fiona._drivers</span> <span class="kn">import</span> <span class="n">driver_count</span><span class="p">,</span> <span class="n">GDALEnv</span>
+<span class="g g-Whitespace">     </span><span class="mi">71</span> <span class="kn">from</span> <span class="nn">fiona.drvsupport</span> <span class="kn">import</span> <span class="n">supported_drivers</span>
+
+<span class="nn">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/fiona/collection.py</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> 
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="kn">from</span> <span class="nn">fiona</span> <span class="kn">import</span> <span class="n">compat</span>
+<span class="ne">----&gt; </span><span class="mi">9</span> <span class="kn">from</span> <span class="nn">fiona.ogrext</span> <span class="kn">import</span> <span class="n">Iterator</span><span class="p">,</span> <span class="n">ItemsIterator</span><span class="p">,</span> <span class="n">KeysIterator</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="kn">from</span> <span class="nn">fiona.ogrext</span> <span class="kn">import</span> <span class="n">Session</span><span class="p">,</span> <span class="n">WritingSession</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="kn">from</span> <span class="nn">fiona.ogrext</span> <span class="kn">import</span> <span class="p">(</span>
+
+<span class="ne">ImportError</span>: libpoppler.so.76: cannot open shared object file: No such file or directory
+
+<span class="c1"># Determine the CRS of the GeoDataFrame</span>
 <span class="gp">In [10]: </span><span class="n">data_proj</span><span class="o">.</span><span class="n">crs</span> <span class="o">=</span> <span class="n">from_epsg</span><span class="p">(</span><span class="mi">3035</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-10-d8da12f1392c&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 data_proj.crs = from_epsg(3035)</span>
+
+<span class="go">NameError: name &#39;from_epsg&#39; is not defined</span>
 
 <span class="go"># Let&#39;s see what we have</span>
 <span class="gp">In [11]: </span><span class="n">data_proj</span><span class="o">.</span><span class="n">crs</span>
-<span class="gh">Out[11]: </span><span class="go">{&#39;init&#39;: &#39;epsg:3035&#39;, &#39;no_defs&#39;: True}</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-11-24454a5a74ce&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 data_proj.crs</span>
+
+<span class="go">NameError: name &#39;data_proj&#39; is not defined</span>
 </pre></div>
 </div>
 <p>Finally, let’s save our projected layer into a Shapefile so that we can use it later.</p>
@@ -433,6 +532,12 @@ We can take use of fiona’s <code class="docutils literal notranslate"><span cl
 <p>On Windows, the prj -file might NOT update with the new CRS value when using the <code class="docutils literal notranslate"><span class="pre">from_epsg()</span></code> -function. If this happens
 it is possible to fix the prj by passing the coordinate reference information as proj4 text, like following.</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [12]: </span><span class="n">data_proj</span><span class="o">.</span><span class="n">crs</span> <span class="o">=</span> <span class="s1">&#39;+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs&#39;</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-12-354b27f9eb20&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">data_proj</span><span class="o">.</span><span class="n">crs</span> <span class="o">=</span> <span class="s1">&#39;+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs&#39;</span>
+
+<span class="ne">NameError</span>: name &#39;data_proj&#39; is not defined
 </pre></div>
 </div>
 <p class="last">You can find <code class="docutils literal notranslate"><span class="pre">proj4</span></code> text versions for different projection from <a class="reference external" href="http://spatialreference.org">spatialreference.org</a>.
@@ -452,6 +557,26 @@ in meters.</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [13]: </span><span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Point</span>
 
 <span class="gp">In [14]: </span><span class="kn">from</span> <span class="nn">fiona.crs</span> <span class="kn">import</span> <span class="n">from_epsg</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-14-b1f6bce98ced&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">fiona.crs</span> <span class="kn">import</span> <span class="n">from_epsg</span>
+
+<span class="nn">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/fiona/__init__.py</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">67</span> <span class="kn">from</span> <span class="nn">six</span> <span class="kn">import</span> <span class="n">string_types</span>
+<span class="g g-Whitespace">     </span><span class="mi">68</span> 
+<span class="ne">---&gt; </span><span class="mi">69</span> <span class="kn">from</span> <span class="nn">fiona.collection</span> <span class="kn">import</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">BytesCollection</span><span class="p">,</span> <span class="n">vsi_path</span>
+<span class="g g-Whitespace">     </span><span class="mi">70</span> <span class="kn">from</span> <span class="nn">fiona._drivers</span> <span class="kn">import</span> <span class="n">driver_count</span><span class="p">,</span> <span class="n">GDALEnv</span>
+<span class="g g-Whitespace">     </span><span class="mi">71</span> <span class="kn">from</span> <span class="nn">fiona.drvsupport</span> <span class="kn">import</span> <span class="n">supported_drivers</span>
+
+<span class="nn">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/fiona/collection.py</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> 
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="kn">from</span> <span class="nn">fiona</span> <span class="kn">import</span> <span class="n">compat</span>
+<span class="ne">----&gt; </span><span class="mi">9</span> <span class="kn">from</span> <span class="nn">fiona.ogrext</span> <span class="kn">import</span> <span class="n">Iterator</span><span class="p">,</span> <span class="n">ItemsIterator</span><span class="p">,</span> <span class="n">KeysIterator</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="kn">from</span> <span class="nn">fiona.ogrext</span> <span class="kn">import</span> <span class="n">Session</span><span class="p">,</span> <span class="n">WritingSession</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="kn">from</span> <span class="nn">fiona.ogrext</span> <span class="kn">import</span> <span class="p">(</span>
+
+<span class="ne">ImportError</span>: libpoppler.so.76: cannot open shared object file: No such file or directory
 </pre></div>
 </div>
 <p>Next we need to specify our projection to metric system using <a class="reference external" href="http://spatialreference.org/ref/esri/world-azimuthal-equidistant/">World Equidistant Cylindrical -projection</a> where distances are represented correctly from the center longitude and latitude.</p>
@@ -471,6 +596,12 @@ in which we want to center our projection to Helsinki. We need to specify the <c
 <p>Okey, now we are ready to transform our <code class="docutils literal notranslate"><span class="pre">Europe_borders.shp</span></code> data into the desired projection. Let’s create a new
 copy of our GeoDataFrame called <code class="docutils literal notranslate"><span class="pre">data_d</span></code> (d for ‘distance’).</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="n">data_d</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">proj4_txt</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-18-c558854369d1&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">data_d</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">proj4_txt</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;data&#39; is not defined
 </pre></div>
 </div>
 <p>Let’s take a look of our data and create a map, so we can see what we have now.</p>
@@ -485,29 +616,51 @@ copy of our GeoDataFrame called <code class="docutils literal notranslate"><span
 <li>Let’s continue our analysis by creating a Point object from Helsinki and insert it into a GeoPandas GeoSeries. We also specify that the CRS of the GeoSeries is WGS84. You can do this by using <code class="docutils literal notranslate"><span class="pre">crs</span></code> parameter when creating the GeoSeries.</li>
 </ul>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [21]: </span><span class="n">hki</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoSeries</span><span class="p">([</span><span class="n">Point</span><span class="p">(</span><span class="n">hki_lon</span><span class="p">,</span> <span class="n">hki_lat</span><span class="p">)],</span> <span class="n">crs</span><span class="o">=</span><span class="n">from_epsg</span><span class="p">(</span><span class="mi">4326</span><span class="p">))</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-21-d9040ba371a2&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">hki</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoSeries</span><span class="p">([</span><span class="n">Point</span><span class="p">(</span><span class="n">hki_lon</span><span class="p">,</span> <span class="n">hki_lat</span><span class="p">)],</span> <span class="n">crs</span><span class="o">=</span><span class="n">from_epsg</span><span class="p">(</span><span class="mi">4326</span><span class="p">))</span>
+
+<span class="ne">NameError</span>: name &#39;gpd&#39; is not defined
 </pre></div>
 </div>
 <ul class="simple">
 <li>Let’s convert this point to the same projection as our Europe data is.</li>
 </ul>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [22]: </span><span class="n">hki</span> <span class="o">=</span> <span class="n">hki</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">proj4_txt</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-22-e6658e2d6b2a&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">hki</span> <span class="o">=</span> <span class="n">hki</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">proj4_txt</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;hki&#39; is not defined
 
 <span class="gp">In [23]: </span><span class="k">print</span><span class="p">(</span><span class="n">hki</span><span class="p">)</span>
-<span class="go">0    POINT (0 0)</span>
-<span class="go">dtype: object</span>
+<span class="go">                                                                                                                                                                                                                                                                                ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-23-cde741fe1c99&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 print(hki)</span>
+
+<span class="go">NameError: name &#39;hki&#39; is not defined</span>
 </pre></div>
 </div>
 <p>Aha! So the Point coordinates of Helsinki are 0. This confirms us that the center point of our projection is indeed Helsinki.</p>
 <p>Next we need to calculate the centroids for all the Polygons of the European countries. This can be done easily in Geopandas by using the <code class="docutils literal notranslate"><span class="pre">centroid</span></code> attribute.</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [24]: </span><span class="n">data_d</span><span class="p">[</span><span class="s1">&#39;country_centroid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_d</span><span class="o">.</span><span class="n">centroid</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-24-95272801c065&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">data_d</span><span class="p">[</span><span class="s1">&#39;country_centroid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_d</span><span class="o">.</span><span class="n">centroid</span>
+
+<span class="ne">NameError</span>: name &#39;data_d&#39; is not defined
 
 <span class="gp">In [25]: </span><span class="n">data_d</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="gh">Out[25]: </span><span class="go"></span>
-<span class="go">            TZID                      ...                                                     country_centroid</span>
-<span class="go">0  Europe/Berlin                      ...                        POINT (-917903.9422464954 -622642.5405510699)</span>
-<span class="go">1  Europe/Berlin                      ...                        POINT (-904392.5030473378 -1387445.472292878)</span>
+<span class="go">                                                                                                                                                                                                                                                                                                    ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-25-076af46bb14a&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 data_d.head(2)</span>
 
-<span class="go">[2 rows x 3 columns]</span>
+<span class="go">NameError: name &#39;data_d&#39; is not defined</span>
 </pre></div>
 </div>
 <p>Okey, so now we have a new column <code class="docutils literal notranslate"><span class="pre">country_centroid</span></code> that has the Point geometries representing the centroids of each Polygon.</p>
@@ -549,50 +702,66 @@ to calculate the distance between the centroids and Helsinki. We will create our
 <li>Before using our function and calculating the distances between Helsinki and centroids, we need to get the Shapely point geometry from the re-projected Helsinki center point. We can use the <code class="docutils literal notranslate"><span class="pre">get()</span></code> function to retrieve a value from specific index (here index 0).</li>
 </ul>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [26]: </span><span class="n">hki_geom</span> <span class="o">=</span> <span class="n">hki</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-26-ba11d5558e81&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">hki_geom</span> <span class="o">=</span> <span class="n">hki</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;hki&#39; is not defined
 
 <span class="gp">In [27]: </span><span class="k">print</span><span class="p">(</span><span class="n">hki_geom</span><span class="p">)</span>
-<span class="go">POINT (0 0)</span>
+<span class="go">                                                                                                                                                                                                                                                                          ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-27-4af4a3087cdd&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 print(hki_geom)</span>
+
+<span class="go">NameError: name &#39;hki_geom&#39; is not defined</span>
 </pre></div>
 </div>
 <p>Now we are ready to use our function with <code class="docutils literal notranslate"><span class="pre">apply()</span></code> function. When using the function, it is important to specify that the <code class="docutils literal notranslate"><span class="pre">axis=1</span></code>.
 This specifies that the calculations should be done row by row (instead of column-wise).</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [28]: </span><span class="n">data_d</span> <span class="o">=</span> <span class="n">data_d</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">calculateDistance</span><span class="p">,</span> <span class="n">dest_geom</span><span class="o">=</span><span class="n">hki_geom</span><span class="p">,</span> <span class="n">src_col</span><span class="o">=</span><span class="s1">&#39;country_centroid&#39;</span><span class="p">,</span> <span class="n">target_col</span><span class="o">=</span><span class="s1">&#39;dist_to_Hki&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-28-55e2b142ca0d&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">data_d</span> <span class="o">=</span> <span class="n">data_d</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">calculateDistance</span><span class="p">,</span> <span class="n">dest_geom</span><span class="o">=</span><span class="n">hki_geom</span><span class="p">,</span> <span class="n">src_col</span><span class="o">=</span><span class="s1">&#39;country_centroid&#39;</span><span class="p">,</span> <span class="n">target_col</span><span class="o">=</span><span class="s1">&#39;dist_to_Hki&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;data_d&#39; is not defined
 
 <span class="gp">In [29]: </span><span class="n">data_d</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
-<span class="gh">Out[29]: </span><span class="go"></span>
-<span class="go">             TZID     ...       dist_to_Hki</span>
-<span class="go">0   Europe/Berlin     ...       1109.157960</span>
-<span class="go">1   Europe/Berlin     ...       1656.179561</span>
-<span class="go">2   Europe/Berlin     ...       1249.979421</span>
-<span class="go">3   Europe/Berlin     ...       1243.676322</span>
-<span class="go">4   Europe/Berlin     ...       1239.567840</span>
-<span class="go">5   Europe/Berlin     ...       1233.398514</span>
-<span class="go">6   Europe/Berlin     ...       1219.015820</span>
-<span class="go">7   Europe/Berlin     ...       1193.458319</span>
-<span class="go">8   Europe/Berlin     ...       1184.692488</span>
-<span class="go">9   Europe/Berlin     ...        933.192649</span>
-<span class="go">10  Europe/Berlin     ...       1177.796732</span>
-<span class="go">11  Europe/Berlin     ...       1210.850218</span>
-<span class="go">12  Europe/Berlin     ...       1203.885991</span>
-<span class="go">13  Europe/Berlin     ...       1111.298075</span>
-<span class="go">14  Europe/Berlin     ...        909.114086</span>
-<span class="go">15  Europe/Berlin     ...       1102.821109</span>
-<span class="go">16  Europe/Berlin     ...        907.927492</span>
-<span class="go">17  Europe/Berlin     ...       1093.321509</span>
-<span class="go">18  Europe/Berlin     ...       1104.650594</span>
-<span class="go">19  Europe/Berlin     ...       1109.059306</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                  ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-29-a2561fce700c&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 data_d.head(20)</span>
 
-<span class="go">[20 rows x 4 columns]</span>
+<span class="go">NameError: name &#39;data_d&#39; is not defined</span>
 </pre></div>
 </div>
 <p>Great! Now we have successfully calculated the distances between the Polygon centroids and Helsinki. :)</p>
 <p>Let’s check what is the longest and mean distance to Helsinki from the centroids of other European countries.</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [30]: </span><span class="n">max_dist</span> <span class="o">=</span> <span class="n">data_d</span><span class="p">[</span><span class="s1">&#39;dist_to_Hki&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-30-bf6008aa7862&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">max_dist</span> <span class="o">=</span> <span class="n">data_d</span><span class="p">[</span><span class="s1">&#39;dist_to_Hki&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+
+<span class="ne">NameError</span>: name &#39;data_d&#39; is not defined
 
 <span class="gp">In [31]: </span><span class="n">mean_dist</span> <span class="o">=</span> <span class="n">data_d</span><span class="p">[</span><span class="s1">&#39;dist_to_Hki&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="go">                                                                                                                                                                                                                                                                                              ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-31-3a3bdaa4a5ba&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 mean_dist = data_d[&#39;dist_to_Hki&#39;].mean()</span>
+
+<span class="go">NameError: name &#39;data_d&#39; is not defined</span>
 
 <span class="gp">In [32]: </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Maximum distance to Helsinki is </span><span class="si">%.0f</span><span class="s2"> km, and the mean distance is </span><span class="si">%.0f</span><span class="s2"> km.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">max_dist</span><span class="p">,</span> <span class="n">mean_dist</span><span class="p">))</span>
-<span class="go">Maximum distance to Helsinki is 3199 km, and the mean distance is 1185 km.</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-32-625e201e0cf0&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 print(&quot;Maximum distance to Helsinki is %.0f km, and the mean distance is %.0f km.&quot; % (max_dist, mean_dist))</span>
+
+<span class="go">NameError: name &#39;max_dist&#39; is not defined</span>
 </pre></div>
 </div>
 <p>Okey, it seems that we finns in the North are fairly far away from all other European countries as the mean distance to other countries is 1185 kilometers.</p>
@@ -618,7 +787,9 @@ based on latitude and longitude values.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2018, Henrikki Tenkanen
-      Last updated on Nov 19, 2018.
+      <span class="lastupdated">
+        Last updated on Oct 31, 2018.
+      </span>
 
     </p>
   </div>
@@ -644,9 +815,12 @@ based on latitude and longitude values.</p>
     </span>
     <div class="rst-other-versions">
         <dl>
+            <dt>Tags</dt>
+            <dd><a href="../../2018/lessons/L2/projections.html">2018</a></dd>
+        </dl>
+        <dl>
             <dt>Branches</dt>
-            <dd><a href="../../2017/lessons/L2/projections.html">2017</a></dd>
-            <dd><a href="../../develop/lessons/L2/projections.html">develop</a></dd>
+            <dd><a href="../../develop/index.html">develop</a></dd>
             <dd><a href="../../drafts/lessons/L2/projections.html">drafts</a></dd>
             <dd><a href="../../master/lessons/L2/projections.html">master</a></dd>
         </dl>
@@ -654,36 +828,16 @@ based on latitude and longitude values.</p>
 </div>
 
 
-  
-
-    
-    
-      <script type="text/javascript">
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'../../',
-              VERSION:'2018',
-              LANGUAGE:'None',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-
-  
-
-  <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

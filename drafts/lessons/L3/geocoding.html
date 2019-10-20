@@ -28,13 +28,31 @@
   
 
   
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'2018',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
@@ -43,21 +61,16 @@
     <link href="../../_static/geo-python.css" rel="stylesheet" type="text/css">
      
 
-
-  
-  <script src="../../_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -327,32 +340,52 @@ data looks like following:</p>
 </ul>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Import the geocoding tool</span>
 <span class="gp">In [2]: </span><span class="kn">from</span> <span class="nn">geopandas.tools</span> <span class="kn">import</span> <span class="n">geocode</span>
-
-<span class="go"># Geocode addresses with Nominatim backend</span>
-<span class="gp">In [3]: </span><span class="n">geo</span> <span class="o">=</span> <span class="n">geocode</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;addr&#39;</span><span class="p">],</span> <span class="n">provider</span><span class="o">=</span><span class="s1">&#39;nominatim&#39;</span><span class="p">)</span>
 <span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-3-0311dcae81b6&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">geo</span> <span class="o">=</span> <span class="n">geocode</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;addr&#39;</span><span class="p">],</span> <span class="n">provider</span><span class="o">=</span><span class="s1">&#39;nominatim&#39;</span><span class="p">)</span>
+<span class="nn">&lt;ipython-input-2-f9b0f1186ddc&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">geopandas.tools</span> <span class="kn">import</span> <span class="n">geocode</span>
 
-<span class="nn">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/geopandas/tools/geocoding.py</span> in <span class="ni">geocode</span><span class="nt">(strings, provider, **kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">60</span> 
-<span class="g g-Whitespace">     </span><span class="mi">61</span>     <span class="s2">&quot;&quot;&quot;</span>
-<span class="ne">---&gt; </span><span class="mi">62</span><span class="s2">     return _query(strings, True, provider, **kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">63</span><span class="s2"> </span>
-<span class="g g-Whitespace">     </span><span class="mi">64</span><span class="s2"> </span>
+<span class="nn">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/geopandas/__init__.py</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">geopandas.array</span> <span class="kn">import</span> <span class="n">_points_from_xy</span> <span class="k">as</span> <span class="n">points_from_xy</span>  <span class="c1"># noqa</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> 
+<span class="ne">----&gt; </span><span class="mi">5</span> <span class="kn">from</span> <span class="nn">geopandas.io.file</span> <span class="kn">import</span> <span class="n">read_file</span>  <span class="c1"># noqa</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">from</span> <span class="nn">geopandas.io.sql</span> <span class="kn">import</span> <span class="n">read_postgis</span>  <span class="c1"># noqa</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">from</span> <span class="nn">geopandas.tools</span> <span class="kn">import</span> <span class="n">sjoin</span>  <span class="c1"># noqa</span>
 
-<span class="nn">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/geopandas/tools/geocoding.py</span> in <span class="ni">_query</span><span class="nt">(data, forward, provider, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">109</span><span class="s2"> def _query(data, forward, provider, **kwargs):</span>
-<span class="g g-Whitespace">    </span><span class="mi">110</span><span class="s2">     # generic wrapper for calls over lists to geopy Geocoders</span>
-<span class="ne">--&gt; </span><span class="mi">111</span><span class="s2">     import geopy</span>
-<span class="g g-Whitespace">    </span><span class="mi">112</span><span class="s2">     from geopy.geocoders.base import GeocoderQueryError</span>
-<span class="g g-Whitespace">    </span><span class="mi">113</span><span class="s2">     from geopy.geocoders import get_geocoder_for_service</span>
+<span class="nn">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/geopandas/io/file.py</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">six</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> 
+<span class="ne">----&gt; </span><span class="mi">6</span> <span class="kn">import</span> <span class="nn">fiona</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> 
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="kn">from</span> <span class="nn">geopandas</span> <span class="kn">import</span> <span class="n">GeoDataFrame</span><span class="p">,</span> <span class="n">GeoSeries</span>
 
-<span class="ne">ImportError</span>: No module named &#39;geopy&#39;
+<span class="nn">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/fiona/__init__.py</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">67</span> <span class="kn">from</span> <span class="nn">six</span> <span class="kn">import</span> <span class="n">string_types</span>
+<span class="g g-Whitespace">     </span><span class="mi">68</span> 
+<span class="ne">---&gt; </span><span class="mi">69</span> <span class="kn">from</span> <span class="nn">fiona.collection</span> <span class="kn">import</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">BytesCollection</span><span class="p">,</span> <span class="n">vsi_path</span>
+<span class="g g-Whitespace">     </span><span class="mi">70</span> <span class="kn">from</span> <span class="nn">fiona._drivers</span> <span class="kn">import</span> <span class="n">driver_count</span><span class="p">,</span> <span class="n">GDALEnv</span>
+<span class="g g-Whitespace">     </span><span class="mi">71</span> <span class="kn">from</span> <span class="nn">fiona.drvsupport</span> <span class="kn">import</span> <span class="n">supported_drivers</span>
+
+<span class="nn">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/fiona/collection.py</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> 
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="kn">from</span> <span class="nn">fiona</span> <span class="kn">import</span> <span class="n">compat</span>
+<span class="ne">----&gt; </span><span class="mi">9</span> <span class="kn">from</span> <span class="nn">fiona.ogrext</span> <span class="kn">import</span> <span class="n">Iterator</span><span class="p">,</span> <span class="n">ItemsIterator</span><span class="p">,</span> <span class="n">KeysIterator</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="kn">from</span> <span class="nn">fiona.ogrext</span> <span class="kn">import</span> <span class="n">Session</span><span class="p">,</span> <span class="n">WritingSession</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="kn">from</span> <span class="nn">fiona.ogrext</span> <span class="kn">import</span> <span class="p">(</span>
+
+<span class="ne">ImportError</span>: libpoppler.so.76: cannot open shared object file: No such file or directory
+
+<span class="c1"># Geocode addresses with Nominatim backend</span>
+<span class="gp">In [3]: </span><span class="n">geo</span> <span class="o">=</span> <span class="n">geocode</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;addr&#39;</span><span class="p">],</span> <span class="n">provider</span><span class="o">=</span><span class="s1">&#39;nominatim&#39;</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-3-0311dcae81b6&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 geo = geocode(data[&#39;addr&#39;], provider=&#39;nominatim&#39;)</span>
+
+<span class="go">NameError: name &#39;geocode&#39; is not defined</span>
 
 <span class="gp">In [4]: </span><span class="n">geo</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ---------------------------------------------------------------------------</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ---------------------------------------------------------------------------</span>
 <span class="go">NameError                                 Traceback (most recent call last)</span>
 <span class="go">&lt;ipython-input-4-fee2bd90ad10&gt; in &lt;module&gt;()</span>
 <span class="go">----&gt; 1 geo.head(2)</span>
@@ -444,7 +477,9 @@ Take a look from last year, <a class="reference external" href="https://automati
   <div role="contentinfo">
     <p>
         &copy; Copyright 2018, Henrikki Tenkanen
-      Last updated on Nov 02, 2018.
+      <span class="lastupdated">
+        Last updated on Nov 02, 2018.
+      </span>
 
     </p>
   </div>
@@ -470,9 +505,12 @@ Take a look from last year, <a class="reference external" href="https://automati
     </span>
     <div class="rst-other-versions">
         <dl>
+            <dt>Tags</dt>
+            <dd><a href="../../../2018/lessons/L3/geocoding.html">2018</a></dd>
+        </dl>
+        <dl>
             <dt>Branches</dt>
-            <dd><a href="../../../2017/lessons/L3/geocoding.html">2017</a></dd>
-            <dd><a href="../../../develop/lessons/L3/geocoding.html">develop</a></dd>
+            <dd><a href="../../../develop/index.html">develop</a></dd>
             <dd><a href="geocoding.html">drafts</a></dd>
             <dd><a href="../../../master/lessons/L3/geocoding.html">master</a></dd>
         </dl>
@@ -480,36 +518,16 @@ Take a look from last year, <a class="reference external" href="https://automati
 </div>
 
 
-  
-
-    
-    
-      <script type="text/javascript">
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'../../',
-              VERSION:'2018',
-              LANGUAGE:'None',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-
-  
-
-  <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

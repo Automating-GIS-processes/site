@@ -1,0 +1,829 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Spatial join\n",
+    "\n",
+    "[Spatial join](http://wiki.gis.com/wiki/index.php/Spatial_Join) is\n",
+    "yet another classic GIS problem. Getting attributes from one layer and\n",
+    "transferring them into another layer based on their spatial relationship\n",
+    "is something you most likely need to do on a regular basis.\n",
+    "\n",
+    "In the previous section we learned how to perform **a Point in Polygon query**.\n",
+    "We could now apply those techniques and create our own function to perform **a spatial join** between two layers based on their\n",
+    "spatial relationship. We could, for example, join the attributes of a polygon layer into a point layer where each point would get the\n",
+    "attributes of a polygon that ``contains`` the point.\n",
+    "\n",
+    "Luckily, [spatial join is already implemented in Geopandas](http://geopandas.org/mergingdata.html#spatial-joins)\n",
+    ", thus we do not need to create it ourselves. There are three possible types of\n",
+    "join that can be applied in spatial join that are determined with ``op`` -parameter in the ``gpd.sjoin()`` -function:\n",
+    "\n",
+    "-  ``\"intersects\"``\n",
+    "-  ``\"within\"``\n",
+    "-  ``\"contains\"``\n",
+    "\n",
+    "Sounds familiar? Yep, all of those spatial relationships were discussed\n",
+    "in the [Point in Polygon lesson](point-in-polygon.ipynb), thus you should know how they work.\n",
+    "\n",
+    "Let's perform a spatial join between these two layers:\n",
+    "- **Addresses:** the address-point Shapefile that we created trough geocoding \n",
+    "- **Population grid:** a Polygon layer that is a 250m x 250m grid showing the amount of people living in the Helsinki Region.\n",
+    "    - The population grid a dataset is produced by the **Helsinki Region Environmental\n",
+    "Services Authority (HSY)** (see [this page](https://www.hsy.fi/fi/asiantuntijalle/avoindata/Sivut/AvoinData.aspx?dataID=7) to access data from different years).\n",
+    "    - For this lesson we will use the population grid for year 2017, which can be dowloaded as a shapefile [from this link](https://www.hsy.fi/sites/AvoinData/AvoinData/SYT/Tietoyhteistyoyksikko/Shape%20(Esri)/V%C3%A4est%C3%B6tietoruudukko/Vaestotietoruudukko_2017_SHP.zip) in the  [Helsinki Region Infroshare\n",
+    "(HRI) open data portal](https://hri.fi/en_gb/) \n",
+    "\n",
+    "\n",
+    "## Download and clean the data\n",
+    "\n",
+    "**Execute the following steps in a terminal window**\n",
+    "\n",
+    "- Navigate to the data folder\n",
+    "\n",
+    "```\n",
+    "    $ cd data\n",
+    "```\n",
+    "\n",
+    "- Download the population grid using wget:\n",
+    "\n",
+    "```\n",
+    "    $ wget \"https://www.hsy.fi/sites/AvoinData/AvoinData/SYT/Tietoyhteistyoyksikko/Shape%20(Esri)/V%C3%A4est%C3%B6tietoruudukko/Vaestotietoruudukko_2017_SHP.zip\"\n",
+    "\n",
+    "```\n",
+    "\n",
+    "-  Unzip the file in Terminal into a folder called Pop17 (using -d flag)\n",
+    "\n",
+    "```\n",
+    "    $ unzip Vaestotietoruudukko_2017_SHP.zip -d Pop17\n",
+    "\n",
+    "```\n",
+    "\n",
+    "You should now have a folder ``/data/Pop17`` containing the population grid shapefile.\n",
+    "\n",
+    "-  Let's read the data into memory and see what we have.\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 22,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>INDEX</th>\n",
+       "      <th>ASUKKAITA</th>\n",
+       "      <th>ASVALJYYS</th>\n",
+       "      <th>IKA0_9</th>\n",
+       "      <th>IKA10_19</th>\n",
+       "      <th>IKA20_29</th>\n",
+       "      <th>IKA30_39</th>\n",
+       "      <th>IKA40_49</th>\n",
+       "      <th>IKA50_59</th>\n",
+       "      <th>IKA60_69</th>\n",
+       "      <th>IKA70_79</th>\n",
+       "      <th>IKA_YLI80</th>\n",
+       "      <th>geometry</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>688</td>\n",
+       "      <td>9</td>\n",
+       "      <td>28.0</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>POLYGON Z ((25472499.99532626 6689749.00506918...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>710</td>\n",
+       "      <td>8</td>\n",
+       "      <td>44.0</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>POLYGON Z ((25472499.99532626 6684249.00413040...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>711</td>\n",
+       "      <td>5</td>\n",
+       "      <td>90.0</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>POLYGON Z ((25472499.99532626 6683999.00499700...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>715</td>\n",
+       "      <td>12</td>\n",
+       "      <td>37.0</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>POLYGON Z ((25472499.99532626 6682998.99846143...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>848</td>\n",
+       "      <td>6</td>\n",
+       "      <td>44.0</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>99</td>\n",
+       "      <td>POLYGON Z ((25472749.99291839 6690249.00333598...</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "   INDEX  ASUKKAITA  ASVALJYYS  IKA0_9  IKA10_19  IKA20_29  IKA30_39  \\\n",
+       "0    688          9       28.0      99        99        99        99   \n",
+       "1    710          8       44.0      99        99        99        99   \n",
+       "2    711          5       90.0      99        99        99        99   \n",
+       "3    715         12       37.0      99        99        99        99   \n",
+       "4    848          6       44.0      99        99        99        99   \n",
+       "\n",
+       "   IKA40_49  IKA50_59  IKA60_69  IKA70_79  IKA_YLI80  \\\n",
+       "0        99        99        99        99         99   \n",
+       "1        99        99        99        99         99   \n",
+       "2        99        99        99        99         99   \n",
+       "3        99        99        99        99         99   \n",
+       "4        99        99        99        99         99   \n",
+       "\n",
+       "                                            geometry  \n",
+       "0  POLYGON Z ((25472499.99532626 6689749.00506918...  \n",
+       "1  POLYGON Z ((25472499.99532626 6684249.00413040...  \n",
+       "2  POLYGON Z ((25472499.99532626 6683999.00499700...  \n",
+       "3  POLYGON Z ((25472499.99532626 6682998.99846143...  \n",
+       "4  POLYGON Z ((25472749.99291839 6690249.00333598...  "
+      ]
+     },
+     "execution_count": 22,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "import geopandas as gpd\n",
+    "\n",
+    "# Filepath\n",
+    "fp = \"data/Pop17/Vaestoruudukko_2017.shp\"\n",
+    "\n",
+    "# Read the data\n",
+    "pop = gpd.read_file(fp)\n",
+    "\n",
+    "# See the first rows\n",
+    "pop.head()\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Okey so we have multiple columns in the dataset but the most important\n",
+    "one here is the column ``ASUKKAITA`` (*\"population\" in Finnish*) that\n",
+    "tells the amount of inhabitants living under that polygon.\n",
+    "\n",
+    "-  Let's change the name of that columns into ``pop17`` so that it is\n",
+    "   more intuitive. Changing column names is easy in Pandas / Geopandas\n",
+    "   using a function called ``rename()`` where we pass a dictionary to a\n",
+    "   parameter ``columns={'oldname': 'newname'}``."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 23,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Index(['INDEX', 'pop17', 'ASVALJYYS', 'IKA0_9', 'IKA10_19', 'IKA20_29',\n",
+       "       'IKA30_39', 'IKA40_49', 'IKA50_59', 'IKA60_69', 'IKA70_79', 'IKA_YLI80',\n",
+       "       'geometry'],\n",
+       "      dtype='object')"
+      ]
+     },
+     "execution_count": 23,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Change the name of a column\n",
+    "pop = pop.rename(columns={'ASUKKAITA': 'pop17'})\n",
+    "\n",
+    "# See the column names and confirm that we now have a column called 'pop17'\n",
+    "pop.columns"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "-  Let's also get rid of all unnecessary columns by selecting only\n",
+    "   columns that we need i.e. ``pop17`` and ``geometry``"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>pop17</th>\n",
+       "      <th>geometry</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>9</td>\n",
+       "      <td>POLYGON Z ((25472499.99532626 6689749.00506918...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>8</td>\n",
+       "      <td>POLYGON Z ((25472499.99532626 6684249.00413040...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>5</td>\n",
+       "      <td>POLYGON Z ((25472499.99532626 6683999.00499700...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>12</td>\n",
+       "      <td>POLYGON Z ((25472499.99532626 6682998.99846143...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>6</td>\n",
+       "      <td>POLYGON Z ((25472749.99291839 6690249.00333598...</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "   pop17                                           geometry\n",
+       "0      9  POLYGON Z ((25472499.99532626 6689749.00506918...\n",
+       "1      8  POLYGON Z ((25472499.99532626 6684249.00413040...\n",
+       "2      5  POLYGON Z ((25472499.99532626 6683999.00499700...\n",
+       "3     12  POLYGON Z ((25472499.99532626 6682998.99846143...\n",
+       "4      6  POLYGON Z ((25472749.99291839 6690249.00333598..."
+      ]
+     },
+     "execution_count": 24,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Columns that will be sected\n",
+    "selected_cols = ['pop17', 'geometry']\n",
+    "\n",
+    "# Select those columns\n",
+    "pop = pop[selected_cols]\n",
+    "\n",
+    "# Let's see the last 2 rows\n",
+    "pop.head()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Now we have cleaned the data and have only those columns that we need\n",
+    "for our analysis."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Join the layers\n",
+    "\n",
+    "Now we are ready to perform the spatial join between the two layers that\n",
+    "we have. The aim here is to get information about **how many people live\n",
+    "in a polygon that contains an individual address-point** . Thus, we want\n",
+    "to join attributes from the population layer we just modified into the\n",
+    "addresses point layer ``addresses.shp`` that we created trough gecoding in the previous section.\n",
+    "\n",
+    "-  Read the addresses layer into memory"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 25,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>address</th>\n",
+       "      <th>id</th>\n",
+       "      <th>addr</th>\n",
+       "      <th>geometry</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>Ruoholahti, 14, Itämerenkatu, Ruoholahti, Läns...</td>\n",
+       "      <td>1000</td>\n",
+       "      <td>Itämerenkatu 14, 00101 Helsinki, Finland</td>\n",
+       "      <td>POINT (24.9155624 60.1632015)</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>Kamppi, 1, Kampinkuja, Kamppi, Eteläinen suurp...</td>\n",
+       "      <td>1001</td>\n",
+       "      <td>Kampinkuja 1, 00100 Helsinki, Finland</td>\n",
+       "      <td>POINT (24.9316914 60.1690222)</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>Bangkok9, 8, Kaivokatu, Keskusta, Kluuvi, Etel...</td>\n",
+       "      <td>1002</td>\n",
+       "      <td>Kaivokatu 8, 00101 Helsinki, Finland</td>\n",
+       "      <td>POINT (24.9416849 60.1699637)</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>1, Hermannin rantatie, Hermanninmäki, Hermanni...</td>\n",
+       "      <td>1003</td>\n",
+       "      <td>Hermannin rantatie 1, 00580 Helsinki, Finland</td>\n",
+       "      <td>POINT (24.9655355 60.2008878)</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>Hesburger, 9, Tyynenmerenkatu, Jätkäsaari, Län...</td>\n",
+       "      <td>1005</td>\n",
+       "      <td>Tyynenmerenkatu 9, 00220 Helsinki, Finland</td>\n",
+       "      <td>POINT (24.9216003 60.1566475)</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "                                             address    id  \\\n",
+       "0  Ruoholahti, 14, Itämerenkatu, Ruoholahti, Läns...  1000   \n",
+       "1  Kamppi, 1, Kampinkuja, Kamppi, Eteläinen suurp...  1001   \n",
+       "2  Bangkok9, 8, Kaivokatu, Keskusta, Kluuvi, Etel...  1002   \n",
+       "3  1, Hermannin rantatie, Hermanninmäki, Hermanni...  1003   \n",
+       "4  Hesburger, 9, Tyynenmerenkatu, Jätkäsaari, Län...  1005   \n",
+       "\n",
+       "                                            addr  \\\n",
+       "0       Itämerenkatu 14, 00101 Helsinki, Finland   \n",
+       "1          Kampinkuja 1, 00100 Helsinki, Finland   \n",
+       "2           Kaivokatu 8, 00101 Helsinki, Finland   \n",
+       "3  Hermannin rantatie 1, 00580 Helsinki, Finland   \n",
+       "4     Tyynenmerenkatu 9, 00220 Helsinki, Finland   \n",
+       "\n",
+       "                        geometry  \n",
+       "0  POINT (24.9155624 60.1632015)  \n",
+       "1  POINT (24.9316914 60.1690222)  \n",
+       "2  POINT (24.9416849 60.1699637)  \n",
+       "3  POINT (24.9655355 60.2008878)  \n",
+       "4  POINT (24.9216003 60.1566475)  "
+      ]
+     },
+     "execution_count": 25,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Addresses filpath\n",
+    "addr_fp = r\"data/addresses.shp\"\n",
+    "\n",
+    "# Read data\n",
+    "addresses = gpd.read_file(addr_fp)\n",
+    "\n",
+    "# Check the head of the file\n",
+    "addresses.head()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "In order to do a spatial join, the layers need to be in the same projection"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 26,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "False"
+      ]
+     },
+     "execution_count": 26,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Are the layers in the same projection?\n",
+    "addresses.crs == pop.crs"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Let's re-project addresses to the projection of the population layer:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 27,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "addresses = addresses.to_crs(pop.crs)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "-  Let's make sure that the coordinate reference system of the layers\n",
+    "are identical"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 28,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "{'proj': 'tmerc', 'lat_0': 0, 'lon_0': 25, 'k': 1, 'x_0': 25500000, 'y_0': 0, 'ellps': 'GRS80', 'units': 'm', 'no_defs': True}\n",
+      "{'proj': 'tmerc', 'lat_0': 0, 'lon_0': 25, 'k': 1, 'x_0': 25500000, 'y_0': 0, 'ellps': 'GRS80', 'units': 'm', 'no_defs': True}\n"
+     ]
+    },
+    {
+     "data": {
+      "text/plain": [
+       "True"
+      ]
+     },
+     "execution_count": 28,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Check the crs of address points\n",
+    "print(addresses.crs)\n",
+    "\n",
+    "# Check the crs of population layer\n",
+    "print(pop.crs)\n",
+    "\n",
+    "# Do they match now?\n",
+    "addresses.crs == pop.crs"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Now they should be identical. Thus, we can be sure that when doing spatial\n",
+    "queries between layers the locations match and we get the right results\n",
+    "e.g. from the spatial join that we are conducting here.\n",
+    "\n",
+    "-  Let's now join the attributes from ``pop`` GeoDataFrame into\n",
+    "   ``addresses`` GeoDataFrame by using ``gpd.sjoin()`` -function"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 29,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>address</th>\n",
+       "      <th>id</th>\n",
+       "      <th>addr</th>\n",
+       "      <th>geometry</th>\n",
+       "      <th>index_right</th>\n",
+       "      <th>pop17</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>Ruoholahti, 14, Itämerenkatu, Ruoholahti, Läns...</td>\n",
+       "      <td>1000</td>\n",
+       "      <td>Itämerenkatu 14, 00101 Helsinki, Finland</td>\n",
+       "      <td>POINT (25495311.60802662 6672258.694634228)</td>\n",
+       "      <td>3238</td>\n",
+       "      <td>501</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>Kamppi, 1, Kampinkuja, Kamppi, Eteläinen suurp...</td>\n",
+       "      <td>1001</td>\n",
+       "      <td>Kampinkuja 1, 00100 Helsinki, Finland</td>\n",
+       "      <td>POINT (25496207.84010911 6672906.172794735)</td>\n",
+       "      <td>3350</td>\n",
+       "      <td>190</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>Bangkok9, 8, Kaivokatu, Keskusta, Kluuvi, Etel...</td>\n",
+       "      <td>1002</td>\n",
+       "      <td>Kaivokatu 8, 00101 Helsinki, Finland</td>\n",
+       "      <td>POINT (25496762.72293893 6673010.538330208)</td>\n",
+       "      <td>3474</td>\n",
+       "      <td>37</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>10</th>\n",
+       "      <td>Rautatientori, Keskusta, Kluuvi, Eteläinen suu...</td>\n",
+       "      <td>1011</td>\n",
+       "      <td>Rautatientori 1, 00100 Helsinki, Finland</td>\n",
+       "      <td>POINT (25496896.60078502 6673159.446016792)</td>\n",
+       "      <td>3474</td>\n",
+       "      <td>37</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>1, Hermannin rantatie, Hermanninmäki, Hermanni...</td>\n",
+       "      <td>1003</td>\n",
+       "      <td>Hermannin rantatie 1, 00580 Helsinki, Finland</td>\n",
+       "      <td>POINT (25498088.55200266 6676455.030033929)</td>\n",
+       "      <td>3711</td>\n",
+       "      <td>133</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "                                              address    id  \\\n",
+       "0   Ruoholahti, 14, Itämerenkatu, Ruoholahti, Läns...  1000   \n",
+       "1   Kamppi, 1, Kampinkuja, Kamppi, Eteläinen suurp...  1001   \n",
+       "2   Bangkok9, 8, Kaivokatu, Keskusta, Kluuvi, Etel...  1002   \n",
+       "10  Rautatientori, Keskusta, Kluuvi, Eteläinen suu...  1011   \n",
+       "3   1, Hermannin rantatie, Hermanninmäki, Hermanni...  1003   \n",
+       "\n",
+       "                                             addr  \\\n",
+       "0        Itämerenkatu 14, 00101 Helsinki, Finland   \n",
+       "1           Kampinkuja 1, 00100 Helsinki, Finland   \n",
+       "2            Kaivokatu 8, 00101 Helsinki, Finland   \n",
+       "10       Rautatientori 1, 00100 Helsinki, Finland   \n",
+       "3   Hermannin rantatie 1, 00580 Helsinki, Finland   \n",
+       "\n",
+       "                                       geometry  index_right  pop17  \n",
+       "0   POINT (25495311.60802662 6672258.694634228)         3238    501  \n",
+       "1   POINT (25496207.84010911 6672906.172794735)         3350    190  \n",
+       "2   POINT (25496762.72293893 6673010.538330208)         3474     37  \n",
+       "10  POINT (25496896.60078502 6673159.446016792)         3474     37  \n",
+       "3   POINT (25498088.55200266 6676455.030033929)         3711    133  "
+      ]
+     },
+     "execution_count": 29,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Make a spatial join\n",
+    "join = gpd.sjoin(addresses, pop, how=\"inner\", op=\"within\")\n",
+    "\n",
+    "# Let's check the result\n",
+    "join.head()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Awesome! Now we have performed a successful spatial join where we got\n",
+    "two new columns into our ``join`` GeoDataFrame, i.e. ``index_right``\n",
+    "that tells the index of the matching polygon in the population grid and\n",
+    "``pop17`` which is the population in the cell where the address-point is\n",
+    "located.\n",
+    "\n",
+    "-  Let's save this layer into a new Shapefile"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 30,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Output path\n",
+    "outfp = r\"data/addresses_pop17_epsg3979.shp\"\n",
+    "\n",
+    "# Save to disk\n",
+    "join.to_file(outfp)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Do the results make sense? Let's evaluate this a bit by plotting the\n",
+    "points where color intensity indicates the population numbers.\n",
+    "\n",
+    "-  Plot the points and use the ``pop17`` column to indicate the color.\n",
+    "   ``cmap`` -parameter tells to use a sequential colormap for the\n",
+    "   values, ``markersize`` adjusts the size of a point, ``scheme`` parameter can be used to adjust the classification method based on [pysal](http://pysal.readthedocs.io/en/latest/library/esda/mapclassify.html), and ``legend`` tells that we want to have a legend.\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 31,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "/opt/conda/lib/python3.6/site-packages/scipy/stats/stats.py:1713: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.\n",
+      "  return np.add.reduce(sorted[indexer] * weights, axis=axis) / sumval\n"
+     ]
+    },
+    {
+     "data": {
+      "image/png": "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\n",
+      "text/plain": [
+       "<Figure size 432x288 with 1 Axes>"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "import matplotlib.pyplot as plt\n",
+    "\n",
+    "# Plot the points with population info\n",
+    "join.plot(column='pop17', cmap=\"Reds\", markersize=7, scheme='quantiles', legend=True);\n",
+    "\n",
+    "# Add title\n",
+    "plt.title(\"Amount of inhabitants living close the the point\");\n",
+    "\n",
+    "# Remove white space around the figure\n",
+    "plt.tight_layout()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "By knowing approximately how population is distributed in Helsinki, it\n",
+    "seems that the results do make sense as the points with highest\n",
+    "population are located in the south where the city center of Helsinki\n",
+    "is."
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.6.5"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}

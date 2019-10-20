@@ -1,0 +1,1007 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-88382509-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Geometric operations &mdash; AutoGIS 2018 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'2018',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Exercise 4" href="../../lessons/L4/exercise-4.html" />
+    <link rel="prev" title="Data reclassification" href="reclassify.html" />
+    <link href="../../_static/geo-python.css" rel="stylesheet" type="text/css">
+     
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> AutoGIS
+          
+
+          
+            
+            <img src="../../_static/logo_hy_geo_135.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2018
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Course information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/course-info.html">General info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/course-environment-components.html">Course environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/grading.html">Grading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/learning-goals.html">Learning goals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/Installing_Anacondas_GIS.html">Installing Python + GIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/License-terms.html">License and terms of usage</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 1</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L1/Intro-Python-GIS.html">Motivation for the course</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L1/overview.html">Lesson overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1/geometric-objects.html">Geometric objects - Spatial data model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L1/exercise-1.html">Exercise 1</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 2</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L2/overview.html">Lesson 2 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/geopandas-basics.html">Introduction to Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/projections.html">Map projections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L2/exercise-2.html">Exercise 2</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 3</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L3/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L3/geocoding.html">Geocoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L3/geocoding_in_geopandas.html">Geocoding in Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L3/point-in-polygon.html">Point in Polygon &amp; Intersect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L3/spatial-join.html">Spatial join</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L3/nearest-neighbour.html">Nearest Neighbour Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L3/exercise-3.html">Exercise 3</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 4</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L4/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reclassify.html">Data reclassification</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Geometric operations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Overlay-analysis">Overlay analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Aggregating-data">Aggregating data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Simplifying-geometries">Simplifying geometries</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L4/exercise-4.html">Exercise 4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L4/exercise-4.html#exercise-4-hints">Exercise 4 hints</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 5</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L5/overview.html">Lesson 5 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/static_maps.html">Static maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/interactive-map-folium.html">Interactive maps on Leaflet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L5/share-on-github.html">Sharing interactive plots on GitHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L5/exercise-5.html">Exercise 5</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 6</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L6/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L6/retrieve_osm_data.html">Retrieving OpenStreetMap data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L6/network-analysis.html">Network analysis in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L6/exercise-6.html">Exercise 6</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 7</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L7/overview.html">Lesson 7 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L7/pyqgis.html">Python in QGIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L7/processing-toolbox.html">The QGIS Processing Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L7/processing-script.html">Processing toolbox scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L7/processing-script.html#run-the-script">Run the script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L7/exercise-7.html">Exercise 7</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Final Assignment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/FA/final-assignment.html">Final assignment</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AutoGIS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Geometric operations</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/Automating-GIS-processes/2018/blob/2018/source/notebooks/L4/geometric-operations.ipynb" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+
+
+    
+    
+
+
+
+    <p class="scv-banner scv-sphinx_rtd_theme"><a href="../../../master/notebooks/L4/geometric-operations.html"><b>Warning:</b> This document is for an old version of AutoGIS. The main version is master.</a></p>
+
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 5ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    background: #f5f5f5;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="admonition note">
+This page was generated from <a class="reference external" href="https://github.com/Automating-GIS-processes/2018/blob/master/source/notebooks/L4/geometric-operations.ipynb">source/notebooks/L4/geometric-operations.ipynb</a>.
+<span class="raw-html"><br/><a href="https://mybinder.org/v2/gh/Automating-GIS-processes/2018/master?urlpath=lab/tree/source/notebooks/L4/geometric-operations.ipynb"><img alt="Binder badge" src="https://img.shields.io/badge/launch-full%20binder-red.svg" style="vertical-align:text-bottom"></a></span>
+<span class="raw-html"><a href="https://mybinder.org/v2/gh/Automating-GIS-processes/notebooks/master?urlpath=lab/tree/notebooks/L4/geometric-operations.ipynb"><img alt="Binder badge" src="https://img.shields.io/badge/launch-student%20binder-red.svg" style="vertical-align:text-bottom"></a></span>
+<span class="raw-html"><a href="https://notebooks.csc.fi/#/blueprint/d71cd2d26d924f48820dc22b67a87d8e"><img alt="CSC badge" src="https://img.shields.io/badge/launch-CSC%20notebook-blue.svg" style="vertical-align:text-bottom"></a></span></div>
+<div class="section" id="Geometric-operations">
+<h1>Geometric operations<a class="headerlink" href="#Geometric-operations" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="Overlay-analysis">
+<h2>Overlay analysis<a class="headerlink" href="#Overlay-analysis" title="Permalink to this headline">¶</a></h2>
+<p>In this tutorial, the aim is to make an overlay analysis where we create a new layer based on geometries from a dataset that <code class="docutils literal notranslate"><span class="pre">intersect</span></code> with geometries of another layer. As our test case, we will select Polygon grid cells from <code class="docutils literal notranslate"><span class="pre">TravelTimes_to_5975375_RailwayStation_Helsinki.geojson</span></code> that intersects with municipality borders of Helsinki found in <code class="docutils literal notranslate"><span class="pre">Helsinki_borders.shp</span></code>.</p>
+<p>Typical overlay operations are (source: <a class="reference external" href="https://docs.qgis.org/2.8/en/docs/gentle_gis_introduction/vector_spatial_analysis_buffers.html#more-spatial-analysis-tools">QGIS docs</a>): <img alt="image0" src="../../_images/overlay_operations.png" /></p>
+<ul class="simple">
+<li>Let’s first read the data and take a look how they look:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">shapely.speedups</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="c1"># Let&#39;s enable speedups to make queries faster</span>
+<span class="n">shapely</span><span class="o">.</span><span class="n">speedups</span><span class="o">.</span><span class="n">enable</span><span class="p">()</span>
+
+<span class="c1"># File paths</span>
+<span class="n">border_fp</span> <span class="o">=</span> <span class="s2">&quot;data/Helsinki_borders.shp&quot;</span>
+<span class="n">grid_fp</span> <span class="o">=</span> <span class="s2">&quot;data/TravelTimes_to_5975375_RailwayStation.shp&quot;</span>
+
+<span class="c1"># Read files</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">grid_fp</span><span class="p">)</span>
+<span class="n">hel</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">border_fp</span><span class="p">)</span>
+
+<span class="c1"># Plot the layers</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">hel</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x2637d634cc0&gt;
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L4_geometric-operations_1_1.png" src="../../_images/notebooks_L4_geometric-operations_1_1.png" />
+</div>
+</div>
+<p>Here the blue area is the borders that we want to use for conducting the overlay analysis and select the geometries from the Polygon grid.</p>
+<ul class="simple">
+<li>Always, when conducting GIS operations involving multiple layers, it is required to check that the CRS of the layers match:</li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Ensure that the CRS matches, if not raise an AssertionError</span>
+<span class="k">assert</span> <span class="n">hel</span><span class="o">.</span><span class="n">crs</span> <span class="o">==</span> <span class="n">grid</span><span class="o">.</span><span class="n">crs</span><span class="p">,</span> <span class="s2">&quot;CRS differs between layers!&quot;</span>
+</pre></div>
+</div>
+</div>
+<p>Indeed, they do. Hence, the pre-requisite to conduct spatial operations between the layers is fullfilled (also the map we plotted indicated this).</p>
+<ul class="simple">
+<li>Let’s do an overlay analysis and create a new layer from polygons of the grid that <code class="docutils literal notranslate"><span class="pre">intersect</span></code> with our Helsinki layer. We can use a function called <code class="docutils literal notranslate"><span class="pre">overlay()</span></code> to conduct the overlay analysis that takes as an input 1) the GeoDataFrame where the selection is taken, 2) the GeoDataFrame used for making the selection, and 3) parameter <code class="docutils literal notranslate"><span class="pre">how</span></code> that can be used to control how the overlay analysis is conducted (possible values are <code class="docutils literal notranslate"><span class="pre">'intersection'</span></code>, <code class="docutils literal notranslate"><span class="pre">'union'</span></code>, <code class="docutils literal notranslate"><span class="pre">'symmetric_difference'</span></code>,
+<code class="docutils literal notranslate"><span class="pre">'difference'</span></code>, and <code class="docutils literal notranslate"><span class="pre">'identity'</span></code>):</li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">intersection</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">overlay</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">hel</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;intersection&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li>Let’s plot our data and see what we have:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">intersection</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x2637d5e9128&gt;
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L4_geometric-operations_7_1.png" src="../../_images/notebooks_L4_geometric-operations_7_1.png" />
+</div>
+</div>
+<p>As a result, we now have only those grid cells that intersect with the Helsinki borders. As we can see the grid cells are clipped based on the boundary.</p>
+<ul class="simple">
+<li>Whatabout the data attributes? Let’s see what we have:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">print</span><span class="p">(</span><span class="n">intersection</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+     car_m_d  car_m_t  car_r_d  car_r_t  from_id  pt_m_d  pt_m_t  pt_m_tt  \
+94     29476       41    29483       46  5876274   29990      76       95
+95     29456       41    29462       46  5876275   29866      74       95
+96     36772       50    36778       56  5876278   33541     116      137
+97     36898       49    36904       56  5876279   33720     119      141
+193    29411       40    29418       44  5878128   29944      75       95
+
+     pt_r_d  pt_r_t  pt_r_tt    to_id  walk_d  walk_t    GML_ID   NAMEFIN  \
+94    24984      77       99  5975375   25532     365  27517366  Helsinki
+95    24860      75       93  5975375   25408     363  27517366  Helsinki
+96    44265     130      146  5975375   31110     444  27517366  Helsinki
+97    44444     132      155  5975375   31289     447  27517366  Helsinki
+193   24938      76       99  5975375   25486     364  27517366  Helsinki
+
+         NAMESWE NATCODE                                           geometry
+94   Helsingfors     091  POLYGON ((402250.0001322526 6685750.000039577,...
+95   Helsingfors     091  POLYGON ((402367.8898583531 6685750.000039573,...
+96   Helsingfors     091  POLYGON ((403250.000132058 6685750.000039549, ...
+97   Helsingfors     091  POLYGON ((403456.4840652301 6685750.000039542,...
+193  Helsingfors     091  POLYGON ((402000.0001323065 6685500.000039622,...
+</pre></div></div>
+</div>
+<p>As we can see, due to the overlay analysis, the dataset contains the attributes from both input layers.</p>
+<ul class="simple">
+<li>Let’s save our result grid as a GeoJSON file that is commonly used file format nowadays for storing spatial data.</li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Output filepath</span>
+<span class="n">outfp</span> <span class="o">=</span> <span class="s2">&quot;data/TravelTimes_to_5975375_RailwayStation_Helsinki.geojson&quot;</span>
+
+<span class="c1"># Use GeoJSON driver</span>
+<span class="n">intersection</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">outfp</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s2">&quot;GeoJSON&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>There are many more examples for different types of overlay analysis in <a class="reference external" href="http://geopandas.org/set_operations.html">Geopandas documentation</a> where you can go and learn more.</p>
+</div>
+<div class="section" id="Aggregating-data">
+<h2>Aggregating data<a class="headerlink" href="#Aggregating-data" title="Permalink to this headline">¶</a></h2>
+<p>Aggregating data can also be useful sometimes. What we mean by aggregation is that we basically merge Geometries into together by some common identifier. Suppose we are interested in studying continents, but we only have country-level data like the country dataset. By aggregation we would convert this into a continent-level dataset.</p>
+<p>In this tutorial, we will aggregate our travel time data by car travel times (column <code class="docutils literal notranslate"><span class="pre">car_r_t</span></code>), i.e.&nbsp;the grid cells that have the same travel time to Railway Station will be merged together.</p>
+<ul class="simple">
+<li>For doing the aggregation we will use a function called <code class="docutils literal notranslate"><span class="pre">dissolve()</span></code> that takes as input the column that will be used for conducting the aggregation:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Conduct the aggregation</span>
+<span class="n">dissolved</span> <span class="o">=</span> <span class="n">intersection</span><span class="o">.</span><span class="n">dissolve</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;car_r_t&quot;</span><span class="p">)</span>
+
+<span class="c1"># What did we get</span>
+<span class="k">print</span><span class="p">(</span><span class="n">dissolved</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+                                                  geometry  car_m_d  car_m_t  \
+car_r_t
+-1       (POLYGON ((388000.0001354803 6668750.0000429, ...       -1       -1
+ 0       POLYGON ((386000.0001357812 6672000.000042388,...        0        0
+ 7       POLYGON ((386250.0001357396 6671750.000042424,...     1051        7
+ 8       (POLYGON ((386250.0001357467 6671500.000042468...     1286        8
+ 9       (POLYGON ((387000.0001355996 6671500.000042449...     1871        9
+
+         car_r_d  from_id  pt_m_d  pt_m_t  pt_m_tt  pt_r_d  pt_r_t  pt_r_tt  \
+car_r_t
+-1            -1  5913094      -1      -1       -1      -1      -1       -1
+ 0             0  5975375       0       0        0       0       0        0
+ 7          1051  5973739     617       5        6     617       5        6
+ 8          1286  5973736     706      10       10     706      10       10
+ 9          1871  5970457    1384      11       13    1394      11       12
+
+           to_id  walk_d  walk_t    GML_ID   NAMEFIN      NAMESWE NATCODE
+car_r_t
+-1            -1      -1      -1  27517366  Helsinki  Helsingfors     091
+ 0       5975375       0       0  27517366  Helsinki  Helsingfors     091
+ 7       5975375     448       6  27517366  Helsinki  Helsingfors     091
+ 8       5975375     706      10  27517366  Helsinki  Helsingfors     091
+ 9       5975375    1249      18  27517366  Helsinki  Helsingfors     091
+</pre></div></div>
+</div>
+<ul class="simple">
+<li>Let’s compare the number of cells in the layers before and after the aggregation:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Rows in original intersection GeoDataFrame:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">intersection</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Rows in dissolved layer:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dissolved</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Rows in original intersection GeoDataFrame: 3826
+Rows in dissolved layer: 51
+</pre></div></div>
+</div>
+<p>Indeed the number of rows in our data has decreased and the Polygons were merged together.</p>
+<p>What actually happened here? Let’s take a closer look.</p>
+<ul class="simple">
+<li>Let’s see what columns we have now in our GeoDataFrame:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">print</span><span class="p">(</span><span class="n">dissolved</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Index([&#39;geometry&#39;, &#39;car_m_d&#39;, &#39;car_m_t&#39;, &#39;car_r_d&#39;, &#39;from_id&#39;, &#39;pt_m_d&#39;,
+       &#39;pt_m_t&#39;, &#39;pt_m_tt&#39;, &#39;pt_r_d&#39;, &#39;pt_r_t&#39;, &#39;pt_r_tt&#39;, &#39;to_id&#39;, &#39;walk_d&#39;,
+       &#39;walk_t&#39;, &#39;GML_ID&#39;, &#39;NAMEFIN&#39;, &#39;NAMESWE&#39;, &#39;NATCODE&#39;],
+      dtype=&#39;object&#39;)
+</pre></div></div>
+</div>
+<p>As we can see, the column that we used for conducting the aggregation (<code class="docutils literal notranslate"><span class="pre">car_r_t</span></code>) can not be found from the columns list anymore. What happened to it?</p>
+<ul class="simple">
+<li>Let’s take a look at the indices of our GeoDataFrame:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">print</span><span class="p">(</span><span class="n">dissolved</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Int64Index([-1,  0,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+            22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38,
+            39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54,
+            56],
+           dtype=&#39;int64&#39;, name=&#39;car_r_t&#39;)
+</pre></div></div>
+</div>
+<p>Aha! Well now we understand where our column went. It is now used as index in our <code class="docutils literal notranslate"><span class="pre">dissolved</span></code> GeoDataFrame.</p>
+<ul class="simple">
+<li>Now, we can for example select only such geometries from the layer that are for example exactly 15 minutes away from the Helsinki Railway Station:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[51]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Select only geometries that are within 15 minutes away</span>
+<span class="n">sel_15min</span> <span class="o">=</span> <span class="n">dissolved</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">15</span><span class="p">]</span>
+
+<span class="c1"># See the data type</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">sel_15min</span><span class="p">))</span>
+
+<span class="c1"># See the data</span>
+<span class="k">print</span><span class="p">(</span><span class="n">sel_15min</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;class &#39;pandas.core.series.Series&#39;&gt;
+geometry    (POLYGON ((388250.0001354316 6668750.000042891...
+car_m_d                                                 12035
+car_m_t                                                    18
+car_r_d                                                 11997
+from_id                                               5903886
+Name: 20, dtype: object
+</pre></div></div>
+</div>
+<p>As we can see, as a result, we have now a Pandas <code class="docutils literal notranslate"><span class="pre">Series</span></code> object containing basically one row from our original aggregated GeoDataFrame.</p>
+<ul class="simple">
+<li>Let’s finally convert the <code class="docutils literal notranslate"><span class="pre">Series</span></code> into GeoDataFrame and plot it to see where those 15 minute grid cells are located:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[54]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Create a GeoDataFrame</span>
+<span class="n">geo</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">([</span><span class="n">sel_15min</span><span class="o">.</span><span class="n">values</span><span class="p">],</span> <span class="n">crs</span><span class="o">=</span><span class="n">dissolved</span><span class="o">.</span><span class="n">crs</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">dissolved</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+
+<span class="c1"># Plot the grid cells that are 15 minutes a way from the Railway Station</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">dissolved</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">geo</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[54]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x2637dbafc18&gt;
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L4_geometric-operations_24_1.png" src="../../_images/notebooks_L4_geometric-operations_24_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Simplifying-geometries">
+<h2>Simplifying geometries<a class="headerlink" href="#Simplifying-geometries" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes it might be useful to be able to simplify geometries. This could be something to consider for example when you have very detailed spatial features that cover the whole world. If you make a map that covers the whole world, it is unnecessary to have really detailed geometries because it is simply impossible to see those small details from your map. Furthermore, it takes a long time to actually render a large quantity of features into a map. Here, we will see how it is possible to
+simplify geometric features in Python.</p>
+<p>As an example we will use data representing the Amazon river in South America, and simplify it’s geometries.</p>
+<ul class="simple">
+<li>Let’s first read the data and see how the river looks like:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[75]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span> <span class="nn">pycrs</span>
+
+<span class="c1"># File path</span>
+<span class="n">fp</span> <span class="o">=</span> <span class="s2">&quot;data/Amazon_river.shp&quot;</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+
+<span class="c1"># Print crs</span>
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+
+<span class="c1"># Plot the river</span>
+<span class="n">data</span><span class="o">.</span><span class="n">plot</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;proj&#39;: &#39;merc&#39;, &#39;lon_0&#39;: -43, &#39;lat_ts&#39;: -2, &#39;x_0&#39;: 5000000, &#39;y_0&#39;: 10000000, &#39;ellps&#39;: &#39;GRS80&#39;, &#39;units&#39;: &#39;m&#39;, &#39;no_defs&#39;: True}
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L4_geometric-operations_27_1.png" src="../../_images/notebooks_L4_geometric-operations_27_1.png" />
+</div>
+</div>
+<p>The LineString that is presented here is quite detailed, so let’s see how we can generalize them a bit. As we can see from the coordinate reference system, the data is projected in a metric system using <a class="reference external" href="http://spatialreference.org/ref/sr-org/7868/">Mercator projection based on SIRGAS datum</a>.</p>
+<ul class="simple">
+<li>Generalization can be done easily by using a Shapely function called <code class="docutils literal notranslate"><span class="pre">.simplify()</span></code>. The <code class="docutils literal notranslate"><span class="pre">tolerance</span></code> parameter can be used to adjusts how much geometries should be generalized. <strong>The tolerance value is tied to the coordinate system of the geometries</strong>. Hence, the value we pass here is 20 000 <strong>meters</strong> (20 kilometers).</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[81]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Generalize geometry</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;geom_gen&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span><span class="n">tolerance</span><span class="o">=</span><span class="mi">20000</span><span class="p">)</span>
+
+<span class="c1"># Set geometry to be our new simlified geometry</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">set_geometry</span><span class="p">(</span><span class="s1">&#39;geom_gen&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot</span>
+<span class="n">data</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[81]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x2637f725390&gt;
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L4_geometric-operations_29_1.png" src="../../_images/notebooks_L4_geometric-operations_29_1.png" />
+</div>
+</div>
+<p>Nice! As a result, now we have simplified our LineString quite significantly as we can see from the map.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../lessons/L4/exercise-4.html" class="btn btn-neutral float-right" title="Exercise 4" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="reclassify.html" class="btn btn-neutral float-left" title="Data reclassification" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Henrikki Tenkanen
+      <span class="lastupdated">
+        Last updated on Mar 07, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+    <p> <br/> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /> </a></p>
+     
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: 2018
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="geometric-operations.html">2018</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../../../develop/notebooks/L4/geometric-operations.html">develop</a></dd>
+            <dd><a href="../../../drafts/index.html">drafts</a></dd>
+            <dd><a href="../../../master/notebooks/L4/geometric-operations.html">master</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

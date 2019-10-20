@@ -1,0 +1,527 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-88382509-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Installing Python + GIS &mdash; AutoGIS 2018 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'2018',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/banner.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Resources" href="resources.html" />
+    <link rel="prev" title="Learning goals" href="learning-goals.html" />
+    <link href="../_static/geo-python.css" rel="stylesheet" type="text/css">
+     
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> AutoGIS
+          
+
+          
+            
+            <img src="../_static/logo_hy_geo_135.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2018
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Course information</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="course-info.html">General info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="course-environment-components.html">Course environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grading.html">Grading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="learning-goals.html">Learning goals</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installing Python + GIS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#install-python-gis-on-windows">Install Python + GIS on Windows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#test-that-everything-works">Test that everything works</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#install-python-gis-on-linux-mac">Install Python + GIS on Linux / Mac</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-find-out-which-conda-command-to-use-when-installing-a-package">How to find out which conda -command to use when installing a package?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#the-easiest-way">The easiest way</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#alternative-way-to-install-if-typical-doesn-t-work">Alternative way to install if typical doesn’t work</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="License-terms.html">License and terms of usage</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 1</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../lessons/L1/Intro-Python-GIS.html">Motivation for the course</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lessons/L1/overview.html">Lesson overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/L1/geometric-objects.html">Geometric objects - Spatial data model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lessons/L1/exercise-1.html">Exercise 1</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 2</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../lessons/L2/overview.html">Lesson 2 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/L2/geopandas-basics.html">Introduction to Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/L2/projections.html">Map projections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lessons/L2/exercise-2.html">Exercise 2</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 3</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../lessons/L3/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lessons/L3/geocoding.html">Geocoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/L3/geocoding_in_geopandas.html">Geocoding in Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/L3/point-in-polygon.html">Point in Polygon &amp; Intersect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/L3/spatial-join.html">Spatial join</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/L3/nearest-neighbour.html">Nearest Neighbour Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lessons/L3/exercise-3.html">Exercise 3</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 4</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../lessons/L4/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/L4/reclassify.html">Data reclassification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/L4/geometric-operations.html">Geometric operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lessons/L4/exercise-4.html">Exercise 4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lessons/L4/exercise-4.html#exercise-4-hints">Exercise 4 hints</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 5</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../lessons/L5/overview.html">Lesson 5 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/L5/static_maps.html">Static maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/L5/interactive-map-folium.html">Interactive maps on Leaflet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lessons/L5/share-on-github.html">Sharing interactive plots on GitHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lessons/L5/exercise-5.html">Exercise 5</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 6</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../lessons/L6/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/L6/retrieve_osm_data.html">Retrieving OpenStreetMap data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/L6/network-analysis.html">Network analysis in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lessons/L6/exercise-6.html">Exercise 6</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 7</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../lessons/L7/overview.html">Lesson 7 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lessons/L7/pyqgis.html">Python in QGIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lessons/L7/processing-toolbox.html">The QGIS Processing Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lessons/L7/processing-script.html">Processing toolbox scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lessons/L7/processing-script.html#run-the-script">Run the script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lessons/L7/exercise-7.html">Exercise 7</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Final Assignment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../lessons/FA/final-assignment.html">Final assignment</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">AutoGIS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Installing Python + GIS</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/Automating-GIS-processes/2018/blob/2018/source/course-info/Installing_Anacondas_GIS.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+
+
+    
+    
+
+
+
+    <p class="scv-banner scv-sphinx_rtd_theme"><a href="../../master/course-info/Installing_Anacondas_GIS.html"><b>Warning:</b> This document is for an old version of AutoGIS. The main version is master.</a></p>
+
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="installing-python-gis">
+<h1>Installing Python + GIS<a class="headerlink" href="#installing-python-gis" title="Permalink to this headline">¶</a></h1>
+<p><strong>How to start doing GIS with Python on your own computer?</strong></p>
+<p>First step is to install Python and necessary Python modules that are needed to perform various GIS-tasks.
+The purpose of this page is to help you out installing Python and various useful GIS modules into your own computer.
+Even though it is possible to install Python from their <a class="reference external" href="https://www.python.org/">homepage</a>,
+<strong>we highly recommend using</strong> <a class="reference external" href="https://www.continuum.io/anaconda-overview">Anaconda</a> which is an open source
+distribution of the Python and R programming languages for large-scale data processing, predictive analytics,
+and scientific computing, that aims to simplify package management and deployment. In short,
+it makes life much easier when installing new tools on your Python to play with.</p>
+<div class="section" id="install-python-gis-on-windows">
+<h2>Install Python + GIS on Windows<a class="headerlink" href="#install-python-gis-on-windows" title="Permalink to this headline">¶</a></h2>
+<p>Following steps have been tested to work on Windows 7 and 10 with Anaconda3 64 bit, using conda v4.3.29 (30th October 2017).</p>
+<p><a class="reference external" href="https://www.continuum.io/downloads">Download Anaconda installer (64 bit)</a> for Windows.</p>
+<p>Install Anaconda to your computer by double clicking the installer and install it into a directory you want (needs admin rights).
+Install it to <strong>all users</strong> and use default settings.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Note for University of Helsinki workers: you need to set the installation location as <code class="docutils literal notranslate"><span class="pre">C:\HYapp</span></code> so that it can be used easily by anyone without the need to
+pass admin credentials all the time. If you don’t have <code class="docutils literal notranslate"><span class="pre">C:\HYapp</span></code> -folder, create one with admin rights.</p>
+</div>
+<p>Test that the Anaconda´s package manage called <code class="docutils literal notranslate"><span class="pre">conda</span></code> works by <a class="reference external" href="http://www.howtogeek.com/194041/how-to-open-the-command-prompt-as-administrator-in-windows-8.1/">opening a command prompt as a admin user</a>
+and running command <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">--version</span></code>.</p>
+<p>Install GIS related packages with conda (and pip) by running in command prompt following commands.
+Many of the GIS packages are bundled with geopandas, but there are a few that requires separate installation.
+As you can see below, many of the GIS packages are available from specific <code class="docutils literal notranslate"><span class="pre">channel</span></code> from conda called <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install Geopandas</span>
+conda install -c conda-forge geopandas
+
+<span class="c1"># Install geoplot</span>
+conda install -c conda-forge geoplot
+
+<span class="c1"># Install osmnx</span>
+conda install -c conda-forge osmnx
+
+<span class="c1"># Install pysal</span>
+conda install -c conda-forge pysal
+
+<span class="c1"># Install contextily</span>
+conda install -c conda-forge contextily
+
+<span class="c1"># Install rasterio</span>
+conda install -c conda-forge rasterio
+
+<span class="c1"># Install rasterstats</span>
+conda install -c conda-forge rasterstats
+
+<span class="c1"># Install pycrs</span>
+pip install pycrs
+
+<span class="c1"># Install Dash using Pip</span>
+pip install <span class="nv">dash</span><span class="o">==</span><span class="m">0</span>.19.0  <span class="c1"># The core dash backend</span>
+pip install dash-renderer<span class="o">==</span><span class="m">0</span>.11.1  <span class="c1"># The dash front-end</span>
+pip install dash-html-components<span class="o">==</span><span class="m">0</span>.8.0  <span class="c1"># HTML components</span>
+pip install dash-core-components<span class="o">==</span><span class="m">0</span>.14.0  <span class="c1"># Supercharged components</span>
+pip install plotly --upgrade  <span class="c1"># Plotly graphing library</span>
+</pre></div>
+</div>
+<div class="section" id="test-that-everything-works">
+<h3>Test that everything works<a class="headerlink" href="#test-that-everything-works" title="Permalink to this headline">¶</a></h3>
+<p>You can test that the installations have worked by running following commands in your IPython console (comes with mini-conda).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span> <span class="nn">pysal</span>
+<span class="kn">import</span> <span class="nn">cartopy</span>
+<span class="kn">import</span> <span class="nn">geoplot</span>
+<span class="kn">import</span> <span class="nn">osmnx</span>
+<span class="kn">import</span> <span class="nn">folium</span>
+<span class="kn">import</span> <span class="nn">dash</span>
+<span class="kn">import</span> <span class="nn">rasterio</span>
+<span class="kn">import</span> <span class="nn">osmnx</span>
+<span class="kn">import</span> <span class="nn">contextily</span>
+</pre></div>
+</div>
+<p>If you don’t receive any errors, everything should be working!</p>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">It is also possible to install all these packages at once by taking advantage of <code class="docutils literal notranslate"><span class="pre">.yml</span></code> environment file
+that is provided by us. Using them requires a few special tricks, <a class="reference internal" href="install-using-yml.html"><span class="doc">read more from here</span></a>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="install-python-gis-on-linux-mac">
+<h2>Install Python + GIS on Linux / Mac<a class="headerlink" href="#install-python-gis-on-linux-mac" title="Permalink to this headline">¶</a></h2>
+<p><strong>Install Anaconda 3 and add it to system path</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Download and install Anaconda</span>
+sudo wget https://repo.continuum.io/archive/Anaconda3-5.3.0-Linux-x86_64.sh
+sudo bash Anaconda3-5.3.0-Linux-x86_64.sh
+
+<span class="c1"># Add Anaconda installation permanently to PATH variable</span>
+nano ~/.bashrc
+
+<span class="c1"># Add following line at the end of the file and save (EDIT ACCORDING YOUR INSTALLATION PATH)</span>
+<span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:/PATH_TO_ANACONDA/anaconda3/bin:/PATH_TO_ANACONDA/anaconda3/lib/python3.7/site-packages
+</pre></div>
+</div>
+<p><strong>Install Python packages</strong></p>
+<p>Install GIS related packages with conda (and pip) by running in command prompt following commands (in the same order as they are listed):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install Geopandas</span>
+conda install -c conda-forge geopandas
+
+<span class="c1"># Install geoplot</span>
+conda install -c conda-forge geoplot
+
+<span class="c1"># Install osmnx</span>
+conda install -c conda-forge osmnx
+
+<span class="c1"># Install pysal</span>
+conda install -c conda-forge pysal
+
+<span class="c1"># Install contextily</span>
+conda install -c conda-forge contextily
+
+<span class="c1"># Install rasterio</span>
+conda install -c conda-forge rasterio
+
+<span class="c1"># Install rasterstats</span>
+conda install -c conda-forge rasterstats
+
+<span class="c1"># Install pycrs</span>
+pip install pycrs
+
+<span class="c1"># Install Dash using Pip</span>
+pip install <span class="nv">dash</span><span class="o">==</span><span class="m">0</span>.19.0  <span class="c1"># The core dash backend</span>
+pip install dash-renderer<span class="o">==</span><span class="m">0</span>.11.1  <span class="c1"># The dash front-end</span>
+pip install dash-html-components<span class="o">==</span><span class="m">0</span>.8.0  <span class="c1"># HTML components</span>
+pip install dash-core-components<span class="o">==</span><span class="m">0</span>.14.0  <span class="c1"># Supercharged components</span>
+pip install plotly --upgrade  <span class="c1"># Plotly graphing library</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-to-find-out-which-conda-command-to-use-when-installing-a-package">
+<h2>How to find out which conda -command to use when installing a package?<a class="headerlink" href="#how-to-find-out-which-conda-command-to-use-when-installing-a-package" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="the-easiest-way">
+<h3>The easiest way<a class="headerlink" href="#the-easiest-way" title="Permalink to this headline">¶</a></h3>
+<p>The first thing to try when installing a new module <code class="docutils literal notranslate"><span class="pre">X</span></code> is to run in a command prompt (as admin) following command (here we try to install a hypothetical
+module called X)</p>
+<p>In most cases this approach works but sometimes you get errors like (example when installing a module called shapely):</p>
+<p>Okey, so conda couldn’t find the shapely module from the typical channel it uses for downloading the module.</p>
+</div>
+<div class="section" id="alternative-way-to-install-if-typical-doesn-t-work">
+<h3>Alternative way to install if typical doesn’t work<a class="headerlink" href="#alternative-way-to-install-if-typical-doesn-t-work" title="Permalink to this headline">¶</a></h3>
+<p>How to find a way to install a module if it cannot be installed on a typical way?
+Well, the answer is the same is in many other cases nowadays, <strong>Google it!</strong></p>
+<p>Let’s find our way to install the Shapely module by typing following query to Google:</p>
+<img alt="../_images/google_query_conda.PNG" src="../_images/google_query_conda.PNG" />
+<p>Okey, we have different pages showing how to install Shapely using conda package manager.</p>
+<p><strong>Which one of them is the correct one to use?</strong></p>
+<p>We need to check the operating system banners and if you find a logo of the operating system of your computer,
+that is the one to use! Thus, in our case the first page that Google gives does not work in Windows but the second one does, as it has Windows logo on it:</p>
+<img alt="../_images/conda_shapely_windows.PNG" src="../_images/conda_shapely_windows.PNG" />
+<p>From here we can get the correct installation command for conda and it works!</p>
+<img alt="../_images/install_shapely.PNG" src="../_images/install_shapely.PNG" />
+<p>You can follow these steps similarly for all of the other Python modules that you are interested to install.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="resources.html" class="btn btn-neutral float-right" title="Resources" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="learning-goals.html" class="btn btn-neutral float-left" title="Learning goals" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Henrikki Tenkanen
+      <span class="lastupdated">
+        Last updated on Oct 29, 2018.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+    <p> <br/> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /> </a></p>
+     
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: 2018
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="Installing_Anacondas_GIS.html">2018</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../../develop/course-info/Installing_Anacondas_GIS.html">develop</a></dd>
+            <dd><a href="../../drafts/course-info/Installing_Anacondas_GIS.html">drafts</a></dd>
+            <dd><a href="../../master/course-info/Installing_Anacondas_GIS.html">master</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

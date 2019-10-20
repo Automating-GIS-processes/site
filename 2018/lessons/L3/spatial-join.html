@@ -1,0 +1,611 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-88382509-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Spatial join &mdash; AutoGIS 2018 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'2018',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link href="../../_static/geo-python.css" rel="stylesheet" type="text/css">
+     
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> AutoGIS
+          
+
+          
+            
+            <img src="../../_static/logo_hy_geo_135.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2018
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Course information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/course-info.html">General info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/course-environment-components.html">Course environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/grading.html">Grading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/learning-goals.html">Learning goals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/Installing_Anacondas_GIS.html">Installing Python + GIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/License-terms.html">License and terms of usage</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 1</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L1/Intro-Python-GIS.html">Motivation for the course</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1/overview.html">Lesson overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L1/geometric-objects.html">Geometric objects - Spatial data model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1/exercise-1.html">Exercise 1</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 2</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L2/overview.html">Lesson 2 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L2/geopandas-basics.html">Introduction to Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L2/projections.html">Map projections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/exercise-2.html">Exercise 2</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 3</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geocoding.html">Geocoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L3/geocoding_in_geopandas.html">Geocoding in Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L3/point-in-polygon.html">Point in Polygon &amp; Intersect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L3/spatial-join.html">Spatial join</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L3/nearest-neighbour.html">Nearest Neighbour Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercise-3.html">Exercise 3</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 4</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L4/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L4/reclassify.html">Data reclassification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L4/geometric-operations.html">Geometric operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L4/exercise-4.html">Exercise 4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L4/exercise-4.html#exercise-4-hints">Exercise 4 hints</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 5</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L5/overview.html">Lesson 5 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L5/static_maps.html">Static maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L5/interactive-map-folium.html">Interactive maps on Leaflet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/share-on-github.html">Sharing interactive plots on GitHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/exercise-5.html">Exercise 5</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 6</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L6/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L6/retrieve_osm_data.html">Retrieving OpenStreetMap data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L6/network-analysis.html">Network analysis in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L6/exercise-6.html">Exercise 6</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 7</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L7/overview.html">Lesson 7 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L7/pyqgis.html">Python in QGIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L7/processing-toolbox.html">The QGIS Processing Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L7/processing-script.html">Processing toolbox scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L7/processing-script.html#run-the-script">Run the script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L7/exercise-7.html">Exercise 7</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Final Assignment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../FA/final-assignment.html">Final assignment</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AutoGIS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Spatial join</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/Automating-GIS-processes/2018/blob/2018/source/lessons/L3/spatial-join.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+
+
+    
+    
+
+
+
+    <p class="scv-banner scv-sphinx_rtd_theme"><a href="../../../master/lessons/L3/spatial-join.html"><b>Warning:</b> This document is for an old version of AutoGIS. The main version is master.</a></p>
+
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="spatial-join">
+<h1>Spatial join<a class="headerlink" href="#spatial-join" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="http://wiki.gis.com/wiki/index.php/Spatial_Join">Spatial join</a> is
+yet another classic GIS problem. Getting attributes from one layer and
+transferring them into another layer based on their spatial relationship
+is something you most likely need to do on a regular basis.</p>
+<p>The previous materials focused on learning how to perform a <a class="reference external" href="Lesson3-point-in-polygon.html#how-to-check-if-point-is-inside-a-polygon">Point in Polygon query</a>.
+We could now apply those techniques and create our
+own function to perform a spatial join between two layers based on their
+spatial relationship. We could for example join the attributes of a
+polygon layer into a point layer where each point would get the
+attributes of a polygon that <code class="docutils literal notranslate"><span class="pre">contains</span></code> the point.</p>
+<p>Luckily, <a class="reference external" href="http://geopandas.org/mergingdata.html#spatial-joins">spatial join</a>
+(<code class="docutils literal notranslate"><span class="pre">gpd.sjoin()</span></code> -function) is already implemented in Geopandas, thus we
+do not need to create it ourselves. There are three possible types of
+join that can be applied in spatial join that are determined with <code class="docutils literal notranslate"><span class="pre">op</span></code>
+-parameter:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">&quot;intersects&quot;</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">&quot;within&quot;</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">&quot;contains&quot;</span></code></li>
+</ul>
+<p>Sounds familiar? Yep, all of those spatial relationships were discussed
+in the <a class="reference external" href="Lesson3-point-in-polygon.html">previous materials</a>, thus you should know how they work.</p>
+<p>Let’s perform a spatial join between the address-point Shapefile that we
+<a class="reference external" href="Lesson3-table-join.html">created</a> and then <a class="reference external" href="Lesson3-projections.html">reprojected</a>
+and a Polygon layer that is a
+250m x 250m grid showing the amount of people living in Helsinki Region.</p>
+<div class="section" id="download-and-clean-the-data">
+<h2>Download and clean the data<a class="headerlink" href="#download-and-clean-the-data" title="Permalink to this headline">¶</a></h2>
+<p>For this lesson we will be using publicly available population data from
+Helsinki that can be downloaded from <a class="reference external" href="http://www.hri.fi/en/dataset/vaestotietoruudukko">Helsinki Region Infroshare
+(HRI)</a> which is an
+excellent source that provides all sorts of open data from Helsinki,
+Finland.</p>
+<p>From HRI <strong>download a</strong> <a class="reference external" href="https://www.hsy.fi/sites/AvoinData/AvoinData/SYT/Tietoyhteistyoyksikko/Shape%20(Esri)/V%C3%A4est%C3%B6tietoruudukko/Vaestotietoruudukko_2015.zip">Population grid for year
+2015</a>
+that is a dataset (.shp) produced by Helsinki Region Environmental
+Services Authority (HSY) (see <a class="reference external" href="https://www.hsy.fi/fi/asiantuntijalle/avoindata/Sivut/AvoinData.aspx?dataID=7">this
+page</a>
+to access data from different years).</p>
+<ul class="simple">
+<li>Unzip the file in Terminal into a folder called Pop15 (using -d flag)</li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span>
+$ unzip Vaestotietoruudukko_2015.zip -d Pop15
+$ ls Pop15
+Vaestotietoruudukko_2015.dbf  Vaestotietoruudukko_2015.shp
+Vaestotietoruudukko_2015.prj  Vaestotietoruudukko_2015.shx
+</pre></div>
+</div>
+<p>You should now have a folder <code class="docutils literal notranslate"><span class="pre">/home/geo/Pop15</span></code> with files listed
+above.</p>
+<ul class="simple">
+<li>Let’s read the data into memory and see what we have.</li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+
+<span class="c1"># Filepath</span>
+<span class="n">fp</span> <span class="o">=</span> <span class="s2">&quot;/home/geo/Pop15/Vaestotietoruudukko_2015.shp&quot;</span>
+
+<span class="c1"># Read the data</span>
+<span class="n">pop</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># See the first rows</span>
+<span class="gp">In [1]: </span><span class="n">pop</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-1-1a2324c1bc9a&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">pop</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+
+<span class="ne">NameError</span>: name &#39;pop&#39; is not defined
+</pre></div>
+</div>
+<p>Okey so we have multiple columns in the dataset but the most important
+one here is the column <code class="docutils literal notranslate"><span class="pre">ASUKKAITA</span></code> (<em>population in Finnish</em>) that
+tells the amount of inhabitants living under that polygon.</p>
+<ul class="simple">
+<li>Let’s change the name of that columns into <code class="docutils literal notranslate"><span class="pre">pop15</span></code> so that it is
+more intuitive. Changing column names is easy in Pandas / Geopandas
+using a function called <code class="docutils literal notranslate"><span class="pre">rename()</span></code> where we pass a dictionary to a
+parameter <code class="docutils literal notranslate"><span class="pre">columns={'oldname':</span> <span class="pre">'newname'}</span></code>.</li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Change the name of a column</span>
+<span class="gp">In [2]: </span><span class="n">pop</span> <span class="o">=</span> <span class="n">pop</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;ASUKKAITA&#39;</span><span class="p">:</span> <span class="s1">&#39;pop15&#39;</span><span class="p">})</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-2-89c047f96142&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">pop</span> <span class="o">=</span> <span class="n">pop</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;ASUKKAITA&#39;</span><span class="p">:</span> <span class="s1">&#39;pop15&#39;</span><span class="p">})</span>
+
+<span class="ne">NameError</span>: name &#39;pop&#39; is not defined
+
+<span class="c1"># See the column names and confirm that we now have a column called &#39;pop15&#39;</span>
+<span class="gp">In [3]: </span><span class="n">pop</span><span class="o">.</span><span class="n">columns</span>
+<span class="go">                                                                                                                                                                                                                                                                                                    ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-3-93d1f78bf66a&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 pop.columns</span>
+
+<span class="go">NameError: name &#39;pop&#39; is not defined</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Let’s also get rid of all unnecessary columns by selecting only
+columns that we need i.e. <code class="docutils literal notranslate"><span class="pre">pop15</span></code> and <code class="docutils literal notranslate"><span class="pre">geometry</span></code></li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Columns that will be sected</span>
+<span class="gp">In [4]: </span><span class="n">selected_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;pop15&#39;</span><span class="p">,</span> <span class="s1">&#39;geometry&#39;</span><span class="p">]</span>
+
+<span class="go"># Select those columns</span>
+<span class="gp">In [5]: </span><span class="n">pop</span> <span class="o">=</span> <span class="n">pop</span><span class="p">[</span><span class="n">selected_cols</span><span class="p">]</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-5-1fb25a44ef2d&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">pop</span> <span class="o">=</span> <span class="n">pop</span><span class="p">[</span><span class="n">selected_cols</span><span class="p">]</span>
+
+<span class="ne">NameError</span>: name &#39;pop&#39; is not defined
+
+<span class="c1"># Let&#39;s see the last 2 rows</span>
+<span class="gp">In [6]: </span><span class="n">pop</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                            ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-6-11780fb61d0e&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 pop.tail(2)</span>
+
+<span class="go">NameError: name &#39;pop&#39; is not defined</span>
+</pre></div>
+</div>
+<p>Now we have cleaned the data and have only those columns that we need
+for our analysis.</p>
+</div>
+<div class="section" id="join-the-layers">
+<h2>Join the layers<a class="headerlink" href="#join-the-layers" title="Permalink to this headline">¶</a></h2>
+<p>Now we are ready to perform the spatial join between the two layers that
+we have. The aim here is to get information about <strong>how many people live
+in a polygon that contains an individual address-point</strong> . Thus, we want
+to join attributes from the population layer we just modified into the
+addresses point layer <code class="docutils literal notranslate"><span class="pre">addresses_epsg3879.shp</span></code>.</p>
+<ul class="simple">
+<li>Read the addresses layer into memory</li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Addresses filpath</span>
+<span class="gp">In [7]: </span><span class="n">addr_fp</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;/home/geo/addresses_epsg3879.shp&quot;</span>
+
+<span class="go"># Read data</span>
+<span class="gp">In [8]: </span><span class="n">addresses</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">addr_fp</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-8-21fa2220c1e3&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">addresses</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">addr_fp</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;gpd&#39; is not defined
+
+<span class="c1"># Check the head of the file</span>
+<span class="gp">In [9]: </span><span class="n">addresses</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                      ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-9-b6c2948b566f&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 addresses.head(2)</span>
+
+<span class="go">NameError: name &#39;addresses&#39; is not defined</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Let’s make sure that the coordinate reference system of the layers
+are identical</li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Check the crs of address points</span>
+<span class="gp">In [10]: </span><span class="n">addresses</span><span class="o">.</span><span class="n">crs</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-10-82f9b1192e4f&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">addresses</span><span class="o">.</span><span class="n">crs</span>
+
+<span class="ne">NameError</span>: name &#39;addresses&#39; is not defined
+
+<span class="c1"># Check the crs of population layer</span>
+<span class="gp">In [11]: </span><span class="n">pop</span><span class="o">.</span><span class="n">crs</span>
+<span class="go">                                                                                                                                                                                                                                                                        ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-11-b9b851ae9770&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 pop.crs</span>
+
+<span class="go">NameError: name &#39;pop&#39; is not defined</span>
+
+<span class="go"># Do they match? - We can test that</span>
+<span class="gp">In [12]: </span><span class="n">addresses</span><span class="o">.</span><span class="n">crs</span> <span class="o">==</span> <span class="n">pop</span><span class="o">.</span><span class="n">crs</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-12-327e611de145&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 addresses.crs == pop.crs</span>
+
+<span class="go">NameError: name &#39;addresses&#39; is not defined</span>
+</pre></div>
+</div>
+<p>Indeed they are identical. Thus, we can be sure that when doing spatial
+queries between layers the locations match and we get the right results
+e.g. from the spatial join that we are conducting here.</p>
+<ul class="simple">
+<li>Let’s now join the attributes from <code class="docutils literal notranslate"><span class="pre">pop</span></code> GeoDataFrame into
+<code class="docutils literal notranslate"><span class="pre">addresses</span></code> GeoDataFrame by using <code class="docutils literal notranslate"><span class="pre">gpd.sjoin()</span></code> -function</li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Make a spatial join</span>
+<span class="gp">In [13]: </span><span class="n">join</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span><span class="n">addresses</span><span class="p">,</span> <span class="n">pop</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;inner&quot;</span><span class="p">,</span> <span class="n">op</span><span class="o">=</span><span class="s2">&quot;within&quot;</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-13-dc99f0addef7&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">join</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span><span class="n">addresses</span><span class="p">,</span> <span class="n">pop</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;inner&quot;</span><span class="p">,</span> <span class="n">op</span><span class="o">=</span><span class="s2">&quot;within&quot;</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;gpd&#39; is not defined
+
+<span class="c1"># Let&#39;s check the result</span>
+<span class="gp">In [14]: </span><span class="n">join</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="go">                                                                                                                                                                                                                                                                                                               ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-14-5af4a6625532&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 join.head()</span>
+
+<span class="go">NameError: name &#39;join&#39; is not defined</span>
+</pre></div>
+</div>
+<p>Awesome! Now we have performed a successful spatial join where we got
+two new columns into our <code class="docutils literal notranslate"><span class="pre">join</span></code> GeoDataFrame, i.e. <code class="docutils literal notranslate"><span class="pre">index_right</span></code>
+that tells the index of the matching polygon in the <code class="docutils literal notranslate"><span class="pre">pop</span></code> layer and
+<code class="docutils literal notranslate"><span class="pre">pop15</span></code> which is the population in the cell where the address-point is
+located.</p>
+<ul class="simple">
+<li>Let’s save this layer into a new Shapefile</li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Output path</span>
+<span class="n">outfp</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;/home/geo/addresses_pop15_epsg3979.shp&quot;</span>
+
+<span class="c1"># Save to disk</span>
+<span class="n">join</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">outfp</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Do the results make sense? Let’s evaluate this a bit by plotting the
+points where color intensity indicates the population numbers.</p>
+<ul class="simple">
+<li>Plot the points and use the <code class="docutils literal notranslate"><span class="pre">pop15</span></code> column to indicate the color.
+<code class="docutils literal notranslate"><span class="pre">cmap</span></code> -parameter tells to use a sequential colormap for the
+values, <code class="docutils literal notranslate"><span class="pre">markersize</span></code> adjusts the size of a point, <code class="docutils literal notranslate"><span class="pre">scheme</span></code> parameter can be used to adjust the classification method based on <a class="reference external" href="http://pysal.readthedocs.io/en/latest/library/esda/mapclassify.html">pysal</a>, and <code class="docutils literal notranslate"><span class="pre">legend</span></code> tells that we want to have a legend.</li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [15]: </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="go"># Plot the points with population info</span>
+<span class="gp">In [16]: </span><span class="n">join</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;pop15&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Reds&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s1">&#39;natural_breaks&#39;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="bp">True</span><span class="p">);</span>
+
+<span class="go"># Add title</span>
+<span class="gp">In [17]: </span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Amount of inhabitants living close the the point&quot;</span><span class="p">);</span>
+
+<span class="go"># Remove white space around the figure</span>
+<span class="gp">In [18]: </span><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/population_points.png"><img alt="../../_images/population_points.png" src="../../_images/population_points.png" style="width: 7in;" /></a>
+<p>By knowing approximately how population is distributed in Helsinki, it
+seems that the results do make sense as the points with highest
+population are located in the south where the city center of Helsinki
+is.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Henrikki Tenkanen
+      <span class="lastupdated">
+        Last updated on Nov 10, 2018.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+    <p> <br/> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /> </a></p>
+     
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: 2018
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="spatial-join.html">2018</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../../../develop/index.html">develop</a></dd>
+            <dd><a href="../../../drafts/index.html">drafts</a></dd>
+            <dd><a href="../../../master/lessons/L3/spatial-join.html">master</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -29,21 +29,11 @@ The data we use this week is the same that we used already during the `second we
 Lecture videos
 --------------
 
-.. admonition:: Lesson 7.1 - Introduction to Python in QGIS; Processing toolbox; Graphical modeller
+.. admonition:: Lesson 7.1 - Using Python with QGIS
 
     .. raw:: html
 
-        <!--// <iframe width="560" height="315" src="https://www.youtube.com/embed/D1IbJNV_Cp4?start=1" frameborder="0" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/XRMPWSSuWo8" frameborder="0" allowfullscreen></iframe>
         <p>Christoph Fink / Henrikki Tenkanen, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p> //-->
-
-
-.. admonition:: Lesson 7.2 - Python scripting in QGIS 3.4; Creating a processing toolbox with custom Python scripts;
-
-    .. raw:: html
-
-        <!--// <iframe width="560" height="315" src="https://www.youtube.com/embed/-tnqzIyUDLs?start=1" frameborder="0" allowfullscreen></iframe>
-        <p>Christoph Fink / Henrikki Tenkanen, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p> //-->
-
-
 
 
