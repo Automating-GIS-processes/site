@@ -3,7 +3,7 @@
 
 # Fill this out with the correct org/repo
 ORG=Automating-GIS-processes
-REPO=2018
+REPO=site
 # This probably should match an email for one of your users.
 EMAIL=henrikki.tenkanen@helsinki.fi
 

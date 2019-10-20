@@ -2,9 +2,9 @@
 
 [![Build Status](https://travis-ci.org/Automating-GIS-processes/2018.svg?branch=master)](https://travis-ci.org/Automating-GIS-processes/2018)
 
-Source documents for maintaining the [Automating GIS-processes course pages, year 2017](https://automating-gis-processes.github.io/2017/).
+Source documents for maintaining the [Automating GIS-processes course pages, year 2018](https://automating-gis-processes.github.io/2018/).
 
-The docs are written using a combination of [Sphinx](http://www.sphinx-doc.org/en/1.4.9/) and [Jupyter Notebooks](http://jupyter.org/). All the rst files for the lesson contents are located in [source/lessons](source/lessons) -folder and all notebooks are located in [source/notebooks](source/notebooks) folder. Build html pages are located in the [docs](docs/) -folder.
+The docs are written using a combination of [Sphinx](http://www.sphinx-doc.org/en/1.4.9/) and [Jupyter Notebooks](http://jupyter.org/). All the rst files for the lesson contents are located in [source/lessons](source/lessons) -folder and all notebooks are located in [source/notebooks](source/notebooks) folder. Build html pages are located in a separate branch called [gh-pages](https://github.com/Automating-GIS-processes/2018/tree/gh-pages).
 
 ## License and terms of usage
 
@@ -49,38 +49,24 @@ to write as Markdown but rst makes it possible to include many things that are i
 colored notes or hints etc.). All the .rst -files should be placed into the [/source](/source) -folder which is the directory where Sphinx tries to find the documentation by default. **Those .rst files are also 
 the ones that you want to modify if you desire to make changes to the documents**.
 
+## Writing Jupyter Notebook files
+
+All the programming materials in this site are written using [Jupyter Notebooks](https://jupyter.org/). These notebooks are converted into html pages during the build of the pages using [npsphinx](https://nbsphinx.readthedocs.io/en/0.4.2/) extension to Sphinx.
+
 ## Continuous Integration with Travis CI
 
 [Travis-CI](https://travis-ci.org/) makes it possible to build the GitHub pages automatically whenever a change has been pushed to master.
 It is highly recommendable to use separate branches for developing the materials (such as using `develop` branch) and then merging the changes
 from that branch to `master` using **pull requests**.
 
-## Building the pages manually with sphinx
+- Travis Integration is controlled from [.travis.yml](.travis.yml).
+- See a bit more documentation from [Travis-integration.md](Travis-integration.md)
 
-Unlike Markdown pages (such as this page), Sphinx pages need to be build before you can see the final result. This is because Sphinx produces html pages (into [/docs](/docs) -folder) 
-that can have many nice features such as the navigation bar on the left, efficient search functionality etc. 
-  
-Build the pages by navigating to the root of the repository (i.e. to a folder where this README.md -file is located) and executing following command:
- 
- ```
- make html
- ```
- 
-Sphinx will then start building the pages and the final html pages will be located in [/docs](/docs) -folder. This is a custom location (by default the docs would go to /build -folder) that matches how GitHub 
-wants them so that GitHub Pages works. I have edited the [make.bat](make.bat) for achieving this. 
+## Browser based programming environment
 
-### Sphinx actually runs the codes! 
+This course site provides programming environment that allows anyone to immediately try and run all the codes directly in the browser. This functionality is done using [Binder](https://mybinder.org/) and [CSC Notebooks (for Universities in Finland)](https://notebooks.csc.fi/#/) -services.
 
-One of the most powerful features that Sphinx has (in my opinion), is that it will actually run all the Python codes that are written under the `.. ipython:: python` code block. This makes
-it possible that you can e.g. plot images dynamically to the pages without doing any manual work (adding images with links), see and show the contents of a datafile on the pages without needing to 
-add them manually (which is how you would do it on Markdown pages). Hence, doing the documentation reminds a bit how you can write documents with [Jupyter Notebooks](https://jupyter.org/) but with a nicer 
-looking pages.  
-
-### Data needs to be in the repository
-
-What this kind of dynamic Python interpreter of Sphinx means though, is that you need to also keep the data that you use in the documentation together with the docs. I keep all the datasets 
-used for building these pages in the [/data](/data) -folder and then read the files from there in the background (hidden from the user). See an example of how to hide (with `:suppress:` command) 
-the data-reading-procedure from the user, from [here](https://raw.githubusercontent.com/Automating-GIS-processes/2016/master/source/Lesson3-table-join.rst).    
+Binder environment is controlled from [environment.yml](environment.yml). CSC Notebooks are controlled separately from [https://github.com/Automating-GIS-processes/notebooks](https://github.com/Automating-GIS-processes/notebooks) -repository. 
 
 ## Contact & Developers
 

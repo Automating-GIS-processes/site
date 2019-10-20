@@ -1,7 +1,7 @@
 
 .. figure:: img/AutoGIS_banner.jpg
 
-Welcome to Automating GIS-processes 2018!
+Welcome to Automating GIS-processes 2019!
 =========================================
 
 **Automating GIS-processes** -course teaches you how to do different GIS-related tasks in Python programming language.
@@ -45,6 +45,7 @@ summary write-ups that you submit must be completed individually and must clearl
 .. admonition:: Earlier versions of the course
 
     Older course materials are available at:
+        - `2018 <https://automating-gis-processes.github.io/site/2018>`__
         - `2017 <https://automating-gis-processes.github.io/2017/>`__
         - `2016 <https://automating-gis-processes.github.io/2016/>`__
 
@@ -59,37 +60,37 @@ See earlier materials for learning the basics of Python programming from `here <
 The materials are divided into weekly sections that are published at these pages every Monday morning. Lessons are held with following schedule:
 
 +----------------+---------------------------------+
-| Time           | Theme                           |
+| Week           | Theme                           |
 +================+=================================+
-| **Class 1**    | GIS in Python;                  |
-|   29.10.2018   | Spatial data model;             |
+| **1**          | GIS in Python;                  |
+|                | Spatial data model;             |
 |                | Geometric Objects; Shapely      |
 |                |                                 |
 +----------------+---------------------------------+
-| **Class 2**    | Working with GeoDataFrames;     |
-|  5.11.2018     | Managing projections;           |
+| **2**          | Working with GeoDataFrames;     |
+|                | Managing projections;           |
 |                | Table join;                     |
 |                |                                 |
 +----------------+---------------------------------+
-| **Class 3**    | Geocoding and making spatial    |
-| Wed 14.11.2018 | queries                         |
-| (note change   |                                 |
-|  in schedule!) |                                 |
-+----------------+---------------------------------+
-| **Class 4**    | Geometric operations;           |
-|  19.11.2018    | Reclassifying data with Pysal   |
+| **3**          | Geocoding and making spatial    |
+|                | queries                         |
+|                |                                 |
 |                |                                 |
 +----------------+---------------------------------+
-| **Class 5**    | Visualization, making static    |
-|  26.11.2018    | and interactive maps            |
+| **4**          | Geometric operations;           |
+|                | Reclassifying data with Pysal   |
 |                |                                 |
 +----------------+---------------------------------+
-| **Class 6**    | Network analysis and routing    |
-|  3.12.2018     | in Python (transport modelling) |
+| **5**          | Visualization, making static    |
+|                | and interactive maps            |
 |                |                                 |
 +----------------+---------------------------------+
-| **Class 7**    | Using Python programming in     |
-|  10.12.2018    | QGIS                            |
+| **6**          | Network analysis and routing    |
+|                | in Python (transport modelling) |
+|                |                                 |
++----------------+---------------------------------+
+| **7**          | Using Python programming in     |
+|                | QGIS                            |
 |                |                                 |
 +----------------+---------------------------------+
 
