@@ -18,7 +18,7 @@ Course format
 
 The majority of this course will be spent in front of a computer learning to program with Python programming language and doing practical exercises.
 During Teaching Period I, the Automating GIS-processes and `Introduction to Quantitative Geology <https://introqg.github.io>`_ courses met together and focused on
-`learning the basics of programming with Python <https://geo-python.github.io>`_. Previously, both these courses lacked sufficient time for students to properly learn the basic concepts of programming in Python.
+`learning the basics of programming with Python <https://geo-python.github.io>`_.
 
 The computer exercises will focus on developing basic programming skills using Python and applying those skills to various GIS related problems.
 Typical exercises will involve a brief introduction, followed by topical computer-based tasks and exercises. At the end of the exercises, you are asked
@@ -49,15 +49,15 @@ summary write-ups that you submit must be completed individually and must clearl
         - `2017 <https://automating-gis-processes.github.io/2017/>`__
         - `2016 <https://automating-gis-processes.github.io/2016/>`__
 
-    Note, that the contents of the course are updated for each year. Hence, the older course materials may not be used, and they
-    might be outdated.
+    Note, that the older course materials might be outdated.
 
 
 Course topics by week
 ---------------------
-See earlier materials for learning the basics of Python programming from `here <https://geo-python.github.io>`_.
+See `Geo-Python course materials <https://geo-python.github.io>`_  for learning the basics of Python programming.
 
-The materials are divided into weekly sections that are published at these pages every Monday morning. Lessons are held with following schedule:
+Automating GIS processes -part of the course runs for seven weeks starting on Monday the 28th of October 2019.
+Lesson materials are published on these pages each week on Monday, after which they are publicly available for anyone interested:
 
 +----------------+---------------------------------+
 | Week           | Theme                           |
