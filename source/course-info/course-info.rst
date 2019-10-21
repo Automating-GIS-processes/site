@@ -10,22 +10,17 @@ Course meetings in Period II
 Instructors
 -----------
 
-**Lecturer**:
+**Lessons**:
 
 * Vuokko Heikinheimo
-
-  * Office: A125, Physicum
-  * Email: *firstname.lastname@helsinki.fi*
-
 * Henrikki Tenkanen
 
-  * Office: A125, Physicum
-  * Email: *firstname.lastname@helsinki.fi*
-
-**Course assistants**:
+**Practical exercises**:
 
 * Sakari Sarjakoski
 * Sara Todorovic
+
+Email: *firstname.lastname@helsinki.fi*
 
 Course websites
 ---------------
