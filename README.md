@@ -1,8 +1,8 @@
 # Automating GIS-processes - Sphinx + GitHub Pages
 
-[![Build Status](https://travis-ci.org/Automating-GIS-processes/2018.svg?branch=master)](https://travis-ci.org/Automating-GIS-processes/2018)
+[![Build Status](https://travis-ci.org/Automating-GIS-processes/site.svg?branch=master)](https://travis-ci.org/Automating-GIS-processes/site)
 
-Source documents for maintaining the [Automating GIS-processes course pages, year 2018](https://automating-gis-processes.github.io/2018/).
+Source documents for maintaining the [Automating GIS-processes course pages](https://automating-gis-processes.github.io/site/).
 
 The docs are written using a combination of [Sphinx](http://www.sphinx-doc.org/en/1.4.9/) and [Jupyter Notebooks](http://jupyter.org/). All the rst files for the lesson contents are located in [source/lessons](source/lessons) -folder and all notebooks are located in [source/notebooks](source/notebooks) folder. Build html pages are located in a separate branch called [gh-pages](https://github.com/Automating-GIS-processes/2018/tree/gh-pages).
 
@@ -72,8 +72,8 @@ Binder environment is controlled from [environment.yml](environment.yml). CSC No
 
 - **Henrikki Tenkanen**
 
-- **Vuokko Heikinheimo**.
+- **Vuokko Heikinheimo**
 
-See contact info from [here](https://automating-gis-processes.github.io/2017/course-info/course-info.html).
+See contact info from [here](https://automating-gis-processes.github.io/site/course-info/course-info.html).
 
 
