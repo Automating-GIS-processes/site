@@ -14,7 +14,6 @@ There are **no required textbooks** for this course. This course uses a wide ran
   - Zelle, J. (2010) `Python Programming: An Introduction to Computer Science <http://mcsp.wartburg.edu/zelle/python/ppics2/index.html>`_, Second edition. Franklin, Beedle & Associates.
   - McKinney, W. (2012) `Python for Data Analysis: Data wrangling with Pandas, NumPy and iPython <http://www.amazon.com/Python-Data-Analysis-Wrangling-IPython/dp/1449319793>`_, First edition. O´Reilly Media.
   - Lawhead, J. (2015) `Learning Geospatial Analysis with Python: An effective guide to geographic information systems and remote sensing analysis using Python 3 <https://www.packtpub.com/application-development/learning-geospatial-analysis-python-second-edition>`_, Second edition. Packt Publishing.
-  - McKinney, W. (2012) `Python for Data Analysis: Data wrangling with Pandas, NumPy and iPython <http://www.amazon.com/Python-Data-Analysis-Wrangling-IPython/dp/1449319793>`_, First edition. O´Reilly Media.
 
 - Optional textbooks:
 
