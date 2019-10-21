@@ -125,6 +125,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#install-python-gis-on-linux-mac">Install Python + GIS on Linux / Mac</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-jupyter-lab">Install Jupyter Lab</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#how-to-find-out-which-conda-command-to-use-when-installing-a-package">How to find out which conda -command to use when installing a package?</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#the-easiest-way">The easiest way</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#alternative-way-to-install-if-typical-doesn-t-work">Alternative way to install if typical doesn’t work</a></li>
@@ -419,6 +420,20 @@ pip install plotly --upgrade  <span class="c1"># Plotly graphing library</span>
 </pre></div>
 </div>
 </div>
+<div class="section" id="install-jupyter-lab">
+<h2>Install Jupyter Lab<a class="headerlink" href="#install-jupyter-lab" title="Permalink to this headline">¶</a></h2>
+<p>If you want to use Jupyter Lab on your own computer, you can install it using conda (or pip).
+First, have a quick look at the Jupyter Lab installation instructions: <a class="reference external" href="https://jupyterlab.readthedocs.io/en/stable/getting_started/installation.html">https://jupyterlab.readthedocs.io/en/stable/getting_started/installation.html</a></p>
+<p>You can install Jupyter Lab using conda:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install -c conda-forge jupyterlab
+</pre></div>
+</div>
+<p>After installation is completed, you can start a Jupyter Lab instance by running this command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter lab
+</pre></div>
+</div>
+<p>Jupyter Lab should open up in a browser window.</p>
+</div>
 <div class="section" id="how-to-find-out-which-conda-command-to-use-when-installing-a-package">
 <h2>How to find out which conda -command to use when installing a package?<a class="headerlink" href="#how-to-find-out-which-conda-command-to-use-when-installing-a-package" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="the-easiest-way">
@@ -468,7 +483,7 @@ that is the one to use! Thus, in our case the first page that Google gives does 
     <p>
         &copy; Copyright 2019, Henrikki Tenkanen and Vuokko Heikinheimo, Digital Geography Lab, University of Helsinki
       <span class="lastupdated">
-        Last updated on Oct 29, 2018.
+        Last updated on Oct 21, 2019.
       </span>
 
     </p>

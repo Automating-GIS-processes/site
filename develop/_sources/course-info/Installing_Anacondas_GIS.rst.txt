@@ -148,6 +148,29 @@ Install GIS related packages with conda (and pip) by running in command prompt f
     pip install dash-core-components==0.14.0  # Supercharged components
     pip install plotly --upgrade  # Plotly graphing library
 
+Install Jupyter Lab
+----------------------
+
+If you want to use Jupyter Lab on your own computer, you can install it using conda (or pip).
+First, have a quick look at the Jupyter Lab installation instructions: https://jupyterlab.readthedocs.io/en/stable/getting_started/installation.html
+
+You can install Jupyter Lab using conda:
+
+.. code:: bash
+
+    conda install -c conda-forge jupyterlab
+
+
+After installation is completed, you can start a Jupyter Lab instance by running this command:
+
+
+.. code:: bash
+
+    jupyter lab
+
+Jupyter Lab should open up in a browser window.
+
+
 How to find out which conda -command to use when installing a package?
 ----------------------------------------------------------------------
 
