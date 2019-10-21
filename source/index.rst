@@ -98,10 +98,10 @@ Lesson materials are published on these pages each week on Monday, after which t
 
 Contents
 --------
-*Lesson content, readings and due dates are subject to change*
+*Lesson materials are updated on these pages each week on Monday*
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Course information
 
    course-info/course-info
