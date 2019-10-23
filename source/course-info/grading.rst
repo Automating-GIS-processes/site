@@ -10,7 +10,7 @@ Course grade for Automating GIS-processes will be based on 1) final broader prog
 You will receive one grade for the final assignment, and one grade for the practical exercises and
 the final grade is based 40 % on the final assignment and 60 % on weekly exercise submissions.
 
-.. note:: please submit your exercise reports on time.
+.. note:: Please submit your exercise reports on time.
           Generally, exercises are due at the start of class the week following their assignment.
           If you anticipate you will not be able to submit any of these items by the given deadline,
           you should let the instructors know before the deadline.

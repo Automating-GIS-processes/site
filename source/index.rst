@@ -54,9 +54,12 @@ summary write-ups that you submit must be completed individually and must clearl
 
 Course topics by week
 ---------------------
-See `Geo-Python course materials <https://geo-python.github.io>`_  for learning the basics of Python programming.
+In teaching period 1 (Geo-Python), we focused on learning the basics of Python programming.
+See the materials on the `Geo-Python course page <https://geo-python.github.io>`_.
 
-Automating GIS processes -part of the course runs for seven weeks starting on Monday the 28th of October 2019.
+In teaching period 2 (Automating GIS processes), we dive into spatial data management and analysis using python.
+This part of the course runs for seven weeks starting on Monday the 28th of October 2019.
+
 Lesson materials are published on these pages each week on Monday, after which they are publicly available for anyone interested:
 
 +----------------+---------------------------------+
@@ -101,7 +104,7 @@ Contents
 *Lesson materials are updated on these pages each week on Monday*
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    :caption: Course information
 
    course-info/course-info
