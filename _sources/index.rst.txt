@@ -54,9 +54,12 @@ summary write-ups that you submit must be completed individually and must clearl
 
 Course topics by week
 ---------------------
-See `Geo-Python course materials <https://geo-python.github.io>`_  for learning the basics of Python programming.
+In teaching period 1 (Geo-Python), we focused on learning the basics of Python programming.
+See the materials on the `Geo-Python course page <https://geo-python.github.io>`_.
 
-Automating GIS processes -part of the course runs for seven weeks starting on Monday the 28th of October 2019.
+In teaching period 2 (Automating GIS processes), we dive into spatial data management and analysis using python.
+This part of the course runs for seven weeks starting on Monday the 28th of October 2019.
+
 Lesson materials are published on these pages each week on Monday, after which they are publicly available for anyone interested:
 
 +----------------+---------------------------------+
@@ -98,7 +101,7 @@ Lesson materials are published on these pages each week on Monday, after which t
 
 Contents
 --------
-*Lesson content, readings and due dates are subject to change*
+*Lesson materials are updated on these pages each week on Monday*
 
 .. toctree::
    :maxdepth: 2
@@ -112,77 +115,77 @@ Contents
    course-info/resources
    course-info/License-terms
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Lesson 1
+    .. toctree::
+       :maxdepth: 2
+       :caption: Lesson 1
 
-   lessons/L1/Intro-Python-GIS
-   lessons/L1/overview
-   notebooks/L1/geometric-objects.ipynb
-   lessons/L1/exercise-1
+       lessons/L1/Intro-Python-GIS
+       lessons/L1/overview
+       notebooks/L1/geometric-objects.ipynb
+       lessons/L1/exercise-1
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Lesson 2
+    .. toctree::
+       :maxdepth: 2
+       :caption: Lesson 2
 
-   lessons/L2/overview
-   notebooks/L2/geopandas-basics.ipynb
-   notebooks/L2/projections.ipynb
-   lessons/L2/exercise-2
+       lessons/L2/overview
+       notebooks/L2/geopandas-basics.ipynb
+       notebooks/L2/projections.ipynb
+       lessons/L2/exercise-2
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Lesson 3
+    .. toctree::
+       :maxdepth: 2
+       :caption: Lesson 3
 
-   lessons/L3/overview
-   lessons/L3/geocoding
-   notebooks/L3/geocoding_in_geopandas.ipynb
-   notebooks/L3/point-in-polygon.ipynb
-   notebooks/L3/spatial-join.ipynb
-   notebooks/L3/nearest-neighbour.ipynb
-   lessons/L3/exercise-3
+       lessons/L3/overview
+       lessons/L3/geocoding
+       notebooks/L3/geocoding_in_geopandas.ipynb
+       notebooks/L3/point-in-polygon.ipynb
+       notebooks/L3/spatial-join.ipynb
+       notebooks/L3/nearest-neighbour.ipynb
+       lessons/L3/exercise-3
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Lesson 4
+    .. toctree::
+       :maxdepth: 2
+       :caption: Lesson 4
 
-   lessons/L4/overview
-   notebooks/L4/reclassify.ipynb
-   notebooks/L4/geometric-operations.ipynb
-   lessons/L4/exercise-4
+       lessons/L4/overview
+       notebooks/L4/reclassify.ipynb
+       notebooks/L4/geometric-operations.ipynb
+       lessons/L4/exercise-4
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Lesson 5
+    .. toctree::
+       :maxdepth: 2
+       :caption: Lesson 5
 
-   lessons/L5/overview
-   notebooks/L5/static_maps.ipynb
-   notebooks/L5/interactive-map-folium.ipynb
-   lessons/L5/share-on-github
-   lessons/L5/exercise-5
+       lessons/L5/overview
+       notebooks/L5/static_maps.ipynb
+       notebooks/L5/interactive-map-folium.ipynb
+       lessons/L5/share-on-github
+       lessons/L5/exercise-5
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Lesson 6
+    .. toctree::
+       :maxdepth: 2
+       :caption: Lesson 6
 
-   lessons/L6/overview
-   notebooks/L6/retrieve_osm_data.ipynb
-   notebooks/L6/network-analysis.ipynb
-   lessons/L6/exercise-6
+       lessons/L6/overview
+       notebooks/L6/retrieve_osm_data.ipynb
+       notebooks/L6/network-analysis.ipynb
+       lessons/L6/exercise-6
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Lesson 7
+    .. toctree::
+       :maxdepth: 2
+       :caption: Lesson 7
 
-   lessons/L7/overview
-   lessons/L7/pyqgis
-   lessons/L7/processing-toolbox
-   lessons/L7/processing-script
-   lessons/L7/exercise-7
+       lessons/L7/overview
+       lessons/L7/pyqgis
+       lessons/L7/processing-toolbox
+       lessons/L7/processing-script
+       lessons/L7/exercise-7
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Final Assignment
+    .. toctree::
+       :maxdepth: 2
+       :caption: Final Assignment
 
-   lessons/FA/final-assignment
+       lessons/FA/final-assignment
 
