@@ -1,11 +1,13 @@
 Exercise 1
 ==========
 
+.. note::
+
+    Please complete this exercise by **16:00 on Monday the 4th of November 2019** (before the next lesson).
+
 .. admonition:: Start your assignment
 
     You can start working on your copy of Exercise 1 by `accepting the GitHub Classroom assignment <>`__.
-
-    **Exercise 1 is due by Wednesday 7.11 before the next practical session**.
 
 You can also take a look at the open course copy of `Exercise 1 in the course GitHub repository <https://github.com/AutoGIS-2019/Exercise-1>`__ (does not require logging in).
 Note that you should not try to make changes to this copy of the exercise, but rather only to the copy available via GitHub Classroom.
@@ -19,6 +21,7 @@ Assert statements
 Assertions are a way to ``assert``, or ensure, that the values being used in your scripts are going to be
 suitable for what the code does. It is common to use ``assert`` statements with ``functions`` as they are a
 good way to ensure the correct functionality of a function and guide the user to use function as intended.
+Read more about assertions from `Geo-Python week 6 good coding practices <https://geo-python.github.io/site/notebooks/L6/gcp-assertions.html#Assertions>`__.
 
 One good example how to use assertions inside a function is to ensure that the values passed into the function are
 of correct type. It is also common to test value ranges with assert, such as test that values are positive.
