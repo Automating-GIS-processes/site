@@ -247,14 +247,13 @@
 <p>First step is to install Python and necessary Python modules that are needed to perform various GIS-tasks.
 The purpose of this page is to help you out installing Python and various useful GIS modules into your own computer.
 Even though it is possible to install Python from their <a class="reference external" href="https://www.python.org/">homepage</a>,
-<strong>we highly recommend using</strong> <a class="reference external" href="https://www.continuum.io/anaconda-overview">Anaconda</a> which is an open source
+<strong>we highly recommend using</strong> <a class="reference external" href="https://www.anaconda.com/distribution/">Anaconda</a> which is an open source
 distribution of the Python and R programming languages for large-scale data processing, predictive analytics,
 and scientific computing, that aims to simplify package management and deployment. In short,
 it makes life much easier when installing new tools on your Python to play with.</p>
 <div class="section" id="install-python-gis-on-windows">
 <h2>Install Python + GIS on Windows<a class="headerlink" href="#install-python-gis-on-windows" title="Permalink to this headline">¶</a></h2>
-<p>Following steps have been tested to work on Windows 7 and 10 with Anaconda3 64 bit, using conda v4.3.29 (30th October 2017).</p>
-<p><a class="reference external" href="https://www.continuum.io/downloads">Download Anaconda installer (64 bit)</a> for Windows.</p>
+<p><a class="reference external" href="https://www.anaconda.com/distribution/">Download Anaconda installer (Python 3.7 version, 64 bit)</a> for Windows.</p>
 <p>Install Anaconda to your computer by double clicking the installer and install it into a directory you want (needs admin rights).
 Install it to <strong>all users</strong> and use default settings.</p>
 <div class="admonition note">
@@ -264,13 +263,16 @@ pass admin credentials all the time. If you don’t have <code class="docutils l
 </div>
 <p>Test that the Anaconda´s package manage called <code class="docutils literal notranslate"><span class="pre">conda</span></code> works by <a class="reference external" href="http://www.howtogeek.com/194041/how-to-open-the-command-prompt-as-administrator-in-windows-8.1/">opening a command prompt as a admin user</a>
 and running command <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">--version</span></code>.</p>
-<p>Install GIS related packages with conda (and pip) by running in command prompt following commands.
-Many of the GIS packages are bundled with geopandas, but there are a few that requires separate installation.
+<p>Install GIS related packages with conda (and pip) by running the following commands in your terminal / command prompt /anaconda prompt.
 As you can see below, many of the GIS packages are available from specific <code class="docutils literal notranslate"><span class="pre">channel</span></code> from conda called <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>.</p>
+<p>We recommend that you first install only geopandas, and add the other packages once you need them.
+Installing geopandas will automatically install several fundamental GIS packages (such as Shapely and fiona) on your computer, so you will have a nice setup already using one installation command!</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install Geopandas</span>
 conda install -c conda-forge geopandas
-
-<span class="c1"># Install geoplot</span>
+</pre></div>
+</div>
+<p>There are also other useful packages that requires separate installation. You don’t necessarily need these during the first weeks of this course.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install geoplot</span>
 conda install -c conda-forge geoplot
 
 <span class="c1"># Install osmnx</span>
@@ -278,6 +280,9 @@ conda install -c conda-forge osmnx
 
 <span class="c1"># Install pysal</span>
 conda install -c conda-forge pysal
+
+<span class="c1">#install folium</span>
+conda install -c conda-forge folium
 
 <span class="c1"># Install contextily</span>
 conda install -c conda-forge contextily
@@ -301,7 +306,7 @@ pip install plotly --upgrade  <span class="c1"># Plotly graphing library</span>
 </div>
 <div class="section" id="test-that-everything-works">
 <h3>Test that everything works<a class="headerlink" href="#test-that-everything-works" title="Permalink to this headline">¶</a></h3>
-<p>You can test that the installations have worked by running following commands in your IPython console (comes with mini-conda).</p>
+<p>You can test that the installations have worked by running following commands in Python (try importing only those packages you installed):</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
 <span class="kn">import</span> <span class="nn">pysal</span>
 <span class="kn">import</span> <span class="nn">cartopy</span>
@@ -337,7 +342,10 @@ nano ~/.bashrc
 </pre></div>
 </div>
 <p><strong>Install Python packages</strong></p>
-<p>Install GIS related packages with conda (and pip) by running in command prompt following commands (in the same order as they are listed):</p>
+<p>Install GIS related packages with conda (and pip) by running in command prompt following commands (in the same order as they are listed):
+You can start by installing geopandas, and add other packages once you start needing them.
+Installing geopandas will automatically install several fundamental GIS packages (such as Shapely and fiona) on your computer,
+so you will have a nice setup already using one installation command!</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install Geopandas</span>
 conda install -c conda-forge geopandas
 
@@ -434,7 +442,7 @@ that is the one to use! Thus, in our case the first page that Google gives does 
     <p>
         &copy; Copyright 2019, Henrikki Tenkanen and Vuokko Heikinheimo, Digital Geography Lab, University of Helsinki
       <span class="lastupdated">
-        Last updated on Oct 21, 2019.
+        Last updated on Oct 24, 2019.
       </span>
 
     </p>
