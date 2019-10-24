@@ -6,7 +6,7 @@ Installing Python + GIS
 First step is to install Python and necessary Python modules that are needed to perform various GIS-tasks.
 The purpose of this page is to help you out installing Python and various useful GIS modules into your own computer.
 Even though it is possible to install Python from their `homepage <https://www.python.org/>`_,
-**we highly recommend using** `Anaconda <https://www.continuum.io/anaconda-overview>`_ which is an open source
+**we highly recommend using** `Anaconda <https://www.anaconda.com/distribution/>`_ which is an open source
 distribution of the Python and R programming languages for large-scale data processing, predictive analytics,
 and scientific computing, that aims to simplify package management and deployment. In short,
 it makes life much easier when installing new tools on your Python to play with.
@@ -14,9 +14,8 @@ it makes life much easier when installing new tools on your Python to play with.
 Install Python + GIS on Windows
 -------------------------------
 
-Following steps have been tested to work on Windows 7 and 10 with Anaconda3 64 bit, using conda v4.3.29 (30th October 2017).
 
-`Download Anaconda installer (64 bit) <https://www.continuum.io/downloads>`_ for Windows.
+`Download Anaconda installer (Python 3.7 version, 64 bit) <https://www.anaconda.com/distribution/>`_ for Windows.
 
 Install Anaconda to your computer by double clicking the installer and install it into a directory you want (needs admin rights).
 Install it to **all users** and use default settings.
@@ -30,14 +29,20 @@ Install it to **all users** and use default settings.
 Test that the Anaconda´s package manage called ``conda`` works by `opening a command prompt as a admin user <http://www.howtogeek.com/194041/how-to-open-the-command-prompt-as-administrator-in-windows-8.1/>`_
 and running command ``conda --version``.
 
-Install GIS related packages with conda (and pip) by running in command prompt following commands.
-Many of the GIS packages are bundled with geopandas, but there are a few that requires separate installation.
+Install GIS related packages with conda (and pip) by running the following commands in your terminal / command prompt /anaconda prompt.
 As you can see below, many of the GIS packages are available from specific ``channel`` from conda called ``conda-forge``.
+
+We recommend that you first install only geopandas, and add the other packages once you need them.
+Installing geopandas will automatically install several fundamental GIS packages (such as Shapely and fiona) on your computer, so you will have a nice setup already using one installation command!
 
 .. code:: bash
 
     # Install Geopandas
     conda install -c conda-forge geopandas
+
+There are also other useful packages that requires separate installation. You don't necessarily need these during the first weeks of this course.
+
+.. code:: bash
 
     # Install geoplot
     conda install -c conda-forge geoplot
@@ -47,6 +52,9 @@ As you can see below, many of the GIS packages are available from specific ``cha
 
     # Install pysal
     conda install -c conda-forge pysal
+
+    #install folium
+    conda install -c conda-forge folium
 
     # Install contextily
     conda install -c conda-forge contextily
@@ -70,7 +78,7 @@ As you can see below, many of the GIS packages are available from specific ``cha
 Test that everything works
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can test that the installations have worked by running following commands in your IPython console (comes with mini-conda).
+You can test that the installations have worked by running following commands in Python (try importing only those packages you installed):
 
 .. code:: python
 
@@ -114,6 +122,10 @@ Install Python + GIS on Linux / Mac
 **Install Python packages**
 
 Install GIS related packages with conda (and pip) by running in command prompt following commands (in the same order as they are listed):
+You can start by installing geopandas, and add other packages once you start needing them.
+Installing geopandas will automatically install several fundamental GIS packages (such as Shapely and fiona) on your computer,
+so you will have a nice setup already using one installation command!
+
 
 .. code:: bash
 
