@@ -4,10 +4,10 @@ Motivation for the course
 General overview of the latter part of the course
 -------------------------------------------------
 
-Now as you know `the basics of Python programming <https://geo-python.github.io>`_ it is time to
-apply those skills to different GIS related tasks. During the next
+Now that you are familiar with `the basics of Python programming <https://geo-python.github.io>`_ it is time to
+apply those skills to geographic data analysis. During the next
 seven weeks you will learn how to deal with spatial data and analyze it
-using Python programming language and various libraries that has been developed for GIS.
+using Python and various libraries that have been developed for GIS-related tasks.
 
 Learning objectives
 -------------------
@@ -174,4 +174,4 @@ the module that you need:
 
 .. admonition:: Install to your own computer!
 
-    See **directions how to install these modules to your own computer from** `here <Installing_Anacondas_GIS.html>`_
+    See **directions how to install these modules to your own computer under** `the course info <Installing_Anacondas_GIS.html>`_

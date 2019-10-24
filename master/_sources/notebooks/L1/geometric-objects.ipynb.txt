@@ -4,24 +4,27 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# Geometric objects - Spatial data model\n",
+    "# Shapely and geometric objects\n",
     "\n",
     "**Sources:**\n",
     "\n",
-    "These materials are partly based on [Shapely-documentation](http://toblerity.org/shapely/manual.html) and [Westra\n",
+    "These materials are partly based on [Shapely-documentation](https://shapely.readthedocs.io/en/stable/manual.html) and [Westra\n",
     "E. (2013), Chapter 3](https://www.packtpub.com/application-development/python-geospatial-development-second-edition).\n",
     "\n",
-    "## Overview of geometric objects and Shapely -module\n",
+    "## Spatial data model\n",
     "\n",
     "![Spatial data model](img/SpatialDataModel.PNG)\n",
-    "*Fundamental geometric objects that can be used in Python with* [Shapely](http://toblerity.org/shapely/manual.html) *module*\n",
     "\n",
-    "The most fundamental geometric objects are `Points`, `Lines` and `Polygons` which are the basic ingredients when working with spatial data in vector format. Python has a specific module called [Shapely](http://toblerity.org/shapely/manual.html) that can be used to create and work with `Geometric Objects`. There are many useful functionalities that you can do with Shapely such as:\n",
+    "*Fundamental geometric objects that can be used in Python with* [Shapely](http://toblerity.org/shapely/manual.html).\n",
+    "\n",
+    "The most fundamental geometric objects are `Points`, `Lines` and `Polygons` which are the basic ingredients when working with spatial data in vector format. \n",
+    "Python has a specific module called [Shapely](http://toblerity.org/shapely/manual.html) for doing various geometric operations. \n",
+    "There are many useful functionalities that you can do with Shapely such as:\n",
     "\n",
     "-  Create a `Line` or `Polygon` from a `Collection` of `Point` -geometries\n",
     "-  Calculate areas/length/bounds etc. of input geometries\n",
     "-  Conduct geometric operations based on the input geometries such as `Union`, `Difference`, `Distance` etc.\n",
-    "-  Conduct spatial queries between geometries such `Intersects`, `Touches`, `Crosses`, `Within` etc.\n",
+    "-  Conduct spatial queries between geometries such as `Intersects`, `Touches`, `Crosses`, `Within` etc.\n",
     "\n",
     "**Geometric Objects consist of coordinate tuples where:**\n",
     "\n",
@@ -40,16 +43,38 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
+    "<div class=\"alert alert-info\">\n",
+    "\n",
+    "**Tuple**\n",
+    "\n",
+    "[Tuple](https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences) is a Python data structure that consists of a nuber of values separated by commas. Coordinate pairs are often represented as a tuple. For example:\n",
+    "\n",
+    "```\n",
+    "(60.192059, 24.945831)\n",
+    "``` \n",
+    "\n",
+    "Tuples belong to [sequence data types](https://docs.python.org/3/library/stdtypes.html#typesseq) in Python. Other sequence data types are lists and ranges. Tuples have many similarities with lists and ranges, but they are often used for different purposes. The main difference between tuples and lists is that tuples are [immutable](https://docs.python.org/3/glossary.html#term-immutable), which means that the contents of a tuple cannot be altered (while lists are mutable; you can, for example, add and remove values from lists).\n",
+    "</div>\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
     "## Point\n",
     "\n",
-    "-  Creating point is easy, you pass x and y coordinates into `Point()` -object (+ possibly also z -coordinate):"
+    "Creating point is easy, you pass x and y coordinates into `Point()` -object (+ possibly also z -coordinate):"
    ]
   },
   {
    "cell_type": "code",
    "execution_count": 1,
    "metadata": {
-    "collapsed": false
+    "collapsed": false,
+    "jupyter": {
+     "outputs_hidden": false
+    }
    },
    "outputs": [],
    "source": [
@@ -60,24 +85,56 @@
     "point1 = Point(2.2, 4.2)\n",
     "point2 = Point(7.2, -25.1)\n",
     "point3 = Point(9.26, -2.456)\n",
-    "point3D = Point(9.26, -2.456, 0.57)\n",
-    "\n",
-    "# What is the type of the point?\n",
-    "point_type = type(point1)"
+    "point3D = Point(9.26, -2.456, 0.57)"
    ]
   },
   {
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "-  Let's see what the variables look like"
+    "Let's see what the variables look like:"
    ]
   },
   {
    "cell_type": "code",
    "execution_count": 2,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "image/svg+xml": [
+       "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"100.0\" height=\"100.0\" viewBox=\"1.2000000000000002 3.2 2.0 2.0\" preserveAspectRatio=\"xMinYMin meet\"><g transform=\"matrix(1,0,0,-1,0,8.4)\"><circle cx=\"2.2\" cy=\"4.2\" r=\"0.06\" stroke=\"#555555\" stroke-width=\"0.02\" fill=\"#66cc99\" opacity=\"0.6\" /></g></svg>"
+      ],
+      "text/plain": [
+       "<shapely.geometry.point.Point at 0x24eb246e080>"
+      ]
+     },
+     "execution_count": 2,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "point1"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Jupyter notebook is able to display the shape directly on the screen.\n",
+    "\n",
+    "We can also print out the points to see the actual definition:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
    "metadata": {
-    "collapsed": false
+    "collapsed": false,
+    "jupyter": {
+     "outputs_hidden": false
+    }
    },
    "outputs": [
     {
@@ -85,15 +142,42 @@
      "output_type": "stream",
      "text": [
       "POINT (2.2 4.2)\n",
-      "POINT Z (9.26 -2.456 0.57)\n",
-      "<class 'shapely.geometry.point.Point'>\n"
+      "POINT Z (9.26 -2.456 0.57)\n"
      ]
     }
    ],
    "source": [
     "print(point1)\n",
-    "print(point3D)\n",
-    "print(type(point1))"
+    "print(point3D)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "3D-point can be recognized from the capital Z -letter in front of the coordinates.\n",
+    "\n",
+    "Let's also check the data type of a point:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "shapely.geometry.point.Point"
+      ]
+     },
+     "execution_count": 4,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "type(point1)"
    ]
   },
   {
@@ -101,7 +185,29 @@
    "metadata": {},
    "source": [
     "We can see that the type of the point is shapely's Point which is represented in a specific format that is based on\n",
-    "[GEOS](https://trac.osgeo.org/geos) C++ library that is one of the standard libraries in GIS. It runs under the hood e.g. in [QGIS](http://www.qgis.org/en/site/). 3D-point can be recognized from the capital Z -letter in front of the coordinates."
+    "[GEOS](https://trac.osgeo.org/geos) C++ library that is one of the standard libraries in GIS. It runs under the hood e.g. in [QGIS](http://www.qgis.org/en/site/). \n",
+    "\n",
+    "We can also access the geometry type of the object using `Point.geom_type`:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "'Point'"
+      ]
+     },
+     "execution_count": 5,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "point1.geom_type"
    ]
   },
   {
@@ -110,17 +216,39 @@
    "source": [
     "### Point attributes and functions\n",
     "\n",
-    "Point -object has some built-in attributes that can be accessed and also some useful functionalities. One of the most useful ones are the ability to extract the coordinates of a Point and calculate the Euclidian distance between points.\n",
+    "Points and other shapely objects have useful built-in [attributes and methods](https://shapely.readthedocs.io/en/stable/manual.html#general-attributes-and-methods). One of the most useful ones are the ability to extract the coordinates of a Point and calculate the Euclidian distance between points.\n",
     "\n",
-    "-  Extracting the coordinates of a Point can be done in a couple of different ways:"
+    "Extracting the coordinates of a Point can be done in a couple of different ways:"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 3,
+   "execution_count": 6,
    "metadata": {
-    "collapsed": false
+    "collapsed": false,
+    "jupyter": {
+     "outputs_hidden": false
+    }
    },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "<shapely.coords.CoordinateSequence object at 0x0000024EB27F8BA8>\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Get the coordinates\n",
+    "point_coords = point1.coords\n",
+    "print(point_coords)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {},
    "outputs": [
     {
      "data": {
@@ -128,16 +256,13 @@
        "shapely.coords.CoordinateSequence"
       ]
      },
-     "execution_count": 3,
+     "execution_count": 7,
      "metadata": {},
      "output_type": "execute_result"
     }
    ],
    "source": [
-    "# Get the coordinates\n",
-    "point_coords = point1.coords\n",
-    "\n",
-    "# What is the type of this?\n",
+    "# What is the data type?\n",
     "type(point_coords)"
    ]
   },
@@ -147,31 +272,19 @@
    "source": [
     "As we can see, the data type of our `point_coords` variable is a Shapely CoordinateSequence.\n",
     "\n",
-    "- Let's see how we can get out the actual coordinates from this object:"
+    "Let's see how we can get out the actual coordinates from this object:"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 4,
+   "execution_count": 8,
    "metadata": {
-    "collapsed": false
-   },
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "xy variable:\n",
-      " (array('d', [2.2]), array('d', [4.2])) \n",
-      "\n",
-      "x variable:\n",
-      " 2.2 \n",
-      "\n",
-      "y variable:\n",
-      " 4.2\n"
-     ]
+    "collapsed": false,
+    "jupyter": {
+     "outputs_hidden": false
     }
-   ],
+   },
+   "outputs": [],
    "source": [
     "# Get x and y coordinates\n",
     "xy = point_coords.xy\n",
@@ -180,12 +293,37 @@
     "x = point1.x\n",
     "\n",
     "# Whatabout y coordinate?\n",
-    "y = point1.y\n",
-    "\n",
-    "# Print out\n",
-    "print(\"xy variable:\\n\", xy, \"\\n\")\n",
-    "print(\"x variable:\\n\", x, \"\\n\")\n",
-    "print(\"y variable:\\n\", y)"
+    "y = point1.y"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Print out the coordinates:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "xy: (array('d', [2.2]), array('d', [4.2])) \n",
+      "\n",
+      "x: 2.2 \n",
+      "\n",
+      "y: 4.2\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(\"xy:\", xy, \"\\n\")\n",
+    "print(\"x:\", x, \"\\n\")\n",
+    "print(\"y:\", y)"
    ]
   },
   {
@@ -195,14 +333,19 @@
     "As we can see from above the `xy` -variable contains a tuple where x and y coordinates are stored inside numpy arrays.\n",
     "Using the attributes `point1.x` and `point1.y` it is possible to get the coordinates directly as plain decimal numbers.\n",
     "\n",
-    "-  It is also possible to calculate the distance between points which can be useful in many applications. The returned distance is based on the projection of the points (e.g. degrees in WGS84, meters in UTM):"
+    "It is also possible to [calculate the distance between two objects using shapely](https://shapely.readthedocs.io/en/stable/manual.html#object.distance). The returned distance is based on the projection of the points (e.g. degrees in WGS84, meters in UTM).\n",
+    "\n",
+    "Let's calculate the distance between `point1` and `point2`:"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 5,
+   "execution_count": 10,
    "metadata": {
-    "collapsed": false
+    "collapsed": false,
+    "jupyter": {
+     "outputs_hidden": false
+    }
    },
    "outputs": [
     {
@@ -222,58 +365,118 @@
   },
   {
    "cell_type": "markdown",
-   "metadata": {
-    "collapsed": true
-   },
+   "metadata": {},
    "source": [
     "## LineString\n",
     "\n",
     "\n",
-    "Creating a LineString -object is fairly similar to how Point is created. \n",
+    "Creating LineString -objects is fairly similar to creating Shapely Points. \n",
     "\n",
-    "- Now instead using a single coordinate-tuple we can construct the line using either a list of shapely Point -objects or pass coordinate-tuples:"
+    "Now instead using a single coordinate-tuple we can construct the line using either a list of shapely Point -objects or pass the points as coordinate-tuples:"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 6,
+   "execution_count": 11,
    "metadata": {
-    "collapsed": false
-   },
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "line variable: \n",
-      " LINESTRING (2.2 4.2, 7.2 -25.1, 9.26 -2.456) \n",
-      "\n",
-      "line2 variable: \n",
-      " LINESTRING (2.2 4.2, 7.2 -25.1, 9.26 -2.456) \n",
-      "\n",
-      "type of the line: \n",
-      " <class 'shapely.geometry.linestring.LineString'>\n"
-     ]
+    "collapsed": false,
+    "jupyter": {
+     "outputs_hidden": false
     }
-   ],
+   },
+   "outputs": [],
    "source": [
     "# Create a LineString from our Point objects\n",
     "line = LineString([point1, point2, point3])\n",
     "\n",
-    "# It is also possible to use coordinate tuples having the same outcome\n",
-    "line2 = LineString([(2.2, 4.2), (7.2, -25.1), (9.26, -2.456)])\n",
-    "\n",
-    "# Print the results\n",
-    "print(\"line variable: \\n\", line, \"\\n\")\n",
-    "print(\"line2 variable: \\n\", line2, \"\\n\")\n",
-    "print(\"type of the line: \\n\", type(line))"
+    "# It is also possible to produce the same outcome using coordinate tuples\n",
+    "line2 = LineString([(2.2, 4.2), (7.2, -25.1), (9.26, -2.456)])"
    ]
   },
   {
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "As we can see from above, the `line` -variable constitutes of multiple coordinate-pairs and the type of the data is shapely LineString."
+    "Let's see how our line looks like: "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "image/svg+xml": [
+       "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"100.0\" height=\"100.0\" viewBox=\"1.028 -26.272000000000002 9.404 31.644000000000002\" preserveAspectRatio=\"xMinYMin meet\"><g transform=\"matrix(1,0,0,-1,0,-20.900000000000002)\"><polyline fill=\"none\" stroke=\"#66cc99\" stroke-width=\"0.63288\" points=\"2.2,4.2 7.2,-25.1 9.26,-2.456\" opacity=\"0.8\" /></g></svg>"
+      ],
+      "text/plain": [
+       "<shapely.geometry.linestring.LineString at 0x24eb28115c0>"
+      ]
+     },
+     "execution_count": 12,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "line"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "line: \n",
+      " LINESTRING (2.2 4.2, 7.2 -25.1, 9.26 -2.456) \n",
+      "\n",
+      "line2: \n",
+      " LINESTRING (2.2 4.2, 7.2 -25.1, 9.26 -2.456) \n",
+      "\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(\"line: \\n\", line, \"\\n\")\n",
+    "print(\"line2: \\n\", line2, \"\\n\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "As we can see from above, the `line` -variable constitutes of multiple coordinate-pairs."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Check also the data type:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Object data type: <class 'shapely.geometry.linestring.LineString'>\n",
+      "Geometry type as text: LineString\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(\"Object data type:\", type(line))\n",
+    "print(\"Geometry type as text:\", line.geom_type)"
    ]
   },
   {
@@ -285,15 +488,28 @@
     "\n",
     "`LineString` -object has many useful built-in attributes and functionalities. It is for instance possible to extract the coordinates or the length of a LineString (line), calculate the centroid of the line, create points along the line at specific distance, calculate the closest distance from a line to specified Point and simplify the geometry. See full list of functionalities from [Shapely documentation](http://toblerity.org/shapely/manual.html). Here, we go through a few of them.\n",
     "\n",
-    "-  We can extract the coordinates of a LineString similarly as with `Point`\n"
+    "We can extract the coordinates of a LineString similarly as with `Point`"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 7,
+   "execution_count": 15,
    "metadata": {
-    "collapsed": false
+    "collapsed": false,
+    "jupyter": {
+     "outputs_hidden": false
+    }
    },
+   "outputs": [],
+   "source": [
+    "# Get x and y coordinates of the line\n",
+    "lxy = line.xy"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "metadata": {},
    "outputs": [
     {
      "name": "stdout",
@@ -304,9 +520,6 @@
     }
    ],
    "source": [
-    "# Get x and y coordinates of the line\n",
-    "lxy = line.xy\n",
-    "\n",
     "print(lxy)"
    ]
   },
@@ -316,15 +529,31 @@
    "source": [
     "As we can see, the coordinates are again stored as a numpy arrays where first array includes all x-coordinates and the second one all the y-coordinates respectively.\n",
     "\n",
-    "-  We can extract only x or y coordinates by referring to those arrays as follows\n"
+    "We can extract only x or y coordinates by referring to those arrays using indices (same way you would access values in a list):"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 8,
+   "execution_count": 17,
    "metadata": {
-    "collapsed": false
+    "collapsed": false,
+    "jupyter": {
+     "outputs_hidden": false
+    }
    },
+   "outputs": [],
+   "source": [
+    "# Extract x coordinates\n",
+    "line_xcoords = lxy[0]\n",
+    "\n",
+    "# Extract y coordinates straight from the LineObject by referring to a array at index 1\n",
+    "line_ycoords = line.xy[1]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 18,
+   "metadata": {},
    "outputs": [
     {
      "name": "stdout",
@@ -339,30 +568,40 @@
     }
    ],
    "source": [
-    "# Extract x coordinates\n",
-    "line_x = lxy[0]\n",
+    "print('line_x:\\n', line_xcoords, '\\n')\n",
     "\n",
-    "# Extract y coordinates straight from the LineObject by referring to a array at index 1\n",
-    "line_y = line.xy[1]\n",
-    "\n",
-    "print('line_x:\\n', line_x, '\\n')\n",
-    "\n",
-    "print('line_y:\\n', line_y)"
+    "print('line_y:\\n', line_ycoords)"
    ]
   },
   {
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "-  It is possible to retrieve specific attributes such as lenght of the line and center of the line (centroid) straight from the LineString object itself:"
+    "It is possible to retrieve specific attributes such as lenght of the line and center of the line (centroid) straight from the LineString object itself:"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 9,
+   "execution_count": 19,
    "metadata": {
-    "collapsed": false
+    "collapsed": false,
+    "jupyter": {
+     "outputs_hidden": false
+    }
    },
+   "outputs": [],
+   "source": [
+    "# Get the lenght of the line\n",
+    "l_length = line.length\n",
+    "\n",
+    "# Get the centroid of the line\n",
+    "l_centroid = line.centroid"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 20,
+   "metadata": {},
    "outputs": [
     {
      "name": "stdout",
@@ -375,19 +614,10 @@
     }
    ],
    "source": [
-    "# Get the lenght of the line\n",
-    "l_length = line.length\n",
-    "\n",
-    "# Get the centroid of the line\n",
-    "l_centroid = line.centroid\n",
-    "\n",
-    "# What type is the centroid?\n",
-    "centroid_type = type(l_centroid)\n",
-    "\n",
     "# Print the outputs\n",
     "print(\"Length of our line: {0:.2f}\".format(l_length))\n",
     "print(\"Centroid of our line: \", l_centroid)\n",
-    "print(\"Type of the centroid:\", centroid_type)"
+    "print(\"Type of the centroid:\", type(l_centroid))"
    ]
   },
   {
@@ -406,57 +636,130 @@
     "## Polygon\n",
     "\n",
     "\n",
-    "Creating a `Polygon` -object continues the same logic of how `Point` and `LineString` were created but Polygon object only accepts coordinate-tuples as input. \n",
+    "Creating a `Polygon` -object continues the same logic of how `Point` and `LineString` were created but Polygon object only accepts a sequence of coordinates as input. \n",
     "\n",
-    "- Polygon needs at least three coordinate-tuples (that basically forms a triangle):\n"
+    "Polygon needs **at least three coordinate-tuples** (that basically forms a triangle):"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 10,
+   "execution_count": 21,
    "metadata": {
-    "collapsed": false
-   },
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "poly: POLYGON ((2.2 4.2, 7.2 -25.1, 9.26 -2.456, 2.2 4.2))\n",
-      "poly2: POLYGON ((2.2 4.2, 7.2 -25.1, 9.26 -2.456, 2.2 4.2))\n",
-      "Geometry type as text: Polygon\n",
-      "Geometry how Python shows it: <class 'shapely.geometry.polygon.Polygon'>\n"
-     ]
+    "collapsed": false,
+    "jupyter": {
+     "outputs_hidden": false
     }
-   ],
+   },
+   "outputs": [],
    "source": [
     "# Create a Polygon from the coordinates\n",
     "poly = Polygon([(2.2, 4.2), (7.2, -25.1), (9.26, -2.456)])\n",
     "\n",
-    "# We can also use our previously created Point objects (same outcome)\n",
-    "# --> notice that Polygon object requires x,y coordinates as input\n",
-    "poly2 = Polygon([[p.x, p.y] for p in [point1, point2, point3]])\n",
-    "\n",
-    "# Geometry type can be accessed as a String\n",
-    "poly_type = poly.geom_type\n",
-    "\n",
-    "# Using the Python's type function gives the type in a different format\n",
-    "poly_type2 = type(poly)\n",
-    "\n",
-    "# Let's see how our Polygon looks like\n",
-    "print('poly:', poly)\n",
-    "print('poly2:', poly2)\n",
-    "print(\"Geometry type as text:\", poly_type)\n",
-    "print(\"Geometry how Python shows it:\", poly_type2)"
+    "# It is also possible to produce the same outcome using a list of lists which contain the point coordinates.\n",
+    "# We can do this using the point objects we created before and a list comprehension:\n",
+    "# --> here, we pass a list of lists as input when creating the Polygon (the linst comprehension generates this list: [[2.2, 4.2], [7.2, -25.1], [9.26, -2.456]]):\n",
+    "poly2 = Polygon([[p.x, p.y] for p in [point1, point2, point3]])"
    ]
   },
   {
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "Notice that `Polygon` representation has double parentheses around the coordinates (i.e. `POLYGON ((<values in here>))` ). This is because Polygon can also have holes inside of it. \n",
+    "Let's see how our Polygon looks like"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 22,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "image/svg+xml": [
+       "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"100.0\" height=\"100.0\" viewBox=\"1.028 -26.272000000000002 9.404 31.644000000000002\" preserveAspectRatio=\"xMinYMin meet\"><g transform=\"matrix(1,0,0,-1,0,-20.900000000000002)\"><path fill-rule=\"evenodd\" fill=\"#66cc99\" stroke=\"#555555\" stroke-width=\"0.63288\" opacity=\"0.6\" d=\"M 2.2,4.2 L 7.2,-25.1 L 9.26,-2.456 L 2.2,4.2 z\" /></g></svg>"
+      ],
+      "text/plain": [
+       "<shapely.geometry.polygon.Polygon at 0x24eb2816f28>"
+      ]
+     },
+     "execution_count": 22,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "poly"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 23,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "poly: POLYGON ((2.2 4.2, 7.2 -25.1, 9.26 -2.456, 2.2 4.2))\n",
+      "poly2: POLYGON ((2.2 4.2, 7.2 -25.1, 9.26 -2.456, 2.2 4.2))\n"
+     ]
+    }
+   ],
+   "source": [
+    "print('poly:', poly)\n",
+    "print('poly2:', poly2)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Notice that `Polygon` representation has double parentheses around the coordinates (i.e. `POLYGON ((<values in here>))` ). This is because Polygon can also have holes inside of it. "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Check also the data type:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Object data type: <class 'shapely.geometry.polygon.Polygon'>\n",
+      "Geometry type as text: Polygon\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(\"Object data type:\", type(poly))\n",
+    "print(\"Geometry type as text:\", poly.geom_type)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 25,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Check the help for Polygon objects:\n",
+    "#help(Polygon)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
     "\n",
-    "As the help of Polygon -object tells, a Polygon can be constructed using exterior coordinates and interior coordinates (optional) where the interior coordinates creates a hole inside the Polygon:\n"
+    "\n",
+    "As the help of [Polygon](https://shapely.readthedocs.io/en/stable/manual.html#polygons) -object tells, a Polygon can be constructed using exterior coordinates and interior coordinates (optional) where the interior coordinates creates a hole inside the Polygon:\n"
    ]
   },
   {
@@ -486,26 +789,29 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "-  Let's see how we can create a `Polygon` with a hole inside"
+    "Let's see how we can create a `Polygon` with a hole inside; lLet's create a bounding box of the world and make a whole in it:"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 11,
-   "metadata": {
-    "collapsed": true
-   },
+   "execution_count": 26,
+   "metadata": {},
    "outputs": [],
    "source": [
-    "# Let's create a bounding box of the world and make a whole in it\n",
-    "\n",
     "# First we define our exterior\n",
     "world_exterior = [(-180, 90), (-180, -90), (180, -90), (180, 90)]\n",
     "\n",
     "# Let's create a single big hole where we leave ten decimal degrees at the boundaries of the world\n",
     "# Notice: there could be multiple holes, thus we need to provide a list of holes\n",
-    "hole = [[(-170, 80), (-170, -80), (170, -80), (170, 80)]]\n",
-    "\n",
+    "hole = [[(-170, 80), (-170, -80), (170, -80), (170, 80)]]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 27,
+   "metadata": {},
+   "outputs": [],
+   "source": [
     "# World without a hole\n",
     "world = Polygon(shell=world_exterior)\n",
     "\n",
@@ -517,14 +823,40 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "-  Let's see what we have now:"
+    "Let's see what we have now:"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 12,
+   "execution_count": 28,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "image/svg+xml": [
+       "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"300\" height=\"208.8\" viewBox=\"-194.4 -104.4 388.8 208.8\" preserveAspectRatio=\"xMinYMin meet\"><g transform=\"matrix(1,0,0,-1,0,0.0)\"><path fill-rule=\"evenodd\" fill=\"#66cc99\" stroke=\"#555555\" stroke-width=\"2.592\" opacity=\"0.6\" d=\"M -180.0,90.0 L -180.0,-90.0 L 180.0,-90.0 L 180.0,90.0 L -180.0,90.0 z M -170.0,80.0 L -170.0,-80.0 L 170.0,-80.0 L 170.0,80.0 L -170.0,80.0 z\" /></g></svg>"
+      ],
+      "text/plain": [
+       "<shapely.geometry.polygon.Polygon at 0x24eb27f8be0>"
+      ]
+     },
+     "execution_count": 28,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "world_has_a_hole"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 29,
    "metadata": {
-    "collapsed": false
+    "collapsed": false,
+    "jupyter": {
+     "outputs_hidden": false
+    }
    },
    "outputs": [
     {
@@ -557,30 +889,21 @@
     "### Polygon attributes and functions\n",
     "\n",
     "\n",
-    "We can again access different attributes directly from the `Polygon` object itself that can be really useful for many analyses, such as `area`, `centroid`, `bounding box`, `exterior`, and `exterior-length`.\n",
+    "We can again access different attributes directly from the `Polygon` object itself that can be really useful for many analyses, such as `area`, `centroid`, `bounding box`, `exterior`, and `exterior-length`. See a full list of methods in the [Shapely User Manual](https://shapely.readthedocs.io/en/stable/manual.html#the-shapely-user-manual).\n",
     "\n",
-    "- Here, we can see a few of the available attributes and how to access them:"
+    "Here, we can see a few of the available attributes and how to access them:"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 13,
+   "execution_count": 30,
    "metadata": {
-    "collapsed": false
-   },
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Poly centroid:  POINT (-0 -0)\n",
-      "Poly Area:  64800.0\n",
-      "Poly Bounding Box:  (-180.0, -90.0, 180.0, 90.0)\n",
-      "Poly Exterior:  LINEARRING (-180 90, -180 -90, 180 -90, 180 90, -180 90)\n",
-      "Poly Exterior Length:  1080.0\n"
-     ]
+    "collapsed": false,
+    "jupyter": {
+     "outputs_hidden": false
     }
-   ],
+   },
+   "outputs": [],
    "source": [
     "# Get the centroid of the Polygon\n",
     "world_centroid = world.centroid\n",
@@ -595,8 +918,27 @@
     "world_ext = world.exterior\n",
     "\n",
     "# Get the length of the exterior\n",
-    "world_ext_length = world_ext.length\n",
-    "\n",
+    "world_ext_length = world_ext.length"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 31,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Poly centroid:  POINT (-0 -0)\n",
+      "Poly Area:  64800.0\n",
+      "Poly Bounding Box:  (-180.0, -90.0, 180.0, 90.0)\n",
+      "Poly Exterior:  LINEARRING (-180 90, -180 -90, 180 -90, 180 90, -180 90)\n",
+      "Poly Exterior Length:  1080.0\n"
+     ]
+    }
+   ],
+   "source": [
     "# Print the outputs\n",
     "print(\"Poly centroid: \", world_centroid)\n",
     "print(\"Poly Area: \", world_area)\n",
@@ -622,14 +964,17 @@
     "In some occassions it is useful to store e.g. multiple lines or polygons under a single feature (i.e. a single row in a Shapefile represents more than one line or polygon object). Collections of points are implemented by using a MultiPoint -object, collections of curves by using a MultiLineString -object, and collections of surfaces by a MultiPolygon -object. These collections are not computationally significant, but are useful for modeling certain kinds of features. A Y-shaped line feature\n",
     "(such as road), or multiple polygons (e.g. islands on a like), can be presented nicely as a whole by a using MultiLineString or MultiPolygon accordingly. Creating and visualizing a minimum [bounding box](https://en.wikipedia.org/wiki/Minimum_bounding_box) e.g. around your data points is a really useful function for many purposes (e.g. trying to understand the extent of your data), here we demonstrate how to create one using Shapely.\n",
     "\n",
-    "-  Geometry collections can be constructed in a following manner:"
+    "Geometry collections can be constructed in a following manner:"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 14,
+   "execution_count": 32,
    "metadata": {
-    "collapsed": false
+    "collapsed": false,
+    "jupyter": {
+     "outputs_hidden": false
+    }
    },
    "outputs": [
     {
@@ -687,7 +1032,122 @@
     "print(\"MultiPoint:\", multi_point)\n",
     "print(\"MultiLine: \", multi_line)\n",
     "print(\"Bounding box: \", east_poly_box)\n",
-    "print(\"MultiPoly: \", multi_poly)\n"
+    "print(\"MultiPoly: \", multi_poly)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 33,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "image/svg+xml": [
+       "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"100.0\" height=\"100.0\" viewBox=\"1.028 -26.272000000000002 9.404 31.644000000000002\" preserveAspectRatio=\"xMinYMin meet\"><g transform=\"matrix(1,0,0,-1,0,-20.900000000000002)\"><g><circle cx=\"2.2\" cy=\"4.2\" r=\"0.9493199999999999\" stroke=\"#555555\" stroke-width=\"0.31644\" fill=\"#66cc99\" opacity=\"0.6\" /><circle cx=\"7.2\" cy=\"-25.1\" r=\"0.9493199999999999\" stroke=\"#555555\" stroke-width=\"0.31644\" fill=\"#66cc99\" opacity=\"0.6\" /><circle cx=\"9.26\" cy=\"-2.456\" r=\"0.9493199999999999\" stroke=\"#555555\" stroke-width=\"0.31644\" fill=\"#66cc99\" opacity=\"0.6\" /></g></g></svg>"
+      ],
+      "text/plain": [
+       "<shapely.geometry.multipoint.MultiPoint at 0x24eb2827e10>"
+      ]
+     },
+     "execution_count": 33,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "multi_point"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 34,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "image/svg+xml": [
+       "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"100.0\" height=\"100.0\" viewBox=\"1.028 -26.272000000000002 9.404 31.644000000000002\" preserveAspectRatio=\"xMinYMin meet\"><g transform=\"matrix(1,0,0,-1,0,-20.900000000000002)\"><g><polyline fill=\"none\" stroke=\"#66cc99\" stroke-width=\"0.63288\" points=\"2.2,4.2 7.2,-25.1\" opacity=\"0.8\" /><polyline fill=\"none\" stroke=\"#66cc99\" stroke-width=\"0.63288\" points=\"7.2,-25.1 9.26,-2.456\" opacity=\"0.8\" /></g></g></svg>"
+      ],
+      "text/plain": [
+       "<shapely.geometry.multilinestring.MultiLineString at 0x24eb2827f28>"
+      ]
+     },
+     "execution_count": 34,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "multi_line"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 35,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "image/svg+xml": [
+       "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"194.39999999999998\" height=\"194.4\" viewBox=\"-187.2 -97.2 194.39999999999998 194.4\" preserveAspectRatio=\"xMinYMin meet\"><g transform=\"matrix(1,0,0,-1,0,0.0)\"><path fill-rule=\"evenodd\" fill=\"#66cc99\" stroke=\"#555555\" stroke-width=\"2.0\" opacity=\"0.6\" d=\"M -180.0,90.0 L -180.0,-90.0 L 0.0,-90.0 L 0.0,90.0 L -180.0,90.0 z M -170.0,80.0 L -170.0,-80.0 L -10.0,-80.0 L -10.0,80.0 L -170.0,80.0 z\" /></g></svg>"
+      ],
+      "text/plain": [
+       "<shapely.geometry.polygon.Polygon at 0x24eb2811588>"
+      ]
+     },
+     "execution_count": 35,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "west_poly"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 36,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "image/svg+xml": [
+       "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"194.39999999999998\" height=\"194.4\" viewBox=\"-7.2 -97.2 194.39999999999998 194.4\" preserveAspectRatio=\"xMinYMin meet\"><g transform=\"matrix(1,0,0,-1,0,0.0)\"><path fill-rule=\"evenodd\" fill=\"#66cc99\" stroke=\"#555555\" stroke-width=\"2.0\" opacity=\"0.6\" d=\"M 180.0,-90.0 L 180.0,90.0 L 0.0,90.0 L 0.0,-90.0 L 180.0,-90.0 z\" /></g></svg>"
+      ],
+      "text/plain": [
+       "<shapely.geometry.polygon.Polygon at 0x24eb2827ef0>"
+      ]
+     },
+     "execution_count": 36,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "east_poly_box"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 37,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "image/svg+xml": [
+       "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"300\" height=\"208.8\" viewBox=\"-194.4 -104.4 388.8 208.8\" preserveAspectRatio=\"xMinYMin meet\"><g transform=\"matrix(1,0,0,-1,0,0.0)\"><g><path fill-rule=\"evenodd\" fill=\"#ff3333\" stroke=\"#555555\" stroke-width=\"2.592\" opacity=\"0.6\" d=\"M -180.0,90.0 L -180.0,-90.0 L 0.0,-90.0 L 0.0,90.0 L -180.0,90.0 z M -170.0,80.0 L -170.0,-80.0 L -10.0,-80.0 L -10.0,80.0 L -170.0,80.0 z\" /><path fill-rule=\"evenodd\" fill=\"#ff3333\" stroke=\"#555555\" stroke-width=\"2.592\" opacity=\"0.6\" d=\"M 180.0,-90.0 L 180.0,90.0 L 0.0,90.0 L 0.0,-90.0 L 180.0,-90.0 z\" /></g></g></svg>"
+      ],
+      "text/plain": [
+       "<shapely.geometry.multipolygon.MultiPolygon at 0x24eb2828160>"
+      ]
+     },
+     "execution_count": 37,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "multi_poly"
    ]
   },
   {
@@ -698,14 +1158,17 @@
     "\n",
     "### Geometry collection -objects' attributes and functions\n",
     "\n",
-    "-  We can also get many useful attributes from those objects such as `Convex Hull`:"
+    "We can also get many useful attributes from those objects such as `Convex Hull`:"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 15,
+   "execution_count": 38,
    "metadata": {
-    "collapsed": false
+    "collapsed": false,
+    "jupyter": {
+     "outputs_hidden": false
+    }
    },
    "outputs": [
     {
@@ -750,6 +1213,29 @@
    ]
   },
   {
+   "cell_type": "code",
+   "execution_count": 39,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "image/svg+xml": [
+       "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"100.0\" height=\"100.0\" viewBox=\"1.028 -26.272000000000002 9.404 31.644000000000002\" preserveAspectRatio=\"xMinYMin meet\"><g transform=\"matrix(1,0,0,-1,0,-20.900000000000002)\"><path fill-rule=\"evenodd\" fill=\"#66cc99\" stroke=\"#555555\" stroke-width=\"0.63288\" opacity=\"0.6\" d=\"M 7.2,-25.1 L 2.2,4.2 L 9.26,-2.456 L 7.2,-25.1 z\" /></g></svg>"
+      ],
+      "text/plain": [
+       "<shapely.geometry.polygon.Polygon at 0x24eb2828470>"
+      ]
+     },
+     "execution_count": 39,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "convex"
+   ]
+  },
+  {
    "cell_type": "markdown",
    "metadata": {},
    "source": [
@@ -774,9 +1260,9 @@
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.5.2"
+   "version": "3.5.6"
   }
  },
  "nbformat": 4,
- "nbformat_minor": 2
+ "nbformat_minor": 4
 }
