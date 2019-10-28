@@ -65,35 +65,35 @@ Lesson materials are published on these pages each week on Monday, after which t
 +----------------+---------------------------------+
 | Week           | Theme                           |
 +================+=================================+
-| **1**          | GIS in Python;                  |
-|                | Spatial data model;             |
-|                | Geometric Objects; Shapely      |
+| **1**          | Shapely and geometric objects   |
+|                | (points, lines and polygons)    |
+|                |                                 |
 |                |                                 |
 +----------------+---------------------------------+
-| **2**          | Working with GeoDataFrames;     |
-|                | Managing projections;           |
-|                | Table join;                     |
+| **2**          | Managing spatial data with      |
+|                | Geopandas (reading and writing  |
+|                | data, projections, table joins) |
 |                |                                 |
 +----------------+---------------------------------+
-| **3**          | Geocoding and making spatial    |
+| **3**          | Geocoding and spatial           |
 |                | queries                         |
 |                |                                 |
 |                |                                 |
 +----------------+---------------------------------+
-| **4**          | Geometric operations;           |
-|                | Reclassifying data with Pysal   |
+| **4**          |  Reclassifying data,            |
+|                |  overlay analysis               |
 |                |                                 |
 +----------------+---------------------------------+
-| **5**          | Visualization, making static    |
+| **5**          | Visualization: static           |
 |                | and interactive maps            |
 |                |                                 |
 +----------------+---------------------------------+
-| **6**          | Network analysis and routing    |
-|                | in Python (transport modelling) |
+| **6**          | OpenStreetMap data (osmnx) and  |
+|                | Network analysis (networkx)     |
 |                |                                 |
 +----------------+---------------------------------+
-| **7**          | Using Python programming in     |
-|                | QGIS                            |
+| **7**          | Raster processing (rasterio)    |
+|                | Python in QGIS demo             |
 |                |                                 |
 +----------------+---------------------------------+
 
