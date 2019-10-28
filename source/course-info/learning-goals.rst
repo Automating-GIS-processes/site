@@ -14,14 +14,14 @@ After each week you should be able to achieve following learning goals.
 |                                 |                                                                                     |
 +---------------------------------+-------------------------------------------------------------------------------------+
 | 2.                              | At the end of class 2 you should be able to:                                        |
-|                                 |     - Read and write data from/to Shapefile                                         |
-|                                 |     - Create geometries into GeoDataFrame                                           |
-|                                 |     - Change the coordinate reference system of the data                            |
+|                                 |     - Read and write spatial data from/to common file formats                       |
+|                                 |     - Manage spatial data using Geopandas                                           |
+|                                 |     - Re-project a geodatagfame from one projection to another                      |
 |                                 |                                                                                     |
 +---------------------------------+-------------------------------------------------------------------------------------+
 | 3.                              |  At the end of class 3 you should be able to:                                       |
 |                                 |    - Do geocoding, i.e. converting addresses into Points (and vice versa)           |
-|                                 |    - Conduct a Point in Polygon queries                                             |
+|                                 |    - Conduct Point in Polygon queries                                               |
 |                                 |    - Read data from KML file                                                        |
 |                                 |    - Make spatial and table joins between layers                                    |
 |                                 |    - Find the nearest neighbour from Point -objects                                 |
@@ -47,8 +47,8 @@ After each week you should be able to achieve following learning goals.
 |                                 |                                                                                     |
 +---------------------------------+-------------------------------------------------------------------------------------+
 | 7.                              |  At the end of class 7 you should be able to:                                       |
-|                                 |    - Create a simple user interface for a script in the QGIS Processing Toolbox     |
-|                                 |    - Run different QGIS algorithms from Python                                      |
-|                                 |    - Find and know how to read the PyQGIS and QGIS Processing documentation online  |
+|                                 |    - understand the basics of raster data processing using rasterio                 |
+|                                 |    - be familiar with Python scripting in QGIS                                      |
+|                                 |                                                                                     |
 |                                 |                                                                                     |
 +---------------------------------+-------------------------------------------------------------------------------------+
