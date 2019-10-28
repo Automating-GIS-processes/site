@@ -10,15 +10,15 @@ tasks using Python tools. We are using only publicly available data which can be
 We also provide a computing environment which allows you to instantly start programming and trying out the materials yourself,
 directly in your browser (no installations needed).
 
-Notice: we assume that you know the basics of Python programming. If Python is not familiar to you, we recommend to start with
-our earlier course that prepares you for this course, and focuses on learning the basics of Python, see `geo-python.github.io <https://geo-python.github.io>`_.
+Notice: we assume that you know the basics of Python programming. If you are new to Python, we recommend that you start with
+the `Geo-Python course materials at geo-python.github.io <https://geo-python.github.io>`_. The Automating GIS processes course ("AutoGIS")
+is a direct continuation from the Geo-Python course, which is a join effort between the geography and geology study programmes at
+the University of Helsinki, Finland.
 
 Course format
 -------------
 
 The majority of this course will be spent in front of a computer learning to program with Python programming language and doing practical exercises.
-During Teaching Period I, the Automating GIS-processes and `Introduction to Quantitative Geology <https://introqg.github.io>`_ courses met together and focused on
-`learning the basics of programming with Python <https://geo-python.github.io>`_.
 
 The computer exercises will focus on developing basic programming skills using Python and applying those skills to various GIS related problems.
 Typical exercises will involve a brief introduction, followed by topical computer-based tasks and exercises. At the end of the exercises, you are asked
