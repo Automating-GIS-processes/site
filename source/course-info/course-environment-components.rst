@@ -110,7 +110,7 @@ CSC Notebooks is available only for students who are affiliated with Finnish uni
 Using your own computer
 --------------------------------
 We recommend everyone to use the available `cloud computing environments`_ during this course.
-In case you want to work on your own computer, start by `installing Python (via Anaconda) <#installing_anacondas_GIS>`_.
+In case you want to work on your own computer, start by :doc:`installing Python (via Anaconda) <installing_Anacondas_GIS>` .
 
 
 Git and GitHub
