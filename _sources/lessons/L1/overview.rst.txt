@@ -4,7 +4,8 @@ Lesson overview
 In this week's lesson we will introduce you a spatial data model (geometric objects) and some basics of how spatial data
 can be manipulated in pure Python.
 
-1. `Shapely and Geometric Objects <../../notebooks/L1/geometric-objects.ipynb>`__
+1.  :doc:`Motivation for the course: Automating GIS processes <Intro-Python-GIS>`
+2. `Shapely and Geometric Objects <../../notebooks/L1/geometric-objects.ipynb>`__
 
     -  Overview of Geometric Objects and Shapely -module
     -  Point -object
@@ -12,7 +13,7 @@ can be manipulated in pure Python.
     -  Polygon -object
     -  Geometry collections (optional)
 
-2. :doc:`Exercise 1: Working with geometric objects <exercise-1>`
+3. :doc:`Exercise 1: Working with geometric objects <exercise-1>`
 
 Learning goals
 --------------
