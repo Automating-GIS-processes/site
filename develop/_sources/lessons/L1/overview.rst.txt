@@ -30,9 +30,9 @@ Intro slides
 --------------
 .. admonition:: Lesson slides
 
-    `Slides for Lecture 1 (PDF) <../../_static/autogis-intro-slides-2019.pdf>`__
+    `Slides from lesson 1 (PDF) <../../_static/autogis-intro-slides-2019.pdf>`__
 
-Lecture video
+Lesson video
 -------------
 
 *Lesson video will be added here soonish after the lesson*
