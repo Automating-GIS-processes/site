@@ -20,6 +20,13 @@ Note that you should not try to make changes to this copy of the exercise, but r
 Hints
 -----
 
+Useful materials from Geo-Python
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- `Lesson 4: Functions <https://geo-python.github.io/site/notebooks/L4/functions.html>`__
+- `Lesson 6: Iterating dataframe rows <https://geo-python.github.io/site/notebooks/L6/advanced-data-processing-with-pandas.html#Iterating-over-rows>`__
+- `Lesson 6: Good Coding Practices - Using assertions <https://geo-python.github.io/site/notebooks/L6/gcp-assertions.html?#Good-coding-practices---Using-assertions>`__
+
 Assert statements
 ~~~~~~~~~~~~~~~~~
 

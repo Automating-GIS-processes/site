@@ -431,33 +431,55 @@ This page was generated from <a class="reference external" href="https://github.
 <span class="raw-html"><a href="https://notebooks.csc.fi/#/blueprint/8d7886c2f0ac402aa99235f8d289a52b"><img alt="CSC badge" src="https://img.shields.io/badge/launch-CSC%20notebook-blue.svg" style="vertical-align:text-bottom"></a></span></div>
 <div class="section" id="Introduction-to-Geopandas">
 <h1>Introduction to Geopandas<a class="headerlink" href="#Introduction-to-Geopandas" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="Input-data">
+<h2>Input data<a class="headerlink" href="#Input-data" title="Permalink to this headline">¶</a></h2>
+<p>For this lesson we are using data in Shapefile format representing distributions of specific beautifully colored fish species called <a class="reference external" href="https://en.wikipedia.org/wiki/Damselfish">Damselfish</a> and the country borders of Europe.</p>
+</div>
 <div class="section" id="Downloading-data">
 <h2>Downloading data<a class="headerlink" href="#Downloading-data" title="Permalink to this headline">¶</a></h2>
-<p>For this lesson we are using data in Shapefile format representing distributions of specific beautifully colored fish species called <a class="reference external" href="https://en.wikipedia.org/wiki/Damselfish">Damselfish</a> and the country borders of Europe. From now on, we are going to download the datafiles at the start of each lesson because of the large size of the data. It is also a good practice to know how to download files from terminal.</p>
-<p>On Binder and CSC Notebook environment, you can use <code class="docutils literal notranslate"><span class="pre">wget</span></code> programn to download the data. Let’s download the <a class="reference external" href="https://github.com/AutoGIS/data/raw/master/L2_data.zip">data</a> into folder <code class="docutils literal notranslate"><span class="pre">/home/jovyan/notebooks/L2</span></code> by running following commands in the Terminal (<a class="reference external" href="https://jupyterlab.readthedocs.io/en/stable/user/terminal.html">see here</a> if you don’t know how to launch a terminal):</p>
+<p>From now on, we are going to download the datafiles at the start of each lesson because of the large size of the data. On Binder and CSC Notebook environment, you can use <code class="docutils literal notranslate"><span class="pre">wget</span></code> program to download the data from the command line. Let’s download the data (<a class="reference external" href="https://github.com/AutoGIS/data/raw/master/L2_data.zip">download link</a>) into the same folder with the lesson 2 notebooks (<code class="docutils literal notranslate"><span class="pre">/home/jovyan/notebooks/L2</span></code>):</p>
+<ul class="simple">
+<li>First, open up a new terminal window</li>
+<li>Navigate to the correct folder in the terminal:</li>
+</ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Change directory to directory with Lesson 2 materials
 $ cd /home/jovyan/notebooks/L2
-$ wget https://github.com/AutoGIS/data/raw/master/L2_data.zip
 </pre></div>
 </div>
-<p><em>Hint: you can copy/paste things to JupyterLab Terminal by pressing SHIFT + RIGHT-CLICK on your mouse and choosing ‘Paste’.</em></p>
-<p>Once you have downloaded the <code class="docutils literal notranslate"><span class="pre">L2_data.zip</span></code> file into your home directory, you can unzip the file using <code class="docutils literal notranslate"><span class="pre">unzip</span></code> command from Terminal (or e.g.&nbsp;7zip on Windows if working with own computer). Following assumes that the file was downloaded to <code class="docutils literal notranslate"><span class="pre">/home/jovyan/notebooks/L2</span></code> -directory:</p>
+<ul class="simple">
+<li>use <code class="docutils literal notranslate"><span class="pre">wget</span></code> utility and the download link to dowload the data:</li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ wget https://github.com/AutoGIS/data/raw/master/L2_data.zip
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title fa fa-exclamation-circle"><strong>Copy-paste</strong></p>
+<p>You can copy/paste things to JupyterLab Terminal by pressing <code class="docutils literal notranslate"><span class="pre">SHIFT</span></code> + <code class="docutils literal notranslate"><span class="pre">RIGHT-CLICK</span></code> on your mouse and choosing <code class="docutils literal notranslate"><span class="pre">Paste</span></code>.</p>
+</div>
+<ul class="simple">
+<li>Once you have downloaded the <code class="docutils literal notranslate"><span class="pre">L2_data.zip</span></code> file, you can unzip the file using <code class="docutils literal notranslate"><span class="pre">unzip</span></code> command from Terminal (or e.g.&nbsp;7zip on Windows if working with own computer):</li>
+</ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd /home/jovyan/notebooks/L2
 $ unzip L2_data.zip
-$ ls L2_data
+</pre></div>
+</div>
+<ul class="simple">
+<li>finally, check the contents of the downloaded folder:</li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ls L2_data
 DAMSELFISH_distributions.cpg  DAMSELFISH_distributions.shp  Europe_borders.dbf  Europe_borders.sbx
 DAMSELFISH_distributions.dbf  DAMSELFISH_distributions.shx  Europe_borders.prj  Europe_borders.shp
 DAMSELFISH_distributions.prj  Europe_borders.cpg            Europe_borders.sbn  Europe_borders.shx
 </pre></div>
 </div>
-<p>As we can see, the <code class="docutils literal notranslate"><span class="pre">L2_data</span></code> folder includes Shapefiles called <code class="docutils literal notranslate"><span class="pre">DAMSELFISH_distribution.shp</span></code> and <code class="docutils literal notranslate"><span class="pre">Europe_borders.shp</span></code>. Notice that Shapefile -fileformat is constituted of many separate files such as <code class="docutils literal notranslate"><span class="pre">.dbf</span></code> that contains the attribute information, and <code class="docutils literal notranslate"><span class="pre">.prj</span></code> -file that contains information about coordinate reference system.</p>
+<p>As we can see, the <code class="docutils literal notranslate"><span class="pre">L2_data</span></code> folder includes Shapefiles called <code class="docutils literal notranslate"><span class="pre">DAMSELFISH_distribution.shp</span></code> and <code class="docutils literal notranslate"><span class="pre">Europe_borders.shp</span></code>. Notice that Shapefile -fileformat comes with many separate files such as <code class="docutils literal notranslate"><span class="pre">.dbf</span></code> that contains the attribute information, and <code class="docutils literal notranslate"><span class="pre">.prj</span></code> -file that contains information about coordinate reference system.</p>
 </div>
 <div class="section" id="Reading-a-Shapefile">
 <h2>Reading a Shapefile<a class="headerlink" href="#Reading-a-Shapefile" title="Permalink to this headline">¶</a></h2>
 <p>Typically reading the data into Python is the first step of the analysis pipeline. In GIS, there exists various dataformats such as <a class="reference external" href="https://en.wikipedia.org/wiki/Shapefile">Shapefile</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/GeoJSON">GeoJSON</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Keyhole_Markup_Language">KML</a>, and <a class="reference external" href="https://en.wikipedia.org/wiki/GeoPackage">GPKG</a> that are probably the most common vector data formats. <a class="reference external" href="http://geopandas.org/io.html">Geopandas</a> is capable of reading data from all
 of these formats (plus many more). Reading spatial data can be done easily with geopandas using <code class="docutils literal notranslate"><span class="pre">gpd.from_file()</span></code> -function:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -474,7 +496,7 @@ of these formats (plus many more). Reading spatial data can be done easily with 
 </div>
 <p>Now we read the data from a Shapefile into variable <code class="docutils literal notranslate"><span class="pre">data</span></code>.</p>
 <ul class="simple">
-<li>Let’s see check the data type of it</li>
+<li>Let’s see check the data type:</li>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
@@ -494,16 +516,28 @@ of these formats (plus many more). Reading spatial data can be done easily with 
 </pre></div>
 </div>
 </div>
-<p>Okey so from the above we can see that our <code class="docutils literal notranslate"><span class="pre">data</span></code> -variable is a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code>. GeoDataFrame extends the functionalities of <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code> in a way that it is possible to use and handle spatial data using similar approaches and datastructures as in Pandas (hence the name geopandas). GeoDataFrame have some special features and functions that are useful in GIS.</p>
+<p>Okey so from the above we can see that our <code class="docutils literal notranslate"><span class="pre">data</span></code> -variable is a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code>. GeoDataFrame extends the functionalities of <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code> in a way that it is possible to use and handle spatial data using similar approaches and datastructures as in pandas (hence the name geopandas). GeoDataFrame have some special features and functions that are useful in GIS.</p>
 <ul class="simple">
 <li>Let’s take a look at our data and print the first 2 rows using the <code class="docutils literal notranslate"><span class="pre">head()</span></code> -function:</li>
 </ul>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li>Check the column names:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -512,35 +546,51 @@ of these formats (plus many more). Reading spatial data can be done easily with 
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-      ID_NO            BINOMIAL  ORIGIN COMPILER  YEAR  \
-0  183963.0  Stegastes leucorus       1     IUCN  2010
-1  183963.0  Stegastes leucorus       1     IUCN  2010
-
-                                            CITATION SOURCE DIST_COMM ISLAND  \
-0  International Union for Conservation of Nature...   None      None   None
-1  International Union for Conservation of Nature...   None      None   None
-
-  SUBSPECIES                        ...                         RL_UPDATE  \
-0       None                        ...                            2012.1
-1       None                        ...                            2012.1
-
-  KINGDOM_NA  PHYLUM_NAM      CLASS_NAME   ORDER_NAME     FAMILY_NAM  \
-0   ANIMALIA    CHORDATA  ACTINOPTERYGII  PERCIFORMES  POMACENTRIDAE
-1   ANIMALIA    CHORDATA  ACTINOPTERYGII  PERCIFORMES  POMACENTRIDAE
-
-  GENUS_NAME SPECIES_NA CATEGORY  \
-0  Stegastes   leucorus       VU
-1  Stegastes   leucorus       VU
-
-                                            geometry
-0  POLYGON ((-115.6437454219999 29.71392059300007...
-1  POLYGON ((-105.589950704 21.89339825500002, -1...
-
-[2 rows x 24 columns]
+Index([&#39;ID_NO&#39;, &#39;BINOMIAL&#39;, &#39;ORIGIN&#39;, &#39;COMPILER&#39;, &#39;YEAR&#39;, &#39;CITATION&#39;, &#39;SOURCE&#39;,
+       &#39;DIST_COMM&#39;, &#39;ISLAND&#39;, &#39;SUBSPECIES&#39;, &#39;SUBPOP&#39;, &#39;LEGEND&#39;, &#39;SEASONAL&#39;,
+       &#39;TAX_COMM&#39;, &#39;RL_UPDATE&#39;, &#39;KINGDOM_NA&#39;, &#39;PHYLUM_NAM&#39;, &#39;CLASS_NAME&#39;,
+       &#39;ORDER_NAME&#39;, &#39;FAMILY_NAM&#39;, &#39;GENUS_NAME&#39;, &#39;SPECIES_NA&#39;, &#39;CATEGORY&#39;,
+       &#39;geometry&#39;],
+      dtype=&#39;object&#39;)
 </pre></div></div>
 </div>
 <p>As we can see, there exists multiple columns in our data related to our Damselfish -fish.</p>
-<p>When having spatial data, it is always a good idea to explore your data on a map. Creating a simple map from a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> is really easy: you can use <code class="docutils literal notranslate"><span class="pre">.plot()</span></code> -function from geopandas that creates a map based on the geometries of the data. Geopandas actually uses Matplotlib for creating the map that was introduced in <a class="reference external" href="https://geo-python.github.io/2018/notebooks/L7/matplotlib.html">Lesson 7 of Geo-Python course</a>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title fa fa-exclamation-circle"><strong>Task</strong></p>
+<p>Answer the following questions based on your pandas-skills from the Geo-Python course: - How many different fish species there are in the input data? - How many genera (distinct genus)? - How many families of fish species?</p>
+</div>
+<p>Solution:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Number of fish species&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;BINOMIAL&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Number of fish genera&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;GENUS_NAME&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Number of fish families&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;FAMILY_NAM&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Number of fish species 30
+Number of fish genera 10
+Number of fish families 1
+</pre></div></div>
+</div>
+<p>When having spatial data, it is always a good idea to explore your data on a map. Creating a simple map from a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> is really easy: you can use <code class="docutils literal notranslate"><span class="pre">.plot()</span></code> -function from geopandas that creates a map based on the geometries of the data. Geopandas actually uses Matplotlib for creating the map that was introduced in <a class="reference external" href="https://geo-python.github.io/site/notebooks/L7/matplotlib.html">Lesson 7 of Geo-Python course</a>.</p>
 <ul class="simple">
 <li>Let’s try it out, and take a look how our data looks like on a map:</li>
 </ul>
@@ -567,7 +617,7 @@ of these formats (plus many more). Reading spatial data can be done easily with 
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/notebooks_L2_geopandas-basics_8_1.png" src="../../_images/notebooks_L2_geopandas-basics_8_1.png" />
+<img alt="../../_images/notebooks_L2_geopandas-basics_15_1.png" src="../../_images/notebooks_L2_geopandas-basics_15_1.png" />
 </div>
 </div>
 <p>Voilá! As we can see, it is really easy to produce a map out of your Shapefile with geopandas. Geopandas automatically positions your map in a way that it covers the whole extent of your data.</p>
@@ -588,13 +638,33 @@ of these formats (plus many more). Reading spatial data can be done easily with 
 
 <span class="c1"># Select first 50 rows</span>
 <span class="n">selection</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">50</span><span class="p">]</span>
-
-<span class="c1"># Write those rows into a new Shapefile (the default output file format is Shapefile)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Write those rows into a new Shapefile (the default output file format is Shapefile)</span>
 <span class="n">selection</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">outfp</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<p><strong>TASK:</strong> Read the newly created Shapefile with geopandas, and see how the data looks like.</p>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-intense-fg ansi-bold">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-intense-fg ansi-bold">&lt;ipython-input-3-ec790800b0ad&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">      1</span> <span class="ansi-red-intense-fg ansi-bold"># Write those rows into a new Shapefile (the default output file format is Shapefile)</span>
+<span class="ansi-green-intense-fg ansi-bold">----&gt; 2</span><span class="ansi-yellow-intense-fg ansi-bold"> </span>selection<span class="ansi-yellow-intense-fg ansi-bold">.</span>to_file<span class="ansi-yellow-intense-fg ansi-bold">(</span>outfp<span class="ansi-yellow-intense-fg ansi-bold">)</span>
+
+<span class="ansi-red-intense-fg ansi-bold">NameError</span>: name &#39;selection&#39; is not defined
+</pre></div></div>
+</div>
 </div>
 <div class="section" id="Geometries-in-Geopandas">
 <h2>Geometries in Geopandas<a class="headerlink" href="#Geometries-in-Geopandas" title="Permalink to this headline">¶</a></h2>
@@ -625,7 +695,7 @@ of these formats (plus many more). Reading spatial data can be done easily with 
 Name: geometry, dtype: object
 </pre></div></div>
 </div>
-<p>As we can see the <code class="docutils literal notranslate"><span class="pre">geometry</span></code> column contains familiar looking values, namely Shapely <code class="docutils literal notranslate"><span class="pre">Polygon</span></code> -objects that we <a class="reference external" href="https://automating-gis-processes.github.io/2018/notebooks/L1/geometric-objects.html#Polygon">learned to use last week</a>. Since the spatial data is stored as Shapely objects, <strong>it is possible to use all of the functionalities of Shapely module</strong>.</p>
+<p>As we can see the <code class="docutils literal notranslate"><span class="pre">geometry</span></code> column contains familiar looking values, namely Shapely <code class="docutils literal notranslate"><span class="pre">Polygon</span></code> -objects that we <a class="reference external" href="https://automating-gis-processes.github.io/site/notebooks/L1/geometric-objects.html#Polygon">learned to use last week</a>. Since the spatial data is stored as Shapely objects, <strong>it is possible to use all of the functionalities from Shapely</strong> that we learned in Lesson 1.</p>
 <ul class="simple">
 <li>Let’s prove that this really is the case by iterating over a sample of the data, and printing the <code class="docutils literal notranslate"><span class="pre">area</span></code> of first five polygons.<ul>
 <li>We can iterate over the rows by using the <code class="docutils literal notranslate"><span class="pre">iterrows()</span></code> -function that we learned <a class="reference external" href="https://geo-python.github.io/2018/notebooks/L6/pandas/advanced-data-processing-with-pandas.html#Iterating-rows-and-using-self-made-functions-in-Pandas">during the Lesson 6 of the Geo-Python course</a>.</li>
@@ -633,7 +703,7 @@ Name: geometry, dtype: object
 </li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -642,8 +712,10 @@ Name: geometry, dtype: object
 
 <span class="c1"># Iterate over rows and print the area of a Polygon</span>
 <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">selection</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+
     <span class="c1"># Get the area of the polygon</span>
     <span class="n">poly_area</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">area</span>
+
     <span class="c1"># Print information for the user</span>
     <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Polygon area at index {index} is: {area:.3f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span> <span class="n">area</span><span class="o">=</span><span class="n">poly_area</span><span class="p">))</span>
 </pre></div>
@@ -661,7 +733,7 @@ Polygon area at index 3 is: 87.461
 Polygon area at index 4 is: 0.001
 </pre></div></div>
 </div>
-<p>As you might guess from here, all the functionalities of <strong>Pandas</strong>, such as the <code class="docutils literal notranslate"><span class="pre">iterrows()</span></code> function, are directly available in Geopandas without the need to call pandas separately because Geopandas is an <strong>extension</strong> for Pandas.</p>
+<p>As you might guess from here, all the functionalities of <strong>pandas</strong>, such as the <code class="docutils literal notranslate"><span class="pre">iterrows()</span></code> function, are directly available in Geopandas without the need to call pandas separately because geopandas is an <strong>extension</strong> for pandas.</p>
 <ul class="simple">
 <li>Let’s next create a new column into our GeoDataFrame where we calculate and store the areas of individual polygons into that column. Calculating the areas of polygons is really easy in geopandas by using <code class="docutils literal notranslate"><span class="pre">GeoDataFrame.area</span></code> attribute. Hence, it is not needed to actually iterate over the rows line by line as we did previously:</li>
 </ul>
@@ -930,7 +1002,7 @@ None
 </div>
 <div class="section" id="Practical-example:-Saving-multiple-Shapefiles">
 <h2>Practical example: Saving multiple Shapefiles<a class="headerlink" href="#Practical-example:-Saving-multiple-Shapefiles" title="Permalink to this headline">¶</a></h2>
-<p>One really useful function that can be used in Pandas/Geopandas is <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.groupby.html">.groupby()</a>. We saw and used this function already in <a class="reference external" href="https://geo-python.github.io/2018/notebooks/L6/pandas/advanced-data-processing-with-pandas.html#Aggregating-data-in-Pandas-by-grouping">Lesson 6 of the Geo-Python course</a>. Group by function is useful to group data based on values on selected column(s).</p>
+<p>One really useful function that can be used in Pandas/Geopandas is <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.groupby.html">.groupby()</a>. We saw and used this function already in <a class="reference external" href="https://geo-python.github.io/site/notebooks/L6/pandas/advanced-data-processing-with-pandas.html#Aggregating-data-in-Pandas-by-grouping">Lesson 6 of the Geo-Python course</a>. Group by function is useful for grouping data based on values on selected column(s).</p>
 <p>Next we will take a practical example by automating the file export task. We will group individual fish subspecies in our <code class="docutils literal notranslate"><span class="pre">DAMSELFISH_distribution.shp</span></code> and export those into separate Shapefiles.</p>
 <ul class="simple">
 <li>Let’s start from scratch and read the Shapefile into GeoDataFrame</li>
