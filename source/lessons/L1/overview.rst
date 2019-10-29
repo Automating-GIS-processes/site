@@ -39,12 +39,12 @@ Lesson video
 
     .. raw:: html
 
-        <iframe width="560" height="315" src="https://youtu.be/4zSLRpXZAIU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/4zSLRpXZAIU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         <p>Vuokko Heikinheimo, University of Helsinki <a href="https://www.youtube.com/watch?v=4zSLRpXZAIU&list=PLs9D4XVqc6dClEYe0tk6Ce1YZkppw8dbL">@ AutoGIS channel on Youtube</a>.</p>
 
 .. admonition:: Lesson 1 - Shapely and Geometric objects
 
     .. raw:: html
 
-        <iframe width="560" height="315" src="https://youtu.be/FizD8t5_s3M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/FizD8t5_s3M" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         <p>Vuokko Heikinheimo, University of Helsinki <a href="https://www.youtube.com/watch?v=4zSLRpXZAIU&list=PLs9D4XVqc6dClEYe0tk6Ce1YZkppw8dbL">@ AutoGIS channel on Youtube</a>.</p>
