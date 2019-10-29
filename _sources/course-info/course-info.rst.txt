@@ -18,7 +18,7 @@ Instructors
 **Practical exercises**:
 
 * Sakari Sarjakoski
-* Sara Todorovic
+* Sara Todorović
 
 Email: *firstname.lastname@helsinki.fi*
 

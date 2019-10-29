@@ -30,14 +30,14 @@ Lecture videos
 
     .. raw:: html
 
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/O6hRbHrDHjc" frameborder="0" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/4zSLRpXZAIU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         <p>Henrikki Tenkanen, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p>
 
 .. admonition:: Lesson 2.2 - Managing map projections
 
     .. raw:: html
 
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/O6hRbHrDHjc" frameborder="0" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/FizD8t5_s3M" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         <p>Henrikki Tenkanen, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p>
 
 
