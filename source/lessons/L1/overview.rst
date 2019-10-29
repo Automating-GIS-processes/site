@@ -26,6 +26,12 @@ After this week you should:
   - know how to create different kind of geometries using Shapely
   - know how to read coordinates from a file and create Points based on those
 
+Intro slides
+--------------
+.. admonition:: Lesson slides
+
+    `Slides for Lecture 1 (PDF) <../../_static/autogis-intro-slides-2019.pdf>`__
+
 Lecture video
 -------------
 
