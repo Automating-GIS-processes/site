@@ -131,6 +131,7 @@ Contents
    lessons/L2/overview
    notebooks/L2/data_io.ipynb
    notebooks/L2/geopandas-basics.ipynb
+   notebooks/L2/geopandas-geometries.ipynb
    notebooks/L2/projections.ipynb
    lessons/L2/exercise-2
 
