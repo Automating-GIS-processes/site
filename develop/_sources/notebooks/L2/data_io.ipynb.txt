@@ -1,0 +1,405 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Vector Data I/O from various formats / sources\n",
+    "\n",
+    "In GIS, there are various different data formats and sources (such as databases or WFS) that can be used to read the data. This tutorial will show some typical examples how to read (and write) from different alternatives.\n",
+    "\n",
+    " - To see all possible file formats supported by GDAL, execute following:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 44,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "dict_keys(['PCIDSK', 'netCDF', 'JP2OpenJPEG', 'PDF', 'DB2ODBC', 'ESRI Shapefile', 'MapInfo File', 'UK .NTF', 'OGR_SDTS', 'S57', 'DGN', 'OGR_VRT', 'REC', 'Memory', 'BNA', 'CSV', 'NAS', 'GML', 'GPX', 'KML', 'GeoJSON', 'OGR_GMT', 'GPKG', 'SQLite', 'ODBC', 'WAsP', 'PGeo', 'MSSQLSpatial', 'PostgreSQL', 'OpenFileGDB', 'XPlane', 'DXF', 'CAD', 'Geoconcept', 'GeoRSS', 'GPSTrackMaker', 'VFK', 'PGDUMP', 'OSM', 'GPSBabel', 'SUA', 'OpenAir', 'OGR_PDS', 'WFS', 'HTF', 'AeronavFAA', 'Geomedia', 'EDIGEO', 'GFT', 'SVG', 'CouchDB', 'Cloudant', 'Idrisi', 'ARCGEN', 'SEGUKOOA', 'SEGY', 'XLS', 'ODS', 'XLSX', 'ElasticSearch', 'Walk', 'Carto', 'AmigoCloud', 'SXF', 'Selafin', 'JML', 'PLSCENES', 'CSW', 'VDV', 'GMLAS', 'TIGER', 'AVCBin', 'AVCE00', 'HTTP'])"
+      ]
+     },
+     "execution_count": 44,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# See all available drivers supported by GDAL\n",
+    "import fiona\n",
+    "from fiona._drivers import GDALEnv\n",
+    "env = GDALEnv()\n",
+    "\n",
+    "# This will print all available Drivers supported by GDAL\n",
+    "# All these can be used for reading data from them \n",
+    "# and most often also writing data into\n",
+    "\n",
+    "env.start().drivers().keys()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Read / write Shapefile"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 34,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import geopandas as gpd\n",
+    "\n",
+    "# Read file from Shapefile\n",
+    "fp = \"L2_data/Finland.shp\"\n",
+    "data = gpd.read_file(fp)\n",
+    "\n",
+    "# Write to Shapefile (just make a copy)\n",
+    "outfp = \"L2_data/Finland_copy.shp\"\n",
+    "data.to_file(outfp)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Read / write GeoJSON"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import geopandas as gpd\n",
+    "\n",
+    "# Read file from GeoJSON\n",
+    "fp = \"L2_data/Finland.geojson\"\n",
+    "data = gpd.read_file(fp, driver=\"GeoJSON\")\n",
+    "\n",
+    "# Write to GeoJSON (just make a copy)\n",
+    "outfp = \"L2_data/Finland_copy.geojson\"\n",
+    "data.to_file(outfp, driver=\"GeoJSON\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Read / write KML"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import geopandas as gpd\n",
+    "\n",
+    "# Enable KML driver\n",
+    "gpd.io.file.fiona.drvsupport.supported_drivers['KML'] = 'rw'\n",
+    "\n",
+    "# Read file from KML\n",
+    "fp = \"L2_data/Finland.kml\"\n",
+    "data = gpd.read_file(fp)\n",
+    "\n",
+    "# Write to KML (just make a copy)\n",
+    "outfp = \"L2_data/Finland_copy.kml\"\n",
+    "data.to_file(outfp, driver=\"KML\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Read / write Geopackage"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import geopandas as gpd\n",
+    "\n",
+    "# Read file from Geopackage\n",
+    "fp = \"L2_data/Finland.gpkg\"\n",
+    "data = gpd.read_file(fp)\n",
+    "\n",
+    "# Write to Geopackage (just make a copy)\n",
+    "outfp = \"L2_data/Finland_copy.gpkg\"\n",
+    "data.to_file(outfp, driver=\"GPKG\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Read / write GeoDatabase"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import geopandas as gpd\n",
+    "\n",
+    "# Read file from File Geodatabase\n",
+    "fp = \"L2_data/Finland.gdb\"\n",
+    "data = gpd.read_file(fp, driver=\"FileGDB\", layer='country')\n",
+    "\n",
+    "# Write to same FileGDB (just add a new layer)\n",
+    "outfp = \"L2_data/Finland.gdb\"\n",
+    "data.to_file(outfp, driver=\"FileGDB\", layer=\"country_copy\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Read / write MapInfo Tab"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Read file from MapInfo Tab\n",
+    "fp = \"L2_data/Finland.tab\"\n",
+    "data = gpd.read_file(fp, driver=\"MapInfo File\")\n",
+    "\n",
+    "# Write to same FileGDB (just add a new layer)\n",
+    "outfp = \"L2_data/Finland_copy.tab\"\n",
+    "data.to_file(outfp, driver=\"MapInfo File\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Read PostGIS database using psycopg2"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import geopandas as gpd\n",
+    "import psycopg2\n",
+    "\n",
+    "# Create connection to database with psycopg2 module (update params according your db)\n",
+    "conn, cursor = psycopg2.connect(dbname='my_postgis_database', user='my_usrname', password='my_pwd', \n",
+    "                                host='123.22.432.16', port=5432)\n",
+    "\n",
+    "# Specify sql query\n",
+    "sql = \"SELECT * FROM MY_TABLE;\"\n",
+    "\n",
+    "# Read data from PostGIS\n",
+    "data = gpd.read_postgis(sql=sql, con=conn)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Read / write PostGIS database using SqlAlchemy + GeoAlchemy"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from sqlalchemy.engine.url import URL\n",
+    "from sqlalchemy import create_engine\n",
+    "from sqlalchemy import MetaData\n",
+    "from sqlalchemy.orm import sessionmaker\n",
+    "from geoalchemy2 import WKTElement, Geometry\n",
+    "\n",
+    "# Update with your db parameters\n",
+    "HOST = '123.234.345.16'\n",
+    "DB = 'my_database'\n",
+    "USER = 'my_user'\n",
+    "PORT = 5432\n",
+    "PWD = 'my_password'\n",
+    "\n",
+    "# Database info\n",
+    "db_url = URL(drivername='postgresql+psycopg2', host=HOST, database=DB,\n",
+    "                   username=USER, port=PORT, password=PWD)\n",
+    "\n",
+    "# Create engine\n",
+    "engine = create_engine(db_url)\n",
+    "\n",
+    "# Init Metadata\n",
+    "meta = MetaData()\n",
+    "\n",
+    "# Load table definitions from db\n",
+    "meta.reflect(engine)\n",
+    "\n",
+    "# Create session\n",
+    "Session = sessionmaker(bind=engine)\n",
+    "session = Session()\n",
+    "\n",
+    "# ========================\n",
+    "# Read data from PostGIS\n",
+    "# ========================\n",
+    "\n",
+    "# Specify sql query\n",
+    "sql = \"SELECT * FROM finland;\"\n",
+    "\n",
+    "# Pull the data\n",
+    "data = gpd.read_postgis(sql=sql, con=engine)\n",
+    "\n",
+    "# Close session\n",
+    "session.close()\n",
+    "\n",
+    "# =========================================\n",
+    "# Write data to PostGIS (make a copy table)\n",
+    "# =========================================\n",
+    "\n",
+    "# Coordinate Reference System (srid)\n",
+    "crs = 4326\n",
+    "\n",
+    "# Target table\n",
+    "target_table = 'finland_copy'\n",
+    "\n",
+    "# Convert Shapely geometries to WKTElements into column 'geom' (default in PostGIS)\n",
+    "data['geom'] = data['geometry'].apply(lambda row: WKTElement(row.wkt, srid=crs))\n",
+    "\n",
+    "# Drop Shapely geometries\n",
+    "data = data.drop('geometry', axis=1)\n",
+    "\n",
+    "# Write to PostGIS (overwrite if table exists, be careful with this! )\n",
+    "# Possible behavior: 'replace', 'append', 'fail'\n",
+    "\n",
+    "data.to_sql(target_table, engine, if_exists='replace', index=False)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Read / write Spatialite database "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 39,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import geopandas as gpd\n",
+    "import sqlite3\n",
+    "import shapely.wkb as swkb\n",
+    "from sqlalchemy import create_engine, event\n",
+    "\n",
+    "# DB path\n",
+    "dbfp = 'L2_data/Finland.sqlite'\n",
+    "\n",
+    "# Name for the table\n",
+    "tbl_name = 'finland'\n",
+    "\n",
+    "# SRID (crs of your data)\n",
+    "srid = 4326\n",
+    "\n",
+    "# Parse Geometry type of the input Data\n",
+    "gtype = data.geom_type.unique()\n",
+    "assert len(gtype) == 1, \"Mixed Geometries! Cannot insert into SQLite table.\"\n",
+    "geom_type = gtype[0].upper()\n",
+    "\n",
+    "# Initialize database engine\n",
+    "engine = create_engine('sqlite:///{db}'.format(db=dbfp), module=sqlite)\n",
+    "\n",
+    "# Initialize table without geometries\n",
+    "geo = data.drop(['geometry'], axis=1)\n",
+    "\n",
+    "with sqlite3.connect(dbfp) as conn:\n",
+    "    geo.to_sql(tbl_name, conn, if_exists='replace', index=False)\n",
+    "\n",
+    "# Enable spatialite extension    \n",
+    "with sqlite3.connect(dbfp) as conn:\n",
+    "    conn.enable_load_extension(True)\n",
+    "    conn.load_extension(\"mod_spatialite\")\n",
+    "    conn.execute(\"SELECT InitSpatialMetaData(1);\")\n",
+    "    # Add geometry column with specified CRS with defined geometry typehaving two dimensions\n",
+    "    conn.execute(\n",
+    "        \"SELECT AddGeometryColumn({table}, 'wkb_geometry',\\\n",
+    "        {srid}, {geom_type}, 2);\".format(table=tbl_name, srid=srid, geom_type=geom_type)\n",
+    "    )\n",
+    "    \n",
+    "# Convert Shapely geometries into well-known-binary format\n",
+    "data['geometry'] = data['geometry'].apply(lambda geom: swkb.dumps(geom))\n",
+    "\n",
+    "# Push to database (overwrite if table exists)\n",
+    "data.to_sql(tbl_name, engine, if_exists='replace', index=False)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Read Web Feature Service (WFS)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 28,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import geopandas as gpd\n",
+    "import requests\n",
+    "import geojson\n",
+    "\n",
+    "# Specify the url for the backend\n",
+    "url = 'http://geo.stat.fi/geoserver/vaestoruutu/wfs'\n",
+    "\n",
+    "# Specify parameters (read data in json format)\n",
+    "params = dict(service='WFS', version='2.0.0', request='GetFeature', \n",
+    "         typeName='vaestoruutu:vaki2017_5km', outputFormat='json')\n",
+    "\n",
+    "# Fetch data from WFS using requests\n",
+    "r = requests.get(url, params=params)\n",
+    "\n",
+    "# Create GeoDataFrame from geojson\n",
+    "data = gpd.GeoDataFrame.from_features(geojson.loads(r.content))"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.6.0"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
