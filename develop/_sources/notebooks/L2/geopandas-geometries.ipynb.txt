@@ -4,179 +4,6 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "## Geometries in Geopandas\n",
-    "\n",
-    "Geopandas takes advantage of Shapely's geometric objects. Geometries are stored in a column called *geometry* that is a default column name for\n",
-    "storing geometric information in geopandas.\n",
-    "\n",
-    "-  Let's print the first 5 rows of the column 'geometry':"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 30,
-   "metadata": {
-    "collapsed": false,
-    "jupyter": {
-     "outputs_hidden": false
-    }
-   },
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "0    POLYGON ((379394.248 6689991.936, 379389.79 66...\n",
-      "1    POLYGON ((378980.811 6689359.377, 378983.401 6...\n",
-      "2    POLYGON ((378804.766 6689256.471, 378817.107 6...\n",
-      "3    POLYGON ((379229.695 6685025.111, 379233.366 6...\n",
-      "4    POLYGON ((379825.199 6685096.247, 379829.651 6...\n",
-      "Name: geometry, dtype: object\n"
-     ]
-    }
-   ],
-   "source": [
-    "# It is possible to get a specific column by specifying the column name within square brackets []\n",
-    "print(data['geometry'].head())"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
-    "As we can see the `geometry` column contains familiar looking values, namely Shapely `Polygon` -objects that we [learned to use last week](https://automating-gis-processes.github.io/2018/notebooks/L1/geometric-objects.html#Polygon). Since the spatial data is stored as Shapely objects, **it is possible to use all of the functionalities of Shapely module**.\n",
-    "\n",
-    "- Let's prove that this really is the case by iterating over a sample of the data, and printing the `area` of first five polygons. \n",
-    "\n",
-    "  - We can iterate over the rows by using the `iterrows()` -function that we learned [during the Lesson 6 of the Geo-Python course](https://geo-python.github.io/2018/notebooks/L6/pandas/advanced-data-processing-with-pandas.html#Iterating-rows-and-using-self-made-functions-in-Pandas)."
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 31,
-   "metadata": {
-    "collapsed": false,
-    "jupyter": {
-     "outputs_hidden": false
-    }
-   },
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Polygon area at index 0 is: 76.027\n",
-      "Polygon area at index 1 is: 2652.054\n",
-      "Polygon area at index 2 is: 3185.650\n",
-      "Polygon area at index 3 is: 13075.165\n",
-      "Polygon area at index 4 is: 3980.683\n"
-     ]
-    }
-   ],
-   "source": [
-    "# Make a selection that contains only the first five rows\n",
-    "selection = data[0:5]\n",
-    "\n",
-    "# Iterate over rows and print the area of a Polygon\n",
-    "for index, row in selection.iterrows():\n",
-    "    # Get the area of the polygon\n",
-    "    poly_area = row['geometry'].area\n",
-    "    # Print information for the user\n",
-    "    print(\"Polygon area at index {index} is: {area:.3f}\".format(index=index, area=poly_area))"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
-    "As you might guess from here, all the functionalities of **Pandas**, such as the `iterrows()` function, are directly available in Geopandas without the need to call pandas separately because Geopandas is an **extension** for Pandas. \n",
-    "\n",
-    "- Let's next create a new column into our GeoDataFrame where we calculate and store the areas of individual polygons into that column. Calculating the areas of polygons is really easy in geopandas by using ``GeoDataFrame.area`` attribute. Hence, it is not needed to actually iterate over the rows line by line as we did previously:"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 32,
-   "metadata": {
-    "collapsed": false,
-    "jupyter": {
-     "outputs_hidden": false
-    }
-   },
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "0      76.027392\n",
-      "1    2652.054186\n",
-      "Name: area, dtype: float64\n"
-     ]
-    }
-   ],
-   "source": [
-    "# Create a new column called 'area' and assign the area of the Polygons into it\n",
-    "data['area'] = data.area\n",
-    "\n",
-    "# Print first 2 rows of the area column\n",
-    "print(data['area'].head(2))"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
-    "As we can see, the area of our first polygon seems to be approximately `19.396` and `6.146` for the second polygon. They correspond to the ones we saw in previous step when iterating rows, hence, everything seems to work as should.\n",
-    "\n",
-    "- Let's check what is the `min`, `max` and `mean` of those areas using familiar functions from our previous Pandas lessions.\n"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 53,
-   "metadata": {
-    "collapsed": false,
-    "jupyter": {
-     "outputs_hidden": false
-    }
-   },
-   "outputs": [],
-   "source": [
-    "# Maximum area\n",
-    "max_area = data['area'].max()\n",
-    "\n",
-    "# Minimum area\n",
-    "min_area = data['area'].min()\n",
-    "\n",
-    "# Mean area\n",
-    "mean_area = data['area'].mean()"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 54,
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Max area: 4084558.0 meters\n",
-      "Min area: 1.0 meters\n",
-      "Mean area: 11522.0 meters\n"
-     ]
-    }
-   ],
-   "source": [
-    "print(\"Max area: {max} meters\".format(max=round(max_area, 0)))\n",
-    "print(\"Min area: {min} meters\".format(min=round(min_area, 0)))\n",
-    "print(\"Mean area: {mean} meters\".format(mean=round(mean_area, 0)))"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
     "## Creating geometries into a GeoDataFrame\n",
     "\n",
     "Since geopandas takes advantage of Shapely geometric objects, it is possible to create a Shapefile from a scratch by passing Shapely's\n",
@@ -188,7 +15,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 34,
+   "execution_count": 32,
    "metadata": {
     "collapsed": false,
     "jupyter": {
@@ -229,7 +56,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 35,
+   "execution_count": 33,
    "metadata": {
     "collapsed": false,
     "jupyter": {
@@ -266,7 +93,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 36,
+   "execution_count": 34,
    "metadata": {
     "collapsed": false,
     "jupyter": {
@@ -304,7 +131,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 37,
+   "execution_count": 35,
    "metadata": {
     "collapsed": false,
     "jupyter": {
@@ -323,7 +150,7 @@
    ],
    "source": [
     "# Insert the polygon into 'geometry' -column at index 0\n",
-    "newdata.loc[0, 'geometry'] = poly\n",
+    "newdata.at[0, 'geometry'] = poly\n",
     "\n",
     "# Let's see what we have now\n",
     "print(newdata)"
@@ -340,7 +167,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 38,
+   "execution_count": 36,
    "metadata": {
     "collapsed": false,
     "jupyter": {
@@ -359,7 +186,7 @@
    ],
    "source": [
     "# Add a new column and insert data \n",
-    "newdata.loc[0, 'location'] = 'Senaatintori'\n",
+    "newdata.at[0, 'location'] = 'Senaatintori'\n",
     "\n",
     "# Let's check the data\n",
     "print(newdata)"
@@ -376,7 +203,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 39,
+   "execution_count": 37,
    "metadata": {
     "collapsed": false,
     "jupyter": {
@@ -405,7 +232,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 40,
+   "execution_count": 38,
    "metadata": {
     "collapsed": false,
     "jupyter": {
@@ -417,7 +244,7 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "{'no_defs': True, 'init': 'epsg:4326'}\n"
+      "{'init': 'epsg:4326', 'no_defs': True}\n"
      ]
     }
    ],
@@ -443,7 +270,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 41,
+   "execution_count": 39,
    "metadata": {},
    "outputs": [],
    "source": [

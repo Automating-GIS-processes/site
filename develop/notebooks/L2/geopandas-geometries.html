@@ -19,7 +19,7 @@
     </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Geometries in Geopandas &mdash; AutoGIS site documentation</title>
+  <title>Creating geometries into a GeoDataFrame &mdash; AutoGIS site documentation</title>
   
 
   
@@ -135,8 +135,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/L2/overview.html">Lesson 2 Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="data_io.html">Vector Data I/O from various formats / sources</a></li>
 <li class="toctree-l1"><a class="reference internal" href="geopandas-basics.html">Introduction to Geopandas</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Geometries in Geopandas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#Creating-geometries-into-a-GeoDataFrame">Creating geometries into a GeoDataFrame</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Creating geometries into a GeoDataFrame</a></li>
 <li class="toctree-l1"><a class="reference internal" href="projections.html">Map projections</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/L2/exercise-2.html">Exercise 2</a></li>
 </ul>
@@ -184,7 +183,7 @@
     
       <li><a href="../../index.html">Docs</a> &raquo;</li>
         
-      <li>Geometries in Geopandas</li>
+      <li>Creating geometries into a GeoDataFrame</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -441,140 +440,6 @@ This page was generated from <a class="reference external" href="https://github.
 <span class="raw-html"><br/><a href="https://mybinder.org/v2/gh/Automating-GIS-processes/site/master?urlpath=lab/tree/source/notebooks/L2/geopandas-geometries.ipynb"><img alt="Binder badge" src="https://img.shields.io/badge/launch-full%20binder-red.svg" style="vertical-align:text-bottom"></a></span>
 <span class="raw-html"><a href="https://mybinder.org/v2/gh/Automating-GIS-processes/notebooks/master?urlpath=lab/tree/notebooks/L2/geopandas-geometries.ipynb"><img alt="Binder badge" src="https://img.shields.io/badge/launch-student%20binder-red.svg" style="vertical-align:text-bottom"></a></span>
 <span class="raw-html"><a href="https://notebooks.csc.fi/#/blueprint/8d7886c2f0ac402aa99235f8d289a52b"><img alt="CSC badge" src="https://img.shields.io/badge/launch-CSC%20notebook-blue.svg" style="vertical-align:text-bottom"></a></span></div>
-<div class="section" id="Geometries-in-Geopandas">
-<h1>Geometries in Geopandas<a class="headerlink" href="#Geometries-in-Geopandas" title="Permalink to this headline">¶</a></h1>
-<p>Geopandas takes advantage of Shapely’s geometric objects. Geometries are stored in a column called <em>geometry</em> that is a default column name for storing geometric information in geopandas.</p>
-<ul class="simple">
-<li>Let’s print the first 5 rows of the column ‘geometry’:</li>
-</ul>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># It is possible to get a specific column by specifying the column name within square brackets []</span>
-<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-0    POLYGON ((379394.248 6689991.936, 379389.79 66...
-1    POLYGON ((378980.811 6689359.377, 378983.401 6...
-2    POLYGON ((378804.766 6689256.471, 378817.107 6...
-3    POLYGON ((379229.695 6685025.111, 379233.366 6...
-4    POLYGON ((379825.199 6685096.247, 379829.651 6...
-Name: geometry, dtype: object
-</pre></div></div>
-</div>
-<p>As we can see the <code class="docutils literal notranslate"><span class="pre">geometry</span></code> column contains familiar looking values, namely Shapely <code class="docutils literal notranslate"><span class="pre">Polygon</span></code> -objects that we <a class="reference external" href="https://automating-gis-processes.github.io/2018/notebooks/L1/geometric-objects.html#Polygon">learned to use last week</a>. Since the spatial data is stored as Shapely objects, <strong>it is possible to use all of the functionalities of Shapely module</strong>.</p>
-<ul class="simple">
-<li>Let’s prove that this really is the case by iterating over a sample of the data, and printing the <code class="docutils literal notranslate"><span class="pre">area</span></code> of first five polygons.<ul>
-<li>We can iterate over the rows by using the <code class="docutils literal notranslate"><span class="pre">iterrows()</span></code> -function that we learned <a class="reference external" href="https://geo-python.github.io/2018/notebooks/L6/pandas/advanced-data-processing-with-pandas.html#Iterating-rows-and-using-self-made-functions-in-Pandas">during the Lesson 6 of the Geo-Python course</a>.</li>
-</ul>
-</li>
-</ul>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Make a selection that contains only the first five rows</span>
-<span class="n">selection</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
-
-<span class="c1"># Iterate over rows and print the area of a Polygon</span>
-<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">selection</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
-    <span class="c1"># Get the area of the polygon</span>
-    <span class="n">poly_area</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">area</span>
-    <span class="c1"># Print information for the user</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Polygon area at index {index} is: {area:.3f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span> <span class="n">area</span><span class="o">=</span><span class="n">poly_area</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-Polygon area at index 0 is: 76.027
-Polygon area at index 1 is: 2652.054
-Polygon area at index 2 is: 3185.650
-Polygon area at index 3 is: 13075.165
-Polygon area at index 4 is: 3980.683
-</pre></div></div>
-</div>
-<p>As you might guess from here, all the functionalities of <strong>Pandas</strong>, such as the <code class="docutils literal notranslate"><span class="pre">iterrows()</span></code> function, are directly available in Geopandas without the need to call pandas separately because Geopandas is an <strong>extension</strong> for Pandas.</p>
-<ul class="simple">
-<li>Let’s next create a new column into our GeoDataFrame where we calculate and store the areas of individual polygons into that column. Calculating the areas of polygons is really easy in geopandas by using <code class="docutils literal notranslate"><span class="pre">GeoDataFrame.area</span></code> attribute. Hence, it is not needed to actually iterate over the rows line by line as we did previously:</li>
-</ul>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Create a new column called &#39;area&#39; and assign the area of the Polygons into it</span>
-<span class="n">data</span><span class="p">[</span><span class="s1">&#39;area&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">area</span>
-
-<span class="c1"># Print first 2 rows of the area column</span>
-<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;area&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-0      76.027392
-1    2652.054186
-Name: area, dtype: float64
-</pre></div></div>
-</div>
-<p>As we can see, the area of our first polygon seems to be approximately <code class="docutils literal notranslate"><span class="pre">19.396</span></code> and <code class="docutils literal notranslate"><span class="pre">6.146</span></code> for the second polygon. They correspond to the ones we saw in previous step when iterating rows, hence, everything seems to work as should.</p>
-<ul class="simple">
-<li>Let’s check what is the <code class="docutils literal notranslate"><span class="pre">min</span></code>, <code class="docutils literal notranslate"><span class="pre">max</span></code> and <code class="docutils literal notranslate"><span class="pre">mean</span></code> of those areas using familiar functions from our previous Pandas lessions.</li>
-</ul>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[53]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Maximum area</span>
-<span class="n">max_area</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;area&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
-
-<span class="c1"># Minimum area</span>
-<span class="n">min_area</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;area&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
-
-<span class="c1"># Mean area</span>
-<span class="n">mean_area</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;area&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[54]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Max area: {max} meters&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">max</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">max_area</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Min area: {min} meters&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">min_area</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Mean area: {mean} meters&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">mean_area</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-Max area: 4084558.0 meters
-Min area: 1.0 meters
-Mean area: 11522.0 meters
-</pre></div></div>
-</div>
-</div>
 <div class="section" id="Creating-geometries-into-a-GeoDataFrame">
 <h1>Creating geometries into a GeoDataFrame<a class="headerlink" href="#Creating-geometries-into-a-GeoDataFrame" title="Permalink to this headline">¶</a></h1>
 <p>Since geopandas takes advantage of Shapely geometric objects, it is possible to create a Shapefile from a scratch by passing Shapely’s geometric objects into the GeoDataFrame. This is useful as it makes it easy to convert e.g.&nbsp;a text file that contains coordinates into a Shapefile. Next we will see how to create a Shapefile from scratch.</p>
@@ -582,7 +447,7 @@ Mean area: 11522.0 meters
 <li>Let’s create an empty <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code>.</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -613,7 +478,7 @@ Index: []
 <li>Let’s create a new column called <code class="docutils literal notranslate"><span class="pre">geometry</span></code> that will contain our Shapely objects:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -640,7 +505,7 @@ Index: []
 <li>Let’s create a Shapely <code class="docutils literal notranslate"><span class="pre">Polygon</span></code> repsenting the Helsinki Senate square that we can later insert to our GeoDataFrame:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -668,12 +533,12 @@ POLYGON ((24.950899 60.169158, 24.953492 60.169158, 24.95351 60.170104, 24.95095
 <li>Let’s insert the polygon into our ‘geometry’ column of our GeoDataFrame at position 0:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Insert the polygon into &#39;geometry&#39; -column at index 0</span>
-<span class="n">newdata</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">poly</span>
+<span class="n">newdata</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">poly</span>
 
 <span class="c1"># Let&#39;s see what we have now</span>
 <span class="k">print</span><span class="p">(</span><span class="n">newdata</span><span class="p">)</span>
@@ -694,12 +559,12 @@ POLYGON ((24.950899 60.169158, 24.953492 60.169158, 24.95351 60.170104, 24.95095
 <li>Hence, let’s add another column to our GeoDataFrame called <code class="docutils literal notranslate"><span class="pre">location</span></code> with text <code class="docutils literal notranslate"><span class="pre">Senaatintori</span></code> that describes the location of the feature.</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Add a new column and insert data</span>
-<span class="n">newdata</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;location&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Senaatintori&#39;</span>
+<span class="n">newdata</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;location&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Senaatintori&#39;</span>
 
 <span class="c1"># Let&#39;s check the data</span>
 <span class="k">print</span><span class="p">(</span><span class="n">newdata</span><span class="p">)</span>
@@ -718,7 +583,7 @@ POLYGON ((24.950899 60.169158, 24.953492 60.169158, 24.95351 60.170104, 24.95095
 <p>Okay, now we have additional information that is useful for recognicing what the feature represents.</p>
 <p>Before exporting the data it is always good (basically necessary) to <strong>determine the coordinate reference system (projection) for the GeoDataFrame.</strong> GeoDataFrame has an attribute called <code class="docutils literal notranslate"><span class="pre">.crs</span></code> that shows the coordinate system of the data which is empty (None) in our case since we are creating the data from the scratch (more about projection on next tutorial):</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -738,7 +603,7 @@ None
 <li>Let’s add a crs for our GeoDataFrame. A Python module called <strong>fiona</strong> has a nice function called <code class="docutils literal notranslate"><span class="pre">from_epsg()</span></code> for passing the coordinate reference system information for the GeoDataFrame. Next we will use that and determine the projection to WGS84 (epsg code: 4326):</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -758,7 +623,7 @@ None
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-{&#39;no_defs&#39;: True, &#39;init&#39;: &#39;epsg:4326&#39;}
+{&#39;init&#39;: &#39;epsg:4326&#39;, &#39;no_defs&#39;: True}
 </pre></div></div>
 </div>
 <p>As we can see, now we have associated coordinate reference system information (i.e.&nbsp;<code class="docutils literal notranslate"><span class="pre">CRS</span></code>) into our <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code>. The CRS information here, is a Python <code class="docutils literal notranslate"><span class="pre">dictionary</span></code> containing necessary values for geopandas to create a <code class="docutils literal notranslate"><span class="pre">.prj</span></code> file for our Shapefile that contains the CRS info.</p>
@@ -766,7 +631,7 @@ None
 <li>Finally, we can export the GeoDataFrame using <code class="docutils literal notranslate"><span class="pre">.to_file()</span></code> -function. The function works quite similarly as the export functions in numpy or pandas, but here we only need to provide the output path for the Shapefile. Easy isn’t it!:</li>
 </ul>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
