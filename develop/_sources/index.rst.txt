@@ -129,6 +129,7 @@ Contents
    :caption: Lesson 2
 
    lessons/L2/overview
+   lessons/L2/quiz.rst
    notebooks/L2/data_io.ipynb
    notebooks/L2/geopandas-basics.ipynb
    notebooks/L2/projections.ipynb
