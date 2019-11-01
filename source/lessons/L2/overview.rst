@@ -19,13 +19,20 @@ After this week, you should know how to:
  - Change the coordinate reference system of the data
 
 
+
+Sources
+-------
+
+This lesson partly based on `Geopandas documentation <http://geopandas.org/>`_.
+
+
 .. admonition:: **Test your understanding**
 
     Before diving into this week's Python lesson, you should already be familiar with some basic
     spatial data file formats and projection definitions, such as these:
 
-    - shapefile
-    - geopackage
+    - Shapefile
+    - GeoPackage
     - CRS
     - Datum
     - EPSG
@@ -46,7 +53,8 @@ After this week, you should know how to:
 
     **CRS:** Coordinate reference systems define how coordinates relate to real locations on the Earth.
     *Geographic coordinate reference systems* commonly use latitude and longitude degrees.
-    *Projected coordinate reference systems* use  x and y coordinates to represent locations on a flat surface. There are different formats for defining CRS.
+    *Projected coordinate reference systems* use  x and y coordinates to represent locations on a flat surface.
+    You will learn more about coordinate reference systems during this lesson!
 
     **Datum:** defines the center point, orientation, and scale of the reference surface related to a coordinate reference system.
     Same coordinates can relate to different locations depending on the Datum! For example, WGS84 is a widely used global datum.
@@ -57,13 +65,6 @@ After this week, you should know how to:
     EPSG stands for "European Petroleum Survey Group" that originally published a database for spatial reference systems.
     For example, `EPSG:3067 <https://spatialreference.org/ref/epsg/3067/>`__ refers to coordinate reference system ETRS-TM35FIN which is commonly used in Finland.
     `EPSG:4326 <https://spatialreference.org/ref/epsg/4326/`__ refers to WGS84. You can search for EPSG codes at: https://spatialreference.org/
-
-
-
-Sources
--------
-
-These materials are partly based on `Geopandas documentation <http://geopandas.org/>`_.
 
 Lecture videos
 --------------
@@ -76,6 +77,10 @@ Lecture videos
 
         <iframe width="560" height="315" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         <p>Vuokko Heikinheimo, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p>
+
+
+
+
 
 
 
