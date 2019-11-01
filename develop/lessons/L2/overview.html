@@ -261,6 +261,41 @@ and some useful data management functionalities.</p>
 <li>Change the coordinate reference system of the data</li>
 </ul>
 </div></blockquote>
+<div class="admonition-test-your-understanding admonition">
+<p class="first admonition-title"><strong>Test your understanding</strong></p>
+<p>Before diving into this week’s Python lesson, you should already be familiar with some basic
+spatial data file formats and projection definitions, such as these:</p>
+<ul class="last simple">
+<li>shapefile</li>
+<li>geopackage</li>
+<li>CRS</li>
+<li>Datum</li>
+<li>EPSG</li>
+</ul>
+</div>
+<div class="admonition-definitions admonition">
+<p class="first admonition-title"><strong>Definitions</strong></p>
+<p><strong>Shapefile:</strong> a vector data format for storing location information and related attributes.
+A shapefile consist of several files with a common prefix that need to be stored in the same directory.
+<cite>.shp</cite>, <cite>shx</cite> and <cite>.dbf</cite> are required file extensions in a shapefile. Other file extensions are not required,
+but for example the file extension <cite>.prj</cite> is often essential. More information about Shapefile file extensions
+in <a class="reference external" href="http://help.arcgis.com/en/arcgisdesktop/10.0/help/index.html#/Shapefile_file_extensions/005600000003000000/)">here</a>.
+The shapefile format is developed by ESRI.</p>
+<p><strong>GeoPackage:</strong> an open source format for storing and transferring geospatial information.
+GeoPackages are able to store both vector data and raster data. In more detail, GeoPackage is a container for
+an SQLite database with a <cite>.gpkg</cite> extension (all in one file!). The GeoPackage format is governed by the Open GeoSpatial Consortium.
+More information at: <a class="reference external" href="https://www.geopackage.org/">https://www.geopackage.org/</a></p>
+<p><strong>CRS:</strong> Coordinate reference systems define how coordinates relate to real locations on the Earth.
+<em>Geographic coordinate reference systems</em> commonly use latitude and longitude degrees.
+<em>Projected coordinate reference systems</em> use  x and y coordinates to represent locations on a flat surface. There are different formats for defining CRS.</p>
+<p><strong>Datum:</strong> defines the center point, orientation, and scale of the reference surface related to a coordinate reference system.
+Same coordinates can relate to different locations depending on the Datum! For example, WGS84 is a widely used global datum.
+ETRS89 is a datum used in Europe. Coordinate reference systems are often named based on the datum used.</p>
+<p class="last"><strong>EPSG:</strong> EPSG codes refer to specific reference systems.
+EPSG stands for “European Petroleum Survey Group” that originally published a database for spatial reference systems.
+For example, <a class="reference external" href="https://spatialreference.org/ref/epsg/3067/">EPSG:3067</a> refers to coordinate reference system ETRS-TM35FIN which is commonly used in Finland.
+<a href="#id1"><span class="problematic" id="id2">`EPSG:4326 &lt;https://spatialreference.org/ref/epsg/4326/`__</span></a> refers to WGS84. You can search for EPSG codes at: <a class="reference external" href="https://spatialreference.org/">https://spatialreference.org/</a></p>
+</div>
 </div>
 <div class="section" id="sources">
 <h2>Sources<a class="headerlink" href="#sources" title="Permalink to this headline">¶</a></h2>
@@ -268,14 +303,11 @@ and some useful data management functionalities.</p>
 </div>
 <div class="section" id="lecture-videos">
 <h2>Lecture videos<a class="headerlink" href="#lecture-videos" title="Permalink to this headline">¶</a></h2>
-<div class="admonition-lesson-2-1-introduction-to-geopandas admonition">
-<p class="first admonition-title">Lesson 2.1 - Introduction to Geopandas</p>
-<div class="last"><iframe width="560" height="315" src="https://www.youtube.com/embed/4zSLRpXZAIU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<p>Henrikki Tenkanen, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p></div></div>
-<div class="admonition-lesson-2-2-managing-map-projections admonition">
-<p class="first admonition-title">Lesson 2.2 - Managing map projections</p>
-<div class="last"><iframe width="560" height="315" src="https://www.youtube.com/embed/FizD8t5_s3M" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<p>Henrikki Tenkanen, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p></div></div>
+<p><em>videos are added here after the lesson</em></p>
+<div class="admonition-lesson-2 admonition">
+<p class="first admonition-title">Lesson 2</p>
+<div class="last"><iframe width="560" height="315" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p>Vuokko Heikinheimo, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p></div></div>
 </div>
 </div>
 
@@ -301,7 +333,7 @@ and some useful data management functionalities.</p>
     <p>
         &copy; Copyright 2019, Henrikki Tenkanen and Vuokko Heikinheimo, Digital Geography Lab, University of Helsinki
       <span class="lastupdated">
-        Last updated on Oct 29, 2019.
+        Last updated on Nov 01, 2019.
       </span>
 
     </p>
