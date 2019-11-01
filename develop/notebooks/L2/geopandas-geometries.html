@@ -442,11 +442,11 @@ This page was generated from <a class="reference external" href="https://github.
 <span class="raw-html"><a href="https://notebooks.csc.fi/#/blueprint/8d7886c2f0ac402aa99235f8d289a52b"><img alt="CSC badge" src="https://img.shields.io/badge/launch-CSC%20notebook-blue.svg" style="vertical-align:text-bottom"></a></span></div>
 <div class="section" id="Creating-geometries-into-a-GeoDataFrame">
 <h1>Creating geometries into a GeoDataFrame<a class="headerlink" href="#Creating-geometries-into-a-GeoDataFrame" title="Permalink to this headline">¶</a></h1>
-<p>Since geopandas takes advantage of Shapely geometric objects, it is possible to create a Shapefile from a scratch by passing Shapely’s geometric objects into the GeoDataFrame. This is useful as it makes it easy to convert e.g.&nbsp;a text file that contains coordinates into a Shapefile. Next we will see how to create a Shapefile from scratch.</p>
+<p>Since geopandas takes advantage of Shapely geometric objects, it is possible to create a Shapefile from a scratch by passing Shapely’s geometric objects into the GeoDataFrame. This is useful as it makes it easy to convert e.g.&nbsp;a text file that contains coordinates into a Shapefile. Next we will see how to create a Shapefile from scratch. Our goal is to define a tiny GeoDataFrame, that represents the outlines of the Senate square in Helsinki, Finland.</p>
 <ul class="simple">
 <li>Let’s create an empty <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code>.</li>
 </ul>
-<div class="nbinput docutils container">
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
@@ -457,8 +457,15 @@ This page was generated from <a class="reference external" href="https://github.
 
 <span class="c1"># Create an empty geopandas GeoDataFrame</span>
 <span class="n">newdata</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">()</span>
-
-<span class="c1"># Let&#39;s see what we have at the moment</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Let&#39;s see what we have at the moment</span>
 <span class="k">print</span><span class="p">(</span><span class="n">newdata</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -473,19 +480,26 @@ Columns: []
 Index: []
 </pre></div></div>
 </div>
-<p>As we can see, the GeoDataFrame is empty since we haven’t yet stored any data into it.</p>
+<p>We have an empty GeoDataFrame!</p>
 <ul class="simple">
 <li>Let’s create a new column called <code class="docutils literal notranslate"><span class="pre">geometry</span></code> that will contain our Shapely objects:</li>
 </ul>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Create a new column called &#39;geometry&#39; to the GeoDataFrame</span>
 <span class="n">newdata</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
-
-<span class="c1"># Let&#39;s again see what&#39;s inside</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Let&#39;s again see what&#39;s inside</span>
 <span class="k">print</span><span class="p">(</span><span class="n">newdata</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -500,12 +514,12 @@ Columns: [geometry]
 Index: []
 </pre></div></div>
 </div>
-<p>Now we have a <code class="docutils literal notranslate"><span class="pre">geometry</span></code> column in our GeoDataFrame but we don’t have any data stored yet.</p>
+<p>Now we have a <code class="docutils literal notranslate"><span class="pre">geometry</span></code> column in our GeoDataFrame but we still don’t have any data.</p>
 <ul class="simple">
 <li>Let’s create a Shapely <code class="docutils literal notranslate"><span class="pre">Polygon</span></code> repsenting the Helsinki Senate square that we can later insert to our GeoDataFrame:</li>
 </ul>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -514,8 +528,15 @@ Index: []
 
 <span class="c1"># Create a Shapely polygon from the coordinate-tuple list</span>
 <span class="n">poly</span> <span class="o">=</span> <span class="n">Polygon</span><span class="p">(</span><span class="n">coordinates</span><span class="p">)</span>
-
-<span class="c1"># Let&#39;s see what we have</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Let&#39;s see what we have</span>
 <span class="k">print</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -532,15 +553,22 @@ POLYGON ((24.950899 60.169158, 24.953492 60.169158, 24.95351 60.170104, 24.95095
 <ul class="simple">
 <li>Let’s insert the polygon into our ‘geometry’ column of our GeoDataFrame at position 0:</li>
 </ul>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Insert the polygon into &#39;geometry&#39; -column at index 0</span>
 <span class="n">newdata</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">poly</span>
-
-<span class="c1"># Let&#39;s see what we have now</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Let&#39;s see what we have now</span>
 <span class="k">print</span><span class="p">(</span><span class="n">newdata</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -551,7 +579,7 @@ POLYGON ((24.950899 60.169158, 24.953492 60.169158, 24.95351 60.170104, 24.95095
 <div class="output_area docutils container">
 <div class="highlight"><pre>
                                             geometry
-0  POLYGON ((24.950899 60.169158, 24.953492 60.16...
+0  POLYGON ((24.95090 60.16916, 24.95349 60.16916...
 </pre></div></div>
 </div>
 <p>Great, now we have a GeoDataFrame with a Polygon that we could already now export to a Shapefile. However, typically you might want to include some useful information with your geometry.</p>
@@ -559,7 +587,7 @@ POLYGON ((24.950899 60.169158, 24.953492 60.169158, 24.95351 60.170104, 24.95095
 <li>Hence, let’s add another column to our GeoDataFrame called <code class="docutils literal notranslate"><span class="pre">location</span></code> with text <code class="docutils literal notranslate"><span class="pre">Senaatintori</span></code> that describes the location of the feature.</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -577,13 +605,13 @@ POLYGON ((24.950899 60.169158, 24.953492 60.169158, 24.95351 60.170104, 24.95095
 <div class="output_area docutils container">
 <div class="highlight"><pre>
                                             geometry      location
-0  POLYGON ((24.950899 60.169158, 24.953492 60.16...  Senaatintori
+0  POLYGON ((24.95090 60.16916, 24.95349 60.16916...  Senaatintori
 </pre></div></div>
 </div>
 <p>Okay, now we have additional information that is useful for recognicing what the feature represents.</p>
 <p>Before exporting the data it is always good (basically necessary) to <strong>determine the coordinate reference system (projection) for the GeoDataFrame.</strong> GeoDataFrame has an attribute called <code class="docutils literal notranslate"><span class="pre">.crs</span></code> that shows the coordinate system of the data which is empty (None) in our case since we are creating the data from the scratch (more about projection on next tutorial):</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -599,11 +627,12 @@ POLYGON ((24.950899 60.169158, 24.953492 60.169158, 24.95351 60.170104, 24.95095
 None
 </pre></div></div>
 </div>
+<p>Let’s add a crs for our GeoDataFrame. We passed the coordinates as latitude and longitude decimal degrees, so the correct CRS is WGS84 (epsg code: 4326).</p>
 <ul class="simple">
-<li>Let’s add a crs for our GeoDataFrame. A Python module called <strong>fiona</strong> has a nice function called <code class="docutils literal notranslate"><span class="pre">from_epsg()</span></code> for passing the coordinate reference system information for the GeoDataFrame. Next we will use that and determine the projection to WGS84 (epsg code: 4326):</li>
+<li>Import CRS class from pyproj and add CRS definition to <code class="docutils literal notranslate"><span class="pre">newdata</span></code>:</li>
 </ul>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -611,9 +640,16 @@ None
 <span class="kn">from</span> <span class="nn">pyproj</span> <span class="kn">import</span> <span class="n">CRS</span>
 
 <span class="c1"># Set the GeoDataFrame&#39;s coordinate system to WGS84 (i.e. epsg code 4326)</span>
-<span class="n">newdata</span><span class="o">.</span><span class="n">crs</span> <span class="o">=</span> <span class="n">CRS</span><span class="o">.</span><span class="n">from_epsg</span><span class="p">(</span><span class="mi">4326</span><span class="p">)</span>
-
-<span class="c1"># Let&#39;s see how the crs definition looks like</span>
+<span class="n">newdata</span><span class="o">.</span><span class="n">crs</span> <span class="o">=</span> <span class="n">CRS</span><span class="o">.</span><span class="n">from_epsg</span><span class="p">(</span><span class="mi">4326</span><span class="p">)</span><span class="o">.</span><span class="n">to_wkt</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Let&#39;s see how the crs definition looks like</span>
 <span class="k">print</span><span class="p">(</span><span class="n">newdata</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -623,16 +659,7 @@ None
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
-<span class="ansi-red-intense-fg ansi-bold">ImportError</span>                               Traceback (most recent call last)
-<span class="ansi-green-intense-fg ansi-bold">&lt;ipython-input-7-5308a458a71b&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-fg">      1</span> <span class="ansi-red-intense-fg ansi-bold"># Import CRS class from pyproj</span>
-<span class="ansi-green-intense-fg ansi-bold">----&gt; 2</span><span class="ansi-yellow-intense-fg ansi-bold"> </span><span class="ansi-green-intense-fg ansi-bold">from</span> pyproj <span class="ansi-green-intense-fg ansi-bold">import</span> CRS
-<span class="ansi-green-fg">      3</span>
-<span class="ansi-green-fg">      4</span> <span class="ansi-red-intense-fg ansi-bold"># Set the GeoDataFrame&#39;s coordinate system to WGS84 (i.e. epsg code 4326)</span>
-<span class="ansi-green-fg">      5</span> newdata<span class="ansi-yellow-intense-fg ansi-bold">.</span>crs <span class="ansi-yellow-intense-fg ansi-bold">=</span> CRS<span class="ansi-yellow-intense-fg ansi-bold">.</span>from_epsg<span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-cyan-intense-fg ansi-bold">4326</span><span class="ansi-yellow-intense-fg ansi-bold">)</span>
-
-<span class="ansi-red-intense-fg ansi-bold">ImportError</span>: cannot import name &#39;CRS&#39;
+GEOGCRS[&#34;WGS 84&#34;,DATUM[&#34;World Geodetic System 1984&#34;,ELLIPSOID[&#34;WGS 84&#34;,6378137,298.257223563,LENGTHUNIT[&#34;metre&#34;,1]]],PRIMEM[&#34;Greenwich&#34;,0,ANGLEUNIT[&#34;degree&#34;,0.0174532925199433]],CS[ellipsoidal,2],AXIS[&#34;geodetic latitude (Lat)&#34;,north,ORDER[1],ANGLEUNIT[&#34;degree&#34;,0.0174532925199433]],AXIS[&#34;geodetic longitude (Lon)&#34;,east,ORDER[2],ANGLEUNIT[&#34;degree&#34;,0.0174532925199433]],USAGE[SCOPE[&#34;unknown&#34;],AREA[&#34;World&#34;],BBOX[-90,-180,90,180]],ID[&#34;EPSG&#34;,4326]]
 </pre></div></div>
 </div>
 <p>As we can see, now we have associated coordinate reference system information (i.e.&nbsp;<code class="docutils literal notranslate"><span class="pre">CRS</span></code>) into our <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code>. The CRS information here, is a Python <code class="docutils literal notranslate"><span class="pre">dictionary</span></code> containing necessary values for geopandas to create a <code class="docutils literal notranslate"><span class="pre">.prj</span></code> file for our Shapefile that contains the CRS info.</p>
@@ -640,7 +667,7 @@ None
 <li>Finally, we can export the GeoDataFrame using <code class="docutils literal notranslate"><span class="pre">.to_file()</span></code> -function. The function works quite similarly as the export functions in numpy or pandas, but here we only need to provide the output path for the Shapefile. Easy isn’t it!:</li>
 </ul>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -652,8 +679,15 @@ None
 </pre></div>
 </div>
 </div>
-<p>Now we have successfully created a Shapefile from the scratch using only Python programming. Similar approach can be used to for example to read coordinates from a text file (e.g.&nbsp;points) and create Shapefiles from those automatically.</p>
-<p><strong>TASK:</strong> Check the output Shapefile by reading it with geopandas and make sure that the attribute table and geometry seems correct.</p>
+<p>Now we have successfully created a Shapefile from scratch using only Python programming. Similar approach can be used to for example to read coordinates from a text file (e.g.&nbsp;points) and create Shapefiles from those automatically.</p>
+<div class="admonition note">
+<p class="admonition-title fa fa-exclamation-circle"><strong>TASK</strong></p>
+<p>Check the output Shapefile by reading it with geopandas and make sure that the attribute table and geometry seems correct.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title fa fa-exclamation-circle"><strong>EXTRA TASK</strong></p>
+<p>Re-project the data to ETRS-TM35FIN (EPSG:3067) and save again!</p>
+</div>
 </div>
 
 
