@@ -4,29 +4,18 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# Vector Data I/O from various formats / sources\n",
+    "# Vector Data I/O in Python\n",
     "\n",
-    "In GIS, there are various different data formats and sources (such as databases or WFS) that can be used to read the data. This tutorial will show some typical examples how to read (and write) from different alternatives.\n",
+    "There are various different file formats and data sources for geographic information. This tutorial will show some typical examples how to read (and write) data from different sources.\n",
     "\n",
     " - To see all possible file formats supported by GDAL, execute following:"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 44,
+   "execution_count": null,
    "metadata": {},
-   "outputs": [
-    {
-     "data": {
-      "text/plain": [
-       "dict_keys(['PCIDSK', 'netCDF', 'JP2OpenJPEG', 'PDF', 'DB2ODBC', 'ESRI Shapefile', 'MapInfo File', 'UK .NTF', 'OGR_SDTS', 'S57', 'DGN', 'OGR_VRT', 'REC', 'Memory', 'BNA', 'CSV', 'NAS', 'GML', 'GPX', 'KML', 'GeoJSON', 'OGR_GMT', 'GPKG', 'SQLite', 'ODBC', 'WAsP', 'PGeo', 'MSSQLSpatial', 'PostgreSQL', 'OpenFileGDB', 'XPlane', 'DXF', 'CAD', 'Geoconcept', 'GeoRSS', 'GPSTrackMaker', 'VFK', 'PGDUMP', 'OSM', 'GPSBabel', 'SUA', 'OpenAir', 'OGR_PDS', 'WFS', 'HTF', 'AeronavFAA', 'Geomedia', 'EDIGEO', 'GFT', 'SVG', 'CouchDB', 'Cloudant', 'Idrisi', 'ARCGEN', 'SEGUKOOA', 'SEGY', 'XLS', 'ODS', 'XLSX', 'ElasticSearch', 'Walk', 'Carto', 'AmigoCloud', 'SXF', 'Selafin', 'JML', 'PLSCENES', 'CSW', 'VDV', 'GMLAS', 'TIGER', 'AVCBin', 'AVCE00', 'HTTP'])"
-      ]
-     },
-     "execution_count": 44,
-     "metadata": {},
-     "output_type": "execute_result"
-    }
-   ],
+   "outputs": [],
    "source": [
     "# See all available drivers supported by GDAL\n",
     "import fiona\n",
@@ -49,7 +38,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 34,
+   "execution_count": null,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -73,7 +62,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 3,
+   "execution_count": null,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -97,7 +86,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 4,
+   "execution_count": null,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -124,7 +113,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 7,
+   "execution_count": null,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -148,7 +137,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 8,
+   "execution_count": null,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -172,7 +161,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 9,
+   "execution_count": null,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -194,7 +183,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 10,
+   "execution_count": null,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -221,7 +210,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 11,
+   "execution_count": null,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -299,7 +288,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 39,
+   "execution_count": null,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -358,7 +347,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 28,
+   "execution_count": null,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -366,10 +355,11 @@
     "import requests\n",
     "import geojson\n",
     "\n",
-    "# Specify the url for the backend\n",
+    "# Specify the url for the backend. Here we are using data from Statistics Finland: https://www.stat.fi/org/avoindata/paikkatietoaineistot_en.html\n",
     "url = 'http://geo.stat.fi/geoserver/vaestoruutu/wfs'\n",
     "\n",
-    "# Specify parameters (read data in json format)\n",
+    "# Specify parameters (read data in json format). \n",
+    "# Available feature types in this particular data source: http://geo.stat.fi/geoserver/vaestoruutu/wfs?service=wfs&version=2.0.0&request=describeFeatureType\n",
     "params = dict(service='WFS', version='2.0.0', request='GetFeature', \n",
     "         typeName='vaestoruutu:vaki2017_5km', outputFormat='json')\n",
     "\n",
@@ -383,7 +373,7 @@
  ],
  "metadata": {
   "kernelspec": {
-   "display_name": "Python 3",
+   "display_name": "Python [default]",
    "language": "python",
    "name": "python3"
   },
@@ -397,9 +387,9 @@
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.6.0"
+   "version": "3.5.6"
   }
  },
  "nbformat": 4,
- "nbformat_minor": 2
+ "nbformat_minor": 4
 }

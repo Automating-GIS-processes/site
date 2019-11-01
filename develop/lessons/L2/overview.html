@@ -58,7 +58,7 @@
   <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Vector Data I/O from various formats / sources" href="../../notebooks/L2/data_io.html" />
+    <link rel="next" title="Vector Data I/O in Python" href="../../notebooks/L2/data_io.html" />
     <link rel="prev" title="Exercise 1" href="../L1/exercise-1.html" />
     <link href="../../_static/geo-python.css" rel="stylesheet" type="text/css">
      
@@ -138,7 +138,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#lecture-videos">Lecture videos</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L2/data_io.html">Vector Data I/O from various formats / sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L2/data_io.html">Vector Data I/O in Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../notebooks/L2/geopandas-basics.html">Introduction to Geopandas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../notebooks/L2/projections.html">Map projections</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../notebooks/L2/geopandas-geometries.html">Creating geometries into a GeoDataFrame</a></li>
@@ -261,13 +261,17 @@ and some useful data management functionalities.</p>
 <li>Change the coordinate reference system of the data</li>
 </ul>
 </div></blockquote>
+</div>
+<div class="section" id="sources">
+<h2>Sources<a class="headerlink" href="#sources" title="Permalink to this headline">¶</a></h2>
+<p>This lesson partly based on <a class="reference external" href="http://geopandas.org/">Geopandas documentation</a>.</p>
 <div class="admonition-test-your-understanding admonition">
 <p class="first admonition-title"><strong>Test your understanding</strong></p>
 <p>Before diving into this week’s Python lesson, you should already be familiar with some basic
 spatial data file formats and projection definitions, such as these:</p>
 <ul class="last simple">
-<li>shapefile</li>
-<li>geopackage</li>
+<li>Shapefile</li>
+<li>GeoPackage</li>
 <li>CRS</li>
 <li>Datum</li>
 <li>EPSG</li>
@@ -287,7 +291,8 @@ an SQLite database with a <cite>.gpkg</cite> extension (all in one file!). The G
 More information at: <a class="reference external" href="https://www.geopackage.org/">https://www.geopackage.org/</a></p>
 <p><strong>CRS:</strong> Coordinate reference systems define how coordinates relate to real locations on the Earth.
 <em>Geographic coordinate reference systems</em> commonly use latitude and longitude degrees.
-<em>Projected coordinate reference systems</em> use  x and y coordinates to represent locations on a flat surface. There are different formats for defining CRS.</p>
+<em>Projected coordinate reference systems</em> use  x and y coordinates to represent locations on a flat surface.
+You will learn more about coordinate reference systems during this lesson!</p>
 <p><strong>Datum:</strong> defines the center point, orientation, and scale of the reference surface related to a coordinate reference system.
 Same coordinates can relate to different locations depending on the Datum! For example, WGS84 is a widely used global datum.
 ETRS89 is a datum used in Europe. Coordinate reference systems are often named based on the datum used.</p>
@@ -296,10 +301,6 @@ EPSG stands for “European Petroleum Survey Group” that originally published 
 For example, <a class="reference external" href="https://spatialreference.org/ref/epsg/3067/">EPSG:3067</a> refers to coordinate reference system ETRS-TM35FIN which is commonly used in Finland.
 <a href="#id1"><span class="problematic" id="id2">`EPSG:4326 &lt;https://spatialreference.org/ref/epsg/4326/`__</span></a> refers to WGS84. You can search for EPSG codes at: <a class="reference external" href="https://spatialreference.org/">https://spatialreference.org/</a></p>
 </div>
-</div>
-<div class="section" id="sources">
-<h2>Sources<a class="headerlink" href="#sources" title="Permalink to this headline">¶</a></h2>
-<p>These materials are partly based on <a class="reference external" href="http://geopandas.org/">Geopandas documentation</a>.</p>
 </div>
 <div class="section" id="lecture-videos">
 <h2>Lecture videos<a class="headerlink" href="#lecture-videos" title="Permalink to this headline">¶</a></h2>
@@ -319,7 +320,7 @@ For example, <a class="reference external" href="https://spatialreference.org/re
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../notebooks/L2/data_io.html" class="btn btn-neutral float-right" title="Vector Data I/O from various formats / sources" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../../notebooks/L2/data_io.html" class="btn btn-neutral float-right" title="Vector Data I/O in Python" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../L1/exercise-1.html" class="btn btn-neutral float-left" title="Exercise 1" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
