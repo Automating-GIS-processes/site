@@ -456,7 +456,7 @@ three dimensional earth on a flat, two dimensional map.</p>
 <p>For those of you who want a bit more analytical approach for choosing the projection, you can get a good overview from <a class="reference external" href="http://www.georeference.org/doc/guide_to_selecting_map_projections.htm">georeference.org</a>, or from this blog post introducing <a class="reference external" href="http://usersguidetotheuniverse.com/index.php/2011/03/03/whats-the-best-map-projection/">the strengths and weaknesses of a few commonly used projections</a>.</p>
 <div class="section" id="Coordinate-reference-system-(CRS)-in-Geopandas">
 <h2>Coordinate reference system (CRS) in Geopandas<a class="headerlink" href="#Coordinate-reference-system-(CRS)-in-Geopandas" title="Permalink to this headline">¶</a></h2>
-<p>Luckily, defining and changing projections is easy in Geopandas. In this tutorial we will see how to retrieve the coordinate reference system information from the data, and how to change it. We will re-project a data file from WGS84 (lat, lon coordinates) into a Lambert Azimuthal Equal Area projection which is the <a class="reference external" href="http://mapref.org/LinkedDocuments/MapProjectionsForEurope-EUR-20120.pdf">recommended projection for Europe</a> by European Commission.</p>
+<p>Luckily, defining and changing projections is easy in Geopandas. In this tutorial we will see <strong>how to retrieve the coordinate reference system information from the data, and how to change the crs</strong>. We will re-project a data file from WGS84 (lat, lon coordinates) into a Lambert Azimuthal Equal Area projection which is the <a class="reference external" href="http://mapref.org/LinkedDocuments/MapProjectionsForEurope-EUR-20120.pdf">recommended projection for Europe</a> by European Commission.</p>
 <p>For this tutorial we will be using a Shapefile called <code class="docutils literal notranslate"><span class="pre">Europe_borders.shp</span></code> representing the country borders in Europe, that you already should have <a class="reference internal" href="geopandas-basics.html"><span class="doc">downloaded during the previous tutorial</span></a>.</p>
 <p>Shapefile should always contain information about the coordinate reference system that is stored in <code class="docutils literal notranslate"><span class="pre">.prj</span></code> -file (at least if the data has been appropriately produced). When reading the data into <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> with Geopandas this information is automatically stored into <code class="docutils literal notranslate"><span class="pre">.crs</span></code> attribute of the GeoDataFrame.</p>
 <ul class="simple">
@@ -527,8 +527,8 @@ Name: geometry, dtype: geometry
 </pre></div>
 </div>
 </div>
-<p>As we can see, the coordinate values of the Polygons indeed look like latitude and longitude values, so everything seems to be in order (as in most cases).</p>
-<p>WGS84 projection is not really a good one for representing European borders, so let’s convert those geometries into Lambert Azimuthal Equal Area projection (<a class="reference external" href="http://spatialreference.org/ref/epsg/etrs89-etrs-laea/">EPSG: 3035</a>) which is the recommended projection by European Comission.</p>
+<p>As we can see, the coordinate values of the Polygons indeed look like latitude and longitude values, so everything seems to be in order.</p>
+<p>WGS84 projection is not really a good one for representing European borders (areas get distorted), so let’s convert those geometries into Lambert Azimuthal Equal Area projection (<a class="reference external" href="http://spatialreference.org/ref/epsg/etrs89-etrs-laea/">EPSG: 3035</a>) which is the recommended projection by European Comission.</p>
 <p>Changing the projection is simple to <a class="reference external" href="http://geopandas.org/projections.html#re-projecting">do in Geopandas</a> with <code class="docutils literal notranslate"><span class="pre">.to_crs()</span></code> -function which is a built-in function of the GeoDataFrame. The function has two alternative parameters 1) <code class="docutils literal notranslate"><span class="pre">crs</span></code> and 2) <code class="docutils literal notranslate"><span class="pre">epgs</span></code> that can be used to make the coordinate transformation and re-project the data into the CRS that you want to use.</p>
 <ul class="simple">
 <li>Let’s re-project our data into <code class="docutils literal notranslate"><span class="pre">EPSG</span> <span class="pre">3035</span></code> using <code class="docutils literal notranslate"><span class="pre">epsg</span></code> -parameter:</li>
@@ -611,7 +611,7 @@ Name: geometry, dtype: geometry
 <li>Finally, let’s save our projected layer into a Shapefile so that we can use it later.</li>
 </ul>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -688,7 +688,7 @@ Datum: Unknown based on GRS80 ellipsoid
 <p>As we can see, the <code class="docutils literal notranslate"><span class="pre">CRS</span></code> object contains a lot more information than the original crs dictionary. The data contains some useful information such as the <code class="docutils literal notranslate"><span class="pre">Name</span></code> of the CRS (ETRS89/LAEA Europe), the <code class="docutils literal notranslate"><span class="pre">area</span></code> where the CRS is in use (<em>Europe</em> with bounds <em>(-16.1, 32.88, 40.18, 84.17)</em>), and the <code class="docutils literal notranslate"><span class="pre">Datum</span></code> (European Terrestrial Reference System 1989).</p>
 <p>We can also easily parse this information individually as follows:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -715,7 +715,7 @@ Coordinate system: cartesian
 <p>You can easily explore all the possible information that can be extracted from the CRS by typing <code class="docutils literal notranslate"><span class="pre">data_crs.</span></code> and pressing Tabulator.</p>
 <p>Let’s see how we can convert the crs information from one format to another. Quite often it is useful to know the EPSG code of the CRS. Next, we will conduct a few transformations to demonstrate the capabilities of the <code class="docutils literal notranslate"><span class="pre">CRS</span></code> class.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -735,7 +735,7 @@ PROJCRS[&#34;unknown&#34;,BASEGEOGCRS[&#34;unknown&#34;,DATUM[&#34;Unknown based
 </div>
 <p>As we can see, the <code class="docutils literal notranslate"><span class="pre">WKT</span></code> format contains a <em>lot</em> of information. Typically, e.g.&nbsp;the <code class="docutils literal notranslate"><span class="pre">.prj</span></code> file of a Shapefile contains the information in this format. Let’s see how it is possible to extract <code class="docutils literal notranslate"><span class="pre">EPSG</span></code> code from this. For doing it, we need to re-initialize the CRS object, this time from the <code class="docutils literal notranslate"><span class="pre">WKT</span></code> text presentation.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -756,7 +756,7 @@ None
 <p>Oops, what happened? It seems that the tool wasn’t able to recognize the EPSG code from the WKT. This happened because <code class="docutils literal notranslate"><span class="pre">to_epsg()</span></code> function wasn’t sure enough about the EPSG code of the CRS, so it did not provide any information. Luckily, we can easily adjust the minimum level of confidence for matching the CRS info and the EPSG code. We can do this by adjusting a parameter <code class="docutils literal notranslate"><span class="pre">min_confidence</span></code> when calling the function. By default, the confidence level is 70 %, but let’s see if lowering it
 helps us for retrieving the EPSG code from the WKT.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -777,7 +777,7 @@ helps us for retrieving the EPSG code from the WKT.</p>
 <p>As we can see, by lowering the confidence requirement, it was possible to extract the correct EPSG code from the WKT (3035). However, be cautious when using this, as guessing the EPSG from “exotic” coordinate reference systems might also provide false results.</p>
 <p>Let’s now, as a final step, save our data to disk using the <code class="docutils literal notranslate"><span class="pre">WKT</span></code> format as the crs of our GeoDataFrame.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -793,7 +793,7 @@ helps us for retrieving the EPSG code from the WKT.</p>
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -820,7 +820,7 @@ less commonly used, but still useful to know.</p>
 <li>Let’s first create a GeoDataFrame that contains a single Point representing the location of Helsinki, Finland:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -862,7 +862,7 @@ less commonly used, but still useful to know.</p>
 </li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -899,7 +899,7 @@ CRS:
 <li>Let’s create a new copy of our GeoDataFrame into a variable called <code class="docutils literal notranslate"><span class="pre">europe_borders_aeqd</span></code>:</li>
 </ul>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -912,7 +912,7 @@ CRS:
 <li>Let’s now reproject our Europer borders data into the Azimuthal Equidistant projection that was centered into Helsinki:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -939,7 +939,7 @@ CRS:
 <li>Let’s plot the Europe borders and the location of Helsinki to get a better understanding how our projection has worked out:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -955,11 +955,11 @@ CRS:
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7efce6dc4358&gt;
+<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f2f9133a320&gt;
 </pre></div>
 </div>
 </div>
@@ -976,7 +976,7 @@ CRS:
 <li>This can be done easily in Geopandas by using the <code class="docutils literal notranslate"><span class="pre">centroid</span></code> attribute:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1006,7 +1006,7 @@ CRS:
 <li>First, we will create a dedicated function for calculating the distances called <code class="docutils literal notranslate"><span class="pre">calculate_distance()</span></code>:</li>
 </ul>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1046,7 +1046,7 @@ CRS:
 <li>Before using our function and calculating the distances between Helsinki and centroids, we need to get the Shapely point geometry from the re-projected Helsinki center point that we can pass to our function (into the <code class="docutils literal notranslate"><span class="pre">dest_geom</span></code> -parameter. We can use the <code class="docutils literal notranslate"><span class="pre">loc</span></code> -functionality to retrieve the value from specific index and column:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1072,7 +1072,7 @@ POINT (0 0)
 </li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1117,7 +1117,7 @@ POINT (0 0)
 <li>Let’s check what is the longest and mean distance to Helsinki from the centroids of other European countries:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1177,7 +1177,7 @@ Maximum distance to Helsinki is 3470 km, and the mean distance is 1177 km.
     <p>
         &copy; Copyright 2019, Henrikki Tenkanen and Vuokko Heikinheimo, Digital Geography Lab, University of Helsinki
       <span class="lastupdated">
-        Last updated on Nov 01, 2019.
+        Last updated on Nov 02, 2019.
       </span>
 
     </p>

@@ -477,40 +477,18 @@ This page was generated from <a class="reference external" href="https://github.
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
 </div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">ImportError</span>                               Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-1-41cf7c114334&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">      1</span> <span class="ansi-red-fg"># See all available drivers supported by GDAL</span>
-<span class="ansi-green-fg">----&gt; 2</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">import</span> fiona
-<span class="ansi-green-intense-fg ansi-bold">      3</span> <span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>_drivers <span class="ansi-green-fg">import</span> GDALEnv
-<span class="ansi-green-intense-fg ansi-bold">      4</span> env <span class="ansi-blue-fg">=</span> GDALEnv<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">      5</span>
-
-<span class="ansi-green-fg">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/fiona/__init__.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">     67</span> <span class="ansi-green-fg">from</span> six <span class="ansi-green-fg">import</span> string_types
-<span class="ansi-green-intense-fg ansi-bold">     68</span>
-<span class="ansi-green-fg">---&gt; 69</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>collection <span class="ansi-green-fg">import</span> Collection<span class="ansi-blue-fg">,</span> BytesCollection<span class="ansi-blue-fg">,</span> vsi_path
-<span class="ansi-green-intense-fg ansi-bold">     70</span> <span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>_drivers <span class="ansi-green-fg">import</span> driver_count<span class="ansi-blue-fg">,</span> GDALEnv
-<span class="ansi-green-intense-fg ansi-bold">     71</span> <span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>drvsupport <span class="ansi-green-fg">import</span> supported_drivers
-
-<span class="ansi-green-fg">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/fiona/collection.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">      7</span>
-<span class="ansi-green-intense-fg ansi-bold">      8</span> <span class="ansi-green-fg">from</span> fiona <span class="ansi-green-fg">import</span> compat
-<span class="ansi-green-fg">----&gt; 9</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>ogrext <span class="ansi-green-fg">import</span> Iterator<span class="ansi-blue-fg">,</span> ItemsIterator<span class="ansi-blue-fg">,</span> KeysIterator
-<span class="ansi-green-intense-fg ansi-bold">     10</span> <span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>ogrext <span class="ansi-green-fg">import</span> Session<span class="ansi-blue-fg">,</span> WritingSession
-<span class="ansi-green-intense-fg ansi-bold">     11</span> from fiona.ogrext import (
-
-<span class="ansi-red-fg">ImportError</span>: libpoppler.so.76: cannot open shared object file: No such file or directory
-</pre></div></div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>dict_keys([&#39;PCIDSK&#39;, &#39;netCDF&#39;, &#39;PDS4&#39;, &#39;JP2OpenJPEG&#39;, &#39;PDF&#39;, &#39;MBTiles&#39;, &#39;EEDA&#39;, &#39;ESRI Shapefile&#39;, &#39;MapInfo File&#39;, &#39;UK .NTF&#39;, &#39;OGR_SDTS&#39;, &#39;S57&#39;, &#39;DGN&#39;, &#39;OGR_VRT&#39;, &#39;REC&#39;, &#39;Memory&#39;, &#39;BNA&#39;, &#39;CSV&#39;, &#39;NAS&#39;, &#39;GML&#39;, &#39;GPX&#39;, &#39;LIBKML&#39;, &#39;KML&#39;, &#39;GeoJSON&#39;, &#39;GeoJSONSeq&#39;, &#39;ESRIJSON&#39;, &#39;TopoJSON&#39;, &#39;Interlis 1&#39;, &#39;Interlis 2&#39;, &#39;OGR_GMT&#39;, &#39;GPKG&#39;, &#39;SQLite&#39;, &#39;OGR_DODS&#39;, &#39;WAsP&#39;, &#39;PostgreSQL&#39;, &#39;OpenFileGDB&#39;, &#39;XPlane&#39;, &#39;DXF&#39;, &#39;CAD&#39;, &#39;Geoconcept&#39;, &#39;GeoRSS&#39;, &#39;GPSTrackMaker&#39;, &#39;VFK&#39;, &#39;PGDUMP&#39;, &#39;OSM&#39;, &#39;GPSBabel&#39;, &#39;SUA&#39;, &#39;OpenAir&#39;, &#39;OGR_PDS&#39;, &#39;WFS&#39;, &#39;WFS3&#39;, &#39;HTF&#39;, &#39;AeronavFAA&#39;, &#39;EDIGEO&#39;, &#39;GFT&#39;, &#39;SVG&#39;, &#39;CouchDB&#39;, &#39;Cloudant&#39;, &#39;Idrisi&#39;, &#39;ARCGEN&#39;, &#39;SEGUKOOA&#39;, &#39;SEGY&#39;, &#39;XLS&#39;, &#39;ODS&#39;, &#39;XLSX&#39;, &#39;ElasticSearch&#39;, &#39;Carto&#39;, &#39;AmigoCloud&#39;, &#39;SXF&#39;, &#39;Selafin&#39;, &#39;JML&#39;, &#39;PLSCENES&#39;, &#39;CSW&#39;, &#39;VDV&#39;, &#39;GMLAS&#39;, &#39;MVT&#39;, &#39;TIGER&#39;, &#39;AVCBin&#39;, &#39;AVCE00&#39;, &#39;NGW&#39;, &#39;HTTP&#39;])
+</pre></div>
+</div>
 </div>
 <div class="section" id="Read-/-write-Shapefile">
 <h2>Read / write Shapefile<a class="headerlink" href="#Read-/-write-Shapefile" title="Permalink to this headline">¶</a></h2>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -526,56 +504,11 @@ This page was generated from <a class="reference external" href="https://github.
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">ImportError</span>                               Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-2-c6b992def6c2&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">import</span> geopandas <span class="ansi-green-fg">as</span> gpd
-<span class="ansi-green-intense-fg ansi-bold">      2</span>
-<span class="ansi-green-intense-fg ansi-bold">      3</span> <span class="ansi-red-fg"># Read file from Shapefile</span>
-<span class="ansi-green-intense-fg ansi-bold">      4</span> fp <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">&#34;L2_data/Finland.shp&#34;</span>
-<span class="ansi-green-intense-fg ansi-bold">      5</span> data <span class="ansi-blue-fg">=</span> gpd<span class="ansi-blue-fg">.</span>read_file<span class="ansi-blue-fg">(</span>fp<span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/geopandas/__init__.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">      3</span> <span class="ansi-green-fg">from</span> geopandas<span class="ansi-blue-fg">.</span>array <span class="ansi-green-fg">import</span> _points_from_xy <span class="ansi-green-fg">as</span> points_from_xy  <span class="ansi-red-fg"># noqa</span>
-<span class="ansi-green-intense-fg ansi-bold">      4</span>
-<span class="ansi-green-fg">----&gt; 5</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">from</span> geopandas<span class="ansi-blue-fg">.</span>io<span class="ansi-blue-fg">.</span>file <span class="ansi-green-fg">import</span> read_file  <span class="ansi-red-fg"># noqa</span>
-<span class="ansi-green-intense-fg ansi-bold">      6</span> <span class="ansi-green-fg">from</span> geopandas<span class="ansi-blue-fg">.</span>io<span class="ansi-blue-fg">.</span>sql <span class="ansi-green-fg">import</span> read_postgis  <span class="ansi-red-fg"># noqa</span>
-<span class="ansi-green-intense-fg ansi-bold">      7</span> <span class="ansi-green-fg">from</span> geopandas<span class="ansi-blue-fg">.</span>tools <span class="ansi-green-fg">import</span> sjoin  <span class="ansi-red-fg"># noqa</span>
-
-<span class="ansi-green-fg">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/geopandas/io/file.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">      4</span> <span class="ansi-green-fg">import</span> six
-<span class="ansi-green-intense-fg ansi-bold">      5</span>
-<span class="ansi-green-fg">----&gt; 6</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">import</span> fiona
-<span class="ansi-green-intense-fg ansi-bold">      7</span>
-<span class="ansi-green-intense-fg ansi-bold">      8</span> <span class="ansi-green-fg">from</span> geopandas <span class="ansi-green-fg">import</span> GeoDataFrame<span class="ansi-blue-fg">,</span> GeoSeries
-
-<span class="ansi-green-fg">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/fiona/__init__.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">     67</span> <span class="ansi-green-fg">from</span> six <span class="ansi-green-fg">import</span> string_types
-<span class="ansi-green-intense-fg ansi-bold">     68</span>
-<span class="ansi-green-fg">---&gt; 69</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>collection <span class="ansi-green-fg">import</span> Collection<span class="ansi-blue-fg">,</span> BytesCollection<span class="ansi-blue-fg">,</span> vsi_path
-<span class="ansi-green-intense-fg ansi-bold">     70</span> <span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>_drivers <span class="ansi-green-fg">import</span> driver_count<span class="ansi-blue-fg">,</span> GDALEnv
-<span class="ansi-green-intense-fg ansi-bold">     71</span> <span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>drvsupport <span class="ansi-green-fg">import</span> supported_drivers
-
-<span class="ansi-green-fg">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/fiona/collection.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">      7</span>
-<span class="ansi-green-intense-fg ansi-bold">      8</span> <span class="ansi-green-fg">from</span> fiona <span class="ansi-green-fg">import</span> compat
-<span class="ansi-green-fg">----&gt; 9</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>ogrext <span class="ansi-green-fg">import</span> Iterator<span class="ansi-blue-fg">,</span> ItemsIterator<span class="ansi-blue-fg">,</span> KeysIterator
-<span class="ansi-green-intense-fg ansi-bold">     10</span> <span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>ogrext <span class="ansi-green-fg">import</span> Session<span class="ansi-blue-fg">,</span> WritingSession
-<span class="ansi-green-intense-fg ansi-bold">     11</span> from fiona.ogrext import (
-
-<span class="ansi-red-fg">ImportError</span>: libpoppler.so.76: cannot open shared object file: No such file or directory
-</pre></div></div>
-</div>
 </div>
 <div class="section" id="Read-/-write-GeoJSON">
 <h2>Read / write GeoJSON<a class="headerlink" href="#Read-/-write-GeoJSON" title="Permalink to this headline">¶</a></h2>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -591,56 +524,11 @@ This page was generated from <a class="reference external" href="https://github.
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">ImportError</span>                               Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-3-943553055a73&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">import</span> geopandas <span class="ansi-green-fg">as</span> gpd
-<span class="ansi-green-intense-fg ansi-bold">      2</span>
-<span class="ansi-green-intense-fg ansi-bold">      3</span> <span class="ansi-red-fg"># Read file from GeoJSON</span>
-<span class="ansi-green-intense-fg ansi-bold">      4</span> fp <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">&#34;L2_data/Finland.geojson&#34;</span>
-<span class="ansi-green-intense-fg ansi-bold">      5</span> data <span class="ansi-blue-fg">=</span> gpd<span class="ansi-blue-fg">.</span>read_file<span class="ansi-blue-fg">(</span>fp<span class="ansi-blue-fg">,</span> driver<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#34;GeoJSON&#34;</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/geopandas/__init__.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">      3</span> <span class="ansi-green-fg">from</span> geopandas<span class="ansi-blue-fg">.</span>array <span class="ansi-green-fg">import</span> _points_from_xy <span class="ansi-green-fg">as</span> points_from_xy  <span class="ansi-red-fg"># noqa</span>
-<span class="ansi-green-intense-fg ansi-bold">      4</span>
-<span class="ansi-green-fg">----&gt; 5</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">from</span> geopandas<span class="ansi-blue-fg">.</span>io<span class="ansi-blue-fg">.</span>file <span class="ansi-green-fg">import</span> read_file  <span class="ansi-red-fg"># noqa</span>
-<span class="ansi-green-intense-fg ansi-bold">      6</span> <span class="ansi-green-fg">from</span> geopandas<span class="ansi-blue-fg">.</span>io<span class="ansi-blue-fg">.</span>sql <span class="ansi-green-fg">import</span> read_postgis  <span class="ansi-red-fg"># noqa</span>
-<span class="ansi-green-intense-fg ansi-bold">      7</span> <span class="ansi-green-fg">from</span> geopandas<span class="ansi-blue-fg">.</span>tools <span class="ansi-green-fg">import</span> sjoin  <span class="ansi-red-fg"># noqa</span>
-
-<span class="ansi-green-fg">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/geopandas/io/file.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">      4</span> <span class="ansi-green-fg">import</span> six
-<span class="ansi-green-intense-fg ansi-bold">      5</span>
-<span class="ansi-green-fg">----&gt; 6</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">import</span> fiona
-<span class="ansi-green-intense-fg ansi-bold">      7</span>
-<span class="ansi-green-intense-fg ansi-bold">      8</span> <span class="ansi-green-fg">from</span> geopandas <span class="ansi-green-fg">import</span> GeoDataFrame<span class="ansi-blue-fg">,</span> GeoSeries
-
-<span class="ansi-green-fg">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/fiona/__init__.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">     67</span> <span class="ansi-green-fg">from</span> six <span class="ansi-green-fg">import</span> string_types
-<span class="ansi-green-intense-fg ansi-bold">     68</span>
-<span class="ansi-green-fg">---&gt; 69</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>collection <span class="ansi-green-fg">import</span> Collection<span class="ansi-blue-fg">,</span> BytesCollection<span class="ansi-blue-fg">,</span> vsi_path
-<span class="ansi-green-intense-fg ansi-bold">     70</span> <span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>_drivers <span class="ansi-green-fg">import</span> driver_count<span class="ansi-blue-fg">,</span> GDALEnv
-<span class="ansi-green-intense-fg ansi-bold">     71</span> <span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>drvsupport <span class="ansi-green-fg">import</span> supported_drivers
-
-<span class="ansi-green-fg">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/fiona/collection.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">      7</span>
-<span class="ansi-green-intense-fg ansi-bold">      8</span> <span class="ansi-green-fg">from</span> fiona <span class="ansi-green-fg">import</span> compat
-<span class="ansi-green-fg">----&gt; 9</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>ogrext <span class="ansi-green-fg">import</span> Iterator<span class="ansi-blue-fg">,</span> ItemsIterator<span class="ansi-blue-fg">,</span> KeysIterator
-<span class="ansi-green-intense-fg ansi-bold">     10</span> <span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>ogrext <span class="ansi-green-fg">import</span> Session<span class="ansi-blue-fg">,</span> WritingSession
-<span class="ansi-green-intense-fg ansi-bold">     11</span> from fiona.ogrext import (
-
-<span class="ansi-red-fg">ImportError</span>: libpoppler.so.76: cannot open shared object file: No such file or directory
-</pre></div></div>
-</div>
 </div>
 <div class="section" id="Read-/-write-KML">
 <h2>Read / write KML<a class="headerlink" href="#Read-/-write-KML" title="Permalink to this headline">¶</a></h2>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -659,56 +547,11 @@ This page was generated from <a class="reference external" href="https://github.
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">ImportError</span>                               Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-4-8c827a80d63e&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">import</span> geopandas <span class="ansi-green-fg">as</span> gpd
-<span class="ansi-green-intense-fg ansi-bold">      2</span>
-<span class="ansi-green-intense-fg ansi-bold">      3</span> <span class="ansi-red-fg"># Enable KML driver</span>
-<span class="ansi-green-intense-fg ansi-bold">      4</span> gpd<span class="ansi-blue-fg">.</span>io<span class="ansi-blue-fg">.</span>file<span class="ansi-blue-fg">.</span>fiona<span class="ansi-blue-fg">.</span>drvsupport<span class="ansi-blue-fg">.</span>supported_drivers<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;KML&#39;</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">&#39;rw&#39;</span>
-<span class="ansi-green-intense-fg ansi-bold">      5</span>
-
-<span class="ansi-green-fg">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/geopandas/__init__.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">      3</span> <span class="ansi-green-fg">from</span> geopandas<span class="ansi-blue-fg">.</span>array <span class="ansi-green-fg">import</span> _points_from_xy <span class="ansi-green-fg">as</span> points_from_xy  <span class="ansi-red-fg"># noqa</span>
-<span class="ansi-green-intense-fg ansi-bold">      4</span>
-<span class="ansi-green-fg">----&gt; 5</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">from</span> geopandas<span class="ansi-blue-fg">.</span>io<span class="ansi-blue-fg">.</span>file <span class="ansi-green-fg">import</span> read_file  <span class="ansi-red-fg"># noqa</span>
-<span class="ansi-green-intense-fg ansi-bold">      6</span> <span class="ansi-green-fg">from</span> geopandas<span class="ansi-blue-fg">.</span>io<span class="ansi-blue-fg">.</span>sql <span class="ansi-green-fg">import</span> read_postgis  <span class="ansi-red-fg"># noqa</span>
-<span class="ansi-green-intense-fg ansi-bold">      7</span> <span class="ansi-green-fg">from</span> geopandas<span class="ansi-blue-fg">.</span>tools <span class="ansi-green-fg">import</span> sjoin  <span class="ansi-red-fg"># noqa</span>
-
-<span class="ansi-green-fg">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/geopandas/io/file.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">      4</span> <span class="ansi-green-fg">import</span> six
-<span class="ansi-green-intense-fg ansi-bold">      5</span>
-<span class="ansi-green-fg">----&gt; 6</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">import</span> fiona
-<span class="ansi-green-intense-fg ansi-bold">      7</span>
-<span class="ansi-green-intense-fg ansi-bold">      8</span> <span class="ansi-green-fg">from</span> geopandas <span class="ansi-green-fg">import</span> GeoDataFrame<span class="ansi-blue-fg">,</span> GeoSeries
-
-<span class="ansi-green-fg">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/fiona/__init__.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">     67</span> <span class="ansi-green-fg">from</span> six <span class="ansi-green-fg">import</span> string_types
-<span class="ansi-green-intense-fg ansi-bold">     68</span>
-<span class="ansi-green-fg">---&gt; 69</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>collection <span class="ansi-green-fg">import</span> Collection<span class="ansi-blue-fg">,</span> BytesCollection<span class="ansi-blue-fg">,</span> vsi_path
-<span class="ansi-green-intense-fg ansi-bold">     70</span> <span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>_drivers <span class="ansi-green-fg">import</span> driver_count<span class="ansi-blue-fg">,</span> GDALEnv
-<span class="ansi-green-intense-fg ansi-bold">     71</span> <span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>drvsupport <span class="ansi-green-fg">import</span> supported_drivers
-
-<span class="ansi-green-fg">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/fiona/collection.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">      7</span>
-<span class="ansi-green-intense-fg ansi-bold">      8</span> <span class="ansi-green-fg">from</span> fiona <span class="ansi-green-fg">import</span> compat
-<span class="ansi-green-fg">----&gt; 9</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>ogrext <span class="ansi-green-fg">import</span> Iterator<span class="ansi-blue-fg">,</span> ItemsIterator<span class="ansi-blue-fg">,</span> KeysIterator
-<span class="ansi-green-intense-fg ansi-bold">     10</span> <span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>ogrext <span class="ansi-green-fg">import</span> Session<span class="ansi-blue-fg">,</span> WritingSession
-<span class="ansi-green-intense-fg ansi-bold">     11</span> from fiona.ogrext import (
-
-<span class="ansi-red-fg">ImportError</span>: libpoppler.so.76: cannot open shared object file: No such file or directory
-</pre></div></div>
-</div>
 </div>
 <div class="section" id="Read-/-write-Geopackage">
 <h2>Read / write Geopackage<a class="headerlink" href="#Read-/-write-Geopackage" title="Permalink to this headline">¶</a></h2>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -724,56 +567,11 @@ This page was generated from <a class="reference external" href="https://github.
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">ImportError</span>                               Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-5-7071cb21fcfd&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">import</span> geopandas <span class="ansi-green-fg">as</span> gpd
-<span class="ansi-green-intense-fg ansi-bold">      2</span>
-<span class="ansi-green-intense-fg ansi-bold">      3</span> <span class="ansi-red-fg"># Read file from Geopackage</span>
-<span class="ansi-green-intense-fg ansi-bold">      4</span> fp <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">&#34;L2_data/Finland.gpkg&#34;</span>
-<span class="ansi-green-intense-fg ansi-bold">      5</span> data <span class="ansi-blue-fg">=</span> gpd<span class="ansi-blue-fg">.</span>read_file<span class="ansi-blue-fg">(</span>fp<span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/geopandas/__init__.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">      3</span> <span class="ansi-green-fg">from</span> geopandas<span class="ansi-blue-fg">.</span>array <span class="ansi-green-fg">import</span> _points_from_xy <span class="ansi-green-fg">as</span> points_from_xy  <span class="ansi-red-fg"># noqa</span>
-<span class="ansi-green-intense-fg ansi-bold">      4</span>
-<span class="ansi-green-fg">----&gt; 5</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">from</span> geopandas<span class="ansi-blue-fg">.</span>io<span class="ansi-blue-fg">.</span>file <span class="ansi-green-fg">import</span> read_file  <span class="ansi-red-fg"># noqa</span>
-<span class="ansi-green-intense-fg ansi-bold">      6</span> <span class="ansi-green-fg">from</span> geopandas<span class="ansi-blue-fg">.</span>io<span class="ansi-blue-fg">.</span>sql <span class="ansi-green-fg">import</span> read_postgis  <span class="ansi-red-fg"># noqa</span>
-<span class="ansi-green-intense-fg ansi-bold">      7</span> <span class="ansi-green-fg">from</span> geopandas<span class="ansi-blue-fg">.</span>tools <span class="ansi-green-fg">import</span> sjoin  <span class="ansi-red-fg"># noqa</span>
-
-<span class="ansi-green-fg">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/geopandas/io/file.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">      4</span> <span class="ansi-green-fg">import</span> six
-<span class="ansi-green-intense-fg ansi-bold">      5</span>
-<span class="ansi-green-fg">----&gt; 6</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">import</span> fiona
-<span class="ansi-green-intense-fg ansi-bold">      7</span>
-<span class="ansi-green-intense-fg ansi-bold">      8</span> <span class="ansi-green-fg">from</span> geopandas <span class="ansi-green-fg">import</span> GeoDataFrame<span class="ansi-blue-fg">,</span> GeoSeries
-
-<span class="ansi-green-fg">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/fiona/__init__.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">     67</span> <span class="ansi-green-fg">from</span> six <span class="ansi-green-fg">import</span> string_types
-<span class="ansi-green-intense-fg ansi-bold">     68</span>
-<span class="ansi-green-fg">---&gt; 69</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>collection <span class="ansi-green-fg">import</span> Collection<span class="ansi-blue-fg">,</span> BytesCollection<span class="ansi-blue-fg">,</span> vsi_path
-<span class="ansi-green-intense-fg ansi-bold">     70</span> <span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>_drivers <span class="ansi-green-fg">import</span> driver_count<span class="ansi-blue-fg">,</span> GDALEnv
-<span class="ansi-green-intense-fg ansi-bold">     71</span> <span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>drvsupport <span class="ansi-green-fg">import</span> supported_drivers
-
-<span class="ansi-green-fg">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/fiona/collection.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">      7</span>
-<span class="ansi-green-intense-fg ansi-bold">      8</span> <span class="ansi-green-fg">from</span> fiona <span class="ansi-green-fg">import</span> compat
-<span class="ansi-green-fg">----&gt; 9</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>ogrext <span class="ansi-green-fg">import</span> Iterator<span class="ansi-blue-fg">,</span> ItemsIterator<span class="ansi-blue-fg">,</span> KeysIterator
-<span class="ansi-green-intense-fg ansi-bold">     10</span> <span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>ogrext <span class="ansi-green-fg">import</span> Session<span class="ansi-blue-fg">,</span> WritingSession
-<span class="ansi-green-intense-fg ansi-bold">     11</span> from fiona.ogrext import (
-
-<span class="ansi-red-fg">ImportError</span>: libpoppler.so.76: cannot open shared object file: No such file or directory
-</pre></div></div>
-</div>
 </div>
 <div class="section" id="Read-/-write-GeoDatabase">
 <h2>Read / write GeoDatabase<a class="headerlink" href="#Read-/-write-GeoDatabase" title="Permalink to this headline">¶</a></h2>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -789,56 +587,11 @@ This page was generated from <a class="reference external" href="https://github.
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">ImportError</span>                               Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-6-c3809dece30a&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">import</span> geopandas <span class="ansi-green-fg">as</span> gpd
-<span class="ansi-green-intense-fg ansi-bold">      2</span>
-<span class="ansi-green-intense-fg ansi-bold">      3</span> <span class="ansi-red-fg"># Read file from File Geodatabase</span>
-<span class="ansi-green-intense-fg ansi-bold">      4</span> fp <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">&#34;L2_data/Finland.gdb&#34;</span>
-<span class="ansi-green-intense-fg ansi-bold">      5</span> data <span class="ansi-blue-fg">=</span> gpd<span class="ansi-blue-fg">.</span>read_file<span class="ansi-blue-fg">(</span>fp<span class="ansi-blue-fg">,</span> driver<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#34;FileGDB&#34;</span><span class="ansi-blue-fg">,</span> layer<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#39;country&#39;</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/geopandas/__init__.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">      3</span> <span class="ansi-green-fg">from</span> geopandas<span class="ansi-blue-fg">.</span>array <span class="ansi-green-fg">import</span> _points_from_xy <span class="ansi-green-fg">as</span> points_from_xy  <span class="ansi-red-fg"># noqa</span>
-<span class="ansi-green-intense-fg ansi-bold">      4</span>
-<span class="ansi-green-fg">----&gt; 5</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">from</span> geopandas<span class="ansi-blue-fg">.</span>io<span class="ansi-blue-fg">.</span>file <span class="ansi-green-fg">import</span> read_file  <span class="ansi-red-fg"># noqa</span>
-<span class="ansi-green-intense-fg ansi-bold">      6</span> <span class="ansi-green-fg">from</span> geopandas<span class="ansi-blue-fg">.</span>io<span class="ansi-blue-fg">.</span>sql <span class="ansi-green-fg">import</span> read_postgis  <span class="ansi-red-fg"># noqa</span>
-<span class="ansi-green-intense-fg ansi-bold">      7</span> <span class="ansi-green-fg">from</span> geopandas<span class="ansi-blue-fg">.</span>tools <span class="ansi-green-fg">import</span> sjoin  <span class="ansi-red-fg"># noqa</span>
-
-<span class="ansi-green-fg">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/geopandas/io/file.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">      4</span> <span class="ansi-green-fg">import</span> six
-<span class="ansi-green-intense-fg ansi-bold">      5</span>
-<span class="ansi-green-fg">----&gt; 6</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">import</span> fiona
-<span class="ansi-green-intense-fg ansi-bold">      7</span>
-<span class="ansi-green-intense-fg ansi-bold">      8</span> <span class="ansi-green-fg">from</span> geopandas <span class="ansi-green-fg">import</span> GeoDataFrame<span class="ansi-blue-fg">,</span> GeoSeries
-
-<span class="ansi-green-fg">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/fiona/__init__.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">     67</span> <span class="ansi-green-fg">from</span> six <span class="ansi-green-fg">import</span> string_types
-<span class="ansi-green-intense-fg ansi-bold">     68</span>
-<span class="ansi-green-fg">---&gt; 69</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>collection <span class="ansi-green-fg">import</span> Collection<span class="ansi-blue-fg">,</span> BytesCollection<span class="ansi-blue-fg">,</span> vsi_path
-<span class="ansi-green-intense-fg ansi-bold">     70</span> <span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>_drivers <span class="ansi-green-fg">import</span> driver_count<span class="ansi-blue-fg">,</span> GDALEnv
-<span class="ansi-green-intense-fg ansi-bold">     71</span> <span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>drvsupport <span class="ansi-green-fg">import</span> supported_drivers
-
-<span class="ansi-green-fg">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/fiona/collection.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">      7</span>
-<span class="ansi-green-intense-fg ansi-bold">      8</span> <span class="ansi-green-fg">from</span> fiona <span class="ansi-green-fg">import</span> compat
-<span class="ansi-green-fg">----&gt; 9</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>ogrext <span class="ansi-green-fg">import</span> Iterator<span class="ansi-blue-fg">,</span> ItemsIterator<span class="ansi-blue-fg">,</span> KeysIterator
-<span class="ansi-green-intense-fg ansi-bold">     10</span> <span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>ogrext <span class="ansi-green-fg">import</span> Session<span class="ansi-blue-fg">,</span> WritingSession
-<span class="ansi-green-intense-fg ansi-bold">     11</span> from fiona.ogrext import (
-
-<span class="ansi-red-fg">ImportError</span>: libpoppler.so.76: cannot open shared object file: No such file or directory
-</pre></div></div>
-</div>
 </div>
 <div class="section" id="Read-/-write-MapInfo-Tab">
 <h2>Read / write MapInfo Tab<a class="headerlink" href="#Read-/-write-MapInfo-Tab" title="Permalink to this headline">¶</a></h2>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -852,28 +605,11 @@ This page was generated from <a class="reference external" href="https://github.
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-7-2f89b7919bbd&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">      1</span> <span class="ansi-red-fg"># Read file from MapInfo Tab</span>
-<span class="ansi-green-intense-fg ansi-bold">      2</span> fp <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">&#34;L2_data/Finland.tab&#34;</span>
-<span class="ansi-green-fg">----&gt; 3</span><span class="ansi-red-fg"> </span>data <span class="ansi-blue-fg">=</span> gpd<span class="ansi-blue-fg">.</span>read_file<span class="ansi-blue-fg">(</span>fp<span class="ansi-blue-fg">,</span> driver<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#34;MapInfo File&#34;</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">      4</span>
-<span class="ansi-green-intense-fg ansi-bold">      5</span> <span class="ansi-red-fg"># Write to same FileGDB (just add a new layer)</span>
-
-<span class="ansi-red-fg">NameError</span>: name &#39;gpd&#39; is not defined
-</pre></div></div>
-</div>
 </div>
 <div class="section" id="Read-PostGIS-database-using-psycopg2">
 <h2>Read PostGIS database using psycopg2<a class="headerlink" href="#Read-PostGIS-database-using-psycopg2" title="Permalink to this headline">¶</a></h2>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -892,56 +628,11 @@ This page was generated from <a class="reference external" href="https://github.
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">ImportError</span>                               Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-8-19a94e88089c&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">import</span> geopandas <span class="ansi-green-fg">as</span> gpd
-<span class="ansi-green-intense-fg ansi-bold">      2</span> <span class="ansi-green-fg">import</span> psycopg2
-<span class="ansi-green-intense-fg ansi-bold">      3</span>
-<span class="ansi-green-intense-fg ansi-bold">      4</span> <span class="ansi-red-fg"># Create connection to database with psycopg2 module (update params according your db)</span>
-<span class="ansi-green-intense-fg ansi-bold">      5</span> conn, cursor = psycopg2.connect(dbname=&#39;my_postgis_database&#39;, user=&#39;my_usrname&#39;, password=&#39;my_pwd&#39;,
-
-<span class="ansi-green-fg">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/geopandas/__init__.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">      3</span> <span class="ansi-green-fg">from</span> geopandas<span class="ansi-blue-fg">.</span>array <span class="ansi-green-fg">import</span> _points_from_xy <span class="ansi-green-fg">as</span> points_from_xy  <span class="ansi-red-fg"># noqa</span>
-<span class="ansi-green-intense-fg ansi-bold">      4</span>
-<span class="ansi-green-fg">----&gt; 5</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">from</span> geopandas<span class="ansi-blue-fg">.</span>io<span class="ansi-blue-fg">.</span>file <span class="ansi-green-fg">import</span> read_file  <span class="ansi-red-fg"># noqa</span>
-<span class="ansi-green-intense-fg ansi-bold">      6</span> <span class="ansi-green-fg">from</span> geopandas<span class="ansi-blue-fg">.</span>io<span class="ansi-blue-fg">.</span>sql <span class="ansi-green-fg">import</span> read_postgis  <span class="ansi-red-fg"># noqa</span>
-<span class="ansi-green-intense-fg ansi-bold">      7</span> <span class="ansi-green-fg">from</span> geopandas<span class="ansi-blue-fg">.</span>tools <span class="ansi-green-fg">import</span> sjoin  <span class="ansi-red-fg"># noqa</span>
-
-<span class="ansi-green-fg">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/geopandas/io/file.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">      4</span> <span class="ansi-green-fg">import</span> six
-<span class="ansi-green-intense-fg ansi-bold">      5</span>
-<span class="ansi-green-fg">----&gt; 6</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">import</span> fiona
-<span class="ansi-green-intense-fg ansi-bold">      7</span>
-<span class="ansi-green-intense-fg ansi-bold">      8</span> <span class="ansi-green-fg">from</span> geopandas <span class="ansi-green-fg">import</span> GeoDataFrame<span class="ansi-blue-fg">,</span> GeoSeries
-
-<span class="ansi-green-fg">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/fiona/__init__.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">     67</span> <span class="ansi-green-fg">from</span> six <span class="ansi-green-fg">import</span> string_types
-<span class="ansi-green-intense-fg ansi-bold">     68</span>
-<span class="ansi-green-fg">---&gt; 69</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>collection <span class="ansi-green-fg">import</span> Collection<span class="ansi-blue-fg">,</span> BytesCollection<span class="ansi-blue-fg">,</span> vsi_path
-<span class="ansi-green-intense-fg ansi-bold">     70</span> <span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>_drivers <span class="ansi-green-fg">import</span> driver_count<span class="ansi-blue-fg">,</span> GDALEnv
-<span class="ansi-green-intense-fg ansi-bold">     71</span> <span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>drvsupport <span class="ansi-green-fg">import</span> supported_drivers
-
-<span class="ansi-green-fg">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/fiona/collection.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">      7</span>
-<span class="ansi-green-intense-fg ansi-bold">      8</span> <span class="ansi-green-fg">from</span> fiona <span class="ansi-green-fg">import</span> compat
-<span class="ansi-green-fg">----&gt; 9</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>ogrext <span class="ansi-green-fg">import</span> Iterator<span class="ansi-blue-fg">,</span> ItemsIterator<span class="ansi-blue-fg">,</span> KeysIterator
-<span class="ansi-green-intense-fg ansi-bold">     10</span> <span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>ogrext <span class="ansi-green-fg">import</span> Session<span class="ansi-blue-fg">,</span> WritingSession
-<span class="ansi-green-intense-fg ansi-bold">     11</span> from fiona.ogrext import (
-
-<span class="ansi-red-fg">ImportError</span>: libpoppler.so.76: cannot open shared object file: No such file or directory
-</pre></div></div>
-</div>
 </div>
 <div class="section" id="Read-/-write-PostGIS-database-using-SqlAlchemy-+-GeoAlchemy">
 <h2>Read / write PostGIS database using SqlAlchemy + GeoAlchemy<a class="headerlink" href="#Read-/-write-PostGIS-database-using-SqlAlchemy-+-GeoAlchemy" title="Permalink to this headline">¶</a></h2>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1011,28 +702,11 @@ This page was generated from <a class="reference external" href="https://github.
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">ImportError</span>                               Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-9-dff56ab2e0f9&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">from</span> sqlalchemy<span class="ansi-blue-fg">.</span>engine<span class="ansi-blue-fg">.</span>url <span class="ansi-green-fg">import</span> URL
-<span class="ansi-green-intense-fg ansi-bold">      2</span> <span class="ansi-green-fg">from</span> sqlalchemy <span class="ansi-green-fg">import</span> create_engine
-<span class="ansi-green-intense-fg ansi-bold">      3</span> <span class="ansi-green-fg">from</span> sqlalchemy <span class="ansi-green-fg">import</span> MetaData
-<span class="ansi-green-intense-fg ansi-bold">      4</span> <span class="ansi-green-fg">from</span> sqlalchemy<span class="ansi-blue-fg">.</span>orm <span class="ansi-green-fg">import</span> sessionmaker
-<span class="ansi-green-intense-fg ansi-bold">      5</span> <span class="ansi-green-fg">from</span> geoalchemy2 <span class="ansi-green-fg">import</span> WKTElement<span class="ansi-blue-fg">,</span> Geometry
-
-<span class="ansi-red-fg">ImportError</span>: No module named &#39;sqlalchemy&#39;
-</pre></div></div>
-</div>
 </div>
 <div class="section" id="Read-/-write-Spatialite-database">
 <h2>Read / write Spatialite database<a class="headerlink" href="#Read-/-write-Spatialite-database" title="Permalink to this headline">¶</a></h2>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1083,56 +757,11 @@ This page was generated from <a class="reference external" href="https://github.
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">ImportError</span>                               Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-10-51f290c4c623&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">import</span> geopandas <span class="ansi-green-fg">as</span> gpd
-<span class="ansi-green-intense-fg ansi-bold">      2</span> <span class="ansi-green-fg">import</span> sqlite3
-<span class="ansi-green-intense-fg ansi-bold">      3</span> <span class="ansi-green-fg">import</span> shapely<span class="ansi-blue-fg">.</span>wkb <span class="ansi-green-fg">as</span> swkb
-<span class="ansi-green-intense-fg ansi-bold">      4</span> <span class="ansi-green-fg">from</span> sqlalchemy <span class="ansi-green-fg">import</span> create_engine<span class="ansi-blue-fg">,</span> event
-<span class="ansi-green-intense-fg ansi-bold">      5</span>
-
-<span class="ansi-green-fg">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/geopandas/__init__.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">      3</span> <span class="ansi-green-fg">from</span> geopandas<span class="ansi-blue-fg">.</span>array <span class="ansi-green-fg">import</span> _points_from_xy <span class="ansi-green-fg">as</span> points_from_xy  <span class="ansi-red-fg"># noqa</span>
-<span class="ansi-green-intense-fg ansi-bold">      4</span>
-<span class="ansi-green-fg">----&gt; 5</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">from</span> geopandas<span class="ansi-blue-fg">.</span>io<span class="ansi-blue-fg">.</span>file <span class="ansi-green-fg">import</span> read_file  <span class="ansi-red-fg"># noqa</span>
-<span class="ansi-green-intense-fg ansi-bold">      6</span> <span class="ansi-green-fg">from</span> geopandas<span class="ansi-blue-fg">.</span>io<span class="ansi-blue-fg">.</span>sql <span class="ansi-green-fg">import</span> read_postgis  <span class="ansi-red-fg"># noqa</span>
-<span class="ansi-green-intense-fg ansi-bold">      7</span> <span class="ansi-green-fg">from</span> geopandas<span class="ansi-blue-fg">.</span>tools <span class="ansi-green-fg">import</span> sjoin  <span class="ansi-red-fg"># noqa</span>
-
-<span class="ansi-green-fg">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/geopandas/io/file.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">      4</span> <span class="ansi-green-fg">import</span> six
-<span class="ansi-green-intense-fg ansi-bold">      5</span>
-<span class="ansi-green-fg">----&gt; 6</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">import</span> fiona
-<span class="ansi-green-intense-fg ansi-bold">      7</span>
-<span class="ansi-green-intense-fg ansi-bold">      8</span> <span class="ansi-green-fg">from</span> geopandas <span class="ansi-green-fg">import</span> GeoDataFrame<span class="ansi-blue-fg">,</span> GeoSeries
-
-<span class="ansi-green-fg">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/fiona/__init__.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">     67</span> <span class="ansi-green-fg">from</span> six <span class="ansi-green-fg">import</span> string_types
-<span class="ansi-green-intense-fg ansi-bold">     68</span>
-<span class="ansi-green-fg">---&gt; 69</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>collection <span class="ansi-green-fg">import</span> Collection<span class="ansi-blue-fg">,</span> BytesCollection<span class="ansi-blue-fg">,</span> vsi_path
-<span class="ansi-green-intense-fg ansi-bold">     70</span> <span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>_drivers <span class="ansi-green-fg">import</span> driver_count<span class="ansi-blue-fg">,</span> GDALEnv
-<span class="ansi-green-intense-fg ansi-bold">     71</span> <span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>drvsupport <span class="ansi-green-fg">import</span> supported_drivers
-
-<span class="ansi-green-fg">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/fiona/collection.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">      7</span>
-<span class="ansi-green-intense-fg ansi-bold">      8</span> <span class="ansi-green-fg">from</span> fiona <span class="ansi-green-fg">import</span> compat
-<span class="ansi-green-fg">----&gt; 9</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>ogrext <span class="ansi-green-fg">import</span> Iterator<span class="ansi-blue-fg">,</span> ItemsIterator<span class="ansi-blue-fg">,</span> KeysIterator
-<span class="ansi-green-intense-fg ansi-bold">     10</span> <span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>ogrext <span class="ansi-green-fg">import</span> Session<span class="ansi-blue-fg">,</span> WritingSession
-<span class="ansi-green-intense-fg ansi-bold">     11</span> from fiona.ogrext import (
-
-<span class="ansi-red-fg">ImportError</span>: libpoppler.so.76: cannot open shared object file: No such file or directory
-</pre></div></div>
-</div>
 </div>
 <div class="section" id="Read-Web-Feature-Service-(WFS)">
 <h2>Read Web Feature Service (WFS)<a class="headerlink" href="#Read-Web-Feature-Service-(WFS)" title="Permalink to this headline">¶</a></h2>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1155,51 +784,6 @@ This page was generated from <a class="reference external" href="https://github.
 <span class="n">data</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="o">.</span><span class="n">from_features</span><span class="p">(</span><span class="n">geojson</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">))</span>
 </pre></div>
 </div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">ImportError</span>                               Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-11-ba041d54fe3b&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">import</span> geopandas <span class="ansi-green-fg">as</span> gpd
-<span class="ansi-green-intense-fg ansi-bold">      2</span> <span class="ansi-green-fg">import</span> requests
-<span class="ansi-green-intense-fg ansi-bold">      3</span> <span class="ansi-green-fg">import</span> geojson
-<span class="ansi-green-intense-fg ansi-bold">      4</span>
-<span class="ansi-green-intense-fg ansi-bold">      5</span> <span class="ansi-red-fg"># Specify the url for the backend. Here we are using data from Statistics Finland: https://www.stat.fi/org/avoindata/paikkatietoaineistot_en.html</span>
-
-<span class="ansi-green-fg">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/geopandas/__init__.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">      3</span> <span class="ansi-green-fg">from</span> geopandas<span class="ansi-blue-fg">.</span>array <span class="ansi-green-fg">import</span> _points_from_xy <span class="ansi-green-fg">as</span> points_from_xy  <span class="ansi-red-fg"># noqa</span>
-<span class="ansi-green-intense-fg ansi-bold">      4</span>
-<span class="ansi-green-fg">----&gt; 5</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">from</span> geopandas<span class="ansi-blue-fg">.</span>io<span class="ansi-blue-fg">.</span>file <span class="ansi-green-fg">import</span> read_file  <span class="ansi-red-fg"># noqa</span>
-<span class="ansi-green-intense-fg ansi-bold">      6</span> <span class="ansi-green-fg">from</span> geopandas<span class="ansi-blue-fg">.</span>io<span class="ansi-blue-fg">.</span>sql <span class="ansi-green-fg">import</span> read_postgis  <span class="ansi-red-fg"># noqa</span>
-<span class="ansi-green-intense-fg ansi-bold">      7</span> <span class="ansi-green-fg">from</span> geopandas<span class="ansi-blue-fg">.</span>tools <span class="ansi-green-fg">import</span> sjoin  <span class="ansi-red-fg"># noqa</span>
-
-<span class="ansi-green-fg">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/geopandas/io/file.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">      4</span> <span class="ansi-green-fg">import</span> six
-<span class="ansi-green-intense-fg ansi-bold">      5</span>
-<span class="ansi-green-fg">----&gt; 6</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">import</span> fiona
-<span class="ansi-green-intense-fg ansi-bold">      7</span>
-<span class="ansi-green-intense-fg ansi-bold">      8</span> <span class="ansi-green-fg">from</span> geopandas <span class="ansi-green-fg">import</span> GeoDataFrame<span class="ansi-blue-fg">,</span> GeoSeries
-
-<span class="ansi-green-fg">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/fiona/__init__.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">     67</span> <span class="ansi-green-fg">from</span> six <span class="ansi-green-fg">import</span> string_types
-<span class="ansi-green-intense-fg ansi-bold">     68</span>
-<span class="ansi-green-fg">---&gt; 69</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>collection <span class="ansi-green-fg">import</span> Collection<span class="ansi-blue-fg">,</span> BytesCollection<span class="ansi-blue-fg">,</span> vsi_path
-<span class="ansi-green-intense-fg ansi-bold">     70</span> <span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>_drivers <span class="ansi-green-fg">import</span> driver_count<span class="ansi-blue-fg">,</span> GDALEnv
-<span class="ansi-green-intense-fg ansi-bold">     71</span> <span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>drvsupport <span class="ansi-green-fg">import</span> supported_drivers
-
-<span class="ansi-green-fg">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/fiona/collection.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">      7</span>
-<span class="ansi-green-intense-fg ansi-bold">      8</span> <span class="ansi-green-fg">from</span> fiona <span class="ansi-green-fg">import</span> compat
-<span class="ansi-green-fg">----&gt; 9</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>ogrext <span class="ansi-green-fg">import</span> Iterator<span class="ansi-blue-fg">,</span> ItemsIterator<span class="ansi-blue-fg">,</span> KeysIterator
-<span class="ansi-green-intense-fg ansi-bold">     10</span> <span class="ansi-green-fg">from</span> fiona<span class="ansi-blue-fg">.</span>ogrext <span class="ansi-green-fg">import</span> Session<span class="ansi-blue-fg">,</span> WritingSession
-<span class="ansi-green-intense-fg ansi-bold">     11</span> from fiona.ogrext import (
-
-<span class="ansi-red-fg">ImportError</span>: libpoppler.so.76: cannot open shared object file: No such file or directory
-</pre></div></div>
 </div>
 </div>
 </div>
@@ -1226,7 +810,7 @@ This page was generated from <a class="reference external" href="https://github.
     <p>
         &copy; Copyright 2019, Henrikki Tenkanen and Vuokko Heikinheimo, Digital Geography Lab, University of Helsinki
       <span class="lastupdated">
-        Last updated on Nov 01, 2019.
+        Last updated on Nov 02, 2019.
       </span>
 
     </p>

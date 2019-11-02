@@ -457,8 +457,9 @@ This page was generated from <a class="reference external" href="https://github.
 <div class="section" id="Introduction-to-Geopandas">
 <h1>Introduction to Geopandas<a class="headerlink" href="#Introduction-to-Geopandas" title="Permalink to this headline">¶</a></h1>
 <p>Geopandas (<a class="reference external" href="http://geopandas.org/">http://geopandas.org/</a>) makes it possible to work with geospatial data in Python in a relatively easy way. Geopandas combines the capabilities of the data analysis library <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/">pandas</a> with other packages like <a class="reference external" href="https://shapely.readthedocs.io/en/stable/manual.html">shapely</a>, <a class="reference external" href="https://fiona.readthedocs.io/en/latest/manual.html">fiona</a> and <a class="reference external" href="https://pyproj4.github.io/pyproj/dev/api/crs.html">pyproj</a> for managing spatial data.</p>
-<p>The main data structures in geopandas; <code class="docutils literal notranslate"><span class="pre">GeoSeries</span></code> and <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> extend the capabilities of <code class="docutils literal notranslate"><span class="pre">Series</span></code> and <code class="docutils literal notranslate"><span class="pre">DataFrames</span></code> from pandas. This means, that we can apply the our pandas skills also with geopandas data structures. If you need to refresh your memory about pandas, check out week 5 and 6 lesson materials from the <a class="reference external" href="geo-python.github.io">Geo-Python website</a>.</p>
-<p>The main difference between geodataframes and pandas dataframes is that, <a class="reference external" href="http://geopandas.org/data_structures.html#geodataframe">by definition</a>, a geodataframe always contains one <a class="reference external" href="http://geopandas.org/data_structures.html#geoseries">geoseries</a>, which in turn contains the geometries (points, lines, polygons, multipolygons etc.) for each row of data. Apart from the geometries, you can often treat a geodataframe in the same way as a pandas dataframe.</p>
+<p>The main data structures in geopandas; <code class="docutils literal notranslate"><span class="pre">GeoSeries</span></code> and <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> extend the capabilities of <code class="docutils literal notranslate"><span class="pre">Series</span></code> and <code class="docutils literal notranslate"><span class="pre">DataFrames</span></code> from pandas. This means, that we can apply our pandas skills also with geopandas data structures. If you need to refresh your memory about pandas, check out week 5 and 6 lesson materials from the <a class="reference external" href="geo-python.github.io">Geo-Python website</a>.</p>
+<p>The main difference between geodataframes and pandas dataframes is that, <a class="reference external" href="http://geopandas.org/data_structures.html#geodataframe">by definition</a>, a geodataframe always contains one column for geometries (by default, the name of this column is <code class="docutils literal notranslate"><span class="pre">'geometry'</span></code>). The geometry column is a <a class="reference external" href="http://geopandas.org/data_structures.html#geoseries">geoseries</a> which contains the geometries (points, lines, polygons, multipolygons etc.) for each row of data. Apart from the geometries, you can often treat
+a geodataframe in the same way as a pandas dataframe.</p>
 <p>As we learned in the Geo-Python course, it is conventional to import pandas as <code class="docutils literal notranslate"><span class="pre">pd</span></code>. Similarly,we will import geopandas as <code class="docutils literal notranslate"><span class="pre">gpd</span></code>:</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -469,12 +470,12 @@ This page was generated from <a class="reference external" href="https://github.
 </pre></div>
 </div>
 </div>
-<p>In this lesson, we will cover basics steps needed for interacting with spatial data in Python:</p>
+<p>In this lesson, we will cover basics steps needed for interacting with spatial data in Python using geopandas:</p>
 <ul class="simple">
 <li>Managing filepaths</li>
-<li>Reading a shapefile using geopandas</li>
-<li>Accessing geometries in geopandas</li>
-<li>Writing a shapefile using geopandas</li>
+<li>Reading a shapefile</li>
+<li>Geometry calculations</li>
+<li>Writing a shapefile</li>
 <li>Grouping and splitting spatial data into multiple layers</li>
 </ul>
 <p>Before diving deeper into geopandas functionalities, let’s first acquire some input data to work with.</p>
@@ -482,14 +483,14 @@ This page was generated from <a class="reference external" href="https://github.
 <h2>Input data: Finnish topographic database<a class="headerlink" href="#Input-data:-Finnish-topographic-database" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><a class="reference external" href="https://www.maanmittauslaitos.fi/en/maps-and-spatial-data/expert-users/product-descriptions/topographic-database">Topographic Database from the National Land Survey of Finland (NLS)</a>.</li>
-<li>The data set is licensed under the NLS’ <a class="reference external" href="https://www.maanmittauslaitos.fi/en/opendata-licence-cc40">open data licence</a> (CC BY 4.0)</li>
+<li>The data set is licensed under the NLS’ <a class="reference external" href="https://www.maanmittauslaitos.fi/en/opendata-licence-cc40">open data licence</a> (CC BY 4.0).</li>
 <li>Structure of the data is described in a separate Excel file (<a class="reference external" href="http://www.maanmittauslaitos.fi/sites/maanmittauslaitos.fi/files/attachments/2018/10/maastotietokanta_kohdemalli_eng.xlsx">download link</a>).</li>
-<li>Further information about file naming at <a class="reference external" href="https://etsin.fairdata.fi/dataset/5023ecc7-914a-4494-9e32-d0a39d3b56ae">fairdata.fi</a></li>
+<li>Further information about file naming at <a class="reference external" href="https://etsin.fairdata.fi/dataset/5023ecc7-914a-4494-9e32-d0a39d3b56ae">fairdata.fi</a>.</li>
 <li>We acquired the data via the <a class="reference external" href="https://avaa.tdata.fi/web/paituli/latauspalvelu">CSC open data portal</a>:</li>
 </ul>
 <p><img alt="Paituli data download" src="../../_images/Paituli_maastotietokanta_download.png" /></p>
-<p>In this lesson, we will focus on <strong>terrain objects</strong> (Feature group: “Terrain/1”) downloaded as Shapefiles. According to the <a class="reference external" href="https://etsin.fairdata.fi/dataset/5023ecc7-914a-4494-9e32-d0a39d3b56ae">naming convention of the Topographic Database</a> for Shapefiles, all files that start with a letter <code class="docutils literal notranslate"><span class="pre">m</span></code> and end with <code class="docutils literal notranslate"><span class="pre">p</span></code> contain the objects we are interested in (Terrain/1 polygons). Furthermore, the Terrain/1 feature group contains several feature classes. Our task in this lesson is to save all
-these feature classes into separate files.</p>
+<p>In this lesson, we will focus on <strong>terrain objects</strong> (Feature group: “Terrain/1”) downloaded as Shapefiles. According to the <a class="reference external" href="https://etsin.fairdata.fi/dataset/5023ecc7-914a-4494-9e32-d0a39d3b56ae">naming convention of the Topographic Database</a> for Shapefiles, all files that start with a letter <code class="docutils literal notranslate"><span class="pre">m</span></code> and end with <code class="docutils literal notranslate"><span class="pre">p</span></code> contain the objects we are interested in (Terrain/1 polygons). Furthermore, the Terrain/1 feature group contains several feature classes. <strong>Our final task in this lesson is to
+save all these feature classes into separate files</strong>.</p>
 <p><em>Terrain/1 features in the Topographic Database:</em></p>
 <table border="1" class="docutils">
 <colgroup>
@@ -591,7 +592,7 @@ these feature classes into separate files.</p>
 <h2>Downloading data<a class="headerlink" href="#Downloading-data" title="Permalink to this headline">¶</a></h2>
 <p>On Binder and CSC Notebook environment, you can use <code class="docutils literal notranslate"><span class="pre">wget</span></code> program to download the data from the command line. Let’s download the data (<a class="reference external" href="https://github.com/AutoGIS/data/raw/master/L2_data.zip">download link</a>) into the same folder with the lesson 2 notebooks (<code class="docutils literal notranslate"><span class="pre">.../notebooks/L2</span></code>):</p>
 <ul class="simple">
-<li>First, open up a new terminal window</li>
+<li>Open up a new terminal window</li>
 <li>Navigate to the correct folder in the terminal:</li>
 </ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Navigate to lesson 2 notebooks directory:
@@ -599,7 +600,7 @@ $ cd /home/jovyan/work/autogis/notebooks/notebooks/L2
 </pre></div>
 </div>
 <ul class="simple">
-<li>use <code class="docutils literal notranslate"><span class="pre">wget</span></code> utility and the download link to dowload the data:</li>
+<li>use <code class="docutils literal notranslate"><span class="pre">wget</span></code> utility to dowload the data from the dowload link:</li>
 </ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ wget https://github.com/AutoGIS/data/raw/master/L2_data.zip
 </pre></div>
@@ -608,19 +609,19 @@ $ cd /home/jovyan/work/autogis/notebooks/notebooks/L2
 <p class="admonition-title fa fa-exclamation-circle"><strong>Copy-paste</strong></p>
 <p>You can copy/paste things to JupyterLab Terminal by pressing <code class="docutils literal notranslate"><span class="pre">SHIFT</span></code> + <code class="docutils literal notranslate"><span class="pre">RIGHT-CLICK</span></code> on your mouse and choosing <code class="docutils literal notranslate"><span class="pre">Paste</span></code>.</p>
 </div>
-<p>Once you have downloaded the <code class="docutils literal notranslate"><span class="pre">L2_data.zip</span></code> file into your home directory, you can unzip the file using <code class="docutils literal notranslate"><span class="pre">unzip</span></code> command from Terminal (or e.g.&nbsp;7zip on Windows if working with own computer). Following assumes that the file was downloaded to <code class="docutils literal notranslate"><span class="pre">.../notebooks/L2</span></code> -directory:</p>
+<p>Once you have downloaded the <code class="docutils literal notranslate"><span class="pre">L2_data.zip</span></code> file into your home directory, you can unzip the file using <code class="docutils literal notranslate"><span class="pre">unzip</span></code> command in the Terminal (or e.g.&nbsp;7zip on Windows if working with own computer). Run the following commands in the <code class="docutils literal notranslate"><span class="pre">.../notebooks/L2</span></code> -directory:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ unzip L2_data.zip
 $ ls L2_data
 </pre></div>
 </div>
 <p>You can also check the contents of the downloaded and unzipped file in the file browser window.</p>
-<p>You can find the data for this tutorial under: <code class="docutils literal notranslate"><span class="pre">L2_data/NLS/2018/L4/L41/L4132R.shp</span></code>. Notice that Shapefile -fileformat is constituted of many separate files such as <code class="docutils literal notranslate"><span class="pre">.dbf</span></code> that contains the attribute information, and <code class="docutils literal notranslate"><span class="pre">.prj</span></code> -file that contains information about coordinate reference system.</p>
+<p>The L2_data folder contains several subfolders. You can find the data for this tutorial under: <code class="docutils literal notranslate"><span class="pre">L2_data/NLS/2018/L4/L41/L4132R.shp</span></code>. Notice that Shapefile -fileformat contains many separate files such as <code class="docutils literal notranslate"><span class="pre">.dbf</span></code> that contains the attribute information, and <code class="docutils literal notranslate"><span class="pre">.prj</span></code> -file that contains information about coordinate reference system.</p>
 </div>
 <div class="section" id="Managing-filepaths">
 <h2>Managing filepaths<a class="headerlink" href="#Managing-filepaths" title="Permalink to this headline">¶</a></h2>
 <p>Built-in module <code class="docutils literal notranslate"><span class="pre">os</span></code>provides many useful functions for interacting with the operating system. One of the most useful submodules in the os package is the <a class="reference external" href="https://docs.python.org/2/library/os.path.html">os.path-module</a> for manipulating file paths. This week, we have data in different sub-folders and we can practice how to use <code class="docutils literal notranslate"><span class="pre">os</span></code> path tools when defining filepaths.</p>
 <ul class="simple">
-<li>Let’s import os and see how we can construct a filepath by joining a folder path and file name:</li>
+<li>Let’s import <code class="docutils literal notranslate"><span class="pre">os</span></code> and see how we can construct a filepath by joining a folder path and file name:</li>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
@@ -629,8 +630,13 @@ $ ls L2_data
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">os</span>
 
-<span class="n">input_folder</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;C:\LocalData\VUOKKHEI\codes\Auto-GIS\datafolder\paituli_49759407\mml\maastotietokanta\2018\L4\L41\L4132R.shp&quot;</span>
+<span class="c1"># Define path to folder</span>
+<span class="n">input_folder</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;L2_data/maastotietokanta/2018/L4/L41/L4132R.shp&quot;</span>
+
+<span class="c1"># Join folder path and filename</span>
 <span class="n">fp</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_folder</span><span class="p">,</span> <span class="s2">&quot;m_L4132R_p.shp&quot;</span><span class="p">)</span>
+
+<span class="c1"># Print out the full file path</span>
 <span class="k">print</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -640,7 +646,7 @@ $ ls L2_data
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-C:\LocalData\VUOKKHEI\codes\Auto-GIS\datafolder\paituli_49759407\mml\maastotietokanta\2018\L4\L41\L4132R.shp\m_L4132R_p.shp
+L2_data/maastotietokanta/2018/L4/L41/L4132R.shp/m_L4132R_p.shp
 </pre></div></div>
 </div>
 </div>
@@ -710,26 +716,26 @@ of these formats (plus many more). See examples for reading other data sources f
 3   None     64   32421   20000       0     0.0          0   411173768
 4   None     64   32421   20000       0     0.0          0   411173698
 
-   AINLAHDE SYNTYHETKI                        ...                          \
-0         1   20180125                        ...
-1         1   20180120                        ...
-2         1   20180120                        ...
-3         1   20180120                        ...
-4         1   20180120                        ...
+   AINLAHDE SYNTYHETKI  ... KARTOGLK  ALUEJAKOON  VERSUH  SUUNTA  SIIRT_DX  \
+0         1   20180125  ...        0           0       0       0         0
+1         1   20180120  ...        0           0       0       0         0
+2         1   20180120  ...        0           0       0       0         0
+3         1   20180120  ...        0           0       0       0         0
+4         1   20180120  ...        0           0       0       0         0
 
-  KARTOGLK  ALUEJAKOON  VERSUH  SUUNTA  SIIRT_DX  SIIRT_DY  KORKEUS  ATTR2  \
-0        0           0       0       0         0         0      0.0      0
-1        0           0       0       0         0         0      0.0      0
-2        0           0       0       0         0         0      0.0      0
-3        0           0       0       0         0         0      0.0      0
-4        0           0       0       0         0         0      0.0      0
+   SIIRT_DY  KORKEUS  ATTR2  ATTR3  \
+0         0      0.0      0      0
+1         0      0.0      0      0
+2         0      0.0      0      0
+3         0      0.0      0      0
+4         0      0.0      0      0
 
-   ATTR3                                           geometry
-0      0  POLYGON ((379394.248 6689991.936, 379389.79 66...
-1      0  POLYGON ((378980.811 6689359.377, 378983.401 6...
-2      0  POLYGON ((378804.766 6689256.471, 378817.107 6...
-3      0  POLYGON ((379229.695 6685025.111, 379233.366 6...
-4      0  POLYGON ((379825.199 6685096.247, 379829.651 6...
+                                            geometry
+0  POLYGON ((379394.248 6689991.936, 379389.790 6...
+1  POLYGON ((378980.811 6689359.377, 378983.401 6...
+2  POLYGON ((378804.766 6689256.471, 378817.107 6...
+3  POLYGON ((379229.695 6685025.111, 379233.366 6...
+4  POLYGON ((379825.199 6685096.247, 379829.651 6...
 
 [5 rows x 21 columns]
 </pre></div></div>
@@ -856,7 +862,7 @@ Number of groups 1
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x20ed6b47898&gt;
+<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f51e9642390&gt;
 </pre></div>
 </div>
 </div>
@@ -891,7 +897,7 @@ Number of groups 1
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-0    POLYGON ((379394.248 6689991.936, 379389.79 66...
+0    POLYGON ((379394.248 6689991.936, 379389.790 6...
 1    POLYGON ((378980.811 6689359.377, 378983.401 6...
 2    POLYGON ((378804.766 6689256.471, 378817.107 6...
 3    POLYGON ((379229.695 6685025.111, 379233.366 6...
@@ -1109,7 +1115,7 @@ Mean area: 11522.0 square meters
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x20ed6b6b358&gt;
+<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f51e95f7588&gt;
 </pre></div>
 </div>
 </div>
@@ -1129,7 +1135,7 @@ Mean area: 11522.0 square meters
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Create a output path for the data</span>
-<span class="n">output_folder</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;C:\LocalData\VUOKKHEI\codes\Auto-GIS\datafolder&quot;</span>
+<span class="n">output_folder</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;L2_data/&quot;</span>
 <span class="n">output_fp</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_folder</span><span class="p">,</span> <span class="s2">&quot;Class_36200.shp&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1196,7 +1202,7 @@ Mean area: 11522.0 square meters
       <th>0</th>
       <td>64</td>
       <td>32421</td>
-      <td>POLYGON ((379394.248 6689991.936, 379389.79 66...</td>
+      <td>POLYGON ((379394.248 6689991.936, 379389.790 6...</td>
       <td>76.027392</td>
     </tr>
     <tr>
@@ -1272,7 +1278,7 @@ Mean area: 11522.0 square meters
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>&lt;pandas.core.groupby.groupby.DataFrameGroupBy object at 0x0000020ED6B75BA8&gt;
+<span></span>&lt;pandas.core.groupby.generic.DataFrameGroupBy object at 0x7f51e9323438&gt;
 </pre></div>
 </div>
 </div>
@@ -1294,7 +1300,7 @@ Mean area: 11522.0 square meters
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>dict_keys([32800, 36200, 32611, 32900, 32421, 32200, 33100, 34700, 35300, 32111, 32112, 33000, 35411, 34100, 32500, 36313, 35412, 34300, 32612, 35421])
+<span></span>dict_keys([32111, 32112, 32200, 32421, 32500, 32611, 32612, 32800, 32900, 33000, 33100, 34100, 34300, 34700, 35300, 35411, 35412, 35421, 36200, 36313])
 </pre></div>
 </div>
 </div>
@@ -1442,7 +1448,7 @@ Number of rows: 8
       <th>4305</th>
       <td>64</td>
       <td>36313</td>
-      <td>POLYGON ((371498.72 6680399.799, 371497.585 66...</td>
+      <td>POLYGON ((371498.720 6680399.799, 371497.585 6...</td>
       <td>364.087680</td>
     </tr>
     <tr>
@@ -1456,7 +1462,7 @@ Number of rows: 8
       <th>4307</th>
       <td>64</td>
       <td>36313</td>
-      <td>POLYGON ((368411.063 6679328.99, 368411.424 66...</td>
+      <td>POLYGON ((368411.063 6679328.990, 368411.424 6...</td>
       <td>376.503380</td>
     </tr>
   </tbody>
@@ -1525,11 +1531,10 @@ Number of rows: 8
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Determine output directory</span>
-<span class="c1">#out_directory = &quot;L2_data&quot;</span>
-<span class="n">out_directory</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;C:\LocalData\VUOKKHEI\codes\Auto-GIS\datafolder&quot;</span>
+<span class="n">output_folder</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;L2_data/&quot;</span>
 
 <span class="c1"># Create a new folder called &#39;Results&#39;</span>
-<span class="n">result_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_directory</span><span class="p">,</span> <span class="s1">&#39;results&#39;</span><span class="p">)</span>
+<span class="n">result_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_folder</span><span class="p">,</span> <span class="s1">&#39;Results&#39;</span><span class="p">)</span>
 
 <span class="c1"># Check if the folder exists already</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">result_folder</span><span class="p">):</span>
@@ -1538,6 +1543,7 @@ Number of rows: 8
 </pre></div>
 </div>
 </div>
+<p>At this point, you can go to the file browser and check that the new folder was created successfully.</p>
 <ul class="simple">
 <li>Iterate over groups, create a file name, and save group to file:</li>
 </ul>
@@ -1647,12 +1653,12 @@ Name: area, dtype: float64
 <li>save area info to csv using pandas:</li>
 </ul>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Create an output path</span>
-<span class="n">area_info</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;terrain_class_areas.csv&quot;</span><span class="p">)</span>
+<span class="n">area_info</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;terrain_class_areas.csv&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1666,6 +1672,7 @@ Name: area, dtype: float64
 <li>Access geometry information in a geodataframe</li>
 <li>Write GeoDataFrame data from Shapefile using geopandas</li>
 <li>Automate a task to save specific rows from data into Shapefile based on specific key using <code class="docutils literal notranslate"><span class="pre">groupby()</span></code> -function</li>
+<li>Extra: saving attribute information to a csv file.</li>
 </ol>
 </div>
 </div>
@@ -1692,7 +1699,7 @@ Name: area, dtype: float64
     <p>
         &copy; Copyright 2019, Henrikki Tenkanen and Vuokko Heikinheimo, Digital Geography Lab, University of Helsinki
       <span class="lastupdated">
-        Last updated on Nov 01, 2019.
+        Last updated on Nov 02, 2019.
       </span>
 
     </p>

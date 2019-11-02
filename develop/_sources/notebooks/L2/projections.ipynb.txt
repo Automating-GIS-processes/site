@@ -24,8 +24,8 @@
    "source": [
     "## Coordinate reference system (CRS) in Geopandas\n",
     "\n",
-    "Luckily, defining and changing projections is easy in Geopandas. In this tutorial we will see how to retrieve the\n",
-    "coordinate reference system information from the data, and how to change it. We will re-project a data file from\n",
+    "Luckily, defining and changing projections is easy in Geopandas. In this tutorial we will see **how to retrieve the\n",
+    "coordinate reference system information from the data, and how to change the crs**. We will re-project a data file from\n",
     "WGS84 (lat, lon coordinates) into a Lambert Azimuthal Equal Area projection which is the [recommended projection for\n",
     "Europe](http://mapref.org/LinkedDocuments/MapProjectionsForEurope-EUR-20120.pdf) by European Commission.\n",
     "\n",
@@ -122,9 +122,9 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "As we can see, the coordinate values of the Polygons indeed look like latitude and longitude values, so everything seems to be in order (as in most cases).\n",
+    "As we can see, the coordinate values of the Polygons indeed look like latitude and longitude values, so everything seems to be in order.\n",
     "\n",
-    "WGS84 projection is not really a good one for representing European borders, so let's convert those geometries into Lambert Azimuthal Equal Area projection ([EPSG: 3035](http://spatialreference.org/ref/epsg/etrs89-etrs-laea/)) which is the recommended projection by European Comission.\n",
+    "WGS84 projection is not really a good one for representing European borders (areas get distorted), so let's convert those geometries into Lambert Azimuthal Equal Area projection ([EPSG: 3035](http://spatialreference.org/ref/epsg/etrs89-etrs-laea/)) which is the recommended projection by European Comission.\n",
     "\n",
     "Changing the projection is simple to [do in Geopandas](http://geopandas.org/projections.html#re-projecting) with `.to_crs()` -function which is a built-in function of the GeoDataFrame. The function has two alternative parameters 1) `crs` and 2) `epgs` that can be used to make the coordinate transformation and re-project the data into the CRS that you want to use. \n",
     "\n",
@@ -229,7 +229,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 13,
+   "execution_count": 7,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -333,7 +333,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 14,
+   "execution_count": 10,
    "metadata": {},
    "outputs": [
     {
@@ -367,7 +367,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 15,
+   "execution_count": 11,
    "metadata": {},
    "outputs": [
     {
@@ -393,7 +393,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 16,
+   "execution_count": 12,
    "metadata": {},
    "outputs": [
     {
@@ -419,7 +419,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 17,
+   "execution_count": 13,
    "metadata": {},
    "outputs": [
     {
@@ -447,7 +447,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 19,
+   "execution_count": 14,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -463,7 +463,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 20,
+   "execution_count": 15,
    "metadata": {},
    "outputs": [
     {
@@ -506,7 +506,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 21,
+   "execution_count": 16,
    "metadata": {},
    "outputs": [
     {
@@ -554,7 +554,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 22,
+   "execution_count": 17,
    "metadata": {},
    "outputs": [
     {
@@ -602,7 +602,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 23,
+   "execution_count": 18,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -619,7 +619,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 24,
+   "execution_count": 19,
    "metadata": {},
    "outputs": [
     {
@@ -651,16 +651,16 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 25,
+   "execution_count": 20,
    "metadata": {},
    "outputs": [
     {
      "data": {
       "text/plain": [
-       "<matplotlib.axes._subplots.AxesSubplot at 0x7efce6dc4358>"
+       "<matplotlib.axes._subplots.AxesSubplot at 0x7f2f9133a320>"
       ]
      },
-     "execution_count": 25,
+     "execution_count": 20,
      "metadata": {},
      "output_type": "execute_result"
     },
@@ -707,7 +707,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 26,
+   "execution_count": 21,
    "metadata": {},
    "outputs": [
     {
@@ -744,7 +744,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 27,
+   "execution_count": 22,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -789,7 +789,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 28,
+   "execution_count": 23,
    "metadata": {},
    "outputs": [
     {
@@ -819,7 +819,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 29,
+   "execution_count": 24,
    "metadata": {},
    "outputs": [
     {
@@ -874,7 +874,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 30,
+   "execution_count": 25,
    "metadata": {},
    "outputs": [
     {
