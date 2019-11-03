@@ -275,6 +275,16 @@ Note that you should not try to make changes to this copy of the exercise, but r
 <ul class="simple">
 <li>We need to convert the DataFrame into a GeoDataFrame, so that we can e.g. save it into a Shapefile. It is easily done by passing the DataFrame into a GeoDataFrame object. We need to determine which column contains the geometry information (needs to be always a column called ‘geometry’), and optionally we can also determine the coordinate reference system when creating the GeoDataFrame:</li>
 </ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span class="kn">from</span> <span class="nn">pyproj</span> <span class="kn">import</span> <span class="n">CRS</span>
+
+<span class="c1"># Convert DataFrame into a GeoDataFrame</span>
+<span class="n">geo</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="n">CRS</span><span class="o">.</span><span class="n">from_epsg</span><span class="p">(</span><span class="mi">4326</span><span class="p">)</span><span class="o">.</span><span class="n">to_wkt</span><span class="p">())</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">type</span><span class="p">(</span><span class="n">geo</span><span class="p">)</span>
+<span class="n">geopandas</span><span class="o">.</span><span class="n">geodataframe</span><span class="o">.</span><span class="n">GeoDataFrame</span>
+</pre></div>
+</div>
 <p>Now we have converted Pandas DataFrame into a proper GeoDataFrame that we can export into a Shapefile for instance.</p>
 </div>
 </div>

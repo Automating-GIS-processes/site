@@ -40,6 +40,7 @@ Quite often you are in a situation where you have read data e.g. from text file 
 - We need to convert the DataFrame into a GeoDataFrame, so that we can e.g. save it into a Shapefile. It is easily done by passing the DataFrame into a GeoDataFrame object. We need to determine which column contains the geometry information (needs to be always a column called 'geometry'), and optionally we can also determine the coordinate reference system when creating the GeoDataFrame:
 
 .. code:: python
+
     import geopandas as gpd
     from pyproj import CRS
 
@@ -48,8 +49,5 @@ Quite often you are in a situation where you have read data e.g. from text file 
 
     >>> type(geo)
     geopandas.geodataframe.GeoDataFrame
-
-    >>> geo.crs
-    {'init': 'epsg:4326', 'no_defs': True}
 
 Now we have converted Pandas DataFrame into a proper GeoDataFrame that we can export into a Shapefile for instance.
