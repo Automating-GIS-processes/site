@@ -246,19 +246,16 @@
 <h1>Exercise 2<a class="headerlink" href="#exercise-2" title="Permalink to this headline">¶</a></h1>
 <div class="admonition-start-your-assignment admonition">
 <p class="first admonition-title">Start your assignment</p>
-<p>You can start working on your copy of Exercise 2 by <a class="reference external" href="https://classroom.github.com/a/7GeC2bC2">accepting the GitHub Classroom assignment</a>.</p>
-<p class="last"><strong>Exercise 2 is due by Wed 14.11</strong> before the next practical session.</p>
+<p>You can start working on your copy of Exercise 2 by <a class="reference external" href="https://classroom.github.com/a/QQyBjWM2">accepting the GitHub Classroom assignment</a>.</p>
+<p class="last"><strong>Exercise 2 is due by by 16:00 on Wednesday the 13th of November 2019</strong> (day before the next practical session).</p>
 </div>
-<p>You can also take a look at the open course copy of <a class="reference external" href="https://github.com/AutoGIS-2018/Exercise-2">Exercise 2 in the course GitHub repository</a> (does not require logging in).
+<p>You can also take a look at the open course copy of <a class="reference external" href="https://github.com/AutoGIS-2019/Exercise-2">Exercise 2 in the course GitHub repository</a> (does not require logging in).
 Note that you should not try to make changes to this copy of the exercise, but rather only to the copy available via GitHub Classroom.</p>
 <div class="section" id="hints">
 <h2>Hints<a class="headerlink" href="#hints" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="converting-pandas-dataframe-into-a-geodataframe">
 <h3>Converting Pandas DataFrame into a GeoDataFrame<a class="headerlink" href="#converting-pandas-dataframe-into-a-geodataframe" title="Permalink to this headline">¶</a></h3>
-<p>Quite often you are in a situation where you have read data e.g. from text file into a Pandas DataFrame where you have latitude and longitude columns representing the location of a record.</p>
-<ul class="simple">
-<li>Let’s continue with the previous example and consider that we have a column where we have stored the shapely geometries:</li>
-</ul>
+<p>Quite often you are in a situation where you have read data e.g. from text file into a pandas DataFrame where you have latitude and longitude columns representing the location of a record. The first step is to create a column where with corresponding the shapely geometries:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 <span class="go">    value  lat  lon     geometry</span>
 <span class="go">0      0    2    4  POINT (4 2)</span>
@@ -269,27 +266,15 @@ Note that you should not try to make changes to this copy of the exercise, but r
 </pre></div>
 </div>
 <ul class="simple">
-<li>Notice that now our data is still a Pandas <strong>DataFrame</strong>, not a GeoDataFrame:</li>
+<li>Notice that the data is still a pandas <strong>DataFrame</strong>, not a GeoDataFrame:</li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 <span class="go">pandas.core.frame.DataFrame</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li>We need to convert the DataFrame into a GeoDataFrame, so that we can e.g. save it into a Shapefile. It is easily done by passing the DataFrame into a GeoDataFrame object. We need to determine</li>
+<li>We need to convert the DataFrame into a GeoDataFrame, so that we can e.g. save it into a Shapefile. It is easily done by passing the DataFrame into a GeoDataFrame object. We need to determine which column contains the geometry information (needs to be always a column called ‘geometry’), and optionally we can also determine the coordinate reference system when creating the GeoDataFrame:</li>
 </ul>
-<blockquote>
-<div>which column contains the geometry information (needs to be always a column called ‘geometry’), and optionally we can also determine the coordinate reference system when creating the GeoDataFrame:</div></blockquote>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert DataFrame into a GeoDataFrame</span>
-<span class="n">geo</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="n">from_epsg</span><span class="p">(</span><span class="mi">4326</span><span class="p">))</span>
-
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">type</span><span class="p">(</span><span class="n">geo</span><span class="p">)</span>
-<span class="n">geopandas</span><span class="o">.</span><span class="n">geodataframe</span><span class="o">.</span><span class="n">GeoDataFrame</span>
-
-<span class="o">&gt;&gt;&gt;</span> <span class="n">geo</span><span class="o">.</span><span class="n">crs</span>
-<span class="p">{</span><span class="s1">&#39;init&#39;</span><span class="p">:</span> <span class="s1">&#39;epsg:4326&#39;</span><span class="p">,</span> <span class="s1">&#39;no_defs&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">}</span>
-</pre></div>
-</div>
 <p>Now we have converted Pandas DataFrame into a proper GeoDataFrame that we can export into a Shapefile for instance.</p>
 </div>
 </div>
@@ -315,7 +300,7 @@ Note that you should not try to make changes to this copy of the exercise, but r
     <p>
         &copy; Copyright 2019, Henrikki Tenkanen and Vuokko Heikinheimo, Digital Geography Lab, University of Helsinki
       <span class="lastupdated">
-        Last updated on Oct 21, 2019.
+        Last updated on Nov 03, 2019.
       </span>
 
     </p>
