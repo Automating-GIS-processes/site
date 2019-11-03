@@ -127,4 +127,4 @@ In this exercise, you need to add/append items to a (geo)dataframe iteratively (
     df.at[0, 'geometry'] = point
     
 
-As an alternative, you can also add new rows of data using the [append method](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.append.html).
+As an alternative, you can also add new rows of data using the `append method <http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.append.html>`__.
