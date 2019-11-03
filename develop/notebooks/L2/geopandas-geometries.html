@@ -19,7 +19,7 @@
     </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Creating geometries into a GeoDataFrame &mdash; AutoGIS site documentation</title>
+  <title>Creating new layers &mdash; AutoGIS site documentation</title>
   
 
   
@@ -136,7 +136,7 @@
 <li class="toctree-l1"><a class="reference internal" href="data_io.html">Vector Data I/O in Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="geopandas-basics.html">Introduction to Geopandas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="projections.html">Map projections</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Creating geometries into a GeoDataFrame</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Creating new layers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/L2/exercise-2.html">Exercise 2</a></li>
 </ul>
 
@@ -183,7 +183,7 @@
     
       <li><a href="../../index.html">Docs</a> &raquo;</li>
         
-      <li>Creating geometries into a GeoDataFrame</li>
+      <li>Creating new layers</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -440,8 +440,8 @@ This page was generated from <a class="reference external" href="https://github.
 <span class="raw-html"><br/><a href="https://mybinder.org/v2/gh/Automating-GIS-processes/site/master?urlpath=lab/tree/source/notebooks/L2/geopandas-geometries.ipynb"><img alt="Binder badge" src="https://img.shields.io/badge/launch-full%20binder-red.svg" style="vertical-align:text-bottom"></a></span>
 <span class="raw-html"><a href="https://mybinder.org/v2/gh/Automating-GIS-processes/notebooks/master?urlpath=lab/tree/notebooks/L2/geopandas-geometries.ipynb"><img alt="Binder badge" src="https://img.shields.io/badge/launch-student%20binder-red.svg" style="vertical-align:text-bottom"></a></span>
 <span class="raw-html"><a href="https://notebooks.csc.fi/#/blueprint/8d7886c2f0ac402aa99235f8d289a52b"><img alt="CSC badge" src="https://img.shields.io/badge/launch-CSC%20notebook-blue.svg" style="vertical-align:text-bottom"></a></span></div>
-<div class="section" id="Creating-geometries-into-a-GeoDataFrame">
-<h1>Creating geometries into a GeoDataFrame<a class="headerlink" href="#Creating-geometries-into-a-GeoDataFrame" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="Creating-new-layers">
+<h1>Creating new layers<a class="headerlink" href="#Creating-new-layers" title="Permalink to this headline">¶</a></h1>
 <p>Since geopandas takes advantage of Shapely geometric objects, it is possible to create spatial data from a scratch by passing Shapely’s geometric objects into the GeoDataFrame. This is useful as it makes it easy to convert e.g.&nbsp;a text file that contains coordinates into spatial data layers. Next we will see how to create a new GeoDataFrame from scratch and save it into a Shapefile. Our goal is to define a geometry that represents the outlines of the <a class="reference external" href="https://fi.wikipedia.org/wiki/Senaatintori">Senate square in Helsinki,
 Finland</a>.</p>
 <ul class="simple">

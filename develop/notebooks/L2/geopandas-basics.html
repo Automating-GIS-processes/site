@@ -150,7 +150,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="projections.html">Map projections</a></li>
-<li class="toctree-l1"><a class="reference internal" href="geopandas-geometries.html">Creating geometries into a GeoDataFrame</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geopandas-geometries.html">Creating new layers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/L2/exercise-2.html">Exercise 2</a></li>
 </ul>
 
@@ -456,10 +456,9 @@ This page was generated from <a class="reference external" href="https://github.
 <span class="raw-html"><a href="https://notebooks.csc.fi/#/blueprint/8d7886c2f0ac402aa99235f8d289a52b"><img alt="CSC badge" src="https://img.shields.io/badge/launch-CSC%20notebook-blue.svg" style="vertical-align:text-bottom"></a></span></div>
 <div class="section" id="Introduction-to-Geopandas">
 <h1>Introduction to Geopandas<a class="headerlink" href="#Introduction-to-Geopandas" title="Permalink to this headline">¶</a></h1>
-<p>Geopandas (<a class="reference external" href="http://geopandas.org/">http://geopandas.org/</a>) makes it possible to work with geospatial data in Python in a relatively easy way. Geopandas combines the capabilities of the data analysis library <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/">pandas</a> with other packages like <a class="reference external" href="https://shapely.readthedocs.io/en/stable/manual.html">shapely</a>, <a class="reference external" href="https://fiona.readthedocs.io/en/latest/manual.html">fiona</a> and <a class="reference external" href="https://pyproj4.github.io/pyproj/dev/api/crs.html">pyproj</a> for managing spatial data.</p>
-<p>The main data structures in geopandas; <code class="docutils literal notranslate"><span class="pre">GeoSeries</span></code> and <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> extend the capabilities of <code class="docutils literal notranslate"><span class="pre">Series</span></code> and <code class="docutils literal notranslate"><span class="pre">DataFrames</span></code> from pandas. This means, that we can apply our pandas skills also with geopandas data structures. If you need to refresh your memory about pandas, check out week 5 and 6 lesson materials from the <a class="reference external" href="geo-python.github.io">Geo-Python website</a>.</p>
-<p>The main difference between geodataframes and pandas dataframes is that, <a class="reference external" href="http://geopandas.org/data_structures.html#geodataframe">by definition</a>, a geodataframe always contains one column for geometries (by default, the name of this column is <code class="docutils literal notranslate"><span class="pre">'geometry'</span></code>). The geometry column is a <a class="reference external" href="http://geopandas.org/data_structures.html#geoseries">geoseries</a> which contains the geometries (points, lines, polygons, multipolygons etc.) for each row of data. Apart from the geometries, you can often treat
-a geodataframe in the same way as a pandas dataframe.</p>
+<p>Geopandas (<a class="reference external" href="http://geopandas.org/">http://geopandas.org/</a>) makes it possible to work with geospatial data in Python in a relatively easy way. Geopandas combines the capabilities of the data analysis library <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/">pandas</a> with other packages like <a class="reference external" href="https://shapely.readthedocs.io/en/stable/manual.html">shapely</a> and <a class="reference external" href="https://fiona.readthedocs.io/en/latest/manual.html">fiona</a> for managing spatial data.</p>
+<p>The main data structures in geopandas; <code class="docutils literal notranslate"><span class="pre">GeoSeries</span></code> and <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> extend the capabilities of <code class="docutils literal notranslate"><span class="pre">Series</span></code> and <code class="docutils literal notranslate"><span class="pre">DataFrames</span></code> from pandas. This means that we can apply our pandas skills also with geopandas data structures. If you need to refresh your memory about pandas, check out week 5 and 6 lesson materials from the <a class="reference external" href="geo-python.github.io">Geo-Python website</a>.</p>
+<p>The main difference between geodataframes and pandas dataframes is that <a class="reference external" href="http://geopandas.org/data_structures.html#geodataframe">a geodataframe should contain one column for geometries</a> (by default, the name of this column is <code class="docutils literal notranslate"><span class="pre">'geometry'</span></code>). The geometry column is a <a class="reference external" href="http://geopandas.org/data_structures.html#geoseries">geoseries</a> which contains the geometries (points, lines, polygons, multipolygons etc.) for each row of data.</p>
 <p>As we learned in the Geo-Python course, it is conventional to import pandas as <code class="docutils literal notranslate"><span class="pre">pd</span></code>. Similarly,we will import geopandas as <code class="docutils literal notranslate"><span class="pre">gpd</span></code>:</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -615,11 +614,11 @@ $ ls L2_data
 </pre></div>
 </div>
 <p>You can also check the contents of the downloaded and unzipped file in the file browser window.</p>
-<p>The L2_data folder contains several subfolders. You can find the data for this tutorial under: <code class="docutils literal notranslate"><span class="pre">L2_data/NLS/2018/L4/L41/L4132R.shp</span></code>. Notice that Shapefile -fileformat contains many separate files such as <code class="docutils literal notranslate"><span class="pre">.dbf</span></code> that contains the attribute information, and <code class="docutils literal notranslate"><span class="pre">.prj</span></code> -file that contains information about coordinate reference system.</p>
+<p>The L2_data folder contains several subfolders. After unzipping the downloaded file, you can find the data for this tutorial under: <code class="docutils literal notranslate"><span class="pre">L2_data/NLS/2018/L4/L41/L4132R.shp</span></code>. Notice that Shapefile -fileformat contains many separate files such as <code class="docutils literal notranslate"><span class="pre">.dbf</span></code> that contains the attribute information, and <code class="docutils literal notranslate"><span class="pre">.prj</span></code> -file that contains information about coordinate reference system.</p>
 </div>
 <div class="section" id="Managing-filepaths">
 <h2>Managing filepaths<a class="headerlink" href="#Managing-filepaths" title="Permalink to this headline">¶</a></h2>
-<p>Built-in module <code class="docutils literal notranslate"><span class="pre">os</span></code>provides many useful functions for interacting with the operating system. One of the most useful submodules in the os package is the <a class="reference external" href="https://docs.python.org/2/library/os.path.html">os.path-module</a> for manipulating file paths. This week, we have data in different sub-folders and we can practice how to use <code class="docutils literal notranslate"><span class="pre">os</span></code> path tools when defining filepaths.</p>
+<p>Built-in module <code class="docutils literal notranslate"><span class="pre">os</span></code> provides many useful functions for interacting with the operating system. One of the most useful submodules in the os package is the <a class="reference external" href="https://docs.python.org/2/library/os.path.html">os.path-module</a> for manipulating file paths. This week, we have data in different sub-folders and we can practice how to use <code class="docutils literal notranslate"><span class="pre">os</span></code> path tools when defining filepaths.</p>
 <ul class="simple">
 <li>Let’s import <code class="docutils literal notranslate"><span class="pre">os</span></code> and see how we can construct a filepath by joining a folder path and file name:</li>
 </ul>
@@ -652,9 +651,9 @@ L2_data/maastotietokanta/2018/L4/L41/L4132R.shp/m_L4132R_p.shp
 </div>
 <div class="section" id="Reading-a-Shapefile">
 <h2>Reading a Shapefile<a class="headerlink" href="#Reading-a-Shapefile" title="Permalink to this headline">¶</a></h2>
-<p>Typically reading the data into Python is the first step of the analysis pipeline. In GIS, there exists various dataformats such as <a class="reference external" href="https://en.wikipedia.org/wiki/Shapefile">Shapefile</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/GeoJSON">GeoJSON</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Keyhole_Markup_Language">KML</a>, and <a class="reference external" href="https://en.wikipedia.org/wiki/GeoPackage">GPKG</a> that are probably the most common vector data formats. <a class="reference external" href="http://geopandas.org/io.html">Geopandas</a> is capable of reading data from all
-of these formats (plus many more). See examples for reading other data sources from the previous page.</p>
-<p>In geopandas, we use a generic function <a class="reference external" href="http://geopandas.org/reference.html#geopandas.GeoDataFrame.to_file">gpd.from_file()</a> for reading different data formats. Geopandas uses <a class="reference external" href="https://fiona.readthedocs.io/en/latest/fiona.html#fiona.open">fiona.open()</a> when reading in data (refer to fiona documentation for more information).</p>
+<p>Typically reading the data into Python is the first step of the analysis pipeline. There are various different GIS data formats available. <a class="reference external" href="https://en.wikipedia.org/wiki/Shapefile">Shapefile</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/GeoJSON">GeoJSON</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Keyhole_Markup_Language">KML</a>, and <a class="reference external" href="https://en.wikipedia.org/wiki/GeoPackage">GPKG</a> are one of the most common vector data formats currently in use. <a class="reference external" href="http://geopandas.org/io.html">Geopandas</a> is capable of
+reading data from all of these formats (plus many more).</p>
+<p>In geopandas, we use a generic function <a class="reference external" href="http://geopandas.org/reference.html#geopandas.GeoDataFrame.to_file">.from_file()</a> for reading in different data formats. In the bacground, Geopandas uses <a class="reference external" href="https://fiona.readthedocs.io/en/latest/fiona.html#fiona.open">fiona.open()</a> when reading in data.</p>
 <ul class="simple">
 <li>When reading in a Shapefile, we only need to pass the filepath when reading data:</li>
 </ul>
@@ -691,7 +690,7 @@ of these formats (plus many more). See examples for reading other data sources f
 </pre></div>
 </div>
 </div>
-<p>Okey so from the above we can see that our <code class="docutils literal notranslate"><span class="pre">data</span></code> -variable is a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code>. GeoDataFrame extends the functionalities of <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code> in a way that it is possible to use and handle spatial data using similar approaches and datastructures as in pandas (hence the name geopandas). GeoDataFrame have some special features and functions that are useful in GIS.</p>
+<p>Here we see that our <code class="docutils literal notranslate"><span class="pre">data</span></code> -variable is a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code>. GeoDataFrame extends the functionalities of <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code> in a way that it is possible to handle spatial data using similar approaches and datastructures as in pandas (hence the name geopandas).</p>
 <ul class="simple">
 <li>Let’s take a look at our data and print the first rows using the <code class="docutils literal notranslate"><span class="pre">head()</span></code> -function:</li>
 </ul>
@@ -819,7 +818,12 @@ of these formats (plus many more). See examples for reading other data sources f
 </div>
 <div class="admonition note">
 <p class="admonition-title fa fa-exclamation-circle"><strong>Task</strong></p>
-<p>Figure out the following information from our input data based on your pandas-skills from the Geo-Python course: - Number of rows? - Number of classes? - Number of groups?</p>
+<p>Figure out the following information from our input data based on your pandas-skills from the Geo-Python course:</p>
+<ul class="simple">
+<li>Number of rows?</li>
+<li>Number of classes?</li>
+<li>Number of groups?</li>
+</ul>
 </div>
 <p>Solutions:</p>
 <div class="nbinput docutils container">
@@ -843,9 +847,9 @@ Number of classes 20
 Number of groups 1
 </pre></div></div>
 </div>
-<p>When having spatial data, it is always a good idea to explore your data on a map. Creating a simple map from a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> is really easy: you can use <code class="docutils literal notranslate"><span class="pre">.plot()</span></code> -function from geopandas that creates a map based on the geometries of the data. Geopandas actually uses Matplotlib for creating the map that was introduced in <a class="reference external" href="https://geo-python.github.io/2018/notebooks/L7/matplotlib.html">Lesson 7 of Geo-Python course</a>.</p>
+<p>It is always a good idea to explore your data also on a map. Creating a simple map from a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> is really easy: you can use <code class="docutils literal notranslate"><span class="pre">.plot()</span></code> -function from geopandas that <strong>creates a map based on the geometries of the data</strong>. Geopandas actually uses matplotlib for plotting which we introduced in <a class="reference external" href="https://geo-python.github.io/site/notebooks/L7/matplotlib.html">Lesson 7 of the Geo-Python course</a>.</p>
 <ul class="simple">
-<li>Let’s try it out, and plot our geometries:</li>
+<li>Let’s try it out, and plot our GeoDataFrame:</li>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
@@ -862,7 +866,7 @@ Number of groups 1
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f51e9642390&gt;
+<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fdc09a7b978&gt;
 </pre></div>
 </div>
 </div>
@@ -905,8 +909,8 @@ Number of groups 1
 Name: geometry, dtype: geometry
 </pre></div></div>
 </div>
-<p>As we can see the <code class="docutils literal notranslate"><span class="pre">geometry</span></code> column contains familiar looking values, namely Shapely <code class="docutils literal notranslate"><span class="pre">Polygon</span></code> -objects. Since the spatial data is stored as Shapely objects, <strong>it is possible to use all of the functionalities of Shapely module</strong>.</p>
-<p>Let’s have a closer look at the polygons and try to apply some of the Shapely methods we <a class="reference external" href="https://automating-gis-processes.github.io/2018/notebooks/L1/geometric-objects.html#Polygon">learned last week</a>.</p>
+<p>As we can see the <code class="docutils literal notranslate"><span class="pre">geometry</span></code> column contains familiar looking values, namely Shapely <code class="docutils literal notranslate"><span class="pre">Polygon</span></code> -objects. Since the spatial data is stored as Shapely objects, <strong>it is possible to use all of the functionalities of the Shapely module</strong> when dealing with geometries in geopandas.</p>
+<p>Let’s have a closer look at the polygons and try to apply some of the <a class="reference external" href="https://automating-gis-processes.github.io/site/notebooks/L1/geometric-objects.html#Polygon">Shapely methods we learned last week</a>.</p>
 <ul class="simple">
 <li>Let’s start by checking the area of the first polygon in the data:</li>
 </ul>
@@ -932,7 +936,7 @@ Area: 76.0 square meters
 <p>Let’s do the same for the first five rows in the data;</p>
 <ul class="simple">
 <li>Iterate over the GeoDataFrame rows using the <code class="docutils literal notranslate"><span class="pre">iterrows()</span></code> -function that we learned <a class="reference external" href="https://geo-python.github.io/site/notebooks/L6/pandas/advanced-data-processing-with-pandas.html#Iterating-rows-and-using-self-made-functions-in-Pandas">during the Lesson 6 of the Geo-Python course</a>.</li>
-<li>For each row, print the area of the polygon:</li>
+<li>For each row, print the area of the polygon (here, we’ll limit the for-loop to a selection of the first five rows):</li>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
@@ -1084,7 +1088,7 @@ Mean area: 11522.0 square meters
 </div>
 <div class="section" id="Writing-a-shapefile">
 <h2>Writing a shapefile<a class="headerlink" href="#Writing-a-shapefile" title="Permalink to this headline">¶</a></h2>
-<p>It is possible to export GeoDataFrames into various data formats using <a class="reference external" href="http://geopandas.org/io.html#writing-spatial-data">gpd.to_file()</a>.</p>
+<p>It is possible to export GeoDataFrames into various data formats using <a class="reference external" href="http://geopandas.org/io.html#writing-spatial-data">gpd.to_file()</a>. Here, we will first learn how to export a subset of the data into a Shapefile.</p>
 <ul class="simple">
 <li>Let’s first select one class (class number <code class="docutils literal notranslate"><span class="pre">36200</span></code>, “Lake water”) from the data as a new GeoDataFrame:</li>
 </ul>
@@ -1115,7 +1119,7 @@ Mean area: 11522.0 square meters
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f51e95f7588&gt;
+<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fdc097d3a58&gt;
 </pre></div>
 </div>
 </div>
@@ -1150,11 +1154,24 @@ Mean area: 11522.0 square meters
 </pre></div>
 </div>
 </div>
+<div class="admonition note">
+<p class="admonition-title fa fa-exclamation-circle"><strong>Task</strong></p>
+<p>Read the output Shapefile in a new geodataframe, and check that the data looks ok.</p>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="Grouping-the-Geodataframe">
 <h2>Grouping the Geodataframe<a class="headerlink" href="#Grouping-the-Geodataframe" title="Permalink to this headline">¶</a></h2>
 <p>One really useful function that can be used in Pandas/Geopandas is <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.groupby.html">.groupby()</a> which groups data based on values on selected column(s). We saw and used this function already in <a class="reference external" href="https://geo-python.github.io/2018/notebooks/L6/pandas/advanced-data-processing-with-pandas.html#Aggregating-data-in-Pandas-by-grouping">Lesson 6 of the Geo-Python course</a>.</p>
-<p>Next we will take a practical example by automating the file export task. We will group the data based on column <code class="docutils literal notranslate"><span class="pre">CLASS</span></code> and export a shapefile for each class.</p>
+<p>Next we will automate the file export task; we will group the data based on column <code class="docutils literal notranslate"><span class="pre">CLASS</span></code> and export a shapefile for each class.</p>
 <p>Let’s continue with the same input file we already read previously into the variable <code class="docutils literal notranslate"><span class="pre">data</span></code>. We also selected and renamed a subset of the columns.</p>
 <ul class="simple">
 <li>Check the first rows of the data:</li>
@@ -1278,7 +1295,7 @@ Mean area: 11522.0 square meters
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>&lt;pandas.core.groupby.generic.DataFrameGroupBy object at 0x7f51e9323438&gt;
+<span></span>&lt;pandas.core.groupby.generic.DataFrameGroupBy object at 0x7fdc0975a160&gt;
 </pre></div>
 </div>
 </div>
@@ -1499,24 +1516,15 @@ Number of rows: 8
 <p>There are different approaches for formatting strings in Python. Here are a couple of different ways for putting together file-path names using two variables:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">basename</span> <span class="o">=</span> <span class="s2">&quot;terrain&quot;</span>
 <span class="n">key</span> <span class="o">=</span> <span class="mi">36200</span>
-</pre></div>
-</div>
-<ol class="arabic simple">
-<li>Concatenating using the <code class="docutils literal notranslate"><span class="pre">+</span></code> operator:</li>
-</ol>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">out_fp</span> <span class="o">=</span> <span class="n">basename</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.shp&quot;</span>
-</pre></div>
-</div>
-<ol class="arabic simple" start="2">
-<li>Positional formatting using <code class="docutils literal notranslate"><span class="pre">%</span></code> operator</li>
-</ol>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">out_fp</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">_</span><span class="si">%s</span><span class="s2">.shp&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">basename</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
-</pre></div>
-</div>
-<ol class="arabic simple" start="3">
-<li>Positional formatting using <code class="docutils literal notranslate"><span class="pre">.format()</span></code></li>
-</ol>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">out_fp</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">_</span><span class="si">{}</span><span class="s2">.shp&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">basename</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+
+<span class="c1"># OPTION 1. Concatenating using the `+` operator:</span>
+<span class="n">out_fp</span> <span class="o">=</span> <span class="n">basename</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.shp&quot;</span>
+
+<span class="c1"># OPTION 2. Positional formatting using `%` operator</span>
+<span class="n">out_fp</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">_</span><span class="si">%s</span><span class="s2">.shp&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">basename</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+
+<span class="c1"># OPTION 3. Positional formatting using `.format()`</span>
+<span class="n">out_fp</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">_</span><span class="si">{}</span><span class="s2">.shp&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">basename</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Read more from here: <a class="reference external" href="https://pyformat.info/">https://pyformat.info/</a></p>
@@ -1653,7 +1661,7 @@ Name: area, dtype: float64
 <li>save area info to csv using pandas:</li>
 </ul>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>

@@ -6,11 +6,11 @@
    "source": [
     "# Introduction to Geopandas\n",
     "\n",
-    "Geopandas (http://geopandas.org/) makes it possible to work with geospatial data in Python in a relatively easy way. Geopandas combines the capabilities of the data analysis library [pandas](https://pandas.pydata.org/pandas-docs/stable/) with other packages like [shapely](https://shapely.readthedocs.io/en/stable/manual.html), [fiona](https://fiona.readthedocs.io/en/latest/manual.html) and [pyproj](https://pyproj4.github.io/pyproj/dev/api/crs.html) for managing spatial data. \n",
+    "Geopandas (http://geopandas.org/) makes it possible to work with geospatial data in Python in a relatively easy way. Geopandas combines the capabilities of the data analysis library [pandas](https://pandas.pydata.org/pandas-docs/stable/) with other packages like [shapely](https://shapely.readthedocs.io/en/stable/manual.html) and [fiona](https://fiona.readthedocs.io/en/latest/manual.html) for managing spatial data. \n",
     "\n",
-    "The main data structures in geopandas; `GeoSeries` and `GeoDataFrame` extend the capabilities of `Series` and `DataFrames` from pandas. This means, that we can apply our pandas skills also with geopandas data structures. If you need to refresh your memory about pandas, check out week 5 and 6 lesson materials from the [Geo-Python website](geo-python.github.io). \n",
+    "The main data structures in geopandas; `GeoSeries` and `GeoDataFrame` extend the capabilities of `Series` and `DataFrames` from pandas. This means that we can apply our pandas skills also with geopandas data structures. If you need to refresh your memory about pandas, check out week 5 and 6 lesson materials from the [Geo-Python website](geo-python.github.io). \n",
     "\n",
-    "The main difference between geodataframes and pandas dataframes is that, [by definition](http://geopandas.org/data_structures.html#geodataframe), a geodataframe always contains one column for geometries (by default, the name of this column is `'geometry'`). The geometry column is a [geoseries](http://geopandas.org/data_structures.html#geoseries) which contains the geometries (points, lines, polygons, multipolygons etc.) for each row of data. Apart from the geometries, you can often treat a geodataframe in the same way as a pandas dataframe.\n",
+    "The main difference between geodataframes and pandas dataframes is that [a geodataframe should contain one column for geometries](http://geopandas.org/data_structures.html#geodataframe) (by default, the name of this column is `'geometry'`). The geometry column is a [geoseries](http://geopandas.org/data_structures.html#geoseries) which contains the geometries (points, lines, polygons, multipolygons etc.) for each row of data. \n",
     "\n",
     "As we learned in the Geo-Python course, it is conventional to import pandas as `pd`. Similarly,we will import geopandas as `gpd`:"
    ]
@@ -121,7 +121,7 @@
     "```\n",
     "You can also check the contents of the downloaded and unzipped file in the file browser window. \n",
     "\n",
-    "The L2_data folder contains several subfolders. You can find the data for this tutorial under: `L2_data/NLS/2018/L4/L41/L4132R.shp`. Notice that Shapefile -fileformat contains many separate files such as `.dbf` that contains the attribute information, and `.prj` -file that contains information about coordinate reference system."
+    "The L2_data folder contains several subfolders. After unzipping the downloaded file, you can find the data for this tutorial under: `L2_data/NLS/2018/L4/L41/L4132R.shp`. Notice that Shapefile -fileformat contains many separate files such as `.dbf` that contains the attribute information, and `.prj` -file that contains information about coordinate reference system."
    ]
   },
   {
@@ -130,7 +130,7 @@
    "source": [
     "## Managing filepaths\n",
     "\n",
-    "Built-in module `os`provides many useful functions for interacting with the operating system. One of the most useful submodules in the os package is the [os.path-module](https://docs.python.org/2/library/os.path.html) for manipulating file paths. This week, we have data in different sub-folders and we can practice how to use `os` path tools when defining filepaths.\n",
+    "Built-in module `os` provides many useful functions for interacting with the operating system. One of the most useful submodules in the os package is the [os.path-module](https://docs.python.org/2/library/os.path.html) for manipulating file paths. This week, we have data in different sub-folders and we can practice how to use `os` path tools when defining filepaths.\n",
     "\n",
     "- Let's import `os` and see how we can construct a filepath by joining a folder path and file name:"
    ]
@@ -167,9 +167,9 @@
    "source": [
     "## Reading a Shapefile\n",
     "\n",
-    "Typically reading the data into Python is the first step of the analysis pipeline. In GIS, there exists various dataformats such as [Shapefile](https://en.wikipedia.org/wiki/Shapefile), [GeoJSON](https://en.wikipedia.org/wiki/GeoJSON), [KML](https://en.wikipedia.org/wiki/Keyhole_Markup_Language), and [GPKG](https://en.wikipedia.org/wiki/GeoPackage) that are probably the most common vector data formats. [Geopandas](http://geopandas.org/io.html) is capable of reading data from all of these formats (plus many more). See examples for reading other data sources from the previous page.\n",
+    "Typically reading the data into Python is the first step of the analysis pipeline. There are various different GIS data formats available. [Shapefile](https://en.wikipedia.org/wiki/Shapefile), [GeoJSON](https://en.wikipedia.org/wiki/GeoJSON), [KML](https://en.wikipedia.org/wiki/Keyhole_Markup_Language), and [GPKG](https://en.wikipedia.org/wiki/GeoPackage) are one of the most common vector data formats currently in use. [Geopandas](http://geopandas.org/io.html) is capable of reading data from all of these formats (plus many more). \n",
     "\n",
-    "In geopandas, we use a generic function [gpd.from_file()](http://geopandas.org/reference.html#geopandas.GeoDataFrame.to_file) for reading different data formats. Geopandas uses [fiona.open()](https://fiona.readthedocs.io/en/latest/fiona.html#fiona.open) when reading in data (refer to fiona documentation for more information).\n",
+    "In geopandas, we use a generic function [.from_file()](http://geopandas.org/reference.html#geopandas.GeoDataFrame.to_file) for reading in different data formats. In the bacground, Geopandas uses [fiona.open()](https://fiona.readthedocs.io/en/latest/fiona.html#fiona.open) when reading in data.\n",
     "\n",
     "- When reading in a Shapefile, we only need to pass the filepath when reading data:"
    ]
@@ -222,8 +222,8 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "Okey so from the above we can see that our `data` -variable is a `GeoDataFrame`. GeoDataFrame extends the functionalities of\n",
-    "`pandas.DataFrame` in a way that it is possible to use and handle spatial data using similar approaches and datastructures as in pandas (hence the name geopandas). GeoDataFrame have some special features and functions that are useful in GIS.\n",
+    "Here we see that our `data` -variable is a `GeoDataFrame`. GeoDataFrame extends the functionalities of\n",
+    "`pandas.DataFrame` in a way that it is possible to handle spatial data using similar approaches and datastructures as in pandas (hence the name geopandas). \n",
     "\n",
     "- Let's take a look at our data and print the first rows using the `head()` -function:"
    ]
@@ -387,6 +387,7 @@
     "**Task**\n",
     "    \n",
     "Figure out the following information from our input data based on your pandas-skills from the Geo-Python course:\n",
+    "    \n",
     "- Number of rows?\n",
     "- Number of classes?\n",
     "- Number of groups?\n",
@@ -425,9 +426,9 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "When having spatial data, it is always a good idea to explore your data on a map. Creating a simple map from a `GeoDataFrame` is really easy: you can use ``.plot()`` -function from geopandas that creates a map based on the geometries of the data. Geopandas actually uses Matplotlib for creating the map that was introduced in [Lesson 7 of Geo-Python course](https://geo-python.github.io/2018/notebooks/L7/matplotlib.html).\n",
+    "It is always a good idea to explore your data also on a map. Creating a simple map from a `GeoDataFrame` is really easy: you can use ``.plot()`` -function from geopandas that **creates a map based on the geometries of the data**. Geopandas actually uses matplotlib for plotting which we introduced in [Lesson 7 of the Geo-Python course](https://geo-python.github.io/site/notebooks/L7/matplotlib.html).\n",
     "\n",
-    "- Let's try it out, and plot our geometries:"
+    "- Let's try it out, and plot our GeoDataFrame:"
    ]
   },
   {
@@ -443,7 +444,7 @@
     {
      "data": {
       "text/plain": [
-       "<matplotlib.axes._subplots.AxesSubplot at 0x7f51e9642390>"
+       "<matplotlib.axes._subplots.AxesSubplot at 0x7fdc09a7b978>"
       ]
      },
      "execution_count": 12,
@@ -526,9 +527,9 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "As we can see the `geometry` column contains familiar looking values, namely Shapely `Polygon` -objects. Since the spatial data is stored as Shapely objects, **it is possible to use all of the functionalities of Shapely module**.\n",
+    "As we can see the `geometry` column contains familiar looking values, namely Shapely `Polygon` -objects. Since the spatial data is stored as Shapely objects, **it is possible to use all of the functionalities of the Shapely module** when dealing with geometries in geopandas.\n",
     "\n",
-    "Let's have a closer look at the polygons and try to apply some of the Shapely methods we [learned last week](https://automating-gis-processes.github.io/2018/notebooks/L1/geometric-objects.html#Polygon). \n",
+    "Let's have a closer look at the polygons and try to apply some of the [Shapely methods we learned last week](https://automating-gis-processes.github.io/site/notebooks/L1/geometric-objects.html#Polygon). \n",
     "\n",
     "- Let's start by checking the area of the first polygon in the data:\n"
    ]
@@ -560,7 +561,7 @@
     "Let's do the same for the first five rows in the data; \n",
     "\n",
     "- Iterate over the GeoDataFrame rows using the `iterrows()` -function that we learned [during the Lesson 6 of the Geo-Python course](https://geo-python.github.io/site/notebooks/L6/pandas/advanced-data-processing-with-pandas.html#Iterating-rows-and-using-self-made-functions-in-Pandas).\n",
-    "- For each row, print the area of the polygon:"
+    "- For each row, print the area of the polygon (here, we'll limit the for-loop to a selection of the first five rows):"
    ]
   },
   {
@@ -750,7 +751,7 @@
    "source": [
     "## Writing a shapefile\n",
     "\n",
-    "It is possible to export GeoDataFrames into various data formats using [gpd.to_file()](http://geopandas.org/io.html#writing-spatial-data). \n",
+    "It is possible to export GeoDataFrames into various data formats using [gpd.to_file()](http://geopandas.org/io.html#writing-spatial-data). Here, we will first learn how to export a subset of the data into a Shapefile.\n",
     "\n",
     "- Let's first select one class (class number `36200`, \"Lake water\") from the data as a new GeoDataFrame:\n"
    ]
@@ -780,7 +781,7 @@
     {
      "data": {
       "text/plain": [
-       "<matplotlib.axes._subplots.AxesSubplot at 0x7f51e95f7588>"
+       "<matplotlib.axes._subplots.AxesSubplot at 0x7fdc097d3a58>"
       ]
      },
      "execution_count": 24,
@@ -836,11 +837,30 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
+    "<div class=\"alert alert-info\">\n",
+    "\n",
+    "**Task**\n",
+    "    \n",
+    "Read the output Shapefile in a new geodataframe, and check that the data looks ok.\n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
     "## Grouping the Geodataframe\n",
     "\n",
     "One really useful function that can be used in Pandas/Geopandas is [.groupby()](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.groupby.html) which groups data based on values on selected column(s). We saw and used this function already in [Lesson 6 of the Geo-Python course](https://geo-python.github.io/2018/notebooks/L6/pandas/advanced-data-processing-with-pandas.html#Aggregating-data-in-Pandas-by-grouping). \n",
     "\n",
-    "Next we will take a practical example by automating the file export task. We will group the data based on column `CLASS` and export a shapefile for each class.\n",
+    "Next we will automate the file export task; we will group the data based on column `CLASS` and export a shapefile for each class.\n",
     "\n",
     "Let's continue with the same input file we already read previously into the variable `data`. We also selected and renamed a subset of the columns.\n",
     "\n",
@@ -995,7 +1015,7 @@
     {
      "data": {
       "text/plain": [
-       "<pandas.core.groupby.generic.DataFrameGroupBy object at 0x7f51e9323438>"
+       "<pandas.core.groupby.generic.DataFrameGroupBy object at 0x7fdc0975a160>"
       ]
      },
      "execution_count": 29,
@@ -1307,24 +1327,17 @@
     "```\n",
     "basename = \"terrain\"\n",
     "key = 36200\n",
-    "```\n",
-    "1. Concatenating using the `+` operator:\n",
-    "    \n",
-    "```\n",
+    "\n",
+    "# OPTION 1. Concatenating using the `+` operator:\n",
     "out_fp = basename + \"_\" + str(key) + \".shp\"\n",
-    "```\n",
-    "2. Positional formatting using `%` operator\n",
-    " \n",
-    "```\n",
+    "\n",
+    "# OPTION 2. Positional formatting using `%` operator\n",
     "out_fp = \"%s_%s.shp\" %(basename, key)\n",
-    "```\n",
     "    \n",
-    "3. Positional formatting using `.format()`\n",
-    " \n",
-    "```\n",
+    "# OPTION 3. Positional formatting using `.format()`\n",
     "out_fp = \"{}_{}.shp\".format(basename, key)\n",
     "```\n",
-    "\n",
+    "    \n",
     "Read more from here: https://pyformat.info/\n",
     "</div>\n",
     "\n",
@@ -1496,7 +1509,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 39,
+   "execution_count": 38,
    "metadata": {},
    "outputs": [],
    "source": [

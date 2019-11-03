@@ -6,11 +6,11 @@
    "source": [
     "# Map projections\n",
     "\n",
-    "Coordinate reference systems (CRS) are important because the geometric shapes in a GeoDataFrame are simply a collection of coordinates in an arbitrary space. A CRS tells Python how those coordinates are related to places on the Earth. A map projection (or a projected coordinate system) is a systematic transformation of the latitudes and longitudes into a plain surface where units are quite commonly represented as meters (instead of decimal degrees). This transformation is used to represent the three dimensional earth on a flat, two dimensional map.\n",
+    "**Coordinate reference systems (CRS)** are important because the geometric shapes in a GeoDataFrame are simply a collection of coordinates in an arbitrary space. A CRS tells Python how those coordinates are related to places on the Earth. **A map projection** (or a projected coordinate system) is a systematic transformation of the latitudes and longitudes into a plain surface where units are quite commonly represented as meters (instead of decimal degrees). This transformation is used to **represent the three dimensional earth on a flat, two dimensional map**.\n",
     "\n",
-    "As the CRS in different spatial datasets differ fairly often (i.e. one might have coordinates defined in decimal degrees while the other one has them in meters), it is a common procedure to redefine (or reproject) the CRS to be identical in both layers. It is important that the layers have the same coordinate reference system as it makes it possible to analyze the spatial relationships between the layers, such as conduct a Point in Polygon -query.\n",
+    "As the CRS in different spatial datasets differ fairly often (i.e. one might have coordinates defined in decimal degrees while the other one has them in meters), it is a common procedure to **reproject** (or redefine) different layers into a common CRS. It is important that the layers are in the same coordinate reference system when analyzing the spatial relationships between the layers, for example, when making a Point in Polygon -query, or other type of overlay analysis.\n",
     "\n",
-    "Choosing an appropriate projection for your map is not always straightforward because it depends on what you actually want to represent with your map, and what is the spatial scale of your data. In fact, there does not exist a \"perfect projection\" since each one of them has some strengths and weaknesses, and you should choose such projection that fits best for your needs. In fact, the projection you choose might even tell something about you:\n",
+    "Choosing an appropriate projection for your map is not always straightforward because it depends on what you actually want to represent with your map, and what is the spatial scale of your data. In fact, there does not exist a \"perfect projection\" since each one of them has some strengths and weaknesses, and you should choose such projection that fits best for your needs. In fact, the projection you choose might even tell something about you 😉:\n",
     "    \n",
     "![](img/Map-projections.png)\n",
     "*Source: XKCD, See a full comic about [\"What your favorite map projection tells about you\"](https://xkcd.com/977/)*.\n",
@@ -29,9 +29,9 @@
     "WGS84 (lat, lon coordinates) into a Lambert Azimuthal Equal Area projection which is the [recommended projection for\n",
     "Europe](http://mapref.org/LinkedDocuments/MapProjectionsForEurope-EUR-20120.pdf) by European Commission.\n",
     "\n",
-    "For this tutorial we will be using a Shapefile called `Europe_borders.shp` representing the country borders in Europe, that you already should have [downloaded during the previous tutorial](geopandas-basics.ipynb). \n",
+    "For this tutorial we will be using a Shapefile called `Europe_borders.shp` representing the country borders in Europe, that you already should have [downloaded during the previous tutorial](geopandas-basics.ipynb) into `L2_data` folder. \n",
     "\n",
-    "Shapefile should always contain information about the coordinate reference system that is stored in `.prj` -file (at least if the data has been appropriately produced). When reading the data into `GeoDataFrame` with Geopandas this information is automatically stored into `.crs` attribute of the GeoDataFrame.\n",
+    "In Shapefiles, information about the coordinate reference system i stored in the `.prj` -file (if this file is missing, you might be in trouble!). When reading the data into `GeoDataFrame` with Geopandas crs information is automatically stored into the `.crs` attribute of the GeoDataFrame.\n",
     "\n",
     "- Let's start by reading the data from the `Europe_borders.shp` file and checking the `crs`:"
    ]
@@ -75,9 +75,11 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "As we can see, here, the `crs` is a Python dictionary with a key `init` that has a value `epsg:4326`. This is a very typical way how CRS is stored in GeoDataFrames. There is also another typical way of representing the coordinate reference system, namely storing that information in [Proj4-string](https://proj4.org/usage/quickstart.html) format (we will come back to this later). \n",
+    "As we can see, here, the `crs` is a Python dictionary with a key `init` that has a value `epsg:4326`. This is a very typical way how CRS is stored in GeoDataFrames. There are, however, other more informative formats for representing the coordinate reference system, which we will learn in a bit. \n",
     "\n",
-    "The EPSG number (*\"European Petroleum Survey Group\"*) is a code that tells about the coordinate system of the dataset. \"[EPSG Geodetic Parameter Dataset](http://www.epsg.org/) is a collection of definitions of coordinate reference systems and coordinate transformations which may be global, regional, national or local in application\". EPSG code `4326` that we have here, belongs to the WGS84 coordinate system (i.e. coordinates are in decimal degrees: latitudes and longitudes).\n",
+    "The EPSG number (named after the *European Petroleum Survey Group*) is a code that tells about the coordinate system of the dataset. \"[EPSG Geodetic Parameter Dataset](http://www.epsg.org/) is a collection of definitions of coordinate reference systems and coordinate transformations which may be global, regional, national or local in application\".\n",
+    "\n",
+    "The EPSG code of our geodataframe is`4326`, which refers to the WGS84 coordinate system (we can also figure this out by looking at the coordinates values which are longitude and latitudes decimal degrees).\n",
     "\n",
     "You can find a lot of information and lists of available coordinate reference systems from:\n",
     "\n",
@@ -138,7 +140,7 @@
    "outputs": [],
    "source": [
     "# Let's make a backup copy of our data\n",
-    "orig = data.copy()\n",
+    "data_wgs84 = data.copy()\n",
     "\n",
     "# Reproject the data\n",
     "data = data.to_crs(epsg=3035)"
@@ -203,7 +205,7 @@
     "fig, (ax1, ax2) = plt.subplots(nrows=1, ncols=2, figsize=(12, 8))\n",
     "\n",
     "# Plot the data in WGS84 CRS\n",
-    "orig.plot(ax=ax1, facecolor='gray');\n",
+    "data_wgs84.plot(ax=ax1, facecolor='gray');\n",
     "\n",
     "# Add title\n",
     "ax1.set_title(\"WGS84\");\n",
@@ -251,7 +253,7 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "There are various ways to present Coordinate Reference System information, such as `PROJ strings`, `EPSG codes`, `Well-Known-Text (WKT)`, `JSON`. It is likely that you will encounter some of these when working with spatial data obtained from different sources. Being able to convert the CRS information from one format to another is needed every now and then, hence, it is useful to know a few tricks how to do this.\n",
+    "There are various ways to present Coordinate Reference System information, such as [PROJ strings](https://proj.org/usage/quickstart.html), `EPSG codes`, `Well-Known-Text (WKT)`, `JSON`. It is likely that you will encounter some of these when working with spatial data obtained from different sources. Being able to convert the CRS information from one format to another is needed every now and then, hence, it is useful to know a few tricks how to do this.\n",
     "\n",
     "Luckily, dealing with CRS information is easy in Python using a library called [pyproj](https://pyproj4.github.io/pyproj/stable/). In fact, `pyproj` is a Python wrapper around a software called [PROJ](https://proj.org/) (maintained by [OSGeo](https://www.osgeo.org/) community), which is widely used tool for conducting coordinate transformations in various GIS softwares. `Pyproj` is also used under the hood in Geopandas, and it handles all the CRS definitions and coordinate transformations (reprojecting from CRS to another as we did earlier).\n",
     "\n",
@@ -286,6 +288,23 @@
    ]
   },
   {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<div class=\"alert alert-info\">\n",
+    "\n",
+    "**Updating pyproj**\n",
+    "    \n",
+    "If you are using your own computer and are having trouble importing the CRS class from the pyproj module, try updating pyproj:\n",
+    "```\n",
+    "conda update pyproj -c conda-forge\n",
+    "```\n",
+    "The following examples have been tested to work with `pyproj` version `2.4.0` and `geopandas` version `0.6.1`. You can check package versions by running the `conda list` -command.\n",
+    "   \n",
+    "</div>"
+   ]
+  },
+  {
    "cell_type": "code",
    "execution_count": 9,
    "metadata": {},
@@ -293,17 +312,18 @@
     {
      "data": {
       "text/plain": [
-       "<Projected CRS: +init=epsg:3035 +no_defs +type=crs>\n",
-       "Name: unknown\n",
+       "<Projected CRS: EPSG:3035>\n",
+       "Name: ETRS89-extended / LAEA Europe\n",
        "Axis Info [cartesian]:\n",
-       "- E[east]: Easting (metre)\n",
-       "- N[north]: Northing (metre)\n",
+       "- Y[north]: Northing (metre)\n",
+       "- X[east]: Easting (metre)\n",
        "Area of Use:\n",
-       "- undefined\n",
+       "- name: Europe - LCC & LAEA\n",
+       "- bounds: (-35.58, 24.6, 44.83, 84.17)\n",
        "Coordinate Operation:\n",
-       "- name: unknown\n",
+       "- name: Europe Equal Area 2001\n",
        "- method: Lambert Azimuthal Equal Area\n",
-       "Datum: Unknown based on GRS80 ellipsoid\n",
+       "Datum: European Terrestrial Reference System 1989\n",
        "- Ellipsoid: GRS 1980\n",
        "- Prime Meridian: Greenwich"
       ]
@@ -314,12 +334,12 @@
     }
    ],
    "source": [
-    "# Import CRS class from pyproj\n",
+    "### Import CRS class from pyproj\n",
     "from pyproj import CRS\n",
     "\n",
-    "# Initialize the CRS class with the dictionary and let's see what it contains\n",
-    "data_crs = CRS(data.crs)\n",
-    "data_crs"
+    "# Initialize the CRS class for epsg code 3035:\n",
+    "crs_object = CRS.from_epsg(3035)\n",
+    "crs_object"
    ]
   },
   {
@@ -340,27 +360,28 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "Name: unknown\n",
-      "Coordinate system: cartesian\n"
+      "Name: ETRS89-extended / LAEA Europe\n",
+      "Coordinate system: cartesian\n",
+      "Bounds: (-35.58, 24.6, 44.83, 84.17)\n"
      ]
     }
    ],
    "source": [
     "# Name\n",
-    "print(\"Name:\", data_crs.name)\n",
+    "print(\"Name:\", crs_object.name)\n",
     "\n",
     "# Coordinate system\n",
-    "print(\"Coordinate system:\", data_crs.coordinate_system)\n",
+    "print(\"Coordinate system:\", crs_object.coordinate_system)\n",
     "\n",
     "# Bounds of the area where CRS is used\n",
-    "#print(\"Bounds:\", data_crs.area_of_use.bounds)"
+    "print(\"Bounds:\", crs_object.area_of_use.bounds)"
    ]
   },
   {
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "You can easily explore all the possible information that can be extracted from the CRS by typing `data_crs.` and pressing Tabulator. \n",
+    "You can easily explore all the possible information that can be extracted from the CRS by typing `crs_info.` and pressing Tabulator. \n",
     "\n",
     "Let's see how we can convert the crs information from one format to another. Quite often it is useful to know the EPSG code of the CRS. Next, we will conduct a few transformations to demonstrate the capabilities of the `CRS` class."
    ]
@@ -374,14 +395,14 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "PROJCRS[\"unknown\",BASEGEOGCRS[\"unknown\",DATUM[\"Unknown based on GRS80 ellipsoid\",ELLIPSOID[\"GRS 1980\",6378137,298.257222101,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",7019]]],PRIMEM[\"Greenwich\",0,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8901]]],CONVERSION[\"unknown\",METHOD[\"Lambert Azimuthal Equal Area\",ID[\"EPSG\",9820]],PARAMETER[\"Latitude of natural origin\",52,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8801]],PARAMETER[\"Longitude of natural origin\",10,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8802]],PARAMETER[\"False easting\",4321000,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8806]],PARAMETER[\"False northing\",3210000,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8807]]],CS[Cartesian,2],AXIS[\"(E)\",east,ORDER[1],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]],AXIS[\"(N)\",north,ORDER[2],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]]]\n"
+      "PROJCRS[\"ETRS89-extended / LAEA Europe\",BASEGEOGCRS[\"ETRS89\",DATUM[\"European Terrestrial Reference System 1989\",ELLIPSOID[\"GRS 1980\",6378137,298.257222101,LENGTHUNIT[\"metre\",1]]],PRIMEM[\"Greenwich\",0,ANGLEUNIT[\"degree\",0.0174532925199433]],ID[\"EPSG\",4258]],CONVERSION[\"Europe Equal Area 2001\",METHOD[\"Lambert Azimuthal Equal Area\",ID[\"EPSG\",9820]],PARAMETER[\"Latitude of natural origin\",52,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8801]],PARAMETER[\"Longitude of natural origin\",10,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8802]],PARAMETER[\"False easting\",4321000,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8806]],PARAMETER[\"False northing\",3210000,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8807]]],CS[Cartesian,2],AXIS[\"northing (Y)\",north,ORDER[1],LENGTHUNIT[\"metre\",1]],AXIS[\"easting (X)\",east,ORDER[2],LENGTHUNIT[\"metre\",1]],USAGE[SCOPE[\"unknown\"],AREA[\"Europe - LCC & LAEA\"],BBOX[24.6,-35.58,84.17,44.83]],ID[\"EPSG\",3035]]\n"
      ]
     }
    ],
    "source": [
     "# Retrive CRS information in WKT format\n",
-    "wkt_crs = data_crs.to_wkt()\n",
-    "print(wkt_crs)"
+    "crs_wkt = crs_object.to_wkt()\n",
+    "print(crs_wkt)"
    ]
   },
   {
@@ -400,13 +421,13 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "None\n"
+      "3035\n"
      ]
     }
    ],
    "source": [
     "# Retrieve EPSG code from WKT text\n",
-    "epsg = CRS(wkt_crs).to_epsg()\n",
+    "epsg = CRS(crs_wkt).to_epsg()\n",
     "print(epsg)"
    ]
   },
@@ -414,68 +435,72 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "Oops, what happened? It seems that the tool wasn't able to recognize the EPSG code from the WKT. This happened because `to_epsg()` function wasn't sure enough about the EPSG code of the CRS, so it did not provide any information. Luckily, we can easily adjust the minimum level of confidence for matching the CRS info and the EPSG code. We can do this by adjusting a parameter `min_confidence` when calling the function. By default, the confidence level is 70 %, but let's see if lowering it helps us for retrieving the EPSG code from the WKT."
+    "<div class=\"alert alert-info\">\n",
+    "\n",
+    "**Not able to recognize epsg?**\n",
+    "    \n",
+    "Sometimes `to_epsg()` isn't able to recognize the EPSG code from the WKT representation. This can happen if the WKT information is missing some details. Luckily, we can easily adjust the minimum level of confidence for matching the CRS info and the EPSG code. We can do this by adjusting a parameter `min_confidence` when calling the function. By default, the confidence level is 70 %, but it is also possible to set a lower confidence threshold. \n",
+    "    \n",
+    "The coordinate information of our input shapefile is incomplete, and does not yield an epsg value with default setting: However, CRS is able to determine the EPSG value with a lower confidence treshold: \n",
+    "    \n",
+    "```\n",
+    "# Let's try to extract the EPSG code from the crs of our original data:\n",
+    "CRS(data.crs).to_epsg()\n",
+    ">>> None\n",
+    "    \n",
+    "# Let's try it again with a lower confidence requirement (25 %)\n",
+    "CRS(data.crs).to_epsg(min_confidence=25)\n",
+    ">>> 3035\n",
+    "```\n",
+    "However, be cautious when using this, as guessing the EPSG from \"exotic\" coordinate reference systems might also provide false results. \n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Let's now save our data to disk using the `WKT` format as the crs of our GeoDataFrame. WKT is a [preferred output format](https://proj.org/faq.html#what-is-the-best-format-for-describing-coordinate-reference-systems) for crs information:"
    ]
   },
   {
    "cell_type": "code",
    "execution_count": 13,
    "metadata": {},
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "3035\n"
-     ]
-    }
-   ],
+   "outputs": [],
    "source": [
-    "# Let's try to extract the EPSG code with a lower confidence requirement (25 %)\n",
-    "epsg = CRS(wkt_crs).to_epsg(min_confidence=25)\n",
-    "print(epsg)"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
-    "As we can see, by lowering the confidence requirement, it was possible to extract the correct EPSG code from the WKT (3035). However, be cautious when using this, as guessing the EPSG from \"exotic\" coordinate reference systems might also provide false results. \n",
-    "\n",
-    "Let's now, as a final step, save our data to disk using the `WKT` format as the crs of our GeoDataFrame."
+    "# Re-define the CRS of the input GeoDataFrame \n",
+    "data.crs = CRS.from_epsg(3035).to_wkt()"
    ]
   },
   {
    "cell_type": "code",
    "execution_count": 14,
    "metadata": {},
-   "outputs": [],
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "PROJCRS[\"ETRS89-extended / LAEA Europe\",BASEGEOGCRS[\"ETRS89\",DATUM[\"European Terrestrial Reference System 1989\",ELLIPSOID[\"GRS 1980\",6378137,298.257222101,LENGTHUNIT[\"metre\",1]]],PRIMEM[\"Greenwich\",0,ANGLEUNIT[\"degree\",0.0174532925199433]],ID[\"EPSG\",4258]],CONVERSION[\"Europe Equal Area 2001\",METHOD[\"Lambert Azimuthal Equal Area\",ID[\"EPSG\",9820]],PARAMETER[\"Latitude of natural origin\",52,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8801]],PARAMETER[\"Longitude of natural origin\",10,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8802]],PARAMETER[\"False easting\",4321000,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8806]],PARAMETER[\"False northing\",3210000,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8807]]],CS[Cartesian,2],AXIS[\"northing (Y)\",north,ORDER[1],LENGTHUNIT[\"metre\",1]],AXIS[\"easting (X)\",east,ORDER[2],LENGTHUNIT[\"metre\",1]],USAGE[SCOPE[\"unknown\"],AREA[\"Europe - LCC & LAEA\"],BBOX[24.6,-35.58,84.17,44.83]],ID[\"EPSG\",3035]]\n"
+     ]
+    }
+   ],
    "source": [
-    "# Update the CRS of the GeoDataFrame with WKT\n",
-    "data.crs = wkt_crs\n",
-    "\n",
-    "# Ouput filepath\n",
-    "outfp = \"L2_data/Europe_borders_epsg3035.shp\"\n",
-    "    \n",
-    "# Save to disk\n",
-    "#data.to_file(outfp)"
+    "print(data.crs)"
    ]
   },
   {
    "cell_type": "code",
    "execution_count": 15,
    "metadata": {},
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "PROJCRS[\"unknown\",BASEGEOGCRS[\"unknown\",DATUM[\"Unknown based on GRS80 ellipsoid\",ELLIPSOID[\"GRS 1980\",6378137,298.257222101,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",7019]]],PRIMEM[\"Greenwich\",0,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8901]]],CONVERSION[\"unknown\",METHOD[\"Lambert Azimuthal Equal Area\",ID[\"EPSG\",9820]],PARAMETER[\"Latitude of natural origin\",52,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8801]],PARAMETER[\"Longitude of natural origin\",10,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8802]],PARAMETER[\"False easting\",4321000,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8806]],PARAMETER[\"False northing\",3210000,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8807]]],CS[Cartesian,2],AXIS[\"(E)\",east,ORDER[1],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]],AXIS[\"(N)\",north,ORDER[2],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]]]\n"
-     ]
-    }
-   ],
+   "outputs": [],
    "source": [
-    "print(data.crs)"
+    "# Ouput filepath\n",
+    "outfp = \"L2_data/Europe_borders_epsg3035.shp\"\n",
+    "    \n",
+    "# Save to disk\n",
+    "#data.to_file(outfp)"
    ]
   },
   {
@@ -486,6 +511,71 @@
     "\n",
     "\n",
     "**HINT**: A module called [PyCRS](https://github.com/karimbahgat/PyCRS) can also be useful library as it contains information and supports many different coordinate reference definitions, such as OGC WKT (v1), ESRI WKT, Proj4, and any EPSG, ESRI, or SR-ORG code available from spatialreference.org."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Overview of different crs formats\n",
+    "\n",
+    "Summary of different ways of representing crs information using pyproj CRS:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 55,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# PROJ dictionary:\n",
+    "wgs84_dict = data_wgs84.crs\n",
+    "\n",
+    "# pyproj CRS object:\n",
+    "wgs84_object = CRS(data_wgs84.crs)\n",
+    "\n",
+    "# EPSG code (here, the input crs information is a bit vague so we need to lower the confidence threshold)\n",
+    "wgs84_epsg = CRS(data_wgs84.crs).to_epsg(min_confidence=25)\n",
+    "\n",
+    "# PROJ string\n",
+    "wgs84_proj4 = CRS(data_wgs84.crs).to_proj4()\n",
+    "\n",
+    "# Well-Known Text (WKT)\n",
+    "wgs84_wkt = CRS(data_wgs84.crs).to_wkt()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 54,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "PROJ dictionary:\n",
+      " {'init': 'epsg:4326'}\n",
+      "\n",
+      "EPSG code: \n",
+      " 4326\n",
+      "\n",
+      "CRS object:\n",
+      " +init=epsg:4326 +type=crs\n",
+      "\n",
+      "PROJ string: \n",
+      " +proj=longlat +datum=WGS84 +no_defs +type=crs\n",
+      "\n",
+      "Well-Known Text (WKT):\n",
+      " GEOGCRS[\"WGS 84\",DATUM[\"World Geodetic System 1984\",ELLIPSOID[\"WGS 84\",6378137,298.257223563,LENGTHUNIT[\"metre\",1]],ID[\"EPSG\",6326]],PRIMEM[\"Greenwich\",0,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8901]],CS[ellipsoidal,2],AXIS[\"longitude\",east,ORDER[1],ANGLEUNIT[\"degree\",0.0174532925199433,ID[\"EPSG\",9122]]],AXIS[\"latitude\",north,ORDER[2],ANGLEUNIT[\"degree\",0.0174532925199433,ID[\"EPSG\",9122]]],USAGE[SCOPE[\"unknown\"],AREA[\"World\"],BBOX[-90,-180,90,180]]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(\"PROJ dictionary:\\n\", wgs84_dict)\n",
+    "print(\"\\nEPSG code: \\n\", wgs84_epsg)\n",
+    "print(\"\\nCRS object:\\n\", wgs84_object)\n",
+    "print(\"\\nPROJ string: \\n\", wgs84_proj4)\n",
+    "print(\"\\nWell-Known Text (WKT):\\n\",wgs84_wkt) "
    ]
   },
   {
@@ -657,7 +747,7 @@
     {
      "data": {
       "text/plain": [
-       "<matplotlib.axes._subplots.AxesSubplot at 0x7f2f9133a320>"
+       "<matplotlib.axes._subplots.AxesSubplot at 0x7f1928771128>"
       ]
      },
      "execution_count": 20,
@@ -906,17 +996,17 @@
     "\n",
     "During this tutorial we have seen how to \n",
     "\n",
-    "**1)** define the coordinate reference system with a few different approaches, mainly by:\n",
-    "\n",
-    " - specifying the coordinate reference system with crs dictionary e.g. `{'init': 'epsg:4326'}`\n",
-    " - specifying the coordinate reference system with alternative CRS formats using pyproj library, e.g. `CRS.from_epsg(4326).to_proj4()`\n",
-    " - specifying slightly less common CRS (Azimuthal Equidistant) with Proj4-string using pyproj library: `pyproj.Proj(proj='aeqd', ellps='WGS84', datum='WGS84', lat_0=hki_lat, lon_0=hki_lon).srs`\n",
-    " - A fourth option that was not covered in the materials is to use a library called `fiona` and its function `from_epsg()`. See documentation about this from [here](http://toblerity.org/fiona/manual.html#format-drivers-crs-bounds-and-schema) if you are interested. We also quickly introduced this in the [previous tutorial](geopandas-basics.ipynb).\n",
-    " \n",
-    "**2)** reproject (transform) the geometries from crs to another using the `to_crs()` -function in GeoPandas\n",
-    "\n",
-    "**3)** calculate distances between locations and using `apply()` -function to iterate over rows more efficiently than using `iterrows()`. "
+    "1. define the coordinate reference system in different formats\n",
+    "2. reproject (transform) the geometries from crs to another using the `to_crs()` -function in GeoPandas\n",
+    "3. calculate distances between locations and using `apply()` -function to iterate over rows more efficiently than using `iterrows()`. "
    ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
   }
  ],
  "metadata": {
