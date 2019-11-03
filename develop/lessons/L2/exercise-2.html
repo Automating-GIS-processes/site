@@ -140,6 +140,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#hints">Hints</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#converting-pandas-dataframe-into-a-geodataframe">Converting Pandas DataFrame into a GeoDataFrame</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#alternatives-for-iterrows">Alternatives for iterrows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#setting-userid-as-index-optional">Setting userid as index (optional!)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adding-items-to-a-geo-dataframe">Adding items to a (Geo)DataFrame</a></li>
 </ul>
 </li>
 </ul>
@@ -338,6 +340,19 @@ Note that you should not try to make changes to this copy of the exercise, but r
 <span class="n">df</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">geom</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="setting-userid-as-index-optional">
+<h3>Setting userid as index (optional!)<a class="headerlink" href="#setting-userid-as-index-optional" title="Permalink to this headline">¶</a></h3>
+<p>When creating the <cite>movements</cite> geodataframe, it might be useful to pre-define the index like this: <cite>index = data[“userid”].unique()</cite> when using the <cite>gpd.GeoDataFrame()</cite> constructor. Later on, you can use this index when adding geometries to that geodataframe.</p>
+</div>
+<div class="section" id="adding-items-to-a-geo-dataframe">
+<h3>Adding items to a (Geo)DataFrame<a class="headerlink" href="#adding-items-to-a-geo-dataframe" title="Permalink to this headline">¶</a></h3>
+<p>In this exercise, you need to add/append items to a (geo)dataframe iteratively (one row at a time). When adding new information to a dataframe, you can use the <cite>.at</cite> or <cite>.loc</cite> indexer like in this example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add a point object into the geometry-column on the first row (here, the row-label is 0)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">point</span>
+</pre></div>
+</div>
+<p>As an alternative, you can also add new rows of data using the <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.append.html">append method</a>.</p>
 </div>
 </div>
 </div>

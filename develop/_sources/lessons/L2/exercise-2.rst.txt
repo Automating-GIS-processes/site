@@ -110,3 +110,21 @@ There are other **faster** solutions for this. Check out the following examples,
         geom.append(Point(x, y))
 
     df['geometry'] = geom
+    
+
+Setting userid as index (optional!)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+When creating the `movements` geodataframe, it might be useful to pre-define the index like this: `index = data["userid"].unique()` when using the `gpd.GeoDataFrame()` constructor. Later on, you can use this index when adding geometries to that geodataframe.
+
+Adding items to a (Geo)DataFrame
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+In this exercise, you need to add/append items to a (geo)dataframe iteratively (one row at a time). When adding new information to a dataframe, you can use the `.at` or `.loc` indexer like in this example: 
+
+.. code:: python
+
+    # Add a point object into the geometry-column on the first row (here, the row-label is 0)
+    df.at[0, 'geometry'] = point
+    
+
+As an alternative, you can also add new rows of data using the `append method <http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.append.html>`__.
