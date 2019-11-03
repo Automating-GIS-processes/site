@@ -51,3 +51,62 @@ Quite often you are in a situation where you have read data e.g. from text file 
     geopandas.geodataframe.GeoDataFrame
 
 Now we have converted Pandas DataFrame into a proper GeoDataFrame that we can export into a Shapefile for instance.
+
+
+
+Alternatives for iterrows
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In exercise 2, problem 2 you need to create Shapely Points for each row of data. Our input data set is rather large, so the iterrows-approach will be rather slow. You can try this approach, but prepare to wait for a while for the code to run!
+
+.. code:: python
+
+    #-----------------------------------------
+
+    # OPTION 1: Iterate over dataframe rows:
+    for idx, row in df.iterrows():
+
+        # create a point based on x and y column values on this row:
+        point = Point(row['x'], row['y'])
+
+        # Add the point object to the geometry column on this row:
+        df.at[idx, 'geometry'] = point
+        
+        
+        
+There are other **faster** solutions for this. Check out the following examples, and try to understand what happens in them. Pick one of these solutions and use it in problem 2 :) You'll need to change the variable and column names.
+
+.. code:: python
+
+    #-----------------------------------------
+
+    # OPTION 2: apply a function
+
+    # Define a function for creating points from row values
+    def create_point(row):
+        '''Returns a shapely point object based on values in x and y columns'''
+
+        point = Point(row['x'], row['y'])
+
+        return point
+
+    # Apply the function to each row 
+    df['geometry'] = df.apply(create_point, axis=1)
+
+    #-----------------------------------------
+
+
+    # OPTION 3: apply a lambda function
+    # see: https://docs.python.org/3.5/tutorial/controlflow.html#lambda-expressions
+
+    df['geometry'] = df.apply(lambda row: Point(row['x'], row['y']), axis=1)
+
+    #-----------------------------------------
+
+    # OPTION 4: zip and for-loop
+
+    geom = []
+    for x, y in zip(df['x'], df['y']):
+        geom.append(Point(x, y))
+
+    df['geometry'] = geom

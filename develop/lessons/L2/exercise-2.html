@@ -139,6 +139,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Exercise 2</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#hints">Hints</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#converting-pandas-dataframe-into-a-geodataframe">Converting Pandas DataFrame into a GeoDataFrame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#alternatives-for-iterrows">Alternatives for iterrows</a></li>
 </ul>
 </li>
 </ul>
@@ -286,6 +287,57 @@ Note that you should not try to make changes to this copy of the exercise, but r
 </pre></div>
 </div>
 <p>Now we have converted Pandas DataFrame into a proper GeoDataFrame that we can export into a Shapefile for instance.</p>
+</div>
+<div class="section" id="alternatives-for-iterrows">
+<h3>Alternatives for iterrows<a class="headerlink" href="#alternatives-for-iterrows" title="Permalink to this headline">¶</a></h3>
+<p>In exercise 2, problem 2 you need to create Shapely Points for each row of data. Our input data set is rather large, so the iterrows-approach will be rather slow. You can try this approach, but prepare to wait for a while for the code to run!</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#-----------------------------------------</span>
+
+<span class="c1"># OPTION 1: Iterate over dataframe rows:</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+
+    <span class="c1"># create a point based on x and y column values on this row:</span>
+    <span class="n">point</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
+
+    <span class="c1"># Add the point object to the geometry column on this row:</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">point</span>
+</pre></div>
+</div>
+<p>There are other <strong>faster</strong> solutions for this. Check out the following examples, and try to understand what happens in them. Pick one of these solutions and use it in problem 2 :) You’ll need to change the variable and column names.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#-----------------------------------------</span>
+
+<span class="c1"># OPTION 2: apply a function</span>
+
+<span class="c1"># Define a function for creating points from row values</span>
+<span class="k">def</span> <span class="nf">create_point</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Returns a shapely point object based on values in x and y columns&#39;&#39;&#39;</span>
+
+    <span class="n">point</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">point</span>
+
+<span class="c1"># Apply the function to each row</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">create_point</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">#-----------------------------------------</span>
+
+
+<span class="c1"># OPTION 3: apply a lambda function</span>
+<span class="c1"># see: https://docs.python.org/3.5/tutorial/controlflow.html#lambda-expressions</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">Point</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">#-----------------------------------------</span>
+
+<span class="c1"># OPTION 4: zip and for-loop</span>
+
+<span class="n">geom</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]):</span>
+    <span class="n">geom</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">geom</span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>
