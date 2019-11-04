@@ -18,26 +18,30 @@ After this week, you should know how to:
  - Create geometries into GeoDataFrame
  - Change the coordinate reference system of the data
 
+
+
 Sources
 -------
 
-These materials are partly based on `Geopandas documentation <http://geopandas.org/>`_.
+This lesson partly based on `Geopandas documentation <http://geopandas.org/>`_.
+
 
 Lecture videos
 --------------
 
-.. admonition:: Lesson 2.1 - Introduction to Geopandas
+*videos are added here after the lesson*
+
+.. admonition:: Lesson 2
 
     .. raw:: html
 
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/4zSLRpXZAIU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <p>Henrikki Tenkanen, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p>
+        <iframe width="560" height="315" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <p>Vuokko Heikinheimo, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p>
 
-.. admonition:: Lesson 2.2 - Managing map projections
 
-    .. raw:: html
 
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/FizD8t5_s3M" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <p>Henrikki Tenkanen, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p>
+
+
+
 
 
