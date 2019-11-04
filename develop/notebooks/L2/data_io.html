@@ -485,6 +485,47 @@ This page was generated from <a class="reference external" href="https://github.
 </pre></div>
 </div>
 </div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Available drivers in geopandas/fiona. Same as: fiona.supported_drivers</span>
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span class="n">gpd</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">fiona</span><span class="o">.</span><span class="n">drvsupport</span><span class="o">.</span><span class="n">supported_drivers</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>{&#39;AeronavFAA&#39;: &#39;r&#39;,
+ &#39;ARCGEN&#39;: &#39;r&#39;,
+ &#39;BNA&#39;: &#39;raw&#39;,
+ &#39;DXF&#39;: &#39;raw&#39;,
+ &#39;CSV&#39;: &#39;raw&#39;,
+ &#39;OpenFileGDB&#39;: &#39;r&#39;,
+ &#39;ESRIJSON&#39;: &#39;r&#39;,
+ &#39;ESRI Shapefile&#39;: &#39;raw&#39;,
+ &#39;GeoJSON&#39;: &#39;rw&#39;,
+ &#39;GeoJSONSeq&#39;: &#39;rw&#39;,
+ &#39;GPKG&#39;: &#39;rw&#39;,
+ &#39;GML&#39;: &#39;raw&#39;,
+ &#39;GPX&#39;: &#39;raw&#39;,
+ &#39;GPSTrackMaker&#39;: &#39;raw&#39;,
+ &#39;Idrisi&#39;: &#39;r&#39;,
+ &#39;MapInfo File&#39;: &#39;raw&#39;,
+ &#39;DGN&#39;: &#39;raw&#39;,
+ &#39;PCIDSK&#39;: &#39;r&#39;,
+ &#39;S57&#39;: &#39;r&#39;,
+ &#39;SEGY&#39;: &#39;r&#39;,
+ &#39;SUA&#39;: &#39;r&#39;,
+ &#39;TopoJSON&#39;: &#39;r&#39;}
+</pre></div>
+</div>
+</div>
 <div class="section" id="Read-/-write-Shapefile">
 <h2>Read / write Shapefile<a class="headerlink" href="#Read-/-write-Shapefile" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
