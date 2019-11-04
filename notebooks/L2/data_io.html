@@ -1,0 +1,904 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-88382509-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Vector Data I/O in Python &mdash; AutoGIS site documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'site',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Introduction to Geopandas" href="geopandas-basics.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="../../lessons/L2/quiz.html" />
+    <link href="../../_static/geo-python.css" rel="stylesheet" type="text/css">
+     
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> AutoGIS
+          
+
+          
+            
+            <img src="../../_static/logo_hy_geo_135.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2019
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Course information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/course-info.html">General info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/course-environment-components.html">Course environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/grading.html">Grading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/learning-goals.html">Learning goals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/Installing_Anacondas_GIS.html">Installing Python + GIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/License-terms.html">License and terms of usage</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 1</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L1/Intro-Python-GIS.html">Motivation for the course</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L1/overview.html">Lesson overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1/geometric-objects.html">Shapely and geometric objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L1/exercise-1.html">Exercise 1</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 2</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L2/overview.html">Lesson 2 Overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Vector Data I/O in Python</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Read-/-write-Shapefile">Read / write Shapefile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Read-/-write-GeoJSON">Read / write GeoJSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Read-/-write-KML">Read / write KML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Read-/-write-Geopackage">Read / write Geopackage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Read-/-write-GeoDatabase">Read / write GeoDatabase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Read-/-write-MapInfo-Tab">Read / write MapInfo Tab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Read-PostGIS-database-using-psycopg2">Read PostGIS database using psycopg2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Read-/-write-PostGIS-database-using-SqlAlchemy-+-GeoAlchemy">Read / write PostGIS database using SqlAlchemy + GeoAlchemy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Read-/-write-Spatialite-database">Read / write Spatialite database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Read-Web-Feature-Service-(WFS)">Read Web Feature Service (WFS)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="geopandas-basics.html">Introduction to Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projections.html">Map projections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calculating-distances.html">Calculating distances</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geopandas-geometries.html">Creating new layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L2/exercise-2.html">Exercise 2</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AutoGIS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Vector Data I/O in Python</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/Automating-GIS-processes/site/blob/master/source/notebooks/L2/data_io.ipynb" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+
+
+
+
+
+
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 5ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    background: #f5f5f5;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="admonition note">
+This page was generated from <a class="reference external" href="https://github.com/Automating-GIS-processes/site/blob/master/source/notebooks/L2/data_io.ipynb">source/notebooks/L2/data_io.ipynb</a>.
+<span class="raw-html"><br/><a href="https://mybinder.org/v2/gh/Automating-GIS-processes/site/master?urlpath=lab/tree/source/notebooks/L2/data_io.ipynb"><img alt="Binder badge" src="https://img.shields.io/badge/launch-full%20binder-red.svg" style="vertical-align:text-bottom"></a></span>
+<span class="raw-html"><a href="https://mybinder.org/v2/gh/Automating-GIS-processes/notebooks/master?urlpath=lab/tree/notebooks/L2/data_io.ipynb"><img alt="Binder badge" src="https://img.shields.io/badge/launch-student%20binder-red.svg" style="vertical-align:text-bottom"></a></span>
+<span class="raw-html"><a href="https://notebooks.csc.fi/#/blueprint/8d7886c2f0ac402aa99235f8d289a52b"><img alt="CSC badge" src="https://img.shields.io/badge/launch-CSC%20notebook-blue.svg" style="vertical-align:text-bottom"></a></span></div>
+<div class="section" id="Vector-Data-I/O-in-Python">
+<h1>Vector Data I/O in Python<a class="headerlink" href="#Vector-Data-I/O-in-Python" title="Permalink to this headline">¶</a></h1>
+<p>There are various different file formats and data sources for geographic information. This tutorial will show some typical examples how to read (and write) data from different sources.</p>
+<ul class="simple">
+<li>To see all possible file formats supported by GDAL, execute following:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># See all available drivers supported by GDAL</span>
+<span class="kn">import</span> <span class="nn">fiona</span>
+<span class="kn">from</span> <span class="nn">fiona._drivers</span> <span class="kn">import</span> <span class="n">GDALEnv</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">GDALEnv</span><span class="p">()</span>
+
+<span class="c1"># This will print all available Drivers supported by GDAL</span>
+<span class="c1"># All these can be used for reading data from them</span>
+<span class="c1"># and most often also writing data into</span>
+
+<span class="n">env</span><span class="o">.</span><span class="n">start</span><span class="p">()</span><span class="o">.</span><span class="n">drivers</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>dict_keys([&#39;PCIDSK&#39;, &#39;netCDF&#39;, &#39;PDS4&#39;, &#39;JP2OpenJPEG&#39;, &#39;PDF&#39;, &#39;MBTiles&#39;, &#39;EEDA&#39;, &#39;ESRI Shapefile&#39;, &#39;MapInfo File&#39;, &#39;UK .NTF&#39;, &#39;OGR_SDTS&#39;, &#39;S57&#39;, &#39;DGN&#39;, &#39;OGR_VRT&#39;, &#39;REC&#39;, &#39;Memory&#39;, &#39;BNA&#39;, &#39;CSV&#39;, &#39;NAS&#39;, &#39;GML&#39;, &#39;GPX&#39;, &#39;LIBKML&#39;, &#39;KML&#39;, &#39;GeoJSON&#39;, &#39;GeoJSONSeq&#39;, &#39;ESRIJSON&#39;, &#39;TopoJSON&#39;, &#39;Interlis 1&#39;, &#39;Interlis 2&#39;, &#39;OGR_GMT&#39;, &#39;GPKG&#39;, &#39;SQLite&#39;, &#39;OGR_DODS&#39;, &#39;WAsP&#39;, &#39;PostgreSQL&#39;, &#39;OpenFileGDB&#39;, &#39;XPlane&#39;, &#39;DXF&#39;, &#39;CAD&#39;, &#39;Geoconcept&#39;, &#39;GeoRSS&#39;, &#39;GPSTrackMaker&#39;, &#39;VFK&#39;, &#39;PGDUMP&#39;, &#39;OSM&#39;, &#39;GPSBabel&#39;, &#39;SUA&#39;, &#39;OpenAir&#39;, &#39;OGR_PDS&#39;, &#39;WFS&#39;, &#39;WFS3&#39;, &#39;HTF&#39;, &#39;AeronavFAA&#39;, &#39;EDIGEO&#39;, &#39;GFT&#39;, &#39;SVG&#39;, &#39;CouchDB&#39;, &#39;Cloudant&#39;, &#39;Idrisi&#39;, &#39;ARCGEN&#39;, &#39;SEGUKOOA&#39;, &#39;SEGY&#39;, &#39;XLS&#39;, &#39;ODS&#39;, &#39;XLSX&#39;, &#39;ElasticSearch&#39;, &#39;Carto&#39;, &#39;AmigoCloud&#39;, &#39;SXF&#39;, &#39;Selafin&#39;, &#39;JML&#39;, &#39;PLSCENES&#39;, &#39;CSW&#39;, &#39;VDV&#39;, &#39;GMLAS&#39;, &#39;MVT&#39;, &#39;TIGER&#39;, &#39;AVCBin&#39;, &#39;AVCE00&#39;, &#39;NGW&#39;, &#39;HTTP&#39;])
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Available drivers in geopandas/fiona. Same as: fiona.supported_drivers</span>
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span class="n">gpd</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">fiona</span><span class="o">.</span><span class="n">drvsupport</span><span class="o">.</span><span class="n">supported_drivers</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>{&#39;AeronavFAA&#39;: &#39;r&#39;,
+ &#39;ARCGEN&#39;: &#39;r&#39;,
+ &#39;BNA&#39;: &#39;raw&#39;,
+ &#39;DXF&#39;: &#39;raw&#39;,
+ &#39;CSV&#39;: &#39;raw&#39;,
+ &#39;OpenFileGDB&#39;: &#39;r&#39;,
+ &#39;ESRIJSON&#39;: &#39;r&#39;,
+ &#39;ESRI Shapefile&#39;: &#39;raw&#39;,
+ &#39;GeoJSON&#39;: &#39;rw&#39;,
+ &#39;GeoJSONSeq&#39;: &#39;rw&#39;,
+ &#39;GPKG&#39;: &#39;rw&#39;,
+ &#39;GML&#39;: &#39;raw&#39;,
+ &#39;GPX&#39;: &#39;raw&#39;,
+ &#39;GPSTrackMaker&#39;: &#39;raw&#39;,
+ &#39;Idrisi&#39;: &#39;r&#39;,
+ &#39;MapInfo File&#39;: &#39;raw&#39;,
+ &#39;DGN&#39;: &#39;raw&#39;,
+ &#39;PCIDSK&#39;: &#39;r&#39;,
+ &#39;S57&#39;: &#39;r&#39;,
+ &#39;SEGY&#39;: &#39;r&#39;,
+ &#39;SUA&#39;: &#39;r&#39;,
+ &#39;TopoJSON&#39;: &#39;r&#39;}
+</pre></div>
+</div>
+</div>
+<div class="section" id="Read-/-write-Shapefile">
+<h2>Read / write Shapefile<a class="headerlink" href="#Read-/-write-Shapefile" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+
+<span class="c1"># Read file from Shapefile</span>
+<span class="n">fp</span> <span class="o">=</span> <span class="s2">&quot;L2_data/Finland.shp&quot;</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+
+<span class="c1"># Write to Shapefile (just make a copy)</span>
+<span class="n">outfp</span> <span class="o">=</span> <span class="s2">&quot;L2_data/Finland_copy.shp&quot;</span>
+<span class="n">data</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">outfp</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Read-/-write-GeoJSON">
+<h2>Read / write GeoJSON<a class="headerlink" href="#Read-/-write-GeoJSON" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+
+<span class="c1"># Read file from GeoJSON</span>
+<span class="n">fp</span> <span class="o">=</span> <span class="s2">&quot;L2_data/Finland.geojson&quot;</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s2">&quot;GeoJSON&quot;</span><span class="p">)</span>
+
+<span class="c1"># Write to GeoJSON (just make a copy)</span>
+<span class="n">outfp</span> <span class="o">=</span> <span class="s2">&quot;L2_data/Finland_copy.geojson&quot;</span>
+<span class="n">data</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">outfp</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s2">&quot;GeoJSON&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Read-/-write-KML">
+<h2>Read / write KML<a class="headerlink" href="#Read-/-write-KML" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+
+<span class="c1"># Enable KML driver</span>
+<span class="n">gpd</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">fiona</span><span class="o">.</span><span class="n">drvsupport</span><span class="o">.</span><span class="n">supported_drivers</span><span class="p">[</span><span class="s1">&#39;KML&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;rw&#39;</span>
+
+<span class="c1"># Read file from KML</span>
+<span class="n">fp</span> <span class="o">=</span> <span class="s2">&quot;L2_data/Finland.kml&quot;</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+
+<span class="c1"># Write to KML (just make a copy)</span>
+<span class="n">outfp</span> <span class="o">=</span> <span class="s2">&quot;L2_data/Finland_copy.kml&quot;</span>
+<span class="n">data</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">outfp</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s2">&quot;KML&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Read-/-write-Geopackage">
+<h2>Read / write Geopackage<a class="headerlink" href="#Read-/-write-Geopackage" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+
+<span class="c1"># Read file from Geopackage</span>
+<span class="n">fp</span> <span class="o">=</span> <span class="s2">&quot;L2_data/Finland.gpkg&quot;</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+
+<span class="c1"># Write to Geopackage (just make a copy)</span>
+<span class="n">outfp</span> <span class="o">=</span> <span class="s2">&quot;L2_data/Finland_copy.gpkg&quot;</span>
+<span class="n">data</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">outfp</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s2">&quot;GPKG&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Read-/-write-GeoDatabase">
+<h2>Read / write GeoDatabase<a class="headerlink" href="#Read-/-write-GeoDatabase" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+
+<span class="c1"># Read file from File Geodatabase</span>
+<span class="n">fp</span> <span class="o">=</span> <span class="s2">&quot;L2_data/Finland.gdb&quot;</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s2">&quot;FileGDB&quot;</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="s1">&#39;country&#39;</span><span class="p">)</span>
+
+<span class="c1"># Write to same FileGDB (just add a new layer)</span>
+<span class="n">outfp</span> <span class="o">=</span> <span class="s2">&quot;L2_data/Finland.gdb&quot;</span>
+<span class="n">data</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">outfp</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s2">&quot;FileGDB&quot;</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="s2">&quot;country_copy&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Read-/-write-MapInfo-Tab">
+<h2>Read / write MapInfo Tab<a class="headerlink" href="#Read-/-write-MapInfo-Tab" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Read file from MapInfo Tab</span>
+<span class="n">fp</span> <span class="o">=</span> <span class="s2">&quot;L2_data/Finland.tab&quot;</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s2">&quot;MapInfo File&quot;</span><span class="p">)</span>
+
+<span class="c1"># Write to same FileGDB (just add a new layer)</span>
+<span class="n">outfp</span> <span class="o">=</span> <span class="s2">&quot;L2_data/Finland_copy.tab&quot;</span>
+<span class="n">data</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">outfp</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s2">&quot;MapInfo File&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Read-PostGIS-database-using-psycopg2">
+<h2>Read PostGIS database using psycopg2<a class="headerlink" href="#Read-PostGIS-database-using-psycopg2" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span> <span class="nn">psycopg2</span>
+
+<span class="c1"># Create connection to database with psycopg2 module (update params according your db)</span>
+<span class="n">conn</span><span class="p">,</span> <span class="n">cursor</span> <span class="o">=</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">dbname</span><span class="o">=</span><span class="s1">&#39;my_postgis_database&#39;</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="s1">&#39;my_usrname&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;my_pwd&#39;</span><span class="p">,</span>
+                                <span class="n">host</span><span class="o">=</span><span class="s1">&#39;123.22.432.16&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">5432</span><span class="p">)</span>
+
+<span class="c1"># Specify sql query</span>
+<span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;SELECT * FROM MY_TABLE;&quot;</span>
+
+<span class="c1"># Read data from PostGIS</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_postgis</span><span class="p">(</span><span class="n">sql</span><span class="o">=</span><span class="n">sql</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">conn</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Read-/-write-PostGIS-database-using-SqlAlchemy-+-GeoAlchemy">
+<h2>Read / write PostGIS database using SqlAlchemy + GeoAlchemy<a class="headerlink" href="#Read-/-write-PostGIS-database-using-SqlAlchemy-+-GeoAlchemy" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">sqlalchemy.engine.url</span> <span class="kn">import</span> <span class="n">URL</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">MetaData</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">sessionmaker</span>
+<span class="kn">from</span> <span class="nn">geoalchemy2</span> <span class="kn">import</span> <span class="n">WKTElement</span><span class="p">,</span> <span class="n">Geometry</span>
+
+<span class="c1"># Update with your db parameters</span>
+<span class="n">HOST</span> <span class="o">=</span> <span class="s1">&#39;123.234.345.16&#39;</span>
+<span class="n">DB</span> <span class="o">=</span> <span class="s1">&#39;my_database&#39;</span>
+<span class="n">USER</span> <span class="o">=</span> <span class="s1">&#39;my_user&#39;</span>
+<span class="n">PORT</span> <span class="o">=</span> <span class="mi">5432</span>
+<span class="n">PWD</span> <span class="o">=</span> <span class="s1">&#39;my_password&#39;</span>
+
+<span class="c1"># Database info</span>
+<span class="n">db_url</span> <span class="o">=</span> <span class="n">URL</span><span class="p">(</span><span class="n">drivername</span><span class="o">=</span><span class="s1">&#39;postgresql+psycopg2&#39;</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="n">HOST</span><span class="p">,</span> <span class="n">database</span><span class="o">=</span><span class="n">DB</span><span class="p">,</span>
+                   <span class="n">username</span><span class="o">=</span><span class="n">USER</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">PORT</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">PWD</span><span class="p">)</span>
+
+<span class="c1"># Create engine</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">db_url</span><span class="p">)</span>
+
+<span class="c1"># Init Metadata</span>
+<span class="n">meta</span> <span class="o">=</span> <span class="n">MetaData</span><span class="p">()</span>
+
+<span class="c1"># Load table definitions from db</span>
+<span class="n">meta</span><span class="o">.</span><span class="n">reflect</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
+
+<span class="c1"># Create session</span>
+<span class="n">Session</span> <span class="o">=</span> <span class="n">sessionmaker</span><span class="p">(</span><span class="n">bind</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
+<span class="n">session</span> <span class="o">=</span> <span class="n">Session</span><span class="p">()</span>
+
+<span class="c1"># ========================</span>
+<span class="c1"># Read data from PostGIS</span>
+<span class="c1"># ========================</span>
+
+<span class="c1"># Specify sql query</span>
+<span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;SELECT * FROM finland;&quot;</span>
+
+<span class="c1"># Pull the data</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_postgis</span><span class="p">(</span><span class="n">sql</span><span class="o">=</span><span class="n">sql</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
+
+<span class="c1"># Close session</span>
+<span class="n">session</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="c1"># =========================================</span>
+<span class="c1"># Write data to PostGIS (make a copy table)</span>
+<span class="c1"># =========================================</span>
+
+<span class="c1"># Coordinate Reference System (srid)</span>
+<span class="n">crs</span> <span class="o">=</span> <span class="mi">4326</span>
+
+<span class="c1"># Target table</span>
+<span class="n">target_table</span> <span class="o">=</span> <span class="s1">&#39;finland_copy&#39;</span>
+
+<span class="c1"># Convert Shapely geometries to WKTElements into column &#39;geom&#39; (default in PostGIS)</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;geom&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">WKTElement</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">wkt</span><span class="p">,</span> <span class="n">srid</span><span class="o">=</span><span class="n">crs</span><span class="p">))</span>
+
+<span class="c1"># Drop Shapely geometries</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Write to PostGIS (overwrite if table exists, be careful with this! )</span>
+<span class="c1"># Possible behavior: &#39;replace&#39;, &#39;append&#39;, &#39;fail&#39;</span>
+
+<span class="n">data</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="n">target_table</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Read-/-write-Spatialite-database">
+<h2>Read / write Spatialite database<a class="headerlink" href="#Read-/-write-Spatialite-database" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span> <span class="nn">sqlite3</span>
+<span class="kn">import</span> <span class="nn">shapely.wkb</span> <span class="kn">as</span> <span class="nn">swkb</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span><span class="p">,</span> <span class="n">event</span>
+
+<span class="c1"># DB path</span>
+<span class="n">dbfp</span> <span class="o">=</span> <span class="s1">&#39;L2_data/Finland.sqlite&#39;</span>
+
+<span class="c1"># Name for the table</span>
+<span class="n">tbl_name</span> <span class="o">=</span> <span class="s1">&#39;finland&#39;</span>
+
+<span class="c1"># SRID (crs of your data)</span>
+<span class="n">srid</span> <span class="o">=</span> <span class="mi">4326</span>
+
+<span class="c1"># Parse Geometry type of the input Data</span>
+<span class="n">gtype</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">geom_type</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">gtype</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Mixed Geometries! Cannot insert into SQLite table.&quot;</span>
+<span class="n">geom_type</span> <span class="o">=</span> <span class="n">gtype</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+
+<span class="c1"># Initialize database engine</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;sqlite:///{db}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">db</span><span class="o">=</span><span class="n">dbfp</span><span class="p">),</span> <span class="n">module</span><span class="o">=</span><span class="n">sqlite</span><span class="p">)</span>
+
+<span class="c1"># Initialize table without geometries</span>
+<span class="n">geo</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;geometry&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">dbfp</span><span class="p">)</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+    <span class="n">geo</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="n">tbl_name</span><span class="p">,</span> <span class="n">conn</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="c1"># Enable spatialite extension</span>
+<span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">dbfp</span><span class="p">)</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">enable_load_extension</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">load_extension</span><span class="p">(</span><span class="s2">&quot;mod_spatialite&quot;</span><span class="p">)</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT InitSpatialMetaData(1);&quot;</span><span class="p">)</span>
+    <span class="c1"># Add geometry column with specified CRS with defined geometry typehaving two dimensions</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+        <span class="s2">&quot;SELECT AddGeometryColumn({table}, &#39;wkb_geometry&#39;,</span><span class="se">\</span>
+<span class="s2">        {srid}, {geom_type}, 2);&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table</span><span class="o">=</span><span class="n">tbl_name</span><span class="p">,</span> <span class="n">srid</span><span class="o">=</span><span class="n">srid</span><span class="p">,</span> <span class="n">geom_type</span><span class="o">=</span><span class="n">geom_type</span><span class="p">)</span>
+    <span class="p">)</span>
+
+<span class="c1"># Convert Shapely geometries into well-known-binary format</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">geom</span><span class="p">:</span> <span class="n">swkb</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">geom</span><span class="p">))</span>
+
+<span class="c1"># Push to database (overwrite if table exists)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="n">tbl_name</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Read-Web-Feature-Service-(WFS)">
+<h2>Read Web Feature Service (WFS)<a class="headerlink" href="#Read-Web-Feature-Service-(WFS)" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">geojson</span>
+
+<span class="c1"># Specify the url for the backend. Here we are using data from Statistics Finland: https://www.stat.fi/org/avoindata/paikkatietoaineistot_en.html</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;http://geo.stat.fi/geoserver/vaestoruutu/wfs&#39;</span>
+
+<span class="c1"># Specify parameters (read data in json format).</span>
+<span class="c1"># Available feature types in this particular data source: http://geo.stat.fi/geoserver/vaestoruutu/wfs?service=wfs&amp;version=2.0.0&amp;request=describeFeatureType</span>
+<span class="n">params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">service</span><span class="o">=</span><span class="s1">&#39;WFS&#39;</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="s1">&#39;2.0.0&#39;</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="s1">&#39;GetFeature&#39;</span><span class="p">,</span>
+         <span class="n">typeName</span><span class="o">=</span><span class="s1">&#39;vaestoruutu:vaki2017_5km&#39;</span><span class="p">,</span> <span class="n">outputFormat</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">)</span>
+
+<span class="c1"># Fetch data from WFS using requests</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+
+<span class="c1"># Create GeoDataFrame from geojson</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="o">.</span><span class="n">from_features</span><span class="p">(</span><span class="n">geojson</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="geopandas-basics.html" class="btn btn-neutral float-right" title="Introduction to Geopandas" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../../lessons/L2/quiz.html" class="btn btn-neutral float-left" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Henrikki Tenkanen and Vuokko Heikinheimo, Digital Geography Lab, University of Helsinki
+      <span class="lastupdated">
+        Last updated on Nov 04, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+    <p> <br/> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /> </a></p>
+     
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: master
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../../2018/index.html">2018</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../../develop/notebooks/L2/data_io.html">develop</a></dd>
+            <dd><a href="../../drafts/index.html">drafts</a></dd>
+            <dd><a href="../../master/notebooks/L2/data_io.html">master</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

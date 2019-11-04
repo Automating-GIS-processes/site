@@ -58,6 +58,7 @@
   <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Creating new layers" href="../../notebooks/L2/geopandas-geometries.html" />
     <link href="../../_static/geo-python.css" rel="stylesheet" type="text/css">
      
 
@@ -127,6 +128,25 @@
 <li class="toctree-l1"><a class="reference internal" href="../L1/overview.html">Lesson overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../notebooks/L1/geometric-objects.html">Shapely and geometric objects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../L1/exercise-1.html">Exercise 1</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 2</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Lesson 2 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L2/data_io.html">Vector Data I/O in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L2/geopandas-basics.html">Introduction to Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L2/projections.html">Map projections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L2/calculating-distances.html">Calculating distances</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L2/geopandas-geometries.html">Creating new layers</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Exercise 2</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#hints">Hints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#converting-pandas-dataframe-into-a-geodataframe">Converting Pandas DataFrame into a GeoDataFrame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#alternatives-for-iterrows">Alternatives for iterrows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#setting-userid-as-index-optional">Setting userid as index (optional!)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adding-items-to-a-geo-dataframe">Adding items to a (Geo)DataFrame</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
             
@@ -227,19 +247,16 @@
 <h1>Exercise 2<a class="headerlink" href="#exercise-2" title="Permalink to this headline">¶</a></h1>
 <div class="admonition-start-your-assignment admonition">
 <p class="first admonition-title">Start your assignment</p>
-<p>You can start working on your copy of Exercise 2 by <a class="reference external" href="https://classroom.github.com/a/7GeC2bC2">accepting the GitHub Classroom assignment</a>.</p>
-<p class="last"><strong>Exercise 2 is due by Wed 14.11</strong> before the next practical session.</p>
+<p>You can start working on your copy of Exercise 2 by <a class="reference external" href="https://classroom.github.com/a/QQyBjWM2">accepting the GitHub Classroom assignment</a>.</p>
+<p class="last"><strong>Exercise 2 is due by by 16:00 on Wednesday the 13th of November 2019</strong> (day before the next practical session).</p>
 </div>
-<p>You can also take a look at the open course copy of <a class="reference external" href="https://github.com/AutoGIS-2018/Exercise-2">Exercise 2 in the course GitHub repository</a> (does not require logging in).
+<p>You can also take a look at the open course copy of <a class="reference external" href="https://github.com/AutoGIS-2019/Exercise-2">Exercise 2 in the course GitHub repository</a> (does not require logging in).
 Note that you should not try to make changes to this copy of the exercise, but rather only to the copy available via GitHub Classroom.</p>
 <div class="section" id="hints">
 <h2>Hints<a class="headerlink" href="#hints" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="converting-pandas-dataframe-into-a-geodataframe">
 <h3>Converting Pandas DataFrame into a GeoDataFrame<a class="headerlink" href="#converting-pandas-dataframe-into-a-geodataframe" title="Permalink to this headline">¶</a></h3>
-<p>Quite often you are in a situation where you have read data e.g. from text file into a Pandas DataFrame where you have latitude and longitude columns representing the location of a record.</p>
-<ul class="simple">
-<li>Let’s continue with the previous example and consider that we have a column where we have stored the shapely geometries:</li>
-</ul>
+<p>Quite often you are in a situation where you have read data e.g. from text file into a pandas DataFrame where you have latitude and longitude columns representing the location of a record. The first step is to create a column where with corresponding the shapely geometries:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 <span class="go">    value  lat  lon     geometry</span>
 <span class="go">0      0    2    4  POINT (4 2)</span>
@@ -250,28 +267,90 @@ Note that you should not try to make changes to this copy of the exercise, but r
 </pre></div>
 </div>
 <ul class="simple">
-<li>Notice that now our data is still a Pandas <strong>DataFrame</strong>, not a GeoDataFrame:</li>
+<li>Notice that the data is still a pandas <strong>DataFrame</strong>, not a GeoDataFrame:</li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 <span class="go">pandas.core.frame.DataFrame</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li>We need to convert the DataFrame into a GeoDataFrame, so that we can e.g. save it into a Shapefile. It is easily done by passing the DataFrame into a GeoDataFrame object. We need to determine</li>
+<li>We need to convert the DataFrame into a GeoDataFrame, so that we can e.g. save it into a Shapefile. It is easily done by passing the DataFrame into a GeoDataFrame object. We need to determine which column contains the geometry information (needs to be always a column called ‘geometry’), and optionally we can also determine the coordinate reference system when creating the GeoDataFrame:</li>
 </ul>
-<blockquote>
-<div>which column contains the geometry information (needs to be always a column called ‘geometry’), and optionally we can also determine the coordinate reference system when creating the GeoDataFrame:</div></blockquote>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert DataFrame into a GeoDataFrame</span>
-<span class="n">geo</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="n">from_epsg</span><span class="p">(</span><span class="mi">4326</span><span class="p">))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span class="kn">from</span> <span class="nn">pyproj</span> <span class="kn">import</span> <span class="n">CRS</span>
+
+<span class="c1"># Convert DataFrame into a GeoDataFrame</span>
+<span class="n">geo</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="n">CRS</span><span class="o">.</span><span class="n">from_epsg</span><span class="p">(</span><span class="mi">4326</span><span class="p">)</span><span class="o">.</span><span class="n">to_wkt</span><span class="p">())</span>
 
 <span class="o">&gt;&gt;&gt;</span> <span class="nb">type</span><span class="p">(</span><span class="n">geo</span><span class="p">)</span>
 <span class="n">geopandas</span><span class="o">.</span><span class="n">geodataframe</span><span class="o">.</span><span class="n">GeoDataFrame</span>
-
-<span class="o">&gt;&gt;&gt;</span> <span class="n">geo</span><span class="o">.</span><span class="n">crs</span>
-<span class="p">{</span><span class="s1">&#39;init&#39;</span><span class="p">:</span> <span class="s1">&#39;epsg:4326&#39;</span><span class="p">,</span> <span class="s1">&#39;no_defs&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">}</span>
 </pre></div>
 </div>
 <p>Now we have converted Pandas DataFrame into a proper GeoDataFrame that we can export into a Shapefile for instance.</p>
+</div>
+<div class="section" id="alternatives-for-iterrows">
+<h3>Alternatives for iterrows<a class="headerlink" href="#alternatives-for-iterrows" title="Permalink to this headline">¶</a></h3>
+<p>In exercise 2, problem 2 you need to create Shapely Points for each row of data. Our input data set is rather large, so the iterrows-approach will be rather slow. You can try this approach, but prepare to wait for a while for the code to run!</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#-----------------------------------------</span>
+
+<span class="c1"># OPTION 1: Iterate over dataframe rows:</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+
+    <span class="c1"># create a point based on x and y column values on this row:</span>
+    <span class="n">point</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
+
+    <span class="c1"># Add the point object to the geometry column on this row:</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">point</span>
+</pre></div>
+</div>
+<p>There are other <strong>faster</strong> solutions for this. Check out the following examples, and try to understand what happens in them. Pick one of these solutions and use it in problem 2 :) You’ll need to change the variable and column names.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#-----------------------------------------</span>
+
+<span class="c1"># OPTION 2: apply a function</span>
+
+<span class="c1"># Define a function for creating points from row values</span>
+<span class="k">def</span> <span class="nf">create_point</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Returns a shapely point object based on values in x and y columns&#39;&#39;&#39;</span>
+
+    <span class="n">point</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">point</span>
+
+<span class="c1"># Apply the function to each row</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">create_point</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">#-----------------------------------------</span>
+
+
+<span class="c1"># OPTION 3: apply a lambda function</span>
+<span class="c1"># see: https://docs.python.org/3.5/tutorial/controlflow.html#lambda-expressions</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">Point</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">#-----------------------------------------</span>
+
+<span class="c1"># OPTION 4: zip and for-loop</span>
+
+<span class="n">geom</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]):</span>
+    <span class="n">geom</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">geom</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="setting-userid-as-index-optional">
+<h3>Setting userid as index (optional!)<a class="headerlink" href="#setting-userid-as-index-optional" title="Permalink to this headline">¶</a></h3>
+<p>When creating the <cite>movements</cite> geodataframe, it might be useful to pre-define the index like this: <cite>index = data[“userid”].unique()</cite> when using the <cite>gpd.GeoDataFrame()</cite> constructor. Later on, you can use this index when adding geometries to that geodataframe.</p>
+</div>
+<div class="section" id="adding-items-to-a-geo-dataframe">
+<h3>Adding items to a (Geo)DataFrame<a class="headerlink" href="#adding-items-to-a-geo-dataframe" title="Permalink to this headline">¶</a></h3>
+<p>In this exercise, you need to add/append items to a (geo)dataframe iteratively (one row at a time). When adding new information to a dataframe, you can use the <cite>.at</cite> or <cite>.loc</cite> indexer like in this example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add a point object into the geometry-column on the first row (here, the row-label is 0)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">point</span>
+</pre></div>
+</div>
+<p>As an alternative, you can also add new rows of data using the <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.append.html">append method</a>.</p>
 </div>
 </div>
 </div>
@@ -282,6 +361,13 @@ Note that you should not try to make changes to this copy of the exercise, but r
           </div>
           <footer>
   
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../../notebooks/L2/geopandas-geometries.html" class="btn btn-neutral float-left" title="Creating new layers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
 
   <hr/>
 
@@ -289,7 +375,7 @@ Note that you should not try to make changes to this copy of the exercise, but r
     <p>
         &copy; Copyright 2019, Henrikki Tenkanen and Vuokko Heikinheimo, Digital Geography Lab, University of Helsinki
       <span class="lastupdated">
-        Last updated on Nov 02, 2018.
+        Last updated on Nov 03, 2019.
       </span>
 
     </p>

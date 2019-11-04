@@ -58,6 +58,8 @@
   <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Map projections" href="projections.html" />
+    <link rel="prev" title="Vector Data I/O in Python" href="data_io.html" />
     <link href="../../_static/geo-python.css" rel="stylesheet" type="text/css">
      
 
@@ -127,6 +129,30 @@
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/L1/overview.html">Lesson overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../L1/geometric-objects.html">Shapely and geometric objects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/L1/exercise-1.html">Exercise 1</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 2</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L2/overview.html">Lesson 2 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_io.html">Vector Data I/O in Python</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction to Geopandas</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Input-data:-Finnish-topographic-database">Input data: Finnish topographic database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Downloading-data">Downloading data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Managing-filepaths">Managing filepaths</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Reading-a-Shapefile">Reading a Shapefile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Geometries-in-Geopandas">Geometries in Geopandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Writing-a-shapefile">Writing a shapefile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Grouping-the-Geodataframe">Grouping the Geodataframe</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Saving-multiple-output-files">Saving multiple output files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Extra:-save-data-to-csv">Extra: save data to csv</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="projections.html">Map projections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calculating-distances.html">Calculating distances</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geopandas-geometries.html">Creating new layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L2/exercise-2.html">Exercise 2</a></li>
 </ul>
 
             
@@ -428,23 +454,151 @@ This page was generated from <a class="reference external" href="https://github.
 <span class="raw-html"><a href="https://notebooks.csc.fi/#/blueprint/8d7886c2f0ac402aa99235f8d289a52b"><img alt="CSC badge" src="https://img.shields.io/badge/launch-CSC%20notebook-blue.svg" style="vertical-align:text-bottom"></a></span></div>
 <div class="section" id="Introduction-to-Geopandas">
 <h1>Introduction to Geopandas<a class="headerlink" href="#Introduction-to-Geopandas" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="Input-data">
-<h2>Input data<a class="headerlink" href="#Input-data" title="Permalink to this headline">¶</a></h2>
-<p>For this lesson we are using data in Shapefile format representing distributions of specific beautifully colored fish species called <a class="reference external" href="https://en.wikipedia.org/wiki/Damselfish">Damselfish</a> and the country borders of Europe.</p>
+<p>Geopandas (<a class="reference external" href="http://geopandas.org/">http://geopandas.org/</a>) makes it possible to work with geospatial data in Python in a relatively easy way. Geopandas combines the capabilities of the data analysis library <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/">pandas</a> with other packages like <a class="reference external" href="https://shapely.readthedocs.io/en/stable/manual.html">shapely</a> and <a class="reference external" href="https://fiona.readthedocs.io/en/latest/manual.html">fiona</a> for managing spatial data.</p>
+<p>The main data structures in geopandas; <code class="docutils literal notranslate"><span class="pre">GeoSeries</span></code> and <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> extend the capabilities of <code class="docutils literal notranslate"><span class="pre">Series</span></code> and <code class="docutils literal notranslate"><span class="pre">DataFrames</span></code> from pandas. This means that we can apply our pandas skills also with geopandas data structures. If you need to refresh your memory about pandas, check out week 5 and 6 lesson materials from the <a class="reference external" href="geo-python.github.io">Geo-Python website</a>.</p>
+<p>The main difference between geodataframes and pandas dataframes is that <a class="reference external" href="http://geopandas.org/data_structures.html#geodataframe">a geodataframe should contain one column for geometries</a> (by default, the name of this column is <code class="docutils literal notranslate"><span class="pre">'geometry'</span></code>). The geometry column is a <a class="reference external" href="http://geopandas.org/data_structures.html#geoseries">geoseries</a> which contains the geometries (points, lines, polygons, multipolygons etc.) for each row of data.</p>
+<p><img alt="geodataframe.png" src="../../_images/geodataframe.png" /></p>
+<p>As we learned in the Geo-Python course, it is conventional to import pandas as <code class="docutils literal notranslate"><span class="pre">pd</span></code>. Similarly,we will import geopandas as <code class="docutils literal notranslate"><span class="pre">gpd</span></code>:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+</pre></div>
+</div>
+</div>
+<p>In this lesson, we will cover basics steps needed for interacting with spatial data in Python using geopandas:</p>
+<ul class="simple">
+<li>Managing filepaths</li>
+<li>Reading a shapefile</li>
+<li>Geometry calculations</li>
+<li>Writing a shapefile</li>
+<li>Grouping and splitting spatial data into multiple layers</li>
+</ul>
+<p>Before diving deeper into geopandas functionalities, let’s first acquire some input data to work with.</p>
+<div class="section" id="Input-data:-Finnish-topographic-database">
+<h2>Input data: Finnish topographic database<a class="headerlink" href="#Input-data:-Finnish-topographic-database" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://www.maanmittauslaitos.fi/en/maps-and-spatial-data/expert-users/product-descriptions/topographic-database">Topographic Database from the National Land Survey of Finland (NLS)</a>.</li>
+<li>The data set is licensed under the NLS’ <a class="reference external" href="https://www.maanmittauslaitos.fi/en/opendata-licence-cc40">open data licence</a> (CC BY 4.0).</li>
+<li>Structure of the data is described in a separate Excel file (<a class="reference external" href="http://www.maanmittauslaitos.fi/sites/maanmittauslaitos.fi/files/attachments/2018/10/maastotietokanta_kohdemalli_eng.xlsx">download link</a>).</li>
+<li>Further information about file naming at <a class="reference external" href="https://etsin.fairdata.fi/dataset/5023ecc7-914a-4494-9e32-d0a39d3b56ae">fairdata.fi</a>.</li>
+<li>We acquired the data via the <a class="reference external" href="https://avaa.tdata.fi/web/paituli/latauspalvelu">CSC open data portal</a>:</li>
+</ul>
+<p><img alt="Paituli data download" src="../../_images/Paituli_maastotietokanta_download.png" /></p>
+<p>In this lesson, we will focus on <strong>terrain objects</strong> (Feature group: “Terrain/1”) downloaded as Shapefiles. According to the <a class="reference external" href="https://etsin.fairdata.fi/dataset/5023ecc7-914a-4494-9e32-d0a39d3b56ae">naming convention of the Topographic Database</a> for Shapefiles, all files that start with a letter <code class="docutils literal notranslate"><span class="pre">m</span></code> and end with <code class="docutils literal notranslate"><span class="pre">p</span></code> contain the objects we are interested in (Terrain/1 polygons). Furthermore, the Terrain/1 feature group contains several feature classes. <strong>Our final task in this lesson is to
+save all these feature classes into separate files</strong>.</p>
+<p><em>Terrain/1 features in the Topographic Database:</em></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="69%" />
+<col width="15%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">feature class</th>
+<th class="head">Name of feature</th>
+<th class="head">Feature group</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>32421</td>
+<td>Motor traffic area</td>
+<td>Terrain/1</td>
+</tr>
+<tr class="row-odd"><td>32200</td>
+<td>Cemetery</td>
+<td>Terrain/1</td>
+</tr>
+<tr class="row-even"><td>34300</td>
+<td>Sand</td>
+<td>Terrain/1</td>
+</tr>
+<tr class="row-odd"><td>34100</td>
+<td>Rock - area</td>
+<td>Terrain/1</td>
+</tr>
+<tr class="row-even"><td>34700</td>
+<td>Rocky area</td>
+<td>Terrain/1</td>
+</tr>
+<tr class="row-odd"><td>32500</td>
+<td>Quarry</td>
+<td>Terrain/1</td>
+</tr>
+<tr class="row-even"><td>32112</td>
+<td>Mineral resources extraction area, fine-grained material</td>
+<td>Terrain/1</td>
+</tr>
+<tr class="row-odd"><td>32111</td>
+<td>Mineral resources extraction area, coarse-grained material</td>
+<td>Terrain/1</td>
+</tr>
+<tr class="row-even"><td>32611</td>
+<td>Field</td>
+<td>Terrain/1</td>
+</tr>
+<tr class="row-odd"><td>32612</td>
+<td>Garden</td>
+<td>Terrain/1</td>
+</tr>
+<tr class="row-even"><td>32800</td>
+<td>Meadow</td>
+<td>Terrain/1</td>
+</tr>
+<tr class="row-odd"><td>32900</td>
+<td>Park</td>
+<td>Terrain/1</td>
+</tr>
+<tr class="row-even"><td>35300</td>
+<td>Paludified land</td>
+<td>Terrain/1</td>
+</tr>
+<tr class="row-odd"><td>35412</td>
+<td>Bog, easy to traverse forested</td>
+<td>Terrain/1</td>
+</tr>
+<tr class="row-even"><td>35411</td>
+<td>Open bog, easy to traverse treeless</td>
+<td>Terrain/1</td>
+</tr>
+<tr class="row-odd"><td>35421</td>
+<td>Open fen, difficult to traverse treeless</td>
+<td>Terrain/1</td>
+</tr>
+<tr class="row-even"><td>33000</td>
+<td>Earth fill</td>
+<td>Terrain/1</td>
+</tr>
+<tr class="row-odd"><td>33100</td>
+<td>Sports and recreation area</td>
+<td>Terrain/1</td>
+</tr>
+<tr class="row-even"><td>36200</td>
+<td>Lake water</td>
+<td>Terrain/1</td>
+</tr>
+<tr class="row-odd"><td>36313</td>
+<td>Watercourse area</td>
+<td>Terrain/1</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section" id="Downloading-data">
 <h2>Downloading data<a class="headerlink" href="#Downloading-data" title="Permalink to this headline">¶</a></h2>
-<p>From now on, we are going to download the datafiles at the start of each lesson because of the large size of the data. On Binder and CSC Notebook environment, you can use <code class="docutils literal notranslate"><span class="pre">wget</span></code> program to download the data from the command line. Let’s download the data (<a class="reference external" href="https://github.com/AutoGIS/data/raw/master/L2_data.zip">download link</a>) into the same folder with the lesson 2 notebooks (<code class="docutils literal notranslate"><span class="pre">/home/jovyan/notebooks/L2</span></code>):</p>
+<p>On Binder and CSC Notebook environment, you can use <code class="docutils literal notranslate"><span class="pre">wget</span></code> program to download the data from the command line. Let’s download the data (<a class="reference external" href="https://github.com/AutoGIS/data/raw/master/L2_data.zip">download link</a>) into the same folder with the lesson 2 notebooks (<code class="docutils literal notranslate"><span class="pre">.../notebooks/L2</span></code>):</p>
 <ul class="simple">
-<li>First, open up a new terminal window</li>
+<li>Open up a new terminal window</li>
 <li>Navigate to the correct folder in the terminal:</li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Change directory to directory with Lesson 2 materials
-$ cd /home/jovyan/notebooks/L2
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Navigate to lesson 2 notebooks directory:
+$ cd /home/jovyan/work/autogis/notebooks/notebooks/L2
 </pre></div>
 </div>
 <ul class="simple">
-<li>use <code class="docutils literal notranslate"><span class="pre">wget</span></code> utility and the download link to dowload the data:</li>
+<li>use <code class="docutils literal notranslate"><span class="pre">wget</span></code> utility to dowload the data from the dowload link:</li>
 </ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ wget https://github.com/AutoGIS/data/raw/master/L2_data.zip
 </pre></div>
@@ -453,50 +607,72 @@ $ cd /home/jovyan/notebooks/L2
 <p class="admonition-title fa fa-exclamation-circle"><strong>Copy-paste</strong></p>
 <p>You can copy/paste things to JupyterLab Terminal by pressing <code class="docutils literal notranslate"><span class="pre">SHIFT</span></code> + <code class="docutils literal notranslate"><span class="pre">RIGHT-CLICK</span></code> on your mouse and choosing <code class="docutils literal notranslate"><span class="pre">Paste</span></code>.</p>
 </div>
-<ul class="simple">
-<li>Once you have downloaded the <code class="docutils literal notranslate"><span class="pre">L2_data.zip</span></code> file, you can unzip the file using <code class="docutils literal notranslate"><span class="pre">unzip</span></code> command from Terminal (or e.g.&nbsp;7zip on Windows if working with own computer):</li>
-</ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd /home/jovyan/notebooks/L2
-$ unzip L2_data.zip
+<p>Once you have downloaded the <code class="docutils literal notranslate"><span class="pre">L2_data.zip</span></code> file into your home directory, you can unzip the file using <code class="docutils literal notranslate"><span class="pre">unzip</span></code> command in the Terminal (or e.g.&nbsp;7zip on Windows if working with own computer). Run the following commands in the <code class="docutils literal notranslate"><span class="pre">.../notebooks/L2</span></code> -directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ unzip L2_data.zip
+$ ls L2_data
 </pre></div>
 </div>
+<p>You can also check the contents of the downloaded and unzipped file in the file browser window.</p>
+<p>The L2_data folder contains several subfolders. After unzipping the downloaded file, you can find the data for this tutorial under: <code class="docutils literal notranslate"><span class="pre">L2_data/NLS/2018/L4/L41/L4132R.shp</span></code>. Notice that Shapefile -fileformat contains many separate files such as <code class="docutils literal notranslate"><span class="pre">.dbf</span></code> that contains the attribute information, and <code class="docutils literal notranslate"><span class="pre">.prj</span></code> -file that contains information about coordinate reference system.</p>
+</div>
+<div class="section" id="Managing-filepaths">
+<h2>Managing filepaths<a class="headerlink" href="#Managing-filepaths" title="Permalink to this headline">¶</a></h2>
+<p>Built-in module <code class="docutils literal notranslate"><span class="pre">os</span></code> provides many useful functions for interacting with the operating system. One of the most useful submodules in the os package is the <a class="reference external" href="https://docs.python.org/2/library/os.path.html">os.path-module</a> for manipulating file paths. This week, we have data in different sub-folders and we can practice how to use <code class="docutils literal notranslate"><span class="pre">os</span></code> path tools when defining filepaths.</p>
 <ul class="simple">
-<li>finally, check the contents of the downloaded folder:</li>
+<li>Let’s import <code class="docutils literal notranslate"><span class="pre">os</span></code> and see how we can construct a filepath by joining a folder path and file name:</li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ls L2_data
-DAMSELFISH_distributions.cpg  DAMSELFISH_distributions.shp  Europe_borders.dbf  Europe_borders.sbx
-DAMSELFISH_distributions.dbf  DAMSELFISH_distributions.shx  Europe_borders.prj  Europe_borders.shp
-DAMSELFISH_distributions.prj  Europe_borders.cpg            Europe_borders.sbn  Europe_borders.shx
-</pre></div>
-</div>
-<p>As we can see, the <code class="docutils literal notranslate"><span class="pre">L2_data</span></code> folder includes Shapefiles called <code class="docutils literal notranslate"><span class="pre">DAMSELFISH_distribution.shp</span></code> and <code class="docutils literal notranslate"><span class="pre">Europe_borders.shp</span></code>. Notice that Shapefile -fileformat comes with many separate files such as <code class="docutils literal notranslate"><span class="pre">.dbf</span></code> that contains the attribute information, and <code class="docutils literal notranslate"><span class="pre">.prj</span></code> -file that contains information about coordinate reference system.</p>
-</div>
-<div class="section" id="Reading-a-Shapefile">
-<h2>Reading a Shapefile<a class="headerlink" href="#Reading-a-Shapefile" title="Permalink to this headline">¶</a></h2>
-<p>Typically reading the data into Python is the first step of the analysis pipeline. In GIS, there exists various dataformats such as <a class="reference external" href="https://en.wikipedia.org/wiki/Shapefile">Shapefile</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/GeoJSON">GeoJSON</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Keyhole_Markup_Language">KML</a>, and <a class="reference external" href="https://en.wikipedia.org/wiki/GeoPackage">GPKG</a> that are probably the most common vector data formats. <a class="reference external" href="http://geopandas.org/io.html">Geopandas</a> is capable of reading data from all
-of these formats (plus many more). Reading spatial data can be done easily with geopandas using <code class="docutils literal notranslate"><span class="pre">gpd.from_file()</span></code> -function:</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Import necessary modules</span>
-<span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
 
-<span class="c1"># Set filepath</span>
-<span class="n">fp</span> <span class="o">=</span> <span class="s2">&quot;L2_data/DAMSELFISH_distributions.shp&quot;</span>
+<span class="c1"># Define path to folder</span>
+<span class="n">input_folder</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;L2_data/NLS/2018/L4/L41/L4132R.shp&quot;</span>
+
+<span class="c1"># Join folder path and filename</span>
+<span class="n">fp</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_folder</span><span class="p">,</span> <span class="s2">&quot;m_L4132R_p.shp&quot;</span><span class="p">)</span>
+
+<span class="c1"># Print out the full file path</span>
+<span class="k">print</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+L2_data/NLS/2018/L4/L41/L4132R.shp/m_L4132R_p.shp
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Reading-a-Shapefile">
+<h2>Reading a Shapefile<a class="headerlink" href="#Reading-a-Shapefile" title="Permalink to this headline">¶</a></h2>
+<p>Typically reading the data into Python is the first step of the analysis pipeline. There are various different GIS data formats available. <a class="reference external" href="https://en.wikipedia.org/wiki/Shapefile">Shapefile</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/GeoJSON">GeoJSON</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Keyhole_Markup_Language">KML</a>, and <a class="reference external" href="https://en.wikipedia.org/wiki/GeoPackage">GPKG</a> are one of the most common vector data formats currently in use. <a class="reference external" href="http://geopandas.org/io.html">Geopandas</a> is capable of
+reading data from all of these formats (plus many more).</p>
+<p>In geopandas, we use a generic function <a class="reference external" href="http://geopandas.org/reference.html#geopandas.GeoDataFrame.to_file">.from_file()</a> for reading in different data formats. In the bacground, Geopandas uses <a class="reference external" href="https://fiona.readthedocs.io/en/latest/fiona.html#fiona.open">fiona.open()</a> when reading in data.</p>
+<ul class="simple">
+<li>When reading in a Shapefile, we only need to pass the filepath when reading data:</li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
 
 <span class="c1"># Read file using gpd.read_file()</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<p>Now we read the data from a Shapefile into variable <code class="docutils literal notranslate"><span class="pre">data</span></code>.</p>
 <ul class="simple">
 <li>Let’s see check the data type:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -505,7 +681,7 @@ of these formats (plus many more). Reading spatial data can be done easily with 
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -513,28 +689,16 @@ of these formats (plus many more). Reading spatial data can be done easily with 
 </pre></div>
 </div>
 </div>
-<p>Okey so from the above we can see that our <code class="docutils literal notranslate"><span class="pre">data</span></code> -variable is a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code>. GeoDataFrame extends the functionalities of <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code> in a way that it is possible to use and handle spatial data using similar approaches and datastructures as in pandas (hence the name geopandas). GeoDataFrame have some special features and functions that are useful in GIS.</p>
+<p>Here we see that our <code class="docutils literal notranslate"><span class="pre">data</span></code> -variable is a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code>. GeoDataFrame extends the functionalities of <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code> in a way that it is possible to handle spatial data using similar approaches and datastructures as in pandas (hence the name geopandas).</p>
 <ul class="simple">
-<li>Let’s take a look at our data and print the first 2 rows using the <code class="docutils literal notranslate"><span class="pre">head()</span></code> -function:</li>
-</ul>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<ul class="simple">
-<li>Check the column names:</li>
+<li>Let’s take a look at our data and print the first rows using the <code class="docutils literal notranslate"><span class="pre">head()</span></code> -function:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span></span><span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -543,37 +707,132 @@ of these formats (plus many more). Reading spatial data can be done easily with 
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Index([&#39;ID_NO&#39;, &#39;BINOMIAL&#39;, &#39;ORIGIN&#39;, &#39;COMPILER&#39;, &#39;YEAR&#39;, &#39;CITATION&#39;, &#39;SOURCE&#39;,
-       &#39;DIST_COMM&#39;, &#39;ISLAND&#39;, &#39;SUBSPECIES&#39;, &#39;SUBPOP&#39;, &#39;LEGEND&#39;, &#39;SEASONAL&#39;,
-       &#39;TAX_COMM&#39;, &#39;RL_UPDATE&#39;, &#39;KINGDOM_NA&#39;, &#39;PHYLUM_NAM&#39;, &#39;CLASS_NAME&#39;,
-       &#39;ORDER_NAME&#39;, &#39;FAMILY_NAM&#39;, &#39;GENUS_NAME&#39;, &#39;SPECIES_NA&#39;, &#39;CATEGORY&#39;,
-       &#39;geometry&#39;],
-      dtype=&#39;object&#39;)
+  TEKSTI  RYHMA  LUOKKA  TASTAR  KORTAR  KORARV  KULKUTAPA    KOHDEOSO  \
+0   None     64   32421    5000       0     0.0          0  1812247077
+1   None     64   32421    5000       0     0.0          0  1718796908
+2   None     64   32421   20000       0     0.0          0   411167695
+3   None     64   32421   20000       0     0.0          0   411173768
+4   None     64   32421   20000       0     0.0          0   411173698
+
+   AINLAHDE SYNTYHETKI  ... KARTOGLK  ALUEJAKOON  VERSUH  SUUNTA  SIIRT_DX  \
+0         1   20180125  ...        0           0       0       0         0
+1         1   20180120  ...        0           0       0       0         0
+2         1   20180120  ...        0           0       0       0         0
+3         1   20180120  ...        0           0       0       0         0
+4         1   20180120  ...        0           0       0       0         0
+
+   SIIRT_DY  KORKEUS  ATTR2  ATTR3  \
+0         0      0.0      0      0
+1         0      0.0      0      0
+2         0      0.0      0      0
+3         0      0.0      0      0
+4         0      0.0      0      0
+
+                                            geometry
+0  POLYGON ((379394.248 6689991.936, 379389.790 6...
+1  POLYGON ((378980.811 6689359.377, 378983.401 6...
+2  POLYGON ((378804.766 6689256.471, 378817.107 6...
+3  POLYGON ((379229.695 6685025.111, 379233.366 6...
+4  POLYGON ((379825.199 6685096.247, 379829.651 6...
+
+[5 rows x 21 columns]
 </pre></div></div>
 </div>
-<p>As we can see, there exists multiple columns in our data related to our Damselfish -fish.</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<ul class="simple">
+<li>Check all column names:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>
+<span></span><span class="n">data</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Index([&#39;TEKSTI&#39;, &#39;RYHMA&#39;, &#39;LUOKKA&#39;, &#39;TASTAR&#39;, &#39;KORTAR&#39;, &#39;KORARV&#39;, &#39;KULKUTAPA&#39;,
+       &#39;KOHDEOSO&#39;, &#39;AINLAHDE&#39;, &#39;SYNTYHETKI&#39;, &#39;KUOLHETKI&#39;, &#39;KARTOGLK&#39;,
+       &#39;ALUEJAKOON&#39;, &#39;VERSUH&#39;, &#39;SUUNTA&#39;, &#39;SIIRT_DX&#39;, &#39;SIIRT_DY&#39;, &#39;KORKEUS&#39;,
+       &#39;ATTR2&#39;, &#39;ATTR3&#39;, &#39;geometry&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+<p>As most of you probably notice, all the column names are in Finnish… - Let’s select only the useful columns and rename them into English:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[[</span><span class="s1">&#39;RYHMA&#39;</span><span class="p">,</span> <span class="s1">&#39;LUOKKA&#39;</span><span class="p">,</span>  <span class="s1">&#39;geometry&#39;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li>Define new column names in a dictionary:</li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">colnames</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;RYHMA&#39;</span><span class="p">:</span><span class="s1">&#39;GROUP&#39;</span><span class="p">,</span> <span class="s1">&#39;LUOKKA&#39;</span><span class="p">:</span><span class="s1">&#39;CLASS&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li>rename the columns:</li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">colnames</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">data</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Index([&#39;GROUP&#39;, &#39;CLASS&#39;, &#39;geometry&#39;], dtype=&#39;object&#39;)
 </pre></div>
 </div>
 </div>
 <div class="admonition note">
 <p class="admonition-title fa fa-exclamation-circle"><strong>Task</strong></p>
-<p>Answer the following questions based on your pandas-skills from the Geo-Python course: - How many different fish species there are in the input data? - How many genera (distinct genus)? - How many families of fish species?</p>
+<p>Figure out the following information from our input data based on your pandas-skills from the Geo-Python course:</p>
+<ul class="simple">
+<li>Number of rows?</li>
+<li>Number of classes?</li>
+<li>Number of groups?</li>
+</ul>
 </div>
-<p>Solution:</p>
+<p>Solutions:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Number of fish species&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;BINOMIAL&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">())</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Number of fish genera&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;GENUS_NAME&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">())</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Number of fish families&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;FAMILY_NAM&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">())</span>
+<span></span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Number of rows&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;CLASS&#39;</span><span class="p">]))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Number of classes&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;CLASS&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Number of groups&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;GROUP&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -582,17 +841,17 @@ Index([&#39;ID_NO&#39;, &#39;BINOMIAL&#39;, &#39;ORIGIN&#39;, &#39;COMPILER&#39;
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Number of fish species 30
-Number of fish genera 10
-Number of fish families 1
+Number of rows 4311
+Number of classes 20
+Number of groups 1
 </pre></div></div>
 </div>
-<p>When having spatial data, it is always a good idea to explore your data on a map. Creating a simple map from a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> is really easy: you can use <code class="docutils literal notranslate"><span class="pre">.plot()</span></code> -function from geopandas that creates a map based on the geometries of the data. Geopandas actually uses Matplotlib for creating the map that was introduced in <a class="reference external" href="https://geo-python.github.io/site/notebooks/L7/matplotlib.html">Lesson 7 of Geo-Python course</a>.</p>
+<p>It is always a good idea to explore your data also on a map. Creating a simple map from a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> is really easy: you can use <code class="docutils literal notranslate"><span class="pre">.plot()</span></code> -function from geopandas that <strong>creates a map based on the geometries of the data</strong>. Geopandas actually uses matplotlib for plotting which we introduced in <a class="reference external" href="https://geo-python.github.io/site/notebooks/L7/matplotlib.html">Lesson 7 of the Geo-Python course</a>.</p>
 <ul class="simple">
-<li>Let’s try it out, and take a look how our data looks like on a map:</li>
+<li>Let’s try it out, and plot our GeoDataFrame:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -602,11 +861,11 @@ Number of fish families 1
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x18feb9164a8&gt;
+<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f8cc41d46a0&gt;
 </pre></div>
 </div>
 </div>
@@ -614,54 +873,11 @@ Number of fish families 1
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/notebooks_L2_geopandas-basics_15_1.png" src="../../_images/notebooks_L2_geopandas-basics_15_1.png" />
+<img alt="../../_images/notebooks_L2_geopandas-basics_26_1.png" src="../../_images/notebooks_L2_geopandas-basics_26_1.png" />
 </div>
 </div>
 <p>Voilá! As we can see, it is really easy to produce a map out of your Shapefile with geopandas. Geopandas automatically positions your map in a way that it covers the whole extent of your data.</p>
-</div>
-<div class="section" id="Writing-a-Shapefile">
-<h2>Writing a Shapefile<a class="headerlink" href="#Writing-a-Shapefile" title="Permalink to this headline">¶</a></h2>
-<p>Writing the spatial data into disk for example as a new Shapefile is also something that is needed frequently.</p>
-<ul class="simple">
-<li>Let’s select 50 first rows of the input data and write those into a new Shapefile by first selecting the data using index slicing and then write the selection into a Shapefile with <code class="docutils literal notranslate"><span class="pre">gpd.to_file()</span></code> -function:</li>
-</ul>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Create a output path for the data</span>
-<span class="n">outfp</span> <span class="o">=</span> <span class="s2">&quot;L2_data/DAMSELFISH_distributions_SELECTION.shp&quot;</span>
-
-<span class="c1"># Select first 50 rows</span>
-<span class="n">selection</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">50</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Write those rows into a new Shapefile (the default output file format is Shapefile)</span>
-<span class="n">selection</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">outfp</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
-<span class="ansi-red-intense-fg ansi-bold">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-intense-fg ansi-bold">&lt;ipython-input-3-ec790800b0ad&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-fg">      1</span> <span class="ansi-red-intense-fg ansi-bold"># Write those rows into a new Shapefile (the default output file format is Shapefile)</span>
-<span class="ansi-green-intense-fg ansi-bold">----&gt; 2</span><span class="ansi-yellow-intense-fg ansi-bold"> </span>selection<span class="ansi-yellow-intense-fg ansi-bold">.</span>to_file<span class="ansi-yellow-intense-fg ansi-bold">(</span>outfp<span class="ansi-yellow-intense-fg ansi-bold">)</span>
-
-<span class="ansi-red-intense-fg ansi-bold">NameError</span>: name &#39;selection&#39; is not defined
-</pre></div></div>
-</div>
+<p><em>If you are living in the Helsinki region, you might recognize the shapes plotted on the map!</em></p>
 </div>
 <div class="section" id="Geometries-in-Geopandas">
 <h2>Geometries in Geopandas<a class="headerlink" href="#Geometries-in-Geopandas" title="Permalink to this headline">¶</a></h2>
@@ -670,7 +886,7 @@ Number of fish families 1
 <li>Let’s print the first 5 rows of the column ‘geometry’:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -684,66 +900,26 @@ Number of fish families 1
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-0    POLYGON ((-115.6437454219999 29.71392059300007...
-1    POLYGON ((-105.589950704 21.89339825500002, -1...
-2    POLYGON ((-111.159618439 19.01535626700007, -1...
-3    POLYGON ((-80.86500229899997 -0.77894492099994...
-4    POLYGON ((-67.33922225599997 -55.6761029239999...
-Name: geometry, dtype: object
+0    POLYGON ((379394.248 6689991.936, 379389.790 6...
+1    POLYGON ((378980.811 6689359.377, 378983.401 6...
+2    POLYGON ((378804.766 6689256.471, 378817.107 6...
+3    POLYGON ((379229.695 6685025.111, 379233.366 6...
+4    POLYGON ((379825.199 6685096.247, 379829.651 6...
+Name: geometry, dtype: geometry
 </pre></div></div>
 </div>
-<p>As we can see the <code class="docutils literal notranslate"><span class="pre">geometry</span></code> column contains familiar looking values, namely Shapely <code class="docutils literal notranslate"><span class="pre">Polygon</span></code> -objects that we <a class="reference external" href="https://automating-gis-processes.github.io/site/notebooks/L1/geometric-objects.html#Polygon">learned to use last week</a>. Since the spatial data is stored as Shapely objects, <strong>it is possible to use all of the functionalities from Shapely</strong> that we learned in Lesson 1.</p>
+<p>As we can see the <code class="docutils literal notranslate"><span class="pre">geometry</span></code> column contains familiar looking values, namely Shapely <code class="docutils literal notranslate"><span class="pre">Polygon</span></code> -objects. Since the spatial data is stored as Shapely objects, <strong>it is possible to use all of the functionalities of the Shapely module</strong> when dealing with geometries in geopandas.</p>
+<p>Let’s have a closer look at the polygons and try to apply some of the <a class="reference external" href="https://automating-gis-processes.github.io/site/notebooks/L1/geometric-objects.html#Polygon">Shapely methods we learned last week</a>.</p>
 <ul class="simple">
-<li>Let’s prove that this really is the case by iterating over a sample of the data, and printing the <code class="docutils literal notranslate"><span class="pre">area</span></code> of first five polygons.<ul>
-<li>We can iterate over the rows by using the <code class="docutils literal notranslate"><span class="pre">iterrows()</span></code> -function that we learned <a class="reference external" href="https://geo-python.github.io/2018/notebooks/L6/pandas/advanced-data-processing-with-pandas.html#Iterating-rows-and-using-self-made-functions-in-Pandas">during the Lesson 6 of the Geo-Python course</a>.</li>
-</ul>
-</li>
-</ul>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Make a selection that contains only the first five rows</span>
-<span class="n">selection</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
-
-<span class="c1"># Iterate over rows and print the area of a Polygon</span>
-<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">selection</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
-
-    <span class="c1"># Get the area of the polygon</span>
-    <span class="n">poly_area</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">area</span>
-
-    <span class="c1"># Print information for the user</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Polygon area at index {index} is: {area:.3f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span> <span class="n">area</span><span class="o">=</span><span class="n">poly_area</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-Polygon area at index 0 is: 19.396
-Polygon area at index 1 is: 6.146
-Polygon area at index 2 is: 2.697
-Polygon area at index 3 is: 87.461
-Polygon area at index 4 is: 0.001
-</pre></div></div>
-</div>
-<p>As you might guess from here, all the functionalities of <strong>pandas</strong>, such as the <code class="docutils literal notranslate"><span class="pre">iterrows()</span></code> function, are directly available in Geopandas without the need to call pandas separately because geopandas is an <strong>extension</strong> for pandas.</p>
-<ul class="simple">
-<li>Let’s next create a new column into our GeoDataFrame where we calculate and store the areas of individual polygons into that column. Calculating the areas of polygons is really easy in geopandas by using <code class="docutils literal notranslate"><span class="pre">GeoDataFrame.area</span></code> attribute. Hence, it is not needed to actually iterate over the rows line by line as we did previously:</li>
+<li>Let’s start by checking the area of the first polygon in the data:</li>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Create a new column called &#39;area&#39; and assign the area of the Polygons into it</span>
-<span class="n">data</span><span class="p">[</span><span class="s1">&#39;area&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">area</span>
-
-<span class="c1"># Print first 2 rows of the area column</span>
-<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;area&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span></span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Polygon:&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Area:&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">area</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="s2">&quot;square meters&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -752,30 +928,149 @@ Polygon area at index 4 is: 0.001
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-0    19.396254
-1     6.145902
-Name: area, dtype: float64
+Polygon: POLYGON ((379394.248 6689991.936, 379389.79 6690000, 379408.646 6690000, 379394.248 6689991.936))
+Area: 76.0 square meters
 </pre></div></div>
 </div>
-<p>As we can see, the area of our first polygon seems to be approximately <code class="docutils literal notranslate"><span class="pre">19.396</span></code> and <code class="docutils literal notranslate"><span class="pre">6.146</span></code> for the second polygon. They correspond to the ones we saw in previous step when iterating rows, hence, everything seems to work as should.</p>
+<p>Let’s do the same for the first five rows in the data;</p>
 <ul class="simple">
-<li>Let’s check what is the <code class="docutils literal notranslate"><span class="pre">min</span></code>, <code class="docutils literal notranslate"><span class="pre">max</span></code> and <code class="docutils literal notranslate"><span class="pre">mean</span></code> of those areas using familiar functions from our previous Pandas lessions.</li>
+<li>Iterate over the GeoDataFrame rows using the <code class="docutils literal notranslate"><span class="pre">iterrows()</span></code> -function that we learned <a class="reference external" href="https://geo-python.github.io/site/notebooks/L6/pandas/advanced-data-processing-with-pandas.html#Iterating-rows-and-using-self-made-functions-in-Pandas">during the Lesson 6 of the Geo-Python course</a>.</li>
+<li>For each row, print the area of the polygon (here, we’ll limit the for-loop to a selection of the first five rows):</li>
 </ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Iterate over rows and print the area of a Polygon</span>
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+
+    <span class="c1"># Get the area from the shapely-object stored in the geometry-column</span>
+    <span class="n">poly_area</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">area</span>
+
+    <span class="c1"># Print info</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Polygon area at index {index} is: {area:.2f} m^2&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span> <span class="n">area</span><span class="o">=</span><span class="n">poly_area</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Polygon area at index 0 is: 76.03 m^2
+Polygon area at index 1 is: 2652.05 m^2
+Polygon area at index 2 is: 3185.65 m^2
+Polygon area at index 3 is: 13075.17 m^2
+Polygon area at index 4 is: 3980.68 m^2
+</pre></div></div>
+</div>
+<p>As you see from here, all the functionalities of <strong>pandas</strong>, such as the <code class="docutils literal notranslate"><span class="pre">iterrows()</span></code> function, are directly available in Geopandas without the need to call pandas separately because Geopandas is an <strong>extension</strong> for pandas.</p>
+<p>In practice, it is not necessary to use the iterrows()-approach to calculate the area for all features. Geodataframes and geoseries have an attribute <code class="docutils literal notranslate"><span class="pre">area</span></code> which we can use for accessing the area for each feature at once:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">data</span><span class="o">.</span><span class="n">area</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>0       76.027392
+1     2652.054186
+2     3185.649995
+3    13075.165279
+4     3980.682621
+dtype: float64
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li>Let’s next create a new column into our GeoDataFrame where we calculate and store the areas of individual polygons:</li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Create a new column called &#39;area&#39; and assign the area of the Polygons into it</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;area&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">area</span>
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li>Check the output:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;area&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>0       76.027392
+1     2652.054186
+2     3185.649995
+3    13075.165279
+4     3980.682621
+Name: area, dtype: float64
+</pre></div>
+</div>
+</div>
+<p>These values correspond to the ones we saw in previous step when iterating rows.</p>
+<ul class="simple">
+<li>Let’s check what is the <code class="docutils literal notranslate"><span class="pre">min</span></code>, <code class="docutils literal notranslate"><span class="pre">max</span></code> and <code class="docutils literal notranslate"><span class="pre">mean</span></code> of those areas using familiar functions from our previous Pandas lessions.</li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Maximum area</span>
 <span class="n">max_area</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;area&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
-
-<span class="c1"># Minimum area</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Minimum area</span>
 <span class="n">min_area</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;area&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
-
-<span class="c1"># Mean area</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Mean area</span>
 <span class="n">mean_area</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;area&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Max area: {max}</span><span class="se">\n</span><span class="s2">Min area: {min}</span><span class="se">\n</span><span class="s2">Mean area: {mean}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">max</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">max_area</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="nb">min</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">min_area</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">mean</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">mean_area</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Max area: {maximum} square meters&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">maximum</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">max_area</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Min area: {minimum} square meters&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">minimum</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">min_area</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Mean area: {mean} square meters&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">mean_area</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
@@ -784,33 +1079,188 @@ Name: area, dtype: float64
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Max area: 1493.2
-Min area: 0.0
-Mean area: 19.96
+Max area: 4084558.0 square meters
+Min area: 1.0 square meters
+Mean area: 11522.0 square meters
 </pre></div></div>
 </div>
-<p>The largest Polygon in our dataset seems to be around 1494 square decimal degrees (~ 165 000 km2) and the average size is ~20 square decimal degrees (~2200 km2). The minimum polygon size seems to be <code class="docutils literal notranslate"><span class="pre">0.0</span></code>, hence it seems that there exists really small polygons as well in the data as well (rounds to 0 with 2 decimals).</p>
 </div>
-<div class="section" id="Creating-geometries-into-a-GeoDataFrame">
-<h2>Creating geometries into a GeoDataFrame<a class="headerlink" href="#Creating-geometries-into-a-GeoDataFrame" title="Permalink to this headline">¶</a></h2>
-<p>Since geopandas takes advantage of Shapely geometric objects, it is possible to create a Shapefile from a scratch by passing Shapely’s geometric objects into the GeoDataFrame. This is useful as it makes it easy to convert e.g.&nbsp;a text file that contains coordinates into a Shapefile. Next we will see how to create a Shapefile from scratch.</p>
+<div class="section" id="Writing-a-shapefile">
+<h2>Writing a shapefile<a class="headerlink" href="#Writing-a-shapefile" title="Permalink to this headline">¶</a></h2>
+<p>It is possible to export GeoDataFrames into various data formats using <a class="reference external" href="http://geopandas.org/io.html#writing-spatial-data">gpd.to_file()</a>. Here, we will first learn how to export a subset of the data into a Shapefile.</p>
 <ul class="simple">
-<li>Let’s create an empty <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code>.</li>
+<li>Let’s first select one class (class number <code class="docutils literal notranslate"><span class="pre">36200</span></code>, “Lake water”) from the data as a new GeoDataFrame:</li>
 </ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Select a class</span>
+<span class="n">selection</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;CLASS&quot;</span><span class="p">]</span><span class="o">==</span><span class="mi">36200</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li>Check the selection:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">selection</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f8cc4199710&gt;
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L2_geopandas-basics_49_1.png" src="../../_images/notebooks_L2_geopandas-basics_49_1.png" />
+</div>
+</div>
+<ul class="simple">
+<li>write this layer into a new Shapefile using the <code class="docutils literal notranslate"><span class="pre">gpd.to_file()</span></code> -function:</li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Create a output path for the data</span>
+<span class="n">output_folder</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;L2_data/&quot;</span>
+<span class="n">output_fp</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_folder</span><span class="p">,</span> <span class="s2">&quot;Class_36200.shp&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Write those rows into a new file (the default output file format is Shapefile)</span>
+<span class="n">selection</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">output_fp</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title fa fa-exclamation-circle"><strong>Task</strong></p>
+<p>Read the output Shapefile in a new geodataframe, and check that the data looks ok.</p>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Grouping-the-Geodataframe">
+<h2>Grouping the Geodataframe<a class="headerlink" href="#Grouping-the-Geodataframe" title="Permalink to this headline">¶</a></h2>
+<p>One really useful function that can be used in Pandas/Geopandas is <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.groupby.html">.groupby()</a> which groups data based on values on selected column(s). We saw and used this function already in <a class="reference external" href="https://geo-python.github.io/2018/notebooks/L6/pandas/advanced-data-processing-with-pandas.html#Aggregating-data-in-Pandas-by-grouping">Lesson 6 of the Geo-Python course</a>.</p>
+<p>Next we will automate the file export task; we will group the data based on column <code class="docutils literal notranslate"><span class="pre">CLASS</span></code> and export a shapefile for each class.</p>
+<p>Let’s continue with the same input file we already read previously into the variable <code class="docutils literal notranslate"><span class="pre">data</span></code>. We also selected and renamed a subset of the columns.</p>
+<ul class="simple">
+<li>Check the first rows of the data:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>GROUP</th>
+      <th>CLASS</th>
+      <th>geometry</th>
+      <th>area</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>64</td>
+      <td>32421</td>
+      <td>POLYGON ((379394.248 6689991.936, 379389.790 6...</td>
+      <td>76.027392</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>64</td>
+      <td>32421</td>
+      <td>POLYGON ((378980.811 6689359.377, 378983.401 6...</td>
+      <td>2652.054186</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>64</td>
+      <td>32421</td>
+      <td>POLYGON ((378804.766 6689256.471, 378817.107 6...</td>
+      <td>3185.649995</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>64</td>
+      <td>32421</td>
+      <td>POLYGON ((379229.695 6685025.111, 379233.366 6...</td>
+      <td>13075.165279</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>64</td>
+      <td>32421</td>
+      <td>POLYGON ((379825.199 6685096.247, 379829.651 6...</td>
+      <td>3980.682621</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">CLASS</span></code> column in the data contains information about different land use types. With <code class="docutils literal notranslate"><span class="pre">.unique()</span></code> -function we can quickly see all different values in that column:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Import necessary modules first</span>
-<span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
-<span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Point</span><span class="p">,</span> <span class="n">Polygon</span>
-
-<span class="c1"># Create an empty geopandas GeoDataFrame</span>
-<span class="n">newdata</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">()</span>
-
-<span class="c1"># Let&#39;s see what we have at the moment</span>
-<span class="k">print</span><span class="p">(</span><span class="n">newdata</span><span class="p">)</span>
+<span></span><span class="c1"># Print all unique values in the column</span>
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;CLASS&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -819,256 +1269,20 @@ Mean area: 19.96
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Empty GeoDataFrame
-Columns: []
-Index: []
+[32421 32200 34300 34100 34700 32500 32112 32111 32611 32612 32800 32900
+ 35300 35412 35411 35421 33000 33100 36200 36313]
 </pre></div></div>
 </div>
-<p>As we can see, the GeoDataFrame is empty since we haven’t yet stored any data into it.</p>
 <ul class="simple">
-<li>Let’s create a new column called <code class="docutils literal notranslate"><span class="pre">geometry</span></code> that will contain our Shapely objects:</li>
+<li>Now we can use that information to group our data and save all land use types into different layers:</li>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Create a new column called &#39;geometry&#39; to the GeoDataFrame</span>
-<span class="n">newdata</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
-
-<span class="c1"># Let&#39;s again see what&#39;s inside</span>
-<span class="k">print</span><span class="p">(</span><span class="n">newdata</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-Empty GeoDataFrame
-Columns: [geometry]
-Index: []
-</pre></div></div>
-</div>
-<p>Now we have a <code class="docutils literal notranslate"><span class="pre">geometry</span></code> column in our GeoDataFrame but we don’t have any data stored yet.</p>
-<ul class="simple">
-<li>Let’s create a Shapely <code class="docutils literal notranslate"><span class="pre">Polygon</span></code> repsenting the Helsinki Senate square that we can later insert to our GeoDataFrame:</li>
-</ul>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Coordinates of the Helsinki Senate square in Decimal Degrees</span>
-<span class="n">coordinates</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">24.950899</span><span class="p">,</span> <span class="mf">60.169158</span><span class="p">),</span> <span class="p">(</span><span class="mf">24.953492</span><span class="p">,</span> <span class="mf">60.169158</span><span class="p">),</span> <span class="p">(</span><span class="mf">24.953510</span><span class="p">,</span> <span class="mf">60.170104</span><span class="p">),</span> <span class="p">(</span><span class="mf">24.950958</span><span class="p">,</span> <span class="mf">60.169990</span><span class="p">)]</span>
-
-<span class="c1"># Create a Shapely polygon from the coordinate-tuple list</span>
-<span class="n">poly</span> <span class="o">=</span> <span class="n">Polygon</span><span class="p">(</span><span class="n">coordinates</span><span class="p">)</span>
-
-<span class="c1"># Let&#39;s see what we have</span>
-<span class="k">print</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-POLYGON ((24.950899 60.169158, 24.953492 60.169158, 24.95351 60.170104, 24.950958 60.16999, 24.950899 60.169158))
-</pre></div></div>
-</div>
-<p>Okay, now we have an appropriate <code class="docutils literal notranslate"><span class="pre">Polygon</span></code> -object.</p>
-<ul class="simple">
-<li>Let’s insert the polygon into our ‘geometry’ column of our GeoDataFrame at position 0:</li>
-</ul>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Insert the polygon into &#39;geometry&#39; -column at index 0</span>
-<span class="n">newdata</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">poly</span>
-
-<span class="c1"># Let&#39;s see what we have now</span>
-<span class="k">print</span><span class="p">(</span><span class="n">newdata</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-                                            geometry
-0  POLYGON ((24.950899 60.169158, 24.953492 60.16...
-</pre></div></div>
-</div>
-<p>Great, now we have a GeoDataFrame with a Polygon that we could already now export to a Shapefile. However, typically you might want to include some useful information with your geometry.</p>
-<ul class="simple">
-<li>Hence, let’s add another column to our GeoDataFrame called <code class="docutils literal notranslate"><span class="pre">location</span></code> with text <code class="docutils literal notranslate"><span class="pre">Senaatintori</span></code> that describes the location of the feature.</li>
-</ul>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Add a new column and insert data</span>
-<span class="n">newdata</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;location&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Senaatintori&#39;</span>
-
-<span class="c1"># Let&#39;s check the data</span>
-<span class="k">print</span><span class="p">(</span><span class="n">newdata</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-                                            geometry      location
-0  POLYGON ((24.950899 60.169158, 24.953492 60.16...  Senaatintori
-</pre></div></div>
-</div>
-<p>Okay, now we have additional information that is useful for recognicing what the feature represents.</p>
-<p>Before exporting the data it is always good (basically necessary) to <strong>determine the coordinate reference system (projection) for the GeoDataFrame.</strong> GeoDataFrame has an attribute called <code class="docutils literal notranslate"><span class="pre">.crs</span></code> that shows the coordinate system of the data which is empty (None) in our case since we are creating the data from the scratch (more about projection on next tutorial):</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">print</span><span class="p">(</span><span class="n">newdata</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-None
-</pre></div></div>
-</div>
-<ul class="simple">
-<li>Let’s add a crs for our GeoDataFrame. A Python module called <strong>fiona</strong> has a nice function called <code class="docutils literal notranslate"><span class="pre">from_epsg()</span></code> for passing the coordinate reference system information for the GeoDataFrame. Next we will use that and determine the projection to WGS84 (epsg code: 4326):</li>
-</ul>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Import specific function &#39;from_epsg&#39; from fiona module</span>
-<span class="kn">from</span> <span class="nn">fiona.crs</span> <span class="kn">import</span> <span class="n">from_epsg</span>
-
-<span class="c1"># Set the GeoDataFrame&#39;s coordinate system to WGS84 (i.e. epsg code 4326)</span>
-<span class="n">newdata</span><span class="o">.</span><span class="n">crs</span> <span class="o">=</span> <span class="n">from_epsg</span><span class="p">(</span><span class="mi">4326</span><span class="p">)</span>
-
-<span class="c1"># Let&#39;s see how the crs definition looks like</span>
-<span class="k">print</span><span class="p">(</span><span class="n">newdata</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-{&#39;init&#39;: &#39;epsg:4326&#39;, &#39;no_defs&#39;: True}
-</pre></div></div>
-</div>
-<p>As we can see, now we have associated coordinate reference system information (i.e.&nbsp;<code class="docutils literal notranslate"><span class="pre">CRS</span></code>) into our <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code>. The CRS information here, is a Python <code class="docutils literal notranslate"><span class="pre">dictionary</span></code> containing necessary values for geopandas to create a <code class="docutils literal notranslate"><span class="pre">.prj</span></code> file for our Shapefile that contains the CRS info.</p>
-<ul class="simple">
-<li>Finally, we can export the GeoDataFrame using <code class="docutils literal notranslate"><span class="pre">.to_file()</span></code> -function. The function works quite similarly as the export functions in numpy or pandas, but here we only need to provide the output path for the Shapefile. Easy isn’t it!:</li>
-</ul>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Determine the output path for the Shapefile</span>
-<span class="n">outfp</span> <span class="o">=</span> <span class="s2">&quot;L2_data/Senaatintori.shp&quot;</span>
-
-<span class="c1"># Write the data into that Shapefile</span>
-<span class="n">newdata</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">outfp</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<p>Now we have successfully created a Shapefile from the scratch using only Python programming. Similar approach can be used to for example to read coordinates from a text file (e.g.&nbsp;points) and create Shapefiles from those automatically.</p>
-<p><strong>TASK:</strong> Check the output Shapefile by reading it with geopandas and make sure that the attribute table and geometry seems correct.</p>
-</div>
-<div class="section" id="Practical-example:-Saving-multiple-Shapefiles">
-<h2>Practical example: Saving multiple Shapefiles<a class="headerlink" href="#Practical-example:-Saving-multiple-Shapefiles" title="Permalink to this headline">¶</a></h2>
-<p>One really useful function that can be used in Pandas/Geopandas is <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.groupby.html">.groupby()</a>. We saw and used this function already in <a class="reference external" href="https://geo-python.github.io/site/notebooks/L6/pandas/advanced-data-processing-with-pandas.html#Aggregating-data-in-Pandas-by-grouping">Lesson 6 of the Geo-Python course</a>. Group by function is useful for grouping data based on values on selected column(s).</p>
-<p>Next we will take a practical example by automating the file export task. We will group individual fish subspecies in our <code class="docutils literal notranslate"><span class="pre">DAMSELFISH_distribution.shp</span></code> and export those into separate Shapefiles.</p>
-<ul class="simple">
-<li>Let’s start from scratch and read the Shapefile into GeoDataFrame</li>
-</ul>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Read Damselfish data</span>
-<span class="n">fp</span> <span class="o">=</span> <span class="s2">&quot;L2_data/DAMSELFISH_distributions.shp&quot;</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
-
-<span class="c1"># Print columns</span>
-<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-Index([&#39;ID_NO&#39;, &#39;BINOMIAL&#39;, &#39;ORIGIN&#39;, &#39;COMPILER&#39;, &#39;YEAR&#39;, &#39;CITATION&#39;, &#39;SOURCE&#39;,
-       &#39;DIST_COMM&#39;, &#39;ISLAND&#39;, &#39;SUBSPECIES&#39;, &#39;SUBPOP&#39;, &#39;LEGEND&#39;, &#39;SEASONAL&#39;,
-       &#39;TAX_COMM&#39;, &#39;RL_UPDATE&#39;, &#39;KINGDOM_NA&#39;, &#39;PHYLUM_NAM&#39;, &#39;CLASS_NAME&#39;,
-       &#39;ORDER_NAME&#39;, &#39;FAMILY_NAM&#39;, &#39;GENUS_NAME&#39;, &#39;SPECIES_NA&#39;, &#39;CATEGORY&#39;,
-       &#39;geometry&#39;],
-      dtype=&#39;object&#39;)
-</pre></div></div>
-</div>
-<p>The <code class="docutils literal notranslate"><span class="pre">BINOMIAL</span></code> column in the data contains information about different fish subspecies (their latin name). With <code class="docutils literal notranslate"><span class="pre">.unique()</span></code> -function we can quickly see all different names in that column:</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Print all unique fish subspecies in &#39;BINOMIAL&#39; column</span>
-<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;BINOMIAL&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-[&#39;Stegastes leucorus&#39; &#39;Chromis intercrusma&#39; &#39;Stegastes beebei&#39;
- &#39;Stegastes rectifraenum&#39; &#39;Chromis punctipinnis&#39; &#39;Chromis crusma&#39;
- &#39;Chromis pembae&#39; &#39;Stegastes redemptus&#39; &#39;Teixeirichthys jordani&#39;
- &#39;Chromis limbaughi&#39; &#39;Microspathodon dorsalis&#39; &#39;Chromis cyanea&#39;
- &#39;Amphiprion sandaracinos&#39; &#39;Nexilosus latifrons&#39; &#39;Stegastes baldwini&#39;
- &#39;Microspathodon bairdii&#39; &#39;Azurina eupalama&#39; &#39;Chromis flavicauda&#39;
- &#39;Stegastes arcifrons&#39; &#39;Chromis alta&#39; &#39;Abudefduf declivifrons&#39;
- &#39;Chromis alpha&#39; &#39;Stegastes flavilatus&#39; &#39;Abudefduf concolor&#39;
- &#39;Abudefduf troschelii&#39; &#39;Chrysiptera flavipinnis&#39; &#39;Chromis atrilobata&#39;
- &#39;Stegastes acapulcoensis&#39; &#39;Hypsypops rubicundus&#39; &#39;Azurina hirundo&#39;]
-</pre></div></div>
-</div>
-<ul class="simple">
-<li>Now we can use that information to group our data and save all individual fish subspecies as separate Shapefiles:</li>
-</ul>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Group the data by column &#39;BINOMIAL&#39;</span>
-<span class="n">grouped</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;BINOMIAL&#39;</span><span class="p">)</span>
+<span></span><span class="c1"># Group the data by class</span>
+<span class="n">grouped</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;CLASS&#39;</span><span class="p">)</span>
 
 <span class="c1"># Let&#39;s see what we have</span>
 <span class="n">grouped</span>
@@ -1076,30 +1290,51 @@ Index([&#39;ID_NO&#39;, &#39;BINOMIAL&#39;, &#39;ORIGIN&#39;, &#39;COMPILER&#39;
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>&lt;pandas.core.groupby.groupby.DataFrameGroupBy object at 0x0000018FF1F87208&gt;
+<span></span>&lt;pandas.core.groupby.generic.DataFrameGroupBy object at 0x7f8cc4175048&gt;
 </pre></div>
 </div>
 </div>
-<p>As we can see, <code class="docutils literal notranslate"><span class="pre">groupby</span></code> -function gives us an object called <code class="docutils literal notranslate"><span class="pre">DataFrameGroupBy</span></code> which is similar to list of keys and values (in a dictionary) that we can iterate over. This is again exactly similar thing that we already practiced during <a class="reference external" href="https://geo-python.github.io/2018/notebooks/L6/pandas/advanced-data-processing-with-pandas.html#Aggregating-data-in-Pandas-by-grouping">Lesson 6 of the Geo-Python course</a>.</p>
+<p>As we can see, <code class="docutils literal notranslate"><span class="pre">groupby</span></code> -function gives us an object called <code class="docutils literal notranslate"><span class="pre">DataFrameGroupBy</span></code> which is similar to list of keys and values (in a dictionary) that we can iterate over. For more information about grouped objects, see <a class="reference external" href="https://geo-python.github.io/2018/notebooks/L6/pandas/advanced-data-processing-with-pandas.html#Aggregating-data-in-Pandas-by-grouping">Lesson 6 of the Geo-Python course</a>.</p>
 <ul class="simple">
-<li>Let’s iterate over the groups and see what our variables <code class="docutils literal notranslate"><span class="pre">key</span></code> and <code class="docutils literal notranslate"><span class="pre">values</span></code> contain</li>
+<li>Check out all group keys:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">grouped</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>dict_keys([32111, 32112, 32200, 32421, 32500, 32611, 32612, 32800, 32900, 33000, 33100, 34100, 34300, 34700, 35300, 35411, 35412, 35421, 36200, 36313])
+</pre></div>
+</div>
+</div>
+<p>The group keys are unique values from the column by which we grouped the dataframe.</p>
+<ul class="simple">
+<li>Check how many rows of data each group has:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Iterate over the group object</span>
-<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">grouped</span><span class="p">:</span>
-    <span class="n">individual_fish</span> <span class="o">=</span> <span class="n">values</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">grouped</span><span class="p">:</span>
 
-<span class="c1"># Let&#39;s see what is the LAST item and key that we iterated</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Key:&#39;</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">individual_fish</span><span class="p">)</span>
+    <span class="c1"># Let&#39;s check how many rows each group has:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Terrain class:&#39;</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Number of rows:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">group</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1108,79 +1343,161 @@ Index([&#39;ID_NO&#39;, &#39;BINOMIAL&#39;, &#39;ORIGIN&#39;, &#39;COMPILER&#39;
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Key: Teixeirichthys jordani
-       ID_NO                BINOMIAL  ORIGIN COMPILER  YEAR  \
-27  154915.0  Teixeirichthys jordani       1     None  2012
-28  154915.0  Teixeirichthys jordani       1     None  2012
-29  154915.0  Teixeirichthys jordani       1     None  2012
-30  154915.0  Teixeirichthys jordani       1     None  2012
-31  154915.0  Teixeirichthys jordani       1     None  2012
-32  154915.0  Teixeirichthys jordani       1     None  2012
-33  154915.0  Teixeirichthys jordani       1     None  2012
+Terrain class: 32111
+Number of rows: 1
 
-                                             CITATION SOURCE DIST_COMM ISLAND  \
-27  Red List Index (Sampled Approach), Zoological ...   None      None   None
-28  Red List Index (Sampled Approach), Zoological ...   None      None   None
-29  Red List Index (Sampled Approach), Zoological ...   None      None   None
-30  Red List Index (Sampled Approach), Zoological ...   None      None   None
-31  Red List Index (Sampled Approach), Zoological ...   None      None   None
-32  Red List Index (Sampled Approach), Zoological ...   None      None   None
-33  Red List Index (Sampled Approach), Zoological ...   None      None   None
+Terrain class: 32112
+Number of rows: 1
 
-   SUBSPECIES                        ...                         RL_UPDATE  \
-27       None                        ...                            2012.2
-28       None                        ...                            2012.2
-29       None                        ...                            2012.2
-30       None                        ...                            2012.2
-31       None                        ...                            2012.2
-32       None                        ...                            2012.2
-33       None                        ...                            2012.2
+Terrain class: 32200
+Number of rows: 2
 
-   KINGDOM_NA  PHYLUM_NAM      CLASS_NAME   ORDER_NAME     FAMILY_NAM  \
-27   ANIMALIA    CHORDATA  ACTINOPTERYGII  PERCIFORMES  POMACENTRIDAE
-28   ANIMALIA    CHORDATA  ACTINOPTERYGII  PERCIFORMES  POMACENTRIDAE
-29   ANIMALIA    CHORDATA  ACTINOPTERYGII  PERCIFORMES  POMACENTRIDAE
-30   ANIMALIA    CHORDATA  ACTINOPTERYGII  PERCIFORMES  POMACENTRIDAE
-31   ANIMALIA    CHORDATA  ACTINOPTERYGII  PERCIFORMES  POMACENTRIDAE
-32   ANIMALIA    CHORDATA  ACTINOPTERYGII  PERCIFORMES  POMACENTRIDAE
-33   ANIMALIA    CHORDATA  ACTINOPTERYGII  PERCIFORMES  POMACENTRIDAE
+Terrain class: 32421
+Number of rows: 110
 
-        GENUS_NAME SPECIES_NA CATEGORY  \
-27  Teixeirichthys    jordani       LC
-28  Teixeirichthys    jordani       LC
-29  Teixeirichthys    jordani       LC
-30  Teixeirichthys    jordani       LC
-31  Teixeirichthys    jordani       LC
-32  Teixeirichthys    jordani       LC
-33  Teixeirichthys    jordani       LC
+Terrain class: 32500
+Number of rows: 2
 
-                                             geometry
-27  POLYGON ((121.6300326400001 33.04248618400004,...
-28  POLYGON ((32.56219482400007 29.97488975500005,...
-29  POLYGON ((130.9052090560001 34.02498196400006,...
-30  POLYGON ((56.32233070000007 -3.707270205999976...
-31  POLYGON ((40.64476131800006 -10.85502363999996...
-32  POLYGON ((48.11258402900006 -9.335103113999935...
-33  POLYGON ((51.75403543100003 -9.21679305899994,...
+Terrain class: 32611
+Number of rows: 257
 
-[7 rows x 24 columns]
+Terrain class: 32612
+Number of rows: 11
+
+Terrain class: 32800
+Number of rows: 80
+
+Terrain class: 32900
+Number of rows: 28
+
+Terrain class: 33000
+Number of rows: 5
+
+Terrain class: 33100
+Number of rows: 118
+
+Terrain class: 34100
+Number of rows: 3005
+
+Terrain class: 34300
+Number of rows: 1
+
+Terrain class: 34700
+Number of rows: 3
+
+Terrain class: 35300
+Number of rows: 134
+
+Terrain class: 35411
+Number of rows: 35
+
+Terrain class: 35412
+Number of rows: 449
+
+Terrain class: 35421
+Number of rows: 5
+
+Terrain class: 36200
+Number of rows: 56
+
+Terrain class: 36313
+Number of rows: 8
+
 </pre></div></div>
 </div>
-<p>From here we can see that the <code class="docutils literal notranslate"><span class="pre">individual_fish</span></code> -variable contains all the rows that belongs to a fish called <code class="docutils literal notranslate"><span class="pre">Teixeirichthys</span> <span class="pre">jordani</span></code> that is the <code class="docutils literal notranslate"><span class="pre">key</span></code> for conducting the grouping. Notice that the index numbers refer to the row numbers in the original data -GeoDataFrame.</p>
-<ul class="simple">
-<li>Let’s check the datatype of the grouped object:</li>
-</ul>
+<p>There are, for example, 56 lake polygons in the input data.</p>
+<p>We can also check how the <em>last</em> group looks like (we have the variables in memory from the last iteration of the for-loop):</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[42]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="nb">type</span><span class="p">(</span><span class="n">individual_fish</span><span class="p">)</span>
+<span></span><span class="n">group</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[42]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>GROUP</th>
+      <th>CLASS</th>
+      <th>geometry</th>
+      <th>area</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>4303</th>
+      <td>64</td>
+      <td>36313</td>
+      <td>POLYGON ((377127.305 6688073.257, 377116.045 6...</td>
+      <td>9619.307973</td>
+    </tr>
+    <tr>
+      <th>4304</th>
+      <td>64</td>
+      <td>36313</td>
+      <td>POLYGON ((371141.897 6677999.999, 371139.757 6...</td>
+      <td>25266.167705</td>
+    </tr>
+    <tr>
+      <th>4305</th>
+      <td>64</td>
+      <td>36313</td>
+      <td>POLYGON ((371498.720 6680399.799, 371497.585 6...</td>
+      <td>364.087680</td>
+    </tr>
+    <tr>
+      <th>4306</th>
+      <td>64</td>
+      <td>36313</td>
+      <td>POLYGON ((375668.607 6682942.062, 375671.489 6...</td>
+      <td>2651.800270</td>
+    </tr>
+    <tr>
+      <th>4307</th>
+      <td>64</td>
+      <td>36313</td>
+      <td>POLYGON ((368411.063 6679328.990, 368411.424 6...</td>
+      <td>376.503380</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>Notice that the index numbers refer to the row numbers in the original data -GeoDataFrame.</p>
+<p>Check also the data type of the group:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nb">type</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -1188,42 +1505,73 @@ Key: Teixeirichthys jordani
 </pre></div>
 </div>
 </div>
-<p>As we can see, each set of data are now grouped into separate GeoDataFrames that we can export into Shapefiles using the variable <code class="docutils literal notranslate"><span class="pre">key</span></code> for creating the output filename. Next, we use a specific string formatting method to produce the output filename using <code class="docutils literal notranslate"><span class="pre">%</span> <span class="pre">operator</span></code> (<a class="reference external" href="https://www.learnpython.org/en/String_Formatting">read more here</a>).</p>
+<p>As we can see, each set of data are now grouped into separate GeoDataFrames, and we can save them into separate files.</p>
+<div class="section" id="Saving-multiple-output-files">
+<h3>Saving multiple output files<a class="headerlink" href="#Saving-multiple-output-files" title="Permalink to this headline">¶</a></h3>
+<p>Let’s <strong>export each class into a separate Shapefile</strong>. While doing this, we also want to <strong>create unique filenames for each class</strong>.</p>
+<p>When looping over the grouped object, information about the class is stored in the variable <code class="docutils literal notranslate"><span class="pre">key</span></code>, and we can use this information for creating new variable names inside the for-loop. For example, we want to name the shapefile containing lake polygons as “terrain_36200.shp”.</p>
+<div class="admonition note">
+<p class="admonition-title fa fa-exclamation-circle"><strong>String formatting</strong></p>
+<p>There are different approaches for formatting strings in Python. Here are a couple of different ways for putting together file-path names using two variables:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">basename</span> <span class="o">=</span> <span class="s2">&quot;terrain&quot;</span>
+<span class="n">key</span> <span class="o">=</span> <span class="mi">36200</span>
+
+<span class="c1"># OPTION 1. Concatenating using the `+` operator:</span>
+<span class="n">out_fp</span> <span class="o">=</span> <span class="n">basename</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.shp&quot;</span>
+
+<span class="c1"># OPTION 2. Positional formatting using `%` operator</span>
+<span class="n">out_fp</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">_</span><span class="si">%s</span><span class="s2">.shp&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">basename</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+
+<span class="c1"># OPTION 3. Positional formatting using `.format()`</span>
+<span class="n">out_fp</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">_</span><span class="si">{}</span><span class="s2">.shp&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">basename</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Read more from here: <a class="reference external" href="https://pyformat.info/">https://pyformat.info/</a></p>
+</div>
+<p>Let’s now export terrain classes into separate Shapefiles.</p>
 <ul class="simple">
-<li>Let’s now export all individual subspecies into separate Shapefiles:</li>
+<li>First, create a new folder for the outputs:</li>
 </ul>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[45]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Import os -module that is useful for parsing filepaths</span>
-<span class="kn">import</span> <span class="nn">os</span>
-
-<span class="c1"># Determine output directory</span>
-<span class="n">out_directory</span> <span class="o">=</span> <span class="s2">&quot;L2_data&quot;</span>
+<span></span><span class="c1"># Determine output directory</span>
+<span class="n">output_folder</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;L2_data/&quot;</span>
 
 <span class="c1"># Create a new folder called &#39;Results&#39;</span>
-<span class="n">result_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_directory</span><span class="p">,</span> <span class="s1">&#39;Results&#39;</span><span class="p">)</span>
+<span class="n">result_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_folder</span><span class="p">,</span> <span class="s1">&#39;Results&#39;</span><span class="p">)</span>
 
 <span class="c1"># Check if the folder exists already</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">result_folder</span><span class="p">):</span>
     <span class="c1"># If it does not exist, create one</span>
     <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">result_folder</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>At this point, you can go to the file browser and check that the new folder was created successfully.</p>
+<ul class="simple">
+<li>Iterate over groups, create a file name, and save group to file:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Iterate over the groups</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">grouped</span><span class="p">:</span>
+    <span class="c1"># Format the filename</span>
+    <span class="n">output_name</span> <span class="o">=</span> <span class="s2">&quot;terrain_</span><span class="si">%s</span><span class="s2">.shp&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
 
-<span class="c1"># Iterate over the groups</span>
-<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">grouped</span><span class="p">:</span>
-    <span class="c1"># Format the filename (replace spaces with underscores using &#39;replace()&#39; -function)</span>
-    <span class="n">output_name</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">.shp&quot;</span> <span class="o">%</span> <span class="n">key</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span>
-
-    <span class="c1"># Print some information for the user</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Processing: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">key</span><span class="p">)</span>
+    <span class="c1"># Print information about the process</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Saving file&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">output_name</span><span class="p">))</span>
 
     <span class="c1"># Create an output path</span>
     <span class="n">outpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">result_folder</span><span class="p">,</span> <span class="n">output_name</span><span class="p">)</span>
 
     <span class="c1"># Export the data</span>
-    <span class="n">values</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">outpath</span><span class="p">)</span>
+    <span class="n">group</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">outpath</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1232,47 +1580,107 @@ Key: Teixeirichthys jordani
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Processing: Abudefduf concolor
-Processing: Abudefduf declivifrons
-Processing: Abudefduf troschelii
-Processing: Amphiprion sandaracinos
-Processing: Azurina eupalama
-Processing: Azurina hirundo
-Processing: Chromis alpha
-Processing: Chromis alta
-Processing: Chromis atrilobata
-Processing: Chromis crusma
-Processing: Chromis cyanea
-Processing: Chromis flavicauda
-Processing: Chromis intercrusma
-Processing: Chromis limbaughi
-Processing: Chromis pembae
-Processing: Chromis punctipinnis
-Processing: Chrysiptera flavipinnis
-Processing: Hypsypops rubicundus
-Processing: Microspathodon bairdii
-Processing: Microspathodon dorsalis
-Processing: Nexilosus latifrons
-Processing: Stegastes acapulcoensis
-Processing: Stegastes arcifrons
-Processing: Stegastes baldwini
-Processing: Stegastes beebei
-Processing: Stegastes flavilatus
-Processing: Stegastes leucorus
-Processing: Stegastes rectifraenum
-Processing: Stegastes redemptus
-Processing: Teixeirichthys jordani
+Saving file terrain_32111.shp
+Saving file terrain_32112.shp
+Saving file terrain_32200.shp
+Saving file terrain_32421.shp
+Saving file terrain_32500.shp
+Saving file terrain_32611.shp
+Saving file terrain_32612.shp
+Saving file terrain_32800.shp
+Saving file terrain_32900.shp
+Saving file terrain_33000.shp
+Saving file terrain_33100.shp
+Saving file terrain_34100.shp
+Saving file terrain_34300.shp
+Saving file terrain_34700.shp
+Saving file terrain_35300.shp
+Saving file terrain_35411.shp
+Saving file terrain_35412.shp
+Saving file terrain_35421.shp
+Saving file terrain_36200.shp
+Saving file terrain_36313.shp
 </pre></div></div>
 </div>
-<p>Excellent! Now we have saved those individual fishes into separate Shapefiles and named the file according to the species name. These kind of grouping operations can be really handy when dealing with Shapefiles. Doing similar process manually would be really laborious and error-prone.</p>
+<p>Excellent! Now we have saved those individual classes into separate Shapefiles and named the file according to the class name. These kind of grouping operations can be really handy when dealing with layers of spatial data. Doing similar process manually would be really laborious and error-prone.</p>
+</div>
+<div class="section" id="Extra:-save-data-to-csv">
+<h3>Extra: save data to csv<a class="headerlink" href="#Extra:-save-data-to-csv" title="Permalink to this headline">¶</a></h3>
+<p>We can also extract basic statistics from our geodataframe, and save this information as a text file.</p>
+<p>Let’s summarize the total area of each group:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">area_info</span> <span class="o">=</span> <span class="n">grouped</span><span class="o">.</span><span class="n">area</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">area_info</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>CLASS
+32111        1834.0
+32112        2148.0
+32200      105737.0
+32421      702073.0
+32500      109747.0
+32611    13135597.0
+32612      107343.0
+32800     1465278.0
+32900      617209.0
+33000      659465.0
+33100     3777595.0
+34100    12381611.0
+34300        1627.0
+34700        2786.0
+35300     1382940.0
+35411      411198.0
+35412     4710133.0
+35421       67864.0
+36200     9986966.0
+36313       43459.0
+Name: area, dtype: float64
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li>save area info to csv using pandas:</li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Create an output path</span>
+<span class="n">area_info</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;terrain_class_areas.csv&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="Summary">
 <h2>Summary<a class="headerlink" href="#Summary" title="Permalink to this headline">¶</a></h2>
 <p>In this tutorial we introduced the first steps of using geopandas. More specifically you should know how to:</p>
-<p><strong>1)</strong> Read data from Shapefile using geopandas,</p>
-<p><strong>2)</strong> Write GeoDataFrame data from Shapefile using geopandas,</p>
-<p><strong>3)</strong> Create a GeoDataFrame from scratch, and</p>
-<p><strong>4)</strong> automate a task to save specific rows from data into Shapefile based on specific key using <code class="docutils literal notranslate"><span class="pre">groupby()</span></code> -function.</p>
+<ol class="arabic simple">
+<li>Read data from Shapefile using geopandas</li>
+<li>Access geometry information in a geodataframe</li>
+<li>Write GeoDataFrame data from Shapefile using geopandas</li>
+<li>Automate a task to save specific rows from data into Shapefile based on specific key using <code class="docutils literal notranslate"><span class="pre">groupby()</span></code> -function</li>
+<li>Extra: saving attribute information to a csv file.</li>
+</ol>
 </div>
 </div>
 
@@ -1282,6 +1690,15 @@ Processing: Teixeirichthys jordani
           </div>
           <footer>
   
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="projections.html" class="btn btn-neutral float-right" title="Map projections" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="data_io.html" class="btn btn-neutral float-left" title="Vector Data I/O in Python" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
 
   <hr/>
 
@@ -1289,7 +1706,7 @@ Processing: Teixeirichthys jordani
     <p>
         &copy; Copyright 2019, Henrikki Tenkanen and Vuokko Heikinheimo, Digital Geography Lab, University of Helsinki
       <span class="lastupdated">
-        Last updated on Oct 29, 2019.
+        Last updated on Nov 04, 2019.
       </span>
 
     </p>
