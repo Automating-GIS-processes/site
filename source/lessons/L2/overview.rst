@@ -42,8 +42,11 @@ Lesson videos
         - `Quiz 01:47 <https://www.youtube.com/watch?v=W7wYNui2wyc&t=107s>`__
         - `Vector data I/O from different formats 06:20 <https://www.youtube.com/watch?v=W7wYNui2wyc&t=380s>`__
         - `Geopandas intro 11:36  <https://www.youtube.com/watch?v=W7wYNui2wyc&t=696s>`__
+        - `Downloading input data 15:20 <https://www.youtube.com/watch?v=W7wYNui2wyc&t=920s>`__
+        - `Managing filepaths 19:37 <https://www.youtube.com/watch?v=W7wYNui2wyc&t=1177s>`__
+        - `Reading a shapefile 23:12 <https://www.youtube.com/watch?v=W7wYNui2wyc&t=1392s>`__
         - `Writing a shapefile 39:15 <https://www.youtube.com/watch?v=W7wYNui2wyc&t=2355s>`__
-        - ` Grouping the data 47:56 <https://www.youtube.com/watch?v=W7wYNui2wyc&t=2876s>`__
+        - `Grouping the data 47:56 <https://www.youtube.com/watch?v=W7wYNui2wyc&t=2876s>`__
         
      
 .. admonition:: Lesson 2 - Coordinate reference systems 
