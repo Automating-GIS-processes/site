@@ -147,7 +147,6 @@
 <li class="toctree-l1"><a class="reference internal" href="geocoding_in_geopandas.html">Geocoding in Geopandas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="point-in-polygon.html">Point in Polygon &amp; Intersect</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Spatial join</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#Download-and-clean-the-data">Download and clean the data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#Join-the-layers">Join the layers</a></li>
 </ul>
 </li>
@@ -459,61 +458,61 @@ This page was generated from <a class="reference external" href="https://github.
 <h1>Spatial join<a class="headerlink" href="#Spatial-join" title="Permalink to this headline">¶</a></h1>
 <p><a class="reference external" href="http://wiki.gis.com/wiki/index.php/Spatial_Join">Spatial join</a> is yet another classic GIS problem. Getting attributes from one layer and transferring them into another layer based on their spatial relationship is something you most likely need to do on a regular basis.</p>
 <p>In the previous section we learned how to perform <strong>a Point in Polygon query</strong>. We could now apply those techniques and create our own function to perform <strong>a spatial join</strong> between two layers based on their spatial relationship. We could, for example, join the attributes of a polygon layer into a point layer where each point would get the attributes of a polygon that <code class="docutils literal notranslate"><span class="pre">contains</span></code> the point.</p>
-<p>Luckily, <a class="reference external" href="http://geopandas.org/mergingdata.html#spatial-joins">spatial join is already implemented in Geopandas</a> , thus we do not need to create it ourselves. There are three possible types of join that can be applied in spatial join that are determined with <code class="docutils literal notranslate"><span class="pre">op</span></code> -parameter in the <code class="docutils literal notranslate"><span class="pre">gpd.sjoin()</span></code> -function:</p>
+<p>Luckily, <a class="reference external" href="http://geopandas.org/mergingdata.html#spatial-joins">spatial join is already implemented in Geopandas</a>, thus we do not need to create our own function for doing it. There are three possible types of join that can be applied in spatial join that are determined with <code class="docutils literal notranslate"><span class="pre">op</span></code> -parameter in the <code class="docutils literal notranslate"><span class="pre">gpd.sjoin()</span></code> -function:</p>
 <ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">&quot;intersects&quot;</span></code></li>
 <li><code class="docutils literal notranslate"><span class="pre">&quot;within&quot;</span></code></li>
 <li><code class="docutils literal notranslate"><span class="pre">&quot;contains&quot;</span></code></li>
 </ul>
 <p>Sounds familiar? Yep, all of those spatial relationships were discussed in the <a class="reference internal" href="point-in-polygon.html"><span class="doc">Point in Polygon lesson</span></a>, thus you should know how they work.</p>
-<p>Let’s perform a spatial join between these two layers: - <strong>Addresses:</strong> the address-point Shapefile that we created trough geocoding - <strong>Population grid:</strong> a Polygon layer that is a 250m x 250m grid showing the amount of people living in the Helsinki Region. - The population grid a dataset is produced by the <strong>Helsinki Region Environmental Services Authority (HSY)</strong> (see <a class="reference external" href="https://www.hsy.fi/fi/asiantuntijalle/avoindata/Sivut/AvoinData.aspx?dataID=7">this page</a> to access data from different
-years). - For this lesson we will use the population grid for year 2017, which can be dowloaded as a shapefile <a class="reference external" href="https://www.hsy.fi/sites/AvoinData/AvoinData/SYT/Tietoyhteistyoyksikko/Shape%20(Esri)/V%C3%A4est%C3%B6tietoruudukko/Vaestotietoruudukko_2017_SHP.zip">from this link</a> in the <a class="reference external" href="https://hri.fi/en_gb/">Helsinki Region Infroshare (HRI) open data portal</a></p>
-<div class="section" id="Download-and-clean-the-data">
-<h2>Download and clean the data<a class="headerlink" href="#Download-and-clean-the-data" title="Permalink to this headline">¶</a></h2>
-<p><strong>Execute the following steps in a terminal window</strong></p>
+<p>Furthermore, pay attention to the different options for the type of join via the <code class="docutils literal notranslate"><span class="pre">how</span></code> parameter; “left”, “right” and “inner”. You can read more about these options in the <a class="reference external" href="http://geopandas.org/mergingdata.html#sjoin-arguments">geopandas sjoin documentation</a> and pandas guide for <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/merging.html">merge, join and concatenate</a></p>
+<p>Let’s perform a spatial join between these two layers: - <strong>Addresses:</strong> the geocoded address-point (we created this Shapefile in the geocoding tutorial) - <strong>Population grid:</strong> 250m x 250m grid polygon layer that contains population information from the Helsinki Region. - The population grid a dataset is produced by the <strong>Helsinki Region Environmental Services Authority (HSY)</strong> (see <a class="reference external" href="https://www.hsy.fi/fi/asiantuntijalle/avoindata/Sivut/AvoinData.aspx?dataID=7">this page</a> to access data from
+different years). - You can download the data from <a class="reference external" href="https://www.hsy.fi/sites/AvoinData/AvoinData/SYT/Tietoyhteistyoyksikko/Shape%20(Esri)/V%C3%A4est%C3%B6tietoruudukko/Vaestotietoruudukko_2018_SHP.zip">from this link</a> in the <a class="reference external" href="https://hri.fi/en_gb/">Helsinki Region Infroshare (HRI) open data portal</a>.</p>
 <ul class="simple">
-<li>Navigate to the data folder</li>
+<li>Here, we will access the data directly from the HSY wfs:</li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd data
-</pre></div>
-</div>
-<ul class="simple">
-<li>Download the population grid using wget:</li>
-</ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ wget &quot;https://www.hsy.fi/sites/AvoinData/AvoinData/SYT/Tietoyhteistyoyksikko/Shape%20(Esri)/V%C3%A4est%C3%B6tietoruudukko/Vaestotietoruudukko_2017_SHP.zip&quot;
-</pre></div>
-</div>
-<ul class="simple">
-<li>Unzip the file in Terminal into a folder called Pop17 (using -d flag)</li>
-</ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ unzip Vaestotietoruudukko_2017_SHP.zip -d Pop17
-</pre></div>
-</div>
-<p>You should now have a folder <code class="docutils literal notranslate"><span class="pre">/data/Pop17</span></code> containing the population grid shapefile.</p>
-<ul class="simple">
-<li>Let’s read the data into memory and see what we have.</li>
-</ul>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span class="c1">#from pyproj import CRS</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">geojson</span>
 
-<span class="c1"># Filepath</span>
-<span class="n">fp</span> <span class="o">=</span> <span class="s2">&quot;data/Pop17/Vaestoruudukko_2017.shp&quot;</span>
+<span class="c1"># Specify the url for web feature service</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://kartta.hsy.fi/geoserver/wfs&#39;</span>
 
-<span class="c1"># Read the data</span>
-<span class="n">pop</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+<span class="c1"># Specify parameters (read data in json format).</span>
+<span class="c1"># Available feature types in this particular data source: http://geo.stat.fi/geoserver/vaestoruutu/wfs?service=wfs&amp;version=2.0.0&amp;request=describeFeatureType</span>
+<span class="n">params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">service</span><span class="o">=</span><span class="s1">&#39;WFS&#39;</span><span class="p">,</span>
+              <span class="n">version</span><span class="o">=</span><span class="s1">&#39;2.0.0&#39;</span><span class="p">,</span>
+              <span class="n">request</span><span class="o">=</span><span class="s1">&#39;GetFeature&#39;</span><span class="p">,</span>
+              <span class="n">typeName</span><span class="o">=</span><span class="s1">&#39;asuminen_ja_maankaytto:Vaestotietoruudukko_2018&#39;</span><span class="p">,</span>
+              <span class="n">outputFormat</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">)</span>
 
-<span class="c1"># See the first rows</span>
-<span class="n">pop</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="c1"># Fetch data from WFS using requests</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
 
+<span class="c1"># Create GeoDataFrame from geojson</span>
+<span class="n">pop</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="o">.</span><span class="n">from_features</span><span class="p">(</span><span class="n">geojson</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">))</span>
+<span class="n">pop</span><span class="o">.</span><span class="n">crs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;init&#39;</span><span class="p">:</span> <span class="s1">&#39;epsg:3879&#39;</span><span class="p">}</span>
+<span class="c1">#pop.crs = CRS.from_epsg(3879)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">pop</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -535,117 +534,117 @@ years). - For this lesson we will use the population grid for year 2017, which c
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>INDEX</th>
-      <th>ASUKKAITA</th>
-      <th>ASVALJYYS</th>
-      <th>IKA0_9</th>
-      <th>IKA10_19</th>
-      <th>IKA20_29</th>
-      <th>IKA30_39</th>
-      <th>IKA40_49</th>
-      <th>IKA50_59</th>
-      <th>IKA60_69</th>
-      <th>IKA70_79</th>
-      <th>IKA_YLI80</th>
+      <th>asukkaita</th>
+      <th>asvaljyys</th>
       <th>geometry</th>
+      <th>ika0_9</th>
+      <th>ika10_19</th>
+      <th>ika20_29</th>
+      <th>ika30_39</th>
+      <th>ika40_49</th>
+      <th>ika50_59</th>
+      <th>ika60_69</th>
+      <th>ika70_79</th>
+      <th>ika_yli80</th>
+      <th>index</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>688</td>
-      <td>9</td>
-      <td>28.0</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>POLYGON Z ((25472499.99532626 6689749.00506918...</td>
+      <td>108</td>
+      <td>45</td>
+      <td>(POLYGON Z ((25476499.99891588 6674248.9987864...</td>
+      <td>11</td>
+      <td>23</td>
+      <td>6</td>
+      <td>7</td>
+      <td>26</td>
+      <td>17</td>
+      <td>8</td>
+      <td>6</td>
+      <td>4</td>
+      <td>3342</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>710</td>
-      <td>8</td>
-      <td>44.0</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>POLYGON Z ((25472499.99532626 6684249.00413040...</td>
+      <td>273</td>
+      <td>35</td>
+      <td>(POLYGON Z ((25476749.99650801 6674498.9979198...</td>
+      <td>35</td>
+      <td>24</td>
+      <td>52</td>
+      <td>62</td>
+      <td>40</td>
+      <td>26</td>
+      <td>25</td>
+      <td>9</td>
+      <td>0</td>
+      <td>3503</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>711</td>
-      <td>5</td>
-      <td>90.0</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>POLYGON Z ((25472499.99532626 6683999.00499700...</td>
+      <td>239</td>
+      <td>34</td>
+      <td>(POLYGON Z ((25476999.99410014 6675749.0035888...</td>
+      <td>46</td>
+      <td>24</td>
+      <td>24</td>
+      <td>45</td>
+      <td>33</td>
+      <td>30</td>
+      <td>25</td>
+      <td>10</td>
+      <td>2</td>
+      <td>3660</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>715</td>
-      <td>12</td>
-      <td>37.0</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>POLYGON Z ((25472499.99532626 6682998.99846143...</td>
+      <td>202</td>
+      <td>30</td>
+      <td>(POLYGON Z ((25476999.99410014 6675499.0044554...</td>
+      <td>52</td>
+      <td>37</td>
+      <td>13</td>
+      <td>36</td>
+      <td>43</td>
+      <td>11</td>
+      <td>4</td>
+      <td>3</td>
+      <td>3</td>
+      <td>3661</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>848</td>
+      <td>261</td>
+      <td>30</td>
+      <td>(POLYGON Z ((25476999.99410014 6675249.0053220...</td>
+      <td>64</td>
+      <td>32</td>
+      <td>36</td>
+      <td>64</td>
+      <td>34</td>
+      <td>20</td>
       <td>6</td>
-      <td>44.0</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>POLYGON Z ((25472749.99291839 6690249.00333598...</td>
+      <td>3</td>
+      <td>2</td>
+      <td>3662</td>
     </tr>
   </tbody>
 </table>
 </div></div>
 </div>
-<p>Okey so we have multiple columns in the dataset but the most important one here is the column <code class="docutils literal notranslate"><span class="pre">ASUKKAITA</span></code> (<em>“population” in Finnish</em>) that tells the amount of inhabitants living under that polygon.</p>
+<p>Okey so we have multiple columns in the dataset but the most important one here is the column <code class="docutils literal notranslate"><span class="pre">asukkaita</span></code> (“population” in Finnish) that tells the amount of inhabitants living under that polygon.</p>
 <ul class="simple">
-<li>Let’s change the name of that columns into <code class="docutils literal notranslate"><span class="pre">pop17</span></code> so that it is more intuitive. Changing column names is easy in Pandas / Geopandas using a function called <code class="docutils literal notranslate"><span class="pre">rename()</span></code> where we pass a dictionary to a parameter <code class="docutils literal notranslate"><span class="pre">columns={'oldname':</span> <span class="pre">'newname'}</span></code>.</li>
+<li>Let’s change the name of that columns into <code class="docutils literal notranslate"><span class="pre">pop18</span></code> so that it is more intuitive. As you might remember, we can easily rename (Geo)DataFrame column names using the <code class="docutils literal notranslate"><span class="pre">rename()</span></code> function where we pass a dictionary of new column names like this: <code class="docutils literal notranslate"><span class="pre">columns={'oldname':</span> <span class="pre">'newname'}</span></code>.</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Change the name of a column</span>
-<span class="n">pop</span> <span class="o">=</span> <span class="n">pop</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;ASUKKAITA&#39;</span><span class="p">:</span> <span class="s1">&#39;pop17&#39;</span><span class="p">})</span>
+<span class="n">pop</span> <span class="o">=</span> <span class="n">pop</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;asukkaita&#39;</span><span class="p">:</span> <span class="s1">&#39;pop18&#39;</span><span class="p">})</span>
 
 <span class="c1"># See the column names and confirm that we now have a column called &#39;pop17&#39;</span>
 <span class="n">pop</span><span class="o">.</span><span class="n">columns</span>
@@ -653,38 +652,41 @@ years). - For this lesson we will use the population grid for year 2017, which c
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Index([&#39;INDEX&#39;, &#39;pop17&#39;, &#39;ASVALJYYS&#39;, &#39;IKA0_9&#39;, &#39;IKA10_19&#39;, &#39;IKA20_29&#39;,
-       &#39;IKA30_39&#39;, &#39;IKA40_49&#39;, &#39;IKA50_59&#39;, &#39;IKA60_69&#39;, &#39;IKA70_79&#39;, &#39;IKA_YLI80&#39;,
-       &#39;geometry&#39;],
+<span></span>Index([&#39;pop18&#39;, &#39;asvaljyys&#39;, &#39;geometry&#39;, &#39;ika0_9&#39;, &#39;ika10_19&#39;, &#39;ika20_29&#39;,
+       &#39;ika30_39&#39;, &#39;ika40_49&#39;, &#39;ika50_59&#39;, &#39;ika60_69&#39;, &#39;ika70_79&#39;, &#39;ika_yli80&#39;,
+       &#39;index&#39;],
       dtype=&#39;object&#39;)
 </pre></div>
 </div>
 </div>
 <ul class="simple">
-<li>Let’s also get rid of all unnecessary columns by selecting only columns that we need i.e.&nbsp;<code class="docutils literal notranslate"><span class="pre">pop17</span></code> and <code class="docutils literal notranslate"><span class="pre">geometry</span></code></li>
+<li>Let’s also get rid of all unnecessary columns by selecting only columns that we need i.e.&nbsp;<code class="docutils literal notranslate"><span class="pre">pop18</span></code> and <code class="docutils literal notranslate"><span class="pre">geometry</span></code></li>
 </ul>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Columns that will be sected</span>
-<span class="n">selected_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;pop17&#39;</span><span class="p">,</span> <span class="s1">&#39;geometry&#39;</span><span class="p">]</span>
-
-<span class="c1"># Select those columns</span>
-<span class="n">pop</span> <span class="o">=</span> <span class="n">pop</span><span class="p">[</span><span class="n">selected_cols</span><span class="p">]</span>
-
-<span class="c1"># Let&#39;s see the last 2 rows</span>
-<span class="n">pop</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span></span><span class="c1"># Subset columns</span>
+<span class="n">pop</span> <span class="o">=</span> <span class="n">pop</span><span class="p">[[</span><span class="s2">&quot;pop18&quot;</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">pop</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -706,50 +708,49 @@ years). - For this lesson we will use the population grid for year 2017, which c
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>pop17</th>
+      <th>pop18</th>
       <th>geometry</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>9</td>
-      <td>POLYGON Z ((25472499.99532626 6689749.00506918...</td>
+      <td>108</td>
+      <td>(POLYGON Z ((25476499.99891588 6674248.9987864...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>8</td>
-      <td>POLYGON Z ((25472499.99532626 6684249.00413040...</td>
+      <td>273</td>
+      <td>(POLYGON Z ((25476749.99650801 6674498.9979198...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>5</td>
-      <td>POLYGON Z ((25472499.99532626 6683999.00499700...</td>
+      <td>239</td>
+      <td>(POLYGON Z ((25476999.99410014 6675749.0035888...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>12</td>
-      <td>POLYGON Z ((25472499.99532626 6682998.99846143...</td>
+      <td>202</td>
+      <td>(POLYGON Z ((25476999.99410014 6675499.0044554...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>6</td>
-      <td>POLYGON Z ((25472749.99291839 6690249.00333598...</td>
+      <td>261</td>
+      <td>(POLYGON Z ((25476999.99410014 6675249.0053220...</td>
     </tr>
   </tbody>
 </table>
 </div></div>
 </div>
 <p>Now we have cleaned the data and have only those columns that we need for our analysis.</p>
-</div>
 <div class="section" id="Join-the-layers">
 <h2>Join the layers<a class="headerlink" href="#Join-the-layers" title="Permalink to this headline">¶</a></h2>
 <p>Now we are ready to perform the spatial join between the two layers that we have. The aim here is to get information about <strong>how many people live in a polygon that contains an individual address-point</strong> . Thus, we want to join attributes from the population layer we just modified into the addresses point layer <code class="docutils literal notranslate"><span class="pre">addresses.shp</span></code> that we created trough gecoding in the previous section.</p>
 <ul class="simple">
 <li>Read the addresses layer into memory</li>
 </ul>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -758,14 +759,21 @@ years). - For this lesson we will use the population grid for year 2017, which c
 
 <span class="c1"># Read data</span>
 <span class="n">addresses</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">addr_fp</span><span class="p">)</span>
-
-<span class="c1"># Check the head of the file</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Check the head of the file</span>
 <span class="n">addresses</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -817,10 +825,10 @@ years). - For this lesson we will use the population grid for year 2017, which c
     </tr>
     <tr>
       <th>3</th>
-      <td>1, Hermannin rantatie, Hermanninmäki, Hermanni...</td>
+      <td>Hermannin rantatie, Kyläsaari, Hermanni, Helsi...</td>
       <td>1003</td>
       <td>Hermannin rantatie 1, 00580 Helsinki, Finland</td>
-      <td>POINT (24.9655355 60.2008878)</td>
+      <td>POINT (24.9719335 60.1969965)</td>
     </tr>
     <tr>
       <th>4</th>
@@ -835,7 +843,43 @@ years). - For this lesson we will use the population grid for year 2017, which c
 </div>
 <p>In order to do a spatial join, the layers need to be in the same projection</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">addresses</span><span class="o">.</span><span class="n">crs</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>{&#39;init&#39;: &#39;epsg:4326&#39;}
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">pop</span><span class="o">.</span><span class="n">crs</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>{&#39;init&#39;: &#39;epsg:3879&#39;}
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -845,7 +889,7 @@ years). - For this lesson we will use the population grid for year 2017, which c
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -855,7 +899,7 @@ years). - For this lesson we will use the population grid for year 2017, which c
 </div>
 <p>Let’s re-project addresses to the projection of the population layer:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -867,7 +911,7 @@ years). - For this lesson we will use the population grid for year 2017, which c
 <li>Let’s make sure that the coordinate reference system of the layers are identical</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -887,12 +931,12 @@ years). - For this lesson we will use the population grid for year 2017, which c
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-{&#39;proj&#39;: &#39;tmerc&#39;, &#39;lat_0&#39;: 0, &#39;lon_0&#39;: 25, &#39;k&#39;: 1, &#39;x_0&#39;: 25500000, &#39;y_0&#39;: 0, &#39;ellps&#39;: &#39;GRS80&#39;, &#39;units&#39;: &#39;m&#39;, &#39;no_defs&#39;: True}
-{&#39;proj&#39;: &#39;tmerc&#39;, &#39;lat_0&#39;: 0, &#39;lon_0&#39;: 25, &#39;k&#39;: 1, &#39;x_0&#39;: 25500000, &#39;y_0&#39;: 0, &#39;ellps&#39;: &#39;GRS80&#39;, &#39;units&#39;: &#39;m&#39;, &#39;no_defs&#39;: True}
+{&#39;init&#39;: &#39;epsg:3879&#39;}
+{&#39;init&#39;: &#39;epsg:3879&#39;}
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -902,23 +946,29 @@ years). - For this lesson we will use the population grid for year 2017, which c
 </div>
 <p>Now they should be identical. Thus, we can be sure that when doing spatial queries between layers the locations match and we get the right results e.g.&nbsp;from the spatial join that we are conducting here.</p>
 <ul class="simple">
-<li>Let’s now join the attributes from <code class="docutils literal notranslate"><span class="pre">pop</span></code> GeoDataFrame into <code class="docutils literal notranslate"><span class="pre">addresses</span></code> GeoDataFrame by using <code class="docutils literal notranslate"><span class="pre">gpd.sjoin()</span></code> -function</li>
+<li>Let’s now join the attributes from <code class="docutils literal notranslate"><span class="pre">pop</span></code> GeoDataFrame into <code class="docutils literal notranslate"><span class="pre">addresses</span></code> GeoDataFrame by using <code class="docutils literal notranslate"><span class="pre">gpd.sjoin()</span></code> -function:</li>
 </ul>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Make a spatial join</span>
 <span class="n">join</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span><span class="n">addresses</span><span class="p">,</span> <span class="n">pop</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;inner&quot;</span><span class="p">,</span> <span class="n">op</span><span class="o">=</span><span class="s2">&quot;within&quot;</span><span class="p">)</span>
-
-<span class="c1"># Let&#39;s check the result</span>
-<span class="n">join</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">join</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -945,7 +995,7 @@ years). - For this lesson we will use the population grid for year 2017, which c
       <th>addr</th>
       <th>geometry</th>
       <th>index_right</th>
-      <th>pop17</th>
+      <th>pop18</th>
     </tr>
   </thead>
   <tbody>
@@ -955,8 +1005,8 @@ years). - For this lesson we will use the population grid for year 2017, which c
       <td>1000</td>
       <td>Itämerenkatu 14, 00101 Helsinki, Finland</td>
       <td>POINT (25495311.60802662 6672258.694634228)</td>
-      <td>3238</td>
-      <td>501</td>
+      <td>1514</td>
+      <td>515</td>
     </tr>
     <tr>
       <th>1</th>
@@ -964,70 +1014,136 @@ years). - For this lesson we will use the population grid for year 2017, which c
       <td>1001</td>
       <td>Kampinkuja 1, 00100 Helsinki, Finland</td>
       <td>POINT (25496207.84010911 6672906.172794735)</td>
-      <td>3350</td>
-      <td>190</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Bangkok9, 8, Kaivokatu, Keskusta, Kluuvi, Etel...</td>
-      <td>1002</td>
-      <td>Kaivokatu 8, 00101 Helsinki, Finland</td>
-      <td>POINT (25496762.72293893 6673010.538330208)</td>
-      <td>3474</td>
-      <td>37</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>Rautatientori, Keskusta, Kluuvi, Eteläinen suu...</td>
-      <td>1011</td>
-      <td>Rautatientori 1, 00100 Helsinki, Finland</td>
-      <td>POINT (25496896.60078502 6673159.446016792)</td>
-      <td>3474</td>
-      <td>37</td>
+      <td>1600</td>
+      <td>182</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>1, Hermannin rantatie, Hermanninmäki, Hermanni...</td>
+      <td>Hermannin rantatie, Kyläsaari, Hermanni, Helsi...</td>
       <td>1003</td>
       <td>Hermannin rantatie 1, 00580 Helsinki, Finland</td>
-      <td>POINT (25498088.55200266 6676455.030033929)</td>
-      <td>3711</td>
-      <td>133</td>
+      <td>POINT (25498443.20946861 6676021.310266595)</td>
+      <td>1904</td>
+      <td>275</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Hesburger, 9, Tyynenmerenkatu, Jätkäsaari, Län...</td>
+      <td>1005</td>
+      <td>Tyynenmerenkatu 9, 00220 Helsinki, Finland</td>
+      <td>POINT (25495645.99519936 6671528.067807197)</td>
+      <td>1550</td>
+      <td>1435</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Itäväylä, Vartioharju, Vartiokylä, Helsinki, H...</td>
+      <td>1007</td>
+      <td>Itäväylä 3, 00950 Helsinki, Finland</td>
+      <td>POINT (25506149.98533134 6678773.517751076)</td>
+      <td>3007</td>
+      <td>155</td>
     </tr>
   </tbody>
 </table>
 </div></div>
 </div>
-<p>Awesome! Now we have performed a successful spatial join where we got two new columns into our <code class="docutils literal notranslate"><span class="pre">join</span></code> GeoDataFrame, i.e.&nbsp;<code class="docutils literal notranslate"><span class="pre">index_right</span></code> that tells the index of the matching polygon in the population grid and <code class="docutils literal notranslate"><span class="pre">pop17</span></code> which is the population in the cell where the address-point is located.</p>
+<p>Awesome! Now we have performed a successful spatial join where we got two new columns into our <code class="docutils literal notranslate"><span class="pre">join</span></code> GeoDataFrame, i.e.&nbsp;<code class="docutils literal notranslate"><span class="pre">index_right</span></code> that tells the index of the matching polygon in the population grid and <code class="docutils literal notranslate"><span class="pre">pop18</span></code> which is the population in the cell where the address-point is located.</p>
 <ul class="simple">
-<li>Let’s save this layer into a new Shapefile</li>
+<li>Let’s still check how many rows of data we have now:</li>
 </ul>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Output path</span>
-<span class="n">outfp</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;data/addresses_pop17_epsg3979.shp&quot;</span>
-
-<span class="c1"># Save to disk</span>
-<span class="n">join</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">outfp</span><span class="p">)</span>
+<span></span><span class="nb">len</span><span class="p">(</span><span class="n">join</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<p>Do the results make sense? Let’s evaluate this a bit by plotting the points where color intensity indicates the population numbers.</p>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>28
+</pre></div>
+</div>
+</div>
+<p>Did we lose some data here?</p>
 <ul class="simple">
-<li>Plot the points and use the <code class="docutils literal notranslate"><span class="pre">pop17</span></code> column to indicate the color. <code class="docutils literal notranslate"><span class="pre">cmap</span></code> -parameter tells to use a sequential colormap for the values, <code class="docutils literal notranslate"><span class="pre">markersize</span></code> adjusts the size of a point, <code class="docutils literal notranslate"><span class="pre">scheme</span></code> parameter can be used to adjust the classification method based on <a class="reference external" href="http://pysal.readthedocs.io/en/latest/library/esda/mapclassify.html">pysal</a>, and <code class="docutils literal notranslate"><span class="pre">legend</span></code> tells that we want to have a legend.</li>
+<li>Check how many addresses we had originally:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nb">len</span><span class="p">(</span><span class="n">addresses</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>34
+</pre></div>
+</div>
+</div>
+<p>If we plot the layers on top of each other, we can observe that some of the points are located outside the populated grid squares (increase figure size if you can’t see this properly!)</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Create a figure with one subplot</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+
+<span class="c1"># Plot population grid</span>
+<span class="n">pop</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+
+<span class="c1"># Plot points</span>
+<span class="n">addresses</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x224adfe5ba8&gt;
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L3_spatial-join_28_1.png" src="../../_images/notebooks_L3_spatial-join_28_1.png" />
+</div>
+</div>
+<p>Let’s also visualize the joined output:</p>
+<ul class="simple">
+<li>Plot the points and use the <code class="docutils literal notranslate"><span class="pre">pop18</span></code> column to indicate the color. <code class="docutils literal notranslate"><span class="pre">cmap</span></code> -parameter tells to use a sequential colormap for the values, <code class="docutils literal notranslate"><span class="pre">markersize</span></code> adjusts the size of a point, <code class="docutils literal notranslate"><span class="pre">scheme</span></code> parameter can be used to adjust the classification method based on <a class="reference external" href="http://pysal.readthedocs.io/en/latest/library/esda/mapclassify.html">pysal</a>, and <code class="docutils literal notranslate"><span class="pre">legend</span></code> tells that we want to have a legend:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
+<span class="c1"># Create a figure with one subplot</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+
 <span class="c1"># Plot the points with population info</span>
-<span class="n">join</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;pop17&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Reds&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s1">&#39;quantiles&#39;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="bp">True</span><span class="p">);</span>
+<span class="n">join</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="s1">&#39;pop18&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Reds&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s1">&#39;quantiles&#39;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="bp">True</span><span class="p">);</span>
 
 <span class="c1"># Add title</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Amount of inhabitants living close the the point&quot;</span><span class="p">);</span>
@@ -1037,23 +1153,56 @@ years). - For this lesson we will use the population grid for year 2017, which c
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
+<div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-/opt/conda/lib/python3.6/site-packages/scipy/stats/stats.py:1713: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
-  return np.add.reduce(sorted[indexer] * weights, axis=axis) / sumval
-</pre></div></div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L3_spatial-join_31_0.png" src="../../_images/notebooks_L3_spatial-join_31_0.png" />
+</div>
+</div>
+<p>In a similar way, we can plot the original population grid and check the overall population distribution in Helsinki:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Create a figure with one subplot</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Plot the points with population info</span>
+<span class="n">pop</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="s1">&#39;pop18&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Reds&quot;</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s1">&#39;quantiles&#39;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="bp">True</span><span class="p">);</span>
+
+<span class="c1"># Add title</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Population 2018 in 250 x 250 m grid squares&quot;</span><span class="p">);</span>
+
+<span class="c1"># Remove white space around the figure</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/notebooks_L3_spatial-join_20_1.png" src="../../_images/notebooks_L3_spatial-join_20_1.png" />
+<img alt="../../_images/notebooks_L3_spatial-join_33_0.png" src="../../_images/notebooks_L3_spatial-join_33_0.png" />
 </div>
 </div>
-<p>By knowing approximately how population is distributed in Helsinki, it seems that the results do make sense as the points with highest population are located in the south where the city center of Helsinki is.</p>
+<ul class="simple">
+<li>Finally, let’s save the result point layer into a file:</li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Output path</span>
+<span class="n">outfp</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;data/addresses_population.shp&quot;</span>
+
+<span class="c1"># Save to disk</span>
+<span class="n">join</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">outfp</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 
