@@ -255,57 +255,49 @@
 <h1>Geocoding<a class="headerlink" href="#geocoding" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="overview-of-geocoders">
 <h2>Overview of Geocoders<a class="headerlink" href="#overview-of-geocoders" title="Permalink to this headline">¶</a></h2>
-<p>Geocoding, i.e. converting addresses into coordinates or vice versa, is
-a really common GIS task. Luckily, in Python there are nice libraries
-that makes the geocoding really easy. One of the libraries that can do
-the geocoding for us is
-<a class="reference external" href="http://geopy.readthedocs.io/en/1.11.0/">geopy</a> that makes it easy to
-locate the coordinates of addresses, cities, countries, and landmarks
-across the globe using third-party geocoders and other data sources.</p>
-<p>As said, <strong>Geopy</strong> uses third-party geocoders - i.e. services that does
-the geocoding - to locate the addresses and it works with multiple
-different service providers such as:</p>
+<p>Geocoding is the process of transforming place names or addresses into coordinates.
+In this lesson we will learn how to geocode addresses using Geopandas and
+<a class="reference external" href="https://geopy.readthedocs.io/en/stable/">geopy</a>. There are also other Python modules in addition to geopy
+that can do geocoding such as <a class="reference external" href="http://geocoder.readthedocs.io/">Geocoder</a>.</p>
+<p>Geocoding libraries make it easy to locate the coordinates of addresses, cities, countries, and landmarks
+across the globe using different geocoding web services (“geocoders”). In practice, geocoders are often
+Application Programming Interfaces (APIs) where you can send requests, and receive responses in the form of place names,
+addresses and coordinates.</p>
+<p>Several different geocoding services are available via geopy, including these:</p>
 <ul class="simple">
-<li><a class="reference external" href="http://resources.arcgis.com/en/help/arcgis-rest-api/">ESRI
-ArcGIS</a></li>
-<li><a class="reference external" href="http://developer.baidu.com/map/webservice-geocoding.htm">Baidu
-Maps</a></li>
-<li><a class="reference external" href="http://www.microsoft.com/maps/developers/web.aspx">Bing</a></li>
-<li><a class="reference external" href="http://geocoder.us/">geocoder.us</a></li>
-<li><a class="reference external" href="https://www.geocodefarm.com/">GeocodeFarm</a></li>
-<li><a class="reference external" href="http://www.geonames.org/">GeoNames</a></li>
-<li><a class="reference external" href="https://developers.google.com/maps/documentation/geocoding/">Google Geocoding API
-(V3)</a></li>
-<li><a class="reference external" href="http://api.ign.fr/tech-docs-js/fr/developpeur/search.html">IGN
-France</a></li>
-<li><a class="reference external" href="http://www.mapquestapi.com/geocoding/">Mapquest</a></li>
-<li><a class="reference external" href="https://mapzen.com/projects/search/">Mapzen Search</a></li>
-<li><a class="reference external" href="http://navidata.pl">NaviData</a></li>
-<li><a class="reference external" href="http://geocoder.opencagedata.com/api.html">OpenCage</a></li>
+<li><a class="reference external" href="https://developers.arcgis.com/rest/geocode/api-reference/overview-world-geocoding-service.htm">ESRI ArcGIS</a></li>
+<li><a class="reference external" href="http://lbsyun.baidu.com/index.php?title=webapi/guide/webservice-geocoding">Baidu Maps</a></li>
+<li><a class="reference external" href="https://msdn.microsoft.com/en-us/library/ff701715.aspx">Bing</a></li>
+<li><a class="reference external" href="https://www.geocode.farm/geocoding/free-api-documentation/">GeocodeFarm</a></li>
+<li><a class="reference external" href="http://www.geonames.org/export/geonames-search.html">GeoNames</a></li>
+<li><a class="reference external" href="https://developers.google.com/maps/documentation/geocoding/">Google Geocoding API (V3)</a></li>
+<li><a class="reference external" href="https://developer.here.com/documentation/geocoder/">HERE</a></li>
+<li><a class="reference external" href="https://geoservices.ign.fr/documentation/geoservices/index.html">IGN France</a></li>
+<li><a class="reference external" href="https://developer.mapquest.com/documentation/open/">Mapquest</a></li>
+<li><a class="reference external" href="https://opencagedata.com/api">OpenCage</a></li>
 <li><a class="reference external" href="http://developer.mapquest.com/web/products/open/geocoding-service">OpenMapQuest</a></li>
 <li><a class="reference external" href="https://wiki.openstreetmap.org/wiki/Nominatim">Open Street Map Nominatim</a></li>
-<li><a class="reference external" href="https://smartystreets.com/products/liveaddress-api">SmartyStreets</a></li>
-<li><a class="reference external" href="http://what3words.com/api/reference">What3words</a></li>
-<li><a class="reference external" href="http://api.yandex.com/maps/doc/intro/concepts/intro.xml">Yandex</a></li>
+<li><a class="reference external" href="https://developer.what3words.com/public-api/docsv2#overview">What3words</a></li>
+<li><a class="reference external" href="https://tech.yandex.com/maps/doc/geocoder/desc/concepts/input_params-docpage/">Yandex</a></li>
 </ul>
-<p>Thus, there are plenty of geocoders where to choose from! However, for most of these services you might need to
-request so called API access-keys from the service provider to be able to use the service.</p>
+<p>Chec the <a class="reference external" href="https://geopy.readthedocs.io/en/stable/">Geopy documentation</a> for more details
+about how to use each service via Python.</p>
+<p>As you see, there are plenty of geocoders where to choose from! The quality of the geocoders might
+differ depending on the underlying data. For example, some addresses might exists on OpenStreetMap,
+but not on Google Maps and thus they can be geocoded using the Nominatim geocoder,
+but not using the Google Geocoding API - and vice versa.</p>
+<p>Geocoding services might require an <strong>API key</strong> in order to use them. (i.e. you need to register for the service before
+you can access results from their API). Furthermore, <strong>rate limiting</strong> also restrict the use of these services.
+The geocoding process might end up in an error if you are making too many requests in a short time period (eg.
+trying to geocode DataFrame with large number of rows). See hints for dealing with rate limiting when geocoding
+pandas Dataframes from the <a class="reference external" href="https://geopy.readthedocs.io/en/stable/#usage-with-pandas">Geopy documentation</a>.
+Under paid plans, you can naturally make more requests to the API.</p>
+<p>In this lesson we will use the Nominatim geocoder for locating a relatively small number of addresses.
+Usage of the Nominatim geocoding service is rate is rate-limited to 1 request per second (3600 / hour). You can
+read more about Nominatim usage policy in <a class="reference external" href="https://operations.osmfoundation.org/policies/nominatim/">here</a></p>
 <p>Luckily, Nominatim, which is a geocoder based on OpenStreetMap data does not require a API key to use their service
-if it is used for small scale geocoding jobs as the service is rate-limited to 1 request per second (3600 / hour).
+if it is used for small scale geocoding jobs as the service
 As we are only making a small set of queries, we can do the geocoding by using Nominatim.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<ul class="last simple">
-<li><strong>Note 1:</strong> If you need to do larger scale geocoding jobs, use and request an API key to some of the geocoders listed above.</li>
-<li><strong>Note 2:</strong> There are also other Python modules in addition to geopy that can do geocoding such as <a class="reference external" href="http://geocoder.readthedocs.io/">Geocoder</a>.</li>
-</ul>
-</div>
-<div class="admonition hint">
-<p class="first admonition-title">Hint</p>
-<p class="last">You can get your access keys to e.g. Google Geocoding API from <a class="reference external" href="https://code.google.com/apis/console">Google APIs console</a> by creating a Project
-and enabling a that API from <a class="reference external" href="https://console.developers.google.com/apis/library">Library</a>. Read a
-short introduction about using Google API Console from <a class="reference external" href="https://developers.googleblog.com/2016/03/introducing-google-api-console.html">here</a>.</p>
-</div>
 </div>
 </div>
 
