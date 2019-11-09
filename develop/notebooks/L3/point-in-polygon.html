@@ -455,17 +455,18 @@ div.rendered_html tbody tr:hover {
 }
 </style>
 <div class="admonition note">
-This page was generated from <a href="#id2"><span class="problematic" id="id3">`source/notebooks/L3/point-in-polygon.ipynb`__</span></a>.
+This page was generated from <a class="reference external" href="https://github.com/Automating-GIS-processes/site/blob/master/source/notebooks/L3/point-in-polygon.ipynb">source/notebooks/L3/point-in-polygon.ipynb</a>.
 <span class="raw-html"><br/><a href="https://mybinder.org/v2/gh/Automating-GIS-processes/site/master?urlpath=lab/tree/source/notebooks/L3/point-in-polygon.ipynb"><img alt="Binder badge" src="https://img.shields.io/badge/launch-full%20binder-red.svg" style="vertical-align:text-bottom"></a></span>
 <span class="raw-html"><a href="https://mybinder.org/v2/gh/Automating-GIS-processes/notebooks/master?urlpath=lab/tree/notebooks/L3/point-in-polygon.ipynb"><img alt="Binder badge" src="https://img.shields.io/badge/launch-student%20binder-red.svg" style="vertical-align:text-bottom"></a></span>
 <span class="raw-html"><a href="https://notebooks.csc.fi/#/blueprint/8d7886c2f0ac402aa99235f8d289a52b"><img alt="CSC badge" src="https://img.shields.io/badge/launch-CSC%20notebook-blue.svg" style="vertical-align:text-bottom"></a></span></div>
 <div class="section" id="Point-in-Polygon-&amp;-Intersect">
 <h1>Point in Polygon &amp; Intersect<a class="headerlink" href="#Point-in-Polygon-&-Intersect" title="Permalink to this headline">¶</a></h1>
 <p>Finding out if a certain point is located inside or outside of an area, or finding out if a line intersects with another line or polygon are fundamental geospatial operations that are often used e.g.&nbsp;to select data based on location. Such spatial queries are one of the typical first steps of the workflow when doing spatial analysis. Performing a spatial join (will be introduced later) between two spatial datasets is one of the most typical applications where Point in Polygon (PIP) query is used.</p>
+<p>For further reading about PIP and other geometric operations, see Chapter 4.2 in Smith, Goodchild &amp; Longley: <a class="reference external" href="https://www.spatialanalysisonline.com/HTML/index.html">Geospatial Analysis - 6th edition</a>.</p>
 <div class="section" id="How-to-check-if-point-is-inside-a-polygon?">
 <h2>How to check if point is inside a polygon?<a class="headerlink" href="#How-to-check-if-point-is-inside-a-polygon?" title="Permalink to this headline">¶</a></h2>
-<p>Computationally, detecting if a point is inside a polygon is most commonly done using a specific formula called <a class="reference external" href="https://en.wikipedia.org/wiki/Point_in_polygon#Ray_casting_algorithm">Ray Casting algorithm</a>. Luckily, we do not need to create such a function ourselves for conducting the Point in Polygon (PIP) query. Instead, we can take advantage of <a class="reference external" href="http://toblerity.org/shapely/manual.html#binary-predicates">Shapely’s binary predicates</a> that can evaluate the topolocical relationships
-between geographical objects, such as the PIP as we’re interested here.</p>
+<p>Computationally, detecting if a point is inside a polygon is most commonly done using a specific formula called <a class="reference external" href="https://en.wikipedia.org/wiki/Point_in_polygon#Ray_casting_algorithm">Ray Casting algorithm</a>. Luckily, we do not need to create such a function ourselves for conducting the Point in Polygon (PIP) query. Instead, we can take advantage of <a class="reference external" href="https://shapely.readthedocs.io/en/stable/manual.html#binary-predicates">Shapely’s binary predicates</a> that can evaluate the topolocical
+relationships between geographical objects, such as the PIP as we’re interested here.</p>
 <p>There are basically two ways of conducting PIP in Shapely:</p>
 <ol class="arabic simple">
 <li>using a function called <a class="reference external" href="http://toblerity.org/shapely/manual.html#object.within">.within()</a> that checks if a point is within a polygon</li>
@@ -473,10 +474,10 @@ between geographical objects, such as the PIP as we’re interested here.</p>
 </ol>
 <p>Notice: even though we are talking here about <strong>Point</strong> in Polygon operation, it is also possible to check if a LineString or Polygon is inside another Polygon.</p>
 <ul class="simple">
-<li>Let’s first create a Polygon using a list of coordinate-tuples and a couple of Point objects</li>
+<li>Let’s import shapely functionalities and create some points:</li>
 </ul>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[48]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -485,12 +486,29 @@ between geographical objects, such as the PIP as we’re interested here.</p>
 <span class="c1"># Create Point objects</span>
 <span class="n">p1</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mf">24.952242</span><span class="p">,</span> <span class="mf">60.1696017</span><span class="p">)</span>
 <span class="n">p2</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mf">24.976567</span><span class="p">,</span> <span class="mf">60.1612500</span><span class="p">)</span>
-
-<span class="c1"># Create a Polygon</span>
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li>Let’s also create a polygon using a list of coordinate-tuples:</li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Create a Polygon</span>
 <span class="n">coords</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">24.950899</span><span class="p">,</span> <span class="mf">60.169158</span><span class="p">),</span> <span class="p">(</span><span class="mf">24.953492</span><span class="p">,</span> <span class="mf">60.169158</span><span class="p">),</span> <span class="p">(</span><span class="mf">24.953510</span><span class="p">,</span> <span class="mf">60.170104</span><span class="p">),</span> <span class="p">(</span><span class="mf">24.950958</span><span class="p">,</span> <span class="mf">60.169990</span><span class="p">)]</span>
 <span class="n">poly</span> <span class="o">=</span> <span class="n">Polygon</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span>
-
-<span class="c1"># Let&#39;s check what we have</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Let&#39;s check what we have</span>
 <span class="k">print</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
@@ -507,22 +525,40 @@ POINT (24.976567 60.16125)
 POLYGON ((24.950899 60.169158, 24.953492 60.169158, 24.95351 60.170104, 24.950958 60.16999, 24.950899 60.169158))
 </pre></div></div>
 </div>
-<p>Let’s check if those points are <code class="docutils literal notranslate"><span class="pre">within</span></code> the polygon</p>
+<ul class="simple">
+<li>Let’s check if those points are <code class="docutils literal notranslate"><span class="pre">within</span></code> the polygon:</li>
+</ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[49]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Check if p1 is within the polygon using the within function</span>
 <span class="n">p1</span><span class="o">.</span><span class="n">within</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
-
-<span class="c1"># Check if p2 is within the polygon</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>True
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Check if p2 is within the polygon</span>
 <span class="n">p2</span><span class="o">.</span><span class="n">within</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[49]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -530,12 +566,12 @@ POLYGON ((24.950899 60.169158, 24.953492 60.169158, 24.95351 60.170104, 24.95095
 </pre></div>
 </div>
 </div>
-<p>Okey, so we can see that the first point seems to be inside that polygon and the other one doesn’t.</p>
+<p>Okey, so we can see that the first point seems to be inside that polygon and the other one isn’t.</p>
 <ul class="simple">
-<li>In fact, the first point is close to the center of the polygon as we can see if we compare the point location to the centroid of the polygon:</li>
+<li>In fact, the first point is quite close to close to the center of the polygon as we can see if we compare the point location to the polygon centroid:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[50]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -560,20 +596,36 @@ POINT (24.95224242849236 60.16960179038188)
 <li>It is also possible to do PIP other way around, i.e.&nbsp;to check if polygon contains a point:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[51]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Does polygon contain p1?</span>
 <span class="n">poly</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
-
-<span class="c1"># Does polygon contain p2?</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>True
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Does polygon contain p2?</span>
 <span class="n">poly</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[51]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -581,32 +633,26 @@ POINT (24.95224242849236 60.16960179038188)
 </pre></div>
 </div>
 </div>
-<p>Thus, both ways of checking the spatial relationship results in the same way.</p>
+<p>Thus, both ways of checking the spatial relationship are identical; <a class="reference external" href="https://shapely.readthedocs.io/en/stable/manual.html#object.contains">contains()</a> is inverse to <a class="reference external" href="https://shapely.readthedocs.io/en/stable/manual.html#object.within">within()</a> and vice versa.</p>
 <p>Which one should you use then? Well, it depends:</p>
 <ul class="simple">
-<li>if you have many points and just one polygon and you try to find out which one of them is inside the polygon:<ul>
-<li>you need to iterate over the points and check one at a time if it is <strong>within()</strong> the polygon specified</li>
-</ul>
-</li>
-<li>if you have many polygons and just one point and you want to find out which polygon contains the point<ul>
-<li>you need to iterate over the polygons until you find a polygon that <strong>contains()</strong> the point specified (assuming there are no overlapping polygons)</li>
-</ul>
-</li>
+<li>if you have <strong>many points and just one polygon</strong> and you try to find out which one of them is inside the polygon: You might need to iterate over the points and check one at a time if it is <strong>within()</strong> the polygon.</li>
+<li>if you have <strong>many polygons and just one point</strong> and you want to find out which polygon contains the point: You might need to iterate over the polygons until you find a polygon that <strong>contains()</strong> the point specified (assuming there are no overlapping polygons)</li>
 </ul>
 </div>
 <div class="section" id="Intersect">
 <h2>Intersect<a class="headerlink" href="#Intersect" title="Permalink to this headline">¶</a></h2>
-<p>Another typical geospatial operation is to see if a geometry <a class="reference external" href="http://toblerity.org/shapely/manual.html#object.intersects">intersect</a> or <a class="reference external" href="http://toblerity.org/shapely/manual.html#object.touches">touches</a> another one. The difference between these two is that:</p>
+<p>Another typical geospatial operation is to see if a geometry intersects or touches another one. Again, there are binary operations in Shapely for checking these spatial relationships:</p>
 <ul class="simple">
-<li>if objects intersect, the boundary and interior of an object needs to intersect in any way with those of the other.</li>
-<li>If an object touches the other one, it is only necessary to have (at least) a single point of their boundaries in common but their interiors shoud NOT intersect.</li>
+<li><a class="reference external" href="https://shapely.readthedocs.io/en/stable/manual.html#object.intersects">intersects():</a> Two objects intersect if the boundary or interior of one object intersect in any way with the boundary or interior of the other object.</li>
+<li><a class="reference external" href="https://shapely.readthedocs.io/en/stable/manual.html#object.touches">touches():</a> Two objects touch if the objects have at least one point in common and their interiors do not intersect with any part of the other object.</li>
 </ul>
 <p>Let’s try these out.</p>
 <ul class="simple">
 <li>Let’s create two LineStrings</li>
 </ul>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[52]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -622,7 +668,7 @@ POINT (24.95224242849236 60.16960179038188)
 <li>Let’s see if they intersect</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[53]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -631,7 +677,7 @@ POINT (24.95224242849236 60.16960179038188)
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[53]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -643,7 +689,7 @@ POINT (24.95224242849236 60.16960179038188)
 <li>Do they also touch each other?</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[54]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -652,7 +698,7 @@ POINT (24.95224242849236 60.16960179038188)
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[54]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -662,7 +708,7 @@ POINT (24.95224242849236 60.16960179038188)
 </div>
 <p>Indeed, they do and we can see this by plotting the features together</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[55]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -673,19 +719,19 @@ POINT (24.95224242849236 60.16960179038188)
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[55]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/notebooks_L3_point-in-polygon_15_0.svg" src="../../_images/notebooks_L3_point-in-polygon_15_0.svg" /></div>
+<img alt="../../_images/notebooks_L3_point-in-polygon_20_0.svg" src="../../_images/notebooks_L3_point-in-polygon_20_0.svg" /></div>
 </div>
 <p>Thus, the <code class="docutils literal notranslate"><span class="pre">line_b</span></code> continues from the same node ( (1,1) ) where <code class="docutils literal notranslate"><span class="pre">line_a</span></code> ends.</p>
 <p>However, if the lines overlap fully, they don’t touch due to the spatial relationship rule, as we can see:</p>
 <ul class="simple">
-<li>Check if line_a touches itself</li>
+<li>Check if <code class="docutils literal notranslate"><span class="pre">line_a</span></code> touches itself:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[56]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -695,7 +741,7 @@ POINT (24.95224242849236 60.16960179038188)
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[56]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -704,10 +750,10 @@ POINT (24.95224242849236 60.16960179038188)
 </div>
 </div>
 <ul class="simple">
-<li>It does not. However, it does intersect</li>
+<li>It does not. However, it does intersect:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[57]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -717,7 +763,7 @@ POINT (24.95224242849236 60.16960179038188)
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[57]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -728,12 +774,12 @@ POINT (24.95224242849236 60.16960179038188)
 </div>
 <div class="section" id="Point-in-Polygon-using-Geopandas">
 <h2>Point in Polygon using Geopandas<a class="headerlink" href="#Point-in-Polygon-using-Geopandas" title="Permalink to this headline">¶</a></h2>
-<p>Next we will do a practical example where we check which of the addresses from <a href="#id2"><span class="problematic" id="id4">`previous tutorial &lt;&gt;`__</span></a> are located in Southern district of Helsinki. Let’s start by reading a KML-file <code class="docutils literal notranslate"><span class="pre">PKS_suuralue.kml</span></code> that has the Polygons for districts of Helsinki Region (data openly available from <a class="reference external" href="http://www.hri.fi/fi/dataset/paakaupunkiseudun-aluejakokartat">Helsinki Region Infoshare</a>.</p>
+<p>Next we will do a practical example where we check which of the addresses from <a class="reference internal" href="geocoding_in_geopandas.html"><span class="doc">the geocoding tutorial</span></a> are located in Southern district of Helsinki. Let’s start by reading a KML-file <code class="docutils literal notranslate"><span class="pre">PKS_suuralue.kml</span></code> that has the Polygons for districts of Helsinki Region (data openly available from <a class="reference external" href="http://www.hri.fi/fi/dataset/paakaupunkiseudun-aluejakokartat">Helsinki Region Infoshare</a>.</p>
 <ul class="simple">
 <li>Let’s start by reading the addresses from the Shapefile that we saved earlier.</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[58]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -747,7 +793,7 @@ POINT (24.95224242849236 60.16960179038188)
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[58]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -799,10 +845,10 @@ POINT (24.95224242849236 60.16960179038188)
     </tr>
     <tr>
       <th>3</th>
-      <td>1, Hermannin rantatie, Hermanninmäki, Hermanni...</td>
+      <td>Hermannin rantatie, Kyläsaari, Hermanni, Helsi...</td>
       <td>1003</td>
       <td>Hermannin rantatie 1, 00580 Helsinki, Finland</td>
-      <td>POINT (24.9655355 60.2008878)</td>
+      <td>POINT (24.9719335 60.1969965)</td>
     </tr>
     <tr>
       <th>4</th>
@@ -820,7 +866,7 @@ POINT (24.95224242849236 60.16960179038188)
 <p>It is possible to read the data from KML-files with GeoPandas in a similar manner as Shapefiles. However, we need to first, enable the KML-driver which is not enabled by default (because KML-files can contain unsupported data structures, nested folders etc., hence be careful when reading KML-files). Supported drivers are managed with <code class="docutils literal notranslate"><span class="pre">`fiona.supported_drivers</span></code> &lt;<a class="reference external" href="https://github.com/Toblerity/Fiona/blob/master/fiona/drvsupport.py">https://github.com/Toblerity/Fiona/blob/master/fiona/drvsupport.py</a>&gt;`__, which is integrated in geopandas. Let’s first check which
 formats are currently supported:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[59]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -830,27 +876,26 @@ formats are currently supported:</p>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[59]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>{&#39;AeronavFAA&#39;: &#39;r&#39;,
- &#39;ARCGEN&#39;: &#39;r&#39;,
+<span></span>{&#39;ARCGEN&#39;: &#39;r&#39;,
+ &#39;AeronavFAA&#39;: &#39;r&#39;,
  &#39;BNA&#39;: &#39;raw&#39;,
+ &#39;DGN&#39;: &#39;raw&#39;,
  &#39;DXF&#39;: &#39;raw&#39;,
- &#39;OpenFileGDB&#39;: &#39;r&#39;,
  &#39;ESRI Shapefile&#39;: &#39;raw&#39;,
- &#39;GeoJSON&#39;: &#39;rw&#39;,
  &#39;GPKG&#39;: &#39;rw&#39;,
- &#39;GPX&#39;: &#39;raw&#39;,
  &#39;GPSTrackMaker&#39;: &#39;raw&#39;,
+ &#39;GPX&#39;: &#39;raw&#39;,
+ &#39;GeoJSON&#39;: &#39;rw&#39;,
  &#39;Idrisi&#39;: &#39;r&#39;,
  &#39;MapInfo File&#39;: &#39;raw&#39;,
- &#39;DGN&#39;: &#39;raw&#39;,
+ &#39;OpenFileGDB&#39;: &#39;r&#39;,
  &#39;PCIDSK&#39;: &#39;r&#39;,
  &#39;SEGY&#39;: &#39;r&#39;,
- &#39;SUA&#39;: &#39;r&#39;,
- &#39;KML&#39;: &#39;rw&#39;}
+ &#39;SUA&#39;: &#39;r&#39;}
 </pre></div>
 </div>
 </div>
@@ -858,7 +903,7 @@ formats are currently supported:</p>
 <li>Let’s enable the read and write functionalities for KML-driver by passing <code class="docutils literal notranslate"><span class="pre">'rw'</span></code> to whitelist of fiona’s supported drivers:</li>
 </ul>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[60]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -868,7 +913,7 @@ formats are currently supported:</p>
 </div>
 <p>Let’s check again the supported drivers:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[61]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -877,45 +922,51 @@ formats are currently supported:</p>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[61]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>{&#39;AeronavFAA&#39;: &#39;r&#39;,
- &#39;ARCGEN&#39;: &#39;r&#39;,
+<span></span>{&#39;ARCGEN&#39;: &#39;r&#39;,
+ &#39;AeronavFAA&#39;: &#39;r&#39;,
  &#39;BNA&#39;: &#39;raw&#39;,
- &#39;DXF&#39;: &#39;raw&#39;,
- &#39;OpenFileGDB&#39;: &#39;r&#39;,
- &#39;ESRI Shapefile&#39;: &#39;raw&#39;,
- &#39;GeoJSON&#39;: &#39;rw&#39;,
- &#39;GPKG&#39;: &#39;rw&#39;,
- &#39;GPX&#39;: &#39;raw&#39;,
- &#39;GPSTrackMaker&#39;: &#39;raw&#39;,
- &#39;Idrisi&#39;: &#39;r&#39;,
- &#39;MapInfo File&#39;: &#39;raw&#39;,
  &#39;DGN&#39;: &#39;raw&#39;,
+ &#39;DXF&#39;: &#39;raw&#39;,
+ &#39;ESRI Shapefile&#39;: &#39;raw&#39;,
+ &#39;GPKG&#39;: &#39;rw&#39;,
+ &#39;GPSTrackMaker&#39;: &#39;raw&#39;,
+ &#39;GPX&#39;: &#39;raw&#39;,
+ &#39;GeoJSON&#39;: &#39;rw&#39;,
+ &#39;Idrisi&#39;: &#39;r&#39;,
+ &#39;KML&#39;: &#39;rw&#39;,
+ &#39;MapInfo File&#39;: &#39;raw&#39;,
+ &#39;OpenFileGDB&#39;: &#39;r&#39;,
  &#39;PCIDSK&#39;: &#39;r&#39;,
  &#39;SEGY&#39;: &#39;r&#39;,
- &#39;SUA&#39;: &#39;r&#39;,
- &#39;KML&#39;: &#39;rw&#39;}
+ &#39;SUA&#39;: &#39;r&#39;}
 </pre></div>
 </div>
 </div>
-<p>Now we should be able to read a KML file with <a class="reference external" href="http://geopandas.org/reference/geopandas.read_file.html#geopandas.read_file">geopandas.read_file</a>.</p>
+<p>Now we should be able to read a KML file suing the geopandas <a class="reference external" href="http://geopandas.org/reference/geopandas.read_file.html#geopandas.read_file">read_file()</a> function.</p>
 <ul class="simple">
 <li>Let’s read the data from a following KML -file:</li>
 </ul>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[62]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Filepath to KML file</span>
 <span class="n">fp</span> <span class="o">=</span> <span class="s2">&quot;data/PKS_suuralue.kml&quot;</span>
-
 <span class="n">polys</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s1">&#39;KML&#39;</span><span class="p">)</span>
-
-<span class="c1">#Check the data</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1">#Check the data</span>
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Number of rows:&quot;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">polys</span><span class="p">))</span>
 <span class="n">polys</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
 </pre></div>
@@ -930,7 +981,7 @@ Number of rows: 23
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[62]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -1028,24 +1079,111 @@ Number of rows: 23
 </table>
 </div></div>
 </div>
-<p>Nice, now we can see that we have 23 districts in our area. We are interested in an area that is called <code class="docutils literal notranslate"><span class="pre">Eteläinen</span></code> (<em>‘Southern’</em> in english).</p>
-<ul class="simple">
-<li>Let’s select the <code class="docutils literal notranslate"><span class="pre">Eteläinen</span></code> district and see where it is located on a map</li>
-</ul>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[63]:
+<p>Nice, now we can see that we have 23 districts in our area. - Let’s quickly plot the geometries to see how the layer looks like:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Select data and reset index</span>
+<span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="n">polys</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x25376f68be0&gt;
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L3_point-in-polygon_37_1.png" src="../../_images/notebooks_L3_point-in-polygon_37_1.png" />
+</div>
+</div>
+<p>We are interested in an area that is called <code class="docutils literal notranslate"><span class="pre">Eteläinen</span></code> (<em>‘Southern’</em> in English).</p>
+<ul class="simple">
+<li>Let’s select the <code class="docutils literal notranslate"><span class="pre">Eteläinen</span></code> district and see where it is located on a map:</li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Select data</span>
 <span class="n">southern</span> <span class="o">=</span> <span class="n">polys</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">polys</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Eteläinen&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Reset index for the selection</span>
 <span class="n">southern</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<p>Let’s create a map which shows the location of the selected district, and let’s also plot the address points on top of the map</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[64]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Check the selction</span>
+<span class="n">southern</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Eteläinen</td>
+      <td></td>
+      <td>POLYGON Z ((24.7827651307035 60.09997268858 0,...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<ul class="simple">
+<li>Let’s create a map which shows the location of the selected district, and let’s also plot the geocoded address points on top of the map:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1069,34 +1207,47 @@ Number of rows: 23
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/notebooks_L3_point-in-polygon_33_0.png" src="../../_images/notebooks_L3_point-in-polygon_33_0.png" />
+<img alt="../../_images/notebooks_L3_point-in-polygon_43_0.png" src="../../_images/notebooks_L3_point-in-polygon_43_0.png" />
 </div>
 </div>
 <p>Okey, so we can see that, indeed, certain points are within the selected red Polygon.</p>
 <p>Let’s find out which one of them are located within the Polygon. Hence, we are conducting a <strong>Point in Polygon query</strong>.</p>
 <ul class="simple">
-<li>Let’s first enable shapely.speedups which makes some of the spatial queries running faster.</li>
+<li>First, let’s check that we have <code class="docutils literal notranslate"><span class="pre">shapely.speedups</span></code> enabled. This module makes some of the spatial queries running faster (starting from Shapely version 1.6.0 Shapely speedups are enabled by default):</li>
 </ul>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[65]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">shapely.speedups</span>
-<span class="n">shapely</span><span class="o">.</span><span class="n">speedups</span><span class="o">.</span><span class="n">enable</span><span class="p">()</span>
+<span></span><span class="c1">#import shapely.speedups</span>
+<span class="kn">from</span> <span class="nn">shapely</span> <span class="kn">import</span> <span class="n">speedups</span>
+<span class="n">speedups</span><span class="o">.</span><span class="n">enabled</span>
+
+<span class="c1"># If false, run this line:</span>
+<span class="c1">#shapely.speedups.enable()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>True
 </pre></div>
 </div>
 </div>
 <ul class="simple">
 <li>Let’s check which Points are within the <code class="docutils literal notranslate"><span class="pre">southern</span></code> Polygon. Notice, that here we check if the Points are <code class="docutils literal notranslate"><span class="pre">within</span></code> the <strong>geometry</strong> of the <code class="docutils literal notranslate"><span class="pre">southern</span></code> GeoDataFrame.</li>
-<li>Hence, we use the <code class="docutils literal notranslate"><span class="pre">.loc[0,</span> <span class="pre">'geometry']</span></code> to parse the actual Polygon geometry object from the GeoDataFrame.</li>
+<li>We use the <code class="docutils literal notranslate"><span class="pre">.at[0,</span> <span class="pre">'geometry']</span></code> to parse the actual Polygon geometry object from the GeoDataFrame.</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[66]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">pip_mask</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">within</span><span class="p">(</span><span class="n">southern</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;geometry&#39;</span><span class="p">])</span>
+<span></span><span class="n">pip_mask</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">within</span><span class="p">(</span><span class="n">southern</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;geometry&#39;</span><span class="p">])</span>
 <span class="k">print</span><span class="p">(</span><span class="n">pip_mask</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1145,10 +1296,10 @@ dtype: bool
 </div>
 <p>As we can see, we now have an array of boolean values for each row, where the result is <code class="docutils literal notranslate"><span class="pre">True</span></code> if Point was inside the Polygon, and <code class="docutils literal notranslate"><span class="pre">False</span></code> if it was not.</p>
 <ul class="simple">
-<li>We can now use this mask array to select the Points that are inside the Polygon. Selecting data with this kind of mask array (of boolean values) is easy by passing the array inside the <code class="docutils literal notranslate"><span class="pre">loc</span></code> indexing function of Pandas.</li>
+<li>We can now use this mask array to select the Points that are inside the Polygon. Selecting data with this kind of mask array (of boolean values) is easy by passing the array inside the <code class="docutils literal notranslate"><span class="pre">loc</span></code> indexer:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[67]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1158,7 +1309,7 @@ dtype: bool
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[67]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -1217,10 +1368,10 @@ dtype: bool
     </tr>
     <tr>
       <th>10</th>
-      <td>Rautatientori, Keskusta, Kluuvi, Eteläinen suu...</td>
+      <td>The Pullman Bar, 1, Rautatientori, Keskusta, K...</td>
       <td>1011</td>
       <td>Rautatientori 1, 00100 Helsinki, Finland</td>
-      <td>POINT (24.9440942536239 60.17130125)</td>
+      <td>POINT (24.9422931 60.1711382)</td>
     </tr>
     <tr>
       <th>30</th>
@@ -1234,7 +1385,7 @@ dtype: bool
       <td>Ruoholahdenkatu, Hietalahti, Kamppi, Eteläinen...</td>
       <td>1032</td>
       <td>Ruoholahdenkatu 17, 00101 Helsinki, Finland</td>
-      <td>POINT (24.9252584 60.1648863)</td>
+      <td>POINT (24.9252037 60.1648863)</td>
     </tr>
     <tr>
       <th>32</th>
@@ -1245,10 +1396,10 @@ dtype: bool
     </tr>
     <tr>
       <th>33</th>
-      <td>4, Vilhonkatu, Keskusta, Kluuvi, Eteläinen suu...</td>
+      <td>Oluthuone Kaisla, 4, Vilhonkatu, Keskusta, Klu...</td>
       <td>1034</td>
       <td>Vilhonkatu 4, 00101 Helsinki, Finland</td>
-      <td>POINT (24.9473289 60.1718719)</td>
+      <td>POINT (24.9470863 60.1719054)</td>
     </tr>
   </tbody>
 </table>
@@ -1256,7 +1407,7 @@ dtype: bool
 </div>
 <p>Let’s finally confirm that our Point in Polygon query worked as it should by plotting the points that are within the southern district:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[68]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1278,7 +1429,7 @@ dtype: bool
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/notebooks_L3_point-in-polygon_41_0.png" src="../../_images/notebooks_L3_point-in-polygon_41_0.png" />
+<img alt="../../_images/notebooks_L3_point-in-polygon_51_0.png" src="../../_images/notebooks_L3_point-in-polygon_51_0.png" />
 </div>
 </div>
 <p>Perfect! Now we only have the (golden) points that, indeed, are inside the red Polygon which is exactly what we wanted!</p>

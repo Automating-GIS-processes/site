@@ -55,13 +55,15 @@ if it is used for small scale geocoding jobs as the service
 As we are only making a small set of queries, we can do the geocoding by using Nominatim.
 
 
-.. User-agent::
+.. Note::
+
+    Always check the terms of service of the geocoding service that you are using!
+
+.. Nominatim::
 
     As noted on the `Geopy documentation for the Nominatim geocoder <https://geopy.readthedocs.io/en/stable/#nominatim>`__
     we need to specify a custom `user_agent` parameter when making requests not to violate the
     `Nominatim Usage Policy <https://operations.osmfoundation.org/policies/nominatim/>`__.
-
-
 
 
 
