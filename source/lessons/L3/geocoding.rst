@@ -4,42 +4,33 @@ Geocoding
 Overview of Geocoders
 ---------------------
 
-Geocoding, i.e. converting addresses into coordinates or vice versa, is
-a really common GIS task. Luckily, in Python there are nice libraries
-that makes the geocoding really easy. One of the libraries that can do
-the geocoding for us is
-`geopy <http://geopy.readthedocs.io/en/1.11.0/>`__ that makes it easy to
+Geocoding is the process of transforming place names or addresses into coordinates.
+In this lesson we will learn how to geocode addresses using Geopandas and
+`geopy <https://geopy.readthedocs.io/en/stable/>`__. Geopy makes it easy to
 locate the coordinates of addresses, cities, countries, and landmarks
-across the globe using third-party geocoders and other data sources.
+across the globe using different geocoding web services ("geocoders").
 
-As said, **Geopy** uses third-party geocoders - i.e. services that does
-the geocoding - to locate the addresses and it works with multiple
-different service providers such as:
+Several different geocoding services are available via geopy, including these:
 
--  `ESRI
-   ArcGIS <http://resources.arcgis.com/en/help/arcgis-rest-api/>`__
--  `Baidu
-   Maps <http://developer.baidu.com/map/webservice-geocoding.htm>`__
--  `Bing <http://www.microsoft.com/maps/developers/web.aspx>`__
--  `geocoder.us <http://geocoder.us/>`__
--  `GeocodeFarm <https://www.geocodefarm.com/>`__
--  `GeoNames <http://www.geonames.org/>`__
--  `Google Geocoding API
-   (V3) <https://developers.google.com/maps/documentation/geocoding/>`__
--  `IGN
-   France <http://api.ign.fr/tech-docs-js/fr/developpeur/search.html>`__
--  `Mapquest <http://www.mapquestapi.com/geocoding/>`__
--  `Mapzen Search <https://mapzen.com/projects/search/>`__
--  `NaviData <http://navidata.pl>`__
--  `OpenCage <http://geocoder.opencagedata.com/api.html>`__
+-  `ESRI ArcGIS <https://developers.arcgis.com/rest/geocode/api-reference/overview-world-geocoding-service.htm>`__
+-  `Baidu Maps <http://lbsyun.baidu.com/index.php?title=webapi/guide/webservice-geocoding>`__
+-  `Bing <https://msdn.microsoft.com/en-us/library/ff701715.aspx>`__
+-  `GeocodeFarm <https://www.geocode.farm/geocoding/free-api-documentation/>`__
+-  `GeoNames <http://www.geonames.org/export/geonames-search.html>`__
+-  `Google Geocoding API (V3) <https://developers.google.com/maps/documentation/geocoding/>`__
+-  `IGN France <https://geoservices.ign.fr/documentation/geoservices/index.html>`__
+-  `Mapquest <https://developer.mapquest.com/documentation/open/>`__
+-  `OpenCage <https://opencagedata.com/api>`__
 -  `OpenMapQuest <http://developer.mapquest.com/web/products/open/geocoding-service>`__
 -  `Open Street Map Nominatim <https://wiki.openstreetmap.org/wiki/Nominatim>`__
--  `SmartyStreets <https://smartystreets.com/products/liveaddress-api>`__
--  `What3words <http://what3words.com/api/reference>`__
--  `Yandex <http://api.yandex.com/maps/doc/intro/concepts/intro.xml>`__
+-  `What3words <https://developer.what3words.com/public-api/docsv2#overview>`__
+-  `Yandex <https://tech.yandex.com/maps/doc/geocoder/desc/concepts/input_params-docpage/>`__
 
-Thus, there are plenty of geocoders where to choose from! However, for most of these services you might need to
-request so called API access-keys from the service provider to be able to use the service.
+Chec the `Geopy documentation <https://geopy.readthedocs.io/en/stable/>`__ for more details
+about how to use each service.
+
+As you see, there are plenty of geocoders where to choose from! However, for most of these services you might need to
+request API access-keys from the service provider to be able to use the service.
 
 Luckily, Nominatim, which is a geocoder based on OpenStreetMap data does not require a API key to use their service
 if it is used for small scale geocoding jobs as the service is rate-limited to 1 request per second (3600 / hour).
@@ -47,7 +38,8 @@ As we are only making a small set of queries, we can do the geocoding by using N
 
 .. note::
 
-   - **Note 1:** If you need to do larger scale geocoding jobs, use and request an API key to some of the geocoders listed above.
+   - **Note 1:** If you need to do larger scale geocoding jobs, use and request an API key to some of the
+   geocoders listed above.
 
    - **Note 2:** There are also other Python modules in addition to geopy that can do geocoding such as `Geocoder <http://geocoder.readthedocs.io/>`__.
 
