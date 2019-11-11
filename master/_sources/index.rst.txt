@@ -137,17 +137,18 @@ Contents
    notebooks/L2/geopandas-geometries.ipynb
    lessons/L2/exercise-2
 
-    .. toctree::
-       :maxdepth: 2
-       :caption: Lesson 3
+.. toctree::
+   :maxdepth: 2
+   :caption: Lesson 3
 
-       lessons/L3/overview
-       lessons/L3/geocoding
-       notebooks/L3/geocoding_in_geopandas.ipynb
-       notebooks/L3/point-in-polygon.ipynb
-       notebooks/L3/spatial-join.ipynb
-       notebooks/L3/nearest-neighbour.ipynb
-       lessons/L3/exercise-3
+   lessons/L3/overview
+   lessons/L3/geocoding
+   notebooks/L3/geocoding_in_geopandas.ipynb
+   notebooks/L3/point-in-polygon.ipynb
+   notebooks/L3/spatial_index.ipynb
+   notebooks/L3/spatial-join.ipynb
+   notebooks/L3/nearest-neighbour.ipynb
+   lessons/L3/exercise-3
 
     .. toctree::
        :maxdepth: 2

@@ -58,6 +58,8 @@
   <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Point in Polygon &amp; Intersect" href="point-in-polygon.html" />
+    <link rel="prev" title="Geocoding" href="../../lessons/L3/geocoding.html" />
     <link href="../../_static/geo-python.css" rel="stylesheet" type="text/css">
      
 
@@ -137,6 +139,24 @@
 <li class="toctree-l1"><a class="reference internal" href="../L2/calculating-distances.html">Calculating distances</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../L2/geopandas-geometries.html">Creating new layers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/L2/exercise-2.html">Exercise 2</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 3</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L3/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L3/geocoding.html">Geocoding</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Geocoding in Geopandas</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Geocode-addresses-using-Nominatim">Geocode addresses using Nominatim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Table-join">Table join</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Notes-about-Nominatim">Notes about Nominatim</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="point-in-polygon.html">Point in Polygon &amp; Intersect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spatial_index.html">Spatial index - How to boost spatial queries?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spatial-join.html">Spatial join</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nearest-neighbour.html">Nearest Neighbour Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L3/exercise-3.html">Exercise 3</a></li>
 </ul>
 
             
@@ -438,7 +458,7 @@ This page was generated from <a class="reference external" href="https://github.
 <span class="raw-html"><a href="https://notebooks.csc.fi/#/blueprint/8d7886c2f0ac402aa99235f8d289a52b"><img alt="CSC badge" src="https://img.shields.io/badge/launch-CSC%20notebook-blue.svg" style="vertical-align:text-bottom"></a></span></div>
 <div class="section" id="Geocoding-in-Geopandas">
 <h1>Geocoding in Geopandas<a class="headerlink" href="#Geocoding-in-Geopandas" title="Permalink to this headline">¶</a></h1>
-<p>It is possible to do geocoding in Geopandas using its integrated functionalities of geopy. Geopandas has a function called <code class="docutils literal notranslate"><span class="pre">geocode()</span></code> that can geocode a list of addresses (strings) and return a GeoDataFrame containing the resulting point objects in <code class="docutils literal notranslate"><span class="pre">geometry</span></code> column.</p>
+<p>It is possible to do <a class="reference external" href="http://geopandas.org/geocoding.html">geocoding in Geopandas</a> using its integrated functionalities of geopy. Geopandas has a function called <code class="docutils literal notranslate"><span class="pre">geocode()</span></code> that can geocode a list of addresses (strings) and return a GeoDataFrame containing the resulting point objects in <code class="docutils literal notranslate"><span class="pre">geometry</span></code> column.</p>
 <p>Nice, isn’t it! Let’s try this out.</p>
 <p>We will geocode addresses stored in a text file called <code class="docutils literal notranslate"><span class="pre">addresses.txt</span></code>. The addresses are located in the Helsinki Region in Southern Finland.</p>
 <p>The first rows of the data look like this:</p>
@@ -471,18 +491,38 @@ This page was generated from <a class="reference external" href="https://github.
 </pre></div>
 </div>
 </div>
+<ul class="simple">
+<li>Let’s check that we imported the file correctly:</li>
+</ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Let&#39;s take a look of the data</span>
-<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span></span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>34
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -538,23 +578,38 @@ This page was generated from <a class="reference external" href="https://github.
 </table>
 </div></div>
 </div>
-<p>Now we have our data in a Pandas DataFrame and we can geocode our addresses.</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="section" id="Geocode-addresses-using-Nominatim">
+<h2>Geocode addresses using Nominatim<a class="headerlink" href="#Geocode-addresses-using-Nominatim" title="Permalink to this headline">¶</a></h2>
+<p>Now we have our data in a Pandas DataFrame and we can geocode our addresses using the <a class="reference external" href="http://geopandas.org/reference/geopandas.tools.geocode.html#geopandas-tools-geocode">geopandas geocoding function</a>. <code class="docutils literal notranslate"><span class="pre">geopandas.tools.geocode</span></code> uses <code class="docutils literal notranslate"><span class="pre">geopy</span></code> package in the background.</p>
+<ul class="simple">
+<li>Let’s import the geocoding function and geocode the addresses (column <code class="docutils literal notranslate"><span class="pre">addr</span></code>) using Nominatim.</li>
+<li>Remember to provide a custom string (name of your application) in the user_agent parameter.</li>
+<li>If needed, you can add the <code class="docutils literal notranslate"><span class="pre">timeout</span></code>-parameter which specifies how many seconds we will wait for a response from the service.</li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Import the geocoding tool</span>
 <span class="kn">from</span> <span class="nn">geopandas.tools</span> <span class="kn">import</span> <span class="n">geocode</span>
 
-<span class="c1"># Geocode addresses with Nominatim backend</span>
-<span class="n">geo</span> <span class="o">=</span> <span class="n">geocode</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;addr&#39;</span><span class="p">],</span> <span class="n">provider</span> <span class="o">=</span> <span class="s1">&#39;nominatim&#39;</span><span class="p">,</span> <span class="n">user_agent</span> <span class="o">=</span> <span class="s1">&#39;autogis_student_xx&#39;</span><span class="p">)</span>
-<span class="n">geo</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="c1"># Geocode addresses using Nominatim. Remember to provide a custom &quot;application name&quot; in the user_agent parameter!</span>
+<span class="n">geo</span> <span class="o">=</span> <span class="n">geocode</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;addr&#39;</span><span class="p">],</span> <span class="n">provider</span><span class="o">=</span><span class="s1">&#39;nominatim&#39;</span><span class="p">,</span> <span class="n">user_agent</span><span class="o">=</span><span class="s1">&#39;autogis_xx&#39;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">geo</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -576,49 +631,80 @@ This page was generated from <a class="reference external" href="https://github.
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>geometry</th>
       <th>address</th>
+      <th>geometry</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>POINT (24.9155624 60.1632015)</td>
       <td>Ruoholahti, 14, Itämerenkatu, Ruoholahti, Läns...</td>
+      <td>POINT (24.9155624 60.1632015)</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>POINT (24.9316914 60.1690222)</td>
       <td>Kamppi, 1, Kampinkuja, Kamppi, Eteläinen suurp...</td>
+      <td>POINT (24.9316914 60.1690222)</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>POINT (24.9416849 60.1699637)</td>
       <td>Bangkok9, 8, Kaivokatu, Keskusta, Kluuvi, Etel...</td>
+      <td>POINT (24.9416849 60.1699637)</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>POINT (24.9655355 60.2008878)</td>
-      <td>1, Hermannin rantatie, Hermanninmäki, Hermanni...</td>
+      <td>Hermannin rantatie, Kyläsaari, Hermanni, Helsi...</td>
+      <td>POINT (24.9719335 60.1969965)</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>POINT (24.9216003 60.1566475)</td>
       <td>Hesburger, 9, Tyynenmerenkatu, Jätkäsaari, Län...</td>
+      <td>POINT (24.9216003 60.1566475)</td>
     </tr>
   </tbody>
 </table>
 </div></div>
 </div>
 <p>And Voilà! As a result we have a GeoDataFrame that contains our original address and a ‘geometry’ column containing Shapely Point -objects that we can use for exporting the addresses to a Shapefile for example. However, the <code class="docutils literal notranslate"><span class="pre">id</span></code> column is not there. Thus, we need to join the information from <code class="docutils literal notranslate"><span class="pre">data</span></code> into our new GeoDataFrame <code class="docutils literal notranslate"><span class="pre">geo</span></code>, thus making a <strong>Table Join</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title fa fa-exclamation-circle"><strong>Rate-limiting</strong></p>
+<p>When geocoding a large dataframe, you might encounter an error when geocoding. In case you get a time out error, try first using the <code class="docutils literal notranslate"><span class="pre">timeout</span></code> parameter as we did above (allow the service a bit more time to respond). In case of Too Many Requests error, you have hit the rate-limit of the service, and you should slow down your requests. To our convenience, GeoPy provides additional tools for taking into account rate limits in geocoding services. This script adapts the usage of <a class="reference external" href="https://geopy.readthedocs.io/en/stable/#geopy.extra.rate_limiter.RateLimiter">GeoPy
+RateLimiter</a> to our input data:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">geopy.geocoders</span> <span class="k">import</span> <span class="n">Nominatim</span>
+<span class="kn">from</span> <span class="nn">geopy.extra.rate_limiter</span> <span class="k">import</span> <span class="n">RateLimiter</span>
+<span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="k">import</span> <span class="n">Point</span>
+
+<span class="c1"># Initiate geocoder</span>
+<span class="n">geolocator</span> <span class="o">=</span> <span class="n">Nominatim</span><span class="p">(</span><span class="n">user_agent</span><span class="o">=</span><span class="s1">&#39;autogis_xx&#39;</span><span class="p">)</span>
+
+<span class="c1"># Create a geopy rate limiter:</span>
+<span class="n">geocode_with_delay</span> <span class="o">=</span> <span class="n">RateLimiter</span><span class="p">(</span><span class="n">geolocator</span><span class="o">.</span><span class="n">geocode</span><span class="p">,</span> <span class="n">min_delay_seconds</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Apply the geocoder with delay using the rate limiter:</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;temp&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;addr&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">geocode_with_delay</span><span class="p">)</span>
+
+<span class="c1"># Get point coordinates from the GeoPy location object on each row:</span>
+<span class="n">data</span><span class="p">[</span><span class="s2">&quot;coords&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;temp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">loc</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">loc</span><span class="o">.</span><span class="n">point</span><span class="p">)</span> <span class="k">if</span> <span class="n">loc</span> <span class="k">else</span> <span class="kc">None</span><span class="p">)</span>
+
+<span class="c1"># Create shapely point objects to geometry column:</span>
+<span class="n">data</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;coords&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">Point</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>All in all, remember that Nominatim is not meant for super heavy use.</p>
+</div>
+</div>
 <div class="section" id="Table-join">
 <h2>Table join<a class="headerlink" href="#Table-join" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="admonition-title fa fa-exclamation-circle"><strong>Table joins in pandas</strong></p>
+<p>For a comprehensive overview of different ways of combining DataFrames and Series based on set theory, have a look at pandas documentation about <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/merging.html">merge, join and concatenate</a>.</p>
+</div>
 <p>Table joins are really common procedures when doing GIS analyses. As you might remember from our earlier lessons, combining data from different tables based on common <strong>key</strong> attribute can be done easily in Pandas/Geopandas using the <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.merge.html">.merge()</a> -function. We used this approach in the geo-python course <a class="reference external" href="https://geo-python.github.io/2018/lessons/L6/exercise-6.html#joining-data-from-one-dataframe-to-another">exercise
 6</a>.</p>
 <p>However, sometimes it is useful to join two tables together based on the <strong>index</strong> of those DataFrames. In such case, we assume that there is <strong>same number of records</strong> in our DataFrames and that the <strong>order of the records should be the same</strong> in both DataFrames. In fact, now we have such a situation as we are geocoding our addresses where the order of the geocoded addresses in <code class="docutils literal notranslate"><span class="pre">geo</span></code> DataFrame is the same as in our original <code class="docutils literal notranslate"><span class="pre">data</span></code> DataFrame.</p>
 <p>Hence, we can join those tables together with <code class="docutils literal notranslate"><span class="pre">join()</span></code> -function which merges the two DataFrames together based on index by default.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -628,7 +714,7 @@ This page was generated from <a class="reference external" href="https://github.
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -650,8 +736,8 @@ This page was generated from <a class="reference external" href="https://github.
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>geometry</th>
       <th>address</th>
+      <th>geometry</th>
       <th>id</th>
       <th>addr</th>
     </tr>
@@ -659,36 +745,36 @@ This page was generated from <a class="reference external" href="https://github.
   <tbody>
     <tr>
       <th>0</th>
-      <td>POINT (24.9155624 60.1632015)</td>
       <td>Ruoholahti, 14, Itämerenkatu, Ruoholahti, Läns...</td>
+      <td>POINT (24.9155624 60.1632015)</td>
       <td>1000</td>
       <td>Itämerenkatu 14, 00101 Helsinki, Finland</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>POINT (24.9316914 60.1690222)</td>
       <td>Kamppi, 1, Kampinkuja, Kamppi, Eteläinen suurp...</td>
+      <td>POINT (24.9316914 60.1690222)</td>
       <td>1001</td>
       <td>Kampinkuja 1, 00100 Helsinki, Finland</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>POINT (24.9416849 60.1699637)</td>
       <td>Bangkok9, 8, Kaivokatu, Keskusta, Kluuvi, Etel...</td>
+      <td>POINT (24.9416849 60.1699637)</td>
       <td>1002</td>
       <td>Kaivokatu 8, 00101 Helsinki, Finland</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>POINT (24.9655355 60.2008878)</td>
-      <td>1, Hermannin rantatie, Hermanninmäki, Hermanni...</td>
+      <td>Hermannin rantatie, Kyläsaari, Hermanni, Helsi...</td>
+      <td>POINT (24.9719335 60.1969965)</td>
       <td>1003</td>
       <td>Hermannin rantatie 1, 00580 Helsinki, Finland</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>POINT (24.9216003 60.1566475)</td>
       <td>Hesburger, 9, Tyynenmerenkatu, Jätkäsaari, Län...</td>
+      <td>POINT (24.9216003 60.1566475)</td>
       <td>1005</td>
       <td>Tyynenmerenkatu 9, 00220 Helsinki, Finland</td>
     </tr>
@@ -700,7 +786,7 @@ This page was generated from <a class="reference external" href="https://github.
 <li>Let’s also check the data type of our new <code class="docutils literal notranslate"><span class="pre">join</span></code> table.</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -709,7 +795,7 @@ This page was generated from <a class="reference external" href="https://github.
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -717,12 +803,12 @@ This page was generated from <a class="reference external" href="https://github.
 </pre></div>
 </div>
 </div>
-<p>As a result we have a new GeoDataFrame called <code class="docutils literal notranslate"><span class="pre">join</span></code> where we now have all original columns plus a new column for <code class="docutils literal notranslate"><span class="pre">geometry</span></code>.</p>
+<p>As a result we have a new GeoDataFrame called <code class="docutils literal notranslate"><span class="pre">join</span></code> where we now have all original columns plus a new column for <code class="docutils literal notranslate"><span class="pre">geometry</span></code>. <strong>Note!</strong> If you would do the join the other way around, i.e.&nbsp;<code class="docutils literal notranslate"><span class="pre">data.join(geo)</span></code>, the output would be a pandas DataFrame, not a GeoDataFrame!</p>
 <ul class="simple">
 <li>Now it is easy to save our address points into a Shapefile</li>
 </ul>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -737,8 +823,8 @@ This page was generated from <a class="reference external" href="https://github.
 <p>That’s it. Now we have successfully geocoded those addresses into Points and made a Shapefile out of them. Easy isn’t it!</p>
 <div class="section" id="Notes-about-Nominatim">
 <h3>Notes about Nominatim<a class="headerlink" href="#Notes-about-Nominatim" title="Permalink to this headline">¶</a></h3>
-<p>Nominatim works relatively nicely if you have well defined and well-known addresses such as the ones that we used in this tutorial. However, in some cases, you might not have such well-defined addresses, and you might have e.g.&nbsp;only the name of a museum available. In such cases, Nominatim might not provide such good results, and in such cases you might want to use e.g.&nbsp;<a class="reference external" href="https://developers.google.com/maps/documentation/geocoding/">Google Geocoding API (V3)</a>. <a class="reference external" href="https://automating-gis-processes.github.io/2016/Lesson3-geocoding.html#geocoding-in-geopandas">Take a look from past year’s
-materials where we show how to use Google Geocoding API</a> in a similar manner as we used Nominatim here.</p>
+<p>Nominatim works relatively nicely if you have well defined and well-known addresses such as the ones that we used in this tutorial. In practice, the address needs to exist in the OpenStreetMap database. Sometimes, however, you might want to geocode a “point-of-interest”, such as a museum, only based on it’s name. If the museum name is not on OpenStreetMap, Nominatim won’t provide any results for it, but you might be able to geocode the place using some other geocoder such as the <a class="reference external" href="https://developers.google.com/maps/documentation/geocoding/">Google
+Geocoding API (V3)</a>, which requires an API key. <a class="reference external" href="https://automating-gis-processes.github.io/2016/Lesson3-geocoding.html#geocoding-in-geopandas">Take a look from past year’s materials where we show how to use Google Geocoding API</a> in a similar manner as we used Nominatim here.</p>
 </div>
 </div>
 </div>
@@ -749,6 +835,15 @@ materials where we show how to use Google Geocoding API</a> in a similar manner 
           </div>
           <footer>
   
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="point-in-polygon.html" class="btn btn-neutral float-right" title="Point in Polygon &amp; Intersect" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../../lessons/L3/geocoding.html" class="btn btn-neutral float-left" title="Geocoding" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
 
   <hr/>
 
@@ -756,7 +851,7 @@ materials where we show how to use Google Geocoding API</a> in a similar manner 
     <p>
         &copy; Copyright 2019, Henrikki Tenkanen and Vuokko Heikinheimo, Digital Geography Lab, University of Helsinki
       <span class="lastupdated">
-        Last updated on Nov 06, 2019.
+        Last updated on Nov 11, 2019.
       </span>
 
     </p>

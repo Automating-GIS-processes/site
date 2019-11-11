@@ -1,0 +1,1141 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-88382509-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Spatial index - How to boost spatial queries? &mdash; AutoGIS site documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'site',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Spatial join" href="spatial-join.html" />
+    <link rel="prev" title="Point in Polygon &amp; Intersect" href="point-in-polygon.html" />
+    <link href="../../_static/geo-python.css" rel="stylesheet" type="text/css">
+     
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> AutoGIS
+          
+
+          
+            
+            <img src="../../_static/logo_hy_geo_135.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2019
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Course information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/course-info.html">General info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/course-environment-components.html">Course environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/grading.html">Grading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/learning-goals.html">Learning goals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/Installing_Anacondas_GIS.html">Installing Python + GIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/License-terms.html">License and terms of usage</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 1</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L1/Intro-Python-GIS.html">Motivation for the course</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L1/overview.html">Lesson overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1/geometric-objects.html">Shapely and geometric objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L1/exercise-1.html">Exercise 1</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 2</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L2/overview.html">Lesson 2 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/data_io.html">Vector Data I/O in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/geopandas-basics.html">Introduction to Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/projections.html">Map projections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/calculating-distances.html">Calculating distances</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/geopandas-geometries.html">Creating new layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L2/exercise-2.html">Exercise 2</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 3</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L3/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L3/geocoding.html">Geocoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geocoding_in_geopandas.html">Geocoding in Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="point-in-polygon.html">Point in Polygon &amp; Intersect</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Spatial index - How to boost spatial queries?</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Motivation">Motivation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Spatial-index-with-Geopandas">Spatial index with Geopandas</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Putting-pieces-together---Performance-comparisons">Putting pieces together - Performance comparisons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Counting-the-intersections">Counting the intersections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Note">Note</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="spatial-join.html">Spatial join</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nearest-neighbour.html">Nearest Neighbour Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L3/exercise-3.html">Exercise 3</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AutoGIS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Spatial index - How to boost spatial queries?</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/Automating-GIS-processes/site/blob/master/source/notebooks/L3/spatial_index.ipynb" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+
+
+
+
+
+
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 5ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    background: #f5f5f5;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="admonition note">
+This page was generated from <a class="reference external" href="https://github.com/Automating-GIS-processes/site/blob/master/source/notebooks/L3/spatial_index.ipynb">source/notebooks/L3/spatial_index.ipynb</a>.
+<span class="raw-html"><br/><a href="https://mybinder.org/v2/gh/Automating-GIS-processes/site/master?urlpath=lab/tree/source/notebooks/L3/spatial_index.ipynb"><img alt="Binder badge" src="https://img.shields.io/badge/launch-full%20binder-red.svg" style="vertical-align:text-bottom"></a></span>
+<span class="raw-html"><a href="https://mybinder.org/v2/gh/Automating-GIS-processes/notebooks/master?urlpath=lab/tree/notebooks/L3/spatial_index.ipynb"><img alt="Binder badge" src="https://img.shields.io/badge/launch-student%20binder-red.svg" style="vertical-align:text-bottom"></a></span>
+<span class="raw-html"><a href="https://notebooks.csc.fi/#/blueprint/8d7886c2f0ac402aa99235f8d289a52b"><img alt="CSC badge" src="https://img.shields.io/badge/launch-CSC%20notebook-blue.svg" style="vertical-align:text-bottom"></a></span></div>
+<div class="section" id="Spatial-index---How-to-boost-spatial-queries?">
+<h1>Spatial index - How to boost spatial queries?<a class="headerlink" href="#Spatial-index---How-to-boost-spatial-queries?" title="Permalink to this headline">¶</a></h1>
+<p>While using the technique from previous examples produces correct results, it is in fact quite slow from performance point of view. Especially when having large datasets (quite typical nowadays), the point in polygon queries can become frustratingly slow, which can be a nerve-racking experience for a busy geo-data scientist.</p>
+<p>Luckily there is an easy and widely used solution called <strong>spatial index</strong> that can significantly boost the performance of your spatial queries. Various alternative techniques has been developed to boost spatial queries, but one of the most popular one and widely used is a spatial index based on <a class="reference external" href="https://en.wikipedia.org/wiki/R-tree">R-tree</a> data structure.</p>
+<p>The core idea behind the <strong>R-tree</strong> is to form a tree-like data structure where nearby objects are grouped together, and their geographical extent (minimum bounding box) is inserted into the data structure (i.e.&nbsp;R-tree). This bounding box then represents the whole group of geometries as one level (typically called as “page” or “node”) in the data structure. This process is repeated several times, which produces a tree-like structure where different levels are connected to each other. This
+structure makes the query times for finding a single object from the data much faster, as the algorithm does not need to travel through all geometries in the data. In the example below, we can see how the geometries have been grouped into several sub-groups (lower part of the picture) and inserted into a tree structure (upper part) where there exists two groups on the highest level (<code class="docutils literal notranslate"><span class="pre">R1</span></code> and <code class="docutils literal notranslate"><span class="pre">R2</span></code>), which are again grouped into five lower level groups (<code class="docutils literal notranslate"><span class="pre">R3-R7</span></code>):</p>
+<p><img alt="image0" src="../../_images/los-angeles-boundary-quadrats-intersections.png" /> Simple example of an R-tree for 2D rectanges (source: <a class="reference external" href="https://www.ibm.com/support/knowledgecenter/en/SSGU8G_11.50.0/com.ibm.rtree.doc/sii-overview-27706.htm">IBM</a>)</p>
+<p>In the next tutorial we will learn how to significantly improve the query times for finding points that are within a given polygon. We will use data that represents all road intersections in the Uusimaa Region of Finland, and count the number of intersections on a postal code level. <em>Why would you do such a thing?</em>, well, one could for example try to understand the vitality of city blocks following <a class="reference external" href="https://en.wikipedia.org/wiki/Jane_Jacobs">Jane Jacobs’</a> ideas.</p>
+<div class="section" id="Motivation">
+<h2>Motivation<a class="headerlink" href="#Motivation" title="Permalink to this headline">¶</a></h2>
+<p>As a motivation for counting intersections, we can use an example/theory from <a class="reference external" href="https://en.wikipedia.org/wiki/Jane_Jacobs">Jane Jacobs’</a> classic book <a class="reference external" href="https://en.wikipedia.org/wiki/The_Death_and_Life_of_Great_American_Cities">“The Death and Life of Great American Cities”</a> (1961), where she defines four requirements that makes a vital/vibrant city:</p>
+<ol class="arabic simple">
+<li>“The district, and indeed as many of its internal parts as possible, must serve more than one primary function; preferably more than two. These must insure the presence of people who go outdoors on different schedules and are in the place for different purposes, but who are able to use many facilities in common.” <em>(–&gt; One could use e.g.&nbsp;OSM data to understand the diversity of services etc.)</em></li>
+<li>“Most blocks must be short; that is, streets and <strong>opportunities to turn corners</strong> must be frequent.” –&gt; intersections!</li>
+<li>“The district must mingle buildings that vary in age and condition, including a good proportion of old ones so that they vary in the economic yield they must produce. This mingling must be fairly close-grained.” (–&gt; one could use e.g.&nbsp;existing building datasets that are available for many cities in Finland)</li>
+<li>“There must be a sufficiently dence concentration of people, for whatever purposes they may be there. This includes dence concentration in the case of people who are there because of residence.”</li>
+</ol>
+<p>The following tutorial only covers one aspect of these four (2.), but it certainly would be possible to measure all 4 aspects if combining more datasets together.</p>
+<div class="section" id="Spatial-index-with-Geopandas">
+<h3>Spatial index with Geopandas<a class="headerlink" href="#Spatial-index-with-Geopandas" title="Permalink to this headline">¶</a></h3>
+<p>In this tutorial, we will first go through a step by step example showing how spatial index works, and in the end we put things together and produce a practical function for doing fast spatial queries.</p>
+<ul class="simple">
+<li>Let’s start by reading data representing road intersections (parsed from <a class="reference external" href="https://vayla.fi/web/en/open-data/digiroad/data#.Xca1TzP7Q2w">Digiroad road network data</a>) and postal code areas (obtained from <a class="reference external" href="https://www.tilastokeskus.fi/tup/karttaaineistot/postinumeroalueet.html">Statistics Finland</a>). In this time, we will read the data from Geopackage files:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+
+<span class="c1"># Filepaths</span>
+<span class="n">intersections_fp</span> <span class="o">=</span> <span class="s2">&quot;data/uusimaa_intersections.gpkg&quot;</span>
+<span class="n">postcode_areas_fp</span> <span class="o">=</span> <span class="s2">&quot;data/uusimaa_postal_code_areas.gpkg&quot;</span>
+
+<span class="n">intersections</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">intersections_fp</span><span class="p">)</span>
+<span class="n">postcode_areas</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">postcode_areas_fp</span><span class="p">)</span>
+
+<span class="c1"># Let&#39;s check first rows</span>
+<span class="k">print</span><span class="p">(</span><span class="n">intersections</span><span class="o">.</span><span class="n">head</span><span class="p">(),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">-------&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">postcode_areas</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+            x            y                        geometry
+0  330888.502  6675829.949  POINT (330888.502 6675829.949)
+1  348059.990  6670041.685  POINT (348059.990 6670041.685)
+2  348022.592  6670202.858  POINT (348022.592 6670202.858)
+3  297208.220  6669048.357  POINT (297208.220 6669048.357)
+4  330835.341  6675586.834  POINT (330835.341 6675586.834)
+-------
+  posti_alue  he_vakiy                                           geometry
+0      00100   18284.0  MULTIPOLYGON (((385653.893 6671591.048, 385573...
+1      00120    7108.0  MULTIPOLYGON (((385316.092 6671076.984, 385279...
+2      00130    1508.0  MULTIPOLYGON (((386212.111 6671061.262, 386176...
+3      00140    7865.0  MULTIPOLYGON (((386577.050 6670280.544, 386552...
+4      00150    9496.0  MULTIPOLYGON (((384846.102 6669565.816, 384823...
+</pre></div></div>
+</div>
+<ul class="simple">
+<li>Let’s see how many intersections and postal code areas we have:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Number of intersections:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">intersections</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Number of postal code areas:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">postcode_areas</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Number of intersections: 63518
+Number of postal code areas: 370
+</pre></div></div>
+</div>
+<p>Okay, as we can see there are 63.5 thousand intersections in the region and 370 postal code areas. These are not yet huge datasets, but big enough so that we can see the benefits in using a spatial index.</p>
+<ul class="simple">
+<li>Let’s still explore quickly how our datasets look on a map before doing the point in polygon queries.</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="n">ax</span> <span class="o">=</span> <span class="n">postcode_areas</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">intersections</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;yellow&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="c1"># Zoom to closer (comment out the following to see the full extent of the data)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mi">380000</span><span class="p">,</span> <span class="mi">395000</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">6667500</span><span class="p">,</span> <span class="mi">6680000</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>(6667500, 6680000)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L3_spatial_index_7_1.png" src="../../_images/notebooks_L3_spatial_index_7_1.png" />
+</div>
+</div>
+<p>As we can see from the map, we have a large number of points (intersections) that are scattered around the city.</p>
+<p>Next, we want to calculate how many of those points are inside each postal code area visible on the map. For doing this, we are going to take advantage of spatial index.</p>
+<ul class="simple">
+<li>Building a spatial index for GeoDataFrame is easy in Geopandas. We can extract that by calling an attribute <code class="docutils literal notranslate"><span class="pre">.sindex</span></code>.</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Let&#39;s build spatial index for intersection points</span>
+<span class="n">intersection_sindex</span> <span class="o">=</span> <span class="n">intersections</span><span class="o">.</span><span class="n">sindex</span>
+
+<span class="c1"># Let&#39;s see what it is</span>
+<span class="n">intersection_sindex</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>&lt;geopandas.sindex.SpatialIndex at 0x1cfcd5c1108&gt;
+</pre></div>
+</div>
+</div>
+<p>Okay, as we can see the variable contains a <code class="docutils literal notranslate"><span class="pre">SpatialIndex</span></code> object. Fundamentally, this object contains now the geometries in an R-tree data structure as introduced in the beginning of this page.</p>
+<p>From this spatial index, we can e.g.&nbsp;see, how the geometries have been grouped in the spatial index.</p>
+<ul class="simple">
+<li>Let’s see how many groups we have, and extract some basic information from them. We can extract this information using <code class="docutils literal notranslate"><span class="pre">.leaves()</span></code> function.</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># How many groups do we have?</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Number of groups:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">intersection_sindex</span><span class="o">.</span><span class="n">leaves</span><span class="p">()),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># Print some basic info for few of them</span>
+<span class="n">n_iterations</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">intersection_sindex</span><span class="o">.</span><span class="n">leaves</span><span class="p">()):</span>
+    <span class="n">group_idx</span><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="n">bbox</span> <span class="o">=</span> <span class="n">group</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Group&quot;</span><span class="p">,</span> <span class="n">group_idx</span><span class="p">,</span> <span class="s2">&quot;contains &quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">indices</span><span class="p">),</span> <span class="s2">&quot;geometries, bounding box:&quot;</span><span class="p">,</span> <span class="n">bbox</span><span class="p">)</span>
+    <span class="n">i</span><span class="o">+=</span><span class="mi">1</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">n_iterations</span><span class="p">:</span>
+        <span class="k">break</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Number of groups: 908
+
+Group 0 contains  70 geometries, bounding box: [270305.195, 6632767.892, 279497.993, 6638674.424]
+Group 2 contains  70 geometries, bounding box: [272155.57, 6638680.047, 285753.31, 6638976.355]
+Group 3 contains  70 geometries, bounding box: [271904.727, 6638983.54, 286463.059, 6639181.123]
+Group 4 contains  70 geometries, bounding box: [271790.007, 6639184.018, 284495.801, 6639351.784]
+Group 5 contains  70 geometries, bounding box: [271952.787, 6639354.724, 284589.912, 6639564.576]
+Group 6 contains  70 geometries, bounding box: [271784.854, 6639571.546, 285241.406, 6639760.222]
+Group 7 contains  70 geometries, bounding box: [271813.417, 6639762.182, 285147.276, 6639945.834]
+Group 8 contains  70 geometries, bounding box: [271646.281, 6639949.717, 283451.674, 6640149.228]
+Group 9 contains  70 geometries, bounding box: [272335.073, 6640150.564, 282567.285, 6640318.718]
+Group 10 contains  70 geometries, bounding box: [272318.947, 6640321.762, 286352.142, 6641062.815]
+</pre></div></div>
+</div>
+<p>We seem to have 908 groups formed in the R-tree, and as we can see, each group seem to consist of 70 geometries. Okay, now as we understand a bit what the <code class="docutils literal notranslate"><span class="pre">R-tree</span></code> index is like. Let’s take that into action.</p>
+<p>For conducting fast spatial queries, we can utilize the spatial index of the intersections, and compare the geometry of a given postal code area to the <strong>bounding boxes</strong> of points inside the R-tree spatial index. Let’s start with a single postal code area, to keep things simple.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Select a postal code area representing the city center of Helsinki</span>
+<span class="n">city_center_zip_area</span> <span class="o">=</span> <span class="n">postcode_areas</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">postcode_areas</span><span class="p">[</span><span class="s1">&#39;posti_alue&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;00100&#39;</span><span class="p">]</span>
+<span class="n">city_center_zip_area</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1cfcd8f28c8&gt;
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L3_spatial_index_13_1.png" src="../../_images/notebooks_L3_spatial_index_13_1.png" />
+</div>
+</div>
+<p>Okay, now we can make a spatial query in which we want to select all the points, that are inside this Polygon. We conduct the point in polygon query in two steps:</p>
+<ul class="simple">
+<li><strong>first</strong>, we compare the bounds of the Polygon into the spatial index of the Points. This gives us point <strong>candidates</strong> that are likely to be within the Polygon (at this stage based on the MBR of the points that is stored inside the R-tree).</li>
+<li><strong>secondly</strong>, we go through the candidate points and make a normal spatial intersection query that gives us the accurate results:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Get the bounding box coordinates of the Polygon as a list</span>
+<span class="n">bounds</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">city_center_zip_area</span><span class="o">.</span><span class="n">bounds</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># Get the indices of the Points that are likely to be inside the bounding box of the given Polygon</span>
+<span class="n">point_candidate_idx</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">intersection_sindex</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">bounds</span><span class="p">))</span>
+<span class="n">point_candidates</span> <span class="o">=</span> <span class="n">intersections</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">point_candidate_idx</span><span class="p">]</span>
+
+<span class="c1"># Let&#39;s see what we have now</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">city_center_zip_area</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">point_candidates</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L3_spatial_index_15_0.png" src="../../_images/notebooks_L3_spatial_index_15_0.png" />
+</div>
+</div>
+<p>Aha, as we can see, now we have successfully selected such points from the dataset that intersect with the <strong>bounding box</strong> of the Polygon. I.e. we conducted the first step of the process.</p>
+<p>Next, let’s do the final selection using a “normal” intersect query, which is however, much faster because there is no need to go through all 63.5 thousand points in the full dataset:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Make the precise Point in Polygon query</span>
+<span class="n">final_selection</span> <span class="o">=</span> <span class="n">point_candidates</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">point_candidates</span><span class="o">.</span><span class="n">intersects</span><span class="p">(</span><span class="n">city_center_zip_area</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
+
+<span class="c1"># Let&#39;s see what we have now</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">city_center_zip_area</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">final_selection</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L3_spatial_index_17_0.png" src="../../_images/notebooks_L3_spatial_index_17_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="Putting-pieces-together---Performance-comparisons">
+<h2>Putting pieces together - Performance comparisons<a class="headerlink" href="#Putting-pieces-together---Performance-comparisons" title="Permalink to this headline">¶</a></h2>
+<p>Following functions both conduct the spatial query that we saw previously, the first one <strong>without</strong> utilizing spatial index and the second one <strong>with</strong> spatial index. We can use them and compare the performance, so that we can get an idea how much the spatial index affects the performance time-wise.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">intersect_using_spatial_index</span><span class="p">(</span><span class="n">source_gdf</span><span class="p">,</span> <span class="n">intersecting_gdf</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Conduct spatial intersection using spatial index for candidates GeoDataFrame to make queries faster.</span>
+<span class="sd">    Note, with this function, you can have multiple Polygons in the &#39;intersecting_gdf&#39; and it will return all the points</span>
+<span class="sd">    intersect with ANY of those geometries.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">source_sindex</span> <span class="o">=</span> <span class="n">source_gdf</span><span class="o">.</span><span class="n">sindex</span>
+    <span class="n">possible_matches_index</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># &#39;itertuples()&#39; function is a faster version of &#39;iterrows()&#39;</span>
+    <span class="k">for</span> <span class="n">other</span> <span class="ow">in</span> <span class="n">intersecting_gdf</span><span class="o">.</span><span class="n">itertuples</span><span class="p">():</span>
+        <span class="n">bounds</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">bounds</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">source_sindex</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">bounds</span><span class="p">))</span>
+        <span class="n">possible_matches_index</span> <span class="o">+=</span> <span class="n">c</span>
+
+    <span class="c1"># Get unique candidates</span>
+    <span class="n">unique_candidate_matches</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">possible_matches_index</span><span class="p">))</span>
+    <span class="n">possible_matches</span> <span class="o">=</span> <span class="n">source_gdf</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">unique_candidate_matches</span><span class="p">]</span>
+
+    <span class="c1"># Conduct the actual intersect</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">possible_matches</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">possible_matches</span><span class="o">.</span><span class="n">intersects</span><span class="p">(</span><span class="n">intersecting_gdf</span><span class="o">.</span><span class="n">unary_union</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="k">def</span> <span class="nf">normal_intersect</span><span class="p">(</span><span class="n">source_gdf</span><span class="p">,</span> <span class="n">intersecting_gdf</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Conduct spatial intersection without spatial index.</span>
+<span class="sd">    Note, with this function, you can have multiple Polygons in the &#39;intersecting_gdf&#39; and it will return all the points</span>
+<span class="sd">    intersect with ANY of those geometries.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">matches</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># &#39;itertuples()&#39; function is a faster version of &#39;iterrows()&#39;</span>
+    <span class="k">for</span> <span class="n">other</span> <span class="ow">in</span> <span class="n">intersecting_gdf</span><span class="o">.</span><span class="n">itertuples</span><span class="p">():</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">source_gdf</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">source_gdf</span><span class="o">.</span><span class="n">intersects</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">geometry</span><span class="p">)]</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+        <span class="n">matches</span> <span class="o">+=</span> <span class="n">c</span>
+
+    <span class="c1"># Get all points that are intersecting with the Polygons</span>
+    <span class="n">unique_matches</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">matches</span><span class="p">))</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">source_gdf</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">source_gdf</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">unique_matches</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li>Let’s compare their performance and time it. Here we utilize a special IPython magic function called <code class="docutils literal notranslate"><span class="pre">%timeit</span></code> that allows to test how long it takes to run a specific function (it actually runs the function multiple times to get a more representative timing).</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Test the spatial query with spatial index</span>
+<span class="o">%</span><span class="k">timeit</span> intersect_using_spatial_index(source_gdf=intersections, intersecting_gdf=city_center_zip_area)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+14.1 ms ± 469 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Test the spatial query without spatial index</span>
+<span class="o">%</span><span class="k">timeit</span> normal_intersect(source_gdf=intersections, intersecting_gdf=city_center_zip_area)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+247 ms ± 4.18 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+</pre></div></div>
+</div>
+<p>Okay, as these tests demonstrate, using the spatial index gives a significant boost in the performance, by being around 17x faster.</p>
+<p>Making the spatial query only with a single Polygon (as in the example) might not make a big difference, but having hundreds or thousands of Polygons, and wanting to find all points that are inside those ones, start to make a drastic difference.</p>
+</div>
+<div class="section" id="Counting-the-intersections">
+<h2>Counting the intersections<a class="headerlink" href="#Counting-the-intersections" title="Permalink to this headline">¶</a></h2>
+<p>The ultimate goal of this tutorial was to count the intersections per postal code. We can do that easily and fast with Geopandas, by conducting a <code class="docutils literal notranslate"><span class="pre">spatial</span> <span class="pre">join</span></code> between the two datasets. Spatial join in Geopandas is highly performant, and in fact, it utilizes spatial index to make the queries fast. The following parts might include a bit advanced tricks that we have not covered, but for the sake of completeness, the following steps count the intersections per postal code area. Finally, we plot
+a density of the intersections as a number of intersections per square kilometer (per postal code area).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Count intersections by postal code area</span>
+<span class="n">intersection_cnt</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span><span class="n">postcode_areas</span><span class="p">,</span> <span class="n">intersections</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;posti_alue&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">intersection_cnt</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>posti_alue</th>
+      <th>0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>00100</td>
+      <td>203</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>00120</td>
+      <td>35</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>00130</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>00140</td>
+      <td>44</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>00150</td>
+      <td>68</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Merge with postcode data and plot</span>
+<span class="n">intersection_cnt</span> <span class="o">=</span> <span class="n">intersection_cnt</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;intersection_cnt&#39;</span><span class="p">})</span>
+<span class="n">postcode_areas</span> <span class="o">=</span> <span class="n">postcode_areas</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">intersection_cnt</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;posti_alue&#39;</span><span class="p">)</span>
+<span class="n">postcode_areas</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>posti_alue</th>
+      <th>he_vakiy</th>
+      <th>geometry</th>
+      <th>intersection_cnt</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>00100</td>
+      <td>18284.0</td>
+      <td>MULTIPOLYGON (((385653.893 6671591.048, 385573...</td>
+      <td>203</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>00120</td>
+      <td>7108.0</td>
+      <td>MULTIPOLYGON (((385316.092 6671076.984, 385279...</td>
+      <td>35</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>00130</td>
+      <td>1508.0</td>
+      <td>MULTIPOLYGON (((386212.111 6671061.262, 386176...</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>00140</td>
+      <td>7865.0</td>
+      <td>MULTIPOLYGON (((386577.050 6670280.544, 386552...</td>
+      <td>44</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>00150</td>
+      <td>9496.0</td>
+      <td>MULTIPOLYGON (((384846.102 6669565.816, 384823...</td>
+      <td>68</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>338</th>
+      <td>25470</td>
+      <td>279.0</td>
+      <td>MULTIPOLYGON (((305067.212 6673543.615, 304620...</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th>339</th>
+      <td>25500</td>
+      <td>3391.0</td>
+      <td>MULTIPOLYGON (((277988.374 6665076.564, 277959...</td>
+      <td>86</td>
+    </tr>
+    <tr>
+      <th>340</th>
+      <td>25560</td>
+      <td>208.0</td>
+      <td>MULTIPOLYGON (((294139.092 6671931.426, 291442...</td>
+      <td>48</td>
+    </tr>
+    <tr>
+      <th>341</th>
+      <td>31350</td>
+      <td>235.0</td>
+      <td>MULTIPOLYGON (((329443.822 6726297.286, 329125...</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>342</th>
+      <td>31470</td>
+      <td>698.0</td>
+      <td>MULTIPOLYGON (((315714.104 6707215.302, 315265...</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+<p>343 rows × 4 columns</p>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Plot intersection density (number of intersections per square kilometer inside a Postal code)</span>
+<span class="n">m2_to_km2_converter</span> <span class="o">=</span> <span class="mi">1000000</span>
+<span class="n">postcode_areas</span><span class="p">[</span><span class="s1">&#39;intersection_density&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">postcode_areas</span><span class="p">[</span><span class="s1">&#39;intersection_cnt&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">postcode_areas</span><span class="o">.</span><span class="n">area</span> <span class="o">/</span> <span class="n">m2_to_km2_converter</span><span class="p">)</span>
+<span class="n">postcode_areas</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">&#39;intersection_density&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdYlBu_r&#39;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1cfcaecc8c8&gt;
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L3_spatial_index_27_1.png" src="../../_images/notebooks_L3_spatial_index_27_1.png" />
+</div>
+</div>
+<p>From the map, we can see that the intersection density is clearly highest in the city center areas of Helsinki (red colored areas).</p>
+</div>
+<div class="section" id="Note">
+<h2>Note<a class="headerlink" href="#Note" title="Permalink to this headline">¶</a></h2>
+<p>As we have learned from this tutorial, spatial index can make the spatial queries significantly faster. There is however, a specific situation in which spatial index does not provide any improvements for the performance: if your polygon and points have more or less similar spatial extent (bounding box), the spatial index does not help to make the queries faster due to its design in working on a level of bounding boxes. This happens e.g.&nbsp;in following case:</p>
+<p><img alt="image0" src="../../_images/los-angeles-boundary-quadrats-intersections.png" /> <em>Example of a situation where spatial index does not provide boost in performance</em> (Source: <a class="reference external" href="https://geoffboeing.com/2016/10/r-tree-spatial-index-python/">G. Boeing, 2016</a>)</p>
+<p>As we can see, in the map, there is a complex Polygon that share more or less identical extent as the point layer, which is problematic from performance point of view.</p>
+<p>There is, however, a nice strategy to deal with this kind of situation, by sub-dividing the Polygon into smaller subsets (having also smaller bounding boxes) that will enable the spatial index to boost the queries:</p>
+<p><img alt="image0" src="../../_images/los-angeles-boundary-quadrats-intersections.png" />.</p>
+<p>You can read more about this strategy from an excellent post from <a class="reference external" href="https://geoffboeing.com/2016/10/r-tree-spatial-index-python/">G. Boeing</a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="spatial-join.html" class="btn btn-neutral float-right" title="Spatial join" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="point-in-polygon.html" class="btn btn-neutral float-left" title="Point in Polygon &amp; Intersect" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Henrikki Tenkanen and Vuokko Heikinheimo, Digital Geography Lab, University of Helsinki
+      <span class="lastupdated">
+        Last updated on Nov 11, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+    <p> <br/> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /> </a></p>
+     
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: master
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../../../2018/index.html">2018</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../../../develop/notebooks/L3/spatial_index.html">develop</a></dd>
+            <dd><a href="../../../drafts/index.html">drafts</a></dd>
+            <dd><a href="spatial_index.html">master</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

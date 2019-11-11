@@ -1,6 +1,9 @@
 Exercise 2
 ==========
 
+.. image:: https://img.shields.io/badge/launch-CSC%20notebook-blue.svg
+   :target: https://notebooks.csc.fi/#/blueprint/8d7886c2f0ac402aa99235f8d289a52b
+
 .. admonition:: Start your assignment
 
     You can start working on your copy of Exercise 2 by `accepting the GitHub Classroom assignment <https://classroom.github.com/a/QQyBjWM2>`__.
