@@ -1,0 +1,1114 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-88382509-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Nearest neighbor analysis with large datasets &mdash; AutoGIS site documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'site',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link href="../../_static/geo-python.css" rel="stylesheet" type="text/css">
+     
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> AutoGIS
+          
+
+          
+            
+            <img src="../../_static/logo_hy_geo_135.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2019
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Course information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/course-info.html">General info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/course-environment-components.html">Course environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/grading.html">Grading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/learning-goals.html">Learning goals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/Installing_Anacondas_GIS.html">Installing Python + GIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/License-terms.html">License and terms of usage</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 1</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L1/Intro-Python-GIS.html">Motivation for the course</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L1/overview.html">Lesson overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1/geometric-objects.html">Shapely and geometric objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L1/exercise-1.html">Exercise 1</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 2</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L2/overview.html">Lesson 2 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/data_io.html">Vector Data I/O in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/geopandas-basics.html">Introduction to Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/projections.html">Map projections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/calculating-distances.html">Calculating distances</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/geopandas-geometries.html">Creating new layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L2/exercise-2.html">Exercise 2</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 3</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L3/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L3/geocoding.html">Geocoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geocoding_in_geopandas.html">Geocoding in Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="point-in-polygon.html">Point in Polygon &amp; Intersect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spatial_index.html">Spatial index - How to boost spatial queries?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spatial-join.html">Spatial join</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nearest-neighbour.html">Nearest Neighbour Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L3/exercise-3.html">Exercise 3</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AutoGIS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Nearest neighbor analysis with large datasets</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/Automating-GIS-processes/site/blob/develop/source/notebooks/L3/nearest-neighbor-faster.ipynb" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+
+
+    
+    
+
+
+
+    <p class="scv-banner scv-sphinx_rtd_theme"><b>Warning:</b> This document is for the development version of AutoGIS.</p>
+
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 5ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    background: #f5f5f5;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="admonition note">
+This page was generated from <a class="reference external" href="https://github.com/Automating-GIS-processes/site/blob/master/source/notebooks/L3/nearest-neighbor-faster.ipynb">source/notebooks/L3/nearest-neighbor-faster.ipynb</a>.
+<span class="raw-html"><br/><a href="https://mybinder.org/v2/gh/Automating-GIS-processes/site/master?urlpath=lab/tree/source/notebooks/L3/nearest-neighbor-faster.ipynb"><img alt="Binder badge" src="https://img.shields.io/badge/launch-full%20binder-red.svg" style="vertical-align:text-bottom"></a></span>
+<span class="raw-html"><a href="https://mybinder.org/v2/gh/Automating-GIS-processes/notebooks/master?urlpath=lab/tree/notebooks/L3/nearest-neighbor-faster.ipynb"><img alt="Binder badge" src="https://img.shields.io/badge/launch-student%20binder-red.svg" style="vertical-align:text-bottom"></a></span>
+<span class="raw-html"><a href="https://notebooks.csc.fi/#/blueprint/8d7886c2f0ac402aa99235f8d289a52b"><img alt="CSC badge" src="https://img.shields.io/badge/launch-CSC%20notebook-blue.svg" style="vertical-align:text-bottom"></a></span></div>
+<div class="section" id="Nearest-neighbor-analysis-with-large-datasets">
+<h1>Nearest neighbor analysis with large datasets<a class="headerlink" href="#Nearest-neighbor-analysis-with-large-datasets" title="Permalink to this headline">¶</a></h1>
+<p>While Shapely’s <code class="docutils literal notranslate"><span class="pre">nearest_points</span></code> -function provides a nice and easy way of conducting the nearest neighbor analysis, it can be quite slow. Using it also requires taking the <code class="docutils literal notranslate"><span class="pre">unary</span> <span class="pre">union</span></code> of the point dataset where all the Points are merged into a single layer. This can be a really memory hungry and slow operation, that can cause problems with large point datasets.</p>
+<p>Luckily, there is a much faster and memory efficient alternatives for conducting nearest neighbor analysis, based on a function called <a class="reference external" href="https://en.wikipedia.org/wiki/Ball_tree">BallTree</a> from a <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.BallTree.html">scikit-learn</a> library. The Balltree algorithm has some nice features, such as the ability to calculate the distance between neighbors with various different distance metrics. Most importantly the function allows to
+calculate <code class="docutils literal notranslate"><span class="pre">euclidian</span></code> distance between neighbors (good if your data is in metric crs), as well as <code class="docutils literal notranslate"><span class="pre">haversine</span></code> distance which allows to determine <a class="reference external" href="https://en.wikipedia.org/wiki/Great-circle_distance">Great Circle distances</a> between locations (good if your data is in lat/lon format). <em>Note: There is also an algorithm called</em><a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KDTree.html#sklearn.neighbors.KDTree">KDTree</a><em>in scikit-learn, that is also highly efficient
+but less flexible in terms of supported distance metrics.</em></p>
+<div class="section" id="Motivation">
+<h2>Motivation<a class="headerlink" href="#Motivation" title="Permalink to this headline">¶</a></h2>
+<p>In this tutorial, we go through a very practical example that relates to our daily commute: Where is the closest public transport stop from my place of living? Hence, our aim is to search for each building in Helsinki Region (around 159 000 buildings) the closest public transport stop (~ 8400 stops). The building points have been fetched from OpenStreetMap using a library called <a class="reference external" href="https://github.com/gboeing/osmnx">OSMnx</a> (we will learn more about this library later), and the public transport
+stops have been fetched from open <a class="reference external" href="https://transitfeeds.com/p/helsinki-regional-transport/735">GTFS dataset for Helsinki Region</a> that contains information about public transport stops, schedules etc.</p>
+</div>
+<div class="section" id="Efficient-nearest-neighbor-search-with-Geopandas-and-scikit-learn">
+<h2>Efficient nearest neighbor search with Geopandas and scikit-learn<a class="headerlink" href="#Efficient-nearest-neighbor-search-with-Geopandas-and-scikit-learn" title="Permalink to this headline">¶</a></h2>
+<p>The following examples show how to conduct nearest neighbor analysis efficiently with large datasets. We will first define the functions and see how to use them, and then we go through the code to understand what happened.</p>
+<ul class="simple">
+<li>Let’s first read the datasets into Geopandas. In case of reading the building data, we will here learn a trick how to read the data directly from a ZipFile. It is very practical to know how to do this, as compressing large datasets is a very common procedure.</li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span class="kn">from</span> <span class="nn">zipfile</span> <span class="kn">import</span> <span class="n">ZipFile</span>
+<span class="kn">import</span> <span class="nn">io</span>
+
+<span class="k">def</span> <span class="nf">read_gdf_from_zip</span><span class="p">(</span><span class="n">zip_fp</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Reads a spatial dataset from ZipFile into GeoPandas. Assumes that there is only a single file (such as GeoPackage)</span>
+<span class="sd">    inside the ZipFile.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="n">ZipFile</span><span class="p">(</span><span class="n">zip_fp</span><span class="p">)</span> <span class="k">as</span> <span class="n">z</span><span class="p">:</span>
+        <span class="c1"># Lists all files inside the ZipFile, here assumes that there is only a single file inside</span>
+        <span class="n">layer</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">namelist</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">z</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">layer</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">data</span>
+
+<span class="c1"># Filepaths</span>
+<span class="n">stops</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s1">&#39;data/pt_stops_helsinki.gpkg&#39;</span><span class="p">)</span>
+<span class="n">buildings</span> <span class="o">=</span> <span class="n">read_gdf_from_zip</span><span class="p">(</span><span class="s1">&#39;data/building_points_helsinki.zip&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li>Let’s see how our datasets look like:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">print</span><span class="p">(</span><span class="n">buildings</span><span class="o">.</span><span class="n">head</span><span class="p">(),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">--------&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">stops</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+             name                   geometry
+0            None  POINT (24.85584 60.20727)
+1     Uimastadion  POINT (24.93045 60.18882)
+2            None  POINT (24.95113 60.16994)
+3  Hartwall Arena  POINT (24.92918 60.20570)
+4           Talli  POINT (24.92607 60.21346)
+--------
+     stop_name   stop_lat   stop_lon  stop_id                   geometry
+0  Ritarihuone  60.169460  24.956670  1010102  POINT (24.95667 60.16946)
+1   Kirkkokatu  60.171270  24.956570  1010103  POINT (24.95657 60.17127)
+2   Kirkkokatu  60.170293  24.956721  1010104  POINT (24.95672 60.17029)
+3    Vironkatu  60.172580  24.956554  1010105  POINT (24.95655 60.17258)
+4    Vironkatu  60.172990  24.956380  1010106  POINT (24.95638 60.17299)
+</pre></div></div>
+</div>
+<p>Okay, so both of our datasets consisting points, and based on the coordinates, they seem to be in WGS84 projection.</p>
+<ul class="simple">
+<li>Let’s also make maps out of them to get a better understanding of the data</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+
+<span class="c1"># Plot buildings</span>
+<span class="n">buildings</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">markersize</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Buildings&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot stops</span>
+<span class="n">stops</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">markersize</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Stops&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L3_nearest-neighbor-faster_6_0.png" src="../../_images/notebooks_L3_nearest-neighbor-faster_6_0.png" />
+</div>
+</div>
+<p>As we can see, we have a very densely distributed Point dataset that shows the location of the buildings (their centroid) in Helsinki Region. On the right, we have public transport stops that seem to cover a bit broader geographical extent with a few train stops reaching further North. Most importantly, we can see from the coordinates and the map that both of the layers share the same coordinate reference system, and they are approximately from the same geographical region. Hence, we are ready
+to find closest public transport stop (on the right) for each building on the left map.</p>
+<ul class="simple">
+<li>Let’s first prepare a couple of functions that does the work</li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">BallTree</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">get_nearest</span><span class="p">(</span><span class="n">src_points</span><span class="p">,</span> <span class="n">candidates</span><span class="p">,</span> <span class="n">k_neighbors</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Find nearest neighbors for all source points from a set of candidate points&quot;&quot;&quot;</span>
+
+    <span class="c1"># Create tree from the candidate points</span>
+    <span class="n">tree</span> <span class="o">=</span> <span class="n">BallTree</span><span class="p">(</span><span class="n">candidates</span><span class="p">,</span> <span class="n">leaf_size</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;haversine&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Find closest points and distances</span>
+    <span class="n">distances</span><span class="p">,</span> <span class="n">indices</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">src_points</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">k_neighbors</span><span class="p">)</span>
+
+    <span class="c1"># Transpose to get distances and indices into arrays</span>
+    <span class="n">distances</span> <span class="o">=</span> <span class="n">distances</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+    <span class="n">indices</span> <span class="o">=</span> <span class="n">indices</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+
+    <span class="c1"># Get closest indices and distances (i.e. array at index 0)</span>
+    <span class="c1"># note: for the second closest points, you would take index 1, etc.</span>
+    <span class="n">closest</span> <span class="o">=</span> <span class="n">indices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">closest_dist</span> <span class="o">=</span> <span class="n">distances</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># Return indices and distances</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">closest</span><span class="p">,</span> <span class="n">closest_dist</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">nearest_neighbor</span><span class="p">(</span><span class="n">left_gdf</span><span class="p">,</span> <span class="n">right_gdf</span><span class="p">,</span> <span class="n">return_dist</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    For each point in left_gdf, find closest point in right GeoDataFrame and return them.</span>
+
+<span class="sd">    NOTICE: Assumes that the input Points are in WGS84 projection (lat/lon).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">left_geom_col</span> <span class="o">=</span> <span class="n">left_gdf</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">name</span>
+    <span class="n">right_geom_col</span> <span class="o">=</span> <span class="n">right_gdf</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">name</span>
+
+    <span class="c1"># Ensure that index in right gdf is formed of sequential numbers</span>
+    <span class="n">right</span> <span class="o">=</span> <span class="n">right_gdf</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="c1"># Parse coordinates from points and insert them into a numpy array as RADIANS</span>
+    <span class="n">left_radians</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">left_gdf</span><span class="p">[</span><span class="n">left_geom_col</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">geom</span><span class="p">:</span> <span class="p">(</span><span class="n">geom</span><span class="o">.</span><span class="n">x</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">180</span><span class="p">,</span> <span class="n">geom</span><span class="o">.</span><span class="n">y</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">180</span><span class="p">))</span><span class="o">.</span><span class="n">to_list</span><span class="p">())</span>
+    <span class="n">right_radians</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">right</span><span class="p">[</span><span class="n">right_geom_col</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">geom</span><span class="p">:</span> <span class="p">(</span><span class="n">geom</span><span class="o">.</span><span class="n">x</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">180</span><span class="p">,</span> <span class="n">geom</span><span class="o">.</span><span class="n">y</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">180</span><span class="p">))</span><span class="o">.</span><span class="n">to_list</span><span class="p">())</span>
+
+    <span class="c1"># Find the nearest points</span>
+    <span class="c1"># -----------------------</span>
+    <span class="c1"># closest ==&gt; index in right_gdf that corresponds to the closest point</span>
+    <span class="c1"># dist ==&gt; distance between the nearest neighbors (in meters)</span>
+
+    <span class="n">closest</span><span class="p">,</span> <span class="n">dist</span> <span class="o">=</span> <span class="n">get_nearest</span><span class="p">(</span><span class="n">src_points</span><span class="o">=</span><span class="n">left_radians</span><span class="p">,</span> <span class="n">candidates</span><span class="o">=</span><span class="n">right_radians</span><span class="p">)</span>
+
+    <span class="c1"># Return points from right GeoDataFrame that are closest to points in left GeoDataFrame</span>
+    <span class="n">closest_points</span> <span class="o">=</span> <span class="n">right</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">closest</span><span class="p">]</span>
+
+    <span class="c1"># Ensure that the index corresponds the one in left_gdf</span>
+    <span class="n">closest_points</span> <span class="o">=</span> <span class="n">closest_points</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="c1"># Add distance if requested</span>
+    <span class="k">if</span> <span class="n">return_dist</span><span class="p">:</span>
+        <span class="c1"># Convert to meters from radians</span>
+        <span class="n">earth_radius</span> <span class="o">=</span> <span class="mi">6371000</span>  <span class="c1"># meters</span>
+        <span class="n">closest_points</span><span class="p">[</span><span class="s1">&#39;distance&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dist</span> <span class="o">*</span> <span class="n">earth_radius</span>
+
+    <span class="k">return</span> <span class="n">closest_points</span>
+</pre></div>
+</div>
+</div>
+<p>Okay, now we have our functions defined. So let’s use them and find the nearest neighbors!</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Find closest public transport stop for each building and get also the distance based on haversine distance</span>
+<span class="c1"># Note: haversine distance which is implemented here is a bit slower than using e.g. &#39;euclidean&#39; metric</span>
+<span class="c1"># but useful as we get the distance between points in meters</span>
+<span class="n">closest_stops</span> <span class="o">=</span> <span class="n">nearest_neighbor</span><span class="p">(</span><span class="n">buildings</span><span class="p">,</span> <span class="n">stops</span><span class="p">,</span> <span class="n">return_dist</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># And the result looks like ..</span>
+<span class="n">closest_stops</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>stop_name</th>
+      <th>stop_lat</th>
+      <th>stop_lon</th>
+      <th>stop_id</th>
+      <th>geometry</th>
+      <th>distance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Muusantori</td>
+      <td>60.207490</td>
+      <td>24.857450</td>
+      <td>1304138</td>
+      <td>POINT (24.85745 60.20749)</td>
+      <td>180.521584</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Eläintarha</td>
+      <td>60.192490</td>
+      <td>24.930840</td>
+      <td>1171120</td>
+      <td>POINT (24.93084 60.19249)</td>
+      <td>372.665221</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Senaatintori</td>
+      <td>60.169010</td>
+      <td>24.950460</td>
+      <td>1020450</td>
+      <td>POINT (24.95046 60.16901)</td>
+      <td>119.425777</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Veturitie</td>
+      <td>60.206610</td>
+      <td>24.929680</td>
+      <td>1174112</td>
+      <td>POINT (24.92968 60.20661)</td>
+      <td>106.762619</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Autokuljetuskeskus 1</td>
+      <td>60.218810</td>
+      <td>24.923110</td>
+      <td>1286161</td>
+      <td>POINT (24.92311 60.21881)</td>
+      <td>631.794206</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>158726</th>
+      <td>Bredantie</td>
+      <td>60.212770</td>
+      <td>24.723210</td>
+      <td>3170222</td>
+      <td>POINT (24.72321 60.21277)</td>
+      <td>200.454057</td>
+    </tr>
+    <tr>
+      <th>158727</th>
+      <td>Kasavuori</td>
+      <td>60.211112</td>
+      <td>24.699637</td>
+      <td>3170256</td>
+      <td>POINT (24.69964 60.21111)</td>
+      <td>262.973726</td>
+    </tr>
+    <tr>
+      <th>158728</th>
+      <td>Kandidaatintie</td>
+      <td>60.218180</td>
+      <td>24.736987</td>
+      <td>3170245</td>
+      <td>POINT (24.73699 60.21818)</td>
+      <td>175.043184</td>
+    </tr>
+    <tr>
+      <th>158729</th>
+      <td>Uimahalli</td>
+      <td>60.215660</td>
+      <td>24.712090</td>
+      <td>3170213</td>
+      <td>POINT (24.71209 60.21566)</td>
+      <td>139.212653</td>
+    </tr>
+    <tr>
+      <th>158730</th>
+      <td>Postitori</td>
+      <td>60.212670</td>
+      <td>24.728250</td>
+      <td>3170257</td>
+      <td>POINT (24.72825 60.21267)</td>
+      <td>62.923989</td>
+    </tr>
+  </tbody>
+</table>
+<p>158731 rows × 6 columns</p>
+</div></div>
+</div>
+<p>Great, that didn’t take too long! Especially considering that we had quite a few points in our datasets (8400*159000=1.33 billion connections). As a result, we have a new GeoDataFrame that reminds a lot the original <code class="docutils literal notranslate"><span class="pre">stops</span></code> dataset. However, as we can see there are much more rows than in the original dataset, and in fact, each row in this dataset corresponds to a single building in the <code class="docutils literal notranslate"><span class="pre">buildings</span></code> dataset. Hence, we should have exactly the same number of closest_stops as there are buildings.
+Let’s confirm this:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Now we should have exactly the same number of closest_stops as we have buildings</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">closest_stops</span><span class="p">),</span> <span class="s1">&#39;==&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">buildings</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+158731 == 158731
+</pre></div></div>
+</div>
+<p>Indeed, that seems to be the case. Hence, it is easy to combine these two datasets together. Before continuing our analysis, let’s take a bit deeper look, what we actually did with the functions above.</p>
+<div class="section" id="What-did-we-just-do?-Explanation.">
+<h3>What did we just do? Explanation.<a class="headerlink" href="#What-did-we-just-do?-Explanation." title="Permalink to this headline">¶</a></h3>
+<p>To get a bit more understanding of what just happened, let’s go through the essential parts of the two functions we defined earlier, i.e.&nbsp;<code class="docutils literal notranslate"><span class="pre">nearest_neighbor()</span></code> and <code class="docutils literal notranslate"><span class="pre">get_closest()</span></code>.</p>
+<p>The purpose of <code class="docutils literal notranslate"><span class="pre">nearest_neighbor()</span></code> function is to handle and transform the data from GeoDataFrame into <code class="docutils literal notranslate"><span class="pre">numpy</span> <span class="pre">arrays</span></code> (=super-fast data structure) in a format how <code class="docutils literal notranslate"><span class="pre">BallTree</span></code> function wants them. This includes converting the lat/lon coordinates into radians (and back), so that we get the distances between the neighboring points in a correct format: scikit-learn’s <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.DistanceMetric.html">haversine distance metric</a> wants
+inputs as radians and also outputs the data as radians. To convert a lat/lon coordinate to radian, we use formula: <code class="docutils literal notranslate"><span class="pre">Radian</span> <span class="pre">=</span> <span class="pre">Degree</span> <span class="pre">*</span> <span class="pre">PI</span> <span class="pre">/</span> <span class="pre">180</span></code>. By doing this, we are able to get the output distance information in meters (even if our coordinates are in decimal degrees).</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">get_closest()</span></code> function does the actual nearest neighbor search using <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.BallTree.html">BallTree</a> function. We initialize the <code class="docutils literal notranslate"><span class="pre">BallTree</span></code> object with the coordinate information from the <strong>right_gdf</strong> (i.e.&nbsp;the point dataset that contains all the nearest neighbor candidates), and we specify the distance metric to be <code class="docutils literal notranslate"><span class="pre">haversine</span></code> so that we get the Great Circle Distances. The <code class="docutils literal notranslate"><span class="pre">leaf_size</span></code> parameter adjusts the tradeoff
+between the cost of BallTree node traversal and the cost of a brute-force distance estimate. Changing leaf_size will not affect the results of a query, but can significantly impact the speed of a query and the memory required to store the constructed tree. We determine the leaf_size as 15 which has been found to be a good compromise when <a class="reference external" href="https://jakevdp.github.io/blog/2013/04/29/benchmarking-nearest-neighbor-searches-in-python/">benchmarked</a>. After we have built (initialized) the ball-tree,
+we run the nearest neighbor query with <code class="docutils literal notranslate"><span class="pre">tree.query(src_points,</span> <span class="pre">k=k_neighbors)</span></code>, where the src_points are the building-coordinates (as radians) and the <code class="docutils literal notranslate"><span class="pre">k</span></code> -parameter is the number of neighbors we want to calculate (1 in our case as we are only interested in the closest neighbor). Finally, we just re-arrange the data back into a format in which the closest point indices and distances are in separate numpy arrays.</p>
+<p><strong>Note:</strong> The functions here assume that your input points are in WGS84 projection. If you pass the points in some other projection, it is highly likely that the distances between nearest neighbors are incorrect. Determining which is the nearest neighbor should not be affected, though.</p>
+</div>
+<div class="section" id="Combining-the-neighboring-datasets">
+<h3>Combining the neighboring datasets<a class="headerlink" href="#Combining-the-neighboring-datasets" title="Permalink to this headline">¶</a></h3>
+<p>Okay, now as we have found closest stop for each building in the region, we can easily merge the information about closest stops back to the building layer. The order of the <code class="docutils literal notranslate"><span class="pre">closest_stops</span></code> matches exactly the order in <code class="docutils literal notranslate"><span class="pre">buildings</span></code>, so we can easily merge the datasets based on index.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Rename the geometry of closest stops gdf so that we can easily identify it</span>
+<span class="n">closest_stops</span> <span class="o">=</span> <span class="n">closest_stops</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;geometry&#39;</span><span class="p">:</span> <span class="s1">&#39;closest_stop_geom&#39;</span><span class="p">})</span>
+
+<span class="c1"># Merge the datasets by index (for this, it is good to use &#39;.join()&#39; -function)</span>
+<span class="n">buildings</span> <span class="o">=</span> <span class="n">buildings</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">closest_stops</span><span class="p">)</span>
+
+<span class="c1"># Let&#39;s see what we have</span>
+<span class="n">buildings</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>geometry</th>
+      <th>stop_name</th>
+      <th>stop_lat</th>
+      <th>stop_lon</th>
+      <th>stop_id</th>
+      <th>closest_stop_geom</th>
+      <th>distance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>None</td>
+      <td>POINT (24.85584 60.20727)</td>
+      <td>Muusantori</td>
+      <td>60.20749</td>
+      <td>24.85745</td>
+      <td>1304138</td>
+      <td>POINT (24.85745 60.20749)</td>
+      <td>180.521584</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Uimastadion</td>
+      <td>POINT (24.93045 60.18882)</td>
+      <td>Eläintarha</td>
+      <td>60.19249</td>
+      <td>24.93084</td>
+      <td>1171120</td>
+      <td>POINT (24.93084 60.19249)</td>
+      <td>372.665221</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>None</td>
+      <td>POINT (24.95113 60.16994)</td>
+      <td>Senaatintori</td>
+      <td>60.16901</td>
+      <td>24.95046</td>
+      <td>1020450</td>
+      <td>POINT (24.95046 60.16901)</td>
+      <td>119.425777</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Hartwall Arena</td>
+      <td>POINT (24.92918 60.20570)</td>
+      <td>Veturitie</td>
+      <td>60.20661</td>
+      <td>24.92968</td>
+      <td>1174112</td>
+      <td>POINT (24.92968 60.20661)</td>
+      <td>106.762619</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Talli</td>
+      <td>POINT (24.92607 60.21346)</td>
+      <td>Autokuljetuskeskus 1</td>
+      <td>60.21881</td>
+      <td>24.92311</td>
+      <td>1286161</td>
+      <td>POINT (24.92311 60.21881)</td>
+      <td>631.794206</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>Excellent! Now we have useful information for each building about the closest stop including the <code class="docutils literal notranslate"><span class="pre">distance</span></code> (in meters) and also e.g.&nbsp;the name of the stop in <code class="docutils literal notranslate"><span class="pre">stop_name</span></code> column.</p>
+<ul class="simple">
+<li>Now it is easy to do some descriptive analysis based on this dataset, that gives information about levels of access to public transport in the region:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">buildings</span><span class="p">[</span><span class="s1">&#39;distance&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>count    158731.000000
+mean        299.288617
+std         372.787458
+min           1.358302
+25%         133.853322
+50%         218.742047
+75%         341.648944
+max        7153.941499
+Name: distance, dtype: float64
+</pre></div>
+</div>
+</div>
+<p>Okay, as we can see the average distance to public transport in the region is around 300 meters. More than 75 % of the buildings seem to be within within 5 minute walking time (~370 meters with walking speed of 4.5 kmph) which indicates generally a good situation in terms of accessibility levels in the region overall. There seem to be some really remote buildings in the data as well, as the longest distance to closest public transport stop is more than 7 kilometers.</p>
+<ul class="simple">
+<li>Let’s make a map out of the distance information to see if there are some spatial patterns in the data in terms of accessibility levels:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">buildings</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;distance&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span> <span class="n">scheme</span><span class="o">=</span><span class="s1">&#39;quantiles&#39;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+               <span class="n">legend</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x21a67f91488&gt;
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L3_nearest-neighbor-faster_21_1.png" src="../../_images/notebooks_L3_nearest-neighbor-faster_21_1.png" />
+</div>
+</div>
+<p>Okay, as we can see, there are some clear spatial patterns in the levels of access to public transport. The buildings with the shortest distances (i.e.&nbsp;best accessibility) are located in the densely populated areas, whereas the buildings locating in the periferial areas (such as islands on the South, and nature areas in the North-West) tend to have longer distance to public transport.</p>
+</div>
+<div class="section" id="Are-the-results-correct?-Validation">
+<h3>Are the results correct? Validation<a class="headerlink" href="#Are-the-results-correct?-Validation" title="Permalink to this headline">¶</a></h3>
+<p>As a final step, it’s good to ensure that our functions are working as they should. This can be done easily by examining the data visually.</p>
+<ul class="simple">
+<li>Let’s first create LineStrings between the building and closest stop points:</li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">LineString</span>
+
+<span class="c1"># Create a link (LineString) between building and stop points</span>
+<span class="n">buildings</span><span class="p">[</span><span class="s1">&#39;link&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">buildings</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">LineString</span><span class="p">([</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;closest_stop_geom&#39;</span><span class="p">]]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Set link as the active geometry</span>
+<span class="n">building_links</span> <span class="o">=</span> <span class="n">buildings</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">building_links</span> <span class="o">=</span> <span class="n">building_links</span><span class="o">.</span><span class="n">set_geometry</span><span class="p">(</span><span class="s1">&#39;link&#39;</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li>Let’s now visualize the building points, stops and the links, and zoom to certain area so that we can investigate the results, and confirm that everything looks correct.</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Plot the connecting links between buildings and stops and color them based on distance</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">building_links</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;distance&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Greens&#39;</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s1">&#39;quantiles&#39;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">buildings</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;yellow&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">stops</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># Zoom closer</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mf">24.99</span><span class="p">,</span> <span class="mf">25.01</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mf">60.26</span><span class="p">,</span> <span class="mf">60.275</span><span class="p">])</span>
+
+<span class="c1"># Set map background color to black, which helps with contrast</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L3_nearest-neighbor-faster_26_0.png" src="../../_images/notebooks_L3_nearest-neighbor-faster_26_0.png" />
+</div>
+</div>
+<p>Voilá, these weird star looking shapes are formed around public transport stops (red) where each link is associated buildings (yellow points) that are closest to the given stop. The color intensity varies according the distance between the stops and buildings. Based on this figure we can conclude that our nearest neighbor search was succesfull and worked as planned.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Henrikki Tenkanen and Vuokko Heikinheimo, Digital Geography Lab, University of Helsinki
+      <span class="lastupdated">
+        Last updated on Nov 11, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+    <p> <br/> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /> </a></p>
+     
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: develop
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../../../2018/index.html">2018</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="nearest-neighbor-faster.html">develop</a></dd>
+            <dd><a href="../../../drafts/index.html">drafts</a></dd>
+            <dd><a href="../../../master/index.html">master</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
