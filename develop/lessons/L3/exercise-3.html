@@ -268,9 +268,12 @@ Note that you should not try to make changes to this copy of the exercise, but r
 <h2>Hints<a class="headerlink" href="#hints" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="coordinate-reference-systems">
 <h3>Coordinate reference systems<a class="headerlink" href="#coordinate-reference-systems" title="Permalink to this headline">¶</a></h3>
-<p>Remember the difference between defining a crs, and reprojecting a layer to a new crs! Before reprojecting, the layer should have a valid crs definition wich you can check like this: <cite>data.crs</cite>.</p>
-<p>-defining a projection is done like this: <cite>data.crs = CRS.from_epsg(4326)</cite>  (this command only updates the metadata about coordinate reference system which is stored in the class variable .crs, and does not modify the actual coordinate values. Do this only if the original crs definition is missing or invalid!)
--re-projecting a layer, eg: <cite>data = data.to_crs(CRS.from_epsg(4326))</cite> (this one will actually re-project the coordinates in the geometry-column AND re-define the .crs definition)</p>
+<p>Remember the difference between defining a crs, and reprojecting a layer to a new crs!
+Before reprojecting, the layer should have a valid crs definition which you can check like this: <code class="docutils literal notranslate"><span class="pre">data.crs</span></code>.</p>
+<ul class="simple">
+<li>defining a projection is done like this: <code class="docutils literal notranslate"><span class="pre">data.crs</span> <span class="pre">=</span> <span class="pre">CRS.from_epsg(4326)</span></code>  (this command only updates the metadata about coordinate reference system which is stored in the class variable .crs, and does not modify the actual coordinate values. Do this only if the original crs definition is missing or invalid!)</li>
+<li>re-projecting a layer, eg: <code class="docutils literal notranslate"><span class="pre">data</span> <span class="pre">=</span> <span class="pre">data.to_crs(CRS.from_epsg(4326))</span></code> (this one will actually re-project the coordinates in the geometry-column AND re-define the .crs definition)</li>
+</ul>
 </div>
 </div>
 </div>
