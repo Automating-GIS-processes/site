@@ -145,6 +145,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/L3/overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/L3/geocoding.html">Geocoding</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Geocoding in Geopandas</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Geocode-addresses-using-Nominatim">Geocode addresses using Nominatim</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#Table-join">Table join</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#Notes-about-Nominatim">Notes about Nominatim</a></li>
 </ul>
@@ -580,9 +581,14 @@ This page was generated from <a class="reference external" href="https://github.
 </table>
 </div></div>
 </div>
-<p>Now we have our data in a Pandas DataFrame and we can geocode our addresses using the <a class="reference external" href="http://geopandas.org/reference/geopandas.tools.geocode.html#geopandas-tools-geocode">geopandas geocoding function</a>.</p>
-<p><strong>Note:</strong> <code class="docutils literal notranslate"><span class="pre">geopandas.tools.geocode</span></code> uses <code class="docutils literal notranslate"><span class="pre">geopy</span></code> package in the background.</p>
-<p>If needed, you can add the <code class="docutils literal notranslate"><span class="pre">timeout</span></code>-parameter which specifies how many seconds we will wait for a response from the service.</p>
+<div class="section" id="Geocode-addresses-using-Nominatim">
+<h2>Geocode addresses using Nominatim<a class="headerlink" href="#Geocode-addresses-using-Nominatim" title="Permalink to this headline">¶</a></h2>
+<p>Now we have our data in a Pandas DataFrame and we can geocode our addresses using the <a class="reference external" href="http://geopandas.org/reference/geopandas.tools.geocode.html#geopandas-tools-geocode">geopandas geocoding function</a>. <code class="docutils literal notranslate"><span class="pre">geopandas.tools.geocode</span></code> uses <code class="docutils literal notranslate"><span class="pre">geopy</span></code> package in the background.</p>
+<ul class="simple">
+<li>Let’s import the geocoding function and geocode the addresses (column <code class="docutils literal notranslate"><span class="pre">addr</span></code>) using Nominatim.</li>
+<li>Remember to provide a custom string (name of your application) in the user_agent parameter.</li>
+<li>If needed, you can add the <code class="docutils literal notranslate"><span class="pre">timeout</span></code>-parameter which specifies how many seconds we will wait for a response from the service.</li>
+</ul>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
@@ -688,6 +694,7 @@ RateLimiter</a> to our input data:</p>
 </pre></div>
 </div>
 <p>All in all, remember that Nominatim is not meant for super heavy use.</p>
+</div>
 </div>
 <div class="section" id="Table-join">
 <h2>Table join<a class="headerlink" href="#Table-join" title="Permalink to this headline">¶</a></h2>

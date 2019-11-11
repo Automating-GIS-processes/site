@@ -478,7 +478,7 @@ different years). - You can download the data from <a class="reference external"
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
-<span class="c1">#from pyproj import CRS</span>
+<span class="kn">from</span> <span class="nn">pyproj</span> <span class="kn">import</span> <span class="n">CRS</span>
 <span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">import</span> <span class="nn">geojson</span>
 
@@ -498,11 +498,12 @@ different years). - You can download the data from <a class="reference external"
 
 <span class="c1"># Create GeoDataFrame from geojson</span>
 <span class="n">pop</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="o">.</span><span class="n">from_features</span><span class="p">(</span><span class="n">geojson</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">))</span>
-<span class="n">pop</span><span class="o">.</span><span class="n">crs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;init&#39;</span><span class="p">:</span> <span class="s1">&#39;epsg:3879&#39;</span><span class="p">}</span>
-<span class="c1">#pop.crs = CRS.from_epsg(3879)</span>
 </pre></div>
 </div>
 </div>
+<ul class="simple">
+<li>Check the result:</li>
+</ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
@@ -535,9 +536,10 @@ different years). - You can download the data from <a class="reference external"
   <thead>
     <tr style="text-align: right;">
       <th></th>
+      <th>geometry</th>
+      <th>index</th>
       <th>asukkaita</th>
       <th>asvaljyys</th>
-      <th>geometry</th>
       <th>ika0_9</th>
       <th>ika10_19</th>
       <th>ika20_29</th>
@@ -547,15 +549,15 @@ different years). - You can download the data from <a class="reference external"
       <th>ika60_69</th>
       <th>ika70_79</th>
       <th>ika_yli80</th>
-      <th>index</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
+      <td>MULTIPOLYGON Z (((25476499.999 6674248.999 0.0...</td>
+      <td>3342</td>
       <td>108</td>
       <td>45</td>
-      <td>(POLYGON Z ((25476499.99891588 6674248.9987864...</td>
       <td>11</td>
       <td>23</td>
       <td>6</td>
@@ -565,13 +567,13 @@ different years). - You can download the data from <a class="reference external"
       <td>8</td>
       <td>6</td>
       <td>4</td>
-      <td>3342</td>
     </tr>
     <tr>
       <th>1</th>
+      <td>MULTIPOLYGON Z (((25476749.997 6674498.998 0.0...</td>
+      <td>3503</td>
       <td>273</td>
       <td>35</td>
-      <td>(POLYGON Z ((25476749.99650801 6674498.9979198...</td>
       <td>35</td>
       <td>24</td>
       <td>52</td>
@@ -581,13 +583,13 @@ different years). - You can download the data from <a class="reference external"
       <td>25</td>
       <td>9</td>
       <td>0</td>
-      <td>3503</td>
     </tr>
     <tr>
       <th>2</th>
+      <td>MULTIPOLYGON Z (((25476999.994 6675749.004 0.0...</td>
+      <td>3660</td>
       <td>239</td>
       <td>34</td>
-      <td>(POLYGON Z ((25476999.99410014 6675749.0035888...</td>
       <td>46</td>
       <td>24</td>
       <td>24</td>
@@ -597,13 +599,13 @@ different years). - You can download the data from <a class="reference external"
       <td>25</td>
       <td>10</td>
       <td>2</td>
-      <td>3660</td>
     </tr>
     <tr>
       <th>3</th>
+      <td>MULTIPOLYGON Z (((25476999.994 6675499.004 0.0...</td>
+      <td>3661</td>
       <td>202</td>
       <td>30</td>
-      <td>(POLYGON Z ((25476999.99410014 6675499.0044554...</td>
       <td>52</td>
       <td>37</td>
       <td>13</td>
@@ -613,13 +615,13 @@ different years). - You can download the data from <a class="reference external"
       <td>4</td>
       <td>3</td>
       <td>3</td>
-      <td>3661</td>
     </tr>
     <tr>
       <th>4</th>
+      <td>MULTIPOLYGON Z (((25476999.994 6675249.005 0.0...</td>
+      <td>3662</td>
       <td>261</td>
       <td>30</td>
-      <td>(POLYGON Z ((25476999.99410014 6675249.0053220...</td>
       <td>64</td>
       <td>32</td>
       <td>36</td>
@@ -629,7 +631,6 @@ different years). - You can download the data from <a class="reference external"
       <td>6</td>
       <td>3</td>
       <td>2</td>
-      <td>3662</td>
     </tr>
   </tbody>
 </table>
@@ -637,7 +638,7 @@ different years). - You can download the data from <a class="reference external"
 </div>
 <p>Okey so we have multiple columns in the dataset but the most important one here is the column <code class="docutils literal notranslate"><span class="pre">asukkaita</span></code> (“population” in Finnish) that tells the amount of inhabitants living under that polygon.</p>
 <ul class="simple">
-<li>Let’s change the name of that columns into <code class="docutils literal notranslate"><span class="pre">pop18</span></code> so that it is more intuitive. As you might remember, we can easily rename (Geo)DataFrame column names using the <code class="docutils literal notranslate"><span class="pre">rename()</span></code> function where we pass a dictionary of new column names like this: <code class="docutils literal notranslate"><span class="pre">columns={'oldname':</span> <span class="pre">'newname'}</span></code>.</li>
+<li>Let’s change the name of that column into <code class="docutils literal notranslate"><span class="pre">pop18</span></code> so that it is more intuitive. As you might remember, we can easily rename (Geo)DataFrame column names using the <code class="docutils literal notranslate"><span class="pre">rename()</span></code> function where we pass a dictionary of new column names like this: <code class="docutils literal notranslate"><span class="pre">columns={'oldname':</span> <span class="pre">'newname'}</span></code>.</li>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
@@ -657,9 +658,9 @@ different years). - You can download the data from <a class="reference external"
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Index([&#39;pop18&#39;, &#39;asvaljyys&#39;, &#39;geometry&#39;, &#39;ika0_9&#39;, &#39;ika10_19&#39;, &#39;ika20_29&#39;,
-       &#39;ika30_39&#39;, &#39;ika40_49&#39;, &#39;ika50_59&#39;, &#39;ika60_69&#39;, &#39;ika70_79&#39;, &#39;ika_yli80&#39;,
-       &#39;index&#39;],
+<span></span>Index([&#39;geometry&#39;, &#39;index&#39;, &#39;pop18&#39;, &#39;asvaljyys&#39;, &#39;ika0_9&#39;, &#39;ika10_19&#39;,
+       &#39;ika20_29&#39;, &#39;ika30_39&#39;, &#39;ika40_49&#39;, &#39;ika50_59&#39;, &#39;ika60_69&#39;, &#39;ika70_79&#39;,
+       &#39;ika_yli80&#39;],
       dtype=&#39;object&#39;)
 </pre></div>
 </div>
@@ -717,27 +718,27 @@ different years). - You can download the data from <a class="reference external"
     <tr>
       <th>0</th>
       <td>108</td>
-      <td>(POLYGON Z ((25476499.99891588 6674248.9987864...</td>
+      <td>MULTIPOLYGON Z (((25476499.999 6674248.999 0.0...</td>
     </tr>
     <tr>
       <th>1</th>
       <td>273</td>
-      <td>(POLYGON Z ((25476749.99650801 6674498.9979198...</td>
+      <td>MULTIPOLYGON Z (((25476749.997 6674498.998 0.0...</td>
     </tr>
     <tr>
       <th>2</th>
       <td>239</td>
-      <td>(POLYGON Z ((25476999.99410014 6675749.0035888...</td>
+      <td>MULTIPOLYGON Z (((25476999.994 6675749.004 0.0...</td>
     </tr>
     <tr>
       <th>3</th>
       <td>202</td>
-      <td>(POLYGON Z ((25476999.99410014 6675499.0044554...</td>
+      <td>MULTIPOLYGON Z (((25476999.994 6675499.004 0.0...</td>
     </tr>
     <tr>
       <th>4</th>
       <td>261</td>
-      <td>(POLYGON Z ((25476999.99410014 6675249.0053220...</td>
+      <td>MULTIPOLYGON Z (((25476999.994 6675249.005 0.0...</td>
     </tr>
   </tbody>
 </table>
@@ -748,7 +749,7 @@ different years). - You can download the data from <a class="reference external"
 <h2>Join the layers<a class="headerlink" href="#Join-the-layers" title="Permalink to this headline">¶</a></h2>
 <p>Now we are ready to perform the spatial join between the two layers that we have. The aim here is to get information about <strong>how many people live in a polygon that contains an individual address-point</strong> . Thus, we want to join attributes from the population layer we just modified into the addresses point layer <code class="docutils literal notranslate"><span class="pre">addresses.shp</span></code> that we created trough gecoding in the previous section.</p>
 <ul class="simple">
-<li>Read the addresses layer into memory</li>
+<li>Read the addresses layer into memory:</li>
 </ul>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
@@ -808,41 +809,44 @@ different years). - You can download the data from <a class="reference external"
       <td>Ruoholahti, 14, Itämerenkatu, Ruoholahti, Läns...</td>
       <td>1000</td>
       <td>Itämerenkatu 14, 00101 Helsinki, Finland</td>
-      <td>POINT (24.9155624 60.1632015)</td>
+      <td>POINT (24.91556 60.16320)</td>
     </tr>
     <tr>
       <th>1</th>
       <td>Kamppi, 1, Kampinkuja, Kamppi, Eteläinen suurp...</td>
       <td>1001</td>
       <td>Kampinkuja 1, 00100 Helsinki, Finland</td>
-      <td>POINT (24.9316914 60.1690222)</td>
+      <td>POINT (24.93169 60.16902)</td>
     </tr>
     <tr>
       <th>2</th>
       <td>Bangkok9, 8, Kaivokatu, Keskusta, Kluuvi, Etel...</td>
       <td>1002</td>
       <td>Kaivokatu 8, 00101 Helsinki, Finland</td>
-      <td>POINT (24.9416849 60.1699637)</td>
+      <td>POINT (24.94168 60.16996)</td>
     </tr>
     <tr>
       <th>3</th>
       <td>Hermannin rantatie, Kyläsaari, Hermanni, Helsi...</td>
       <td>1003</td>
       <td>Hermannin rantatie 1, 00580 Helsinki, Finland</td>
-      <td>POINT (24.9719335 60.1969965)</td>
+      <td>POINT (24.97193 60.19700)</td>
     </tr>
     <tr>
       <th>4</th>
       <td>Hesburger, 9, Tyynenmerenkatu, Jätkäsaari, Län...</td>
       <td>1005</td>
       <td>Tyynenmerenkatu 9, 00220 Helsinki, Finland</td>
-      <td>POINT (24.9216003 60.1566475)</td>
+      <td>POINT (24.92160 60.15665)</td>
     </tr>
   </tbody>
 </table>
 </div></div>
 </div>
 <p>In order to do a spatial join, the layers need to be in the same projection</p>
+<ul class="simple">
+<li>Check the crs of input layers:</li>
+</ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
@@ -861,7 +865,7 @@ different years). - You can download the data from <a class="reference external"
 </pre></div>
 </div>
 </div>
-<div class="nbinput docutils container">
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
@@ -870,17 +874,37 @@ different years). - You can download the data from <a class="reference external"
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<p>If the crs information is missing from the population grid, we can <strong>define the coordinate reference system</strong> as <strong>ETRS GK-25 (EPSG:3879)</strong> because we know what it is based on the <a class="reference external" href="https://hri.fi/data/dataset/vaestotietoruudukko">population grid metadata</a>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
-<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>{&#39;init&#39;: &#39;epsg:3879&#39;}
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Define crs</span>
+<span class="n">pop</span><span class="o">.</span><span class="n">crs</span> <span class="o">=</span> <span class="n">CRS</span><span class="o">.</span><span class="n">from_epsg</span><span class="p">(</span><span class="mi">3879</span><span class="p">)</span><span class="o">.</span><span class="n">to_wkt</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">pop</span><span class="o">.</span><span class="n">crs</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>&#39;PROJCRS[&quot;ETRS89 / GK25FIN&quot;,BASEGEOGCRS[&quot;ETRS89&quot;,DATUM[&quot;European Terrestrial Reference System 1989&quot;,ELLIPSOID[&quot;GRS 1980&quot;,6378137,298.257222101,LENGTHUNIT[&quot;metre&quot;,1]]],PRIMEM[&quot;Greenwich&quot;,0,ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],ID[&quot;EPSG&quot;,4258]],CONVERSION[&quot;Finland Gauss-Kruger zone 25&quot;,METHOD[&quot;Transverse Mercator&quot;,ID[&quot;EPSG&quot;,9807]],PARAMETER[&quot;Latitude of natural origin&quot;,0,ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],ID[&quot;EPSG&quot;,8801]],PARAMETER[&quot;Longitude of natural origin&quot;,25,ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],ID[&quot;EPSG&quot;,8802]],PARAMETER[&quot;Scale factor at natural origin&quot;,1,SCALEUNIT[&quot;unity&quot;,1],ID[&quot;EPSG&quot;,8805]],PARAMETER[&quot;False easting&quot;,25500000,LENGTHUNIT[&quot;metre&quot;,1],ID[&quot;EPSG&quot;,8806]],PARAMETER[&quot;False northing&quot;,0,LENGTHUNIT[&quot;metre&quot;,1],ID[&quot;EPSG&quot;,8807]]],CS[Cartesian,2],AXIS[&quot;northing (N)&quot;,north,ORDER[1],LENGTHUNIT[&quot;metre&quot;,1]],AXIS[&quot;easting (E)&quot;,east,ORDER[2],LENGTHUNIT[&quot;metre&quot;,1]],USAGE[SCOPE[&quot;unknown&quot;],AREA[&quot;Finland - 24.5°E to 25.5°E onshore nominal&quot;],BBOX[59.94,24.5,68.9,25.5]],ID[&quot;EPSG&quot;,3879]]&#39;
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -890,7 +914,7 @@ different years). - You can download the data from <a class="reference external"
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -900,7 +924,7 @@ different years). - You can download the data from <a class="reference external"
 </div>
 <p>Let’s re-project addresses to the projection of the population layer:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -912,7 +936,7 @@ different years). - You can download the data from <a class="reference external"
 <li>Let’s make sure that the coordinate reference system of the layers are identical</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -932,12 +956,12 @@ different years). - You can download the data from <a class="reference external"
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-{&#39;init&#39;: &#39;epsg:3879&#39;}
-{&#39;init&#39;: &#39;epsg:3879&#39;}
+PROJCRS[&#34;ETRS89 / GK25FIN&#34;,BASEGEOGCRS[&#34;ETRS89&#34;,DATUM[&#34;European Terrestrial Reference System 1989&#34;,ELLIPSOID[&#34;GRS 1980&#34;,6378137,298.257222101,LENGTHUNIT[&#34;metre&#34;,1]]],PRIMEM[&#34;Greenwich&#34;,0,ANGLEUNIT[&#34;degree&#34;,0.0174532925199433]],ID[&#34;EPSG&#34;,4258]],CONVERSION[&#34;Finland Gauss-Kruger zone 25&#34;,METHOD[&#34;Transverse Mercator&#34;,ID[&#34;EPSG&#34;,9807]],PARAMETER[&#34;Latitude of natural origin&#34;,0,ANGLEUNIT[&#34;degree&#34;,0.0174532925199433],ID[&#34;EPSG&#34;,8801]],PARAMETER[&#34;Longitude of natural origin&#34;,25,ANGLEUNIT[&#34;degree&#34;,0.0174532925199433],ID[&#34;EPSG&#34;,8802]],PARAMETER[&#34;Scale factor at natural origin&#34;,1,SCALEUNIT[&#34;unity&#34;,1],ID[&#34;EPSG&#34;,8805]],PARAMETER[&#34;False easting&#34;,25500000,LENGTHUNIT[&#34;metre&#34;,1],ID[&#34;EPSG&#34;,8806]],PARAMETER[&#34;False northing&#34;,0,LENGTHUNIT[&#34;metre&#34;,1],ID[&#34;EPSG&#34;,8807]]],CS[Cartesian,2],AXIS[&#34;northing (N)&#34;,north,ORDER[1],LENGTHUNIT[&#34;metre&#34;,1]],AXIS[&#34;easting (E)&#34;,east,ORDER[2],LENGTHUNIT[&#34;metre&#34;,1]],USAGE[SCOPE[&#34;unknown&#34;],AREA[&#34;Finland - 24.5°E to 25.5°E onshore nominal&#34;],BBOX[59.94,24.5,68.9,25.5]],ID[&#34;EPSG&#34;,3879]]
+PROJCRS[&#34;ETRS89 / GK25FIN&#34;,BASEGEOGCRS[&#34;ETRS89&#34;,DATUM[&#34;European Terrestrial Reference System 1989&#34;,ELLIPSOID[&#34;GRS 1980&#34;,6378137,298.257222101,LENGTHUNIT[&#34;metre&#34;,1]]],PRIMEM[&#34;Greenwich&#34;,0,ANGLEUNIT[&#34;degree&#34;,0.0174532925199433]],ID[&#34;EPSG&#34;,4258]],CONVERSION[&#34;Finland Gauss-Kruger zone 25&#34;,METHOD[&#34;Transverse Mercator&#34;,ID[&#34;EPSG&#34;,9807]],PARAMETER[&#34;Latitude of natural origin&#34;,0,ANGLEUNIT[&#34;degree&#34;,0.0174532925199433],ID[&#34;EPSG&#34;,8801]],PARAMETER[&#34;Longitude of natural origin&#34;,25,ANGLEUNIT[&#34;degree&#34;,0.0174532925199433],ID[&#34;EPSG&#34;,8802]],PARAMETER[&#34;Scale factor at natural origin&#34;,1,SCALEUNIT[&#34;unity&#34;,1],ID[&#34;EPSG&#34;,8805]],PARAMETER[&#34;False easting&#34;,25500000,LENGTHUNIT[&#34;metre&#34;,1],ID[&#34;EPSG&#34;,8806]],PARAMETER[&#34;False northing&#34;,0,LENGTHUNIT[&#34;metre&#34;,1],ID[&#34;EPSG&#34;,8807]]],CS[Cartesian,2],AXIS[&#34;northing (N)&#34;,north,ORDER[1],LENGTHUNIT[&#34;metre&#34;,1]],AXIS[&#34;easting (E)&#34;,east,ORDER[2],LENGTHUNIT[&#34;metre&#34;,1]],USAGE[SCOPE[&#34;unknown&#34;],AREA[&#34;Finland - 24.5°E to 25.5°E onshore nominal&#34;],BBOX[59.94,24.5,68.9,25.5]],ID[&#34;EPSG&#34;,3879]]
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -950,7 +974,7 @@ different years). - You can download the data from <a class="reference external"
 <li>Let’s now join the attributes from <code class="docutils literal notranslate"><span class="pre">pop</span></code> GeoDataFrame into <code class="docutils literal notranslate"><span class="pre">addresses</span></code> GeoDataFrame by using <code class="docutils literal notranslate"><span class="pre">gpd.sjoin()</span></code> -function:</li>
 </ul>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -960,7 +984,7 @@ different years). - You can download the data from <a class="reference external"
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -969,7 +993,7 @@ different years). - You can download the data from <a class="reference external"
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -1005,7 +1029,7 @@ different years). - You can download the data from <a class="reference external"
       <td>Ruoholahti, 14, Itämerenkatu, Ruoholahti, Läns...</td>
       <td>1000</td>
       <td>Itämerenkatu 14, 00101 Helsinki, Finland</td>
-      <td>POINT (25495311.60802662 6672258.694634228)</td>
+      <td>POINT (25495311.608 6672258.695)</td>
       <td>1514</td>
       <td>515</td>
     </tr>
@@ -1014,7 +1038,7 @@ different years). - You can download the data from <a class="reference external"
       <td>Kamppi, 1, Kampinkuja, Kamppi, Eteläinen suurp...</td>
       <td>1001</td>
       <td>Kampinkuja 1, 00100 Helsinki, Finland</td>
-      <td>POINT (25496207.84010911 6672906.172794735)</td>
+      <td>POINT (25496207.840 6672906.173)</td>
       <td>1600</td>
       <td>182</td>
     </tr>
@@ -1023,7 +1047,7 @@ different years). - You can download the data from <a class="reference external"
       <td>Hermannin rantatie, Kyläsaari, Hermanni, Helsi...</td>
       <td>1003</td>
       <td>Hermannin rantatie 1, 00580 Helsinki, Finland</td>
-      <td>POINT (25498443.20946861 6676021.310266595)</td>
+      <td>POINT (25498443.209 6676021.310)</td>
       <td>1904</td>
       <td>275</td>
     </tr>
@@ -1032,7 +1056,7 @@ different years). - You can download the data from <a class="reference external"
       <td>Hesburger, 9, Tyynenmerenkatu, Jätkäsaari, Län...</td>
       <td>1005</td>
       <td>Tyynenmerenkatu 9, 00220 Helsinki, Finland</td>
-      <td>POINT (25495645.99519936 6671528.067807197)</td>
+      <td>POINT (25495645.995 6671528.068)</td>
       <td>1550</td>
       <td>1435</td>
     </tr>
@@ -1041,7 +1065,7 @@ different years). - You can download the data from <a class="reference external"
       <td>Itäväylä, Vartioharju, Vartiokylä, Helsinki, H...</td>
       <td>1007</td>
       <td>Itäväylä 3, 00950 Helsinki, Finland</td>
-      <td>POINT (25506149.98533134 6678773.517751076)</td>
+      <td>POINT (25506149.985 6678773.518)</td>
       <td>3007</td>
       <td>155</td>
     </tr>
@@ -1054,7 +1078,7 @@ different years). - You can download the data from <a class="reference external"
 <li>Let’s still check how many rows of data we have now:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1063,7 +1087,7 @@ different years). - You can download the data from <a class="reference external"
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -1076,7 +1100,7 @@ different years). - You can download the data from <a class="reference external"
 <li>Check how many addresses we had originally:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1085,7 +1109,7 @@ different years). - You can download the data from <a class="reference external"
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -1095,7 +1119,7 @@ different years). - You can download the data from <a class="reference external"
 </div>
 <p>If we plot the layers on top of each other, we can observe that some of the points are located outside the populated grid squares (increase figure size if you can’t see this properly!)</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1114,11 +1138,11 @@ different years). - You can download the data from <a class="reference external"
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x224adfe5ba8&gt;
+<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fa2f6d68d30&gt;
 </pre></div>
 </div>
 </div>
@@ -1126,7 +1150,7 @@ different years). - You can download the data from <a class="reference external"
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/notebooks_L3_spatial-join_28_1.png" src="../../_images/notebooks_L3_spatial-join_28_1.png" />
+<img alt="../../_images/notebooks_L3_spatial-join_32_1.png" src="../../_images/notebooks_L3_spatial-join_32_1.png" />
 </div>
 </div>
 <p>Let’s also visualize the joined output:</p>
@@ -1134,13 +1158,11 @@ different years). - You can download the data from <a class="reference external"
 <li>Plot the points and use the <code class="docutils literal notranslate"><span class="pre">pop18</span></code> column to indicate the color. <code class="docutils literal notranslate"><span class="pre">cmap</span></code> -parameter tells to use a sequential colormap for the values, <code class="docutils literal notranslate"><span class="pre">markersize</span></code> adjusts the size of a point, <code class="docutils literal notranslate"><span class="pre">scheme</span></code> parameter can be used to adjust the classification method based on <a class="reference external" href="http://pysal.readthedocs.io/en/latest/library/esda/mapclassify.html">pysal</a>, and <code class="docutils literal notranslate"><span class="pre">legend</span></code> tells that we want to have a legend:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-
-<span class="c1"># Create a figure with one subplot</span>
+<span></span><span class="c1"># Create a figure with one subplot</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
 
 <span class="c1"># Plot the points with population info</span>
@@ -1158,19 +1180,19 @@ different years). - You can download the data from <a class="reference external"
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/notebooks_L3_spatial-join_31_0.png" src="../../_images/notebooks_L3_spatial-join_31_0.png" />
+<img alt="../../_images/notebooks_L3_spatial-join_35_0.png" src="../../_images/notebooks_L3_spatial-join_35_0.png" />
 </div>
 </div>
 <p>In a similar way, we can plot the original population grid and check the overall population distribution in Helsinki:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Create a figure with one subplot</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
 
-<span class="c1"># Plot the points with population info</span>
+<span class="c1"># Plot the grid with population info</span>
 <span class="n">pop</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="s1">&#39;pop18&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Reds&quot;</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s1">&#39;quantiles&#39;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="bp">True</span><span class="p">);</span>
 
 <span class="c1"># Add title</span>
@@ -1185,14 +1207,14 @@ different years). - You can download the data from <a class="reference external"
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/notebooks_L3_spatial-join_33_0.png" src="../../_images/notebooks_L3_spatial-join_33_0.png" />
+<img alt="../../_images/notebooks_L3_spatial-join_37_0.png" src="../../_images/notebooks_L3_spatial-join_37_0.png" />
 </div>
 </div>
 <ul class="simple">
 <li>Finally, let’s save the result point layer into a file:</li>
 </ul>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>

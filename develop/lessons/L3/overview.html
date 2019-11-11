@@ -256,41 +256,39 @@
 </style>
 <div class="section" id="overview">
 <h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
-<p>During this week we will learn a few really useful and commonly used GIS functionalities using Geopandas, namely:</p>
+<p>In this lesson, we will continue to learn how to manage and analyse spatial data using Shapely, Geopandas and other
+relevant Python packages:</p>
 <ol class="arabic simple">
 <li><a class="reference internal" href="geocoding.html"><span class="doc">Geocoding</span></a> / <a class="reference internal" href="../../notebooks/L3/geocoding_in_geopandas.html"><span class="doc">Geocoding in Geopandas</span></a></li>
 <li><a class="reference internal" href="../../notebooks/L3/point-in-polygon.html"><span class="doc">Conducting Point in Polygon queries</span></a></li>
+<li><a class="reference internal" href="../../notebooks/L3/spatial_index.html"><span class="doc">How to boost spatial queries using spatial index</span></a></li>
 <li><a class="reference internal" href="../../notebooks/L3/spatial-join.html"><span class="doc">Making Spatial joins</span></a></li>
-<li><a class="reference internal" href="../../notebooks/L3/nearest-neighbour.html"><span class="doc">Finding Nearest neighbour of a geometry</span></a></li>
+<li><a class="reference internal" href="../../notebooks/L3/nearest-neighbour.html"><span class="doc">Nearest neighbour analysis</span></a></li>
 </ol>
 <div class="section" id="learning-goals">
 <h2>Learning goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
 <p>After this weeks’ lesson you should be able to:</p>
 <blockquote>
 <div><ul class="simple">
-<li>Do geocoding, i.e. converting addresses into Points</li>
-<li>Conduct Point in Polygon queries</li>
-<li>Read data from KML files</li>
-<li>Make spatial joins and table joins between layers</li>
-<li>Find the nearest neighbour for Point -objects.</li>
+<li>Do geocoding, i.e. transform addresses into coordinates</li>
+<li>Conduct point-in-polygon queries</li>
+<li>Read data from WFS services and KML files</li>
+<li>Make spatial joins</li>
+<li>Conduct nearest neighbour analysis (finding the closest point).</li>
 </ul>
 </div></blockquote>
 </div>
 <div class="section" id="sources">
 <h2>Sources<a class="headerlink" href="#sources" title="Permalink to this headline">¶</a></h2>
-<p>Following materials are partly based on documentation of <a class="reference external" href="http://geopandas.org/geocoding.html">Geopandas</a>, <a class="reference external" href="http://geopy.readthedocs.io/en/1.11.0/#">geopy</a>, <a class="reference external" href="https://developers.google.com/">Google</a>, <a class="reference external" href="http://pandas.pydata.org/">Pandas</a>,
-<a class="reference external" href="http://toblerity.org/shapely/manual.html">Shapely</a>, and <a class="reference external" href="https://www.packtpub.com/application-development/learning-geospatial-analysis-python">Lawhead, J. (2013), Chapters I and V</a>.</p>
+<p>Lesson materials are partly based on documentation of <a class="reference external" href="http://geopandas.org/geocoding.html">Geopandas</a>, <a class="reference external" href="https://geopy.readthedocs.io/en/stable/#">geopy</a>,  <a class="reference external" href="http://pandas.pydata.org/">Pandas</a>,
+<a class="reference external" href="https://shapely.readthedocs.io/en/stable/manual.html">Shapely</a>, and <a class="reference external" href="https://www.packtpub.com/application-development/learning-geospatial-analysis-python">Lawhead, J. (2013), Chapters I and V</a>.</p>
 </div>
 <div class="section" id="lecture-videos">
 <h2>Lecture videos<a class="headerlink" href="#lecture-videos" title="Permalink to this headline">¶</a></h2>
-<div class="admonition-lesson-3-1-geocoding-addresses-point-in-polygon-queries admonition">
-<p class="first admonition-title">Lesson 3.1 - Geocoding addresses; Point in Polygon queries</p>
-<div class="last"><iframe width="560" height="315" src="https://www.youtube.com/embed/Y78osvKYoLo" frameborder="0" allowfullscreen></iframe>
-<p>Vuokko Heikinheimo & Henrikki Tenkanen, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p></div></div>
-<div class="admonition-lesson-3-2-spatial-join-nearest-neighbor-analysis-exercise-3-overview admonition">
-<p class="first admonition-title">Lesson 3.2 - Spatial join; Nearest neighbor analysis; Exercise 3 overview</p>
-<div class="last"><iframe width="560" height="315" src="https://www.youtube.com/embed/7yCmi71RAzQ" frameborder="0" allowfullscreen></iframe>
-<p>Vuokko Heikinheimo & Henrikki Tenkanen, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p></div></div>
+<div class="admonition-lesson-3-geocoding-and-spatial-queries admonition">
+<p class="first admonition-title">Lesson 3 - Geocoding and spatial queries</p>
+<div class="last"><iframe width="560" height="315" src="" frameborder="0" allowfullscreen></iframe>
+<p>Vuokko Heikinheimo, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p></div></div>
 </div>
 </div>
 
@@ -316,7 +314,7 @@
     <p>
         &copy; Copyright 2019, Henrikki Tenkanen and Vuokko Heikinheimo, Digital Geography Lab, University of Helsinki
       <span class="lastupdated">
-        Last updated on Oct 29, 2019.
+        Last updated on Nov 11, 2019.
       </span>
 
     </p>

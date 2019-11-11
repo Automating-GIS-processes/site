@@ -755,9 +755,9 @@
     "editable": true
    },
    "source": [
-    "Now we should be able to read a KML file suing the geopandas [read_file()](http://geopandas.org/reference/geopandas.read_file.html#geopandas.read_file) function.\n",
+    "Now we should be able to read a KML file using the geopandas [read_file()](http://geopandas.org/reference/geopandas.read_file.html#geopandas.read_file) function.\n",
     "\n",
-    "- Let's read the data from a following KML -file:"
+    "- Let's read district polygons from a KML -file that is located in the data-folder:"
    ]
   },
   {
