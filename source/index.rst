@@ -145,6 +145,7 @@ Contents
    lessons/L3/geocoding
    notebooks/L3/geocoding_in_geopandas.ipynb
    notebooks/L3/point-in-polygon.ipynb
+   notebooks/L3/spatial_index.ipynb
    notebooks/L3/spatial-join.ipynb
    notebooks/L3/nearest-neighbour.ipynb
    lessons/L3/exercise-3
