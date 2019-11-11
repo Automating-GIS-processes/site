@@ -1,12 +1,14 @@
-name: gis
+name: autogis
 
 channels:
   - conda-forge
 
 dependencies:
-  - python=3.5
+  - python=3.7
   - geopandas
+  - pyproj=2.4.0
   - geopy
+  - geojson
   - bokeh
   - contextily
   - matplotlib
@@ -14,5 +16,3 @@ dependencies:
   - mplleaflet
   - geoplot
   - osmnx
-  - pip:
-    - git+https://github.com/mullenkamp/PyCRS
