@@ -10,9 +10,7 @@ dependencies:
   - geopy
   - geojson
   - bokeh
-  - contextily
   - matplotlib
   - folium
   - mplleaflet
-  - geoplot
   - osmnx
