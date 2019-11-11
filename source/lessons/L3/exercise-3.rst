@@ -3,15 +3,21 @@ Exercise 3
 
 .. admonition:: Start your assignment
 
-    You can start working on your copy of Exercise 3 by `accepting the GitHub Classroom assignment <https://classroom.github.com/a/LkE-9OHL>`__.
+    You can start working on your copy of Exercise 3 by `accepting the GitHub Classroom assignment <https://classroom.github.com/a/0gJjZ2Zb>`__.
 
-    **Exercise 3 is due by Wednesday 21.11. at the end of the day**.
 
-You can also take a look at the open course copy of `Exercise 3 in the course GitHub repository <https://github.com/AutoGIS-2018/Exercise-3>`__ (does not require logging in).
+**Exercise 3 is due by by 16:00 on Wednesday the 20th of November 2019** (day before the next practical session).
+
+You can also take a look at the open course copy of `Exercise 3 in the course GitHub repository <https://github.com/AutoGIS-2019/Exercise-3>`__ (does not require logging in).
 Note that you should not try to make changes to this copy of the exercise, but rather only to the copy available via GitHub Classroom.
 
 
 Hints
 -----
 
-Add hints for Exercise 3 here if needed.
+Coordinate reference systems
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Remember the difference between defining a crs, and reprojecting a layer to a new crs! Before reprojecting, the layer should have a valid crs definition wich you can check like this: `data.crs`.
+
+-defining a projection is done like this: `data.crs = CRS.from_epsg(4326)`  (this command only updates the metadata about coordinate reference system which is stored in the class variable .crs, and does not modify the actual coordinate values. Do this only if the original crs definition is missing or invalid!)
+-re-projecting a layer, eg: `data = data.to_crs(CRS.from_epsg(4326))` (this one will actually re-project the coordinates in the geometry-column AND re-define the .crs definition)
