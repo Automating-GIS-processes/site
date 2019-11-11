@@ -148,7 +148,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../../notebooks/L3/spatial-join.html">Spatial join</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../notebooks/L3/nearest-neighbour.html">Nearest Neighbour Analysis</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Exercise 3</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#hints">Hints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hints">Hints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#coordinate-reference-systems">Coordinate reference systems</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -254,14 +257,19 @@
 <h1>Exercise 3<a class="headerlink" href="#exercise-3" title="Permalink to this headline">¶</a></h1>
 <div class="admonition-start-your-assignment admonition">
 <p class="first admonition-title">Start your assignment</p>
-<p>You can start working on your copy of Exercise 3 by <a class="reference external" href="https://classroom.github.com/a/LkE-9OHL">accepting the GitHub Classroom assignment</a>.</p>
-<p class="last"><strong>Exercise 3 is due by Wednesday 21.11. at the end of the day</strong>.</p>
+<p class="last">You can start working on your copy of Exercise 3 by <a class="reference external" href="https://classroom.github.com/a/0gJjZ2Zb">accepting the GitHub Classroom assignment</a>.</p>
 </div>
-<p>You can also take a look at the open course copy of <a class="reference external" href="https://github.com/AutoGIS-2018/Exercise-3">Exercise 3 in the course GitHub repository</a> (does not require logging in).
+<p><strong>Exercise 3 is due by by 16:00 on Wednesday the 20th of November 2019</strong> (day before the next practical session).</p>
+<p>You can also take a look at the open course copy of <a class="reference external" href="https://github.com/AutoGIS-2019/Exercise-3">Exercise 3 in the course GitHub repository</a> (does not require logging in).
 Note that you should not try to make changes to this copy of the exercise, but rather only to the copy available via GitHub Classroom.</p>
 <div class="section" id="hints">
 <h2>Hints<a class="headerlink" href="#hints" title="Permalink to this headline">¶</a></h2>
-<p>Add hints for Exercise 3 here if needed.</p>
+<div class="section" id="coordinate-reference-systems">
+<h3>Coordinate reference systems<a class="headerlink" href="#coordinate-reference-systems" title="Permalink to this headline">¶</a></h3>
+<p>Remember the difference between defining a crs, and reprojecting a layer to a new crs! Before reprojecting, the layer should have a valid crs definition wich you can check like this: <cite>data.crs</cite>.</p>
+<p>-defining a projection is done like this: <cite>data.crs = CRS.from_epsg(4326)</cite>  (this command only updates the metadata about coordinate reference system which is stored in the class variable .crs, and does not modify the actual coordinate values. Do this only if the original crs definition is missing or invalid!)
+-re-projecting a layer, eg: <cite>data = data.to_crs(CRS.from_epsg(4326))</cite> (this one will actually re-project the coordinates in the geometry-column AND re-define the .crs definition)</p>
+</div>
 </div>
 </div>
 
@@ -285,7 +293,7 @@ Note that you should not try to make changes to this copy of the exercise, but r
     <p>
         &copy; Copyright 2019, Henrikki Tenkanen and Vuokko Heikinheimo, Digital Geography Lab, University of Helsinki
       <span class="lastupdated">
-        Last updated on Oct 29, 2019.
+        Last updated on Nov 11, 2019.
       </span>
 
     </p>
