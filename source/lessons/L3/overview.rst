@@ -76,6 +76,6 @@ Lesson videos
 
         - Shapely nearest_points 1:00
         - Nearest points in geopandas 6:00
-        - See also extra materials about nearest neighbour analysis on the course webpages: [add link]
+        - See also extra materials about `nearest neighbour analysis on the course webpages <../../notebooks/L3/nearest-neighbor-faster.ipynb>`__
         - Quick overview of exercise 3 17:40
 
