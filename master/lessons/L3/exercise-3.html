@@ -58,7 +58,7 @@
   <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="prev" title="Nearest Neighbour Analysis" href="../../notebooks/L3/nearest-neighbour.html" />
+    <link rel="prev" title="Nearest neighbor analysis with large datasets" href="../../notebooks/L3/nearest-neighbor-faster.html" />
     <link href="../../_static/geo-python.css" rel="stylesheet" type="text/css">
      
 
@@ -148,6 +148,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../notebooks/L3/spatial_index.html">Spatial index - How to boost spatial queries?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../notebooks/L3/spatial-join.html">Spatial join</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../notebooks/L3/nearest-neighbour.html">Nearest Neighbour Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L3/nearest-neighbor-faster.html">Nearest neighbor analysis with large datasets</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Exercise 3</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#hints">Hints</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#coordinate-reference-systems">Coordinate reference systems</a></li>
@@ -271,6 +272,8 @@ Before reprojecting, the layer should have a valid crs definition which you can 
 <li>defining a projection is done like this: <code class="docutils literal notranslate"><span class="pre">data.crs</span> <span class="pre">=</span> <span class="pre">CRS.from_epsg(4326)</span></code>  (this command only updates the metadata about coordinate reference system which is stored in the class variable .crs, and does not modify the actual coordinate values. Do this only if the original crs definition is missing or invalid!)</li>
 <li>re-projecting a layer, eg: <code class="docutils literal notranslate"><span class="pre">data</span> <span class="pre">=</span> <span class="pre">data.to_crs(CRS.from_epsg(4326))</span></code> (this one will actually re-project the coordinates in the geometry-column AND re-define the .crs definition)</li>
 </ul>
+<p>When writing a layer to shalefile, define the crs as in the Well-Known Text format. You can do the conversion like this,
+assuming that the dataframe already has a crs defined: <code class="docutils literal notranslate"><span class="pre">data.crs</span> <span class="pre">=</span> <span class="pre">CRS(data.crs).to_wkt()</span></code>-</p>
 </div>
 </div>
 </div>
@@ -284,7 +287,7 @@ Before reprojecting, the layer should have a valid crs definition which you can 
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
       
-        <a href="../../notebooks/L3/nearest-neighbour.html" class="btn btn-neutral float-left" title="Nearest Neighbour Analysis" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../../notebooks/L3/nearest-neighbor-faster.html" class="btn btn-neutral float-left" title="Nearest neighbor analysis with large datasets" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -295,7 +298,7 @@ Before reprojecting, the layer should have a valid crs definition which you can 
     <p>
         &copy; Copyright 2019, Henrikki Tenkanen and Vuokko Heikinheimo, Digital Geography Lab, University of Helsinki
       <span class="lastupdated">
-        Last updated on Nov 11, 2019.
+        Last updated on Nov 12, 2019.
       </span>
 
     </p>

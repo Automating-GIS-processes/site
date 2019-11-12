@@ -162,6 +162,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../notebooks/L3/spatial_index.html">Spatial index - How to boost spatial queries?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notebooks/L3/spatial-join.html">Spatial join</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notebooks/L3/nearest-neighbour.html">Nearest Neighbour Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/L3/nearest-neighbor-faster.html">Nearest neighbor analysis with large datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lessons/L3/exercise-3.html">Exercise 3</a></li>
 </ul>
 
@@ -285,8 +286,28 @@ and running command <code class="docutils literal notranslate"><span class="pre"
 As you can see below, many of the GIS packages are available from specific <code class="docutils literal notranslate"><span class="pre">channel</span></code> from conda called <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>.</p>
 <p>We recommend that you first install only geopandas, and add the other packages once you need them.
 Installing geopandas will automatically install several fundamental GIS packages (such as Shapely and fiona) on your computer, so you will have a nice setup already using one installation command!</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install Geopandas</span>
-conda install -c conda-forge geopandas
+<p>Run this codes in order to get started with a GIS Python environment (tested to work on Windows 10 in November 2019):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a fresh environment with python 3.7</span>
+conda create -n gis <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.7
+
+<span class="c1"># Activate the environment</span>
+conda activate gis
+
+<span class="c1"># Install packages</span>
+conda install geopandas -c conda-forge
+conda install matplotlib -c conda-forge
+conda install geojson -c conda-forge
+<span class="c1"># ... install other packages</span>
+
+<span class="c1"># Install jupyter lab</span>
+conda install jupyterlab -c conda-forge
+
+<span class="c1"># Start jupyter lab</span>
+jupyter lab
+
+<span class="c1"># Jupyter lab opens up in a browser</span>
+
+<span class="c1"># Shut down jupyter lab using CTRL+C once done working</span>
 </pre></div>
 </div>
 <p>There are also other useful packages that requires separate installation. You don’t necessarily need these during the first weeks of this course.</p>
@@ -460,7 +481,7 @@ that is the one to use! Thus, in our case the first page that Google gives does 
     <p>
         &copy; Copyright 2019, Henrikki Tenkanen and Vuokko Heikinheimo, Digital Geography Lab, University of Helsinki
       <span class="lastupdated">
-        Last updated on Oct 24, 2019.
+        Last updated on Nov 12, 2019.
       </span>
 
     </p>

@@ -148,6 +148,7 @@ Contents
    notebooks/L3/spatial_index.ipynb
    notebooks/L3/spatial-join.ipynb
    notebooks/L3/nearest-neighbour.ipynb
+   notebooks/L3/nearest-neighbor-faster.ipynb
    lessons/L3/exercise-3
 
     .. toctree::
