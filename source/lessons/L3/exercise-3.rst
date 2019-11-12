@@ -26,3 +26,7 @@ Before reprojecting, the layer should have a valid crs definition which you can 
 
 - defining a projection is done like this: ``data.crs = CRS.from_epsg(4326)``  (this command only updates the metadata about coordinate reference system which is stored in the class variable .crs, and does not modify the actual coordinate values. Do this only if the original crs definition is missing or invalid!)
 - re-projecting a layer, eg: ``data = data.to_crs(CRS.from_epsg(4326))`` (this one will actually re-project the coordinates in the geometry-column AND re-define the .crs definition)
+
+
+When writing a layer to shalefile, define the crs as in the Well-Known Text format. You can do the conversion like this,
+assuming that the dataframe already has a crs defined: ``data.crs = CRS(data.crs).to_wkt()``-

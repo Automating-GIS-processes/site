@@ -35,10 +35,31 @@ As you can see below, many of the GIS packages are available from specific ``cha
 We recommend that you first install only geopandas, and add the other packages once you need them.
 Installing geopandas will automatically install several fundamental GIS packages (such as Shapely and fiona) on your computer, so you will have a nice setup already using one installation command!
 
+Run this codes in order to get started with a GIS Python environment (tested to work on Windows 10 in November 2019):
+
 .. code:: bash
 
-    # Install Geopandas
-    conda install -c conda-forge geopandas
+    # Create a fresh environment with python 3.7
+    conda create -n gis python=3.7
+
+    # Activate the environment
+    conda activate gis
+
+    # Install packages
+    conda install geopandas -c conda-forge
+    conda install matplotlib -c conda-forge
+    conda install geojson -c conda-forge
+    # ... install other packages
+
+    # Install jupyter lab
+    conda install jupyterlab -c conda-forge
+
+    # Start jupyter lab
+    jupyter lab
+
+    # Jupyter lab opens up in a browser
+
+    # Shut down jupyter lab using CTRL+C once done working
 
 There are also other useful packages that requires separate installation. You don't necessarily need these during the first weeks of this course.
 
