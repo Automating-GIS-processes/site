@@ -3,9 +3,9 @@ Exercise 4
 
 .. admonition:: Start your assignment
 
-    You can start working on your copy of Exercise 4 by `accepting the GitHub Classroom assignment <https://classroom.github.com/a/v7kgQTuF>`__.
+    You can start working on your copy of Exercise 4 by `accepting the GitHub Classroom assignment <>`__.
 
-You can also take a look at the open course copy of `Exercise 4 in the course GitHub repository <https://github.com/AutoGIS-2018/Exercise-4>`__.
+You can also take a look at the open course copy of `Exercise 4 in the course GitHub repository <https://github.com/AutoGIS-2019/Exercise-4>`__.
 Note that you should not try to make changes to this copy of the exercise, but rather only to the copy available via GitHub Classroom.
 
 
