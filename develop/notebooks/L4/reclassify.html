@@ -475,19 +475,10 @@ This page was generated from <a class="reference external" href="https://github.
 </ul>
 </li>
 </ol>
-<div class="section" id="Download-data">
-<h2>Download data<a class="headerlink" href="#Download-data" title="Permalink to this headline">¶</a></h2>
-<p>For this lesson, you should <a class="reference external" href="https://github.com/AutoGIS/data/raw/master/L4_data.zip">download a data package</a> that includes 3 files:</p>
-<ol class="arabic simple">
-<li>Helsinki_borders.shp</li>
-<li>Travel_times_to_5975375_RailwayStation.shp</li>
-<li>Amazon_river.shp</li>
-</ol>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd /home/jovyan/notebooks/L4
-$ wget https://github.com/AutoGIS/data/raw/master/L4_data.zip
-$ unzip L4_data.zip
-</pre></div>
-</div>
+<div class="section" id="Input-data">
+<h2>Input data<a class="headerlink" href="#Input-data" title="Permalink to this headline">¶</a></h2>
+<p>In this tutorial, we will use the geojson file generated in the previous section: <code class="docutils literal notranslate"><span class="pre">&quot;data/TravelTimes_to_5975375_RailwayStation_Helsinki.geojson&quot;</span></code></p>
+<p>Alternatively, you can re-download <a class="reference external" href="https://github.com/AutoGIS/data/raw/master/L4_data.zip">L4 data</a> and use <code class="docutils literal notranslate"><span class="pre">&quot;data/Travel_times_to_5975375_RailwayStation.shp&quot;</span></code> as input file in here.</p>
 </div>
 <div class="section" id="Classifying-data">
 <h2>Classifying data<a class="headerlink" href="#Classifying-data" title="Permalink to this headline">¶</a></h2>
@@ -547,7 +538,7 @@ $ unzip L4_data.zip
 1  Helsingfors     091  POLYGON ((402367.8898583531 6685750.000039573,...
 </pre></div></div>
 </div>
-<p>As we can see, there exist plenty of different variables (see <a class="reference external" href="http://blogs.helsinki.fi/accessibility/helsinki-region-travel-time-matrix-2015">from here the description</a> for all attributes) but what we are interested in are columns called <code class="docutils literal notranslate"><span class="pre">pt_r_tt</span></code> which is telling the time in minutes that it takes to reach city center from different parts of the city, and <code class="docutils literal notranslate"><span class="pre">walk_d</span></code> that tells the network distance by roads to reach city center from different parts of the city (almost equal to Euclidian
+<p>As we can see, there are plenty of different variables (see <a class="reference external" href="http://blogs.helsinki.fi/accessibility/helsinki-region-travel-time-matrix-2015">from here the description</a> for all attributes) but what we are interested in are columns called <code class="docutils literal notranslate"><span class="pre">pt_r_tt</span></code> which is telling the time in minutes that it takes to reach city center from different parts of the city, and <code class="docutils literal notranslate"><span class="pre">walk_d</span></code> that tells the network distance by roads to reach city center from different parts of the city (almost equal to Euclidian
 distance).</p>
 <p><strong>The NoData values are presented with value -1</strong>.</p>
 <ul class="simple">
@@ -564,7 +555,9 @@ distance).</p>
 </div>
 </div>
 <ul class="simple">
-<li>Let’s plot the data and see how it looks like.</li>
+<li>Let’s plot the data and see how it looks like</li>
+<li><code class="docutils literal notranslate"><span class="pre">cmap</span></code> parameter defines the color map. Read more about <a class="reference external" href="https://matplotlib.org/3.1.0/tutorials/colors/colormaps.html">choosing colormaps in matplotlib</a></li>
+<li><code class="docutils literal notranslate"><span class="pre">scheme</span></code> option scales the colors according to a classification scheme (requires <code class="docutils literal notranslate"><span class="pre">mapclassify</span></code> module to be installed):</li>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
@@ -574,8 +567,8 @@ distance).</p>
 <span></span><span class="o">%</span><span class="k">matplotlib</span> inline
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
-<span class="c1"># Plot using 9 classes and classify the values using &quot;Fisher Jenks&quot; classification</span>
-<span class="n">acc</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;pt_r_tt&quot;</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s2">&quot;Fisher_Jenks&quot;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdYlBu&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="c1"># Plot using 9 classes and classify the values using &quot;Natural Breaks&quot; classification</span>
+<span class="n">acc</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;pt_r_tt&quot;</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s2">&quot;Natural_Breaks&quot;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdYlBu&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
 <span class="c1"># Use tight layout</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
@@ -599,7 +592,7 @@ distance).</p>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Plot walking distance</span>
-<span class="n">acc</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;walk_d&quot;</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s2">&quot;Fisher_Jenks&quot;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdYlBu&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">acc</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;walk_d&quot;</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s2">&quot;Natural_Breaks&quot;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdYlBu&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
 <span class="c1"># Use tight layour</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
@@ -614,18 +607,113 @@ distance).</p>
 </div>
 </div>
 <p>Okay, from here we can see that the walking distances (along road network) reminds more or less Euclidian distances.</p>
-<ul class="simple">
-<li>Let’s apply one of the <code class="docutils literal notranslate"><span class="pre">Pysal</span></code> classifiers into our data and classify the travel times by public transport into 9 classes</li>
-<li>The classifier needs to be initialized first with <code class="docutils literal notranslate"><span class="pre">make()</span></code> function that takes the number of desired classes as input parameter</li>
-</ul>
+</div>
+<div class="section" id="Applying-classifiers-to-data">
+<h3>Applying classifiers to data<a class="headerlink" href="#Applying-classifiers-to-data" title="Permalink to this headline">¶</a></h3>
+<p>As mentioned, the <code class="docutils literal notranslate"><span class="pre">scheme</span></code> option defines the classification scheme using <code class="docutils literal notranslate"><span class="pre">pysal/mapclassify</span></code>. Let’s have a closer look at how these classifiers work.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">mapclassify</span>
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li>Natural Breaks</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">mapclassify</span><span class="o">.</span><span class="n">Natural_Breaks</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">acc</span><span class="p">[</span><span class="s1">&#39;pt_r_tt&#39;</span><span class="p">],</span> <span class="n">k</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>               Natural_Breaks
 
-<span class="c1"># Define the number of classes</span>
+ Lower            Upper               Count
+===========================================
+          x[i] &lt;=  20.000               238
+ 20.000 &lt; x[i] &lt;=  28.000               395
+ 28.000 &lt; x[i] &lt;=  33.000               451
+ 33.000 &lt; x[i] &lt;=  38.000               581
+ 38.000 &lt; x[i] &lt;=  44.000               727
+ 44.000 &lt; x[i] &lt;=  52.000               533
+ 52.000 &lt; x[i] &lt;=  63.000               396
+ 63.000 &lt; x[i] &lt;=  80.000               284
+ 80.000 &lt; x[i] &lt;= 155.000               202
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li>Quantiles (default is 5 classes):</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">mapclassify</span><span class="o">.</span><span class="n">Quantiles</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">acc</span><span class="p">[</span><span class="s1">&#39;pt_r_tt&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>                 Quantiles
+
+ Lower            Upper               Count
+===========================================
+          x[i] &lt;=  30.000               792
+ 30.000 &lt; x[i] &lt;=  37.000               779
+ 37.000 &lt; x[i] &lt;=  44.000               821
+ 44.000 &lt; x[i] &lt;=  56.000               685
+ 56.000 &lt; x[i] &lt;= 155.000               730
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li>It’s possible to extract the threshold values into an array:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">classifier</span> <span class="o">=</span> <span class="n">mapclassify</span><span class="o">.</span><span class="n">Natural_Breaks</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">acc</span><span class="p">[</span><span class="s1">&#39;pt_r_tt&#39;</span><span class="p">],</span> <span class="n">k</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">classifier</span><span class="o">.</span><span class="n">bins</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>array([  18.,   26.,   33.,   38.,   44.,   52.,   63.,   80.,  155.])
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li>Let’s apply one of the <code class="docutils literal notranslate"><span class="pre">Pysal</span></code> classifiers into our data and classify the travel times by public transport into 9 classes</li>
+<li>The classifier needs to be initialized first with <code class="docutils literal notranslate"><span class="pre">make()</span></code> function that takes the number of desired classes as input parameter</li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Define the number of classes</span>
 <span class="n">n_classes</span> <span class="o">=</span> <span class="mi">9</span>
 
 <span class="c1"># Create a Natural Breaks classifier</span>
@@ -637,7 +725,7 @@ distance).</p>
 <li>Now we can apply that classifier into our data by using <code class="docutils literal notranslate"><span class="pre">apply</span></code> -function</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -650,7 +738,7 @@ distance).</p>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -701,7 +789,7 @@ distance).</p>
 </div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -710,7 +798,7 @@ distance).</p>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -723,7 +811,7 @@ distance).</p>
 <li>We can also add the classification values directly into a new column in our dataframe:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -736,7 +824,7 @@ distance).</p>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -794,7 +882,7 @@ distance).</p>
 </div>
 <p>Great, now we have those values in our accessibility GeoDataFrame. Let’s visualize the results and see how they look.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -810,10 +898,106 @@ distance).</p>
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/notebooks_L4_reclassify_16_0.png" src="../../_images/notebooks_L4_reclassify_16_0.png" />
+<img alt="../../_images/notebooks_L4_reclassify_24_0.png" src="../../_images/notebooks_L4_reclassify_24_0.png" />
 </div>
 </div>
 <p>And here we go, now we have a map where we have used one of the common classifiers to classify our data into 9 classes.</p>
+</div>
+<div class="section" id="Plotting-a-histogram">
+<h3>Plotting a histogram<a class="headerlink" href="#Plotting-a-histogram" title="Permalink to this headline">¶</a></h3>
+<p>A histogram is a graphic representation of the distribution of the data. When classifying the data, it’s always good to consider how the data is distributed, and how the classification shceme divides values into different ranges.</p>
+<ul class="simple">
+<li>plot the histogram using <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.plot.hist.html">pandas.DataFrame.plot.hist</a></li>
+<li>Number of histogram bins (groups of data) can be controlled using the parameter <code class="docutils literal notranslate"><span class="pre">bins</span></code>:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Histogram for public transport rush hour travel time</span>
+<span class="n">acc</span><span class="p">[</span><span class="s1">&#39;pt_r_tt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x199b9a68128&gt;
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L4_reclassify_27_1.png" src="../../_images/notebooks_L4_reclassify_27_1.png" />
+</div>
+</div>
+<ul class="simple">
+<li>Add threshold values on thop of the histogram:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Define classifier</span>
+<span class="n">classifier</span> <span class="o">=</span> <span class="n">mapclassify</span><span class="o">.</span><span class="n">Natural_Breaks</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">acc</span><span class="p">[</span><span class="s1">&#39;pt_r_tt&#39;</span><span class="p">],</span> <span class="n">k</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+
+<span class="c1"># Plot histogram for public transport rush hour travel time</span>
+<span class="n">acc</span><span class="p">[</span><span class="s1">&#39;pt_r_tt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">classifier</span><span class="o">.</span><span class="n">bins</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L4_reclassify_29_0.png" src="../../_images/notebooks_L4_reclassify_29_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Define classifier</span>
+<span class="n">classifier</span> <span class="o">=</span> <span class="n">mapclassify</span><span class="o">.</span><span class="n">Quantiles</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">acc</span><span class="p">[</span><span class="s1">&#39;pt_r_tt&#39;</span><span class="p">])</span>
+
+<span class="c1"># Plot histogram for public transport rush hour travel time</span>
+<span class="n">acc</span><span class="p">[</span><span class="s1">&#39;pt_r_tt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">classifier</span><span class="o">.</span><span class="n">bins</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L4_reclassify_30_0.png" src="../../_images/notebooks_L4_reclassify_30_0.png" />
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title fa fa-exclamation-circle"><strong>Task</strong></p>
+<p>Select another column from the data (for example, travel times by car), plot visualize it’s histogram with breakpoints from different classification schemes.</p>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="Creating-a-custom-classifier">
 <h3>Creating a custom classifier<a class="headerlink" href="#Creating-a-custom-classifier" title="Permalink to this headline">¶</a></h3>
@@ -825,7 +1009,7 @@ distance).</p>
 <li>Let’s call it <code class="docutils literal notranslate"><span class="pre">custom_classifier</span></code> that takes into account two criteria:</li>
 </ul>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -850,7 +1034,7 @@ distance).</p>
 <li>Let’s create an empty column for our classification results called <code class="docutils literal notranslate"><span class="pre">&quot;suitable_area&quot;</span></code>.</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -868,7 +1052,7 @@ distance).</p>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -972,7 +1156,7 @@ distance).</p>
 <li>How many Polygons are suitable for us? Let’s find out by using a Pandas function called <code class="docutils literal notranslate"><span class="pre">value_counts()</span></code> that return the count of different values in our column.</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -982,7 +1166,7 @@ distance).</p>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -997,7 +1181,7 @@ Name: suitable_area, dtype: int64
 <li>Let’s see where they are located:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1013,7 +1197,7 @@ Name: suitable_area, dtype: int64
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/notebooks_L4_reclassify_25_0.png" src="../../_images/notebooks_L4_reclassify_25_0.png" />
+<img alt="../../_images/notebooks_L4_reclassify_40_0.png" src="../../_images/notebooks_L4_reclassify_40_0.png" />
 </div>
 </div>
 <p>A-haa, okay so we can see that suitable places for us with our criteria seem to be located in the eastern part from the city center. Actually, those locations are along the metro line which makes them good locations in terms of travel time to city center since metro is really fast travel mode.</p>
@@ -1034,7 +1218,7 @@ Name: suitable_area, dtype: int64
     <p>
         &copy; Copyright 2019, Henrikki Tenkanen and Vuokko Heikinheimo, Digital Geography Lab, University of Helsinki
       <span class="lastupdated">
-        Last updated on Nov 13, 2019.
+        Last updated on Nov 15, 2019.
       </span>
 
     </p>
