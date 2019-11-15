@@ -35,6 +35,19 @@ As you can see below, many of the GIS packages are available from specific ``cha
 We recommend that you first install only geopandas, and add the other packages once you need them.
 Installing geopandas will automatically install several fundamental GIS packages (such as Shapely and fiona) on your computer, so you will have a nice setup already using one installation command!
 
+.. code:: bash
+
+    conda install geopandas -c conda-forge
+
+
+Creating a new environment using conda
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Conda allows us to create different `Python environments <https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html>`__.
+Python packages have often many dependencies, and some packages might, for example,
+only work with an older version of Python.
+
 Run this codes in order to get started with a GIS Python environment (tested to work on Windows 10 in November 2019):
 
 .. code:: bash
@@ -61,7 +74,12 @@ Run this codes in order to get started with a GIS Python environment (tested to 
 
     # Shut down jupyter lab using CTRL+C once done working
 
-There are also other useful packages that requires separate installation. You don't necessarily need these during the first weeks of this course.
+
+Other packages
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*Note, this list of packages might be outdated, all these packages are not necessarily used in this course*
+There are also other useful packages that requires separate installation.
 
 .. code:: bash
 
@@ -96,8 +114,6 @@ There are also other useful packages that requires separate installation. You do
     pip install dash-core-components==0.14.0  # Supercharged components
     pip install plotly --upgrade  # Plotly graphing library
 
-Test that everything works
-~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can test that the installations have worked by running following commands in Python (try importing only those packages you installed):
 
