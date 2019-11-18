@@ -3,10 +3,9 @@ Overview
 
 Lesson contents:
 
-1. :doc:`Geometric operations: Overlay analysis <geometric-operations>`
-2. :doc:`Data classification <reclassify>`
-3. :doc:`Exercise 4 <ex-4>`
-4. :doc:`Exercise 4 hints <exercise-4-hints>`
+1. :doc:`Geometric operations: Overlay analysis <../../notebooks/L4/geometric-operations.ipynb>`__
+2. :doc:`Data classification <../../notebooks/L4/reclassify.ipynb>`__
+3. :doc:`Exercise 4 <exercise-4>`
 
 Learning goals
 --------------

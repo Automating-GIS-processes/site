@@ -158,13 +158,13 @@
 <li class="toctree-l1"><a class="reference internal" href="geometric-operations.html">Geometric operations</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Data reclassification</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#Input-data">Input data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#Classifying-data">Classifying data</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#Classification-based-on-common-classifiers">Classification based on common classifiers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Common-classifiers">Common classifiers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Classification-schemes-for-thematic-maps">Classification schemes for thematic maps</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Applying-classifiers-to-data">Applying classifiers to data</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Plotting-a-histogram">Plotting a histogram</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Creating-a-custom-classifier">Creating a custom classifier</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#Plotting-a-histogram">Plotting a histogram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Creating-a-custom-classifier">Creating a custom classifier</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/L4/exercise-4.html">Exercise 4</a></li>
@@ -486,25 +486,26 @@ This page was generated from <a class="reference external" href="https://github.
     IF NOT TRUE: ==&gt; I continue looking for something else
 </pre></div>
 </div>
-<p>In this tutorial, we will use <a class="reference external" href="https://blogs.helsinki.fi/accessibility/helsinki-region-travel-time-matrix/">Travel Time Matrix data from Helsinki</a> to classify some features of the data based on map classifiers that are commonly used e.g.&nbsp;when doing visualizations, and our own self-made classifier where we determine how the data should be classified.</p>
+<p>In this tutorial, we will:</p>
 <ol class="arabic simple">
-<li>use classification schemes from the PySAL <a class="reference external" href="https://pysal.org/mapclassify/">mapclassify library</a> to classify travel times into multiple classes.</li>
-<li>use travel times and distances to find out<ul>
-<li>good locations to buy an apartment with good public transport accessibility to city center</li>
-<li>but from a bit further away from city center where the prices are presumably lower.</li>
+<li>Use classification schemes from the PySAL <a class="reference external" href="https://pysal.org/mapclassify/">mapclassify library</a> to classify travel times into multiple classes.</li>
+<li>Create a custom classifier to classify travel times and distances in order to find out good locations to buy an apartment with these conditions:<ul>
+<li>good public transport accessibility to city center</li>
+<li>bit further away from city center where the prices are presumably lower</li>
 </ul>
 </li>
 </ol>
 <div class="section" id="Input-data">
 <h2>Input data<a class="headerlink" href="#Input-data" title="Permalink to this headline">¶</a></h2>
+<p>We will use <a class="reference external" href="https://blogs.helsinki.fi/accessibility/helsinki-region-travel-time-matrix/">Travel Time Matrix data from Helsinki</a> that contains travel time and distance information for routes between all 250 m x 250 m grid cell centroids (n = 13231) in the Capital Region of Helsinki by walking, cycling, public transportation and car.</p>
 <p>In this tutorial, we will use the geojson file generated in the previous section: <code class="docutils literal notranslate"><span class="pre">&quot;data/TravelTimes_to_5975375_RailwayStation_Helsinki.geojson&quot;</span></code></p>
 <p>Alternatively, you can re-download <a class="reference external" href="https://github.com/AutoGIS/data/raw/master/L4_data.zip">L4 data</a> and use <code class="docutils literal notranslate"><span class="pre">&quot;data/Travel_times_to_5975375_RailwayStation.shp&quot;</span></code> as input file in here.</p>
 </div>
-<div class="section" id="Classifying-data">
-<h2>Classifying data<a class="headerlink" href="#Classifying-data" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="Classification-based-on-common-classifiers">
-<h3>Classification based on common classifiers<a class="headerlink" href="#Classification-based-on-common-classifiers" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference external" href="http://pysal.readthedocs.io/en/latest">PySAL</a> -module is an extensive Python library for spatial analysis. It also includes all of the most common data classifiers that are used commonly e.g.&nbsp;when visualizing data. Available map classifiers in pysal’s mapclassify -module are (<a class="reference external" href="https://pysal.readthedocs.io/en/v1.11.0/library/esda/mapclassify.html">see here for more details</a>):</p>
+<div class="section" id="Common-classifiers">
+<h2>Common classifiers<a class="headerlink" href="#Common-classifiers" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="Classification-schemes-for-thematic-maps">
+<h3>Classification schemes for thematic maps<a class="headerlink" href="#Classification-schemes-for-thematic-maps" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="http://pysal.readthedocs.io/en/latest">PySAL</a> -module is an extensive Python library for spatial analysis. It also includes all of the most common data classifiers that are used commonly e.g.&nbsp;when visualizing data. Available map classifiers in <a class="reference external" href="https://pysal.readthedocs.io/en/v1.11.0/library/esda/mapclassify.html">pysal’s mapclassify -module</a>:</p>
 <ul class="simple">
 <li>Box_Plot</li>
 <li>Equal_Interval</li>
@@ -554,8 +555,8 @@ This page was generated from <a class="reference external" href="https://github.
 1   24860      75       93  5975375   25408     363  27517366  Helsinki
 
        NAMESWE NATCODE                                           geometry
-0  Helsingfors     091  POLYGON ((402250.0001322526 6685750.000039577,...
-1  Helsingfors     091  POLYGON ((402367.8898583531 6685750.000039573,...
+0  Helsingfors     091  POLYGON ((402250.000 6685750.000, 402024.224 6...
+1  Helsingfors     091  POLYGON ((402367.890 6685750.000, 402250.000 6...
 </pre></div></div>
 </div>
 <p>As we can see, there are plenty of different variables (see <a class="reference external" href="http://blogs.helsinki.fi/accessibility/helsinki-region-travel-time-matrix-2015">from here the description</a> for all attributes) but what we are interested in are columns called <code class="docutils literal notranslate"><span class="pre">pt_r_tt</span></code> which is telling the time in minutes that it takes to reach city center from different parts of the city, and <code class="docutils literal notranslate"><span class="pre">walk_d</span></code> that tells the network distance by roads to reach city center from different parts of the city (almost equal to Euclidian
@@ -648,7 +649,7 @@ distance).</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">mapclassify</span><span class="o">.</span><span class="n">Natural_Breaks</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">acc</span><span class="p">[</span><span class="s1">&#39;pt_r_tt&#39;</span><span class="p">],</span> <span class="n">k</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span></span><span class="n">mapclassify</span><span class="o">.</span><span class="n">NaturalBreaks</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">acc</span><span class="p">[</span><span class="s1">&#39;pt_r_tt&#39;</span><span class="p">],</span> <span class="n">k</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -657,19 +658,19 @@ distance).</p>
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>               Natural_Breaks
+<span></span>               NaturalBreaks
 
  Lower            Upper               Count
 ===========================================
-          x[i] &lt;=  20.000               238
- 20.000 &lt; x[i] &lt;=  28.000               395
- 28.000 &lt; x[i] &lt;=  33.000               451
- 33.000 &lt; x[i] &lt;=  38.000               581
- 38.000 &lt; x[i] &lt;=  44.000               727
- 44.000 &lt; x[i] &lt;=  52.000               533
- 52.000 &lt; x[i] &lt;=  63.000               396
- 63.000 &lt; x[i] &lt;=  80.000               284
- 80.000 &lt; x[i] &lt;= 155.000               202
+          x[i] &lt;=  22.000               290
+ 22.000 &lt; x[i] &lt;=  31.000               586
+ 31.000 &lt; x[i] &lt;=  38.000               789
+ 38.000 &lt; x[i] &lt;=  45.000               820
+ 45.000 &lt; x[i] &lt;=  53.000               480
+ 53.000 &lt; x[i] &lt;=  63.000               356
+ 63.000 &lt; x[i] &lt;=  77.000               255
+ 77.000 &lt; x[i] &lt;=  95.000               177
+ 95.000 &lt; x[i] &lt;= 155.000                54
 </pre></div>
 </div>
 </div>
@@ -710,7 +711,7 @@ distance).</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">classifier</span> <span class="o">=</span> <span class="n">mapclassify</span><span class="o">.</span><span class="n">Natural_Breaks</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">acc</span><span class="p">[</span><span class="s1">&#39;pt_r_tt&#39;</span><span class="p">],</span> <span class="n">k</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span></span><span class="n">classifier</span> <span class="o">=</span> <span class="n">mapclassify</span><span class="o">.</span><span class="n">NaturalBreaks</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">acc</span><span class="p">[</span><span class="s1">&#39;pt_r_tt&#39;</span><span class="p">],</span> <span class="n">k</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
 <span class="n">classifier</span><span class="o">.</span><span class="n">bins</span>
 </pre></div>
 </div>
@@ -720,7 +721,7 @@ distance).</p>
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>array([  18.,   26.,   33.,   38.,   44.,   52.,   63.,   80.,  155.])
+<span></span>array([ 21.,  30.,  38.,  45.,  53.,  63.,  76.,  94., 155.])
 </pre></div>
 </div>
 </div>
@@ -733,11 +734,8 @@ distance).</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Define the number of classes</span>
-<span class="n">n_classes</span> <span class="o">=</span> <span class="mi">9</span>
-
-<span class="c1"># Create a Natural Breaks classifier</span>
-<span class="n">classifier</span> <span class="o">=</span> <span class="n">mapclassify</span><span class="o">.</span><span class="n">Natural_Breaks</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="n">n_classes</span><span class="p">)</span>
+<span></span><span class="c1"># Create a Natural Breaks classifier</span>
+<span class="n">classifier</span> <span class="o">=</span> <span class="n">mapclassify</span><span class="o">.</span><span class="n">NaturalBreaks</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -785,23 +783,23 @@ distance).</p>
   </thead>
   <tbody>
     <tr>
-      <th>0</th>
+      <td>0</td>
       <td>8</td>
     </tr>
     <tr>
-      <th>1</th>
+      <td>1</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>2</td>
       <td>8</td>
     </tr>
     <tr>
-      <th>2</th>
+      <td>3</td>
       <td>8</td>
     </tr>
     <tr>
-      <th>3</th>
-      <td>8</td>
-    </tr>
-    <tr>
-      <th>4</th>
+      <td>4</td>
       <td>8</td>
     </tr>
   </tbody>
@@ -838,7 +836,7 @@ distance).</p>
 <span></span><span class="c1"># Rename the column so that we know that it was classified with natural breaks</span>
 <span class="n">acc</span><span class="p">[</span><span class="s1">&#39;nb_pt_r_tt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">acc</span><span class="p">[[</span><span class="s1">&#39;pt_r_tt&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">classifier</span><span class="p">)</span>
 
-<span class="c1"># Let&#39;s see how our data looks like</span>
+<span class="c1"># Check the original values and classification</span>
 <span class="n">acc</span><span class="p">[[</span><span class="s1">&#39;pt_r_tt&#39;</span><span class="p">,</span> <span class="s1">&#39;nb_pt_r_tt&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -872,27 +870,27 @@ distance).</p>
   </thead>
   <tbody>
     <tr>
-      <th>0</th>
+      <td>0</td>
       <td>99</td>
       <td>8</td>
     </tr>
     <tr>
-      <th>1</th>
+      <td>1</td>
       <td>93</td>
-      <td>8</td>
+      <td>7</td>
     </tr>
     <tr>
-      <th>2</th>
+      <td>2</td>
       <td>146</td>
       <td>8</td>
     </tr>
     <tr>
-      <th>3</th>
+      <td>3</td>
       <td>155</td>
       <td>8</td>
     </tr>
     <tr>
-      <th>4</th>
+      <td>4</td>
       <td>99</td>
       <td>8</td>
     </tr>
@@ -923,8 +921,9 @@ distance).</p>
 </div>
 <p>And here we go, now we have a map where we have used one of the common classifiers to classify our data into 9 classes.</p>
 </div>
+</div>
 <div class="section" id="Plotting-a-histogram">
-<h3>Plotting a histogram<a class="headerlink" href="#Plotting-a-histogram" title="Permalink to this headline">¶</a></h3>
+<h2>Plotting a histogram<a class="headerlink" href="#Plotting-a-histogram" title="Permalink to this headline">¶</a></h2>
 <p>A histogram is a graphic representation of the distribution of the data. When classifying the data, it’s always good to consider how the data is distributed, and how the classification shceme divides values into different ranges.</p>
 <ul class="simple">
 <li>plot the histogram using <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.plot.hist.html">pandas.DataFrame.plot.hist</a></li>
@@ -945,7 +944,7 @@ distance).</p>
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x199b9a68128&gt;
+<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x134e1c160c8&gt;
 </pre></div>
 </div>
 </div>
@@ -956,8 +955,9 @@ distance).</p>
 <img alt="../../_images/notebooks_L4_reclassify_27_1.png" src="../../_images/notebooks_L4_reclassify_27_1.png" />
 </div>
 </div>
+<p>Let’s also add threshold values on thop of the histogram as vertical lines.</p>
 <ul class="simple">
-<li>Add threshold values on thop of the histogram:</li>
+<li>Natural Breaks:</li>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
@@ -965,11 +965,12 @@ distance).</p>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Define classifier</span>
-<span class="n">classifier</span> <span class="o">=</span> <span class="n">mapclassify</span><span class="o">.</span><span class="n">Natural_Breaks</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">acc</span><span class="p">[</span><span class="s1">&#39;pt_r_tt&#39;</span><span class="p">],</span> <span class="n">k</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">classifier</span> <span class="o">=</span> <span class="n">mapclassify</span><span class="o">.</span><span class="n">NaturalBreaks</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">acc</span><span class="p">[</span><span class="s1">&#39;pt_r_tt&#39;</span><span class="p">],</span> <span class="n">k</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
 
 <span class="c1"># Plot histogram for public transport rush hour travel time</span>
 <span class="n">acc</span><span class="p">[</span><span class="s1">&#39;pt_r_tt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
 
+<span class="c1"># Add vertical lines for class breaks</span>
 <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">classifier</span><span class="o">.</span><span class="n">bins</span><span class="p">:</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
@@ -982,6 +983,9 @@ distance).</p>
 <img alt="../../_images/notebooks_L4_reclassify_29_0.png" src="../../_images/notebooks_L4_reclassify_29_0.png" />
 </div>
 </div>
+<ul class="simple">
+<li>Quantiles:</li>
+</ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
@@ -1002,12 +1006,16 @@ distance).</p>
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/notebooks_L4_reclassify_30_0.png" src="../../_images/notebooks_L4_reclassify_30_0.png" />
+<img alt="../../_images/notebooks_L4_reclassify_31_0.png" src="../../_images/notebooks_L4_reclassify_31_0.png" />
 </div>
 </div>
 <div class="admonition note">
 <p class="admonition-title fa fa-exclamation-circle"><strong>Task</strong></p>
-<p>Select another column from the data (for example, travel times by car), plot visualize it’s histogram with breakpoints from different classification schemes.</p>
+<p>Select another column from the data (for example, travel times by car: <code class="docutils literal notranslate"><span class="pre">car_r_t</span></code>). Do the following visualizations using one of the classification schemes available from <a class="reference external" href="https://github.com/pysal/mapclassify">pysal/mapclassify</a>:</p>
+<ul class="simple">
+<li>histogram with vertical lines showing the classification bins</li>
+<li>thematic map using the classification scheme</li>
+</ul>
 </div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
@@ -1020,16 +1028,16 @@ distance).</p>
 </div>
 </div>
 <div class="section" id="Creating-a-custom-classifier">
-<h3>Creating a custom classifier<a class="headerlink" href="#Creating-a-custom-classifier" title="Permalink to this headline">¶</a></h3>
+<h2>Creating a custom classifier<a class="headerlink" href="#Creating-a-custom-classifier" title="Permalink to this headline">¶</a></h2>
 <p><strong>Multicriteria data classification</strong></p>
 <p>Let’s create a function where we classify the geometries into two classes based on a given <code class="docutils literal notranslate"><span class="pre">threshold</span></code> -parameter. If the area of a polygon is lower than the threshold value (average size of the lake), the output column will get a value 0, if it is larger, it will get a value 1. This kind of classification is often called a <a class="reference external" href="https://en.wikipedia.org/wiki/Binary_classification">binary classification</a>.</p>
 <p>First we need to create a function for our classification task. This function takes a single row of the GeoDataFrame as input, plus few other parameters that we can use.</p>
 <p>It also possible to do classifiers with multiple criteria easily in Pandas/Geopandas by extending the example that we started earlier. Now we will modify our binaryClassifier function a bit so that it classifies the data based on two columns.</p>
 <ul class="simple">
-<li>Let’s call it <code class="docutils literal notranslate"><span class="pre">custom_classifier</span></code> that takes into account two criteria:</li>
+<li>Let’s call it <code class="docutils literal notranslate"><span class="pre">custom_classifier</span></code> that does the binary classification based on two treshold values:</li>
 </ul>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1054,7 +1062,7 @@ distance).</p>
 <li>Let’s create an empty column for our classification results called <code class="docutils literal notranslate"><span class="pre">&quot;suitable_area&quot;</span></code>.</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1072,7 +1080,7 @@ distance).</p>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -1119,7 +1127,7 @@ distance).</p>
   </thead>
   <tbody>
     <tr>
-      <th>0</th>
+      <td>0</td>
       <td>29476</td>
       <td>41</td>
       <td>29483</td>
@@ -1138,12 +1146,12 @@ distance).</p>
       <td>Helsinki</td>
       <td>Helsingfors</td>
       <td>091</td>
-      <td>POLYGON ((402250.0001322526 6685750.000039577,...</td>
+      <td>POLYGON ((402250.000 6685750.000, 402024.224 6...</td>
       <td>8</td>
       <td>0</td>
     </tr>
     <tr>
-      <th>1</th>
+      <td>1</td>
       <td>29456</td>
       <td>41</td>
       <td>29462</td>
@@ -1162,8 +1170,8 @@ distance).</p>
       <td>Helsinki</td>
       <td>Helsingfors</td>
       <td>091</td>
-      <td>POLYGON ((402367.8898583531 6685750.000039573,...</td>
-      <td>8</td>
+      <td>POLYGON ((402367.890 6685750.000, 402250.000 6...</td>
+      <td>7</td>
       <td>0</td>
     </tr>
   </tbody>
@@ -1217,11 +1225,12 @@ Name: suitable_area, dtype: int64
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/notebooks_L4_reclassify_40_0.png" src="../../_images/notebooks_L4_reclassify_40_0.png" />
+<img alt="../../_images/notebooks_L4_reclassify_41_0.png" src="../../_images/notebooks_L4_reclassify_41_0.png" />
 </div>
 </div>
 <p>A-haa, okay so we can see that suitable places for us with our criteria seem to be located in the eastern part from the city center. Actually, those locations are along the metro line which makes them good locations in terms of travel time to city center since metro is really fast travel mode.</p>
-</div>
+<p><strong>Other examples</strong></p>
+<p>Older course materials contain an example of applying a <a class="reference external" href="https://automating-gis-processes.github.io/2017/lessons/L4/reclassify.html#classifying-data%3E">custom binary classifier on the Corine land cover data</a>.</p>
 </div>
 </div>
 
@@ -1247,7 +1256,7 @@ Name: suitable_area, dtype: int64
     <p>
         &copy; Copyright 2019, Henrikki Tenkanen and Vuokko Heikinheimo, Digital Geography Lab, University of Helsinki
       <span class="lastupdated">
-        Last updated on Nov 15, 2019.
+        Last updated on Nov 18, 2019.
       </span>
 
     </p>

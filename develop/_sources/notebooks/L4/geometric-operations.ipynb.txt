@@ -8,26 +8,69 @@
     "\n",
     "## Overlay analysis\n",
     "\n",
-    "In this tutorial, the aim is to make an overlay analysis where we create a new layer based on geometries from a dataset that `intersect` with geometries of another layer. As our test case, we will select Polygon grid cells from `TravelTimes_to_5975375_RailwayStation_Helsinki.geojson` that intersects with municipality borders of Helsinki found in `Helsinki_borders.shp`.\n",
+    "In this tutorial, the aim is to make an overlay analysis where we create a new layer based on geometries from a dataset that `intersect` with geometries of another layer. As our test case, we will select Polygon grid cells from `TravelTimes_to_5975375_RailwayStation_Helsinki.shp` that intersects with municipality borders of Helsinki found in `Helsinki_borders.shp`.\n",
     "\n",
     "Typical overlay operations are (source: [QGIS docs](https://docs.qgis.org/2.8/en/docs/gentle_gis_introduction/vector_spatial_analysis_buffers.html#more-spatial-analysis-tools)):\n",
     "![](img/overlay_operations.png)\n",
     "\n",
-    "- Let's first read the data and take a look how they look:"
+    "## Download data\n",
+    "\n",
+    "For this lesson, you should [download a data package](https://github.com/AutoGIS/data/raw/master/L4_data.zip) that includes 3 files:\n",
+    "\n",
+    " 1. Helsinki_borders.shp\n",
+    " 2. Travel_times_to_5975375_RailwayStation.shp\n",
+    " 3. Amazon_river.shp\n",
+    " \n",
+    "```\n",
+    "$ cd /home/jovyan/notebooks/L4\n",
+    "$ wget https://github.com/AutoGIS/data/raw/master/L4_data.zip\n",
+    "$ unzip L4_data.zip\n",
+    "```\n",
+    "\n",
+    "Let's first read the data and see how they look like.\n",
+    "\n",
+    "- Import required packages and read in the input data:"
    ]
   },
   {
    "cell_type": "code",
    "execution_count": 1,
    "metadata": {},
+   "outputs": [],
+   "source": [
+    "import geopandas as gpd\n",
+    "import matplotlib.pyplot as plt\n",
+    "import shapely.speedups\n",
+    "%matplotlib inline\n",
+    "\n",
+    "# File paths\n",
+    "border_fp = \"data/Helsinki_borders.shp\"\n",
+    "grid_fp = \"data/TravelTimes_to_5975375_RailwayStation.shp\"\n",
+    "\n",
+    "# Read files\n",
+    "grid = gpd.read_file(grid_fp)\n",
+    "hel = gpd.read_file(border_fp)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "- Visualize the layers:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
    "outputs": [
     {
      "data": {
       "text/plain": [
-       "<matplotlib.axes._subplots.AxesSubplot at 0x2756bf32390>"
+       "<matplotlib.axes._subplots.AxesSubplot at 0x2552bc671d0>"
       ]
      },
-     "execution_count": 1,
+     "execution_count": 2,
      "metadata": {},
      "output_type": "execute_result"
     },
@@ -45,22 +88,6 @@
     }
    ],
    "source": [
-    "import geopandas as gpd\n",
-    "import matplotlib.pyplot as plt\n",
-    "import shapely.speedups\n",
-    "%matplotlib inline\n",
-    "\n",
-    "# Let's enable speedups to make queries faster\n",
-    "shapely.speedups.enable()\n",
-    "\n",
-    "# File paths\n",
-    "border_fp = \"data/Helsinki_borders.shp\"\n",
-    "grid_fp = \"data/TravelTimes_to_5975375_RailwayStation.shp\"\n",
-    "\n",
-    "# Read files\n",
-    "grid = gpd.read_file(grid_fp)\n",
-    "hel = gpd.read_file(border_fp)\n",
-    "\n",
     "# Plot the layers\n",
     "ax = grid.plot(facecolor='gray')\n",
     "hel.plot(ax=ax, facecolor='None', edgecolor='blue')"
@@ -70,14 +97,16 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "Here the blue area is the borders that we want to use for conducting the overlay analysis and select the geometries from the Polygon grid.\n",
+    "Here the grey area is the Travel Time Matrix grid (13231 grid squares) that covers the Helsinki region, and the blue area represents the municipality of Helsinki. Our goal is to conduct an overlay analysis and select the geometries from the grid polygon layer that intersect with the Helsinki municipality polygon.\n",
     "\n",
-    "- Always, when conducting GIS operations involving multiple layers, it is required to check that the CRS of the layers match: "
+    "When conducting overlay analysis, it is important to check that the CRS of the layers match!\n",
+    "\n",
+    "- Check if Helsinki polygon and the grid polygon are in the same crs:"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 2,
+   "execution_count": 3,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -96,7 +125,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 3,
+   "execution_count": 4,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -112,16 +141,16 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 4,
+   "execution_count": 5,
    "metadata": {},
    "outputs": [
     {
      "data": {
       "text/plain": [
-       "<matplotlib.axes._subplots.AxesSubplot at 0x2756c069d30>"
+       "<matplotlib.axes._subplots.AxesSubplot at 0x2552bd9afd0>"
       ]
      },
-     "execution_count": 4,
+     "execution_count": 5,
      "metadata": {},
      "output_type": "execute_result"
     },
@@ -146,14 +175,14 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "As a result, we now have only those grid cells that intersect with the Helsinki borders. As we can see the grid cells are clipped based on the boundary.\n",
+    "As a result, we now have only those grid cells that intersect with the Helsinki borders. As we can see **the grid cells are clipped based on the boundary.**\n",
     "\n",
     "- Whatabout the data attributes? Let's see what we have:\n"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 5,
+   "execution_count": 6,
    "metadata": {},
    "outputs": [
     {
@@ -198,7 +227,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 6,
+   "execution_count": 7,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -222,7 +251,7 @@
    "source": [
     "## Aggregating data\n",
     "\n",
-    "Aggregating data can also be useful sometimes. What we mean by aggregation is that we basically merge Geometries into together by some common identifier. Suppose we are interested in studying continents, but we only have country-level data like the country dataset. By aggregation we would convert this into a continent-level dataset.\n",
+    "Data aggregation refers to a process where we combine data into groups. When doing spatial data aggregation, we merge the geometries together into coarser units (based on some attribute), and can also calculate summary statistics for these combined geometries from the original, more detailed values. For example, suppose that we are interested in studying continents, but we only have country-level data like the country dataset. If we aggregate the data by continent, we would convert the country-level data into a continent-level dataset.\n",
     "\n",
     "In this tutorial, we will aggregate our travel time data by car travel times (column `car_r_t`), i.e. the grid cells that have the same travel time to Railway Station will be merged together.\n",
     "\n",
@@ -231,7 +260,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 7,
+   "execution_count": 8,
    "metadata": {},
    "outputs": [
     {
@@ -281,7 +310,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 8,
+   "execution_count": 9,
    "metadata": {},
    "outputs": [
     {
@@ -311,7 +340,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 9,
+   "execution_count": 10,
    "metadata": {},
    "outputs": [
     {
@@ -340,7 +369,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 10,
+   "execution_count": 11,
    "metadata": {},
    "outputs": [
     {
@@ -370,14 +399,70 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 11,
+   "execution_count": 12,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "geometry    (POLYGON ((388250.0001354316 6668750.000042891...\n",
+       "car_m_d                                                 12035\n",
+       "car_m_t                                                    18\n",
+       "car_r_d                                                 11997\n",
+       "from_id                                               5903886\n",
+       "pt_m_d                                                  11568\n",
+       "pt_m_t                                                     30\n",
+       "pt_m_tt                                                    36\n",
+       "pt_r_d                                                  11568\n",
+       "pt_r_t                                                     34\n",
+       "pt_r_tt                                                    37\n",
+       "to_id                                                 5975375\n",
+       "walk_d                                                  11638\n",
+       "walk_t                                                    166\n",
+       "GML_ID                                               27517366\n",
+       "NAMEFIN                                              Helsinki\n",
+       "NAMESWE                                           Helsingfors\n",
+       "NATCODE                                                   091\n",
+       "Name: 20, dtype: object"
+      ]
+     },
+     "execution_count": 12,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Select only geometries that are within 15 minutes away\n",
+    "dissolved.iloc[15]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
    "metadata": {},
    "outputs": [
     {
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "<class 'pandas.core.series.Series'>\n",
+      "<class 'pandas.core.series.Series'>\n"
+     ]
+    }
+   ],
+   "source": [
+    "# See the data type\n",
+    "print(type(dissolved.iloc[15]))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
       "geometry    (POLYGON ((388250.0001354316 6668750.000042891...\n",
       "car_m_d                                                 12035\n",
       "car_m_t                                                    18\n",
@@ -388,14 +473,8 @@
     }
    ],
    "source": [
-    "# Select only geometries that are within 15 minutes away\n",
-    "sel_15min = dissolved.iloc[15]\n",
-    "\n",
-    "# See the data type\n",
-    "print(type(sel_15min))\n",
-    "\n",
     "# See the data\n",
-    "print(sel_15min.head())"
+    "print(dissolved.iloc[15].head())"
    ]
   },
   {
@@ -404,21 +483,40 @@
    "source": [
     "As we can see, as a result, we have now a Pandas `Series` object containing basically one row from our original aggregated GeoDataFrame.\n",
     "\n",
-    "- Let's finally convert the `Series` into GeoDataFrame and plot it to see where those 15 minute grid cells are located:"
+    "Let's also visualize those 15 minute grid cells.\n",
+    "\n",
+    "- First, we need to convert the selected row back to a GeoDataFrame:"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 12,
+   "execution_count": 15,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Create a GeoDataFrame\n",
+    "selection = gpd.GeoDataFrame([dissolved.iloc[15]], crs=dissolved.crs)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "- Plot the selection on top of the entire grid:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
    "metadata": {},
    "outputs": [
     {
      "data": {
       "text/plain": [
-       "<matplotlib.axes._subplots.AxesSubplot at 0x2756c530240>"
+       "<matplotlib.axes._subplots.AxesSubplot at 0x2552c25be10>"
       ]
      },
-     "execution_count": 12,
+     "execution_count": 16,
      "metadata": {},
      "output_type": "execute_result"
     },
@@ -436,12 +534,9 @@
     }
    ],
    "source": [
-    "# Create a GeoDataFrame\n",
-    "geo = gpd.GeoDataFrame([sel_15min.values], crs=dissolved.crs, columns=dissolved.columns)\n",
-    "\n",
-    "# Plot the grid cells that are 15 minutes a way from the Railway Station\n",
+    "# Plot all the grid cells, and the grid cells that are 15 minutes a way from the Railway Station\n",
     "ax = dissolved.plot(facecolor='gray')\n",
-    "geo.plot(ax=ax, facecolor='red')"
+    "selection.plot(ax=ax, facecolor='red')"
    ]
   },
   {
@@ -464,14 +559,14 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 14,
+   "execution_count": 17,
    "metadata": {},
    "outputs": [
     {
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "{'lat_ts': -2, 'y_0': 10000000, 'units': 'm', 'proj': 'merc', 'x_0': 5000000, 'ellps': 'GRS80', 'no_defs': True, 'lon_0': -43}\n"
+      "{'ellps': 'GRS80', 'lat_ts': -2, 'y_0': 10000000, 'units': 'm', 'x_0': 5000000, 'proj': 'merc', 'no_defs': True, 'lon_0': -43}\n"
      ]
     },
     {
@@ -513,16 +608,16 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 15,
+   "execution_count": 18,
    "metadata": {},
    "outputs": [
     {
      "data": {
       "text/plain": [
-       "<matplotlib.axes._subplots.AxesSubplot at 0x2756bfeb208>"
+       "<matplotlib.axes._subplots.AxesSubplot at 0x2552bd5add8>"
       ]
      },
-     "execution_count": 15,
+     "execution_count": 18,
      "metadata": {},
      "output_type": "execute_result"
     },
@@ -559,6 +654,7 @@
   }
  ],
  "metadata": {
+  "anaconda-cloud": {},
   "kernelspec": {
    "display_name": "Python [default]",
    "language": "python",
