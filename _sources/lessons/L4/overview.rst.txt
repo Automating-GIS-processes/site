@@ -3,16 +3,16 @@ Overview
 
 Lesson contents:
 
-1. :doc:`Geometric operations: Overlay analysis <../../notebooks/L4/geometric-operations.ipynb>`__
-2. :doc:`Data classification <../../notebooks/L4/reclassify.ipynb>`__
+1. `Geometric operations: Overlay analysis <../../notebooks/L4/geometric-operations.ipynb>`__
+2. `Data classification <../../notebooks/L4/reclassify.ipynb>`__
 3. :doc:`Exercise 4 <exercise-4>`
 
 Learning goals
 --------------
 
-AFter this class, you should be able to
+After this class, you should be able to:
 
-- Conduct overlay analysis
+- Create new geometries based on overlay analysis
 - Aggregate geometries
 - Simplify geometries
 - Classify data based on different criteria using common classifiers, and custom classifiers
