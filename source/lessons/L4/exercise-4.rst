@@ -21,7 +21,7 @@ Exercise 4 hints
 General
 -------
 
-- Documentation of the Travel Time Matrix dataset and explanation for different column names can be found at the
+Documentation of the Travel Time Matrix dataset and explanation for different column names can be found at the
 Digital Geography Lab's Accessibility Research Group website: `http://blogs.helsinki.fi/accessibility/ <http://blogs.helsinki.fi/accessibility/helsinki-region-travel-time-matrix-2015>`__
 
 Problem 1
