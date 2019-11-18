@@ -121,7 +121,8 @@
 <li class="toctree-l1"><a class="reference internal" href="learning-goals.html">Learning goals</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installing Python + GIS</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#install-python-gis-on-windows">Install Python + GIS on Windows</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#test-that-everything-works">Test that everything works</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-a-new-environment-using-conda">Creating a new environment using conda</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#other-packages">Other packages</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#install-python-gis-on-linux-mac">Install Python + GIS on Linux / Mac</a></li>
@@ -164,6 +165,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../notebooks/L3/nearest-neighbour.html">Nearest Neighbour Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notebooks/L3/nearest-neighbor-faster.html">Nearest neighbor analysis with large datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lessons/L3/exercise-3.html">Exercise 3</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 4</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../lessons/L4/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/L4/geometric-operations.html">Geometric operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/L4/reclassify.html">Data reclassification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lessons/L4/exercise-4.html">Exercise 4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lessons/L4/exercise-4.html#exercise-4-hints">Exercise 4 hints</a></li>
 </ul>
 
             
@@ -286,6 +295,14 @@ and running command <code class="docutils literal notranslate"><span class="pre"
 As you can see below, many of the GIS packages are available from specific <code class="docutils literal notranslate"><span class="pre">channel</span></code> from conda called <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>.</p>
 <p>We recommend that you first install only geopandas, and add the other packages once you need them.
 Installing geopandas will automatically install several fundamental GIS packages (such as Shapely and fiona) on your computer, so you will have a nice setup already using one installation command!</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install geopandas -c conda-forge
+</pre></div>
+</div>
+<div class="section" id="creating-a-new-environment-using-conda">
+<h3>Creating a new environment using conda<a class="headerlink" href="#creating-a-new-environment-using-conda" title="Permalink to this headline">¶</a></h3>
+<p>Conda allows us to create different <a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html">Python environments</a>.
+Python packages have often many dependencies, and some packages might, for example,
+only work with an older version of Python.</p>
 <p>Run this codes in order to get started with a GIS Python environment (tested to work on Windows 10 in November 2019):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a fresh environment with python 3.7</span>
 conda create -n gis <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.7
@@ -297,6 +314,7 @@ conda activate gis
 conda install geopandas -c conda-forge
 conda install matplotlib -c conda-forge
 conda install geojson -c conda-forge
+conda install mapclassify -c conda-forge
 <span class="c1"># ... install other packages</span>
 
 <span class="c1"># Install jupyter lab</span>
@@ -310,7 +328,11 @@ jupyter lab
 <span class="c1"># Shut down jupyter lab using CTRL+C once done working</span>
 </pre></div>
 </div>
-<p>There are also other useful packages that requires separate installation. You don’t necessarily need these during the first weeks of this course.</p>
+</div>
+<div class="section" id="other-packages">
+<h3>Other packages<a class="headerlink" href="#other-packages" title="Permalink to this headline">¶</a></h3>
+<p><em>Note, this list of packages might be outdated, all these packages are not necessarily used in this course</em>
+There are also other useful packages that requires separate installation.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install geoplot</span>
 conda install -c conda-forge geoplot
 
@@ -343,8 +365,6 @@ pip install dash-core-components<span class="o">==</span><span class="m">0</span
 pip install plotly --upgrade  <span class="c1"># Plotly graphing library</span>
 </pre></div>
 </div>
-<div class="section" id="test-that-everything-works">
-<h3>Test that everything works<a class="headerlink" href="#test-that-everything-works" title="Permalink to this headline">¶</a></h3>
 <p>You can test that the installations have worked by running following commands in Python (try importing only those packages you installed):</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
 <span class="kn">import</span> <span class="nn">pysal</span>
@@ -481,7 +501,7 @@ that is the one to use! Thus, in our case the first page that Google gives does 
     <p>
         &copy; Copyright 2019, Henrikki Tenkanen and Vuokko Heikinheimo, Digital Geography Lab, University of Helsinki
       <span class="lastupdated">
-        Last updated on Nov 12, 2019.
+        Last updated on Nov 15, 2019.
       </span>
 
     </p>

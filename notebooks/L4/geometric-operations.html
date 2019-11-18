@@ -58,6 +58,8 @@
   <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Data reclassification" href="reclassify.html" />
+    <link rel="prev" title="Overview" href="../../lessons/L4/overview.html" />
     <link href="../../_static/geo-python.css" rel="stylesheet" type="text/css">
      
 
@@ -149,6 +151,20 @@
 <li class="toctree-l1"><a class="reference internal" href="../L3/nearest-neighbour.html">Nearest Neighbour Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../L3/nearest-neighbor-faster.html">Nearest neighbor analysis with large datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/L3/exercise-3.html">Exercise 3</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 4</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L4/overview.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Geometric operations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Overlay-analysis">Overlay analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Download-data">Download data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Aggregating-data">Aggregating data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Simplifying-geometries">Simplifying geometries</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reclassify.html">Data reclassification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L4/exercise-4.html">Exercise 4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/L4/exercise-4.html#exercise-4-hints">Exercise 4 hints</a></li>
 </ul>
 
             
@@ -452,13 +468,28 @@ This page was generated from <a class="reference external" href="https://github.
 <h1>Geometric operations<a class="headerlink" href="#Geometric-operations" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="Overlay-analysis">
 <h2>Overlay analysis<a class="headerlink" href="#Overlay-analysis" title="Permalink to this headline">¶</a></h2>
-<p>In this tutorial, the aim is to make an overlay analysis where we create a new layer based on geometries from a dataset that <code class="docutils literal notranslate"><span class="pre">intersect</span></code> with geometries of another layer. As our test case, we will select Polygon grid cells from <code class="docutils literal notranslate"><span class="pre">TravelTimes_to_5975375_RailwayStation_Helsinki.geojson</span></code> that intersects with municipality borders of Helsinki found in <code class="docutils literal notranslate"><span class="pre">Helsinki_borders.shp</span></code>.</p>
+<p>In this tutorial, the aim is to make an overlay analysis where we create a new layer based on geometries from a dataset that <code class="docutils literal notranslate"><span class="pre">intersect</span></code> with geometries of another layer. As our test case, we will select Polygon grid cells from <code class="docutils literal notranslate"><span class="pre">TravelTimes_to_5975375_RailwayStation_Helsinki.shp</span></code> that intersects with municipality borders of Helsinki found in <code class="docutils literal notranslate"><span class="pre">Helsinki_borders.shp</span></code>.</p>
 <p>Typical overlay operations are (source: <a class="reference external" href="https://docs.qgis.org/2.8/en/docs/gentle_gis_introduction/vector_spatial_analysis_buffers.html#more-spatial-analysis-tools">QGIS docs</a>): <img alt="image0" src="../../_images/overlay_operations.png" /></p>
+</div>
+<div class="section" id="Download-data">
+<h2>Download data<a class="headerlink" href="#Download-data" title="Permalink to this headline">¶</a></h2>
+<p>For this lesson, you should <a class="reference external" href="https://github.com/AutoGIS/data/raw/master/L4_data.zip">download a data package</a> that includes 3 files:</p>
+<ol class="arabic simple">
+<li>Helsinki_borders.shp</li>
+<li>Travel_times_to_5975375_RailwayStation.shp</li>
+<li>Amazon_river.shp</li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd /home/jovyan/notebooks/L4
+$ wget https://github.com/AutoGIS/data/raw/master/L4_data.zip
+$ unzip L4_data.zip
+</pre></div>
+</div>
+<p>Let’s first read the data and see how they look like.</p>
 <ul class="simple">
-<li>Let’s first read the data and take a look how they look:</li>
+<li>Import required packages and read in the input data:</li>
 </ul>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -467,9 +498,6 @@ This page was generated from <a class="reference external" href="https://github.
 <span class="kn">import</span> <span class="nn">shapely.speedups</span>
 <span class="o">%</span><span class="k">matplotlib</span> inline
 
-<span class="c1"># Let&#39;s enable speedups to make queries faster</span>
-<span class="n">shapely</span><span class="o">.</span><span class="n">speedups</span><span class="o">.</span><span class="n">enable</span><span class="p">()</span>
-
 <span class="c1"># File paths</span>
 <span class="n">border_fp</span> <span class="o">=</span> <span class="s2">&quot;data/Helsinki_borders.shp&quot;</span>
 <span class="n">grid_fp</span> <span class="o">=</span> <span class="s2">&quot;data/TravelTimes_to_5975375_RailwayStation.shp&quot;</span>
@@ -477,19 +505,29 @@ This page was generated from <a class="reference external" href="https://github.
 <span class="c1"># Read files</span>
 <span class="n">grid</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">grid_fp</span><span class="p">)</span>
 <span class="n">hel</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">border_fp</span><span class="p">)</span>
-
-<span class="c1"># Plot the layers</span>
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li>Visualize the layers:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Plot the layers</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
 <span class="n">hel</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x2637d634cc0&gt;
+<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x2552bc671d0&gt;
 </pre></div>
 </div>
 </div>
@@ -497,15 +535,16 @@ This page was generated from <a class="reference external" href="https://github.
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/notebooks_L4_geometric-operations_1_1.png" src="../../_images/notebooks_L4_geometric-operations_1_1.png" />
+<img alt="../../_images/notebooks_L4_geometric-operations_3_1.png" src="../../_images/notebooks_L4_geometric-operations_3_1.png" />
 </div>
 </div>
-<p>Here the blue area is the borders that we want to use for conducting the overlay analysis and select the geometries from the Polygon grid.</p>
+<p>Here the grey area is the Travel Time Matrix grid (13231 grid squares) that covers the Helsinki region, and the blue area represents the municipality of Helsinki. Our goal is to conduct an overlay analysis and select the geometries from the grid polygon layer that intersect with the Helsinki municipality polygon.</p>
+<p>When conducting overlay analysis, it is important to check that the CRS of the layers match!</p>
 <ul class="simple">
-<li>Always, when conducting GIS operations involving multiple layers, it is required to check that the CRS of the layers match:</li>
+<li>Check if Helsinki polygon and the grid polygon are in the same crs:</li>
 </ul>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -520,7 +559,7 @@ This page was generated from <a class="reference external" href="https://github.
 <code class="docutils literal notranslate"><span class="pre">'difference'</span></code>, and <code class="docutils literal notranslate"><span class="pre">'identity'</span></code>):</li>
 </ul>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -532,7 +571,7 @@ This page was generated from <a class="reference external" href="https://github.
 <li>Let’s plot our data and see what we have:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -541,11 +580,11 @@ This page was generated from <a class="reference external" href="https://github.
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x2637d5e9128&gt;
+<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x2552bd9afd0&gt;
 </pre></div>
 </div>
 </div>
@@ -553,15 +592,15 @@ This page was generated from <a class="reference external" href="https://github.
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/notebooks_L4_geometric-operations_7_1.png" src="../../_images/notebooks_L4_geometric-operations_7_1.png" />
+<img alt="../../_images/notebooks_L4_geometric-operations_9_1.png" src="../../_images/notebooks_L4_geometric-operations_9_1.png" />
 </div>
 </div>
-<p>As a result, we now have only those grid cells that intersect with the Helsinki borders. As we can see the grid cells are clipped based on the boundary.</p>
+<p>As a result, we now have only those grid cells that intersect with the Helsinki borders. As we can see <strong>the grid cells are clipped based on the boundary.</strong></p>
 <ul class="simple">
 <li>Whatabout the data attributes? Let’s see what we have:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -574,26 +613,26 @@ This page was generated from <a class="reference external" href="https://github.
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-     car_m_d  car_m_t  car_r_d  car_r_t  from_id  pt_m_d  pt_m_t  pt_m_tt  \
-94     29476       41    29483       46  5876274   29990      76       95
-95     29456       41    29462       46  5876275   29866      74       95
-96     36772       50    36778       56  5876278   33541     116      137
-97     36898       49    36904       56  5876279   33720     119      141
-193    29411       40    29418       44  5878128   29944      75       95
+   car_m_d  car_m_t  car_r_d  car_r_t  from_id  pt_m_d  pt_m_t  pt_m_tt  \
+0    29476       41    29483       46  5876274   29990      76       95
+1    29456       41    29462       46  5876275   29866      74       95
+2    36772       50    36778       56  5876278   33541     116      137
+3    36898       49    36904       56  5876279   33720     119      141
+4    29411       40    29418       44  5878128   29944      75       95
 
-     pt_r_d  pt_r_t  pt_r_tt    to_id  walk_d  walk_t    GML_ID   NAMEFIN  \
-94    24984      77       99  5975375   25532     365  27517366  Helsinki
-95    24860      75       93  5975375   25408     363  27517366  Helsinki
-96    44265     130      146  5975375   31110     444  27517366  Helsinki
-97    44444     132      155  5975375   31289     447  27517366  Helsinki
-193   24938      76       99  5975375   25486     364  27517366  Helsinki
+   pt_r_d  pt_r_t  pt_r_tt    to_id  walk_d  walk_t    GML_ID   NAMEFIN  \
+0   24984      77       99  5975375   25532     365  27517366  Helsinki
+1   24860      75       93  5975375   25408     363  27517366  Helsinki
+2   44265     130      146  5975375   31110     444  27517366  Helsinki
+3   44444     132      155  5975375   31289     447  27517366  Helsinki
+4   24938      76       99  5975375   25486     364  27517366  Helsinki
 
-         NAMESWE NATCODE                                           geometry
-94   Helsingfors     091  POLYGON ((402250.0001322526 6685750.000039577,...
-95   Helsingfors     091  POLYGON ((402367.8898583531 6685750.000039573,...
-96   Helsingfors     091  POLYGON ((403250.000132058 6685750.000039549, ...
-97   Helsingfors     091  POLYGON ((403456.4840652301 6685750.000039542,...
-193  Helsingfors     091  POLYGON ((402000.0001323065 6685500.000039622,...
+       NAMESWE NATCODE                                           geometry
+0  Helsingfors     091  POLYGON ((402250.0001322526 6685750.000039577,...
+1  Helsingfors     091  POLYGON ((402367.8898583531 6685750.000039573,...
+2  Helsingfors     091  POLYGON ((403250.000132058 6685750.000039549, ...
+3  Helsingfors     091  POLYGON ((403456.4840652301 6685750.000039542,...
+4  Helsingfors     091  POLYGON ((402000.0001323065 6685500.000039622,...
 </pre></div></div>
 </div>
 <p>As we can see, due to the overlay analysis, the dataset contains the attributes from both input layers.</p>
@@ -601,7 +640,7 @@ This page was generated from <a class="reference external" href="https://github.
 <li>Let’s save our result grid as a GeoJSON file that is commonly used file format nowadays for storing spatial data.</li>
 </ul>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -617,13 +656,14 @@ This page was generated from <a class="reference external" href="https://github.
 </div>
 <div class="section" id="Aggregating-data">
 <h2>Aggregating data<a class="headerlink" href="#Aggregating-data" title="Permalink to this headline">¶</a></h2>
-<p>Aggregating data can also be useful sometimes. What we mean by aggregation is that we basically merge Geometries into together by some common identifier. Suppose we are interested in studying continents, but we only have country-level data like the country dataset. By aggregation we would convert this into a continent-level dataset.</p>
+<p>Data aggregation refers to a process where we combine data into groups. When doing spatial data aggregation, we merge the geometries together into coarser units (based on some attribute), and can also calculate summary statistics for these combined geometries from the original, more detailed values. For example, suppose that we are interested in studying continents, but we only have country-level data like the country dataset. If we aggregate the data by continent, we would convert the
+country-level data into a continent-level dataset.</p>
 <p>In this tutorial, we will aggregate our travel time data by car travel times (column <code class="docutils literal notranslate"><span class="pre">car_r_t</span></code>), i.e.&nbsp;the grid cells that have the same travel time to Railway Station will be merged together.</p>
 <ul class="simple">
 <li>For doing the aggregation we will use a function called <code class="docutils literal notranslate"><span class="pre">dissolve()</span></code> that takes as input the column that will be used for conducting the aggregation:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -669,7 +709,7 @@ car_r_t
 <li>Let’s compare the number of cells in the layers before and after the aggregation:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -693,7 +733,7 @@ Rows in dissolved layer: 51
 <li>Let’s see what columns we have now in our GeoDataFrame:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -717,7 +757,7 @@ Index([&#39;geometry&#39;, &#39;car_m_d&#39;, &#39;car_m_t&#39;, &#39;car_r_d&#3
 <li>Let’s take a look at the indices of our GeoDataFrame:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -742,18 +782,49 @@ Int64Index([-1,  0,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
 <li>Now, we can for example select only such geometries from the layer that are for example exactly 15 minutes away from the Helsinki Railway Station:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[51]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Select only geometries that are within 15 minutes away</span>
-<span class="n">sel_15min</span> <span class="o">=</span> <span class="n">dissolved</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">15</span><span class="p">]</span>
-
-<span class="c1"># See the data type</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">sel_15min</span><span class="p">))</span>
-
-<span class="c1"># See the data</span>
-<span class="k">print</span><span class="p">(</span><span class="n">sel_15min</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="n">dissolved</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">15</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>geometry    (POLYGON ((388250.0001354316 6668750.000042891...
+car_m_d                                                 12035
+car_m_t                                                    18
+car_r_d                                                 11997
+from_id                                               5903886
+pt_m_d                                                  11568
+pt_m_t                                                     30
+pt_m_tt                                                    36
+pt_r_d                                                  11568
+pt_r_t                                                     34
+pt_r_tt                                                    37
+to_id                                                 5975375
+walk_d                                                  11638
+walk_t                                                    166
+GML_ID                                               27517366
+NAMEFIN                                              Helsinki
+NAMESWE                                           Helsingfors
+NATCODE                                                   091
+Name: 20, dtype: object
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># See the data type</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">dissolved</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">15</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
@@ -763,6 +834,23 @@ Int64Index([-1,  0,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 &lt;class &#39;pandas.core.series.Series&#39;&gt;
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># See the data</span>
+<span class="k">print</span><span class="p">(</span><span class="n">dissolved</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">15</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
 geometry    (POLYGON ((388250.0001354316 6668750.000042891...
 car_m_d                                                 12035
 car_m_t                                                    18
@@ -772,29 +860,40 @@ Name: 20, dtype: object
 </pre></div></div>
 </div>
 <p>As we can see, as a result, we have now a Pandas <code class="docutils literal notranslate"><span class="pre">Series</span></code> object containing basically one row from our original aggregated GeoDataFrame.</p>
+<p>Let’s also visualize those 15 minute grid cells.</p>
 <ul class="simple">
-<li>Let’s finally convert the <code class="docutils literal notranslate"><span class="pre">Series</span></code> into GeoDataFrame and plot it to see where those 15 minute grid cells are located:</li>
+<li>First, we need to convert the selected row back to a GeoDataFrame:</li>
 </ul>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[54]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Create a GeoDataFrame</span>
-<span class="n">geo</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">([</span><span class="n">sel_15min</span><span class="o">.</span><span class="n">values</span><span class="p">],</span> <span class="n">crs</span><span class="o">=</span><span class="n">dissolved</span><span class="o">.</span><span class="n">crs</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">dissolved</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
-
-<span class="c1"># Plot the grid cells that are 15 minutes a way from the Railway Station</span>
+<span class="n">selection</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">([</span><span class="n">dissolved</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">15</span><span class="p">]],</span> <span class="n">crs</span><span class="o">=</span><span class="n">dissolved</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li>Plot the selection on top of the entire grid:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Plot all the grid cells, and the grid cells that are 15 minutes a way from the Railway Station</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">dissolved</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
-<span class="n">geo</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">selection</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[54]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x2637dbafc18&gt;
+<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x2552c25be10&gt;
 </pre></div>
 </div>
 </div>
@@ -802,7 +901,7 @@ Name: 20, dtype: object
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/notebooks_L4_geometric-operations_24_1.png" src="../../_images/notebooks_L4_geometric-operations_24_1.png" />
+<img alt="../../_images/notebooks_L4_geometric-operations_30_1.png" src="../../_images/notebooks_L4_geometric-operations_30_1.png" />
 </div>
 </div>
 </div>
@@ -815,12 +914,11 @@ simplify geometric features in Python.</p>
 <li>Let’s first read the data and see how the river looks like:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[75]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
-<span class="kn">import</span> <span class="nn">pycrs</span>
 
 <span class="c1"># File path</span>
 <span class="n">fp</span> <span class="o">=</span> <span class="s2">&quot;data/Amazon_river.shp&quot;</span>
@@ -839,14 +937,14 @@ simplify geometric features in Python.</p>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-{&#39;proj&#39;: &#39;merc&#39;, &#39;lon_0&#39;: -43, &#39;lat_ts&#39;: -2, &#39;x_0&#39;: 5000000, &#39;y_0&#39;: 10000000, &#39;ellps&#39;: &#39;GRS80&#39;, &#39;units&#39;: &#39;m&#39;, &#39;no_defs&#39;: True}
+{&#39;ellps&#39;: &#39;GRS80&#39;, &#39;lat_ts&#39;: -2, &#39;y_0&#39;: 10000000, &#39;units&#39;: &#39;m&#39;, &#39;x_0&#39;: 5000000, &#39;proj&#39;: &#39;merc&#39;, &#39;no_defs&#39;: True, &#39;lon_0&#39;: -43}
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/notebooks_L4_geometric-operations_27_1.png" src="../../_images/notebooks_L4_geometric-operations_27_1.png" />
+<img alt="../../_images/notebooks_L4_geometric-operations_33_1.png" src="../../_images/notebooks_L4_geometric-operations_33_1.png" />
 </div>
 </div>
 <p>The LineString that is presented here is quite detailed, so let’s see how we can generalize them a bit. As we can see from the coordinate reference system, the data is projected in a metric system using <a class="reference external" href="http://spatialreference.org/ref/sr-org/7868/">Mercator projection based on SIRGAS datum</a>.</p>
@@ -854,7 +952,7 @@ simplify geometric features in Python.</p>
 <li>Generalization can be done easily by using a Shapely function called <code class="docutils literal notranslate"><span class="pre">.simplify()</span></code>. The <code class="docutils literal notranslate"><span class="pre">tolerance</span></code> parameter can be used to adjusts how much geometries should be generalized. <strong>The tolerance value is tied to the coordinate system of the geometries</strong>. Hence, the value we pass here is 20 000 <strong>meters</strong> (20 kilometers).</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[81]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -870,11 +968,11 @@ simplify geometric features in Python.</p>
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[81]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x2637f725390&gt;
+<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x2552bd5add8&gt;
 </pre></div>
 </div>
 </div>
@@ -882,7 +980,7 @@ simplify geometric features in Python.</p>
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/notebooks_L4_geometric-operations_29_1.png" src="../../_images/notebooks_L4_geometric-operations_29_1.png" />
+<img alt="../../_images/notebooks_L4_geometric-operations_35_1.png" src="../../_images/notebooks_L4_geometric-operations_35_1.png" />
 </div>
 </div>
 <p>Nice! As a result, now we have simplified our LineString quite significantly as we can see from the map.</p>
@@ -895,6 +993,15 @@ simplify geometric features in Python.</p>
           </div>
           <footer>
   
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="reclassify.html" class="btn btn-neutral float-right" title="Data reclassification" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../../lessons/L4/overview.html" class="btn btn-neutral float-left" title="Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
 
   <hr/>
 
@@ -902,7 +1009,7 @@ simplify geometric features in Python.</p>
     <p>
         &copy; Copyright 2019, Henrikki Tenkanen and Vuokko Heikinheimo, Digital Geography Lab, University of Helsinki
       <span class="lastupdated">
-        Last updated on Nov 12, 2019.
+        Last updated on Nov 18, 2019.
       </span>
 
     </p>
