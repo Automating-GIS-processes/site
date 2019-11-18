@@ -1,11 +1,17 @@
 Exercise 4
 ==========
 
+.. image:: https://img.shields.io/badge/launch-CSC%20notebook-blue.svg
+   :target: https://notebooks.csc.fi/#/blueprint/8d7886c2f0ac402aa99235f8d289a52b
+
 .. admonition:: Start your assignment
 
-    You can start working on your copy of Exercise 4 by `accepting the GitHub Classroom assignment <https://classroom.github.com/a/v7kgQTuF>`__.
+    You can start working on your copy of Exercise 4 by `accepting the GitHub Classroom assignment <https://classroom.github.com/a/FpA8NDxG>`__.
 
-You can also take a look at the open course copy of `Exercise 4 in the course GitHub repository <https://github.com/AutoGIS-2018/Exercise-4>`__.
+
+**Exercise 3 is due by Wednesday the 27th of November at 4pm** (day before the next practical session).
+
+You can also take a look at the open course copy of `Exercise 4 in the course GitHub repository <https://github.com/AutoGIS-2019/Exercise-4>`__.
 Note that you should not try to make changes to this copy of the exercise, but rather only to the copy available via GitHub Classroom.
 
 
@@ -15,7 +21,8 @@ Exercise 4 hints
 General
 -------
 
-- Documentation of the Travel Time Matrix dataset and explanation for different column names can be found at the Accessibility Research Group website: `Helsinki Region Travel Time Matrix 2015 <http://blogs.helsinki.fi/accessibility/helsinki-region-travel-time-matrix-2015>`__
+- Documentation of the Travel Time Matrix dataset and explanation for different column names can be found at the
+Digital Geography Lab's Accessibility Research Group website: `http://blogs.helsinki.fi/accessibility/ <http://blogs.helsinki.fi/accessibility/helsinki-region-travel-time-matrix-2015>`__
 
 Problem 1
 ---------
@@ -24,7 +31,7 @@ Problem 1
 - Keep columns `'from_id'`,`'to_id'`,`'pt_r_tt'` and `'car_r_t'` in the travel time data files
 - Join the data using columns `'from_id'` from the travel time data, and `'YKR_ID'` in the grid-shapefile
 - See hints for joining the travel time data to the grid shapefile from our earlier materials from first period (Geo-Python course): `Table join <https://geo-python.github.io/2017/lessons/L6/exercise-6-hints.html?highlight=merge#joining-data-from-one-dataframe-to-another>`__
-- Plotting the data takes a while (be patient!)
+- Plotting the data might take a moment (be patient!)
 
 Problem 2
 ---------
