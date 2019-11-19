@@ -65,6 +65,7 @@ Run this codes in order to get started with a GIS Python environment (tested to 
     conda install -c conda-forge mapclassify
     conda install -c conda-forge contextily
     conda install -c conda-forge folium
+    conda install -c conda-forge mplleaflet
     # ... install other packages
 
     # Install jupyter lab
