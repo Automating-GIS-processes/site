@@ -16,16 +16,13 @@ Note that you should not try to make changes to this copy of the exercise, but r
 
 
 Exercise 4 hints
-================
-
-General
--------
+---------------------
 
 Documentation of the Travel Time Matrix dataset and explanation for different column names can be found at the
 Digital Geography Lab's Accessibility Research Group website: `http://blogs.helsinki.fi/accessibility/ <http://blogs.helsinki.fi/accessibility/helsinki-region-travel-time-matrix-2015>`__
 
 Problem 1
----------
+~~~~~~~~~~~~
 
 - Note that the input travel time data is stored in text files when reading in the data.
 - Keep columns `'from_id'`,`'to_id'`,`'pt_r_tt'` and `'car_r_t'` in the travel time data files
@@ -34,7 +31,7 @@ Problem 1
 - Plotting the data might take a moment (be patient!)
 
 Problem 2
----------
+~~~~~~~~~~~~
 
 **General steps**:
 
@@ -43,8 +40,8 @@ Problem 2
  3. Find out for each row what is the column name of that shopping center that had the minimum travel time
  4. Make maps from the results
 
-Reading multiple files efficiently
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Reading multiple files efficiently**:
+
 
 Here we are reading multiple files from a folder. We could write the filepaths to all of those files but **it is not efficient!**
 Instead, you should use `glob()` -function from module glob to get a filtered list of those files that you want to read and then read the files by iterating over the list.
@@ -89,9 +86,7 @@ Now we have successfully filtered only certain types of files and as a result we
 can loop over and process.
 
 
-Finding out which shopping center is the closest
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+**Finding out which shopping center is the closest**:
 
 We can find out the minimum value from multiple columns simply by applying a `.min()` function to those columns of a row that we are interessted in:
 

@@ -172,7 +172,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../notebooks/L4/geometric-operations.html">Geometric operations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notebooks/L4/reclassify.html">Data reclassification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lessons/L4/exercise-4.html">Exercise 4</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lessons/L4/exercise-4.html#exercise-4-hints">Exercise 4 hints</a></li>
 </ul>
 
             
@@ -310,15 +309,18 @@ conda create -n gis <span class="nv">python</span><span class="o">=</span><span 
 <span class="c1"># Activate the environment</span>
 conda activate gis
 
-<span class="c1"># Install packages</span>
-conda install geopandas -c conda-forge
-conda install matplotlib -c conda-forge
-conda install geojson -c conda-forge
-conda install mapclassify -c conda-forge
-<span class="c1"># ... install other packages</span>
-
 <span class="c1"># Install jupyter lab</span>
 conda install jupyterlab -c conda-forge
+
+<span class="c1"># Install packages</span>
+conda install -c conda-forge geopandas
+conda install -c conda-forge matplotlib
+conda install -c conda-forge geojson
+conda install -c conda-forge mapclassify
+conda install -c conda-forge contextily
+conda install -c conda-forge folium
+conda install -c conda-forge mplleaflet
+<span class="c1"># ... install other packages</span>
 
 <span class="c1"># Start jupyter lab</span>
 jupyter lab
@@ -501,7 +503,7 @@ that is the one to use! Thus, in our case the first page that Google gives does 
     <p>
         &copy; Copyright 2019, Henrikki Tenkanen and Vuokko Heikinheimo, Digital Geography Lab, University of Helsinki
       <span class="lastupdated">
-        Last updated on Nov 15, 2019.
+        Last updated on Nov 19, 2019.
       </span>
 
     </p>
