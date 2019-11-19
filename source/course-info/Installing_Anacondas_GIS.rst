@@ -59,10 +59,12 @@ Run this codes in order to get started with a GIS Python environment (tested to 
     conda activate gis
 
     # Install packages
-    conda install geopandas -c conda-forge
-    conda install matplotlib -c conda-forge
-    conda install geojson -c conda-forge
-    conda install mapclassify -c conda-forge
+    conda install -c conda-forge geopandas
+    conda install -c conda-forge matplotlib
+    conda install -c conda-forge geojson
+    conda install -c conda-forge mapclassify
+    conda install -c conda-forge contextily
+    conda install -c conda-forge folium
     # ... install other packages
 
     # Install jupyter lab
