@@ -156,13 +156,10 @@
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../notebooks/L4/geometric-operations.html">Geometric operations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../notebooks/L4/reclassify.html">Data reclassification</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Exercise 4</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#exercise-4-hints">Exercise 4 hints</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#general">General</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#problem-1">Problem 1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#problem-2">Problem 2</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#reading-multiple-files-efficiently">Reading multiple files efficiently</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#finding-out-which-shopping-center-is-the-closest">Finding out which shopping center is the closest</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Exercise 4</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#exercise-4-hints">Exercise 4 hints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#problem-1">Problem 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#problem-2">Problem 2</a></li>
 </ul>
 </li>
 </ul>
@@ -276,16 +273,12 @@
 <p><strong>Exercise 3 is due by Wednesday the 27th of November at 4pm</strong> (day before the next practical session).</p>
 <p>You can also take a look at the open course copy of <a class="reference external" href="https://github.com/AutoGIS-2019/Exercise-4">Exercise 4 in the course GitHub repository</a>.
 Note that you should not try to make changes to this copy of the exercise, but rather only to the copy available via GitHub Classroom.</p>
-</div>
 <div class="section" id="exercise-4-hints">
-<h1>Exercise 4 hints<a class="headerlink" href="#exercise-4-hints" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="general">
-<h2>General<a class="headerlink" href="#general" title="Permalink to this headline">¶</a></h2>
+<h2>Exercise 4 hints<a class="headerlink" href="#exercise-4-hints" title="Permalink to this headline">¶</a></h2>
 <p>Documentation of the Travel Time Matrix dataset and explanation for different column names can be found at the
 Digital Geography Lab’s Accessibility Research Group website: <a class="reference external" href="http://blogs.helsinki.fi/accessibility/helsinki-region-travel-time-matrix-2015">http://blogs.helsinki.fi/accessibility/</a></p>
-</div>
 <div class="section" id="problem-1">
-<h2>Problem 1<a class="headerlink" href="#problem-1" title="Permalink to this headline">¶</a></h2>
+<h3>Problem 1<a class="headerlink" href="#problem-1" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Note that the input travel time data is stored in text files when reading in the data.</li>
 <li>Keep columns <cite>‘from_id’</cite>,`’to_id’<cite>,</cite>’pt_r_tt’` and <cite>‘car_r_t’</cite> in the travel time data files</li>
@@ -295,7 +288,7 @@ Digital Geography Lab’s Accessibility Research Group website: <a class="refere
 </ul>
 </div>
 <div class="section" id="problem-2">
-<h2>Problem 2<a class="headerlink" href="#problem-2" title="Permalink to this headline">¶</a></h2>
+<h3>Problem 2<a class="headerlink" href="#problem-2" title="Permalink to this headline">¶</a></h3>
 <p><strong>General steps</strong>:</p>
 <blockquote>
 <div><ol class="arabic simple">
@@ -305,8 +298,7 @@ Digital Geography Lab’s Accessibility Research Group website: <a class="refere
 <li>Make maps from the results</li>
 </ol>
 </div></blockquote>
-<div class="section" id="reading-multiple-files-efficiently">
-<h3>Reading multiple files efficiently<a class="headerlink" href="#reading-multiple-files-efficiently" title="Permalink to this headline">¶</a></h3>
+<p><strong>Reading multiple files efficiently</strong>:</p>
 <p>Here we are reading multiple files from a folder. We could write the filepaths to all of those files but <strong>it is not efficient!</strong>
 Instead, you should use <cite>glob()</cite> -function from module glob to get a filtered list of those files that you want to read and then read the files by iterating over the list.</p>
 <p>Listing and searching for file path names from file system can be done using a specific module called <a class="reference external" href="https://docs.python.org/3/library/glob.html">glob</a>.</p>
@@ -345,9 +337,7 @@ We provide those patterns as strings: the character * matches zero or more chara
 </div>
 <p>Now we have successfully filtered only certain types of files and as a result we have a list of files that we
 can loop over and process.</p>
-</div>
-<div class="section" id="finding-out-which-shopping-center-is-the-closest">
-<h3>Finding out which shopping center is the closest<a class="headerlink" href="#finding-out-which-shopping-center-is-the-closest" title="Permalink to this headline">¶</a></h3>
+<p><strong>Finding out which shopping center is the closest</strong>:</p>
 <p>We can find out the minimum value from multiple columns simply by applying a <cite>.min()</cite> function to those columns of a row that we are interessted in:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the columns that are used in the query</span>
 <span class="n">value_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;center1&#39;</span><span class="p">,</span> <span class="s1">&#39;center2&#39;</span><span class="p">,</span> <span class="s1">&#39;center3&#39;</span><span class="p">]</span>
@@ -387,7 +377,7 @@ See example from Geo-Python course: <a class="reference external" href="https://
     <p>
         &copy; Copyright 2019, Henrikki Tenkanen and Vuokko Heikinheimo, Digital Geography Lab, University of Helsinki
       <span class="lastupdated">
-        Last updated on Nov 18, 2019.
+        Last updated on Nov 19, 2019.
       </span>
 
     </p>
