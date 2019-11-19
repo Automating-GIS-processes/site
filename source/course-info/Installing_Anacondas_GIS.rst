@@ -58,6 +58,9 @@ Run this codes in order to get started with a GIS Python environment (tested to 
     # Activate the environment
     conda activate gis
 
+    # Install jupyter lab
+    conda install jupyterlab -c conda-forge
+
     # Install packages
     conda install -c conda-forge geopandas
     conda install -c conda-forge matplotlib
@@ -67,9 +70,6 @@ Run this codes in order to get started with a GIS Python environment (tested to 
     conda install -c conda-forge folium
     conda install -c conda-forge mplleaflet
     # ... install other packages
-
-    # Install jupyter lab
-    conda install jupyterlab -c conda-forge
 
     # Start jupyter lab
     jupyter lab
