@@ -36,7 +36,6 @@ Lesson videos
 
     **Contents:**
 
-        - quiz 0:00
         - Intro 0:00
         - Downloading input data 06:26
         - Reading in data 09:05
