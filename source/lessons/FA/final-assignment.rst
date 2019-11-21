@@ -73,6 +73,8 @@ The grading is based on a typical 0-5 scale. See detailed grading criteria :doc:
 The final assignment is graded based on:
 
 - Main analysis steps / functionality
+- Repeatability (it should be possible to repeat the main analysis steps for different input files / input parameters)
+- Quality of visualizations
 - Overall documentation of the work
 
 **Good documentation of the code and your project is highly appreciated!!!**
@@ -80,8 +82,6 @@ You should add necessary details to the `README.md`file, and use inline comments
 Ttake a look of these hints for using mardown in a useful way:
 - `using markdown in Jupyter Notebooks  <http://www.firstpythonnotebook.org/markdown/>`_
 - `General Markdown syntax guide <https://guides.github.com/features/mastering-markdown/>`__.
-
-
 
 
 .. _AccessViz:
