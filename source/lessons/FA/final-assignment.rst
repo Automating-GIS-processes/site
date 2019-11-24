@@ -84,8 +84,8 @@ The final assignment is graded based on:
 - Overall documentation of the work
 
 **Good documentation of the code and your project is highly appreciated!!!**
-You should add necessary details to the `README.md`file, and use inline comments and Markdown cells to document your work along the way.
-Ttake a look of these hints for using markdown in a useful way:
+You should add necessary details to the `README.md` file, and use inline comments and Markdown cells to document your work along the way. Take a look of these hints for using markdown in a useful way:
+
 - `using markdown in Jupyter Notebooks  <http://www.firstpythonnotebook.org/markdown/>`_
 - `General Markdown syntax guide <https://guides.github.com/features/mastering-markdown/>`__.
 
