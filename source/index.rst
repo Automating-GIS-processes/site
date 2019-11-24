@@ -170,6 +170,14 @@ Contents
    notebooks/L5/Employment_in_Finland.ipynb
    lessons/L5/share-on-github
    lessons/L5/exercise-5
+   
+.. toctree::
+   :maxdepth: 2
+   :caption: Final Assignment
+
+   lessons/FA/final-assignment
+   lessons/FA/final-assignment-grading
+   lessons/FA/fa-hints
 
     .. toctree::
        :maxdepth: 2
@@ -189,12 +197,4 @@ Contents
        lessons/L7/processing-toolbox
        lessons/L7/processing-script
        lessons/L7/exercise-7
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Final Assignment
-
-   lessons/FA/final-assignment
-   lessons/FA/final-assignment-grading
-   lessons/FA/fa-hints
 
