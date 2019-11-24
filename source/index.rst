@@ -170,7 +170,7 @@ Contents
    notebooks/L5/Employment_in_Finland.ipynb
    lessons/L5/share-on-github
    lessons/L5/exercise-5
-   
+
     .. toctree::
        :maxdepth: 2
        :caption: Lesson 6
