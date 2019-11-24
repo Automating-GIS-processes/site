@@ -9,17 +9,19 @@ Final assignment
     Start your final assignment by accepting the `GitHub Classroom <https://classroom.github.com/a/t_W3zC8p>`_ for the final work.
 
 
-YOu can view the instructions in here: https://github.com/AutoGIS-2019/Final-Assignment
-
 Aim of the work
 ---------------
 
 The final project is an individual task where the aim is to apply Python programming to automating a GIS analysis process.
-**The main aim is to create a workflow that can be easily repeated for similar input data.**
+**The main aim is to create a GIS analysis workflow that can be easily repeated for similar input data.**
+
 You can select a pre-defined topic, or develop your own question. You should take advantage of your programming skills
-(basics of python, reading and writing data, data analysis usign pandas, spatial analysis using geopandas,
+(basics of python, defining your own functions, reading and writing data, data analysis usign pandas, spatial analysis using geopandas,
 creating static and/or interactive data visualizations, ...), version control skills (git + GitHub),
 and good coding practices (writing readable code) when doing the final assignment.
+
+Final work topic
+~~~~~~~~~~~~~~~~~~~
 
 You have three options for the final project that you can choose from:
 
@@ -29,19 +31,23 @@ You have three options for the final project that you can choose from:
 
 Think about the final project as a challenge for yourself to show and implement the programming skills that you have learned this far. You have learned a lot already!
 
-Feel free to be creative with the final assignment. Here is the suggested structure of the work, that also serves as the basis for grading:
+Final work structure
+~~~~~~~~~~~~~~~~~~~
+
+Here is the suggested structure of the work, that also serves as the basis for grading:
 
 1. Data acquisition (Fetching data, subsetting data, storing intermediate outputs etc.)
 2. Data analysis (Enriching and analyzing the data, eg. spatial join, overlay, buffering, other calculations..)
 3. Visualization (Visualizing main results and other relevant information as maps and graphs)
-4. Repeating the steps for another set of input data (eg. another city, or another target location)
-5. Good documentation
+
+You can write your code into python script files and /or jupyter notebook files. You can freely organize your final work into one single file, or several files (for example, write your own functions into a separate `.py` file and apply them in one or several jupyter notebook `.ipynb` files.
+
+**The workflow should be repeatable and well documented.** In other words, anyone who gets a copy of your repository should be able to run your code, and read your code. 
 
 What should be returned?
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Organize all your code(s) / notebook(s) into your personal Final-Assignment repository and add links to all relevant files to the README.md file.
-Anyone who downloads the repository should be able to **read your code** and documentation and understand what is going on, and **run your code** in order to reproduce the same results :)
+Organize all your code(s) / notebook(s) into your personal Final-Assignment repository and add links to all relevant files to the README.md file. Anyone who downloads the repository should be able to **read your code** and documentation and understand what is going on, and **run your code** in order to reproduce the same results :)
 
 *Note: If your code requires some python packages not found in the csc notebooks environment, please mention them also in the README.md file and provide installation instrutions.*
 
@@ -79,10 +85,9 @@ The final assignment is graded based on:
 
 **Good documentation of the code and your project is highly appreciated!!!**
 You should add necessary details to the `README.md`file, and use inline comments and Markdown cells to document your work along the way.
-Ttake a look of these hints for using mardown in a useful way:
+Ttake a look of these hints for using markdown in a useful way:
 - `using markdown in Jupyter Notebooks  <http://www.firstpythonnotebook.org/markdown/>`_
 - `General Markdown syntax guide <https://guides.github.com/features/mastering-markdown/>`__.
-
 
 .. _AccessViz:
 
@@ -177,7 +182,7 @@ In this assignment, you can for example analyze (not limited to these ones):
 
  - **Accessibility**: Travel times (walking or driving by car) e.g. from railway station to different administrative areas of the city (neighborhoods), or to certain services (e.g. health care, education)
 
-    - Create e.g. a travel time map (choropleth) that shows travel times to centroids of different neighborhoods
+    - Create a tool that visualizes the travel times to selected sports facilities across the Helsinki region
 
  - **Urban design**: Street network indicators (see Lesson 6 and examples from `here <https://github.com/gboeing/osmnx-examples/tree/master/notebooks>`__)
 
