@@ -356,16 +356,16 @@ exterior ring and (possible) hole list tuples</li>
 <ul class="simple">
 <li>Let’s see what the variables look like</li>
 </ul>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [7]: </span><span class="k">print</span><span class="p">(</span><span class="n">point1</span><span class="p">)</span>
-<span class="go">POINT (2.2 4.2)</span>
+<pre class="literal-block">
+In [7]: print(point1)
+POINT (2.2 4.2)
 
-<span class="gp">In [8]: </span><span class="k">print</span><span class="p">(</span><span class="n">point3D</span><span class="p">)</span>
-<span class="go">                POINT Z (9.26 -2.456 0.57)</span>
+In [8]: print(point3D)
+POINT Z (9.26 -2.456 0.57)
 
-<span class="gp">In [9]: </span><span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">point1</span><span class="p">))</span>
-<span class="go">                                           &lt;class &#39;shapely.geometry.point.Point&#39;&gt;</span>
-</pre></div>
-</div>
+In [9]: print(type(point1))
+&lt;class 'shapely.geometry.point.Point'&gt;
+</pre>
 <p>We can see that the type of the point is shapely’s Point which is
 represented in a specific format that is based on
 <a class="reference external" href="https://trac.osgeo.org/geos/">GEOS</a> C++ library that is one of the
@@ -405,16 +405,16 @@ see how we can get out the actual coordinates:</p>
 <ul class="simple">
 <li>What is inside?</li>
 </ul>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [15]: </span><span class="k">print</span><span class="p">(</span><span class="n">xy</span><span class="p">)</span>
-<span class="go">(array(&#39;d&#39;, [2.2]), array(&#39;d&#39;, [4.2]))</span>
+<pre class="literal-block">
+In [15]: print(xy)
+(array('d', [2.2]), array('d', [4.2]))
 
-<span class="gp">In [16]: </span><span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="go">                                       2.2</span>
+In [16]: print(x)
+2.2
 
-<span class="gp">In [17]: </span><span class="k">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-<span class="go">                                           4.2</span>
-</pre></div>
-</div>
+In [17]: print(y)
+4.2
+</pre>
 <p>Okey, so we can see that the our xy variable contains a tuple where x and y are stored inside of a numpy arrays.
 However, our x and y variables are plain decimal numbers.</p>
 <ul class="simple">
@@ -450,16 +450,16 @@ coordinate-tuples:</li>
 <ul class="simple">
 <li>Let’s see how our LineString looks like</li>
 </ul>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [22]: </span><span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
-<span class="go">LINESTRING (2.2 4.2, 7.2 -25.1, 9.26 -2.456)</span>
+<pre class="literal-block">
+In [22]: print(line)
+LINESTRING (2.2 4.2, 7.2 -25.1, 9.26 -2.456)
 
-<span class="gp">In [23]: </span><span class="k">print</span><span class="p">(</span><span class="n">line2</span><span class="p">)</span>
-<span class="go">                                             LINESTRING (2.2 4.2, 7.2 -25.1, 9.26 -2.456)</span>
+In [23]: print(line2)
+LINESTRING (2.2 4.2, 7.2 -25.1, 9.26 -2.456)
 
-<span class="gp">In [24]: </span><span class="nb">type</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
-<span class="go">                                                                                          Out[24]: shapely.geometry.linestring.LineString</span>
-</pre></div>
-</div>
+In [24]: type(line)
+Out[24]: shapely.geometry.linestring.LineString
+</pre>
 <p>Ok, now we can see that variable line constitutes of multiple
 coordinate-pairs and the type of the data is shapely LineString.</p>
 <div class="section" id="linestring-attributes-and-functions">
@@ -490,43 +490,43 @@ y-coordinates respectively.</p>
 <li>We can extract only x or y coordinates by referring to those arrays
 as follows</li>
 </ul>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Extract x coordinates</span>
-<span class="gp">In [27]: </span><span class="n">line_x</span> <span class="o">=</span> <span class="n">lxy</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<pre class="literal-block">
+# Extract x coordinates
+In [27]: line_x = lxy[0]
 
-<span class="go"># Extract y coordinates straight from the LineObject by referring to a array at index 1</span>
-<span class="gp">In [28]: </span><span class="n">line_y</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">xy</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+# Extract y coordinates straight from the LineObject by referring to a array at index 1
+In [28]: line_y = line.xy[1]
 
-<span class="gp">In [29]: </span><span class="k">print</span><span class="p">(</span><span class="n">line_x</span><span class="p">)</span>
-<span class="go">array(&#39;d&#39;, [2.2, 7.2, 9.26])</span>
+In [29]: print(line_x)
+array('d', [2.2, 7.2, 9.26])
 
-<span class="gp">In [30]: </span><span class="k">print</span><span class="p">(</span><span class="n">line_y</span><span class="p">)</span>
-<span class="go">                             array(&#39;d&#39;, [4.2, -25.1, -2.456])</span>
-</pre></div>
-</div>
+In [30]: print(line_y)
+array('d', [4.2, -25.1, -2.456])
+</pre>
 <ul class="simple">
 <li>We can get specific attributes such as lenght of the line and center
 of the line (centroid) straight from the LineString object itself</li>
 </ul>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Get the lenght of the line</span>
-<span class="gp">In [31]: </span><span class="n">l_length</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">length</span>
+<pre class="literal-block">
+# Get the lenght of the line
+In [31]: l_length = line.length
 
-<span class="go"># Get the centroid of the line</span>
-<span class="gp">In [32]: </span><span class="n">l_centroid</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">centroid</span>
+# Get the centroid of the line
+In [32]: l_centroid = line.centroid
 
-<span class="go"># What type is the centroid?</span>
-<span class="gp">In [33]: </span><span class="n">centroid_type</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">l_centroid</span><span class="p">)</span>
+# What type is the centroid?
+In [33]: centroid_type = type(l_centroid)
 
-<span class="go"># Print the outputs</span>
-<span class="gp">In [34]: </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Length of our line: {0:.2f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">l_length</span><span class="p">))</span>
-<span class="go">Length of our line: 52.46</span>
+# Print the outputs
+In [34]: print(&quot;Length of our line: {0:.2f}&quot;.format(l_length))
+Length of our line: 52.46
 
-<span class="gp">In [35]: </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Centroid of our line: &quot;</span><span class="p">,</span> <span class="n">l_centroid</span><span class="p">)</span>
-<span class="go">                          Centroid of our line:  POINT (6.229961354035622 -11.89241115757239)</span>
+In [35]: print(&quot;Centroid of our line: &quot;, l_centroid)
+Centroid of our line:  POINT (6.229961354035622 -11.89241115757239)
 
-<span class="gp">In [36]: </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Type of the centroid:&quot;</span><span class="p">,</span> <span class="n">centroid_type</span><span class="p">)</span>
-<span class="go">                                                                                              Type of the centroid: &lt;class &#39;shapely.geometry.point.Point&#39;&gt;</span>
-</pre></div>
-</div>
+In [36]: print(&quot;Type of the centroid:&quot;, centroid_type)
+Type of the centroid: &lt;class 'shapely.geometry.point.Point'&gt;
+</pre>
 <p>Okey, so these are already fairly useful information for many different
 GIS tasks, and we didn’t even calculate anything yet! These attributes
 are built-in in every LineString object that is created. Notice that the
@@ -542,33 +542,33 @@ LineString were created but Polygon object only accepts
 coordinate-tuples as input. Polygon needs at least three
 coordinate-tuples:</li>
 </ul>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Create a Polygon from the coordinates</span>
-<span class="gp">In [37]: </span><span class="n">poly</span> <span class="o">=</span> <span class="n">Polygon</span><span class="p">([(</span><span class="mf">2.2</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">),</span> <span class="p">(</span><span class="mf">7.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">25.1</span><span class="p">),</span> <span class="p">(</span><span class="mf">9.26</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.456</span><span class="p">)])</span>
+<pre class="literal-block">
+# Create a Polygon from the coordinates
+In [37]: poly = Polygon([(2.2, 4.2), (7.2, -25.1), (9.26, -2.456)])
 
-<span class="go"># We can also use our previously created Point objects (same outcome)</span>
-<span class="go"># --&gt; notice that Polygon object requires x,y coordinates as input</span>
-<span class="gp">In [38]: </span><span class="n">poly2</span> <span class="o">=</span> <span class="n">Polygon</span><span class="p">([[</span><span class="n">p</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">y</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">[</span><span class="n">point1</span><span class="p">,</span> <span class="n">point2</span><span class="p">,</span> <span class="n">point3</span><span class="p">]])</span>
+# We can also use our previously created Point objects (same outcome)
+# --&gt; notice that Polygon object requires x,y coordinates as input
+In [38]: poly2 = Polygon([[p.x, p.y] for p in [point1, point2, point3]])
 
-<span class="go"># Geometry type can be accessed as a String</span>
-<span class="gp">In [39]: </span><span class="n">poly_type</span> <span class="o">=</span> <span class="n">poly</span><span class="o">.</span><span class="n">geom_type</span>
+# Geometry type can be accessed as a String
+In [39]: poly_type = poly.geom_type
 
-<span class="go"># Using the Python&#39;s type function gives the type in a different format</span>
-<span class="gp">In [40]: </span><span class="n">poly_type2</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
+# Using the Python's type function gives the type in a different format
+In [40]: poly_type2 = type(poly)
 
-<span class="go"># Let&#39;s see how our Polygon looks like</span>
-<span class="gp">In [41]: </span><span class="k">print</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
-<span class="go">POLYGON ((2.2 4.2, 7.2 -25.1, 9.26 -2.456, 2.2 4.2))</span>
+# Let's see how our Polygon looks like
+In [41]: print(poly)
+POLYGON ((2.2 4.2, 7.2 -25.1, 9.26 -2.456, 2.2 4.2))
 
-<span class="gp">In [42]: </span><span class="k">print</span><span class="p">(</span><span class="n">poly2</span><span class="p">)</span>
-<span class="go">                                                     POLYGON ((2.2 4.2, 7.2 -25.1, 9.26 -2.456, 2.2 4.2))</span>
+In [42]: print(poly2)
+POLYGON ((2.2 4.2, 7.2 -25.1, 9.26 -2.456, 2.2 4.2))
 
-<span class="gp">In [43]: </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Geometry type as text:&quot;</span><span class="p">,</span> <span class="n">poly_type</span><span class="p">)</span>
-<span class="go">                                                                                                          Geometry type as text: Polygon</span>
+In [43]: print(&quot;Geometry type as text:&quot;, poly_type)
+Geometry type as text: Polygon
 
-<span class="gp">In [44]: </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Geometry how Python shows it:&quot;</span><span class="p">,</span> <span class="n">poly_type2</span><span class="p">)</span>
-<span class="go">                                                                                                                                         Geometry how Python shows it: &lt;class &#39;shapely.geometry.polygon.Polygon&#39;&gt;</span>
-</pre></div>
-</div>
+In [44]: print(&quot;Geometry how Python shows it:&quot;, poly_type2)
+Geometry how Python shows it: &lt;class 'shapely.geometry.polygon.Polygon'&gt;
+</pre>
 <p>Notice that Polygon has double parentheses around the coordinates. This
 is because Polygon can also have holes inside of it. As the help of
 Polygon -object tells, a Polygon can be constructed using exterior
@@ -611,16 +611,16 @@ coordinates creates a hole inside the Polygon:</p>
 <ul class="simple">
 <li>Let’s see what we have now:</li>
 </ul>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [49]: </span><span class="k">print</span><span class="p">(</span><span class="n">world</span><span class="p">)</span>
-<span class="go">POLYGON ((-180 90, -180 -90, 180 -90, 180 90, -180 90))</span>
+<pre class="literal-block">
+In [49]: print(world)
+POLYGON ((-180 90, -180 -90, 180 -90, 180 90, -180 90))
 
-<span class="gp">In [50]: </span><span class="k">print</span><span class="p">(</span><span class="n">world_has_a_hole</span><span class="p">)</span>
-<span class="go">                                                        POLYGON ((-180 90, -180 -90, 180 -90, 180 90, -180 90), (-170 80, -170 -80, 170 -80, 170 80, -170 80))</span>
+In [50]: print(world_has_a_hole)
+POLYGON ((-180 90, -180 -90, 180 -90, 180 90, -180 90), (-170 80, -170 -80, 170 -80, 170 80, -170 80))
 
-<span class="gp">In [51]: </span><span class="nb">type</span><span class="p">(</span><span class="n">world_has_a_hole</span><span class="p">)</span>
-<span class="go">                                                                                                                                                               Out[51]: shapely.geometry.polygon.Polygon</span>
-</pre></div>
-</div>
+In [51]: type(world_has_a_hole)
+Out[51]: shapely.geometry.polygon.Polygon
+</pre>
 <p>Now we can see that the polygon has two different tuples of coordinates.
 The first one represents the outerior and the second one represents the
 hole inside of the Polygon.</p>
@@ -650,22 +650,22 @@ Polygon</li>
 <ul class="simple">
 <li>Let’s see what we have now</li>
 </ul>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [57]: </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Poly centroid: &quot;</span><span class="p">,</span> <span class="n">world_centroid</span><span class="p">)</span>
-<span class="go">Poly centroid:  POINT (-0 -0)</span>
+<pre class="literal-block">
+In [57]: print(&quot;Poly centroid: &quot;, world_centroid)
+Poly centroid:  POINT (-0 -0)
 
-<span class="gp">In [58]: </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Poly Area: &quot;</span><span class="p">,</span> <span class="n">world_area</span><span class="p">)</span>
-<span class="go">                              Poly Area:  64800.0</span>
+In [58]: print(&quot;Poly Area: &quot;, world_area)
+Poly Area:  64800.0
 
-<span class="gp">In [59]: </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Poly Bounding Box: &quot;</span><span class="p">,</span> <span class="n">world_bbox</span><span class="p">)</span>
-<span class="go">                                                  Poly Bounding Box:  (-180.0, -90.0, 180.0, 90.0)</span>
+In [59]: print(&quot;Poly Bounding Box: &quot;, world_bbox)
+Poly Bounding Box:  (-180.0, -90.0, 180.0, 90.0)
 
-<span class="gp">In [60]: </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Poly Exterior: &quot;</span><span class="p">,</span> <span class="n">world_ext</span><span class="p">)</span>
-<span class="go">                                                                                                   Poly Exterior:  LINEARRING (-180 90, -180 -90, 180 -90, 180 90, -180 90)</span>
+In [60]: print(&quot;Poly Exterior: &quot;, world_ext)
+Poly Exterior:  LINEARRING (-180 90, -180 -90, 180 -90, 180 90, -180 90)
 
-<span class="gp">In [61]: </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Poly Exterior Length: &quot;</span><span class="p">,</span> <span class="n">world_ext_length</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                            Poly Exterior Length:  1080.0</span>
-</pre></div>
-</div>
+In [61]: print(&quot;Poly Exterior Length: &quot;, world_ext_length)
+Poly Exterior Length:  1080.0
+</pre>
 </div>
 </div>
 <div class="section" id="geometry-collections-optional">
@@ -738,19 +738,19 @@ to create one using Shapely.</p>
 <ul class="simple">
 <li>Let’s see what do we have:</li>
 </ul>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [75]: </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;MultiPoint:&quot;</span><span class="p">,</span> <span class="n">multi_point</span><span class="p">)</span>
-<span class="go">MultiPoint: MULTIPOINT (2.2 4.2, 7.2 -25.1, 9.26 -2.456)</span>
+<pre class="literal-block">
+In [75]: print(&quot;MultiPoint:&quot;, multi_point)
+MultiPoint: MULTIPOINT (2.2 4.2, 7.2 -25.1, 9.26 -2.456)
 
-<span class="gp">In [76]: </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;MultiLine: &quot;</span><span class="p">,</span> <span class="n">multi_line</span><span class="p">)</span>
-<span class="go">                                                         MultiLine:  MULTILINESTRING ((2.2 4.2, 7.2 -25.1), (7.2 -25.1, 9.26 -2.456))</span>
+In [76]: print(&quot;MultiLine: &quot;, multi_line)
+MultiLine:  MULTILINESTRING ((2.2 4.2, 7.2 -25.1), (7.2 -25.1, 9.26 -2.456))
 
-<span class="gp">In [77]: </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Bounding box: &quot;</span><span class="p">,</span> <span class="n">east_poly_box</span><span class="p">)</span>
-<span class="go">                                                                                                                                      Bounding box:  POLYGON ((180 -90, 180 90, 0 90, 0 -90, 180 -90))</span>
+In [77]: print(&quot;Bounding box: &quot;, east_poly_box)
+Bounding box:  POLYGON ((180 -90, 180 90, 0 90, 0 -90, 180 -90))
 
-<span class="gp">In [78]: </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;MultiPoly: &quot;</span><span class="p">,</span> <span class="n">multi_poly</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                                                       MultiPoly:  MULTIPOLYGON (((-180 90, -180 -90, 0 -90, 0 90, -180 90), (-170 80, -170 -80, -10 -80, -10 80, -170 80)), ((180 -90, 180 90, 0 90, 0 -90, 180 -90)))</span>
-</pre></div>
-</div>
+In [78]: print(&quot;MultiPoly: &quot;, multi_poly)
+MultiPoly:  MULTIPOLYGON (((-180 90, -180 -90, 0 -90, 0 90, -180 90), (-170 80, -170 -80, -10 -80, -10 80, -170 80)), ((180 -90, 180 90, 0 90, 0 -90, 180 -90)))
+</pre>
 <p>We can see that the outputs are similar to the basic geometric objects
 that we created previously but now these objects contain multiple
 features of those points, lines or polygons.</p>
@@ -782,22 +782,22 @@ features of those points, lines or polygons.</p>
 <ul class="simple">
 <li>Let’s see what do we have:</li>
 </ul>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [84]: </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Convex hull of the points: &quot;</span><span class="p">,</span> <span class="n">convex</span><span class="p">)</span>
-<span class="go">Convex hull of the points:  POLYGON ((7.2 -25.1, 2.2 4.2, 9.26 -2.456, 7.2 -25.1))</span>
+<pre class="literal-block">
+In [84]: print(&quot;Convex hull of the points: &quot;, convex)
+Convex hull of the points:  POLYGON ((7.2 -25.1, 2.2 4.2, 9.26 -2.456, 7.2 -25.1))
 
-<span class="gp">In [85]: </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Number of lines in MultiLineString:&quot;</span><span class="p">,</span> <span class="n">lines_count</span><span class="p">)</span>
-<span class="go">                                                                                   Number of lines in MultiLineString: 2</span>
+In [85]: print(&quot;Number of lines in MultiLineString:&quot;, lines_count)
+Number of lines in MultiLineString: 2
 
-<span class="gp">In [86]: </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Area of our MultiPolygon:&quot;</span><span class="p">,</span> <span class="n">multi_poly_area</span><span class="p">)</span>
-<span class="go">                                                                                                                         Area of our MultiPolygon: 39200.0</span>
+In [86]: print(&quot;Area of our MultiPolygon:&quot;, multi_poly_area)
+Area of our MultiPolygon: 39200.0
 
-<span class="gp">In [87]: </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Area of our Western Hemisphere polygon:&quot;</span><span class="p">,</span> <span class="n">west_area</span><span class="p">)</span>
-<span class="go">                                                                                                                                                           Area of our Western Hemisphere polygon: 6800.0</span>
+In [87]: print(&quot;Area of our Western Hemisphere polygon:&quot;, west_area)
+Area of our Western Hemisphere polygon: 6800.0
 
-<span class="gp">In [88]: </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Is polygon valid?: &quot;</span><span class="p">,</span> <span class="n">valid</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                                                          Is polygon valid?:  False</span>
-</pre></div>
-</div>
+In [88]: print(&quot;Is polygon valid?: &quot;, valid)
+Is polygon valid?:  False
+</pre>
 <p>From the above we can see that MultiPolygons have exactly the same
 attributes available as single geometric objects but now the information
 such as area calculates the area of ALL of the individual -objects
@@ -821,7 +821,7 @@ each other.</p>
     <p>
         &copy; Copyright 2018, Henrikki Tenkanen
       <span class="lastupdated">
-        Last updated on Nov 11, 2018.
+        Last updated on Oct 30, 2017.
       </span>
 
     </p>

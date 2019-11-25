@@ -338,61 +338,41 @@ data looks like following:</p>
 <ul class="simple">
 <li>Let’s</li>
 </ul>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Import the geocoding tool</span>
-<span class="gp">In [2]: </span><span class="kn">from</span> <span class="nn">geopandas.tools</span> <span class="kn">import</span> <span class="n">geocode</span>
-<span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-2-f9b0f1186ddc&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">geopandas.tools</span> <span class="kn">import</span> <span class="n">geocode</span>
+<pre class="literal-block">
+# Import the geocoding tool
+In [2]: from geopandas.tools import geocode
 
-<span class="nn">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/geopandas/__init__.py</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">geopandas.array</span> <span class="kn">import</span> <span class="n">_points_from_xy</span> <span class="k">as</span> <span class="n">points_from_xy</span>  <span class="c1"># noqa</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> 
-<span class="ne">----&gt; </span><span class="mi">5</span> <span class="kn">from</span> <span class="nn">geopandas.io.file</span> <span class="kn">import</span> <span class="n">read_file</span>  <span class="c1"># noqa</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">from</span> <span class="nn">geopandas.io.sql</span> <span class="kn">import</span> <span class="n">read_postgis</span>  <span class="c1"># noqa</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">from</span> <span class="nn">geopandas.tools</span> <span class="kn">import</span> <span class="n">sjoin</span>  <span class="c1"># noqa</span>
+# Geocode addresses with Nominatim backend
+In [3]: geo = geocode(data['addr'], provider='nominatim')
+---------------------------------------------------------------------------
+ModuleNotFoundError                       Traceback (most recent call last)
+&lt;ipython-input-3-0311dcae81b6&gt; in &lt;module&gt;()
+----&gt; 1 geo = geocode(data['addr'], provider='nominatim')
 
-<span class="nn">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/geopandas/io/file.py</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">six</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> 
-<span class="ne">----&gt; </span><span class="mi">6</span> <span class="kn">import</span> <span class="nn">fiona</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> 
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="kn">from</span> <span class="nn">geopandas</span> <span class="kn">import</span> <span class="n">GeoDataFrame</span><span class="p">,</span> <span class="n">GeoSeries</span>
+~/miniconda/envs/autogis-environment/lib/python3.7/site-packages/geopandas/tools/geocoding.py in geocode(strings, provider, **kwargs)
+     71         throttle_time = 0.25
+     72     else:
+---&gt; 73         throttle_time = _get_throttle_time(provider)
+     74 
+     75     return _query(strings, True, provider, throttle_time, **kwargs)
 
-<span class="nn">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/fiona/__init__.py</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">67</span> <span class="kn">from</span> <span class="nn">six</span> <span class="kn">import</span> <span class="n">string_types</span>
-<span class="g g-Whitespace">     </span><span class="mi">68</span> 
-<span class="ne">---&gt; </span><span class="mi">69</span> <span class="kn">from</span> <span class="nn">fiona.collection</span> <span class="kn">import</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">BytesCollection</span><span class="p">,</span> <span class="n">vsi_path</span>
-<span class="g g-Whitespace">     </span><span class="mi">70</span> <span class="kn">from</span> <span class="nn">fiona._drivers</span> <span class="kn">import</span> <span class="n">driver_count</span><span class="p">,</span> <span class="n">GDALEnv</span>
-<span class="g g-Whitespace">     </span><span class="mi">71</span> <span class="kn">from</span> <span class="nn">fiona.drvsupport</span> <span class="kn">import</span> <span class="n">supported_drivers</span>
+~/miniconda/envs/autogis-environment/lib/python3.7/site-packages/geopandas/tools/geocoding.py in _get_throttle_time(provider)
+     17     that specify rate limits in their terms of service.
+     18     &quot;&quot;&quot;
+---&gt; 19     import geopy.geocoders
+     20 
+     21     # https://operations.osmfoundation.org/policies/nominatim/
 
-<span class="nn">~/miniconda/envs/autogis-environment/lib/python3.5/site-packages/fiona/collection.py</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> 
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="kn">from</span> <span class="nn">fiona</span> <span class="kn">import</span> <span class="n">compat</span>
-<span class="ne">----&gt; </span><span class="mi">9</span> <span class="kn">from</span> <span class="nn">fiona.ogrext</span> <span class="kn">import</span> <span class="n">Iterator</span><span class="p">,</span> <span class="n">ItemsIterator</span><span class="p">,</span> <span class="n">KeysIterator</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="kn">from</span> <span class="nn">fiona.ogrext</span> <span class="kn">import</span> <span class="n">Session</span><span class="p">,</span> <span class="n">WritingSession</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="kn">from</span> <span class="nn">fiona.ogrext</span> <span class="kn">import</span> <span class="p">(</span>
+ModuleNotFoundError: No module named 'geopy'
 
-<span class="ne">ImportError</span>: libpoppler.so.76: cannot open shared object file: No such file or directory
+In [4]: geo.head(2)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-4-fee2bd90ad10&gt; in &lt;module&gt;()
+----&gt; 1 geo.head(2)
 
-<span class="c1"># Geocode addresses with Nominatim backend</span>
-<span class="gp">In [3]: </span><span class="n">geo</span> <span class="o">=</span> <span class="n">geocode</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;addr&#39;</span><span class="p">],</span> <span class="n">provider</span><span class="o">=</span><span class="s1">&#39;nominatim&#39;</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             ---------------------------------------------------------------------------</span>
-<span class="go">NameError                                 Traceback (most recent call last)</span>
-<span class="go">&lt;ipython-input-3-0311dcae81b6&gt; in &lt;module&gt;()</span>
-<span class="go">----&gt; 1 geo = geocode(data[&#39;addr&#39;], provider=&#39;nominatim&#39;)</span>
-
-<span class="go">NameError: name &#39;geocode&#39; is not defined</span>
-
-<span class="gp">In [4]: </span><span class="n">geo</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ---------------------------------------------------------------------------</span>
-<span class="go">NameError                                 Traceback (most recent call last)</span>
-<span class="go">&lt;ipython-input-4-fee2bd90ad10&gt; in &lt;module&gt;()</span>
-<span class="go">----&gt; 1 geo.head(2)</span>
-
-<span class="go">NameError: name &#39;geo&#39; is not defined</span>
-</pre></div>
-</div>
+NameError: name 'geo' is not defined
+</pre>
 <p>And Voilà! As a result we have a GeoDataFrame that contains our original
 address and a ‘geometry’ column containing Shapely Point -objects that
 we can use for exporting the addresses to a Shapefile for example.
@@ -412,23 +392,23 @@ In fact, now we have such a situation as we are geocoding our addresses where th
 as in our original <code class="docutils literal notranslate"><span class="pre">data</span></code> DataFrame.</p>
 <p>Hence, we can join those tables together with <code class="docutils literal notranslate"><span class="pre">join()</span></code> -function which merges the two DataFrames together
 based on index by default.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="n">join</span> <span class="o">=</span> <span class="n">geo</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-5-4f19346db1fa&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">join</span> <span class="o">=</span> <span class="n">geo</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<pre class="literal-block">
+In [5]: join = geo.join(data)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-5-4f19346db1fa&gt; in &lt;module&gt;()
+----&gt; 1 join = geo.join(data)
 
-<span class="ne">NameError</span>: name &#39;geo&#39; is not defined
+NameError: name 'geo' is not defined
 
-<span class="gp">In [6]: </span><span class="n">join</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-<span class="go">                                                                                                                                                                                                                                                                         ---------------------------------------------------------------------------</span>
-<span class="go">NameError                                 Traceback (most recent call last)</span>
-<span class="go">&lt;ipython-input-6-5af4a6625532&gt; in &lt;module&gt;()</span>
-<span class="go">----&gt; 1 join.head()</span>
+In [6]: join.head()
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-6-5af4a6625532&gt; in &lt;module&gt;()
+----&gt; 1 join.head()
 
-<span class="go">NameError: name &#39;join&#39; is not defined</span>
-</pre></div>
-</div>
+NameError: name 'join' is not defined
+</pre>
 <ul class="simple">
 <li>Let’s also check the data type of our new <code class="docutils literal notranslate"><span class="pre">join</span></code> table.</li>
 </ul>

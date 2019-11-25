@@ -1,100 +1,93 @@
 Final assignment
 ================
 
-Start your final assignment by accepting the `GitHub Classroom <https://classroom.github.com/a/ZsdqHr4m>`_ for the final work.
+.. image:: https://img.shields.io/badge/launch-CSC%20notebook-blue.svg
+   :target: https://notebooks.csc.fi/#/blueprint/8d7886c2f0ac402aa99235f8d289a52b
+
+.. admonition:: Start your assignment
+
+    Start your final assignment by accepting the `GitHub Classroom <https://classroom.github.com/a/t_W3zC8p>`_ for the final work.
+
 
 Aim of the work
 ---------------
 
-The final assignment is a project of your own where the aim is to apply the programming techniques and skills that we have learned during the course and do something useful with them.
+The final project is an individual task where the aim is to apply Python programming to automating a GIS analysis process.
+**The main aim is to create a GIS analysis workflow that can be easily repeated for similar input data.**
+
+You can select a pre-defined topic, or develop your own question. You should take advantage of your programming skills
+(basics of python, defining your own functions, reading and writing data, data analysis usign pandas, spatial analysis using geopandas,
+creating static and/or interactive data visualizations, ...), version control skills (git + GitHub),
+and good coding practices (writing readable code) when doing the final assignment.
+
+Final work topic
+~~~~~~~~~~~~~~~~~~~
 
 You have three options for the final project that you can choose from:
 
-#. AccessViz_ which is a GIS-tool that can visualize and compare travel times by different travel modes in Helsinki Region.
-#. UrbanIndicators_ which is a *"mini-study"* where the aim is to use different urban indicators to understand urban areas and compare them to each other.
-#. Your-own-project_. If you have a tool, problem or analysis of your own in mind, send your idea to us by email or in Slack (before Friday 21.12.2018), and we can discuss and accept your idea if it is suitable for the final project.
+#. AccessViz_ - a GIS-tool that can visualize and compare travel times by different travel modes in Helsinki Region.
+#. UrbanIndicators_ - a workflow that calculates and reports different urban indicators for an urban region, and allows the comparison of different urban areas based on these indicators.
+#. Your-own-project_ - your own tool or analysis process (for example, related to your thesis!). Suggest your idea before the last practical exercise!
 
-Think the final project as a challenge for yourself to show and implement the programming skills that you have learned this far. You have learned a lot already!
+Think about the final project as a challenge for yourself to show and implement the programming skills that you have learned this far. You have learned a lot already!
 
-Feel free to be creative with the final assignment. Here is the suggested structure of the work, that also serves as the basis for grading:
+Final work structure
+~~~~~~~~~~~~~~~~~~~
+
+Here is the suggested structure of the work, that also serves as the basis for grading:
 
 1. Data acquisition (Fetching data, subsetting data, storing intermediate outputs etc.)
 2. Data analysis (Enriching and analyzing the data, eg. spatial join, overlay, buffering, other calculations..)
 3. Visualization (Visualizing main results and other relevant information as maps and graphs)
-4. Repeating the steps for another set of input data (eg. another city, or another target location)
-5. Good documentation
 
+You can write your code into python script files and /or jupyter notebook files. You can freely organize your final work into one single file, or several files (for example, write your own functions into a separate `.py` file and apply them in one or several jupyter notebook `.ipynb` files.
+
+**The workflow should be repeatable and well documented.** In other words, anyone who gets a copy of your repository should be able to run your code, and read your code. 
 
 What should be returned?
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Write your codes into a single (or multiple) notebook(s) and return the codes to your GitHub repository.
-Good documentation of the code will be highly regarded and
-will affect positively in the grading of the final work. You can choose yourself what tools / techniques / modules you want to use.
+Organize all your code(s) / notebook(s) into your personal Final-Assignment repository and add links to all relevant files to the README.md file. Anyone who downloads the repository should be able to **read your code** and documentation and understand what is going on, and **run your code** in order to reproduce the same results :)
+
+*Note: If your code requires some python packages not found in the csc notebooks environment, please mention them also in the README.md file and provide installation instrutions.*
 
 When is the deadline?
 ~~~~~~~~~~~~~~~~~~~~~
 
-You should **return your final assignment in GitHub by 11.1.2018 at 23:59** at latest. Of course, you can return your work also before the deadline! If you are ready
-before the deadline, please send us a note about it (e.g. in Slack), so that we know and can start evaluating your work.
+Label your submissions as "submitted" in the exercise repository's `README.md` under "status" once you are finished with the Final assignment.
+GitHub classroom creates an automatic commit to the repository at the deadline.
+
+**Deadline: January 15th 2020 at 4pm**
+- You should commit all changes to GitHub by Wednesday the 15th of January 2020 at 16:00.
+- Those who submit by this deadline will get their grades at the end of January.
+- If you need your grade earlier, please contact Vuokko via Slack so we can agree on an earlier schedule
+
+**Late submissions:**
+- Submitted between Wednesday the 15th of January 2020 at 16:00 and Wednesday the 26th of February 2020 at 16:00
+- Will get grades by easter
+- Maximum grade 4/5
+
+**Very late submissions:**
+- Submitted after Wednesday the 26th of February 2020 at 16:00
+- Agree with Vuokko on the schedule :)
+- Maximum grade 3/5
+
 
 Grading
 ~~~~~~~
+The grading is based on a typical 0-5 scale. See detailed grading criteria :doc:`here <final-assignment-grading>`.
+The final assignment is graded based on:
 
-In the evaluation of the final work different functionalities of the code are evaluated individually.
-Thus, if you do not get all different parts / functionalities of the tool working that are described below, it is not the *"the end of the world"*.
-The main idea in the final project is that you try to use your skills and do GIS analyses in Python **independently**.
+- Main analysis steps / functionality
+- Repeatability (it should be possible to repeat the main analysis steps for different input files / input parameters)
+- Quality of visualizations
+- Overall documentation of the work
 
 **Good documentation of the code and your project is highly appreciated!!!**
-One more time: Good documentation of the code and your project is highly appreciated!
-You should use Markdown cells to document your work along the way (take a look of these small tutorials to see `how to add a Markdown cell to Notebook <http://www.firstpythonnotebook.org/markdown/>`_ and `how to use Markdown syntax <https://guides.github.com/features/mastering-markdown/>`_git st ).
+You should add necessary details to the `README.md` file, and use inline comments and Markdown cells to document your work along the way. Take a look of these hints for using markdown in a useful way:
 
-The grading is based on a typical 0-5 scale. See detailed grading criteria :doc:`here <final-assignment-grading>`.
-
-Best practices
---------------
-
-There are several guidelines how to do programming "in a proper way". These best practices when doing programming are well described in `this article <http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001745>`_
-Wilson et al. (2014) that include aspects such as:
-
- 1. *"Write programs for people, not computers."*
-
- 2. *"Let the computer do the work."*
-
- 3. *"Make incremental changes."*
-
- 4. *"Don't repeat yourself (or others)."*
-
- 5. *"Plan for mistakes."*
-
- 6. *"Optimize software only after it works correctly."*
-
- 7. *"Document design and purpose, not mechanics."*
-
- 8. *"Collaborate."*
-
-These kind of guidelines are extremely useful. I recommend that you take at least a short look at the article before starting your final project because it helps you to
-finnish your project efficiently and in such a manner that works and makes your life (and others) easier!
-
-For this final project, the most important aspects from the list above are numbers 1-4 and number 7 (although they are all important).
-Thus, at least take a look at those aspects from the article before
-starting your work.
-
-Documenting your work
-~~~~~~~~~~~~~~~~~~~~~
-
-Good documentation is one the most important aspect when doing any programming. It allows us (and also yourself) to understand what you have done, or tried to do with the code. Thus, we cannot emphasize it more to document your codes, and the work in general, properly. Hence, use comments in the code and also using Markdown cells where you explain the purpose of different parts of the code.
-
-Commit your work frequently!
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-In the previous exercises that we have done during the course, it has not maybe been that important that you commit (upload) your work frequently to GitHub because the size and complexity of the codes have been relatively low. However, now as you are doing a larger programming project, I really recommend that you **commit and upload your changes to GitHub frequently!** Whenever you get some functionality working in your code, it is a good time to commit your changes. In that way, your work is saved and if something goes wrong and your code does not work anymore as planned, you can **go back in history** and start from a state that was still working.
-
-Hints
-~~~~~
-
-Similarly as before, we gather hints separately to `here <https://automating-gis-processes.github.io/2018/lessons/FA/fa-hints.html>`_. However, because this is the final work, we encourage you to try hard yourself first, find information from the internet, and ask your friends before asking help from us. However, if there is a common problem or some of the instructions needs more
-explanation, we will update those into the hints page.
+- `using markdown in Jupyter Notebooks  <http://www.firstpythonnotebook.org/markdown/>`_
+- `General Markdown syntax guide <https://guides.github.com/features/mastering-markdown/>`__.
 
 .. _AccessViz:
 
@@ -189,7 +182,7 @@ In this assignment, you can for example analyze (not limited to these ones):
 
  - **Accessibility**: Travel times (walking or driving by car) e.g. from railway station to different administrative areas of the city (neighborhoods), or to certain services (e.g. health care, education)
 
-    - Create e.g. a travel time map (choropleth) that shows travel times to centroids of different neighborhoods
+    - Create a tool that visualizes the travel times to selected sports facilities across the Helsinki region
 
  - **Urban design**: Street network indicators (see Lesson 6 and examples from `here <https://github.com/gboeing/osmnx-examples/tree/master/notebooks>`__)
 

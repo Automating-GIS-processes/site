@@ -263,22 +263,22 @@ This is a typical nearest neighbour analysis, where the aim is to find the close
 <ul class="simple">
 <li>Now we can find out the nearest destination point by using <code class="docutils literal notranslate"><span class="pre">nearest_points()</span></code> function.</li>
 </ul>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [7]: </span><span class="n">nearest_geoms</span> <span class="o">=</span> <span class="n">nearest_points</span><span class="p">(</span><span class="n">orig</span><span class="p">,</span> <span class="n">destinations</span><span class="p">)</span>
+<pre class="literal-block">
+In [7]: nearest_geoms = nearest_points(orig, destinations)
 
-<span class="gp">In [8]: </span><span class="n">near_idx0</span> <span class="o">=</span> <span class="n">nearest_geoms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+In [8]: near_idx0 = nearest_geoms[0]
 
-<span class="gp">In [9]: </span><span class="n">near_idx1</span> <span class="o">=</span> <span class="n">nearest_geoms</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+In [9]: near_idx1 = nearest_geoms[1]
 
-<span class="gp">In [10]: </span><span class="k">print</span><span class="p">(</span><span class="n">nearest_geoms</span><span class="p">)</span>
-<span class="go">(&lt;shapely.geometry.point.Point object at 0x7f72f29568d0&gt;, &lt;shapely.geometry.point.Point object at 0x7f72f2954828&gt;)</span>
+In [10]: print(nearest_geoms)
+(&lt;shapely.geometry.point.Point object at 0x7fea41935080&gt;, &lt;shapely.geometry.point.Point object at 0x7fea41935160&gt;)
 
-<span class="gp">In [11]: </span><span class="k">print</span><span class="p">(</span><span class="n">near_idx0</span><span class="p">)</span>
-<span class="go">                                                                                                                   POINT (1 1.67)</span>
+In [11]: print(near_idx0)
+POINT (1 1.67)
 
-<span class="gp">In [12]: </span><span class="k">print</span><span class="p">(</span><span class="n">near_idx1</span><span class="p">)</span>
-<span class="go">                                                                                                                                  POINT (0 1.45)</span>
-</pre></div>
-</div>
+In [12]: print(near_idx1)
+POINT (0 1.45)
+</pre>
 <p>As you can see the <code class="docutils literal notranslate"><span class="pre">nearest_points()</span></code> function returns a tuple of geometries where the first item is the geometry
 of our origin point and the second item (at index 1) is the actual nearest geometry from the destination points.
 Hence, the closest destination point seems to be the one located at coordinates (0, 1.45).</p>
@@ -313,59 +313,59 @@ you can find and download them from <a class="reference internal" href="geocodin
 </pre></div>
 </div>
 <p>Create unary union from Points, which basically creates a MultiPoint object from the Point geometries.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [13]: </span><span class="n">unary_union</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">unary_union</span>
-<span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-13-93318693fea5&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">unary_union</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">unary_union</span>
+<pre class="literal-block">
+In [13]: unary_union = df2.unary_union
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-13-93318693fea5&gt; in &lt;module&gt;()
+----&gt; 1 unary_union = df2.unary_union
 
-<span class="ne">NameError</span>: name &#39;df2&#39; is not defined
+NameError: name 'df2' is not defined
 
-<span class="gp">In [14]: </span><span class="k">print</span><span class="p">(</span><span class="n">unary_union</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                                                                                                                                  ---------------------------------------------------------------------------</span>
-<span class="go">NameError                                 Traceback (most recent call last)</span>
-<span class="go">&lt;ipython-input-14-af0fcf0d8792&gt; in &lt;module&gt;()</span>
-<span class="go">----&gt; 1 print(unary_union)</span>
+In [14]: print(unary_union)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-14-af0fcf0d8792&gt; in &lt;module&gt;()
+----&gt; 1 print(unary_union)
 
-<span class="go">NameError: name &#39;unary_union&#39; is not defined</span>
-</pre></div>
-</div>
+NameError: name 'unary_union' is not defined
+</pre>
 <p>Calculate the centroids for each district area.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [15]: </span><span class="n">df1</span><span class="p">[</span><span class="s1">&#39;centroid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">centroid</span>
-<span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-15-5617b26f4d80&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">df1</span><span class="p">[</span><span class="s1">&#39;centroid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">centroid</span>
+<pre class="literal-block">
+In [15]: df1['centroid'] = df1.centroid
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-15-5617b26f4d80&gt; in &lt;module&gt;()
+----&gt; 1 df1['centroid'] = df1.centroid
 
-<span class="ne">NameError</span>: name &#39;df1&#39; is not defined
+NameError: name 'df1' is not defined
 
-<span class="gp">In [16]: </span><span class="n">df1</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-<span class="go">                                                                                                                                                                                                                                                                                   ---------------------------------------------------------------------------</span>
-<span class="go">NameError                                 Traceback (most recent call last)</span>
-<span class="go">&lt;ipython-input-16-eda2b5cc1a42&gt; in &lt;module&gt;()</span>
-<span class="go">----&gt; 1 df1.head()</span>
+In [16]: df1.head()
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-16-eda2b5cc1a42&gt; in &lt;module&gt;()
+----&gt; 1 df1.head()
 
-<span class="go">NameError: name &#39;df1&#39; is not defined</span>
-</pre></div>
-</div>
+NameError: name 'df1' is not defined
+</pre>
 <p>Okey now we are ready to use our function and find closest Points (taking the value from id column) from df2 to df1 centroids</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [17]: </span><span class="n">df1</span><span class="p">[</span><span class="s1">&#39;nearest_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">nearest</span><span class="p">,</span> <span class="n">geom_union</span><span class="o">=</span><span class="n">unary_union</span><span class="p">,</span> <span class="n">df1</span><span class="o">=</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="o">=</span><span class="n">df2</span><span class="p">,</span> <span class="n">geom1_col</span><span class="o">=</span><span class="s1">&#39;centroid&#39;</span><span class="p">,</span> <span class="n">src_column</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-17-805322955fd3&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">df1</span><span class="p">[</span><span class="s1">&#39;nearest_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">nearest</span><span class="p">,</span> <span class="n">geom_union</span><span class="o">=</span><span class="n">unary_union</span><span class="p">,</span> <span class="n">df1</span><span class="o">=</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="o">=</span><span class="n">df2</span><span class="p">,</span> <span class="n">geom1_col</span><span class="o">=</span><span class="s1">&#39;centroid&#39;</span><span class="p">,</span> <span class="n">src_column</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<pre class="literal-block">
+In [17]: df1['nearest_id'] = df1.apply(nearest, geom_union=unary_union, df1=df1, df2=df2, geom1_col='centroid', src_column='id', axis=1)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-17-805322955fd3&gt; in &lt;module&gt;()
+----&gt; 1 df1['nearest_id'] = df1.apply(nearest, geom_union=unary_union, df1=df1, df2=df2, geom1_col='centroid', src_column='id', axis=1)
 
-<span class="ne">NameError</span>: name &#39;df1&#39; is not defined
+NameError: name 'df1' is not defined
 
-<span class="gp">In [18]: </span><span class="n">df1</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                    ---------------------------------------------------------------------------</span>
-<span class="go">NameError                                 Traceback (most recent call last)</span>
-<span class="go">&lt;ipython-input-18-16ec5d44525a&gt; in &lt;module&gt;()</span>
-<span class="go">----&gt; 1 df1.head(20)</span>
+In [18]: df1.head(20)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-18-16ec5d44525a&gt; in &lt;module&gt;()
+----&gt; 1 df1.head(20)
 
-<span class="go">NameError: name &#39;df1&#39; is not defined</span>
-</pre></div>
-</div>
+NameError: name 'df1' is not defined
+</pre>
 <p>That’s it! Now we found the closest point for each centroid and got the <code class="docutils literal notranslate"><span class="pre">id</span></code> value from our addresses into the <code class="docutils literal notranslate"><span class="pre">df1</span></code> GeoDataFrame.</p>
 </div>
 </div>

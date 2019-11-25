@@ -167,7 +167,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../notebooks/L5/static_maps.html">Static maps</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L5/interactive-map-folium.html">Interactive maps on Leaflet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L5/interactive-map-folium.html">Interactive maps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../notebooks/L5/Employment_in_Finland.html">Employment rates in Finland</a></li>
 <li class="toctree-l1"><a class="reference internal" href="share-on-github.html">Sharing interactive plots on GitHub</a></li>
 <li class="toctree-l1"><a class="reference internal" href="exercise-5.html">Exercise 5</a></li>
@@ -279,26 +279,31 @@
 <li><a class="reference internal" href="share-on-github.html"><span class="doc">Sharing interactive maps on GitHub</span></a></li>
 <li><a class="reference internal" href="exercise-5.html"><span class="doc">Exercise 5</span></a></li>
 </ol>
-<p>As you might remember from our earlier <a class="reference external" href="https://github.com/Python-for-geo-people/Lesson-7-Plotting">plotting lesson</a>
-during the Period I, there are many different Python modules that can be used for making visualizations.</p>
-<p>Quite many of them allows you to create also different kinds of maps.</p>
+<p>We already covered the basics of plotting in Python during the <a class="reference external" href="https://geo-python.github.io/site/lessons/L7/overview.html">Geo-Python course week 7</a>. As you might remember from that lesson, there are many different Python modules that can be used for making visualizations, and many of them also allows you to create different kinds of maps.</p>
+<p>During this lesson, we will the use of these modules for plotting static and interactive maps:</p>
 <blockquote>
 <div><ul class="simple">
 <li><a class="reference external" href="http://matplotlib.org/">Matplotlib</a> (static maps, integrated into <a class="reference external" href="http://geopandas.org/">Geopandas</a>)</li>
-<li><a class="reference external" href="http://bokeh.pydata.org/en/latest/">Bokeh</a> (interactive plots)</li>
 <li><a class="reference external" href="https://github.com/python-visualization/folium">Folium</a> (interactive Web maps on Leaflet)</li>
 <li><a class="reference external" href="https://github.com/jwass/mplleaflet">mplleaflet</a> (converts Matplotlib plots easily to interactive Leaflet maps)</li>
-<li><a class="reference external" href="http://matplotlib.org/basemap/index.html">Basemap</a> (Matplotlib’s own mapping module)</li>
-<li><a class="reference external" href="http://geo.holoviews.org/">GeoViews</a></li>
+<li><cite>contextily</cite> &lt;<a class="reference external" href="https://github.com/darribas/contextily">https://github.com/darribas/contextily</a>&gt;`__(for adding basemaps)</li>
 </ul>
 </div></blockquote>
-<p>During this lesson we will cover some of these modules in more detail.</p>
+<dl class="docutils">
+<dt>Other useful modules to check out (not covered in these course materials):</dt>
+<dd><ul class="first last simple">
+<li><a href="#id1"><span class="problematic" id="id2">`Plotly Dash`&lt;https://plot.ly/dash/&gt;`__</span></a> (interactive analytics dashboards)</li>
+<li><a class="reference external" href="http://holoviews.org/">HoloViews</a> and <a class="reference external" href="http://geoviews.org/">GeoViews</a></li>
+<li><a class="reference external" href="http://bokeh.pydata.org/en/latest/">Bokeh</a> (interactive plots)</li>
+</ul>
+</dd>
+</dl>
 <div class="section" id="learning-goals">
 <h2>Learning goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
-<p>After this weeks lesson you should be able to (at least):</p>
+<p>After this weeks lesson you should be able to:</p>
 <blockquote>
 <div><ul class="simple">
-<li>Create a static map using Geopandas</li>
+<li>Create a static map using Geopandas / matplotlib</li>
 <li>Create a simple interactive map using Folium (or matplotlib + mplleaflet).</li>
 <li>Share your maps (static / interactive) on GitHub using GitHub pages.</li>
 </ul>
@@ -306,14 +311,10 @@ during the Period I, there are many different Python modules that can be used fo
 </div>
 <div class="section" id="lecture-videos">
 <h2>Lecture videos<a class="headerlink" href="#lecture-videos" title="Permalink to this headline">¶</a></h2>
-<div class="admonition-lesson-5-1-making-maps-static-maps-adding-basemap-from-web-map-tiles admonition">
-<p class="first admonition-title">Lesson 5.1 - Making maps: Static maps &amp; Adding basemap from Web Map Tiles</p>
-<div class="last"><iframe width="560" height="315" src="https://www.youtube.com/embed/XhGYUMg4FF0" frameborder="0" allowfullscreen></iframe>
-<p>Henrikki Tenkanen, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p></div></div>
-<div class="admonition-lesson-5-2-making-interactive-maps-with-folium-sharing-interactive-visualizations-online admonition">
-<p class="first admonition-title">Lesson 5.2 - Making interactive maps with Folium; Sharing interactive visualizations online</p>
-<div class="last"><iframe width="560" height="315" src="https://www.youtube.com/embed/p0QmTCjlX54" frameborder="0" allowfullscreen></iframe>
-<p>Henrikki Tenkanen, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p></div></div>
+<div class="admonition-lesson-5-spatial-data-visualization admonition">
+<p class="first admonition-title">Lesson 5 - Spatial data visualization</p>
+<div class="last"><iframe width="560" height="315" src="" frameborder="0" allowfullscreen></iframe>
+<p>Vuokko Heikinheimo, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p></div></div>
 </div>
 </div>
 
@@ -339,7 +340,7 @@ during the Period I, there are many different Python modules that can be used fo
     <p>
         &copy; Copyright 2019, Henrikki Tenkanen and Vuokko Heikinheimo, Digital Geography Lab, University of Helsinki
       <span class="lastupdated">
-        Last updated on Dec 05, 2018.
+        Last updated on Nov 24, 2019.
       </span>
 
     </p>

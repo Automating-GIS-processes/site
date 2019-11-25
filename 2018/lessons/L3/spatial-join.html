@@ -346,12 +346,15 @@ above.</p>
 </div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># See the first rows</span>
 <span class="gp">In [1]: </span><span class="n">pop</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-<span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-1-1a2324c1bc9a&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">pop</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[1]: </span><span class="go"></span>
+<span class="go">   INDEX  ...                                           geometry</span>
+<span class="go">0    688  ...  POLYGON ((25472499.995 6689749.005, 25472499.9...</span>
+<span class="go">1    703  ...  POLYGON ((25472499.995 6685998.998, 25472499.9...</span>
+<span class="go">2    710  ...  POLYGON ((25472499.995 6684249.004, 25472499.9...</span>
+<span class="go">3    711  ...  POLYGON ((25472499.995 6683999.005, 25472499.9...</span>
+<span class="go">4    715  ...  POLYGON ((25472499.995 6682998.998, 25472499.9...</span>
 
-<span class="ne">NameError</span>: name &#39;pop&#39; is not defined
+<span class="go">[5 rows x 13 columns]</span>
 </pre></div>
 </div>
 <p>Okey so we have multiple columns in the dataset but the most important
@@ -365,21 +368,14 @@ parameter <code class="docutils literal notranslate"><span class="pre">columns={
 </ul>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Change the name of a column</span>
 <span class="gp">In [2]: </span><span class="n">pop</span> <span class="o">=</span> <span class="n">pop</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;ASUKKAITA&#39;</span><span class="p">:</span> <span class="s1">&#39;pop15&#39;</span><span class="p">})</span>
-<span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-2-89c047f96142&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">pop</span> <span class="o">=</span> <span class="n">pop</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;ASUKKAITA&#39;</span><span class="p">:</span> <span class="s1">&#39;pop15&#39;</span><span class="p">})</span>
 
-<span class="ne">NameError</span>: name &#39;pop&#39; is not defined
-
-<span class="c1"># See the column names and confirm that we now have a column called &#39;pop15&#39;</span>
+<span class="go"># See the column names and confirm that we now have a column called &#39;pop15&#39;</span>
 <span class="gp">In [3]: </span><span class="n">pop</span><span class="o">.</span><span class="n">columns</span>
-<span class="go">                                                                                                                                                                                                                                                                                                    ---------------------------------------------------------------------------</span>
-<span class="go">NameError                                 Traceback (most recent call last)</span>
-<span class="go">&lt;ipython-input-3-93d1f78bf66a&gt; in &lt;module&gt;()</span>
-<span class="go">----&gt; 1 pop.columns</span>
-
-<span class="go">NameError: name &#39;pop&#39; is not defined</span>
+<span class="gh">Out[3]: </span><span class="go"></span>
+<span class="go">Index([&#39;INDEX&#39;, &#39;pop15&#39;, &#39;ASVALJYYS&#39;, &#39;IKA0_9&#39;, &#39;IKA10_19&#39;, &#39;IKA20_29&#39;,</span>
+<span class="go">       &#39;IKA30_39&#39;, &#39;IKA40_49&#39;, &#39;IKA50_59&#39;, &#39;IKA60_69&#39;, &#39;IKA70_79&#39;, &#39;IKA_YLI80&#39;,</span>
+<span class="go">       &#39;geometry&#39;],</span>
+<span class="go">      dtype=&#39;object&#39;)</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -391,21 +387,13 @@ columns that we need i.e. <code class="docutils literal notranslate"><span class
 
 <span class="go"># Select those columns</span>
 <span class="gp">In [5]: </span><span class="n">pop</span> <span class="o">=</span> <span class="n">pop</span><span class="p">[</span><span class="n">selected_cols</span><span class="p">]</span>
-<span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-5-1fb25a44ef2d&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">pop</span> <span class="o">=</span> <span class="n">pop</span><span class="p">[</span><span class="n">selected_cols</span><span class="p">]</span>
 
-<span class="ne">NameError</span>: name &#39;pop&#39; is not defined
-
-<span class="c1"># Let&#39;s see the last 2 rows</span>
+<span class="go"># Let&#39;s see the last 2 rows</span>
 <span class="gp">In [6]: </span><span class="n">pop</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                                                                                                                            ---------------------------------------------------------------------------</span>
-<span class="go">NameError                                 Traceback (most recent call last)</span>
-<span class="go">&lt;ipython-input-6-11780fb61d0e&gt; in &lt;module&gt;()</span>
-<span class="go">----&gt; 1 pop.tail(2)</span>
-
-<span class="go">NameError: name &#39;pop&#39; is not defined</span>
+<span class="gh">Out[6]: </span><span class="go"></span>
+<span class="go">      pop15                                           geometry</span>
+<span class="go">5782      9  POLYGON ((25513499.996 6685499.000, 25513499.9...</span>
+<span class="go">5783  30244  POLYGON ((25514000.000 6659998.998, 25514000.0...</span>
 </pre></div>
 </div>
 <p>Now we have cleaned the data and have only those columns that we need
@@ -426,55 +414,43 @@ addresses point layer <code class="docutils literal notranslate"><span class="pr
 
 <span class="go"># Read data</span>
 <span class="gp">In [8]: </span><span class="n">addresses</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">addr_fp</span><span class="p">)</span>
-<span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-8-21fa2220c1e3&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">addresses</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">addr_fp</span><span class="p">)</span>
 
-<span class="ne">NameError</span>: name &#39;gpd&#39; is not defined
-
-<span class="c1"># Check the head of the file</span>
+<span class="go"># Check the head of the file</span>
 <span class="gp">In [9]: </span><span class="n">addresses</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                                                                                                                                      ---------------------------------------------------------------------------</span>
-<span class="go">NameError                                 Traceback (most recent call last)</span>
-<span class="go">&lt;ipython-input-9-b6c2948b566f&gt; in &lt;module&gt;()</span>
-<span class="go">----&gt; 1 addresses.head(2)</span>
+<span class="gh">Out[9]: </span><span class="go"></span>
+<span class="go">                                 address  ...                          geometry</span>
+<span class="go">0  Kampinkuja 1, 00100 Helsinki, Finland  ...  POINT (25496123.309 6672833.942)</span>
+<span class="go">1   Kaivokatu 8, 00101 Helsinki, Finland  ...  POINT (25496774.282 6672999.699)</span>
 
-<span class="go">NameError: name &#39;addresses&#39; is not defined</span>
+<span class="go">[2 rows x 3 columns]</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li>Let’s make sure that the coordinate reference system of the layers
 are identical</li>
 </ul>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Check the crs of address points</span>
-<span class="gp">In [10]: </span><span class="n">addresses</span><span class="o">.</span><span class="n">crs</span>
-<span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-10-82f9b1192e4f&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">addresses</span><span class="o">.</span><span class="n">crs</span>
+<pre class="literal-block">
+# Check the crs of address points
+In [10]: addresses.crs
+Out[10]: 
+{'proj': 'tmerc',
+ 'lat_0': 0,
+ 'lon_0': 25,
+ 'k': 1,
+ 'x_0': 25500000,
+ 'y_0': 0,
+ 'ellps': 'GRS80',
+ 'units': 'm',
+ 'no_defs': True}
 
-<span class="ne">NameError</span>: name &#39;addresses&#39; is not defined
+# Check the crs of population layer
+In [11]: pop.crs
+Out[11]: {'init': 'epsg:3879'}
 
-<span class="c1"># Check the crs of population layer</span>
-<span class="gp">In [11]: </span><span class="n">pop</span><span class="o">.</span><span class="n">crs</span>
-<span class="go">                                                                                                                                                                                                                                                                        ---------------------------------------------------------------------------</span>
-<span class="go">NameError                                 Traceback (most recent call last)</span>
-<span class="go">&lt;ipython-input-11-b9b851ae9770&gt; in &lt;module&gt;()</span>
-<span class="go">----&gt; 1 pop.crs</span>
-
-<span class="go">NameError: name &#39;pop&#39; is not defined</span>
-
-<span class="go"># Do they match? - We can test that</span>
-<span class="gp">In [12]: </span><span class="n">addresses</span><span class="o">.</span><span class="n">crs</span> <span class="o">==</span> <span class="n">pop</span><span class="o">.</span><span class="n">crs</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ---------------------------------------------------------------------------</span>
-<span class="go">NameError                                 Traceback (most recent call last)</span>
-<span class="go">&lt;ipython-input-12-327e611de145&gt; in &lt;module&gt;()</span>
-<span class="go">----&gt; 1 addresses.crs == pop.crs</span>
-
-<span class="go">NameError: name &#39;addresses&#39; is not defined</span>
-</pre></div>
-</div>
+# Do they match? - We can test that
+In [12]: addresses.crs == pop.crs
+Out[12]: False
+</pre>
 <p>Indeed they are identical. Thus, we can be sure that when doing spatial
 queries between layers the locations match and we get the right results
 e.g. from the spatial join that we are conducting here.</p>
@@ -484,21 +460,18 @@ e.g. from the spatial join that we are conducting here.</p>
 </ul>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Make a spatial join</span>
 <span class="gp">In [13]: </span><span class="n">join</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span><span class="n">addresses</span><span class="p">,</span> <span class="n">pop</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;inner&quot;</span><span class="p">,</span> <span class="n">op</span><span class="o">=</span><span class="s2">&quot;within&quot;</span><span class="p">)</span>
-<span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-13-dc99f0addef7&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">join</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span><span class="n">addresses</span><span class="p">,</span> <span class="n">pop</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;inner&quot;</span><span class="p">,</span> <span class="n">op</span><span class="o">=</span><span class="s2">&quot;within&quot;</span><span class="p">)</span>
 
-<span class="ne">NameError</span>: name &#39;gpd&#39; is not defined
-
-<span class="c1"># Let&#39;s check the result</span>
+<span class="go"># Let&#39;s check the result</span>
 <span class="gp">In [14]: </span><span class="n">join</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-<span class="go">                                                                                                                                                                                                                                                                                                               ---------------------------------------------------------------------------</span>
-<span class="go">NameError                                 Traceback (most recent call last)</span>
-<span class="go">&lt;ipython-input-14-5af4a6625532&gt; in &lt;module&gt;()</span>
-<span class="go">----&gt; 1 join.head()</span>
+<span class="gh">Out[14]: </span><span class="go"></span>
+<span class="go">                                       address    id  ... index_right  pop15</span>
+<span class="go">0        Kampinkuja 1, 00100 Helsinki, Finland  1001  ...        3326    173</span>
+<span class="go">1         Kaivokatu 8, 00101 Helsinki, Finland  1002  ...        3449     31</span>
+<span class="go">10    Rautatientori 1, 00100 Helsinki, Finland  1011  ...        3449     31</span>
+<span class="go">3            Itäväylä, 00900 Helsinki, Finland  1004  ...        5112    353</span>
+<span class="go">4   Tyynenmerenkatu 9, 00220 Helsinki, Finland  1005  ...        3259   1397</span>
 
-<span class="go">NameError: name &#39;join&#39; is not defined</span>
+<span class="go">[5 rows x 5 columns]</span>
 </pre></div>
 </div>
 <p>Awesome! Now we have performed a successful spatial join where we got
@@ -556,7 +529,7 @@ is.</p>
     <p>
         &copy; Copyright 2018, Henrikki Tenkanen
       <span class="lastupdated">
-        Last updated on Nov 13, 2018.
+        Last updated on Nov 10, 2018.
       </span>
 
     </p>
