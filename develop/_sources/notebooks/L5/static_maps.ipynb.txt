@@ -176,11 +176,13 @@
    "metadata": {},
    "source": [
     "Plotting options for the polygon: \n",
+    "\n",
     "- Define the classification scheme using the `scheme` parameter\n",
     "- Change the colormap using the `cmap` parameter. See [colormap options from matplotlib documentation].(https://matplotlib.org/3.1.0/tutorials/colors/colormaps.html#choosing-colormaps-in-matplotlib)\n",
     "- You can add a little bit of transparency for the grid using the `alpha` parameter (ranges from 0 to 1 where 0 is fully transparent and 1 has no transparency)\n",
     "\n",
     "Plotting options fo the lines:\n",
+    "\n",
     " - adjust color using `color` parameter. See [color options from matplotlib pyplot documentation](https://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.colors).\n",
     " - change `linewidth` if needed"
    ]

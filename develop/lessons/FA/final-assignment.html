@@ -58,6 +58,8 @@
   <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Grading criteria for the final assignment" href="final-assignment-grading.html" />
+    <link rel="prev" title="Exercise 5" href="../L5/exercise-5.html" />
     <link href="../../_static/geo-python.css" rel="stylesheet" type="text/css">
      
 
@@ -165,6 +167,35 @@
 <li class="toctree-l1"><a class="reference internal" href="../../notebooks/L5/Employment_in_Finland.html">Employment rates in Finland</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../L5/share-on-github.html">Sharing interactive plots on GitHub</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../L5/exercise-5.html">Exercise 5</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Final Assignment</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Final assignment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#aim-of-the-work">Aim of the work</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#final-work-topic">Final work topic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#final-work-structure">Final work structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#what-should-be-returned">What should be returned?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#when-is-the-deadline">When is the deadline?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#grading">Grading</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#accessviz">AccessViz</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#what-the-tool-should-do">What the tool should do?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#urban-indicators">Urban indicators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data">Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-analyses">Example analyses</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#structure-of-the-final-report-urban-indicators">Structure of the final report (urban indicators)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#technical-considerations">Technical considerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#literature-inspiration">Literature + inspiration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#own-project-work">Own project work</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="final-assignment-grading.html">Grading criteria for the final assignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fa-hints.html">Final Assignment hints</a></li>
 </ul>
 
             
@@ -293,47 +324,54 @@ and good coding practices (writing readable code) when doing the final assignmen
 <h3>Final work structure<a class="headerlink" href="#final-work-structure" title="Permalink to this headline">¶</a></h3>
 <p>Here is the suggested structure of the work, that also serves as the basis for grading:</p>
 <ol class="arabic simple">
-<li>Data acquisition (Fetching data, subsetting data, storing intermediate outputs etc.)</li>
-<li>Data analysis (Enriching and analyzing the data, eg. spatial join, overlay, buffering, other calculations..)</li>
-<li>Visualization (Visualizing main results and other relevant information as maps and graphs)</li>
+<li><strong>Data acquisition</strong> (Fetching data, subsetting data, storing intermediate outputs etc.)</li>
+<li><strong>Data analysis</strong> (Enriching and analyzing the data, eg. spatial join, overlay, buffering, other calculations..)</li>
+<li><strong>Visualization</strong> (Visualizing main results and other relevant information as maps and graphs)</li>
 </ol>
 <p>You can write your code into python script files and /or jupyter notebook files. You can freely organize your final work into one single file, or several files (for example, write your own functions into a separate <cite>.py</cite> file and apply them in one or several jupyter notebook <cite>.ipynb</cite> files.</p>
 <p><strong>The workflow should be repeatable and well documented.</strong> In other words, anyone who gets a copy of your repository should be able to run your code, and read your code.</p>
 </div>
 <div class="section" id="what-should-be-returned">
 <h3>What should be returned?<a class="headerlink" href="#what-should-be-returned" title="Permalink to this headline">¶</a></h3>
-<p>Organize all your code(s) / notebook(s) into your personal Final-Assignment repository and add links to all relevant files to the README.md file. Anyone who downloads the repository should be able to <strong>read your code</strong> and documentation and understand what is going on, and <strong>run your code</strong> in order to reproduce the same results :)</p>
+<p>Organize all your code(s) / notebook(s) into your personal Final-Assignment repository (GitHub classroom link at the top of this page)
+and <strong>add links to all relevant files to the README.md file</strong>. Anyone who downloads the repository should be able to <strong>read your code</strong> and documentation and understand what is going on, and <strong>run your code</strong> in order to reproduce the same results :)</p>
 <p><em>Note: If your code requires some python packages not found in the csc notebooks environment, please mention them also in the README.md file and provide installation instrutions.</em></p>
 </div>
 <div class="section" id="when-is-the-deadline">
 <h3>When is the deadline?<a class="headerlink" href="#when-is-the-deadline" title="Permalink to this headline">¶</a></h3>
 <p>Label your submissions as “submitted” in the exercise repository’s <cite>README.md</cite> under “status” once you are finished with the Final assignment.
 GitHub classroom creates an automatic commit to the repository at the deadline.</p>
-<p><strong>Deadline: January 15th 2020 at 4pm</strong>
-- You should commit all changes to GitHub by Wednesday the 15th of January 2020 at 16:00.
-- Those who submit by this deadline will get their grades at the end of January.
-- If you need your grade earlier, please contact Vuokko via Slack so we can agree on an earlier schedule</p>
-<p><strong>Late submissions:</strong>
-- Submitted between Wednesday the 15th of January 2020 at 16:00 and Wednesday the 26th of February 2020 at 16:00
-- Will get grades by easter
-- Maximum grade 4/5</p>
-<p><strong>Very late submissions:</strong>
-- Submitted after Wednesday the 26th of February 2020 at 16:00
-- Agree with Vuokko on the schedule :)
-- Maximum grade 3/5</p>
+<p><strong>Deadline: January 15th 2020 at 4pm</strong></p>
+<ul class="simple">
+<li>You should commit all changes to GitHub by Wednesday the 15th of January 2020 at 16:00.</li>
+<li>Those who submit by this deadline will get their grades at the end of January.</li>
+<li>If you need your grade earlier, please contact Vuokko via Slack so we can agree on an earlier schedule</li>
+</ul>
+<p><strong>Late submissions:</strong></p>
+<ul class="simple">
+<li>Submitted between Wednesday the 15th of January 2020 at 16:00 and Wednesday the 26th of February 2020 at 16:00</li>
+<li>Will get grades by easter</li>
+<li>Maximum grade 4/5</li>
+</ul>
+<p><strong>Very late submissions:</strong></p>
+<ul class="simple">
+<li>Submitted after Wednesday the 26th of February 2020 at 16:00</li>
+<li>Agree with Vuokko on the schedule :)</li>
+<li>Maximum grade 3/5</li>
+</ul>
 </div>
 <div class="section" id="grading">
 <h3>Grading<a class="headerlink" href="#grading" title="Permalink to this headline">¶</a></h3>
 <p>The grading is based on a typical 0-5 scale. See detailed grading criteria <a class="reference internal" href="final-assignment-grading.html"><span class="doc">here</span></a>.
 The final assignment is graded based on:</p>
 <ul class="simple">
-<li>Main analysis steps / functionality</li>
+<li>Functionality of the main analysis steps (data fetching, data analysis, visualization)</li>
 <li>Repeatability (it should be possible to repeat the main analysis steps for different input files / input parameters)</li>
 <li>Quality of visualizations</li>
 <li>Overall documentation of the work</li>
 </ul>
 <p><strong>Good documentation of the code and your project is highly appreciated!!!</strong>
-You should add necessary details to the <cite>README.md</cite> file, and use inline comments and Markdown cells to document your work along the way. Take a look of these hints for using markdown in a useful way:</p>
+You should add necessary details to the <cite>README.md</cite> file, and use inline comments and Markdown cells to document your work along the way. Take a look of these hints for using markdown:</p>
 <ul class="simple">
 <li><a class="reference external" href="http://www.firstpythonnotebook.org/markdown/">using markdown in Jupyter Notebooks</a></li>
 <li><a class="reference external" href="https://guides.github.com/features/mastering-markdown/">General Markdown syntax guide</a>.</li>
@@ -439,8 +477,8 @@ This functionality can also be a separate program (it is not required to bundle 
 </ul>
 </div></blockquote>
 </div>
-<div class="section" id="structure-of-the-final-report">
-<h3>Structure of the final report<a class="headerlink" href="#structure-of-the-final-report" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="structure-of-the-final-report-urban-indicators">
+<h3>Structure of the final report (urban indicators)<a class="headerlink" href="#structure-of-the-final-report-urban-indicators" title="Permalink to this headline">¶</a></h3>
 <p>In the assignment you should follow traditional structure of scientific article (conduct a <em>“mini-study”</em>) where you should provide:</p>
 <blockquote>
 <div><ul class="simple">
@@ -448,7 +486,7 @@ This functionality can also be a separate program (it is not required to bundle 
 <li>Short description of the datasets you used</li>
 <li>Short generic description of the methods you used</li>
 <li>Actual codes and visualizations to produce the <strong>results</strong></li>
-<li>Description of the results (what should we understand and see from them?)</li>
+<li>Short discussion related to the results (what should we understand and see from them?)</li>
 <li>Evaluate with <strong>healthy</strong> criticism the indicators, data and the analyses
 - What kind of assumptions, biases or uncertainties are related to the data and/or the analyses that you did?
 - Any other notes that the reader should know about the analysis</li>
@@ -511,6 +549,15 @@ where you upload your codes.</p>
           </div>
           <footer>
   
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="final-assignment-grading.html" class="btn btn-neutral float-right" title="Grading criteria for the final assignment" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../L5/exercise-5.html" class="btn btn-neutral float-left" title="Exercise 5" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
 
   <hr/>
 
@@ -518,7 +565,7 @@ where you upload your codes.</p>
     <p>
         &copy; Copyright 2019, Henrikki Tenkanen and Vuokko Heikinheimo, Digital Geography Lab, University of Helsinki
       <span class="lastupdated">
-        Last updated on Nov 24, 2019.
+        Last updated on Nov 25, 2019.
       </span>
 
     </p>
