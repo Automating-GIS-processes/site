@@ -7,7 +7,6 @@ before_install:
 install:
   - sudo apt-get update
   - sudo apt-get install pandoc
-  - pip install sphinx==1.7.9 sphinx_rtd_theme nbsphinx==0.4.3 IPython jupyter_client ipykernel
   - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
   - bash miniconda.sh -b -p $HOME/miniconda
   - export PATH="$HOME/miniconda/bin:$PATH"
@@ -19,7 +18,7 @@ install:
   - conda info -a
 
   # Install packages
-  - conda create -q -n autogis-environment python=$TRAVIS_PYTHON_VERSION sphinx==1.7.9 sphinx_rtd_theme nbsphinx IPython==6.5.0 jupyter_client ipykernel matplotlib geopandas
+  - conda create -q -n autogis-environment python=$TRAVIS_PYTHON_VERSION sphinx==1.7.9 sphinx_rtd_theme nbsphinx==0.4.3 IPython==6.5.0 jupyter_client ipykernel matplotlib geopandas
   - source activate autogis-environment
   - pip install git+https://github.com/HTenkanen/sphinxcontrib-versioning.git
   - pip install sphinxcontrib-googleanalytics
