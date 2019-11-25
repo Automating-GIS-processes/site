@@ -36,9 +36,9 @@ Final work structure
 
 Here is the suggested structure of the work, that also serves as the basis for grading:
 
-1. Data acquisition (Fetching data, subsetting data, storing intermediate outputs etc.)
-2. Data analysis (Enriching and analyzing the data, eg. spatial join, overlay, buffering, other calculations..)
-3. Visualization (Visualizing main results and other relevant information as maps and graphs)
+1. **Data acquisition** (Fetching data, subsetting data, storing intermediate outputs etc.)
+2. **Data analysis** (Enriching and analyzing the data, eg. spatial join, overlay, buffering, other calculations..)
+3. **Visualization** (Visualizing main results and other relevant information as maps and graphs)
 
 You can write your code into python script files and /or jupyter notebook files. You can freely organize your final work into one single file, or several files (for example, write your own functions into a separate `.py` file and apply them in one or several jupyter notebook `.ipynb` files.
 
@@ -47,7 +47,8 @@ You can write your code into python script files and /or jupyter notebook files.
 What should be returned?
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Organize all your code(s) / notebook(s) into your personal Final-Assignment repository and add links to all relevant files to the README.md file. Anyone who downloads the repository should be able to **read your code** and documentation and understand what is going on, and **run your code** in order to reproduce the same results :)
+Organize all your code(s) / notebook(s) into your personal Final-Assignment repository (GitHub classroom link at the top of this page)
+and **add links to all relevant files to the README.md file**. Anyone who downloads the repository should be able to **read your code** and documentation and understand what is going on, and **run your code** in order to reproduce the same results :)
 
 *Note: If your code requires some python packages not found in the csc notebooks environment, please mention them also in the README.md file and provide installation instrutions.*
 
@@ -58,16 +59,19 @@ Label your submissions as "submitted" in the exercise repository's `README.md` u
 GitHub classroom creates an automatic commit to the repository at the deadline.
 
 **Deadline: January 15th 2020 at 4pm**
+
 - You should commit all changes to GitHub by Wednesday the 15th of January 2020 at 16:00.
 - Those who submit by this deadline will get their grades at the end of January.
 - If you need your grade earlier, please contact Vuokko via Slack so we can agree on an earlier schedule
 
 **Late submissions:**
+
 - Submitted between Wednesday the 15th of January 2020 at 16:00 and Wednesday the 26th of February 2020 at 16:00
 - Will get grades by easter
 - Maximum grade 4/5
 
 **Very late submissions:**
+
 - Submitted after Wednesday the 26th of February 2020 at 16:00
 - Agree with Vuokko on the schedule :)
 - Maximum grade 3/5
@@ -78,13 +82,13 @@ Grading
 The grading is based on a typical 0-5 scale. See detailed grading criteria :doc:`here <final-assignment-grading>`.
 The final assignment is graded based on:
 
-- Main analysis steps / functionality
+- Functionality of the main analysis steps (data fetching, data analysis, visualization)
 - Repeatability (it should be possible to repeat the main analysis steps for different input files / input parameters)
 - Quality of visualizations
 - Overall documentation of the work
 
 **Good documentation of the code and your project is highly appreciated!!!**
-You should add necessary details to the `README.md` file, and use inline comments and Markdown cells to document your work along the way. Take a look of these hints for using markdown in a useful way:
+You should add necessary details to the `README.md` file, and use inline comments and Markdown cells to document your work along the way. Take a look of these hints for using markdown:
 
 - `using markdown in Jupyter Notebooks  <http://www.firstpythonnotebook.org/markdown/>`_
 - `General Markdown syntax guide <https://guides.github.com/features/mastering-markdown/>`__.
@@ -186,7 +190,7 @@ In this assignment, you can for example analyze (not limited to these ones):
 
  - **Urban design**: Street network indicators (see Lesson 6 and examples from `here <https://github.com/gboeing/osmnx-examples/tree/master/notebooks>`__)
 
-Structure of the final report
+Structure of the final report (urban indicators)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In the assignment you should follow traditional structure of scientific article (conduct a *"mini-study"*) where you should provide:
@@ -195,7 +199,7 @@ In the assignment you should follow traditional structure of scientific article 
   - Short description of the datasets you used
   - Short generic description of the methods you used
   - Actual codes and visualizations to produce the **results**
-  - Description of the results (what should we understand and see from them?)
+  - Short discussion related to the results (what should we understand and see from them?)
   - Evaluate with **healthy** criticism the indicators, data and the analyses
     - What kind of assumptions, biases or uncertainties are related to the data and/or the analyses that you did?
     - Any other notes that the reader should know about the analysis
