@@ -16,11 +16,11 @@ During this lesson, we will the use of these modules for plotting static and int
  - `Matplotlib <http://matplotlib.org/>`_ (static maps, integrated into `Geopandas <http://geopandas.org/>`_)
  - `Folium <https://github.com/python-visualization/folium>`_ (interactive Web maps on Leaflet)
  - `mplleaflet <https://github.com/jwass/mplleaflet>`_ (converts Matplotlib plots easily to interactive Leaflet maps)
- - `contextily` <https://github.com/darribas/contextily>`__(for adding basemaps)
+ - `contextily <https://github.com/darribas/contextily>`__(for adding basemaps)
 
 
 Other useful modules to check out (not covered in these course materials):
- - `Plotly Dash`<https://plot.ly/dash/>`__ (interactive analytics dashboards)
+ - `Plotly Dash <https://plot.ly/dash/>`__ (interactive analytics dashboards)
  - `HoloViews <http://holoviews.org/>`__ and `GeoViews <http://geoviews.org/>`_ 
  - `Bokeh <http://bokeh.pydata.org/en/latest/>`_ (interactive plots)
 
