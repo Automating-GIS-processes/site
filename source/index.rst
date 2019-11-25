@@ -171,6 +171,14 @@ Contents
    lessons/L5/share-on-github
    lessons/L5/exercise-5
 
+.. toctree::
+   :maxdepth: 2
+   :caption: Final Assignment
+
+   lessons/FA/final-assignment
+   lessons/FA/final-assignment-grading
+   lessons/FA/fa-hints
+
     .. toctree::
        :maxdepth: 2
        :caption: Lesson 6
