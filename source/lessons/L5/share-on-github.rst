@@ -39,7 +39,7 @@ What is currently located there are following files:
 
 Thus, there is already a single map that I have made called *test_map.html*, a html file called *index.html* and the most important file for us called ``index.md``.
 
-Let's see how does the ``index.md`` file look like (here is a `link <https://github.com/Automating-GIS-processes/Exercise-5/blob/master/docs/index.md>`_ to the actual page on our public repository):
+Let's see how does the ``index.md`` file look like (here is a `link <https://github.com/AutoGIS-2019/Exercise-5/blob/master/docs/index.md>`_ to the actual page on our public repository):
 
 .. image:: img/index-md.PNG
     :scale: 80 %
@@ -47,7 +47,7 @@ Let's see how does the ``index.md`` file look like (here is a `link <https://git
 |
 
 Okey, so we can see that this is a familiar looking page with some Markdown text and links. What is the purpose of this page is to serve as an **entrance page** for you interactive plots.
-Thus as the page say, you should add links to your maps that are published from your personal Exercise 5 located at ``https://autogis-2018.github.io/exercise-5-YourUserName/`` (for example, the address for vuokko's exercise 5 submission is ``https://autogis-2018.github.io/exercise-5-VuokkoH/``).
+Thus as the page say, you should add links to your maps that are published from your personal Exercise 5 located at ``https://autogis-2019.github.io/exercise-5-YourUserName/`` (for example, the address for vuokko's exercise 5 submission is ``https://autogis-2019.github.io/exercise-5-VuokkoH/``).
 
 **Okey but how does that work, how do I get a page with such an address?**
 

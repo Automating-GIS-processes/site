@@ -1,7 +1,7 @@
 language: python
 python:
   # We don't actually use the Travis Python, but this keeps it organized.
-  - "3.5"
+  - "3.7"
 before_install:
   - chmod +x push.sh
 install:
@@ -18,7 +18,7 @@ install:
   - conda info -a
 
   # Install packages
-  - conda create -q -n autogis-environment python=$TRAVIS_PYTHON_VERSION sphinx==1.7.9 sphinx_rtd_theme nbsphinx IPython==6.5.0 jupyter_client ipykernel matplotlib geopandas
+  - conda create -q -n autogis-environment python=$TRAVIS_PYTHON_VERSION sphinx==1.7.9 sphinx_rtd_theme nbsphinx==0.4.3 IPython==6.5.0 jupyter_client ipykernel matplotlib geopandas
   - source activate autogis-environment
   - pip install git+https://github.com/HTenkanen/sphinxcontrib-versioning.git
   - pip install sphinxcontrib-googleanalytics
