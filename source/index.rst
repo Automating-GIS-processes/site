@@ -195,7 +195,7 @@ Contents
        lessons/L7/overview
        lessons/L7/pyqgis
        lessons/L7/qgis-plugins.rst
-       
+
     .. toctree::
        :maxdepth: 2
        :caption: Final Assignment
