@@ -194,9 +194,7 @@ Contents
 
        lessons/L7/overview
        lessons/L7/pyqgis
-       lessons/L7/processing-toolbox
-       lessons/L7/processing-script
-       lessons/L7/exercise-7
+       lessons/L7/qgis-plugins.rst
        
     .. toctree::
        :maxdepth: 2
