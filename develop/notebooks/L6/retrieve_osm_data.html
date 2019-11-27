@@ -519,21 +519,13 @@ This page was generated from <a class="reference external" href="https://github.
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
 </div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
-<span class="ansi-red-intense-fg ansi-bold">ModuleNotFoundError</span>                       Traceback (most recent call last)
-<span class="ansi-green-intense-fg ansi-bold">&lt;ipython-input-1-f70077426979&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-intense-fg ansi-bold">----&gt; 1</span><span class="ansi-yellow-intense-fg ansi-bold"> </span><span class="ansi-green-intense-fg ansi-bold">import</span> osmnx <span class="ansi-green-intense-fg ansi-bold">as</span> ox
-<span class="ansi-green-fg">      2</span> <span class="ansi-green-intense-fg ansi-bold">import</span> matplotlib<span class="ansi-yellow-intense-fg ansi-bold">.</span>pyplot <span class="ansi-green-intense-fg ansi-bold">as</span> plt
-<span class="ansi-green-fg">      3</span> get_ipython<span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">.</span>run_line_magic<span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-blue-intense-fg ansi-bold">&#39;matplotlib&#39;</span><span class="ansi-yellow-intense-fg ansi-bold">,</span> <span class="ansi-blue-intense-fg ansi-bold">&#39;inline&#39;</span><span class="ansi-yellow-intense-fg ansi-bold">)</span>
-<span class="ansi-green-fg">      4</span>
-<span class="ansi-green-fg">      5</span> <span class="ansi-red-intense-fg ansi-bold"># Specify the name that is used to seach for the data</span>
-
-<span class="ansi-red-intense-fg ansi-bold">ModuleNotFoundError</span>: No module named &#39;osmnx&#39;
-</pre></div></div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>networkx.classes.multidigraph.MultiDiGraph
+</pre></div>
+</div>
 </div>
 <p>Okey, as we can see the data that we retrieved is a special data object called <code class="docutils literal notranslate"><span class="pre">networkx.classes.multidigraph.MultiDiGraph</span></code>. A DiGraph is a data type that stores nodes and edges with optional data, or attributes. What we can see here is that this data type belongs to a Python module called <a class="reference external" href="https://networkx.github.io/documentation/stable/">networkx</a> that can be used to create, manipulate, and study the structure, dynamics, and functions of complex networks. Networkx module contains
 algorithms that can be used to calculate <a class="reference external" href="https://networkx.github.io/documentation/networkx-1.10/reference/algorithms.shortest_paths.html">shortest paths</a> along road networks using e.g.&nbsp;<a class="reference external" href="https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm">Dijkstra’s</a> or <a class="reference external" href="https://en.wikipedia.org/wiki/A*_search_algorithm">A* algorithm</a>.</p>
@@ -541,7 +533,7 @@ algorithms that can be used to calculate <a class="reference external" href="htt
 <li>Let’s see how our street network looks like. It is easy to visualize the graph with osmnx with <code class="docutils literal notranslate"><span class="pre">plot_graph()</span></code> function. The function utilizes Matplotlib for visualizing the data, hence as a result it returns a matplotlib figure and axis objects:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -560,20 +552,27 @@ algorithms that can be used to calculate <a class="reference external" href="htt
 <p>Great! Now we can see that our graph contains the nodes (blue circles) and the edges (gray lines) that connects those nodes to each other.</p>
 <p>It is also possible to retrieve other types of OSM data features with osmnx such as buildings or points of interest (POIs).</p>
 <ul class="simple">
-<li>Let’s download the buildings with <code class="docutils literal notranslate"><span class="pre">buildings_from_place()</span></code> -function and plot them on top of our street network in Kamppi. Let’s also plot the Polygon that represents the area of Kamppi, Helsinki that can be retrieved with <code class="docutils literal notranslate"><span class="pre">gdf_from_place</span></code> -function.</li>
+<li>Let’s download the buildings with <code class="docutils literal notranslate"><span class="pre">OSMnx</span></code> <a class="reference external" href="https://osmnx.readthedocs.io/en/stable/osmnx.html#module-osmnx.footprints">footprints_from_place</a> -function (same as <code class="docutils literal notranslate"><span class="pre">buildings_from_place</span></code> method in OSMnx&lt;0.9) and plot them on top of our street network in Kamppi. Let’s also plot the Polygon that represents the area of Kamppi, Helsinki that can be retrieved with <code class="docutils literal notranslate"><span class="pre">gdf_from_place</span></code> -function.</li>
 </ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Retrieve the extent of our location</span>
+<span class="n">area</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">gdf_from_place</span><span class="p">(</span><span class="n">place_name</span><span class="p">)</span>
+
+<span class="c1"># Retrieve buildings from the area</span>
+<span class="n">buildings</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">footprints_from_place</span><span class="p">(</span><span class="n">place_name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Retrieve the footprint of our location</span>
-<span class="n">area</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">gdf_from_place</span><span class="p">(</span><span class="n">place_name</span><span class="p">)</span>
-
-<span class="c1"># Retrieve buildings from the area</span>
-<span class="n">buildings</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">buildings_from_place</span><span class="p">(</span><span class="n">place_name</span><span class="p">)</span>
-
-<span class="c1"># What types are those?</span>
+<span></span><span class="c1"># What types are those?</span>
 <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">area</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">buildings</span><span class="p">))</span>
 </pre></div>
@@ -588,13 +587,251 @@ algorithms that can be used to calculate <a class="reference external" href="htt
 &lt;class &#39;geopandas.geodataframe.GeoDataFrame&#39;&gt;
 </pre></div></div>
 </div>
-<p>As a result we got the data as GeoDataFrames.</p>
+<p>As a result we got the data as GeoDataFrames. The footprint contains only one object, while the buildings GeoDataFrame contains several polygons.</p>
+<ul class="simple">
+<li>check the contents of these layers:</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">area</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>geometry</th>
+      <th>place_name</th>
+      <th>bbox_north</th>
+      <th>bbox_south</th>
+      <th>bbox_east</th>
+      <th>bbox_west</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>POLYGON ((24.92074 60.16690, 24.92075 60.16687...</td>
+      <td>Kamppi, Southern major district, Helsinki, Hel...</td>
+      <td>60.172109</td>
+      <td>60.160474</td>
+      <td>24.943453</td>
+      <td>24.920742</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">buildings</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>nodes</th>
+      <th>geometry</th>
+      <th>addr:city</th>
+      <th>addr:country</th>
+      <th>addr:housenumber</th>
+      <th>addr:street</th>
+      <th>building</th>
+      <th>name</th>
+      <th>name:fi</th>
+      <th>name:ko</th>
+      <th>...</th>
+      <th>outdoor_seating</th>
+      <th>addr:floor</th>
+      <th>access</th>
+      <th>covered</th>
+      <th>type</th>
+      <th>brand</th>
+      <th>building:part</th>
+      <th>ele</th>
+      <th>electrified</th>
+      <th>addr:unit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>8035238</td>
+      <td>[60069605, 60069615, 60275530, 1036979252, 105...</td>
+      <td>POLYGON ((24.93563 60.17045, 24.93557 60.17054...</td>
+      <td>Helsinki</td>
+      <td>FI</td>
+      <td>22-24</td>
+      <td>Mannerheimintie</td>
+      <td>public</td>
+      <td>Lasipalatsi</td>
+      <td>Lasipalatsi</td>
+      <td>라시팔라치</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>8042297</td>
+      <td>[1378950415, 1378950417, 1378950418, 319515866...</td>
+      <td>POLYGON ((24.92938 60.16795, 24.92933 60.16797...</td>
+      <td>Helsinki</td>
+      <td>FI</td>
+      <td>2</td>
+      <td>Runeberginkatu</td>
+      <td>yes</td>
+      <td>Radisson Blu Royal</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>14797170</td>
+      <td>[146125363, 3203698292, 3203698293, 3203698294...</td>
+      <td>POLYGON ((24.92427 60.16648, 24.92427 60.16650...</td>
+      <td>Helsinki</td>
+      <td>FI</td>
+      <td>10</td>
+      <td>Lapinlahdenkatu</td>
+      <td>school</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>14797171</td>
+      <td>[146125420, 146125424, 3203623643, 3203623641,...</td>
+      <td>POLYGON ((24.92390 60.16729, 24.92391 60.16731...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>yes</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>14797172</td>
+      <td>[1019881039, 3205236782, 3205236781, 146125459...</td>
+      <td>POLYGON ((24.92647 60.16689, 24.92648 60.16689...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>yes</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 93 columns</p>
+</div></div>
+</div>
 <p>OSMnx has a nice function called <code class="docutils literal notranslate"><span class="pre">ox.pois_from_place()</span></code> that can be used in a similar manner as the previous function to retrieve specific POI data from OpenStreetMap such as <code class="docutils literal notranslate"><span class="pre">restaurants</span></code>. With parameter <code class="docutils literal notranslate"><span class="pre">amenities</span></code> we can pass a list of OSM amenity categories that we are interested in retrieving.</p>
 <ul class="simple">
 <li>Let’s also retrieve restaurants that are located on the area:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -607,11 +844,11 @@ algorithms that can be used to calculate <a class="reference external" href="htt
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>199
+<span></span>211
 </pre></div>
 </div>
 </div>
@@ -620,7 +857,7 @@ algorithms that can be used to calculate <a class="reference external" href="htt
 <li>Let’s explore what kind of attributes we have in our restaurants GeoDataFrame</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -630,24 +867,26 @@ algorithms that can be used to calculate <a class="reference external" href="htt
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Index([&#39;access:dog&#39;, &#39;addr:city&#39;, &#39;addr:country&#39;, &#39;addr:floor&#39;,
-       &#39;addr:housename&#39;, &#39;addr:housenumber&#39;, &#39;addr:place&#39;, &#39;addr:postcode&#39;,
-       &#39;addr:street&#39;, &#39;address&#39;, &#39;alt_name&#39;, &#39;amenity&#39;, &#39;brunch&#39;, &#39;capacity&#39;,
-       &#39;contact:email&#39;, &#39;contact:foursquare&#39;, &#39;contact:phone&#39;,
-       &#39;contact:website&#39;, &#39;contact:yelp&#39;, &#39;created_by&#39;, &#39;cuisine&#39;, &#39;delivery&#39;,
-       &#39;description&#39;, &#39;description:en&#39;, &#39;diet:vegan&#39;, &#39;diet:vegetarian&#39;,
-       &#39;element_type&#39;, &#39;email&#39;, &#39;entrance&#39;, &#39;established&#39;, &#39;geometry&#39;,
-       &#39;highchair&#39;, &#39;internet_access&#39;, &#39;is_in&#39;, &#39;layer&#39;, &#39;level&#39;, &#39;lunch&#39;,
-       &#39;name&#39;, &#39;name:en&#39;, &#39;name:fi&#39;, &#39;name:sv&#39;, &#39;name:zh&#39;, &#39;note&#39;, &#39;office&#39;,
-       &#39;opening_hours&#39;, &#39;opening_hours:brunch&#39;, &#39;opening_hours:lunch&#39;,
-       &#39;opening_hours:lunch_buffet&#39;, &#39;operator&#39;, &#39;osmid&#39;, &#39;outdoor_seating&#39;,
-       &#39;phone&#39;, &#39;ref:vatin&#39;, &#39;shop&#39;, &#39;smoking&#39;, &#39;source&#39;, &#39;takeaway&#39;,
-       &#39;toilets:wheelchair&#39;, &#39;url&#39;, &#39;was:name&#39;, &#39;website&#39;, &#39;website:en&#39;,
-       &#39;wheelchair&#39;, &#39;wheelchair:description&#39;, &#39;wikidata&#39;, &#39;building&#39;,
+<span></span>Index([&#39;osmid&#39;, &#39;geometry&#39;, &#39;addr:city&#39;, &#39;addr:country&#39;, &#39;addr:housenumber&#39;,
+       &#39;addr:postcode&#39;, &#39;addr:street&#39;, &#39;amenity&#39;, &#39;cuisine&#39;, &#39;name&#39;, &#39;phone&#39;,
+       &#39;website&#39;, &#39;wheelchair&#39;, &#39;element_type&#39;, &#39;toilets:wheelchair&#39;,
+       &#39;created_by&#39;, &#39;outdoor_seating&#39;, &#39;fixme&#39;, &#39;opening_hours&#39;, &#39;email&#39;,
+       &#39;internet_access&#39;, &#39;internet_access:fee&#39;, &#39;opening_hours:brunch&#39;,
+       &#39;diet:vegetarian&#39;, &#39;name:fi&#39;, &#39;name:zh&#39;, &#39;short_name&#39;, &#39;takeaway&#39;,
+       &#39;contact:website&#39;, &#39;diet:vegan&#39;, &#39;name:ru&#39;, &#39;operator&#39;, &#39;smoking&#39;,
+       &#39;wheelchair:description&#39;, &#39;level&#39;, &#39;contact:phone&#39;, &#39;source&#39;, &#39;name:en&#39;,
+       &#39;building&#39;, &#39;addr:housename&#39;, &#39;note&#39;, &#39;address&#39;, &#39;brunch&#39;,
+       &#39;contact:foursquare&#39;, &#39;contact:yelp&#39;, &#39;ref:vatin&#39;, &#39;delivery&#39;, &#39;url&#39;,
+       &#39;lunch:menu&#39;, &#39;reservation&#39;, &#39;room&#39;, &#39;toilets&#39;, &#39;capacity&#39;,
+       &#39;access:dog&#39;, &#39;shop&#39;, &#39;opening_hours:lunch_buffet&#39;, &#39;is_in&#39;, &#39;wikidata&#39;,
+       &#39;alt_name&#39;, &#39;contact:email&#39;, &#39;established&#39;, &#39;description&#39;, &#39;name:sv&#39;,
+       &#39;lunch&#39;, &#39;description:en&#39;, &#39;old_name&#39;, &#39;highchair&#39;, &#39;was:name&#39;,
+       &#39;website:en&#39;, &#39;lunch:buffet&#39;, &#39;office&#39;, &#39;addr:place&#39;, &#39;entrance&#39;,
+       &#39;addr:floor&#39;, &#39;layer&#39;, &#39;image&#39;, &#39;payment:mastercard&#39;, &#39;payment:visa&#39;,
        &#39;nodes&#39;],
       dtype=&#39;object&#39;)
 </pre></div>
@@ -655,7 +894,7 @@ algorithms that can be used to calculate <a class="reference external" href="htt
 </div>
 <p>Wow, there exists quite a lot of information related to the POIs. One of the useful ones might be for example the <code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">address</span> <span class="pre">information</span></code> and <code class="docutils literal notranslate"><span class="pre">opening_hours</span></code> information:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -668,7 +907,7 @@ algorithms that can be used to calculate <a class="reference external" href="htt
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -701,7 +940,7 @@ algorithms that can be used to calculate <a class="reference external" href="htt
   </thead>
   <tbody>
     <tr>
-      <th>60062502</th>
+      <td>60062502</td>
       <td>Kabuki</td>
       <td>NaN</td>
       <td>Helsinki</td>
@@ -711,7 +950,7 @@ algorithms that can be used to calculate <a class="reference external" href="htt
       <td>Lapinlahdenkatu</td>
     </tr>
     <tr>
-      <th>60133792</th>
+      <td>60133792</td>
       <td>Ateljé Finne</td>
       <td>NaN</td>
       <td>Helsinki</td>
@@ -721,7 +960,7 @@ algorithms that can be used to calculate <a class="reference external" href="htt
       <td>NaN</td>
     </tr>
     <tr>
-      <th>62965963</th>
+      <td>62965963</td>
       <td>Empire Plaza</td>
       <td>NaN</td>
       <td>NaN</td>
@@ -731,7 +970,7 @@ algorithms that can be used to calculate <a class="reference external" href="htt
       <td>NaN</td>
     </tr>
     <tr>
-      <th>62967659</th>
+      <td>62967659</td>
       <td>Ravintola Pääposti</td>
       <td>NaN</td>
       <td>Helsinki</td>
@@ -741,7 +980,7 @@ algorithms that can be used to calculate <a class="reference external" href="htt
       <td>Mannerheiminaukio</td>
     </tr>
     <tr>
-      <th>68734026</th>
+      <td>68734026</td>
       <td>Hampton Bay</td>
       <td>NaN</td>
       <td>Helsinki</td>
@@ -751,7 +990,7 @@ algorithms that can be used to calculate <a class="reference external" href="htt
       <td>Hietalahdenranta</td>
     </tr>
     <tr>
-      <th>76617692</th>
+      <td>76617692</td>
       <td>Johan Ludvig</td>
       <td>NaN</td>
       <td>Helsinki</td>
@@ -761,7 +1000,7 @@ algorithms that can be used to calculate <a class="reference external" href="htt
       <td>NaN</td>
     </tr>
     <tr>
-      <th>76624339</th>
+      <td>76624339</td>
       <td>Ravintola Rivoletto</td>
       <td>Mo-Th 11:00-23:00; Fr 11:00-24:00; Sa 15:00-24...</td>
       <td>Helsinki</td>
@@ -771,7 +1010,7 @@ algorithms that can be used to calculate <a class="reference external" href="htt
       <td>Albertinkatu</td>
     </tr>
     <tr>
-      <th>76624351</th>
+      <td>76624351</td>
       <td>Pueblo</td>
       <td>NaN</td>
       <td>Helsinki</td>
@@ -781,7 +1020,7 @@ algorithms that can be used to calculate <a class="reference external" href="htt
       <td>Eerikinkatu</td>
     </tr>
     <tr>
-      <th>76627823</th>
+      <td>76627823</td>
       <td>Atabar</td>
       <td>NaN</td>
       <td>Helsinki</td>
@@ -791,14 +1030,14 @@ algorithms that can be used to calculate <a class="reference external" href="htt
       <td>Eerikinkatu</td>
     </tr>
     <tr>
-      <th>89074039</th>
-      <td>Papa Albert</td>
-      <td>Mo-Th 10:00-14:00, 17:30-22:00; Fr 11:00-23:00...</td>
+      <td>77642757</td>
+      <td>Southpark</td>
+      <td>Mo-Sa 11:00-15:00; Su 10:30-17:00</td>
       <td>Helsinki</td>
-      <td>FI</td>
-      <td>30</td>
+      <td>NaN</td>
+      <td>40</td>
       <td>00120</td>
-      <td>Albertinkatu</td>
+      <td>Sinebrychoffin puisto, Bulevardi</td>
     </tr>
   </tbody>
 </table>
@@ -810,7 +1049,7 @@ algorithms that can be used to calculate <a class="reference external" href="htt
 <li>Let’s extract the nodes and edges from the graph as GeoDataFrames:</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -828,41 +1067,48 @@ algorithms that can be used to calculate <a class="reference external" href="htt
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 Nodes:
-            highway     osmid   ref        x        y  \
-25216594       NaN  25216594   NaN  24.9211  60.1648
-25238874       NaN  25238874   NaN   24.921  60.1637
-25238883  crossing  25238883   NaN  24.9214  60.1635
-25238933  bus_stop  25238933  1168  24.9245  60.1611
-25238944       NaN  25238944   NaN  24.9213  60.1646
+                     y          x       osmid         highway  ref  \
+3216400385  60.167552  24.934005  3216400385  turning_circle  NaN
+1372233731  60.162290  24.929274  1372233731        crossing  NaN
+319885318   60.165072  24.925487   319885318             NaN  NaN
+1005744134  60.161622  24.924423  1005744134             NaN  NaN
+3216400394  60.167662  24.933920  3216400394             NaN  NaN
 
-                               geometry
-25216594  POINT (24.9210566 60.1647939)
-25238874  POINT (24.9210282 60.1636645)
-25238883  POINT (24.9214411 60.1634517)
-25238933   POINT (24.924529 60.1611136)
-25238944   POINT (24.9212859 60.164631)
+                             geometry
+3216400385  POINT (24.93400 60.16755)
+1372233731  POINT (24.92927 60.16229)
+319885318   POINT (24.92549 60.16507)
+1005744134  POINT (24.92442 60.16162)
+3216400394  POINT (24.93392 60.16766)
 
 Edges:
-   access bridge                                           geometry  \
-0    NaN    NaN  LINESTRING (24.9253928 60.1664791, 24.925717 6...
-1    NaN    NaN  LINESTRING (24.9253928 60.1664791, 24.9254822 ...
-2    NaN    NaN  LINESTRING (24.9340047 60.1675525, 24.9339332 ...
-3    NaN    NaN  LINESTRING (24.9292726 60.1622912, 24.9294092 ...
-4    NaN    NaN  LINESTRING (24.9292726 60.1622912, 24.9291752 ...
+             u           v  key                  osmid             name  \
+0  3216400385   301360890    0               15240373   Kansakoulukuja
+1  1372233731   298367080    0               86533507              NaN
+2  1372233731   292859610    0               15103120              NaN
+3  1372233731  4430643601    0  [154412960, 86533507]              NaN
+4  1372233731   311043714    0               86533509  Hietalahdenkatu
 
-       highway junction  key lanes  length maxspeed             name  oneway  \
-0  residential      NaN    0   NaN  69.085       30  Lastenkodinkuja    True
-1      footway      NaN    0   NaN   5.119      NaN              NaN   False
-2  residential      NaN    0   NaN  11.431       30   Kansakoulukuja   False
-3      footway      NaN    0   NaN   9.323      NaN              NaN   False
-4      footway      NaN    0   NaN   6.855      NaN              NaN   False
+        highway maxspeed  oneway  length  \
+0   residential       30   False  13.177
+1       footway      NaN   False   6.925
+2  primary_link       30    True  33.874
+3       footway      NaN   False  12.489
+4       primary       30    True  38.768
 
-      osmid  ref service tunnel           u           v
-0   7849131  NaN     NaN    NaN   296045343   295948400
-1  27009094  NaN     NaN    NaN   296045343   296045357
-2  15240373  NaN     NaN    NaN  3216400385   301360890
-3  86533507  NaN     NaN    NaN  1372233731  1005727584
-4  86533507  NaN     NaN    NaN  1372233731   298367080
+                                            geometry lanes service tunnel  \
+0  LINESTRING (24.93400 60.16755, 24.93393 60.167...   NaN     NaN    NaN
+1  LINESTRING (24.92927 60.16229, 24.92917 60.16225)   NaN     NaN    NaN
+2  LINESTRING (24.92927 60.16229, 24.92930 60.162...     2     NaN    NaN
+3  LINESTRING (24.92927 60.16229, 24.92941 60.162...   NaN     NaN    NaN
+4  LINESTRING (24.92927 60.16229, 24.92938 60.162...     2     NaN    NaN
+
+  junction access bridge  ref
+0      NaN    NaN    NaN  NaN
+1      NaN    NaN    NaN  NaN
+2      NaN    NaN    NaN  NaN
+3      NaN    NaN    NaN  NaN
+4      NaN    NaN    NaN  NaN
 
 Type: &lt;class &#39;geopandas.geodataframe.GeoDataFrame&#39;&gt;
 </pre></div></div>
@@ -873,7 +1119,7 @@ Type: &lt;class &#39;geopandas.geodataframe.GeoDataFrame&#39;&gt;
 <li>Let’s create a map out of the streets, buildings, restaurants, and the area Polygon but let’s exclude the nodes (to keep the figure clearer).</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -896,7 +1142,7 @@ Type: &lt;class &#39;geopandas.geodataframe.GeoDataFrame&#39;&gt;
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/notebooks_L6_retrieve_osm_data_18_0.png" src="../../_images/notebooks_L6_retrieve_osm_data_18_0.png" />
+<img alt="../../_images/notebooks_L6_retrieve_osm_data_22_0.png" src="../../_images/notebooks_L6_retrieve_osm_data_22_0.png" />
 </div>
 </div>
 <p>Cool! Now we have a map where we have plotted the restaurants, buildings, streets and the boundaries of the selected region of ‘Kamppi’ in Helsinki. And all of this required only a few lines of code. Pretty neat!</p>
