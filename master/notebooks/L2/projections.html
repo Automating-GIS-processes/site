@@ -503,7 +503,7 @@ This page was generated from <a class="reference external" href="https://github.
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Import necessary packages</span>
-<span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 
 <span class="c1"># Read the file</span>
 <span class="n">fp</span> <span class="o">=</span> <span class="s2">&quot;L2_data/Europe_borders.shp&quot;</span>
@@ -588,7 +588,7 @@ Name: geometry, dtype: geometry
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Check the new geometry values</span>
-<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -613,7 +613,7 @@ Name: geometry, dtype: geometry
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="c1"># Make subplots that are next to each other</span>
 <span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
@@ -672,7 +672,7 @@ transformations (reprojecting from CRS to another as we did earlier).</p>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Let&#39;s see the current CRS of our data</span>
-<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -738,13 +738,13 @@ Datum: European Terrestrial Reference System 1989
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Name</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Name:&quot;</span><span class="p">,</span> <span class="n">crs_object</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Name:&quot;</span><span class="p">,</span> <span class="n">crs_object</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 
 <span class="c1"># Coordinate system</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Coordinate system:&quot;</span><span class="p">,</span> <span class="n">crs_object</span><span class="o">.</span><span class="n">coordinate_system</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Coordinate system:&quot;</span><span class="p">,</span> <span class="n">crs_object</span><span class="o">.</span><span class="n">coordinate_system</span><span class="p">)</span>
 
 <span class="c1"># Bounds of the area where CRS is used</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Bounds:&quot;</span><span class="p">,</span> <span class="n">crs_object</span><span class="o">.</span><span class="n">area_of_use</span><span class="o">.</span><span class="n">bounds</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Bounds:&quot;</span><span class="p">,</span> <span class="n">crs_object</span><span class="o">.</span><span class="n">area_of_use</span><span class="o">.</span><span class="n">bounds</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -767,7 +767,7 @@ Bounds: (-35.58, 24.6, 44.83, 84.17)
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Retrive CRS information in WKT format</span>
 <span class="n">crs_wkt</span> <span class="o">=</span> <span class="n">crs_object</span><span class="o">.</span><span class="n">to_wkt</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="n">crs_wkt</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">crs_wkt</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -787,7 +787,7 @@ PROJCRS[&#34;ETRS89-extended / LAEA Europe&#34;,BASEGEOGCRS[&#34;ETRS89&#34;,DAT
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Retrieve EPSG code from WKT text</span>
 <span class="n">epsg</span> <span class="o">=</span> <span class="n">CRS</span><span class="p">(</span><span class="n">crs_wkt</span><span class="p">)</span><span class="o">.</span><span class="n">to_epsg</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="n">epsg</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">epsg</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -830,7 +830,7 @@ PROJCRS[&#34;ETRS89-extended / LAEA Europe&#34;,BASEGEOGCRS[&#34;ETRS89&#34;,DAT
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -887,11 +887,11 @@ PROJCRS[&#34;ETRS89-extended / LAEA Europe&#34;,BASEGEOGCRS[&#34;ETRS89&#34;,DAT
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;PROJ dictionary:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">crs_dict</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">CRS object:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">crs_object</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">EPSG code: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">crs_epsg</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">PROJ string: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">crs_proj4</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Well-Known Text (WKT):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">crs_wkt</span><span class="p">)</span>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;PROJ dictionary:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">crs_dict</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">CRS object:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">crs_object</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">EPSG code: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">crs_epsg</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">PROJ string: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">crs_proj4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Well-Known Text (WKT):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">crs_wkt</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

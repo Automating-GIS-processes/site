@@ -325,7 +325,7 @@ We provide those patterns as strings: the character * matches zero or more chara
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">glob</span>
 <span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">my_files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;/home/geo/data/*&#39;</span><span class="p">)</span>
-<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="k">print</span><span class="p">(</span><span class="n">my_files</span><span class="p">)</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="nb">print</span><span class="p">(</span><span class="n">my_files</span><span class="p">)</span>
 <span class="p">[</span><span class="s1">&#39;/home/geo/data/inflammation-08.csv&#39;</span><span class="p">,</span>
  <span class="s1">&#39;/home/geo/data/inflammation-10.csv&#39;</span><span class="p">,</span>
  <span class="s1">&#39;/home/geo/data/inflammation-11.csv&#39;</span><span class="p">,</span>
@@ -347,7 +347,7 @@ We provide those patterns as strings: the character * matches zero or more chara
 <li>We can also search for only specific files and file formats. Here, we search for files that starts with the word ‘small’ and ends with file format ‘.csv’:</li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">csv_files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;/home/geo/data/small*.csv&#39;</span><span class="p">)</span>
-<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="k">print</span><span class="p">(</span><span class="n">csv_files</span><span class="p">)</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="nb">print</span><span class="p">(</span><span class="n">csv_files</span><span class="p">)</span>
  <span class="p">[</span><span class="s1">&#39;/home/geo/data/small-03.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;/home/geo/data/small-02.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;/home/geo/data/small-01.csv&#39;</span><span class="p">]</span>
 </pre></div>
 </div>

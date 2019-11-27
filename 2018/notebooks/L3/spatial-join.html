@@ -531,7 +531,7 @@ years). - For this lesson we will use the population grid for year 2017, which c
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 
 <span class="c1"># Filepath</span>
 <span class="n">fp</span> <span class="o">=</span> <span class="s2">&quot;data/Pop17/Vaestoruudukko_2017.shp&quot;</span>
@@ -905,10 +905,10 @@ years). - For this lesson we will use the population grid for year 2017, which c
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Check the crs of address points</span>
-<span class="k">print</span><span class="p">(</span><span class="n">addresses</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">addresses</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
 
 <span class="c1"># Check the crs of population layer</span>
-<span class="k">print</span><span class="p">(</span><span class="n">pop</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pop</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
 
 <span class="c1"># Do they match now?</span>
 <span class="n">addresses</span><span class="o">.</span><span class="n">crs</span> <span class="o">==</span> <span class="n">pop</span><span class="o">.</span><span class="n">crs</span>
@@ -1057,10 +1057,10 @@ years). - For this lesson we will use the population grid for year 2017, which c
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="c1"># Plot the points with population info</span>
-<span class="n">join</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;pop17&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Reds&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s1">&#39;quantiles&#39;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="bp">True</span><span class="p">);</span>
+<span class="n">join</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;pop17&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Reds&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s1">&#39;quantiles&#39;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
 
 <span class="c1"># Add title</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Amount of inhabitants living close the the point&quot;</span><span class="p">);</span>

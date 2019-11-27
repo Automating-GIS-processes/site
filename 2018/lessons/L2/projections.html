@@ -321,7 +321,7 @@ Europe_borders.dbf  Europe_borders.sbn  Europe_borders.shp
 always but should) information about the coordinate system in which the
 data is projected.</p>
 <p>Let’s start by reading the data from the <code class="docutils literal notranslate"><span class="pre">Europe_borders.shp</span></code> file.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 
 <span class="go"># Filepath to the Europe borders Shapefile</span>
 <span class="gp">In [2]: </span><span class="n">fp</span> <span class="o">=</span> <span class="s2">&quot;/home/geo/Europe_borders.shp&quot;</span>
@@ -395,7 +395,7 @@ changed the projection of our layer into a new one, i.e. to ETRS-LAEA projection
 </div>
 <p>To really understand what is going on, it is good to explore our data visually. Hence, let’s compare the datasets by making
 maps out of them.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="c1"># Plot the WGS84</span>
 <span class="n">data</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">);</span>
@@ -508,7 +508,7 @@ copy of our GeoDataFrame called <code class="docutils literal notranslate"><span
 </ul>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [22]: </span><span class="n">hki</span> <span class="o">=</span> <span class="n">hki</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">proj4_txt</span><span class="p">)</span>
 
-<span class="gp">In [23]: </span><span class="k">print</span><span class="p">(</span><span class="n">hki</span><span class="p">)</span>
+<span class="gp">In [23]: </span><span class="nb">print</span><span class="p">(</span><span class="n">hki</span><span class="p">)</span>
 <span class="go">0    POINT (0.00000 0.00000)</span>
 <span class="go">dtype: geometry</span>
 </pre></div>
@@ -566,7 +566,7 @@ to calculate the distance between the centroids and Helsinki. We will create our
 </ul>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [26]: </span><span class="n">hki_geom</span> <span class="o">=</span> <span class="n">hki</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
-<span class="gp">In [27]: </span><span class="k">print</span><span class="p">(</span><span class="n">hki_geom</span><span class="p">)</span>
+<span class="gp">In [27]: </span><span class="nb">print</span><span class="p">(</span><span class="n">hki_geom</span><span class="p">)</span>
 <span class="go">POINT (0 0)</span>
 </pre></div>
 </div>
@@ -607,7 +607,7 @@ This specifies that the calculations should be done row by row (instead of colum
 
 <span class="gp">In [31]: </span><span class="n">mean_dist</span> <span class="o">=</span> <span class="n">data_d</span><span class="p">[</span><span class="s1">&#39;dist_to_Hki&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 
-<span class="gp">In [32]: </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Maximum distance to Helsinki is </span><span class="si">%.0f</span><span class="s2"> km, and the mean distance is </span><span class="si">%.0f</span><span class="s2"> km.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">max_dist</span><span class="p">,</span> <span class="n">mean_dist</span><span class="p">))</span>
+<span class="gp">In [32]: </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Maximum distance to Helsinki is </span><span class="si">%.0f</span><span class="s2"> km, and the mean distance is </span><span class="si">%.0f</span><span class="s2"> km.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">max_dist</span><span class="p">,</span> <span class="n">mean_dist</span><span class="p">))</span>
 <span class="go">Maximum distance to Helsinki is 3199 km, and the mean distance is 1185 km.</span>
 </pre></div>
 </div>

@@ -510,8 +510,8 @@ $ unzip L4_data.zip
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">shapely.speedups</span>
 <span class="o">%</span><span class="k">matplotlib</span> inline
 
@@ -621,7 +621,7 @@ $ unzip L4_data.zip
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">print</span><span class="p">(</span><span class="n">intersection</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="n">intersection</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -688,7 +688,7 @@ country-level data into a continent-level dataset.</p>
 <span class="n">dissolved</span> <span class="o">=</span> <span class="n">intersection</span><span class="o">.</span><span class="n">dissolve</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;car_r_t&quot;</span><span class="p">)</span>
 
 <span class="c1"># What did we get</span>
-<span class="k">print</span><span class="p">(</span><span class="n">dissolved</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dissolved</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -730,8 +730,8 @@ car_r_t
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Rows in original intersection GeoDataFrame:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">intersection</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Rows in dissolved layer:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dissolved</span><span class="p">))</span>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Rows in original intersection GeoDataFrame:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">intersection</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Rows in dissolved layer:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dissolved</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -754,7 +754,7 @@ Rows in dissolved layer: 51
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">print</span><span class="p">(</span><span class="n">dissolved</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="n">dissolved</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -778,7 +778,7 @@ Index([&#39;geometry&#39;, &#39;car_m_d&#39;, &#39;car_m_t&#39;, &#39;car_r_d&#3
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">print</span><span class="p">(</span><span class="n">dissolved</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="n">dissolved</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -841,7 +841,7 @@ Name: 20, dtype: object
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># See the data type</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">dissolved</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">15</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">dissolved</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">15</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
@@ -859,7 +859,7 @@ Name: 20, dtype: object
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># See the data</span>
-<span class="k">print</span><span class="p">(</span><span class="n">dissolved</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">15</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dissolved</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">15</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -935,14 +935,14 @@ simplify geometric features in Python.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 
 <span class="c1"># File path</span>
 <span class="n">fp</span> <span class="o">=</span> <span class="s2">&quot;data/Amazon_river.shp&quot;</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
 
 <span class="c1"># Print crs</span>
-<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
 
 <span class="c1"># Plot the river</span>
 <span class="n">data</span><span class="o">.</span><span class="n">plot</span><span class="p">();</span>
@@ -1026,7 +1026,7 @@ simplify geometric features in Python.</p>
     <p>
         &copy; Copyright 2019, Henrikki Tenkanen and Vuokko Heikinheimo, Digital Geography Lab, University of Helsinki
       <span class="lastupdated">
-        Last updated on Nov 25, 2019.
+        Last updated on Nov 27, 2019.
       </span>
 
     </p>

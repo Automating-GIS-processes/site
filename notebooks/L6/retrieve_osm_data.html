@@ -502,8 +502,8 @@ This page was generated from <a class="reference external" href="https://github.
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">osmnx</span> <span class="kn">as</span> <span class="nn">ox</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span></span><span class="kn">import</span> <span class="nn">osmnx</span> <span class="k">as</span> <span class="nn">ox</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="o">%</span><span class="k">matplotlib</span> inline
 
 <span class="c1"># Specify the name that is used to seach for the data</span>
@@ -563,8 +563,8 @@ algorithms that can be used to calculate <a class="reference external" href="htt
 <span class="n">buildings</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">buildings_from_place</span><span class="p">(</span><span class="n">place_name</span><span class="p">)</span>
 
 <span class="c1"># What types are those?</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">area</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">buildings</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">area</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">buildings</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -805,9 +805,9 @@ algorithms that can be used to calculate <a class="reference external" href="htt
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Retrieve nodes and edges</span>
 <span class="n">nodes</span><span class="p">,</span> <span class="n">edges</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">graph_to_gdfs</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Nodes:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">nodes</span><span class="o">.</span><span class="n">head</span><span class="p">(),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Edges:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">edges</span><span class="o">.</span><span class="n">head</span><span class="p">(),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Type:&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">edges</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Nodes:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">nodes</span><span class="o">.</span><span class="n">head</span><span class="p">(),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Edges:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">edges</span><span class="o">.</span><span class="n">head</span><span class="p">(),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Type:&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">edges</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>

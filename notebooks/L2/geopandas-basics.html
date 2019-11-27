@@ -498,7 +498,7 @@ This page was generated from <a class="reference external" href="https://github.
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 </pre></div>
 </div>
 </div>
@@ -669,7 +669,7 @@ $ ls L2_data
 <span class="n">fp</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_folder</span><span class="p">,</span> <span class="s2">&quot;m_L4132R_p.shp&quot;</span><span class="p">)</span>
 
 <span class="c1"># Print out the full file path</span>
-<span class="k">print</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -695,7 +695,7 @@ reading data from all of these formats (plus many more).</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 
 <span class="c1"># Read file using gpd.read_file()</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
@@ -732,7 +732,7 @@ reading data from all of these formats (plus many more).</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -827,7 +827,7 @@ reading data from all of these formats (plus many more).</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">colnames</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span></span><span class="n">data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">colnames</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -864,9 +864,9 @@ reading data from all of these formats (plus many more).</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Number of rows&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;CLASS&#39;</span><span class="p">]))</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Number of classes&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;CLASS&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">())</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Number of groups&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;GROUP&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">())</span>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of rows&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;CLASS&#39;</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of classes&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;CLASS&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of groups&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;GROUP&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -925,7 +925,7 @@ Number of groups 1
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># It is possible to get a specific column by specifying the column name within square brackets []</span>
-<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -952,8 +952,8 @@ Name: geometry, dtype: geometry
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Polygon:&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">])</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Area:&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">area</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="s2">&quot;square meters&quot;</span><span class="p">)</span>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Polygon:&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Area:&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">area</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="s2">&quot;square meters&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -983,7 +983,7 @@ Area: 76.0 square meters
     <span class="n">poly_area</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">area</span>
 
     <span class="c1"># Print info</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Polygon area at index {index} is: {area:.2f} m^2&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span> <span class="n">area</span><span class="o">=</span><span class="n">poly_area</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Polygon area at index </span><span class="si">{index}</span><span class="s2"> is: </span><span class="si">{area:.2f}</span><span class="s2"> m^2&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span> <span class="n">area</span><span class="o">=</span><span class="n">poly_area</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1102,9 +1102,9 @@ Name: area, dtype: float64
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Max area: {maximum} square meters&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">maximum</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">max_area</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Min area: {minimum} square meters&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">minimum</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">min_area</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Mean area: {mean} square meters&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">mean_area</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Max area: </span><span class="si">{maximum}</span><span class="s2"> square meters&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">maximum</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">max_area</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Min area: </span><span class="si">{minimum}</span><span class="s2"> square meters&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">minimum</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">min_area</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean area: </span><span class="si">{mean}</span><span class="s2"> square meters&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">mean_area</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
@@ -1294,7 +1294,7 @@ Mean area: 11522.0 square meters
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Print all unique values in the column</span>
-<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;CLASS&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;CLASS&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -1367,8 +1367,8 @@ Mean area: 11522.0 square meters
 <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">grouped</span><span class="p">:</span>
 
     <span class="c1"># Let&#39;s check how many rows each group has:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Terrain class:&#39;</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Number of rows:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">group</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Terrain class:&#39;</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of rows:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">group</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1599,7 +1599,7 @@ Number of rows: 8
     <span class="n">output_name</span> <span class="o">=</span> <span class="s2">&quot;terrain_</span><span class="si">%s</span><span class="s2">.shp&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
 
     <span class="c1"># Print information about the process</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Saving file&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">output_name</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Saving file&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">output_name</span><span class="p">))</span>
 
     <span class="c1"># Create an output path</span>
     <span class="n">outpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">result_folder</span><span class="p">,</span> <span class="n">output_name</span><span class="p">)</span>
@@ -1699,7 +1699,7 @@ Name: area, dtype: float64
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Create an output path</span>
-<span class="n">area_info</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;terrain_class_areas.csv&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">area_info</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;terrain_class_areas.csv&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

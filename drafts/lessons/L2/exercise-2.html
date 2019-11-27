@@ -257,7 +257,7 @@ Note that you should not try to make changes to this copy of the exercise, but r
 <ul class="simple">
 <li>Let’s continue with the previous example and consider that we have a column where we have stored the shapely geometries:</li>
 </ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 <span class="go">    value  lat  lon     geometry</span>
 <span class="go">0      0    2    4  POINT (4 2)</span>
 <span class="go">1      5    1    6  POINT (6 1)</span>
@@ -285,7 +285,7 @@ Note that you should not try to make changes to this copy of the exercise, but r
 <span class="n">geopandas</span><span class="o">.</span><span class="n">geodataframe</span><span class="o">.</span><span class="n">GeoDataFrame</span>
 
 <span class="o">&gt;&gt;&gt;</span> <span class="n">geo</span><span class="o">.</span><span class="n">crs</span>
-<span class="p">{</span><span class="s1">&#39;init&#39;</span><span class="p">:</span> <span class="s1">&#39;epsg:4326&#39;</span><span class="p">,</span> <span class="s1">&#39;no_defs&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">}</span>
+<span class="p">{</span><span class="s1">&#39;init&#39;</span><span class="p">:</span> <span class="s1">&#39;epsg:4326&#39;</span><span class="p">,</span> <span class="s1">&#39;no_defs&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
 </pre></div>
 </div>
 <p>Now we have converted Pandas DataFrame into a proper GeoDataFrame that we can export into a Shapefile for instance.</p>

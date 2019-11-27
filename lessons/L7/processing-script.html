@@ -289,7 +289,7 @@ On Microsoft Windows, unfortunately, most programs ship with their private Pytho
 <p>Previous to QGIS 2.99, <em>processing</em> offered a <code class="docutils literal notranslate"><span class="pre">processing.alglist()</span></code> command to list all available algorithms and search for keywords in their names. In QGIS 3.0 and later, the following two lines are an easy drop-in for the same search:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># search for “buffer” algorithms:</span>
 <span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">searchTerm</span> <span class="o">=</span> <span class="s2">&quot;buffer&quot;</span>
-<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="k">print</span><span class="p">([</span><span class="n">a</span><span class="o">.</span><span class="n">id</span><span class="p">()</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">QgsApplication</span><span class="o">.</span><span class="n">processingRegistry</span><span class="p">()</span><span class="o">.</span><span class="n">algorithms</span><span class="p">()</span> <span class="k">if</span> <span class="n">searchTerm</span> <span class="ow">in</span> <span class="n">a</span><span class="o">.</span><span class="n">id</span><span class="p">()])</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="nb">print</span><span class="p">([</span><span class="n">a</span><span class="o">.</span><span class="n">id</span><span class="p">()</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">QgsApplication</span><span class="o">.</span><span class="n">processingRegistry</span><span class="p">()</span><span class="o">.</span><span class="n">algorithms</span><span class="p">()</span> <span class="k">if</span> <span class="n">searchTerm</span> <span class="ow">in</span> <span class="n">a</span><span class="o">.</span><span class="n">id</span><span class="p">()])</span>
 <span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
     <span class="p">[</span><span class="s1">&#39;gdal:buffervectors&#39;</span><span class="p">,</span>
      <span class="s1">&#39;gdal:onesidebuffer&#39;</span><span class="p">,</span>
@@ -310,17 +310,17 @@ On Microsoft Windows, unfortunately, most programs ship with their private Pytho
 <p>To access more information on an individual algorithm, run <code class="docutils literal notranslate"><span class="pre">processing.algorithmHelp()</span></code>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">processing</span><span class="o">.</span><span class="n">algorithmHelp</span><span class="p">(</span><span class="s2">&quot;native:buffer&quot;</span><span class="p">)</span>
 <span class="n">Out</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span>
-    <span class="n">Buffer</span> <span class="p">(</span><span class="n">native</span><span class="p">:</span><span class="nb">buffer</span><span class="p">)</span>
+    <span class="n">Buffer</span> <span class="p">(</span><span class="n">native</span><span class="p">:</span><span class="n">buffer</span><span class="p">)</span>
 
-    <span class="n">This</span> <span class="n">algorithm</span> <span class="n">computes</span> <span class="n">a</span> <span class="nb">buffer</span> <span class="n">area</span> <span class="k">for</span> <span class="nb">all</span> <span class="n">the</span> <span class="n">features</span> <span class="ow">in</span> <span class="n">an</span> <span class="nb">input</span> <span class="n">layer</span><span class="p">,</span> <span class="n">using</span> <span class="n">a</span> <span class="n">fixed</span> <span class="ow">or</span> <span class="n">dynamic</span> <span class="n">distance</span><span class="o">.</span>
+    <span class="n">This</span> <span class="n">algorithm</span> <span class="n">computes</span> <span class="n">a</span> <span class="n">buffer</span> <span class="n">area</span> <span class="k">for</span> <span class="nb">all</span> <span class="n">the</span> <span class="n">features</span> <span class="ow">in</span> <span class="n">an</span> <span class="nb">input</span> <span class="n">layer</span><span class="p">,</span> <span class="n">using</span> <span class="n">a</span> <span class="n">fixed</span> <span class="ow">or</span> <span class="n">dynamic</span> <span class="n">distance</span><span class="o">.</span>
 
     <span class="n">The</span> <span class="n">segments</span> <span class="n">parameter</span> <span class="n">controls</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="n">line</span> <span class="n">segments</span> <span class="n">to</span> <span class="n">use</span> <span class="n">to</span> <span class="n">approximate</span> <span class="n">a</span> <span class="n">quarter</span> <span class="n">circle</span> <span class="n">when</span> <span class="n">creating</span> <span class="n">rounded</span> <span class="n">offsets</span><span class="o">.</span>
 
-    <span class="n">The</span> <span class="n">end</span> <span class="n">cap</span> <span class="n">style</span> <span class="n">parameter</span> <span class="n">controls</span> <span class="n">how</span> <span class="n">line</span> <span class="n">endings</span> <span class="n">are</span> <span class="n">handled</span> <span class="ow">in</span> <span class="n">the</span> <span class="nb">buffer</span><span class="o">.</span>
+    <span class="n">The</span> <span class="n">end</span> <span class="n">cap</span> <span class="n">style</span> <span class="n">parameter</span> <span class="n">controls</span> <span class="n">how</span> <span class="n">line</span> <span class="n">endings</span> <span class="n">are</span> <span class="n">handled</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">buffer</span><span class="o">.</span>
 
     <span class="n">The</span> <span class="n">join</span> <span class="n">style</span> <span class="n">parameter</span> <span class="n">specifies</span> <span class="n">whether</span> <span class="nb">round</span><span class="p">,</span> <span class="n">miter</span> <span class="ow">or</span> <span class="n">beveled</span> <span class="n">joins</span> <span class="n">should</span> <span class="n">be</span> <span class="n">used</span> <span class="n">when</span> <span class="n">offsetting</span> <span class="n">corners</span> <span class="ow">in</span> <span class="n">a</span> <span class="n">line</span><span class="o">.</span>
 
-    <span class="n">The</span> <span class="n">miter</span> <span class="n">limit</span> <span class="n">parameter</span> <span class="ow">is</span> <span class="n">only</span> <span class="n">applicable</span> <span class="k">for</span> <span class="n">miter</span> <span class="n">join</span> <span class="n">styles</span><span class="p">,</span> <span class="ow">and</span> <span class="n">controls</span> <span class="n">the</span> <span class="n">maximum</span> <span class="n">distance</span> <span class="kn">from</span> <span class="nn">the</span> <span class="nn">offset</span> <span class="nn">curve</span> <span class="nn">to</span> <span class="nn">use</span> <span class="nn">when</span> <span class="nn">creating</span> <span class="nn">a</span> <span class="nn">mitered</span> <span class="nn">join.</span>
+    <span class="n">The</span> <span class="n">miter</span> <span class="n">limit</span> <span class="n">parameter</span> <span class="ow">is</span> <span class="n">only</span> <span class="n">applicable</span> <span class="k">for</span> <span class="n">miter</span> <span class="n">join</span> <span class="n">styles</span><span class="p">,</span> <span class="ow">and</span> <span class="n">controls</span> <span class="n">the</span> <span class="n">maximum</span> <span class="n">distance</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">offset</span> <span class="n">curve</span> <span class="n">to</span> <span class="n">use</span> <span class="n">when</span> <span class="n">creating</span> <span class="n">a</span> <span class="n">mitered</span> <span class="n">join</span><span class="o">.</span>
 
     <span class="o">----------------</span>
     <span class="n">Input</span> <span class="n">parameters</span>
@@ -403,7 +403,7 @@ The basic principles of object-orient programming (OOP) are <em>encapsulation</e
         <span class="p">])</span>
         <span class="k">return</span> <span class="n">name</span>
 
-    <span class="k">def</span> <span class="nf">initAlgorithm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">initAlgorithm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="c1"># specify the possible parameters for your tool here</span>
         <span class="k">pass</span>
 
@@ -457,7 +457,7 @@ The basic principles of object-orient programming (OOP) are <em>encapsulation</e
 </pre></div>
 </div>
 <p>For each of the parameters, we call <code class="docutils literal notranslate"><span class="pre">self.addParameter()</span></code> inside <code class="docutils literal notranslate"><span class="pre">initAlgorithm()</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">initAlgorithm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">initAlgorithm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">addParameter</span><span class="p">(</span>
         <span class="n">QgsProcessingParameterVectorLayer</span><span class="p">(</span>
             <span class="n">name</span><span class="o">=</span><span class="s2">&quot;SpeciesRangePolygons&quot;</span><span class="p">,</span>
@@ -492,7 +492,7 @@ The basic principles of object-orient programming (OOP) are <em>encapsulation</e
 <span class="c1"># create destination directory</span>
 <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span>
     <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;OutputFolder&quot;</span><span class="p">],</span>
-    <span class="n">exist_ok</span><span class="o">=</span><span class="bp">True</span>
+    <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -503,12 +503,12 @@ The basic principles of object-orient programming (OOP) are <em>encapsulation</e
 For this step, we use the <em>field calculator</em> algorithm of the processing toolbox. To find its scripting name (<code class="docutils literal notranslate"><span class="pre">id</span></code>), search for it, then display its help text on the Python console (<strong>not</strong> the editor window):</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># search for “buffer” algorithms:</span>
 <span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">searchTerm</span> <span class="o">=</span> <span class="s2">&quot;calculator&quot;</span>
-<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="k">print</span><span class="p">([</span><span class="n">a</span><span class="o">.</span><span class="n">id</span><span class="p">()</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">QgsApplication</span><span class="o">.</span><span class="n">processingRegistry</span><span class="p">()</span><span class="o">.</span><span class="n">algorithms</span><span class="p">()</span> <span class="k">if</span> <span class="n">searchTerm</span> <span class="ow">in</span> <span class="n">a</span><span class="o">.</span><span class="n">id</span><span class="p">()])</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="nb">print</span><span class="p">([</span><span class="n">a</span><span class="o">.</span><span class="n">id</span><span class="p">()</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">QgsApplication</span><span class="o">.</span><span class="n">processingRegistry</span><span class="p">()</span><span class="o">.</span><span class="n">algorithms</span><span class="p">()</span> <span class="k">if</span> <span class="n">searchTerm</span> <span class="ow">in</span> <span class="n">a</span><span class="o">.</span><span class="n">id</span><span class="p">()])</span>
 <span class="n">Out</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="p">[</span><span class="s1">&#39;qgis:advancedpythonfieldcalculator&#39;</span><span class="p">,</span> <span class="s1">&#39;qgis:fieldcalculator&#39;</span><span class="p">,</span> <span class="s1">&#39;qgis:rastercalculator&#39;</span><span class="p">]</span>
 <span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">processing</span><span class="o">.</span><span class="n">algorithmHelp</span>
 <span class="n">Out</span><span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">Field</span> <span class="n">calculator</span> <span class="p">(</span><span class="n">qgis</span><span class="p">:</span><span class="n">fieldcalculator</span><span class="p">)</span>
 
-<span class="n">This</span> <span class="n">algorithm</span> <span class="n">computes</span> <span class="n">a</span> <span class="n">new</span> <span class="n">vector</span> <span class="n">layer</span> <span class="k">with</span> <span class="n">the</span> <span class="n">same</span> <span class="n">features</span> <span class="n">of</span> <span class="n">the</span> <span class="nb">input</span> <span class="n">layer</span><span class="p">,</span> <span class="n">but</span> <span class="k">with</span> <span class="n">an</span> <span class="n">additional</span> <span class="n">attribute</span><span class="o">.</span> <span class="n">The</span> <span class="n">values</span> <span class="n">of</span> <span class="n">this</span> <span class="n">new</span> <span class="n">attribute</span> <span class="n">are</span> <span class="n">computed</span> <span class="kn">from</span> <span class="nn">each</span> <span class="nn">feature</span> <span class="nn">using</span> <span class="nn">a</span> <span class="nn">mathematical</span> <span class="nn">formula</span><span class="p">,</span> <span class="n">based</span> <span class="n">on</span> <span class="n">the</span> <span class="n">properties</span> <span class="ow">and</span> <span class="n">attributes</span> <span class="n">of</span> <span class="n">the</span> <span class="n">feature</span><span class="o">.</span>
+<span class="n">This</span> <span class="n">algorithm</span> <span class="n">computes</span> <span class="n">a</span> <span class="n">new</span> <span class="n">vector</span> <span class="n">layer</span> <span class="k">with</span> <span class="n">the</span> <span class="n">same</span> <span class="n">features</span> <span class="n">of</span> <span class="n">the</span> <span class="nb">input</span> <span class="n">layer</span><span class="p">,</span> <span class="n">but</span> <span class="k">with</span> <span class="n">an</span> <span class="n">additional</span> <span class="n">attribute</span><span class="o">.</span> <span class="n">The</span> <span class="n">values</span> <span class="n">of</span> <span class="n">this</span> <span class="n">new</span> <span class="n">attribute</span> <span class="n">are</span> <span class="n">computed</span> <span class="kn">from</span> <span class="nn">each</span> <span class="n">feature</span> <span class="n">using</span> <span class="n">a</span> <span class="n">mathematical</span> <span class="n">formula</span><span class="p">,</span> <span class="n">based</span> <span class="n">on</span> <span class="n">the</span> <span class="n">properties</span> <span class="ow">and</span> <span class="n">attributes</span> <span class="n">of</span> <span class="n">the</span> <span class="n">feature</span><span class="o">.</span>
 
 
 <span class="o">----------------</span>
@@ -559,7 +559,7 @@ For this step, we use the <em>field calculator</em> algorithm of the processing 
     <span class="s2">&quot;qgis:fieldcalculator&quot;</span><span class="p">,</span>
     <span class="p">{</span>
         <span class="s2">&quot;INPUT&quot;</span><span class="p">:</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;SpeciesRangePolygons&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;NEW_FIELD&quot;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+        <span class="s2">&quot;NEW_FIELD&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
         <span class="s2">&quot;FIELD_NAME&quot;</span><span class="p">:</span> <span class="s2">&quot;presence&quot;</span><span class="p">,</span>
         <span class="s2">&quot;FIELD_TYPE&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
         <span class="s2">&quot;FORMULA&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
@@ -590,7 +590,7 @@ For this step, we use the <em>field calculator</em> algorithm of the processing 
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 3)</span>
 <span class="c1"># Loop over all species</span>
 <span class="k">for</span> <span class="n">speciesName</span> <span class="ow">in</span> <span class="n">speciesNames</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">speciesName</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">speciesName</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
         <span class="c1"># 3a)</span>
         <span class="c1"># define output file name:</span>
@@ -704,7 +704,7 @@ For this step, we use the <em>field calculator</em> algorithm of the processing 
         <span class="p">])</span>
         <span class="k">return</span> <span class="n">name</span>
 
-    <span class="k">def</span> <span class="nf">initAlgorithm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">initAlgorithm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">addParameter</span><span class="p">(</span>
             <span class="n">QgsProcessingParameterVectorLayer</span><span class="p">(</span>
                 <span class="n">name</span><span class="o">=</span><span class="s2">&quot;SpeciesRangePolygons&quot;</span><span class="p">,</span>
@@ -732,7 +732,7 @@ For this step, we use the <em>field calculator</em> algorithm of the processing 
         <span class="c1"># create destination directory</span>
         <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span>
             <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;OutputFolder&quot;</span><span class="p">],</span>
-            <span class="n">exist_ok</span><span class="o">=</span><span class="bp">True</span>
+            <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span>
         <span class="p">)</span>
 
         <span class="c1"># 1)</span>
@@ -742,7 +742,7 @@ For this step, we use the <em>field calculator</em> algorithm of the processing 
             <span class="s2">&quot;qgis:fieldcalculator&quot;</span><span class="p">,</span>
             <span class="p">{</span>
                 <span class="s2">&quot;INPUT&quot;</span><span class="p">:</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;SpeciesRangePolygons&quot;</span><span class="p">],</span>
-                <span class="s2">&quot;NEW_FIELD&quot;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+                <span class="s2">&quot;NEW_FIELD&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
                 <span class="s2">&quot;FIELD_NAME&quot;</span><span class="p">:</span> <span class="s2">&quot;presence&quot;</span><span class="p">,</span>
                 <span class="s2">&quot;FIELD_TYPE&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
                 <span class="s2">&quot;FORMULA&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
@@ -763,7 +763,7 @@ For this step, we use the <em>field calculator</em> algorithm of the processing 
         <span class="c1"># 3)</span>
         <span class="c1"># Loop over all species</span>
         <span class="k">for</span> <span class="n">speciesName</span> <span class="ow">in</span> <span class="n">speciesNames</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">speciesName</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">speciesName</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
                 <span class="c1"># 3a)</span>
                 <span class="c1"># define output file name:</span>

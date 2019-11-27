@@ -523,7 +523,7 @@ This page was generated from <a class="reference external" href="https://github.
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Available drivers in geopandas/fiona. Same as: fiona.supported_drivers</span>
-<span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 <span class="n">gpd</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">fiona</span><span class="o">.</span><span class="n">drvsupport</span><span class="o">.</span><span class="n">supported_drivers</span>
 </pre></div>
 </div>
@@ -565,7 +565,7 @@ This page was generated from <a class="reference external" href="https://github.
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 
 <span class="c1"># Read file from Shapefile</span>
 <span class="n">fp</span> <span class="o">=</span> <span class="s2">&quot;L2_data/Finland.shp&quot;</span>
@@ -585,7 +585,7 @@ This page was generated from <a class="reference external" href="https://github.
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 
 <span class="c1"># Read file from GeoJSON</span>
 <span class="n">fp</span> <span class="o">=</span> <span class="s2">&quot;L2_data/Finland.geojson&quot;</span>
@@ -605,7 +605,7 @@ This page was generated from <a class="reference external" href="https://github.
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 
 <span class="c1"># Enable KML driver</span>
 <span class="n">gpd</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">fiona</span><span class="o">.</span><span class="n">drvsupport</span><span class="o">.</span><span class="n">supported_drivers</span><span class="p">[</span><span class="s1">&#39;KML&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;rw&#39;</span>
@@ -628,7 +628,7 @@ This page was generated from <a class="reference external" href="https://github.
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 
 <span class="c1"># Read file from Geopackage</span>
 <span class="n">fp</span> <span class="o">=</span> <span class="s2">&quot;L2_data/Finland.gpkg&quot;</span>
@@ -648,7 +648,7 @@ This page was generated from <a class="reference external" href="https://github.
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 
 <span class="c1"># Read file from File Geodatabase</span>
 <span class="n">fp</span> <span class="o">=</span> <span class="s2">&quot;L2_data/Finland.gdb&quot;</span>
@@ -686,7 +686,7 @@ This page was generated from <a class="reference external" href="https://github.
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 <span class="kn">import</span> <span class="nn">psycopg2</span>
 
 <span class="c1"># Create connection to database with psycopg2 module (update params according your db)</span>
@@ -771,7 +771,7 @@ This page was generated from <a class="reference external" href="https://github.
 <span class="c1"># Write to PostGIS (overwrite if table exists, be careful with this! )</span>
 <span class="c1"># Possible behavior: &#39;replace&#39;, &#39;append&#39;, &#39;fail&#39;</span>
 
-<span class="n">data</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="n">target_table</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="n">target_table</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -783,9 +783,9 @@ This page was generated from <a class="reference external" href="https://github.
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 <span class="kn">import</span> <span class="nn">sqlite3</span>
-<span class="kn">import</span> <span class="nn">shapely.wkb</span> <span class="kn">as</span> <span class="nn">swkb</span>
+<span class="kn">import</span> <span class="nn">shapely.wkb</span> <span class="k">as</span> <span class="nn">swkb</span>
 <span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span><span class="p">,</span> <span class="n">event</span>
 
 <span class="c1"># DB path</span>
@@ -803,30 +803,30 @@ This page was generated from <a class="reference external" href="https://github.
 <span class="n">geom_type</span> <span class="o">=</span> <span class="n">gtype</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
 
 <span class="c1"># Initialize database engine</span>
-<span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;sqlite:///{db}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">db</span><span class="o">=</span><span class="n">dbfp</span><span class="p">),</span> <span class="n">module</span><span class="o">=</span><span class="n">sqlite</span><span class="p">)</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;sqlite:///</span><span class="si">{db}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">db</span><span class="o">=</span><span class="n">dbfp</span><span class="p">),</span> <span class="n">module</span><span class="o">=</span><span class="n">sqlite</span><span class="p">)</span>
 
 <span class="c1"># Initialize table without geometries</span>
 <span class="n">geo</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;geometry&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">dbfp</span><span class="p">)</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
-    <span class="n">geo</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="n">tbl_name</span><span class="p">,</span> <span class="n">conn</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">geo</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="n">tbl_name</span><span class="p">,</span> <span class="n">conn</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="c1"># Enable spatialite extension</span>
 <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">dbfp</span><span class="p">)</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
-    <span class="n">conn</span><span class="o">.</span><span class="n">enable_load_extension</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">enable_load_extension</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">conn</span><span class="o">.</span><span class="n">load_extension</span><span class="p">(</span><span class="s2">&quot;mod_spatialite&quot;</span><span class="p">)</span>
     <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT InitSpatialMetaData(1);&quot;</span><span class="p">)</span>
     <span class="c1"># Add geometry column with specified CRS with defined geometry typehaving two dimensions</span>
     <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
-        <span class="s2">&quot;SELECT AddGeometryColumn({table}, &#39;wkb_geometry&#39;,</span><span class="se">\</span>
-<span class="s2">        {srid}, {geom_type}, 2);&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table</span><span class="o">=</span><span class="n">tbl_name</span><span class="p">,</span> <span class="n">srid</span><span class="o">=</span><span class="n">srid</span><span class="p">,</span> <span class="n">geom_type</span><span class="o">=</span><span class="n">geom_type</span><span class="p">)</span>
+        <span class="s2">&quot;SELECT AddGeometryColumn(</span><span class="si">{table}</span><span class="s2">, &#39;wkb_geometry&#39;,</span><span class="se">\</span>
+<span class="s2">        </span><span class="si">{srid}</span><span class="s2">, </span><span class="si">{geom_type}</span><span class="s2">, 2);&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table</span><span class="o">=</span><span class="n">tbl_name</span><span class="p">,</span> <span class="n">srid</span><span class="o">=</span><span class="n">srid</span><span class="p">,</span> <span class="n">geom_type</span><span class="o">=</span><span class="n">geom_type</span><span class="p">)</span>
     <span class="p">)</span>
 
 <span class="c1"># Convert Shapely geometries into well-known-binary format</span>
 <span class="n">data</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">geom</span><span class="p">:</span> <span class="n">swkb</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">geom</span><span class="p">))</span>
 
 <span class="c1"># Push to database (overwrite if table exists)</span>
-<span class="n">data</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="n">tbl_name</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="n">tbl_name</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -838,7 +838,7 @@ This page was generated from <a class="reference external" href="https://github.
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 <span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">import</span> <span class="nn">geojson</span>
 

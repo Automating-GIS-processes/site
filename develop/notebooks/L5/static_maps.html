@@ -486,19 +486,20 @@ This page was generated from <a class="reference external" href="https://github.
 <h1>Static maps<a class="headerlink" href="#Static-maps" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="Download-data">
 <h2>Download data<a class="headerlink" href="#Download-data" title="Permalink to this headline">¶</a></h2>
-<p>Before we start you need to download (and then extract) the dataset zip-package used during this lesson <a class="reference external" href="https://github.com/AutoGIS/data/raw/master/L5_data.zip">from this link</a>.</p>
-<p>You should have following Shapefiles in the <code class="docutils literal notranslate"><span class="pre">data</span></code> folder:</p>
+<p>Before we start you need to download (and then extract) the dataset zip-package used during this lesson <a class="reference external" href="https://github.com/Automating-GIS-processes/Lesson-5-Making-Maps/raw/master/data/dataE5.zip">from this link</a>.</p>
+<p>You should have following Shapefiles in the <code class="docutils literal notranslate"><span class="pre">dataE5</span></code> folder:</p>
 <ul class="simple">
 <li>addresses.shp</li>
 <li>metro.shp</li>
 <li>roads.shp</li>
 <li>some.geojson</li>
 <li>TravelTimes_to_5975375_RailwayStation.shp</li>
+<li>Vaestotietoruudukko_2015.shp</li>
 </ul>
-<p>Download and extract data for this lesson:</p>
+<p>Extract the files into a folder called <code class="docutils literal notranslate"><span class="pre">data</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd /home/jovyan/work/autogis/notebooks/notebooks/L5
-$ wget https://github.com/AutoGIS/data/raw/master/L5_data.zip
-$ unzip L5_data.zip
+$ wget https://github.com/Automating-GIS-processes/Lesson-5-Making-Maps/raw/master/data/dataE5.zip
+$ unzip dataE5.zip -d data
 </pre></div>
 </div>
 <div class="section" id="Static-maps-in-Geopandas">
@@ -513,9 +514,9 @@ $ unzip L5_data.zip
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 <span class="kn">from</span> <span class="nn">pyproj</span> <span class="kn">import</span> <span class="n">CRS</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="o">%</span><span class="k">matplotlib</span> inline
 
 <span class="c1"># Filepaths</span>
@@ -540,9 +541,9 @@ $ unzip L5_data.zip
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Check the crs of each layer</span>
-<span class="k">print</span><span class="p">(</span><span class="n">roads</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">metro</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">roads</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">metro</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -562,9 +563,9 @@ $ unzip L5_data.zip
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Roads and the metro are in an old Finnish crs, while the grid is in ETRS89 / TM35FIN:</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Roads crs:&quot;</span><span class="p">,</span> <span class="n">CRS</span><span class="p">(</span><span class="n">roads</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Metro crs:&quot;</span><span class="p">,</span> <span class="n">CRS</span><span class="p">(</span><span class="n">metro</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Grid crs: &quot;</span><span class="p">,</span><span class="n">CRS</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Roads crs:&quot;</span><span class="p">,</span> <span class="n">CRS</span><span class="p">(</span><span class="n">roads</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Metro crs:&quot;</span><span class="p">,</span> <span class="n">CRS</span><span class="p">(</span><span class="n">metro</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Grid crs: &quot;</span><span class="p">,</span><span class="n">CRS</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -652,7 +653,7 @@ Grid crs:  ETRS89 / TM35FIN(E,N)
 
 <span class="c1"># Save the figure as svg file</span>
 <span class="n">outfp</span> <span class="o">=</span> <span class="s2">&quot;static_map.svg&quot;</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">outfp</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s1">&#39;svg&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">outfp</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;svg&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -714,9 +715,9 @@ used to fetch geospatial raster files and add them to your maps. Map tiles are t
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">contextily</span> <span class="kn">as</span> <span class="nn">ctx</span>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">contextily</span> <span class="k">as</span> <span class="nn">ctx</span>
 <span class="o">%</span><span class="k">matplotlib</span> inline
 
 <span class="c1"># Filepaths</span>
@@ -770,7 +771,7 @@ used to fetch geospatial raster files and add them to your maps. Map tiles are t
   </thead>
   <tbody>
     <tr>
-      <th>0</th>
+      <td>0</td>
       <td>32297</td>
       <td>43</td>
       <td>32260</td>
@@ -788,7 +789,7 @@ used to fetch geospatial raster files and add them to your maps. Map tiles are t
       <td>POLYGON ((382000.000 6697750.000, 381750.000 6...</td>
     </tr>
     <tr>
-      <th>1</th>
+      <td>1</td>
       <td>32508</td>
       <td>43</td>
       <td>32471</td>
@@ -904,7 +905,7 @@ used to fetch geospatial raster files and add them to your maps. Map tiles are t
   </thead>
   <tbody>
     <tr>
-      <th>0</th>
+      <td>0</td>
       <td>32297</td>
       <td>43</td>
       <td>32260</td>
@@ -922,7 +923,7 @@ used to fetch geospatial raster files and add them to your maps. Map tiles are t
       <td>POLYGON ((2767221.646 8489079.101, 2766716.966...</td>
     </tr>
     <tr>
-      <th>1</th>
+      <td>1</td>
       <td>32508</td>
       <td>43</td>
       <td>32471</td>
@@ -1018,8 +1019,8 @@ used to fetch geospatial raster files and add them to your maps. Map tiles are t
 <ul class="simple">
 <li>It is possible to change the tile provider by passing an address to the tile providers’ web address using <code class="docutils literal notranslate"><span class="pre">url</span></code> -parameter in <code class="docutils literal notranslate"><span class="pre">add_basemap()</span></code>. Let’s see how we can change the style to <code class="docutils literal notranslate"><span class="pre">OSM_A</span></code> which gives us a background map based on OpenStreetMap:</li>
 </ul>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1034,12 +1035,19 @@ used to fetch geospatial raster files and add them to your maps. Map tiles are t
 </pre></div>
 </div>
 </div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L5_static_maps_24_0.png" src="../../_images/notebooks_L5_static_maps_24_0.png" />
+</div>
+</div>
 <p>As we can see, now the background map changed a bit compared to the earlier one as it was fetched from OpenSteetMap.</p>
 <ul class="simple">
 <li>Let’s take a subset of our data to see a bit better the background map characteristics.</li>
 </ul>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1057,13 +1065,20 @@ used to fetch geospatial raster files and add them to your maps. Map tiles are t
 </pre></div>
 </div>
 </div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L5_static_maps_26_0.png" src="../../_images/notebooks_L5_static_maps_26_0.png" />
+</div>
+</div>
 <p>As we can see now our map has much more details in it as the zoom level of the background map is larger. By default <code class="docutils literal notranslate"><span class="pre">contextily</span></code> sets the zoom level automatically but it is possible to also control that manually using parameter <code class="docutils literal notranslate"><span class="pre">zoom</span></code>. The zoom level is by default specified as <code class="docutils literal notranslate"><span class="pre">auto</span></code> but you can control that by passing in <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Zoom_levels">zoom level</a> as numbers ranging typically from 1 to 19 (the larger the number, the more details your basemap will
 have).</p>
 <ul class="simple">
 <li>Let’s reduce the level of detail from our map by passing <code class="docutils literal notranslate"><span class="pre">zoom=11</span></code>:</li>
 </ul>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1078,13 +1093,20 @@ have).</p>
 </pre></div>
 </div>
 </div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L5_static_maps_28_0.png" src="../../_images/notebooks_L5_static_maps_28_0.png" />
+</div>
+</div>
 <p>As we can see, the map has now less detail.</p>
 <p>We can also use <code class="docutils literal notranslate"><span class="pre">ax.set_xlim()</span></code> and <code class="docutils literal notranslate"><span class="pre">ax.set_ylim()</span></code> -parameters to crop our map. The parameters takes as input the coordinates for minimum and maximum on both axis (x and y). We can also change / remove the contribution text by using parameter <code class="docutils literal notranslate"><span class="pre">attribution</span></code></p>
 <ul class="simple">
 <li>Let’s plot the original data, and crop the map:</li>
 </ul>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1102,6 +1124,22 @@ have).</p>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">2760000</span><span class="p">,</span> <span class="mi">2800000</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">8430000</span><span class="p">,</span> <span class="mi">8470000</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>(8430000, 8470000)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L5_static_maps_30_1.png" src="../../_images/notebooks_L5_static_maps_30_1.png" />
 </div>
 </div>
 <p>It is also possible to use many other map tiles from different <a class="reference external" href="https://en.m.wikipedia.org/wiki/Tile_Map_Service">Tile Map Services</a> as the background map. A good list of different available sources can be found from <a class="reference external" href="http://leaflet-extras.github.io/leaflet-providers/preview/">here</a>. When using map tiles from different sources, it is necessary to parse a url address to the tile provider following a format defined by the provider.</p>
@@ -1126,8 +1164,8 @@ have).</p>
 </li>
 <li>We will use this information to parse the parameters in a way that contextily wants them:</li>
 </ul>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1137,7 +1175,7 @@ have).</p>
 <span class="c1"># The formatting should follow: &#39;https://{s}.basemaps.cartocdn.com/{style}/{z}/{x}/{y}{scale}.png&#39;</span>
 <span class="c1"># Specify the style to use</span>
 <span class="n">style</span> <span class="o">=</span> <span class="s2">&quot;rastertiles/voyager&quot;</span>
-<span class="n">cartodb_url</span> <span class="o">=</span> <span class="s1">&#39;https://a.basemaps.cartocdn.com/</span><span class="si">%s</span><span class="s1">/{z}/{x}/{y}.png&#39;</span> <span class="o">%</span> <span class="n">style</span>
+<span class="n">cartodb_url</span> <span class="o">=</span> <span class="s1">&#39;https://a.basemaps.cartocdn.com/</span><span class="si">%s</span><span class="s1">/</span><span class="si">{z}</span><span class="s1">/</span><span class="si">{x}</span><span class="s1">/</span><span class="si">{y}</span><span class="s1">.png&#39;</span> <span class="o">%</span> <span class="n">style</span>
 
 <span class="c1"># Plot the data from subset</span>
 <span class="n">subset</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="s1">&#39;pt_r_t&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdYlBu&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s2">&quot;quantiles&quot;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
@@ -1151,12 +1189,28 @@ have).</p>
 </pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>(8435000, 8442500)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L5_static_maps_32_1.png" src="../../_images/notebooks_L5_static_maps_32_1.png" />
+</div>
+</div>
 <p>As we can see now we have yet again different kind of background map, now coming from CartoDB.</p>
 <ul class="simple">
 <li>Let’s make a minor modification and change the style from <code class="docutils literal notranslate"><span class="pre">&quot;rastertiles/voyager&quot;</span></code> to <code class="docutils literal notranslate"><span class="pre">&quot;dark_all&quot;</span></code>:</li>
 </ul>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1166,7 +1220,7 @@ have).</p>
 <span class="c1"># The formatting should follow: &#39;https://{s}.basemaps.cartocdn.com/{style}/{z}/{x}/{y}{r}.png&#39;</span>
 <span class="c1"># Specify the style to use</span>
 <span class="n">style</span> <span class="o">=</span> <span class="s2">&quot;dark_all&quot;</span>
-<span class="n">cartodb_url</span> <span class="o">=</span> <span class="s1">&#39;https://a.basemaps.cartocdn.com/</span><span class="si">%s</span><span class="s1">/{z}/{x}/{y}.png&#39;</span> <span class="o">%</span> <span class="n">style</span>
+<span class="n">cartodb_url</span> <span class="o">=</span> <span class="s1">&#39;https://a.basemaps.cartocdn.com/</span><span class="si">%s</span><span class="s1">/</span><span class="si">{z}</span><span class="s1">/</span><span class="si">{x}</span><span class="s1">/</span><span class="si">{y}</span><span class="s1">.png&#39;</span> <span class="o">%</span> <span class="n">style</span>
 
 <span class="c1"># Plot the data from subset</span>
 <span class="n">subset</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="s1">&#39;pt_r_t&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdYlBu&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s2">&quot;quantiles&quot;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
@@ -1178,6 +1232,22 @@ have).</p>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">2770000</span><span class="p">,</span> <span class="mi">2785000</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">8435000</span><span class="p">,</span> <span class="mi">8442500</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>(8435000, 8442500)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_L5_static_maps_34_1.png" src="../../_images/notebooks_L5_static_maps_34_1.png" />
 </div>
 </div>
 <p>Great! Now we have dark background map fetched from CartoDB. In a similar manner, you can use any map tiles from various other tile providers such as the ones listed in <a class="reference external" href="http://leaflet-extras.github.io/leaflet-providers/preview/">leaflet-providers</a>.</p>
@@ -1207,7 +1277,7 @@ have).</p>
     <p>
         &copy; Copyright 2019, Henrikki Tenkanen and Vuokko Heikinheimo, Digital Geography Lab, University of Helsinki
       <span class="lastupdated">
-        Last updated on Nov 25, 2019.
+        Last updated on Nov 27, 2019.
       </span>
 
     </p>

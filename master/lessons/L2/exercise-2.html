@@ -293,7 +293,7 @@ Note that you should not try to make changes to this copy of the exercise, but r
 <div class="section" id="converting-pandas-dataframe-into-a-geodataframe">
 <h3>Converting Pandas DataFrame into a GeoDataFrame<a class="headerlink" href="#converting-pandas-dataframe-into-a-geodataframe" title="Permalink to this headline">¶</a></h3>
 <p>Quite often you are in a situation where you have read data e.g. from text file into a pandas DataFrame where you have latitude and longitude columns representing the location of a record. The first step is to create a column where with corresponding the shapely geometries:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 <span class="go">    value  lat  lon     geometry</span>
 <span class="go">0      0    2    4  POINT (4 2)</span>
 <span class="go">1      5    1    6  POINT (6 1)</span>
@@ -312,7 +312,7 @@ Note that you should not try to make changes to this copy of the exercise, but r
 <ul class="simple">
 <li>We need to convert the DataFrame into a GeoDataFrame, so that we can e.g. save it into a Shapefile. It is easily done by passing the DataFrame into a GeoDataFrame object. We need to determine which column contains the geometry information (needs to be always a column called ‘geometry’), and optionally we can also determine the coordinate reference system when creating the GeoDataFrame:</li>
 </ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 <span class="kn">from</span> <span class="nn">pyproj</span> <span class="kn">import</span> <span class="n">CRS</span>
 
 <span class="c1"># Convert DataFrame into a GeoDataFrame</span>

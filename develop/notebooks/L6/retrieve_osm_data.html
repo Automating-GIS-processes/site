@@ -479,7 +479,7 @@ This page was generated from <a class="reference external" href="https://github.
 <div class="section" id="What-is-OpenStreetMap?">
 <h2>What is OpenStreetMap?<a class="headerlink" href="#What-is-OpenStreetMap?" title="Permalink to this headline">¶</a></h2>
 <p>OpenStreetMap (OSM) is a global collaborative (crowd-sourced) dataset and project that aims at creating a free editable map of the world containing a lot of information about our environment. It contains data for example about streets, buildings, different services, and landuse to mention a few.</p>
-<p>OSM has a large userbase with more than 4 million users and over a million contributers that update actively the OSM database with 3 million changesets per day. In total OSM contains more than 4 billion nodes that form the basis of the digitally mapped world that OSM provides (<a class="reference external" href="http://wiki.openstreetmap.org/wiki/Stats">stats from November 2017</a>).</p>
+<p>OSM has a large userbase with more than 4 million users and over a million contributers that update actively the OSM database with 3 million changesets per day. In total OSM contains 5 billion nodes that form the basis of the digitally mapped world that OSM provides (<a class="reference external" href="http://wiki.openstreetmap.org/wiki/Stats">stats from November 2019</a>).</p>
 <p>OpenStreetMap is used not only for integrating the <strong>OSM maps</strong> as background maps to visualizations or online maps, but also for many other purposes such as <strong>routing</strong>, <strong>geocoding</strong>, <strong>education</strong>, and <strong>research</strong>. OSM is also widely used for humanitarian response e.g.&nbsp;in crisis areas (e.g.&nbsp;after natural disasters) and for fostering economic development (see more from <a class="reference external" href="https://www.hotosm.org">Humanitarian OpenStreetMap Team (HOTOSM) website</a>).</p>
 </div>
 <div class="section" id="OSMnx">
@@ -501,12 +501,12 @@ This page was generated from <a class="reference external" href="https://github.
 <li>Let’s retrieve OpenStreetMap (OSM) data by specifying <code class="docutils literal notranslate"><span class="pre">&quot;Kamppi,</span> <span class="pre">Helsinki,</span> <span class="pre">Finland&quot;</span></code> as the address where the data should be downloaded.</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">osmnx</span> <span class="kn">as</span> <span class="nn">ox</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span></span><span class="kn">import</span> <span class="nn">osmnx</span> <span class="k">as</span> <span class="nn">ox</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="o">%</span><span class="k">matplotlib</span> inline
 
 <span class="c1"># Specify the name that is used to seach for the data</span>
@@ -519,13 +519,21 @@ This page was generated from <a class="reference external" href="https://github.
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
-</pre></div>
+<div class="prompt empty docutils container">
 </div>
-<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>networkx.classes.multidigraph.MultiDiGraph
-</pre></div>
-</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-intense-fg ansi-bold">ModuleNotFoundError</span>                       Traceback (most recent call last)
+<span class="ansi-green-intense-fg ansi-bold">&lt;ipython-input-1-f70077426979&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">----&gt; 1</span><span class="ansi-yellow-intense-fg ansi-bold"> </span><span class="ansi-green-intense-fg ansi-bold">import</span> osmnx <span class="ansi-green-intense-fg ansi-bold">as</span> ox
+<span class="ansi-green-fg">      2</span> <span class="ansi-green-intense-fg ansi-bold">import</span> matplotlib<span class="ansi-yellow-intense-fg ansi-bold">.</span>pyplot <span class="ansi-green-intense-fg ansi-bold">as</span> plt
+<span class="ansi-green-fg">      3</span> get_ipython<span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">.</span>run_line_magic<span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-blue-intense-fg ansi-bold">&#39;matplotlib&#39;</span><span class="ansi-yellow-intense-fg ansi-bold">,</span> <span class="ansi-blue-intense-fg ansi-bold">&#39;inline&#39;</span><span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-fg">      4</span>
+<span class="ansi-green-fg">      5</span> <span class="ansi-red-intense-fg ansi-bold"># Specify the name that is used to seach for the data</span>
+
+<span class="ansi-red-intense-fg ansi-bold">ModuleNotFoundError</span>: No module named &#39;osmnx&#39;
+</pre></div></div>
 </div>
 <p>Okey, as we can see the data that we retrieved is a special data object called <code class="docutils literal notranslate"><span class="pre">networkx.classes.multidigraph.MultiDiGraph</span></code>. A DiGraph is a data type that stores nodes and edges with optional data, or attributes. What we can see here is that this data type belongs to a Python module called <a class="reference external" href="https://networkx.github.io/documentation/stable/">networkx</a> that can be used to create, manipulate, and study the structure, dynamics, and functions of complex networks. Networkx module contains
 algorithms that can be used to calculate <a class="reference external" href="https://networkx.github.io/documentation/networkx-1.10/reference/algorithms.shortest_paths.html">shortest paths</a> along road networks using e.g.&nbsp;<a class="reference external" href="https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm">Dijkstra’s</a> or <a class="reference external" href="https://en.wikipedia.org/wiki/A*_search_algorithm">A* algorithm</a>.</p>
@@ -566,8 +574,8 @@ algorithms that can be used to calculate <a class="reference external" href="htt
 <span class="n">buildings</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">buildings_from_place</span><span class="p">(</span><span class="n">place_name</span><span class="p">)</span>
 
 <span class="c1"># What types are those?</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">area</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">buildings</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">area</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">buildings</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -808,9 +816,9 @@ algorithms that can be used to calculate <a class="reference external" href="htt
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Retrieve nodes and edges</span>
 <span class="n">nodes</span><span class="p">,</span> <span class="n">edges</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">graph_to_gdfs</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Nodes:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">nodes</span><span class="o">.</span><span class="n">head</span><span class="p">(),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Edges:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">edges</span><span class="o">.</span><span class="n">head</span><span class="p">(),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Type:&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">edges</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Nodes:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">nodes</span><span class="o">.</span><span class="n">head</span><span class="p">(),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Edges:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">edges</span><span class="o">.</span><span class="n">head</span><span class="p">(),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Type:&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">edges</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -908,7 +916,7 @@ Type: &lt;class &#39;geopandas.geodataframe.GeoDataFrame&#39;&gt;
     <p>
         &copy; Copyright 2019, Henrikki Tenkanen and Vuokko Heikinheimo, Digital Geography Lab, University of Helsinki
       <span class="lastupdated">
-        Last updated on Nov 25, 2019.
+        Last updated on Nov 27, 2019.
       </span>
 
     </p>

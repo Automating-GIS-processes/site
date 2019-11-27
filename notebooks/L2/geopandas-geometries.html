@@ -484,7 +484,7 @@ Finland</a>.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 <span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Point</span><span class="p">,</span> <span class="n">Polygon</span>
 <span class="kn">from</span> <span class="nn">pyproj</span> <span class="kn">import</span> <span class="n">CRS</span>
 </pre></div>
@@ -507,7 +507,7 @@ Finland</a>.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">print</span><span class="p">(</span><span class="n">newdata</span><span class="p">)</span>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="n">newdata</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -531,7 +531,7 @@ Index: []
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Create a new column called &#39;geometry&#39; to the GeoDataFrame</span>
-<span class="n">newdata</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">newdata</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 </pre></div>
 </div>
 </div>
@@ -540,7 +540,7 @@ Index: []
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">print</span><span class="p">(</span><span class="n">newdata</span><span class="p">)</span>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="n">newdata</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -584,7 +584,7 @@ Index: []
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Check the polyogon</span>
-<span class="k">print</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -616,7 +616,7 @@ POLYGON ((24.950899 60.169158, 24.953492 60.169158, 24.95351 60.170104, 24.95095
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Let&#39;s see what we have now</span>
-<span class="k">print</span><span class="p">(</span><span class="n">newdata</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">newdata</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -642,7 +642,7 @@ POLYGON ((24.950899 60.169158, 24.953492 60.169158, 24.95351 60.170104, 24.95095
 <span class="n">newdata</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;location&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Senaatintori&#39;</span>
 
 <span class="c1"># Let&#39;s check the data</span>
-<span class="k">print</span><span class="p">(</span><span class="n">newdata</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">newdata</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -662,7 +662,7 @@ POLYGON ((24.950899 60.169158, 24.953492 60.169158, 24.95351 60.170104, 24.95095
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">print</span><span class="p">(</span><span class="n">newdata</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="n">newdata</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

@@ -511,9 +511,9 @@ $ unzip dataE5.zip -d data
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 <span class="kn">from</span> <span class="nn">pyproj</span> <span class="kn">import</span> <span class="n">CRS</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="o">%</span><span class="k">matplotlib</span> inline
 
 <span class="c1"># Filepaths</span>
@@ -538,9 +538,9 @@ $ unzip dataE5.zip -d data
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Check the crs of each layer</span>
-<span class="k">print</span><span class="p">(</span><span class="n">roads</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">metro</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">roads</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">metro</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -560,9 +560,9 @@ $ unzip dataE5.zip -d data
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Roads and the metro are in an old Finnish crs, while the grid is in ETRS89 / TM35FIN:</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Roads crs:&quot;</span><span class="p">,</span> <span class="n">CRS</span><span class="p">(</span><span class="n">roads</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Metro crs:&quot;</span><span class="p">,</span> <span class="n">CRS</span><span class="p">(</span><span class="n">metro</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Grid crs: &quot;</span><span class="p">,</span><span class="n">CRS</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Roads crs:&quot;</span><span class="p">,</span> <span class="n">CRS</span><span class="p">(</span><span class="n">roads</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Metro crs:&quot;</span><span class="p">,</span> <span class="n">CRS</span><span class="p">(</span><span class="n">metro</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Grid crs: &quot;</span><span class="p">,</span><span class="n">CRS</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -650,7 +650,7 @@ Grid crs:  ETRS89 / TM35FIN(E,N)
 
 <span class="c1"># Save the figure as svg file</span>
 <span class="n">outfp</span> <span class="o">=</span> <span class="s2">&quot;static_map.svg&quot;</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">outfp</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s1">&#39;svg&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">outfp</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;svg&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -712,9 +712,9 @@ used to fetch geospatial raster files and add them to your maps. Map tiles are t
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">contextily</span> <span class="kn">as</span> <span class="nn">ctx</span>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">contextily</span> <span class="k">as</span> <span class="nn">ctx</span>
 <span class="o">%</span><span class="k">matplotlib</span> inline
 
 <span class="c1"># Filepaths</span>
@@ -1135,7 +1135,7 @@ have).</p>
 <span class="c1"># The formatting should follow: &#39;https://{s}.basemaps.cartocdn.com/{style}/{z}/{x}/{y}{scale}.png&#39;</span>
 <span class="c1"># Specify the style to use</span>
 <span class="n">style</span> <span class="o">=</span> <span class="s2">&quot;rastertiles/voyager&quot;</span>
-<span class="n">cartodb_url</span> <span class="o">=</span> <span class="s1">&#39;https://a.basemaps.cartocdn.com/</span><span class="si">%s</span><span class="s1">/{z}/{x}/{y}.png&#39;</span> <span class="o">%</span> <span class="n">style</span>
+<span class="n">cartodb_url</span> <span class="o">=</span> <span class="s1">&#39;https://a.basemaps.cartocdn.com/</span><span class="si">%s</span><span class="s1">/</span><span class="si">{z}</span><span class="s1">/</span><span class="si">{x}</span><span class="s1">/</span><span class="si">{y}</span><span class="s1">.png&#39;</span> <span class="o">%</span> <span class="n">style</span>
 
 <span class="c1"># Plot the data from subset</span>
 <span class="n">subset</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="s1">&#39;pt_r_t&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdYlBu&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s2">&quot;quantiles&quot;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
@@ -1164,7 +1164,7 @@ have).</p>
 <span class="c1"># The formatting should follow: &#39;https://{s}.basemaps.cartocdn.com/{style}/{z}/{x}/{y}{r}.png&#39;</span>
 <span class="c1"># Specify the style to use</span>
 <span class="n">style</span> <span class="o">=</span> <span class="s2">&quot;dark_all&quot;</span>
-<span class="n">cartodb_url</span> <span class="o">=</span> <span class="s1">&#39;https://a.basemaps.cartocdn.com/</span><span class="si">%s</span><span class="s1">/{z}/{x}/{y}.png&#39;</span> <span class="o">%</span> <span class="n">style</span>
+<span class="n">cartodb_url</span> <span class="o">=</span> <span class="s1">&#39;https://a.basemaps.cartocdn.com/</span><span class="si">%s</span><span class="s1">/</span><span class="si">{z}</span><span class="s1">/</span><span class="si">{x}</span><span class="s1">/</span><span class="si">{y}</span><span class="s1">.png&#39;</span> <span class="o">%</span> <span class="n">style</span>
 
 <span class="c1"># Plot the data from subset</span>
 <span class="n">subset</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="s1">&#39;pt_r_t&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdYlBu&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s2">&quot;quantiles&quot;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>

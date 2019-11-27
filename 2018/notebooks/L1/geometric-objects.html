@@ -562,9 +562,9 @@ This page was generated from <a class="reference external" href="https://github.
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">print</span><span class="p">(</span><span class="n">point1</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">point3D</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">point1</span><span class="p">))</span>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="n">point1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">point3D</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">point1</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -626,9 +626,9 @@ POINT Z (9.26 -2.456 0.57)
 <span class="n">y</span> <span class="o">=</span> <span class="n">point1</span><span class="o">.</span><span class="n">y</span>
 
 <span class="c1"># Print out</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;xy variable:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">xy</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;x variable:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;y variable:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;xy variable:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">xy</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x variable:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;y variable:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -659,7 +659,7 @@ y variable:
 <span></span><span class="c1"># Calculate the distance between point1 and point2</span>
 <span class="n">point_dist</span> <span class="o">=</span> <span class="n">point1</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">point2</span><span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Distance between the points is {0:.2f} decimal degrees&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">point_dist</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Distance between the points is </span><span class="si">{0:.2f}</span><span class="s2"> decimal degrees&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">point_dist</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -691,9 +691,9 @@ Distance between the points is 29.72 decimal degrees
 <span class="n">line2</span> <span class="o">=</span> <span class="n">LineString</span><span class="p">([(</span><span class="mf">2.2</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">),</span> <span class="p">(</span><span class="mf">7.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">25.1</span><span class="p">),</span> <span class="p">(</span><span class="mf">9.26</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.456</span><span class="p">)])</span>
 
 <span class="c1"># Print the results</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;line variable: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;line2 variable: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">line2</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;type of the line: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;line variable: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;line2 variable: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">line2</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;type of the line: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -727,7 +727,7 @@ type of the line:
 <span></span><span class="c1"># Get x and y coordinates of the line</span>
 <span class="n">lxy</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">xy</span>
 
-<span class="k">print</span><span class="p">(</span><span class="n">lxy</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lxy</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -754,9 +754,9 @@ type of the line:
 <span class="c1"># Extract y coordinates straight from the LineObject by referring to a array at index 1</span>
 <span class="n">line_y</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">xy</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;line_x:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">line_x</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;line_x:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">line_x</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;line_y:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">line_y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;line_y:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">line_y</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -790,9 +790,9 @@ line_y:
 <span class="n">centroid_type</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">l_centroid</span><span class="p">)</span>
 
 <span class="c1"># Print the outputs</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Length of our line: {0:.2f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">l_length</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Centroid of our line: &quot;</span><span class="p">,</span> <span class="n">l_centroid</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Type of the centroid:&quot;</span><span class="p">,</span> <span class="n">centroid_type</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Length of our line: </span><span class="si">{0:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">l_length</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Centroid of our line: &quot;</span><span class="p">,</span> <span class="n">l_centroid</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Type of the centroid:&quot;</span><span class="p">,</span> <span class="n">centroid_type</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -835,10 +835,10 @@ Type of the centroid: &lt;class &#39;shapely.geometry.point.Point&#39;&gt;
 <span class="n">poly_type2</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
 
 <span class="c1"># Let&#39;s see how our Polygon looks like</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;poly:&#39;</span><span class="p">,</span> <span class="n">poly</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;poly2:&#39;</span><span class="p">,</span> <span class="n">poly2</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Geometry type as text:&quot;</span><span class="p">,</span> <span class="n">poly_type</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Geometry how Python shows it:&quot;</span><span class="p">,</span> <span class="n">poly_type2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;poly:&#39;</span><span class="p">,</span> <span class="n">poly</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;poly2:&#39;</span><span class="p">,</span> <span class="n">poly2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Geometry type as text:&quot;</span><span class="p">,</span> <span class="n">poly_type</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Geometry how Python shows it:&quot;</span><span class="p">,</span> <span class="n">poly_type2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -904,9 +904,9 @@ Geometry how Python shows it: &lt;class &#39;shapely.geometry.polygon.Polygon&#3
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;world:&#39;</span><span class="p">,</span> <span class="n">world</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;world_has_a_hole:&#39;</span><span class="p">,</span> <span class="n">world_has_a_hole</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;type:&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">world_has_a_hole</span><span class="p">))</span>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;world:&#39;</span><span class="p">,</span> <span class="n">world</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;world_has_a_hole:&#39;</span><span class="p">,</span> <span class="n">world_has_a_hole</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;type:&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">world_has_a_hole</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -948,11 +948,11 @@ type: &lt;class &#39;shapely.geometry.polygon.Polygon&#39;&gt;
 <span class="n">world_ext_length</span> <span class="o">=</span> <span class="n">world_ext</span><span class="o">.</span><span class="n">length</span>
 
 <span class="c1"># Print the outputs</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Poly centroid: &quot;</span><span class="p">,</span> <span class="n">world_centroid</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Poly Area: &quot;</span><span class="p">,</span> <span class="n">world_area</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Poly Bounding Box: &quot;</span><span class="p">,</span> <span class="n">world_bbox</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Poly Exterior: &quot;</span><span class="p">,</span> <span class="n">world_ext</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Poly Exterior Length: &quot;</span><span class="p">,</span> <span class="n">world_ext_length</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Poly centroid: &quot;</span><span class="p">,</span> <span class="n">world_centroid</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Poly Area: &quot;</span><span class="p">,</span> <span class="n">world_area</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Poly Bounding Box: &quot;</span><span class="p">,</span> <span class="n">world_bbox</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Poly Exterior: &quot;</span><span class="p">,</span> <span class="n">world_ext</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Poly Exterior Length: &quot;</span><span class="p">,</span> <span class="n">world_ext_length</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1023,10 +1023,10 @@ Poly Exterior Length:  1080.0
 <span class="n">multi_poly</span> <span class="o">=</span> <span class="n">MultiPolygon</span><span class="p">([</span><span class="n">west_poly</span><span class="p">,</span> <span class="n">east_poly_box</span><span class="p">])</span>
 
 <span class="c1"># Print outputs</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;MultiPoint:&quot;</span><span class="p">,</span> <span class="n">multi_point</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;MultiLine: &quot;</span><span class="p">,</span> <span class="n">multi_line</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Bounding box: &quot;</span><span class="p">,</span> <span class="n">east_poly_box</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;MultiPoly: &quot;</span><span class="p">,</span> <span class="n">multi_poly</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MultiPoint:&quot;</span><span class="p">,</span> <span class="n">multi_point</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MultiLine: &quot;</span><span class="p">,</span> <span class="n">multi_line</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Bounding box: &quot;</span><span class="p">,</span> <span class="n">east_poly_box</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MultiPoly: &quot;</span><span class="p">,</span> <span class="n">multi_poly</span><span class="p">)</span>
 
 </pre></div>
 </div>
@@ -1074,11 +1074,11 @@ MultiPoly:  MULTIPOLYGON (((-180 90, -180 -90, 0 -90, 0 90, -180 90), (-170 80, 
 <span class="n">valid</span> <span class="o">=</span> <span class="n">multi_poly</span><span class="o">.</span><span class="n">is_valid</span>
 
 <span class="c1"># Print outputs</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Convex hull of the points: &quot;</span><span class="p">,</span> <span class="n">convex</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Number of lines in MultiLineString:&quot;</span><span class="p">,</span> <span class="n">lines_count</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Area of our MultiPolygon:&quot;</span><span class="p">,</span> <span class="n">multi_poly_area</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Area of our Western Hemisphere polygon:&quot;</span><span class="p">,</span> <span class="n">west_area</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Is polygon valid?: &quot;</span><span class="p">,</span> <span class="n">valid</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Convex hull of the points: &quot;</span><span class="p">,</span> <span class="n">convex</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of lines in MultiLineString:&quot;</span><span class="p">,</span> <span class="n">lines_count</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Area of our MultiPolygon:&quot;</span><span class="p">,</span> <span class="n">multi_poly_area</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Area of our Western Hemisphere polygon:&quot;</span><span class="p">,</span> <span class="n">west_area</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Is polygon valid?: &quot;</span><span class="p">,</span> <span class="n">valid</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

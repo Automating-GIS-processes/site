@@ -513,7 +513,7 @@ structure makes the query times for finding a single object from the data much f
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 
 <span class="c1"># Filepaths</span>
 <span class="n">intersections_fp</span> <span class="o">=</span> <span class="s2">&quot;data/uusimaa_intersections.gpkg&quot;</span>
@@ -523,8 +523,8 @@ structure makes the query times for finding a single object from the data much f
 <span class="n">postcode_areas</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">postcode_areas_fp</span><span class="p">)</span>
 
 <span class="c1"># Let&#39;s check first rows</span>
-<span class="k">print</span><span class="p">(</span><span class="n">intersections</span><span class="o">.</span><span class="n">head</span><span class="p">(),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">-------&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">postcode_areas</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">intersections</span><span class="o">.</span><span class="n">head</span><span class="p">(),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">-------&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">postcode_areas</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -556,8 +556,8 @@ structure makes the query times for finding a single object from the data much f
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Number of intersections:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">intersections</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Number of postal code areas:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">postcode_areas</span><span class="p">))</span>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of intersections:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">intersections</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of postal code areas:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">postcode_areas</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -643,13 +643,13 @@ Number of postal code areas: 370
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># How many groups do we have?</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Number of groups:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">intersection_sindex</span><span class="o">.</span><span class="n">leaves</span><span class="p">()),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of groups:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">intersection_sindex</span><span class="o">.</span><span class="n">leaves</span><span class="p">()),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
 
 <span class="c1"># Print some basic info for few of them</span>
 <span class="n">n_iterations</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">intersection_sindex</span><span class="o">.</span><span class="n">leaves</span><span class="p">()):</span>
     <span class="n">group_idx</span><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="n">bbox</span> <span class="o">=</span> <span class="n">group</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Group&quot;</span><span class="p">,</span> <span class="n">group_idx</span><span class="p">,</span> <span class="s2">&quot;contains &quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">indices</span><span class="p">),</span> <span class="s2">&quot;geometries, bounding box:&quot;</span><span class="p">,</span> <span class="n">bbox</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Group&quot;</span><span class="p">,</span> <span class="n">group_idx</span><span class="p">,</span> <span class="s2">&quot;contains &quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">indices</span><span class="p">),</span> <span class="s2">&quot;geometries, bounding box:&quot;</span><span class="p">,</span> <span class="n">bbox</span><span class="p">)</span>
     <span class="n">i</span><span class="o">+=</span><span class="mi">1</span>
     <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">n_iterations</span><span class="p">:</span>
         <span class="k">break</span>
@@ -1057,7 +1057,7 @@ a density of the intersections as a number of intersections per square kilometer
 <span></span><span class="c1"># Plot intersection density (number of intersections per square kilometer inside a Postal code)</span>
 <span class="n">m2_to_km2_converter</span> <span class="o">=</span> <span class="mi">1000000</span>
 <span class="n">postcode_areas</span><span class="p">[</span><span class="s1">&#39;intersection_density&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">postcode_areas</span><span class="p">[</span><span class="s1">&#39;intersection_cnt&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">postcode_areas</span><span class="o">.</span><span class="n">area</span> <span class="o">/</span> <span class="n">m2_to_km2_converter</span><span class="p">)</span>
-<span class="n">postcode_areas</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">&#39;intersection_density&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdYlBu_r&#39;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">postcode_areas</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">&#39;intersection_density&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdYlBu_r&#39;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1112,7 +1112,7 @@ a density of the intersections as a number of intersections per square kilometer
     <p>
         &copy; Copyright 2019, Henrikki Tenkanen and Vuokko Heikinheimo, Digital Geography Lab, University of Helsinki
       <span class="lastupdated">
-        Last updated on Nov 25, 2019.
+        Last updated on Nov 27, 2019.
       </span>
 
     </p>

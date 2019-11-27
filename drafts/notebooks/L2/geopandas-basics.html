@@ -480,7 +480,7 @@ of these formats (plus many more). Reading spatial data can be done easily with 
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Import necessary modules</span>
-<span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 
 <span class="c1"># Set filepath</span>
 <span class="n">fp</span> <span class="o">=</span> <span class="s2">&quot;L2_data/DAMSELFISH_distributions.shp&quot;</span>
@@ -521,7 +521,7 @@ of these formats (plus many more). Reading spatial data can be done easily with 
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -626,7 +626,7 @@ of these formats (plus many more). Reading spatial data can be done easily with 
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># It is possible to get a specific column by specifying the column name within square brackets []</span>
-<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -663,7 +663,7 @@ Name: geometry, dtype: object
     <span class="c1"># Get the area of the polygon</span>
     <span class="n">poly_area</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">area</span>
     <span class="c1"># Print information for the user</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Polygon area at index {index} is: {area:.3f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span> <span class="n">area</span><span class="o">=</span><span class="n">poly_area</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Polygon area at index </span><span class="si">{index}</span><span class="s2"> is: </span><span class="si">{area:.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span> <span class="n">area</span><span class="o">=</span><span class="n">poly_area</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -692,7 +692,7 @@ Polygon area at index 4 is: 0.001
 <span class="n">data</span><span class="p">[</span><span class="s1">&#39;area&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">area</span>
 
 <span class="c1"># Print first 2 rows of the area column</span>
-<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;area&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;area&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -724,7 +724,7 @@ Name: area, dtype: float64
 <span class="c1"># Mean area</span>
 <span class="n">mean_area</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;area&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Max area: {max}</span><span class="se">\n</span><span class="s2">Min area: {min}</span><span class="se">\n</span><span class="s2">Mean area: {mean}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">max</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">max_area</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="nb">min</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">min_area</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">mean</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">mean_area</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Max area: </span><span class="si">{max}</span><span class="se">\n</span><span class="s2">Min area: </span><span class="si">{min}</span><span class="se">\n</span><span class="s2">Mean area: </span><span class="si">{mean}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">max</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">max_area</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="nb">min</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">min_area</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">mean</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">mean_area</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
@@ -752,14 +752,14 @@ Mean area: 19.96
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Import necessary modules first</span>
-<span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 <span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Point</span><span class="p">,</span> <span class="n">Polygon</span>
 
 <span class="c1"># Create an empty geopandas GeoDataFrame</span>
 <span class="n">newdata</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">()</span>
 
 <span class="c1"># Let&#39;s see what we have at the moment</span>
-<span class="k">print</span><span class="p">(</span><span class="n">newdata</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">newdata</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -783,10 +783,10 @@ Index: []
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Create a new column called &#39;geometry&#39; to the GeoDataFrame</span>
-<span class="n">newdata</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">newdata</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
 <span class="c1"># Let&#39;s again see what&#39;s inside</span>
-<span class="k">print</span><span class="p">(</span><span class="n">newdata</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">newdata</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -816,7 +816,7 @@ Index: []
 <span class="n">poly</span> <span class="o">=</span> <span class="n">Polygon</span><span class="p">(</span><span class="n">coordinates</span><span class="p">)</span>
 
 <span class="c1"># Let&#39;s see what we have</span>
-<span class="k">print</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -841,7 +841,7 @@ POLYGON ((24.950899 60.169158, 24.953492 60.169158, 24.95351 60.170104, 24.95095
 <span class="n">newdata</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">poly</span>
 
 <span class="c1"># Let&#39;s see what we have now</span>
-<span class="k">print</span><span class="p">(</span><span class="n">newdata</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">newdata</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -867,7 +867,7 @@ POLYGON ((24.950899 60.169158, 24.953492 60.169158, 24.95351 60.170104, 24.95095
 <span class="n">newdata</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;location&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Senaatintori&#39;</span>
 
 <span class="c1"># Let&#39;s check the data</span>
-<span class="k">print</span><span class="p">(</span><span class="n">newdata</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">newdata</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -887,7 +887,7 @@ POLYGON ((24.950899 60.169158, 24.953492 60.169158, 24.95351 60.170104, 24.95095
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">print</span><span class="p">(</span><span class="n">newdata</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="n">newdata</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -914,7 +914,7 @@ None
 <span class="n">newdata</span><span class="o">.</span><span class="n">crs</span> <span class="o">=</span> <span class="n">from_epsg</span><span class="p">(</span><span class="mi">4326</span><span class="p">)</span>
 
 <span class="c1"># Let&#39;s see how the crs definition looks like</span>
-<span class="k">print</span><span class="p">(</span><span class="n">newdata</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">newdata</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -963,7 +963,7 @@ None
 <span class="n">data</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
 
 <span class="c1"># Print columns</span>
-<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -987,7 +987,7 @@ Index([&#39;ID_NO&#39;, &#39;BINOMIAL&#39;, &#39;ORIGIN&#39;, &#39;COMPILER&#39;
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Print all unique fish subspecies in &#39;BINOMIAL&#39; column</span>
-<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;BINOMIAL&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;BINOMIAL&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -1047,8 +1047,8 @@ Index([&#39;ID_NO&#39;, &#39;BINOMIAL&#39;, &#39;ORIGIN&#39;, &#39;COMPILER&#39;
     <span class="n">individual_fish</span> <span class="o">=</span> <span class="n">values</span>
 
 <span class="c1"># Let&#39;s see what is the LAST item and key that we iterated</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Key:&#39;</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">individual_fish</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Key:&#39;</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">individual_fish</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1166,7 +1166,7 @@ Key: Teixeirichthys jordani
     <span class="n">output_name</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">.shp&quot;</span> <span class="o">%</span> <span class="n">key</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span>
 
     <span class="c1"># Print some information for the user</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Processing: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">key</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Processing: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">key</span><span class="p">)</span>
 
     <span class="c1"># Create an output path</span>
     <span class="n">outpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">result_folder</span><span class="p">,</span> <span class="n">output_name</span><span class="p">)</span>

@@ -516,7 +516,7 @@ This page was generated from <a class="reference external" href="https://github.
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="n">destinations</span> <span class="o">=</span> <span class="n">MultiPoint</span><span class="p">([</span><span class="n">dest1</span><span class="p">,</span> <span class="n">dest2</span><span class="p">,</span> <span class="n">dest3</span><span class="p">])</span>
-<span class="k">print</span><span class="p">(</span><span class="n">destinations</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">destinations</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -540,9 +540,9 @@ MULTIPOINT (0 1.45, 2 2, 0 2.5)
 <span></span><span class="n">nearest_geoms</span> <span class="o">=</span> <span class="n">nearest_points</span><span class="p">(</span><span class="n">orig</span><span class="p">,</span> <span class="n">destinations</span><span class="p">)</span>
 <span class="n">near_idx0</span> <span class="o">=</span> <span class="n">nearest_geoms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">near_idx1</span> <span class="o">=</span> <span class="n">nearest_geoms</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<span class="k">print</span><span class="p">(</span><span class="n">nearest_geoms</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">near_idx0</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">near_idx1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nearest_geoms</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">near_idx0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">near_idx1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -567,7 +567,7 @@ POINT (0 1.45)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">def</span> <span class="nf">nearest</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">geom_union</span><span class="p">,</span> <span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">,</span> <span class="n">geom1_col</span><span class="o">=</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span> <span class="n">geom2_col</span><span class="o">=</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span> <span class="n">src_column</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<span></span><span class="k">def</span> <span class="nf">nearest</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">geom_union</span><span class="p">,</span> <span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">,</span> <span class="n">geom1_col</span><span class="o">=</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span> <span class="n">geom2_col</span><span class="o">=</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span> <span class="n">src_column</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Find the nearest point and return the corresponding value from specified column.&quot;&quot;&quot;</span>
 
     <span class="c1"># Find the geometry that is closest</span>
@@ -587,7 +587,7 @@ POINT (0 1.45)
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Import geopandas</span>
-<span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 </pre></div>
 </div>
 </div>
@@ -630,7 +630,7 @@ POINT (0 1.45)
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="n">unary_union</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">unary_union</span>
-<span class="k">print</span><span class="p">(</span><span class="n">unary_union</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">unary_union</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

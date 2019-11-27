@@ -505,11 +505,11 @@ transportation network.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">osmnx</span> <span class="kn">as</span> <span class="nn">ox</span>
-<span class="kn">import</span> <span class="nn">networkx</span> <span class="kn">as</span> <span class="nn">nx</span>
-<span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span></span><span class="kn">import</span> <span class="nn">osmnx</span> <span class="k">as</span> <span class="nn">ox</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
 <span class="n">place_name</span> <span class="o">=</span> <span class="s2">&quot;Kamppi, Helsinki, Finland&quot;</span>
 <span class="n">graph</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">graph_from_place</span><span class="p">(</span><span class="n">place_name</span><span class="p">,</span> <span class="n">network_type</span><span class="o">=</span><span class="s1">&#39;drive&#39;</span><span class="p">)</span>
@@ -534,13 +534,13 @@ transportation network.</p>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Retrieve only edges from the graph</span>
-<span class="n">edges</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">graph_to_gdfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">edges</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">graph_to_gdfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># Check columns</span>
-<span class="k">print</span><span class="p">(</span><span class="n">edges</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">edges</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
 
 <span class="c1"># Check crs</span>
-<span class="k">print</span><span class="p">(</span><span class="n">edges</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">edges</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -624,7 +624,7 @@ Index([&#39;access&#39;, &#39;bridge&#39;, &#39;geometry&#39;, &#39;highway&#39;
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">print</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="s1">&#39;highway&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="s1">&#39;highway&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -672,9 +672,9 @@ Name: highway, dtype: int64
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Get Edges and Nodes</span>
-<span class="n">nodes_proj</span><span class="p">,</span> <span class="n">edges_proj</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">graph_to_gdfs</span><span class="p">(</span><span class="n">graph_proj</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Coordinate system:&quot;</span><span class="p">,</span> <span class="n">edges_proj</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">edges_proj</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="n">nodes_proj</span><span class="p">,</span> <span class="n">edges_proj</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">graph_to_gdfs</span><span class="p">(</span><span class="n">graph_proj</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Coordinate system:&quot;</span><span class="p">,</span> <span class="n">edges_proj</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">edges_proj</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -795,7 +795,7 @@ compact form.</p>
 
 <span class="c1"># Calculate statistics with density information</span>
 <span class="n">stats</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">basic_stats</span><span class="p">(</span><span class="n">graph_proj</span><span class="p">,</span> <span class="n">area</span><span class="o">=</span><span class="n">area</span><span class="p">)</span>
-<span class="n">extended_stats</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">extended_stats</span><span class="p">(</span><span class="n">graph_proj</span><span class="p">,</span> <span class="n">ecc</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">bc</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">cc</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">extended_stats</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">extended_stats</span><span class="p">(</span><span class="n">graph_proj</span><span class="p">,</span> <span class="n">ecc</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bc</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">extended_stats</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="n">stats</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
 <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">stats</span><span class="p">)</span>
@@ -876,7 +876,7 @@ osmid <code class="docutils literal notranslate"><span class="pre">25416262</spa
 <span class="n">centroid</span> <span class="o">=</span> <span class="n">convex_hull</span><span class="o">.</span><span class="n">centroid</span>
 
 <span class="c1"># Show</span>
-<span class="k">print</span><span class="p">(</span><span class="n">centroid</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">centroid</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -902,7 +902,7 @@ POINT (385170.115258674 6671717.254450418)
 
 <span class="c1"># Retrieve the maximum x value (i.e. the most eastern)</span>
 <span class="n">maxx</span> <span class="o">=</span> <span class="n">nodes_proj</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="n">maxx</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">maxx</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -924,7 +924,7 @@ POINT (385170.115258674 6671717.254450418)
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Retrieve the node that is the most eastern one and get the Shapely Point geometry out of it</span>
 <span class="n">target</span> <span class="o">=</span> <span class="n">nodes_proj</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">nodes_proj</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">maxx</span><span class="p">,</span> <span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="k">print</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -957,8 +957,8 @@ which you can retrieve by specifying parameter <code class="docutils literal not
 <span class="n">target_node</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">get_nearest_node</span><span class="p">(</span><span class="n">graph_proj</span><span class="p">,</span> <span class="n">target_xy</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;euclidean&#39;</span><span class="p">)</span>
 
 <span class="c1"># Show the results</span>
-<span class="k">print</span><span class="p">(</span><span class="n">orig_node</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">target_node</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">orig_node</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">target_node</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1062,7 +1062,7 @@ Dijkstra’s algorithm to find the optimal route. We need to specify the graph t
 <span class="n">route</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">shortest_path</span><span class="p">(</span><span class="n">G</span><span class="o">=</span><span class="n">graph_proj</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">orig_node</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">target_node</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s1">&#39;length&#39;</span><span class="p">)</span>
 
 <span class="c1"># Show what we have</span>
-<span class="k">print</span><span class="p">(</span><span class="n">route</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">route</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1111,7 +1111,7 @@ limit and calculate the optimal routes by taking into account the speed limits a
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Get the nodes along the shortest path</span>
 <span class="n">route_nodes</span> <span class="o">=</span> <span class="n">nodes_proj</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">route</span><span class="p">]</span>
-<span class="k">print</span><span class="p">(</span><span class="n">route_nodes</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">route_nodes</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1289,7 +1289,7 @@ limit and calculate the optimal routes by taking into account the speed limits a
 <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">invalid_cols</span><span class="p">:</span>
     <span class="n">edges_proj</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">edges_proj</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="n">edges_proj</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">edges_proj</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

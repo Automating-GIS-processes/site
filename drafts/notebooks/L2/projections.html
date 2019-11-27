@@ -465,7 +465,7 @@ three dimensional earth on a flat, two dimensional map.</p>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Import necessary packages</span>
-<span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 
 <span class="c1"># Read the file</span>
 <span class="n">fp</span> <span class="o">=</span> <span class="s2">&quot;L2_data/Europe_borders.shp&quot;</span>
@@ -535,7 +535,7 @@ Name: geometry, dtype: object
 <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">epsg</span><span class="o">=</span><span class="mi">3035</span><span class="p">)</span>
 
 <span class="c1"># Check the new geometry values</span>
-<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -560,7 +560,7 @@ Name: geometry, dtype: object
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="c1"># Make subplots that are next to each other</span>
 <span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
@@ -677,7 +677,7 @@ less commonly used, but still useful to know.</p>
 <span class="n">helsinki</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">([[</span><span class="n">Point</span><span class="p">(</span><span class="n">hki_lon</span><span class="p">,</span> <span class="n">hki_lat</span><span class="p">)]],</span> <span class="n">geometry</span><span class="o">=</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;init&#39;</span><span class="p">:</span> <span class="s1">&#39;epsg:4326&#39;</span><span class="p">},</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">])</span>
 
 <span class="c1"># Print</span>
-<span class="k">print</span><span class="p">(</span><span class="n">helsinki</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">helsinki</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -719,10 +719,10 @@ less commonly used, but still useful to know.</p>
 <span class="n">helsinki</span> <span class="o">=</span> <span class="n">helsinki</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">crs</span><span class="o">=</span><span class="n">aeqd</span><span class="p">)</span>
 
 <span class="c1"># Print the data</span>
-<span class="k">print</span><span class="p">(</span><span class="n">helsinki</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">helsinki</span><span class="p">)</span>
 
 <span class="c1"># Print the crs</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">CRS:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">helsinki</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">CRS:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">helsinki</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -765,7 +765,7 @@ CRS:
 <span class="n">europe_borders_aeqd</span> <span class="o">=</span> <span class="n">europe_borders_aeqd</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">crs</span><span class="o">=</span><span class="n">aeqd</span><span class="p">)</span>
 
 <span class="c1"># Print</span>
-<span class="k">print</span><span class="p">(</span><span class="n">europe_borders_aeqd</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">europe_borders_aeqd</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -826,7 +826,7 @@ CRS:
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="n">europe_borders_aeqd</span><span class="p">[</span><span class="s1">&#39;centroid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">europe_borders_aeqd</span><span class="o">.</span><span class="n">centroid</span>
-<span class="k">print</span><span class="p">(</span><span class="n">europe_borders_aeqd</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">europe_borders_aeqd</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -897,7 +897,7 @@ CRS:
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Retrieve the geometry from Helsinki GeoDataFrame</span>
 <span class="n">helsinki_geom</span> <span class="o">=</span> <span class="n">helsinki</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;geometry&#39;</span><span class="p">]</span>
-<span class="k">print</span><span class="p">(</span><span class="n">helsinki_geom</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">helsinki_geom</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -923,7 +923,7 @@ POINT (0 0)
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Calculate the distances using our custom function called &#39;calculate_distance&#39;</span>
 <span class="n">europe_borders_aeqd</span> <span class="o">=</span> <span class="n">europe_borders_aeqd</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">calculate_distance</span><span class="p">,</span> <span class="n">dest_geom</span><span class="o">=</span><span class="n">helsinki_geom</span><span class="p">,</span> <span class="n">src_col</span><span class="o">=</span><span class="s1">&#39;centroid&#39;</span><span class="p">,</span> <span class="n">target_col</span><span class="o">=</span><span class="s1">&#39;dist_to_Hki&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">europe_borders_aeqd</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">europe_borders_aeqd</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -970,7 +970,7 @@ POINT (0 0)
 <span class="n">max_dist</span> <span class="o">=</span> <span class="n">europe_borders_aeqd</span><span class="p">[</span><span class="s1">&#39;dist_to_Hki&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
 <span class="n">mean_dist</span> <span class="o">=</span> <span class="n">europe_borders_aeqd</span><span class="p">[</span><span class="s1">&#39;dist_to_Hki&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Maximum distance to Helsinki is </span><span class="si">%.0f</span><span class="s2"> km, and the mean distance is </span><span class="si">%.0f</span><span class="s2"> km.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">max_dist</span><span class="p">,</span> <span class="n">mean_dist</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Maximum distance to Helsinki is </span><span class="si">%.0f</span><span class="s2"> km, and the mean distance is </span><span class="si">%.0f</span><span class="s2"> km.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">max_dist</span><span class="p">,</span> <span class="n">mean_dist</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>

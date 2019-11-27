@@ -524,9 +524,9 @@ between geographical objects, such as the PIP as we’re interested here.</p>
 <span class="n">poly</span> <span class="o">=</span> <span class="n">Polygon</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span>
 
 <span class="c1"># Let&#39;s check what we have</span>
-<span class="k">print</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -573,10 +573,10 @@ POLYGON ((24.950899 60.169158, 24.953492 60.169158, 24.95351 60.170104, 24.95095
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Our point</span>
-<span class="k">print</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
 
 <span class="c1"># The centroid</span>
-<span class="k">print</span><span class="p">(</span><span class="n">poly</span><span class="o">.</span><span class="n">centroid</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">poly</span><span class="o">.</span><span class="n">centroid</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -770,7 +770,7 @@ POINT (24.95224242849236 60.16960179038188)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 
 <span class="n">fp</span> <span class="o">=</span> <span class="s2">&quot;data/addresses.shp&quot;</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
@@ -857,7 +857,7 @@ formats are currently supported:</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 <span class="n">gpd</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">fiona</span><span class="o">.</span><span class="n">drvsupport</span><span class="o">.</span><span class="n">supported_drivers</span>
 </pre></div>
 </div>
@@ -949,7 +949,7 @@ formats are currently supported:</p>
 <span class="n">polys</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s1">&#39;KML&#39;</span><span class="p">)</span>
 
 <span class="c1">#Check the data</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Number of rows:&quot;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">polys</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of rows:&quot;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">polys</span><span class="p">))</span>
 <span class="n">polys</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1072,7 +1072,7 @@ Number of rows: 23
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Select data and reset index</span>
 <span class="n">southern</span> <span class="o">=</span> <span class="n">polys</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">polys</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Eteläinen&#39;</span><span class="p">]</span>
-<span class="n">southern</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">southern</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1082,7 +1082,7 @@ Number of rows: 23
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="c1"># Create a figure with one subplot</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
@@ -1130,7 +1130,7 @@ Number of rows: 23
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="n">pip_mask</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">within</span><span class="p">(</span><span class="n">southern</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;geometry&#39;</span><span class="p">])</span>
-<span class="k">print</span><span class="p">(</span><span class="n">pip_mask</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pip_mask</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

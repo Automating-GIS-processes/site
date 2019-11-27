@@ -543,7 +543,7 @@ This page was generated from <a class="reference external" href="https://github.
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 
 <span class="n">fp</span> <span class="o">=</span> <span class="s2">&quot;data/TravelTimes_to_5975375_RailwayStation_Helsinki.geojson&quot;</span>
 
@@ -551,7 +551,7 @@ This page was generated from <a class="reference external" href="https://github.
 <span class="n">acc</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
 
 <span class="c1"># Let&#39;s see what we have</span>
-<span class="k">print</span><span class="p">(</span><span class="n">acc</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">acc</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -600,10 +600,10 @@ distance).</p>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="c1"># Plot using 9 classes and classify the values using &quot;Natural Breaks&quot; classification</span>
-<span class="n">acc</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;pt_r_tt&quot;</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s2">&quot;Natural_Breaks&quot;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdYlBu&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">acc</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;pt_r_tt&quot;</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s2">&quot;Natural_Breaks&quot;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdYlBu&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># Use tight layout</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
@@ -627,7 +627,7 @@ distance).</p>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Plot walking distance</span>
-<span class="n">acc</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;walk_d&quot;</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s2">&quot;Natural_Breaks&quot;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdYlBu&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">acc</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;walk_d&quot;</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s2">&quot;Natural_Breaks&quot;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdYlBu&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># Use tight layour</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
@@ -919,7 +919,7 @@ distance).</p>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Plot</span>
-<span class="n">acc</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;nb_pt_r_tt&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">acc</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;nb_pt_r_tt&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># Use tight layout</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
@@ -1081,7 +1081,7 @@ distance).</p>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Create column for the classification results</span>
-<span class="n">acc</span><span class="p">[</span><span class="s2">&quot;suitable_area&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">acc</span><span class="p">[</span><span class="s2">&quot;suitable_area&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
 <span class="c1"># Use the function</span>
 <span class="n">acc</span> <span class="o">=</span> <span class="n">acc</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">custom_classifier</span><span class="p">,</span> <span class="n">src_col1</span><span class="o">=</span><span class="s1">&#39;pt_r_tt&#39;</span><span class="p">,</span>
@@ -1270,7 +1270,7 @@ Name: suitable_area, dtype: int64
     <p>
         &copy; Copyright 2019, Henrikki Tenkanen and Vuokko Heikinheimo, Digital Geography Lab, University of Helsinki
       <span class="lastupdated">
-        Last updated on Nov 25, 2019.
+        Last updated on Nov 27, 2019.
       </span>
 
     </p>

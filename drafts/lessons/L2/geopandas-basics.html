@@ -258,7 +258,7 @@ DAMSELFISH_distributions.shx
 <p>Spatial data can be read easily with geopandas using <code class="docutils literal notranslate"><span class="pre">gpd.from_file()</span></code>
 -function:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Import necessary modules</span>
-<span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 
 <span class="go"># Set filepath (fix path relative to yours)</span>
 <span class="gp">In [2]: </span><span class="n">fp</span> <span class="o">=</span> <span class="s2">&quot;/home/geo/Data/DAMSELFISH_distributions.shp&quot;</span>
@@ -360,7 +360,7 @@ earlier.</p>
 <code class="docutils literal notranslate"><span class="pre">.iterrows()</span></code> -function in (geo)pandas and print the area for each polygon:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">selection</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
 <span class="gp">   ...: </span>    <span class="n">poly_area</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">area</span>
-<span class="gp">   ...: </span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Polygon area at index {0} is: {1:.3f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">poly_area</span><span class="p">))</span>
+<span class="gp">   ...: </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Polygon area at index </span><span class="si">{0}</span><span class="s2"> is: </span><span class="si">{1:.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">poly_area</span><span class="p">))</span>
 <span class="gp">   ...: </span>
 <span class="go">Polygon area at index 0 is: 19.396</span>
 <span class="go">Polygon area at index 1 is: 6.146</span>
@@ -395,7 +395,7 @@ Let’s check what is the min and the max of those areas using familiar function
 <span class="go"># Mean area</span>
 <span class="gp">In [13]: </span><span class="n">mean_area</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;area&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 
-<span class="gp">In [14]: </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Max area: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">Mean area: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">max_area</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">mean_area</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
+<span class="gp">In [14]: </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Max area: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">Mean area: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">max_area</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">mean_area</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
 <span class="go">Max area: 1493.2</span>
 <span class="go">Mean area: 19.96</span>
 </pre></div>
@@ -411,8 +411,8 @@ easy to convert e.g. a text file that contains coordinates into a
 Shapefile.</p>
 <p>Let’s create an empty <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import necessary modules first</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 <span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Point</span><span class="p">,</span> <span class="n">Polygon</span>
 <span class="kn">import</span> <span class="nn">fiona</span>
 
@@ -431,7 +431,7 @@ Shapefile.</p>
 <p>The GeoDataFrame is empty since we haven’t placed any data inside.</p>
 <p>Let’s create a new column called <code class="docutils literal notranslate"><span class="pre">geometry</span></code> that will contain our Shapely objects:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Create a new column called &#39;geometry&#39; to the GeoDataFrame</span>
-<span class="gp">In [16]: </span><span class="n">newdata</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="gp">In [16]: </span><span class="n">newdata</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
 <span class="go"># Let&#39;s see what&#39;s inside</span>
 <span class="gp">In [17]: </span><span class="n">newdata</span>
@@ -452,7 +452,7 @@ data yet.</p>
 
 <span class="go"># Let&#39;s see what we have</span>
 <span class="gp">In [20]: </span><span class="n">poly</span>
-<span class="gh">Out[20]: </span><span class="go">&lt;shapely.geometry.polygon.Polygon at 0x7f14d1ef47b8&gt;</span>
+<span class="gh">Out[20]: </span><span class="go">&lt;shapely.geometry.polygon.Polygon at 0x7f2e2923cf98&gt;</span>
 </pre></div>
 </div>
 <p>Okey, so now we have appropriate Polygon -object.</p>
@@ -487,7 +487,7 @@ reference system (projection) for the GeoDataFrame.</strong></p>
 <p>GeoDataFrame has a property called <em>.crs</em> that (more about projection on next tutorial)
 shows the coordinate system of the data which is empty (None) in our
 case since we are creating the data from the scratch:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [25]: </span><span class="k">print</span><span class="p">(</span><span class="n">newdata</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [25]: </span><span class="nb">print</span><span class="p">(</span><span class="n">newdata</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
 <span class="go">None</span>
 </pre></div>
 </div>
@@ -544,7 +544,7 @@ Group by function is useful to group data based on values on selected column(s).
 
 <span class="go"># Let&#39;s see what we got</span>
 <span class="gp">In [30]: </span><span class="n">grouped</span>
-<span class="gh">Out[30]: </span><span class="go">&lt;pandas.core.groupby.generic.DataFrameGroupBy object at 0x7f14d2960d30&gt;</span>
+<span class="gh">Out[30]: </span><span class="go">&lt;pandas.core.groupby.generic.DataFrameGroupBy object at 0x7f2e2971c470&gt;</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -599,7 +599,7 @@ Let’s now export those species into individual Shapefiles.</p>
     <span class="n">outName</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">.shp&quot;</span> <span class="o">%</span> <span class="n">key</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span>
 
     <span class="c1"># Print some information for the user</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Processing: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">key</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Processing: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">key</span><span class="p">)</span>
 
     <span class="c1"># Create an output path</span>
     <span class="n">outpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">resultFolder</span><span class="p">,</span> <span class="n">outName</span><span class="p">)</span>

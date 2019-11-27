@@ -12,17 +12,16 @@ Until 2016, this course taught the use of the `arcpy <http://desktop.arcgis.com/
 Learning objectives
 -------------------
 
-We **don't** have any exercise for this week. The aim of this week is to learn the basics of how QGIS tools and algorithms can be run using *processing* functions, and how custom scripts can be retrofitted with a graphical user interface. In this week’s lesson we will create a QGIS Python tool step by step that **converts the individual *Damselfish species distribution polygons* into raster layers** (``.tif``).
+The aim of this lesson is to get familiar with using Python in QGIS.
 
-After this week’s lesson you should be able to:
+- QGIS plugin demo
+- Overview of building QGIS plugins using Python
+- Quick overview of PyQGIS; how to run QGIS algorithms using Python.
 
- - Create a simple user interface for a script in the QGIS Processing Toolbox.
 
- - Run different QGIS algorithms from Python.
+You can also check out materials from last year: create a QGIS Python tool step by step that
+**converts the individual *Damselfish species distribution polygons* into raster layers** (``.tif``).
 
- - Find and know how to read the PyQGIS and QGIS Processing documentation online.
-
-The data we use this week is the same that we used already during the `second week <../../notebooks/L2/geopandas-basics.html>`_:
 
 .. figure:: img/L7-01-overview-02-damselfish-simplemap.png
 
