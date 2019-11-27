@@ -37,12 +37,41 @@ After this weeks lesson you should be able to:
 Lecture videos
 --------------
 
-.. admonition:: Lesson 5 - Spatial data visualization
+.. admonition:: Lesson 5 - Visualizing spatial data in Python: static maps
 
     .. raw:: html
 
-        <iframe width="560" height="315" src="" frameborder="0" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/p6_1db45e7I" frameborder="0" allowfullscreen></iframe>
         <p>Vuokko Heikinheimo, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p>
+
+    **Contents:**
+
+        - Intro for lesson 5 0:00
+        - Excamples for exercise 5 00:47
+        - Static maps in geopandas 04:40
+        - Adding a basemap using contextily 22:50
+        - Subsetting the data 35:05
+        - Cropping the map 40:10
+
+.. admonition:: Lesson 5 - Visualizing spatial data in Python: interactive maps
+
+    .. raw:: html
+
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/V0ovj5F-Y3M" frameborder="0" allowfullscreen></iframe>
+        <p>Vuokko Heikinheimo, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p>
+
+    **Contents:**
+
+        - Mplleaflet 01:30
+        - Folium map 10:10
+        - Adding a marker (folium) 21:27
+        - Adding a point layer (folium) 27:00
+        - Layer control (folium) 31:00
+        - Heatmap (folium) 31:50
+        - Clustered point map (folium) 37:15
+        - Choropleth map (folium) 38:33
+        - Exercise 5 intro 50:00
+        - Publishing the maps using GitHub pages 52:55
 
 
 
