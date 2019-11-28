@@ -1,4 +1,4 @@
-git Lesson 7 Overview
+Lesson 7 Overview
 =================
 
 .. figure:: img/L7-01-overview-01-pyqgis.svg
