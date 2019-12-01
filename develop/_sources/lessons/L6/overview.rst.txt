@@ -30,7 +30,7 @@ and `OpenStreetMap <https://wiki.openstreetmap.org/wiki/Main_Page>`__.
     .. raw:: html
 
         <iframe width="560" height="315" src="" frameborder="0" allowfullscreen></iframe>
-        <p>Henrikki Tenkanen, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p>
+        <p>Vuokko Heikinheimo, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p>
 
 
 .. admonition:: Lesson 6.2 - Network analysis and routing in Python using OSMnx and Networkx -packages
@@ -38,7 +38,7 @@ and `OpenStreetMap <https://wiki.openstreetmap.org/wiki/Main_Page>`__.
     .. raw:: html
 
         <iframe width="560" height="315" src="" frameborder="0" allowfullscreen></iframe>
-        <p>Henrikki Tenkanen, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p>
+        <p>Vuokko Heikinheimo, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p>
 
 
 
