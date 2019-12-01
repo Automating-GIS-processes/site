@@ -174,7 +174,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../../notebooks/L6/retrieve_osm_data.html">Retrieving OpenStreetMap data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../notebooks/L6/network-analysis.html">Network analysis in Python</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Exercise 6</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#hints">Hints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hints">Hints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#defining-the-graph-extent">Defining the graph extent</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -301,7 +304,63 @@
 Note that you should not try to make changes to this copy of the exercise, but rather only to the copy available via GitHub Classroom.</p>
 <div class="section" id="hints">
 <h2>Hints<a class="headerlink" href="#hints" title="Permalink to this headline">¶</a></h2>
-<p>Will be added here if needed.</p>
+<div class="section" id="defining-the-graph-extent">
+<h3>Defining the graph extent<a class="headerlink" href="#defining-the-graph-extent" title="Permalink to this headline">¶</a></h3>
+<p>First, combine the point data sets, for example, by using the Pandas <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.append.html">append()</a> method (adds rows from one DataFrame to the other).
+Then, specify the extent Polygon using a convex hull or a bounding box + a little buffer (the buffer enables the routes to go beyond the extent of the point layers!).
+When creating the buffer, remember that the coordinates are in decimal degrees!</p>
+<p><strong>Option 2 - Bounding box:</strong>
+Specify a Polygon that represents the <strong>bounding box</strong> of the combined points;</p>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>First, define the bounds:</dt>
+<dd><ul class="first last">
+<li>Once you have all origin and destination points in one GeoDataFrame,</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<dl class="docutils">
+<dt>you can get the corner coordinates of the bounding box from the <a class="reference external" href="http://geopandas.org/reference.html#geopandas.GeoSeries.total_bounds">total_bounds</a> of the geometry-column.</dt>
+<dd><ul class="first last simple">
+<li>Note: the resulting coordinates from the <cite>total_bounds</cite> are in this order: <cite>[xmin, ymin, xmax, ymax]</cite></li>
+</ul>
+</dd>
+</dl>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>Next, you need to define a shapely polygon based on the bounding box coordinates.</dt>
+<dd><ul class="first last">
+<li>In order to create the shapely Polygon, we need to organize the bbox coordinates into a list of coordinate pairs for example like this:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<dl class="docutils">
+<dt><cite>bbox_coords = [[xmin, ymax], [xmin, ymin], [xmax, ymin], [xmax, ymax]]</cite></dt>
+<dd><ul class="first last simple">
+<li>You can create the list of coordinate pairs based on the total bounds. Store the total bounds first into a list, and then create the coordinate pairs.</li>
+<li>You can insert the coordinates into the list one by one. If <cite>bounds</cite> is a list that contains the total bounds of our input coordinates, then we can get xmin like this: <cite>bounds[0]</cite>.</li>
+</ul>
+</dd>
+</dl>
+<ul class="simple">
+<li>Finally, buffer the bounding box polygon (eg. adding 0.05 decimal degrees to the extent using Shapely’s <a class="reference external" href="https://shapely.readthedocs.io/en/stable/manual.html#object.buffer">buffer</a> method)</li>
+</ul>
+<p><strong>Option 2 - Convex hull:</strong>
+- Specify a Polygon that represents the <strong>convex hull</strong> of the combined points like we did in <a class="reference external" href="https://automating-gis-processes.github.io/site/notebooks/L1/geometric-objects.html?highlight=convex%20hull#Geometry-collection--objects%E2%80%99-attributes-and-functions">Lesson 1</a></p>
+<blockquote>
+<div><ul class="simple">
+<li>First, create a MultiPolygon of the points (eg. using <cite>unary_union</cite>)</li>
+<li>Then, you can access the <cite>convex_hull</cite> of that MultiPolygon object</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>Finally, buffer the convex hull polygon (eg. adding 0.1 decimal degrees to the extent using Shapely’s <a class="reference external" href="https://shapely.readthedocs.io/en/stable/manual.html#object.buffer">buffer</a> method)</li>
+</ul>
+</div>
 </div>
 </div>
 
