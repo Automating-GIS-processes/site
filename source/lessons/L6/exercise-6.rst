@@ -19,13 +19,8 @@ Hints
 Defining the graph extent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 First, combine the point data sets, for example, by using the Pandas `append() <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.append.html>`__ method (adds rows from one DataFrame to the other).
-Then, specify the extent Polygon using a convex hull or a bounding box + a little buffer (the buffer enables the routes to go beyond the extent of the point layers!)
-
-**Option 1 - Convex hull:**
-- Specify a Polygon that represents the **convex hull** of the combined points like we did in `Lesson 1 <https://automating-gis-processes.github.io/site/notebooks/L1/geometric-objects.html?highlight=convex%20hull#Geometry-collection--objects%E2%80%99-attributes-and-functions>`__
-    - First, create a MultiPolygon of the points (eg. using `unary_union`)
-    - Then, you can access the `convex_hull` of that MultiPolygon object
-- Finally, buffer the convex hull polygon (eg. adding 0.2 decimal degrees to the extent using Shapely's `buffer <https://shapely.readthedocs.io/en/stable/manual.html#object.buffer>`__ method)
+Then, specify the extent Polygon using a convex hull or a bounding box + a little buffer (the buffer enables the routes to go beyond the extent of the point layers!).
+When creating the buffer, remember that the coordinates are in decimal degrees!
 
 **Option 2 - Bounding box:**
 Specify a Polygon that represents the **bounding box** of the combined points;
@@ -39,6 +34,11 @@ you can get the corner coordinates of the bounding box from the `total_bounds <h
 `bbox_coords = [[xmin, ymax], [xmin, ymin], [xmax, ymin], [xmax, ymax]]`
     - You can create the list of coordinate pairs based on the total bounds. Store the total bounds first into a list, and then create the coordinate pairs.
     - You can insert the coordinates into the list one by one. If `bounds` is a list that contains the total bounds of our input coordinates, then we can get xmin like this: `bounds[0]`.
-- Finally, buffer the bounding box polygon (eg. adding 0.2 decimal degrees to the extent using Shapely's `buffer <https://shapely.readthedocs.io/en/stable/manual.html#object.buffer>`__ method)
+- Finally, buffer the bounding box polygon (eg. adding 0.05 decimal degrees to the extent using Shapely's `buffer <https://shapely.readthedocs.io/en/stable/manual.html#object.buffer>`__ method)
 
+**Option 2 - Convex hull:**
+- Specify a Polygon that represents the **convex hull** of the combined points like we did in `Lesson 1 <https://automating-gis-processes.github.io/site/notebooks/L1/geometric-objects.html?highlight=convex%20hull#Geometry-collection--objects%E2%80%99-attributes-and-functions>`__
+    - First, create a MultiPolygon of the points (eg. using `unary_union`)
+    - Then, you can access the `convex_hull` of that MultiPolygon object
+- Finally, buffer the convex hull polygon (eg. adding 0.1 decimal degrees to the extent using Shapely's `buffer <https://shapely.readthedocs.io/en/stable/manual.html#object.buffer>`__ method)
 
