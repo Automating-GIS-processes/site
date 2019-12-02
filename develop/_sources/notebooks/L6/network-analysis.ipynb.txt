@@ -14,9 +14,9 @@
     "such as [Dijkstra's algorithm](https://networkx.github.io/documentation/networkx-1.10/reference/generated/networkx.algorithms.shortest_paths.weighted.single_source_dijkstra.html#networkx.algorithms.shortest_paths.weighted.single_source_dijkstra) or\n",
     "[A*](https://networkx.github.io/documentation/networkx-1.10/reference/generated/networkx.algorithms.shortest_paths.astar.astar_path.html#networkx.algorithms.shortest_paths.astar.astar_path) algoritm that are commonly used to find shortest paths along transportation network.\n",
     "\n",
-    "To be able to conduct network analysis, it is, of course, necessary to have a network that is used for the analyses. [OSMnx](https://github.com/gboeing/osmnx) package that we just explored in previous tutorial, makes it really easy to retrieve routable networks from OpenStreetMap with different transport modes (walking, cycling and driving). Osmnx also combines some functionalities from `networkx` module to make it straightforward to conduct routing along OpenStreetMap data.\n",
+    "To be able to conduct network analysis, it is, of course, necessary to have a network that is used for the analyses. [OSMnx](https://github.com/gboeing/osmnx) package that we just explored in previous tutorial, makes it really easy to retrieve routable networks from OpenStreetMap with different transport modes (walking, cycling and driving). OSMnx also combines some functionalities from `networkx` module to make it straightforward to conduct routing along OpenStreetMap data.\n",
     "\n",
-    "Next we will test the routing functionalities of osmnx by finding a shortest path between two points based on drivable roads. When fetching netowrk data from OpenStreetMap using osmnx, it is possible to define the type of street network using the `network_type` parameter (options: `drive`, `walk` and `bike`).\n",
+    "Next we will test the routing functionalities of OSMnx by finding a shortest path between two points based on drivable roads. When fetching netowrk data from OpenStreetMap using OSMnx, it is possible to define the type of street network using the `network_type` parameter (options: `drive`, `walk` and `bike`).\n",
     "\n",
     "- import modules:"
    ]
@@ -246,7 +246,7 @@
        "      <td>0</td>\n",
        "      <td>[25514547, 677423564, 30288797, 30288799]</td>\n",
        "      <td>True</td>\n",
-       "      <td>[2, 3]</td>\n",
+       "      <td>[3, 2]</td>\n",
        "      <td>Mechelininkatu</td>\n",
        "      <td>primary</td>\n",
        "      <td>40</td>\n",
@@ -289,7 +289,7 @@
        "0                                           23856784    True       2   \n",
        "1                               [29977177, 30470347]    True       3   \n",
        "2                               [372440330, 8135861]    True       2   \n",
-       "3          [25514547, 677423564, 30288797, 30288799]    True  [2, 3]   \n",
+       "3          [25514547, 677423564, 30288797, 30288799]    True  [3, 2]   \n",
        "4  [30568275, 36729015, 316590744, 316590745, 316...    True     NaN   \n",
        "\n",
        "             name   highway maxspeed   length  \\\n",
@@ -538,7 +538,7 @@
        "      <td>0</td>\n",
        "      <td>[25514547, 677423564, 30288797, 30288799]</td>\n",
        "      <td>True</td>\n",
-       "      <td>[2, 3]</td>\n",
+       "      <td>[3, 2]</td>\n",
        "      <td>Mechelininkatu</td>\n",
        "      <td>primary</td>\n",
        "      <td>40</td>\n",
@@ -581,7 +581,7 @@
        "0                                           23856784    True       2   \n",
        "1                               [29977177, 30470347]    True       3   \n",
        "2                               [372440330, 8135861]    True       2   \n",
-       "3          [25514547, 677423564, 30288797, 30288799]    True  [2, 3]   \n",
+       "3          [25514547, 677423564, 30288797, 30288799]    True  [3, 2]   \n",
        "4  [30568275, 36729015, 316590744, 316590745, 316...    True     NaN   \n",
        "\n",
        "             name   highway maxspeed   length  \\\n",
@@ -656,9 +656,9 @@
    "source": [
     "## Analyzing the network properties\n",
     "\n",
-    "Now as we have seen some of the basic functionalities of osmnx such as downloading the data and converting data from graph to GeoDataFrame, we can take a look some of the analytical features of omsnx. Osmnx includes many useful functionalities to extract information about the network.\n",
+    "Now as we have seen some of the basic functionalities of OSMnx such as downloading the data and converting data from graph to GeoDataFrame, we can take a look some of the analytical features of omsnx. Osmnx includes many useful functionalities to extract information about the network.\n",
     "\n",
-    "- To calculate some of the basic street network measures we can use `basic_stats()` function in OSMnx:"
+    "- To calculate some of the basic street network measures we can use [basic_stats()](https://osmnx.readthedocs.io/en/stable/osmnx.html#osmnx.stats.basic_stats) function in OSMnx:"
    ]
   },
   {
@@ -689,7 +689,7 @@
        " 'intersection_density_km': None,\n",
        " 'edge_density_km': None,\n",
        " 'street_density_km': None,\n",
-       " 'circuity_avg': 1.2708222054226743e-05,\n",
+       " 'circuity_avg': 1.0244213943099583,\n",
        " 'self_loop_proportion': 0.0,\n",
        " 'clean_intersection_count': None,\n",
        " 'clean_intersection_density_km': None}"
@@ -702,7 +702,7 @@
    ],
    "source": [
     "# Calculate network statistics\n",
-    "stats = ox.basic_stats(graph_proj)\n",
+    "stats = ox.basic_stats(graph_proj, circuity_dist='euclidean')\n",
     "stats"
    ]
   },
@@ -711,7 +711,7 @@
    "metadata": {},
    "source": [
     "To be able to extract the more advanced statistics (and some of the missing ones above) from the street network, it is required to have information about the coverage area of the network. Let's calculate the area of the [convex hull](https://en.wikipedia.org/wiki/Convex_hull) of the street network and see what we can get.\n",
-    "As certain statistics are produced separately for each node, they produce a lot of output. Let's merge both stats and put them into Pandas Series to keep things in more compact form.\n"
+    "\n"
    ]
   },
   {
@@ -725,7 +725,7 @@
        "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"300\" height=\"300\" viewBox=\"384574.12422161805 6671093.468717448 1330.1714883511304 1222.853895086795\" preserveAspectRatio=\"xMinYMin meet\"><g transform=\"matrix(1,0,0,-1,0,13343409.791329984)\"><path fill-rule=\"evenodd\" fill=\"#66cc99\" stroke=\"#555555\" stroke-width=\"8.86780992234087\" opacity=\"0.6\" d=\"M 384887.43520964065,6671142.734328128 L 384874.6134171016,6671144.953666562 L 384862.49321464007,6671149.703062389 L 384846.70817595173,6671156.250464548 L 384830.55097262113,6671163.678893964 L 384819.2577072033,6671169.817780623 L 384810.548805537,6671175.830884326 L 384799.8097661783,6671185.46288525 L 384787.5960553605,6671198.183697623 L 384743.85316015256,6671245.752737156 L 384735.2918974575,6671256.09654915 L 384727.4991241174,6671267.3857674645 L 384659.8583754331,6671369.992065999 L 384633.0996793158,6671411.455786523 L 384630.248874986,6671418.811690406 L 384628.1016578999,6671429.109849386 L 384627.1870488745,6671437.808982659 L 384624.5128871406,6671468.763145481 L 384623.92622339417,6671484.172020655 L 384623.38983229775,6671505.586139437 L 384624.16995266604,6671547.642789744 L 384629.5989824361,6671781.058284743 L 384629.84665722464,6671787.335923339 L 384630.97953189426,6671796.505516778 L 384633.39436108875,6671805.824194773 L 384997.3250063297,6672083.911938155 L 385005.4581702336,6672089.161916895 L 385285.23408373387,6672267.057001855 L 385431.07297831087,6672263.37285732 L 385453.99608750106,6672262.733936 L 385460.97191941144,6672262.437781863 L 385855.0300992895,6671721.810323974 L 385395.64087329013,6671421.571126892 L 385372.5008918552,6671406.570391574 L 384912.88220936153,6671147.774655974 L 384904.2688298981,6671144.4567097 L 384896.0935586088,6671142.885828212 L 384887.43520964065,6671142.734328128 z\" /></g></svg>"
       ],
       "text/plain": [
-       "<shapely.geometry.polygon.Polygon at 0x270467ad4e0>"
+       "<shapely.geometry.polygon.Polygon at 0x22e9ad78ba8>"
       ]
      },
      "execution_count": 15,
@@ -744,7 +744,7 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "Now we can use the Convex Hull above to calculate e.g. denisity statistics:"
+    "Now we can use the Convex Hull above to calculate [extended statistics for the network](https://osmnx.readthedocs.io/en/stable/osmnx.html#osmnx.stats.extended_stats). As some of the metrics are produced separately for each node, they produce a lot of output. Here, we combine the basic and extended statistics into one Pandas Series to keep things in more compact form."
    ]
   },
   {
@@ -812,8 +812,12 @@
     "# Calculate statistics with density information\n",
     "stats = ox.basic_stats(graph_proj, area=area)\n",
     "extended_stats = ox.extended_stats(graph_proj, ecc=True, cc=True)\n",
+    "\n",
+    "# Add extened statistics to the basic statistics\n",
     "for key, value in extended_stats.items():\n",
     "    stats[key] = value\n",
+    "    \n",
+    "# Convert the dictionary to a Pandas series for a nicer output\n",
     "pd.Series(stats)"
    ]
   },
@@ -821,7 +825,7 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "As we can see, now we have a **LOT** of information about our street network that can be used to understand its structure. We can for example see that the average node density in our network is `149 nodes/km` and that the total edge length of our network is `19960.6 meters`.\n",
+    "As we can see, now we have a **LOT** of information about our street network that can be used to understand its structure. We can for example see that the average node density in our network is `149 nodes/km` and that the total edge length of our network is almost 20 kilometers.\n",
     "\n",
     "Furthermore, we can see that the [degree centrality](https://en.wikipedia.org/wiki/Centrality) of our network is on average `0.0326515`. Degree is a simple centrality measure that counts how many neighbors a node has (here a fraction of nodes it is connected to). Another interesting measure is the [PageRank](https://en.wikipedia.org/wiki/PageRank) that measures the importance of specific node in the graph. Here we can see that the most important node in our graph seem to a node with osmid `25416262`. PageRank was the algorithm that Google first developed (Larry Page & Sergei Brin) to order the search engine results and became famous for.\n",
     "\n",
@@ -834,7 +838,7 @@
    "source": [
     "## Shortest path analysis\n",
     "\n",
-    "Let's now calculate the shortest path between two points. First we need to specify the source and target locations for our route. Let's use the centroid of our network as the source location and the furthest point in East in our network as the target location.\n",
+    "Let's now calculate the shortest path between two points using the [shortest path function in Networkx](https://networkx.github.io/documentation/networkx-1.10/reference/generated/networkx.algorithms.shortest_paths.generic.shortest_path.html#shortest-path). First we need to specify the source and target locations for our route. Let's use the centroid of our network as the source location and the furthest point in East in our network as the target location.\n",
     "\n",
     "- Let's first determine the centroid of our network. We can take advantage of the same `Convex Hull` that we used previously to determine the centroid of our data.\n"
    ]
@@ -1088,7 +1092,7 @@
     }
    ],
    "source": [
-    "# Find the closest origin and target nodes from the graph (the ids of them)\n",
+    "# Find the node in the graph that is closest to the origin point (here, we want to get the node id)\n",
     "orig_node = ox.get_nearest_node(graph_proj, orig_xy, method='euclidean')\n",
     "orig_node"
    ]
@@ -1110,6 +1114,7 @@
     }
    ],
    "source": [
+    "# Find the node in the graph that is closest to the target point (here, we want to get the node id)\n",
     "target_node = ox.get_nearest_node(graph_proj, target_xy, method='euclidean')\n",
     "target_node"
    ]
@@ -1496,7 +1501,7 @@
        "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"300\" height=\"257.87444090284407\" viewBox=\"385139.17504486965 6671558.6828059275 743.3879411282833 257.87444090284407\" preserveAspectRatio=\"xMinYMin meet\"><g transform=\"matrix(1,0,0,-1,0,13343375.240052758)\"><polyline fill=\"none\" stroke=\"#66cc99\" stroke-width=\"4.9559196075218885\" points=\"385166.7079315781,6671721.244047897 385199.0404225526,6671671.819812791 385239.95699829527,6671610.0800060425 385382.61673782277,6671703.996054846 385514.5733395504,6671789.024360122 385570.8862774068,6671702.891685122 385647.12420955085,6671586.215692636 385779.2070153267,6671672.709376794 385855.0300992895,6671721.810323974\" opacity=\"0.8\" /></g></svg>"
       ],
       "text/plain": [
-       "<shapely.geometry.linestring.LineString at 0x270467f16a0>"
+       "<shapely.geometry.linestring.LineString at 0x22e9adb4668>"
       ]
      },
      "execution_count": 30,

@@ -499,8 +499,8 @@ This page was generated from <a class="reference external" href="https://github.
 <p>It is also possible to perform network analysis such as tranposrtation routing in Python. <a class="reference external" href="https://networkx.github.io/documentation/stable/">Networkx</a> is a Python module that provides tools for analyzing networks in various different ways. It also contains algorithms such as <a class="reference external" href="https://networkx.github.io/documentation/networkx-1.10/reference/generated/networkx.algorithms.shortest_paths.weighted.single_source_dijkstra.html#networkx.algorithms.shortest_paths.weighted.single_source_dijkstra">Dijkstra’s
 algorithm</a> or <a class="reference external" href="https://networkx.github.io/documentation/networkx-1.10/reference/generated/networkx.algorithms.shortest_paths.astar.astar_path.html#networkx.algorithms.shortest_paths.astar.astar_path">A*</a> algoritm that are commonly used to find shortest paths along
 transportation network.</p>
-<p>To be able to conduct network analysis, it is, of course, necessary to have a network that is used for the analyses. <a class="reference external" href="https://github.com/gboeing/osmnx">OSMnx</a> package that we just explored in previous tutorial, makes it really easy to retrieve routable networks from OpenStreetMap with different transport modes (walking, cycling and driving). Osmnx also combines some functionalities from <code class="docutils literal notranslate"><span class="pre">networkx</span></code> module to make it straightforward to conduct routing along OpenStreetMap data.</p>
-<p>Next we will test the routing functionalities of osmnx by finding a shortest path between two points based on drivable roads. When fetching netowrk data from OpenStreetMap using osmnx, it is possible to define the type of street network using the <code class="docutils literal notranslate"><span class="pre">network_type</span></code> parameter (options: <code class="docutils literal notranslate"><span class="pre">drive</span></code>, <code class="docutils literal notranslate"><span class="pre">walk</span></code> and <code class="docutils literal notranslate"><span class="pre">bike</span></code>).</p>
+<p>To be able to conduct network analysis, it is, of course, necessary to have a network that is used for the analyses. <a class="reference external" href="https://github.com/gboeing/osmnx">OSMnx</a> package that we just explored in previous tutorial, makes it really easy to retrieve routable networks from OpenStreetMap with different transport modes (walking, cycling and driving). OSMnx also combines some functionalities from <code class="docutils literal notranslate"><span class="pre">networkx</span></code> module to make it straightforward to conduct routing along OpenStreetMap data.</p>
+<p>Next we will test the routing functionalities of OSMnx by finding a shortest path between two points based on drivable roads. When fetching netowrk data from OpenStreetMap using OSMnx, it is possible to define the type of street network using the <code class="docutils literal notranslate"><span class="pre">network_type</span></code> parameter (options: <code class="docutils literal notranslate"><span class="pre">drive</span></code>, <code class="docutils literal notranslate"><span class="pre">walk</span></code> and <code class="docutils literal notranslate"><span class="pre">bike</span></code>).</p>
 <ul class="simple">
 <li>import modules:</li>
 </ul>
@@ -711,7 +711,7 @@ transportation network.</p>
       <td>0</td>
       <td>[25514547, 677423564, 30288797, 30288799]</td>
       <td>True</td>
-      <td>[2, 3]</td>
+      <td>[3, 2]</td>
       <td>Mechelininkatu</td>
       <td>primary</td>
       <td>40</td>
@@ -986,7 +986,7 @@ Coordinate system: +proj=utm +zone=35 +ellps=WGS84 +datum=WGS84 +units=m +no_def
       <td>0</td>
       <td>[25514547, 677423564, 30288797, 30288799]</td>
       <td>True</td>
-      <td>[2, 3]</td>
+      <td>[3, 2]</td>
       <td>Mechelininkatu</td>
       <td>primary</td>
       <td>40</td>
@@ -1043,9 +1043,9 @@ Coordinate system: +proj=utm +zone=35 +ellps=WGS84 +datum=WGS84 +units=m +no_def
 <p>Indeed, the projection is now <a class="reference external" href="https://epsg.io/32635">WGS 84 / UTM zone 35N, EPSG:32635</a>.</p>
 <div class="section" id="Analyzing-the-network-properties">
 <h2>Analyzing the network properties<a class="headerlink" href="#Analyzing-the-network-properties" title="Permalink to this headline">¶</a></h2>
-<p>Now as we have seen some of the basic functionalities of osmnx such as downloading the data and converting data from graph to GeoDataFrame, we can take a look some of the analytical features of omsnx. Osmnx includes many useful functionalities to extract information about the network.</p>
+<p>Now as we have seen some of the basic functionalities of OSMnx such as downloading the data and converting data from graph to GeoDataFrame, we can take a look some of the analytical features of omsnx. Osmnx includes many useful functionalities to extract information about the network.</p>
 <ul class="simple">
-<li>To calculate some of the basic street network measures we can use <code class="docutils literal notranslate"><span class="pre">basic_stats()</span></code> function in OSMnx:</li>
+<li>To calculate some of the basic street network measures we can use <a class="reference external" href="https://osmnx.readthedocs.io/en/stable/osmnx.html#osmnx.stats.basic_stats">basic_stats()</a> function in OSMnx:</li>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
@@ -1053,7 +1053,7 @@ Coordinate system: +proj=utm +zone=35 +ellps=WGS84 +datum=WGS84 +units=m +no_def
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Calculate network statistics</span>
-<span class="n">stats</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">basic_stats</span><span class="p">(</span><span class="n">graph_proj</span><span class="p">)</span>
+<span class="n">stats</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">basic_stats</span><span class="p">(</span><span class="n">graph_proj</span><span class="p">,</span> <span class="n">circuity_dist</span><span class="o">=</span><span class="s1">&#39;euclidean&#39;</span><span class="p">)</span>
 <span class="n">stats</span>
 </pre></div>
 </div>
@@ -1083,15 +1083,14 @@ Coordinate system: +proj=utm +zone=35 +ellps=WGS84 +datum=WGS84 +units=m +no_def
  &#39;intersection_density_km&#39;: None,
  &#39;edge_density_km&#39;: None,
  &#39;street_density_km&#39;: None,
- &#39;circuity_avg&#39;: 1.2708222054226743e-05,
+ &#39;circuity_avg&#39;: 1.0244213943099583,
  &#39;self_loop_proportion&#39;: 0.0,
  &#39;clean_intersection_count&#39;: None,
  &#39;clean_intersection_density_km&#39;: None}
 </pre></div>
 </div>
 </div>
-<p>To be able to extract the more advanced statistics (and some of the missing ones above) from the street network, it is required to have information about the coverage area of the network. Let’s calculate the area of the <a class="reference external" href="https://en.wikipedia.org/wiki/Convex_hull">convex hull</a> of the street network and see what we can get. As certain statistics are produced separately for each node, they produce a lot of output. Let’s merge both stats and put them into Pandas Series to keep things in more
-compact form.</p>
+<p>To be able to extract the more advanced statistics (and some of the missing ones above) from the street network, it is required to have information about the coverage area of the network. Let’s calculate the area of the <a class="reference external" href="https://en.wikipedia.org/wiki/Convex_hull">convex hull</a> of the street network and see what we can get.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
@@ -1111,7 +1110,7 @@ compact form.</p>
 <div class="output_area docutils container">
 <img alt="../../_images/notebooks_L6_network-analysis_27_0.svg" src="../../_images/notebooks_L6_network-analysis_27_0.svg" /></div>
 </div>
-<p>Now we can use the Convex Hull above to calculate e.g.&nbsp;denisity statistics:</p>
+<p>Now we can use the Convex Hull above to calculate <a class="reference external" href="https://osmnx.readthedocs.io/en/stable/osmnx.html#osmnx.stats.extended_stats">extended statistics for the network</a>. As some of the metrics are produced separately for each node, they produce a lot of output. Here, we combine the basic and extended statistics into one Pandas Series to keep things in more compact form.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
@@ -1123,8 +1122,12 @@ compact form.</p>
 <span class="c1"># Calculate statistics with density information</span>
 <span class="n">stats</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">basic_stats</span><span class="p">(</span><span class="n">graph_proj</span><span class="p">,</span> <span class="n">area</span><span class="o">=</span><span class="n">area</span><span class="p">)</span>
 <span class="n">extended_stats</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">extended_stats</span><span class="p">(</span><span class="n">graph_proj</span><span class="p">,</span> <span class="n">ecc</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Add extened statistics to the basic statistics</span>
 <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">extended_stats</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="n">stats</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+<span class="c1"># Convert the dictionary to a Pandas series for a nicer output</span>
 <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">stats</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1180,14 +1183,14 @@ dtype: object
 </pre></div>
 </div>
 </div>
-<p>As we can see, now we have a <strong>LOT</strong> of information about our street network that can be used to understand its structure. We can for example see that the average node density in our network is <code class="docutils literal notranslate"><span class="pre">149</span> <span class="pre">nodes/km</span></code> and that the total edge length of our network is <code class="docutils literal notranslate"><span class="pre">19960.6</span> <span class="pre">meters</span></code>.</p>
+<p>As we can see, now we have a <strong>LOT</strong> of information about our street network that can be used to understand its structure. We can for example see that the average node density in our network is <code class="docutils literal notranslate"><span class="pre">149</span> <span class="pre">nodes/km</span></code> and that the total edge length of our network is almost 20 kilometers.</p>
 <p>Furthermore, we can see that the <a class="reference external" href="https://en.wikipedia.org/wiki/Centrality">degree centrality</a> of our network is on average <code class="docutils literal notranslate"><span class="pre">0.0326515</span></code>. Degree is a simple centrality measure that counts how many neighbors a node has (here a fraction of nodes it is connected to). Another interesting measure is the <a class="reference external" href="https://en.wikipedia.org/wiki/PageRank">PageRank</a> that measures the importance of specific node in the graph. Here we can see that the most important node in our graph seem to a node with
 osmid <code class="docutils literal notranslate"><span class="pre">25416262</span></code>. PageRank was the algorithm that Google first developed (Larry Page &amp; Sergei Brin) to order the search engine results and became famous for.</p>
 <p>You can read the <a class="reference external" href="https://en.wikipedia.org/wiki/Centrality">Wikipedia article about different centrality measures</a> if you are interested what the other centrality measures mean.</p>
 </div>
 <div class="section" id="Shortest-path-analysis">
 <h2>Shortest path analysis<a class="headerlink" href="#Shortest-path-analysis" title="Permalink to this headline">¶</a></h2>
-<p>Let’s now calculate the shortest path between two points. First we need to specify the source and target locations for our route. Let’s use the centroid of our network as the source location and the furthest point in East in our network as the target location.</p>
+<p>Let’s now calculate the shortest path between two points using the <a class="reference external" href="https://networkx.github.io/documentation/networkx-1.10/reference/generated/networkx.algorithms.shortest_paths.generic.shortest_path.html#shortest-path">shortest path function in Networkx</a>. First we need to specify the source and target locations for our route. Let’s use the centroid of our network as the source location and the furthest point in East in our network as the target location.</p>
 <ul class="simple">
 <li>Let’s first determine the centroid of our network. We can take advantage of the same <code class="docutils literal notranslate"><span class="pre">Convex</span> <span class="pre">Hull</span></code> that we used previously to determine the centroid of our data.</li>
 </ul>
@@ -1390,7 +1393,7 @@ calculate the distance from the point to the closest node (with decimal derees, 
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Find the closest origin and target nodes from the graph (the ids of them)</span>
+<span></span><span class="c1"># Find the node in the graph that is closest to the origin point (here, we want to get the node id)</span>
 <span class="n">orig_node</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">get_nearest_node</span><span class="p">(</span><span class="n">graph_proj</span><span class="p">,</span> <span class="n">orig_xy</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;euclidean&#39;</span><span class="p">)</span>
 <span class="n">orig_node</span>
 </pre></div>
@@ -1410,7 +1413,8 @@ calculate the distance from the point to the closest node (with decimal derees, 
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">target_node</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">get_nearest_node</span><span class="p">(</span><span class="n">graph_proj</span><span class="p">,</span> <span class="n">target_xy</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;euclidean&#39;</span><span class="p">)</span>
+<span></span><span class="c1"># Find the node in the graph that is closest to the target point (here, we want to get the node id)</span>
+<span class="n">target_node</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">get_nearest_node</span><span class="p">(</span><span class="n">graph_proj</span><span class="p">,</span> <span class="n">target_xy</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;euclidean&#39;</span><span class="p">)</span>
 <span class="n">target_node</span>
 </pre></div>
 </div>
@@ -1935,7 +1939,7 @@ dtype: object
     <p>
         &copy; Copyright 2019, Henrikki Tenkanen and Vuokko Heikinheimo, Digital Geography Lab, University of Helsinki
       <span class="lastupdated">
-        Last updated on Dec 01, 2019.
+        Last updated on Dec 02, 2019.
       </span>
 
     </p>
