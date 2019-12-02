@@ -182,19 +182,20 @@ Contents
 
 .. toctree::
    :maxdepth: 2
-   :caption: Lesson 7
-
-   lessons/L7/overview
-   lessons/L7/pyqgis
-   lessons/L7/qgis-plugins.rst
-
-.. toctree::
-   :maxdepth: 2
    :caption: Final Assignment
 
    lessons/FA/final-assignment
    lessons/FA/final-assignment-grading
    lessons/FA/fa-hints
+
+    .. toctree::
+       :maxdepth: 2
+       :caption: Lesson 7
+
+       lessons/L7/overview
+       lessons/L7/pyqgis
+       lessons/L7/qgis-plugins.rst
+
 
 
 
