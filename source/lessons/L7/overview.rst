@@ -2,7 +2,7 @@ Lesson 7 Overview
 =================
 
 .. figure:: img/L7-01-overview-01-pyqgis.svg
-    :width: 500 px
+    :width: 500 pxgit
 
 
 This week we will take a quick tour on **how to use Python in QGIS** using the `processing <http://docs.qgis.org/3.4/en/docs/user_manual/processing/index.html>`_ framework.
