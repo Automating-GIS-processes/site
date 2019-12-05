@@ -32,7 +32,7 @@ You have three options for the final project that you can choose from:
 Think about the final project as a challenge for yourself to show and implement the programming skills that you have learned this far. You have learned a lot already!
 
 Final work structure
-~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 Here is the suggested structure of the work, that also serves as the basis for grading:
 
@@ -113,7 +113,7 @@ Individual YKR IDs can be found from `this web map <http://www.helsinki.fi/scien
 Read further description about the travel time matrix from the `Digital Geography Lab / Accessibility research group blog <http://blogs.helsinki.fi/accessibility/helsinki-region-travel-time-matrix/>`__.
 
 What should this tool do?
-~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 AccessViz is a Python tool (i.e. a set of Notebooks and/or Python script files) for managing, analyzing and visualizing the Travel Time Matrix data set. AccessViz consist of Python functions, and examples on how to use these functions.
 AccessViz has four main components for accessing the files, joining the attribute information to spatial data, visualizing the data and comparing different travel modes:
@@ -228,7 +228,7 @@ The tool should calculate 2-4 indicators about the urban areas. Here are some ex
     - Visualize the results
 
 Structure of the urban indicators tool assignmnent
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can design the structure of your assignment freely. We suggest that you create functions in separate script files, and demonstrate the use of those functions in one or several notebooks.
 In addition, you should provide some basic information in the README.md file of your final assignment. All in all, the work should include these components:

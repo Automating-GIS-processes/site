@@ -39,7 +39,7 @@ In case you are creating something with a totally different structure, please di
 
 
 Grade for the final assignment:
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 *final grade thresholds are defined after assessing the assignments*
 
