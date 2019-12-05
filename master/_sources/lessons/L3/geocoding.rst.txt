@@ -59,7 +59,7 @@ As we are only making a small set of queries, we can do the geocoding by using N
 
     Always check the terms of service of the geocoding service that you are using!
 
-.. Nominatim::
+.. Note::
 
     As noted on the `Geopy documentation for the Nominatim geocoder <https://geopy.readthedocs.io/en/stable/#nominatim>`__
     we need to specify a custom `user_agent` parameter when making requests not to violate the

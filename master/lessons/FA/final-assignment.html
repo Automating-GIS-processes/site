@@ -187,13 +187,14 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#accessviz">AccessViz</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#what-the-tool-should-do">What the tool should do?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#general-description">General Description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#what-should-this-tool-do">What should this tool do?</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#urban-indicators">Urban indicators</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#data">Data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#example-analyses">Example analyses</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#structure-of-the-final-report-urban-indicators">Structure of the final report (urban indicators)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#structure-of-the-urban-indicators-tool-assignmnent">Structure of the urban indicators tool assignmnent</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#technical-considerations">Technical considerations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#literature-inspiration">Literature + inspiration</a></li>
 </ul>
@@ -270,6 +271,12 @@
            <div itemprop="articleBody">
             
   
+
+
+
+
+
+
 <style>
 /* CSS overrides for sphinx_rtd_theme */
 
@@ -378,32 +385,50 @@ You should add necessary details to the <cite>README.md</cite> file, and use inl
 </div>
 <div class="section" id="accessviz">
 <span id="id1"></span><h2>AccessViz<a class="headerlink" href="#accessviz" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="what-the-tool-should-do">
-<h3>What the tool should do?<a class="headerlink" href="#what-the-tool-should-do" title="Permalink to this headline">¶</a></h3>
-<p><strong>AccessViz</strong> is a set of tools that can be used for managing and helping to analyze
-Helsinki Region Travel Time Matrix data (2013 / 2015 / 2018) that can be downloaded from
-<a class="reference external" href="http://blogs.helsinki.fi/accessibility/helsinki-region-travel-time-matrix/">here</a>.
-Read also the description of the dataset from the web-pages so that you get familiar with the data.</p>
-<p>AccessViz tool package (i.e. a set of Notebooks) has following main functionalities (i.e. functions) that should work independently. You should demonstrate the usage of the functionalities in your Notebook:</p>
-<p>1. AccessViz finds from the data folder all the matrices that user has specified by assigning a list of integer values that should correspond to YKR-IDs found from the attribute table of a Shapefile called <a class="reference external" href="http://www.helsinki.fi/science/accessibility/data/MetropAccess-matka-aikamatriisi/MetropAccess_YKR_grid.zip">MetropAccess_YKR_grid.shp</a>.
-If the ID-number that the user has specified does not exist in the data folders, the tools should warn about this to the user but still continue running. The tool should also inform the user about the execution process: tell the user what file is currently under process and how many files there are left
-(e.g. “Processing file travel_times_to_5797076.txt.. Progress: 3/25”).</p>
-<p>2. AccessViz can create Shapefiles from the chosen Matrix text tables (e.g. <em>travel_times_to_5797076.txt</em>) by joining the Matrix file with
-MetropAccess_YKR_grid Shapefile  where <code class="docutils literal notranslate"><span class="pre">from_id</span></code> in Matrix file corresponds to <code class="docutils literal notranslate"><span class="pre">YKR_ID</span></code> in the Shapefile. The tool saves the result in the output-folder
-that user has defined. You should name the files in a way that it is possible to identify the ID from the name (e.g. 5797076).</p>
-<ol class="arabic simple" start="3">
-<li>AccessViz can visualize the travel times of selected YKR_IDs based on the travel mode that the user specifies. It can save those maps into a folder that user specifies. The output maps can be either <strong>static</strong> or <strong>interactive</strong> and user can choose which one with a parameter. You can freely design yourself the style of the map, colors, travel time intervals (classes) etc. Try to make the map as informative as possible!</li>
-</ol>
-<p>4. AccessViz can also compare <strong>travel times</strong> or <strong>travel distances</strong> between two different travel modes (more than two travel modes are not allowed). Thus IF the user has specified two travel modes (passed in as a list) for the AccessViz, the tool will calculate the time/distance difference of those travel modes
-into a new data column that should be created in the Shapefile. The logic of the calculation is following the order of the items passed on the list where first travel mode is always subtracted by the last one: <code class="docutils literal notranslate"><span class="pre">travelmode1</span> <span class="pre">-</span> <span class="pre">travelmode2</span></code>. The tool should ensure that distances are not compared to travel times and vice versa. If the user chooses to compare travel modes to each other, you should add the travel modes to the filename such as <code class="docutils literal notranslate"><span class="pre">Accessibility_5797076_pt_vs_car.shp</span></code>. If the user has not specified any travel modes, the tool should only create the Shapefile but not execute any calculations. It should be only possible to compare two travel modes between each other at the time. Accepted travel modes are the same ones that are found in the actual TravelTimeMatrix file (pt_r_tt, car_t, etc.). If the user specifies something else, stop the program, and give advice what are the acceptable values.</p>
-<p><strong>Additionally, you should choose and implement one of the following functionalities</strong>:</p>
-<ol class="arabic simple" start="5">
-<li>(option 1). Bundled with AccessViz there is also a separate interactive map that shows the YKR grid values in Helsinki region. The purpose of the map is to help the user to choose the YKR-IDs that s/he is interested to visualize / analyze.</li>
-<li>(option 2). AccessViz can also visualize the travel mode comparisons that were described in step 4. You can design the style of the map yourself, but try to make it as informative as possible!</li>
+<div class="section" id="general-description">
+<h3>General Description<a class="headerlink" href="#general-description" title="Permalink to this headline">¶</a></h3>
+<p><strong>AccessViz</strong> is a set of tools that can be used for managing and helping to analyze the
+<strong>Helsinki Region Travel Time Matrix</strong> data set. The data can be downloaded from
+<a class="reference external" href="http://blogs.helsinki.fi/accessibility/helsinki-region-travel-time-matrix/">here</a>. The travel time matrix is available from three different years (2013 / 2015 / 2018).
+You can develop the tool by using data from one year. Optionally, your tool could compare travel times from different years!</p>
+<p>The travel time matrix contsists of 13231 text files. Each file contains travel time and travel distance information by different modes of transport (walking, biking, public transport and car) from all other grid squares to one target grid square.
+The files are named and organized based on their ID number in th YKR ID data set. For example, the Travel Time Matrix file for the railway station is named <cite>travel_times_to_5975375.txt</cite>, and this
+file is located in folder <cite>5975xxx</cite>. All possible YKR ID values can be found from the attribute table of a Shapefile called MetropAccess_YKR_grid.shp that you can download from <a class="reference external" href="http://www.helsinki.fi/science/accessibility/data/MetropAccess-matka-aikamatriisi/MetropAccess_YKR_grid.zip">here</a>.
+Individual YKR IDs can be found from <a class="reference external" href="http://www.helsinki.fi/science/accessibility/tools/YKR/YKR_Identifier.html">this web map</a>.
+Read further description about the travel time matrix from the <a class="reference external" href="http://blogs.helsinki.fi/accessibility/helsinki-region-travel-time-matrix/">Digital Geography Lab / Accessibility research group blog</a>.</p>
+</div>
+<div class="section" id="what-should-this-tool-do">
+<h3>What should this tool do?<a class="headerlink" href="#what-should-this-tool-do" title="Permalink to this headline">¶</a></h3>
+<p>AccessViz is a Python tool (i.e. a set of Notebooks and/or Python script files) for managing, analyzing and visualizing the Travel Time Matrix data set. AccessViz consist of Python functions, and examples on how to use these functions.
+AccessViz has four main components for accessing the files, joining the attribute information to spatial data, visualizing the data and comparing different travel modes:</p>
+<p><strong>1. FileFinder:</strong> The AccessViz tool finds a list of travel time matrix files based on a list of YKR ID values from a specified input data folder. The code should work for different list lengths and different YKR ID values.
+If the YKR ID number does not exist in the input folder (and it’s subfolders), the tools should warn about this to the user but still continue running.
+The tool should also inform the user about the execution process: tell the user what file is currently under process and how many files there are left
+(e.g. <cite>“Processing file travel_times_to_5797076.txt.. Progress: 3/25”</cite>). As output, FileFinder compiles a list of FilePaths for further processing. (Optional feature: FileFinder can also print out a list of filepaths into a text file.)</p>
+<p><strong>2. TableJoiner:</strong> The AccessViz tool creates a spatial layer from the chosen Matrix text table (e.g. <em>travel_times_to_5797076.txt</em>) by joining the Matrix file with
+MetropAccess_YKR_grid Shapefile where <code class="docutils literal notranslate"><span class="pre">from_id</span></code> in Matrix file corresponds to <code class="docutils literal notranslate"><span class="pre">YKR_ID</span></code> in the Shapefile. The tool saves the result in the output-folder
+that user has defined. Output file format can be Shapefile or Geopackage. You should name the files in a way that it is possible to identify the ID from the name (e.g. 5797076).
+The table joiing can be applied to files that correspond to a list of selected YKR ID files (FileFinder handles finding the correct input files!).</p>
+<p><strong>3. Visualizer:</strong> AccessViz can visualize the travel times of selected YKR_IDs based on different travel modes (it should be possible to use the same tool for visualizing travel times by car, public transport, walking or biking depending on an input parameter!).
+It saves the maps into a specified folder for output images. The output maps can be either <strong>static</strong> or <strong>interactive</strong> - it should be possible to select which kind of map output is generated when running the tool. You can freely design yourself the style of the map, colors, travel time intervals (classes) etc.
+Try to make the map as informative as possible! The visualizations can be applied to files that correspond to a list of selected YKR ID files (FileFinder handles finding the correct input files!). Remember to handle no data values.</p>
+<p><strong>4. Comparison tool:</strong> AccessViz can also compare <strong>travel times</strong> or <strong>travel distances</strong> between two different travel modes. For example, the tool can compare rush hour travel times by public transport and car based on columns <cite>pt_r_t</cite> and <cite>car_r_t</cite>, and rush hour travel distances based on columns <cite>pt_r_d</cite> and <cite>car_r_d</cite>.
+It should be also possible to run the AccessViz tool without doing any comparisons. Thus IF the user has specified two travel modes (passed in as a list) for the AccessViz, the tool will calculate the time/distance difference of those travel modes
+into a new column. In the calculation, the first travel mode is always subtracted by the last one: <code class="docutils literal notranslate"><span class="pre">travelmode1</span> <span class="pre">-</span> <span class="pre">travelmode2</span></code> according to the order in which the travel modes were listed.
+The tool should ensure that distances are not compared to travel times and vice versa. The tool saves outputs as new files (Shapefile or Geopackage file format) with an informative name, for example: <code class="docutils literal notranslate"><span class="pre">Accessibility_5797076_pt_vs_car.shp</span></code>.
+It should be possible to compare only two travel modes between each other at the time. Accepted travel modes are the same ones that are found in the actual TravelTimeMatrix file (walking, biking, public transport and car).
+If the tool gets invalid parameters (for example, a travel mode that does not exists, or too many travel modes), stop the program, and give advice what are the acceptable values. Remember to handle no data values.</p>
+<p><strong>If you are pursuing the highest grade, you should implement also at least one of the following components</strong>:</p>
+<p>5. (option 1). The  AccessViz documentation also contains a separate interactive map that shows the YKR grid values in Helsinki region.
+The purpose of the map is to help the user to choose the YKR-IDs that they are interested to visualize / analyze.</p>
+<ol class="arabic simple" start="6">
+<li>(option 2). AccessViz can also visualize the travel mode comparisons that were described in step 4.</li>
 </ol>
 <p>7. (option 3). AccessViz can also visualize shortest path routes (walking, cycling, and/or driving) using OpenStreetMap data from Helsinki Region.
-The impedance value for the routes can be distance (as was shown in Lesson 7) or time (optional for the most advanced students).
-This functionality can also be a separate program (it is not required to bundle include this with the rest of the AccessViz tool)</p>
+The impedance value for the routes can be distance (as was shown in Lesson 7) or time.</p>
+<ol class="arabic simple" start="8">
+<li>(Option 4). AccessViz can also compare travel time data from two different years. For example, this tool could plot a map that shows the difference with public transport travel times between 2013 and 2018.</li>
+</ol>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p><strong>NoData values</strong></p>
@@ -418,12 +443,17 @@ This functionality can also be a separate program (it is not required to bundle 
 </div>
 <div class="section" id="urban-indicators">
 <span id="urbanindicators"></span><h2>Urban indicators<a class="headerlink" href="#urban-indicators" title="Permalink to this headline">¶</a></h2>
-<p>In this assignment, the aim is to analyze and compare <strong>two cities or neighborhoods in Finland</strong> (e.g. Helsinki and Tampere, or neighborhood areas in Helsinki) from different perspectives using different indicators. This assignment is not accurately defined, as the idea is to allow you to use your own imagination and interest to explore different datasets and conduct analyses that interest to you, still providing useful insights about the urban areas using specific set of indicators (you should use 2-4 different indicators, see examples from below).</p>
+<p>In this assignment, the aim is to <strong>develop an urban analytics tool</strong> and apply it to at least two cities or neighborhoods in Finland (e.g. Helsinki and Tampere, or neighborhood areas in Helsinki).
+The main idea is to calculate a set of metrics / indicators based on the urban form and/or population, and to compare the cities/regions based on these measures.
+This assignment is not accurately defined, as the idea is to allow you to use your own imagination and interest to explore different datasets and conduct analyses that interest to you,
+still providing useful insights about the urban areas using specific set of indicators (you should use 2-4 different indicators, see examples from below).</p>
 <div class="section" id="data">
 <h3>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h3>
-<p>You can use any (spatial) data that you can find, and generate your own report describing how the cities differ from each other based on different perspectives (see below hints about possible analyses). You can use any data that is available for example from OpenStreetMap (e.g. streets, buildings, points of interest), or use data that can be found (for example) from:</p>
+<p>You can use any (spatial) data that you can find, and generate your own report describing how the cities differ from each other based on different perspectives (see below hints about possible analyses).
+You can use any data that is available, for example, from the following sources:</p>
 <blockquote>
 <div><ul class="simple">
+<li><a class="reference external" href="www.openstreetmap.org">OpenSreetMap (e.g. streets, buildings, points of interest)</a> following the approach from lesson 6.</li>
 <li><a class="reference external" href="https://avaa.tdata.fi/web/paituli/latauspalvelu">PaiTuli</a>,</li>
 <li><a class="reference external" href="https://www.avoindata.fi/en">Avoindata.fi service</a></li>
 <li><a class="reference external" href="https://hri.fi/en_gb/">Helsinki Region Infoshare</a>.</li>
@@ -434,58 +464,76 @@ This functionality can also be a separate program (it is not required to bundle 
 </div>
 <div class="section" id="example-analyses">
 <h3>Example analyses<a class="headerlink" href="#example-analyses" title="Permalink to this headline">¶</a></h3>
-<p>In this assignment, you can for example analyze (not limited to these ones):</p>
+<p>The tool should calculate 2-4 indicators about the urban areas. Here are some examples of potential metrics:</p>
+<p><strong>Population distribution and demographics</strong></p>
 <blockquote>
-<div><ul>
-<li><p class="first"><strong>Population distribution and demographics</strong></p>
-<ul class="simple">
-<li>create maps and provide some key statistical measures</li>
+<div><blockquote>
+<div><ul class="simple">
+<li>Input data management (table joins, data cleaning etc.)</li>
+<li>Calculate key statistics</li>
+<li>create maps and graphs</li>
 </ul>
-</li>
-<li><p class="first"><strong>Building density</strong></p>
+</div></blockquote>
+<p><strong>Building density</strong></p>
 <blockquote>
 <div><ul class="simple">
-<li>create a map showing the building distribution and calculate building density indices for the cities and describe how the areas differ</li>
+<li>Fetch the data, and filter if needed</li>
+<li>Calculate building density and other metrics</li>
+<li>create mas showing the building types and</li>
 </ul>
 </div></blockquote>
-</li>
-<li><p class="first"><strong>Green area index</strong></p>
+<p><strong>Green area index</strong></p>
 <blockquote>
 <div><ul class="simple">
-<li>How much green area cities have (in percentages)? Create a map and statistics.</li>
+<li>Fetch green area polygons and filter the data if needed</li>
+<li>Calculate the percentage of green areas in the city /region + other statistics</li>
+<li>Visualize the results</li>
 </ul>
 </div></blockquote>
-</li>
-<li><p class="first"><strong>Urban population growth</strong></p>
+</div></blockquote>
+<p><strong>Urban population growth</strong></p>
 <blockquote>
 <div><ul class="simple">
-<li>compare two years to each other and make a comparison map</li>
+<li>Fetch population data from at least two different years</li>
+<li>Compare statistics from different years</li>
+<li>Visualize as graphs and maps</li>
 </ul>
 </div></blockquote>
-</li>
-<li><p class="first"><strong>Accessibility</strong>: Travel times (walking or driving by car) e.g. from railway station to different administrative areas of the city (neighborhoods), or to certain services (e.g. health care, education)</p>
-<blockquote>
+<dl class="docutils">
+<dt><strong>Accessibility</strong>:</dt>
+<dd><blockquote class="first">
 <div><ul class="simple">
-<li>Create a tool that visualizes the travel times to selected sports facilities across the Helsinki region</li>
+<li>Decide what travel tiles you are focusing on (walking, driving, public transport..)</li>
+<li>Decide what types of destinations you are focusing on (transport stations, health care, education, sports facilities..)</li>
+<li>Get travel time data from the Travel Time Matrix OR calculate shortest paths in a network</li>
+<li>Calculate travel time / travel distance metrics, or dominance areas</li>
+<li>Visualize the results as graphs and maps</li>
 </ul>
 </div></blockquote>
-</li>
-<li><p class="first"><strong>Urban design</strong>: Street network indicators (see Lesson 6 and examples from <a class="reference external" href="https://github.com/gboeing/osmnx-examples/tree/master/notebooks">here</a>)</p>
-</li>
+<dl class="last docutils">
+<dt><strong>Urban design</strong></dt>
+<dd><ul class="first last simple">
+<li>Calculate street network indicators (see Lesson 6 and examples from <a class="reference external" href="https://github.com/gboeing/osmnx-examples/tree/master/notebooks">here</a>)</li>
+<li>Visualize the results</li>
 </ul>
-</div></blockquote>
+</dd>
+</dl>
+</dd>
+</dl>
 </div>
-<div class="section" id="structure-of-the-final-report-urban-indicators">
-<h3>Structure of the final report (urban indicators)<a class="headerlink" href="#structure-of-the-final-report-urban-indicators" title="Permalink to this headline">¶</a></h3>
-<p>In the assignment you should follow traditional structure of scientific article (conduct a <em>“mini-study”</em>) where you should provide:</p>
+<div class="section" id="structure-of-the-urban-indicators-tool-assignmnent">
+<h3>Structure of the urban indicators tool assignmnent<a class="headerlink" href="#structure-of-the-urban-indicators-tool-assignmnent" title="Permalink to this headline">¶</a></h3>
+<p>You can design the structure of your assignment freely. We suggest that you create functions in separate script files, and demonstrate the use of those functions in one or several notebooks.
+In addition, you should provide some basic information in the README.md file of your final assignment. All in all, the work should include these components:</p>
 <blockquote>
 <div><ul class="simple">
-<li>A short introduction to the topic (present 2-4 research questions that you aim to answer)</li>
+<li>A topic for your work (eg. “Urban indicators: analyzing the street netowrk structure in Helsinki and Tampere”).</li>
+<li>A short introduction to the topic (present 2-4 research questions that you aim to answer using the indicators)</li>
 <li>Short description of the datasets you used</li>
 <li>Short generic description of the methods you used</li>
 <li>Actual codes and visualizations to produce the <strong>results</strong></li>
 <li>Short discussion related to the results (what should we understand and see from them?)</li>
-<li>Evaluate with <strong>healthy</strong> criticism the indicators, data and the analyses
+<li>Short reflection about the analysis, for example:
 - What kind of assumptions, biases or uncertainties are related to the data and/or the analyses that you did?
 - Any other notes that the reader should know about the analysis</li>
 </ul>
@@ -493,14 +541,14 @@ This functionality can also be a separate program (it is not required to bundle 
 </div>
 <div class="section" id="technical-considerations">
 <h3>Technical considerations<a class="headerlink" href="#technical-considerations" title="Permalink to this headline">¶</a></h3>
-<p>In the Notebook, you should present the previous points. Also take care that you:</p>
+<p>Take care that you:</p>
 <blockquote>
 <div><ul class="simple">
 <li>Document your analyses well using the Markdown cells and describe 1) what you are doing and 2) what you can see from the data and your results.</li>
 <li>Use informative visualizations<ul>
 <li>Create maps (static or interactive)</li>
-<li>Create other kind of graphs (e.g. line plots)</li>
-<li>Create subplots that allows to easily compare the cities to each other</li>
+<li>Create other kind of graphs (e.g. bar graphs, line graphs, scatter plots etc.)</li>
+<li>Use subplots that allows to easily compare results side-by-side</li>
 </ul>
 </li>
 <li>When writing the codes, we highly recommend that you use and write functions for repetitive parts of the code. As a motivation: think that you should repeat your analyses for all cities in Finland, write your codes in a way that this would be possible. Furthermore, we recommend that you save those functions into a separate .py -script file that you import into the Notebook (<a class="reference external" href="https://geo-python.github.io/2018/notebooks/L4/functions.html#Calling-functions-from-a-script-file">see example from Geo-Python Lesson 4</a>)</li>
@@ -509,7 +557,7 @@ This functionality can also be a separate program (it is not required to bundle 
 </div>
 <div class="section" id="literature-inspiration">
 <h3>Literature + inspiration<a class="headerlink" href="#literature-inspiration" title="Permalink to this headline">¶</a></h3>
-<p>Following readings provide you some useful backgound information and inspiration for the analyses (remember to cite if you use them):</p>
+<p>Following readings provide you some useful background information and inspiration for the analyses (remember to cite if you use them):</p>
 <blockquote>
 <div><ul class="simple">
 <li><a class="reference external" href="http://ec.europa.eu/environment/integration/research/newsalert/pdf/indicators_for_sustainable_cities_IR12_en.pdf">European Commission (2015). “Indicators for Sustainable Cities”</a></li>
@@ -563,7 +611,7 @@ where you upload your codes.</p>
     <p>
         &copy; Copyright 2019, Henrikki Tenkanen and Vuokko Heikinheimo, Digital Geography Lab, University of Helsinki
       <span class="lastupdated">
-        Last updated on Nov 25, 2019.
+        Last updated on Dec 05, 2019.
       </span>
 
     </p>
@@ -595,7 +643,7 @@ where you upload your codes.</p>
         </dl>
         <dl>
             <dt>Branches</dt>
-            <dd><a href="../../../drafts/index.html">drafts</a></dd>
+            <dd><a href="../../../develop/lessons/FA/final-assignment.html">develop</a></dd>
             <dd><a href="final-assignment.html">master</a></dd>
         </dl>
     </div>
