@@ -98,28 +98,45 @@ You should add necessary details to the `README.md` file, and use inline comment
 AccessViz
 ---------
 
-What the tool should do?
+General Description
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-**AccessViz** is a set of tools that can be used for managing and helping to analyze
-Helsinki Region Travel Time Matrix data (2013 / 2015 / 2018) that can be downloaded from
-`here <http://blogs.helsinki.fi/accessibility/helsinki-region-travel-time-matrix/>`_.
-Read also the description of the dataset from the web-pages so that you get familiar with the data.
+**AccessViz** is a set of tools that can be used for managing and helping to analyze the
+**Helsinki Region Travel Time Matrix** data set. The data can be downloaded from
+`here <http://blogs.helsinki.fi/accessibility/helsinki-region-travel-time-matrix/>`_. The travel time matrix is available from three different years (2013 / 2015 / 2018).
+You can develop the tool by using data from one year. Optionally, your tool could compare travel times from different years!
 
-AccessViz tool package (i.e. a set of Notebooks) has following main functionalities (i.e. functions) that should work independently. You should demonstrate the usage of the functionalities in your Notebook:
+The travel time matrix contsists of 13231 text files. Each file contains travel time and travel distance information by different modes of transport (walking, biking, public transport and car) from all other grid squares to one target grid square.
+The files are named and organized based on their ID number in th YKR ID data set. For example, the Travel Time Matrix file for the railway station is named `travel_times_to_5975375.txt`, and this
+file is located in folder `5975xxx`. All possible YKR ID values can be found from the attribute table of a Shapefile called MetropAccess_YKR_grid.shp that you can download from `here <http://www.helsinki.fi/science/accessibility/data/MetropAccess-matka-aikamatriisi/MetropAccess_YKR_grid.zip>`_.
+Individual YKR IDs can be found from `this web map <http://www.helsinki.fi/science/accessibility/tools/YKR/YKR_Identifier.html>`__.
+Read further description about the travel time matrix from the `Digital Geography Lab / Accessibility research group blog <http://blogs.helsinki.fi/accessibility/helsinki-region-travel-time-matrix/>`__.
 
-1. AccessViz finds from the data folder all the matrices that user has specified by assigning a list of integer values that should correspond to YKR-IDs found from the attribute table of a Shapefile called `MetropAccess_YKR_grid.shp <http://www.helsinki.fi/science/accessibility/data/MetropAccess-matka-aikamatriisi/MetropAccess_YKR_grid.zip>`_.
-If the ID-number that the user has specified does not exist in the data folders, the tools should warn about this to the user but still continue running. The tool should also inform the user about the execution process: tell the user what file is currently under process and how many files there are left
-(e.g. "Processing file travel_times_to_5797076.txt.. Progress: 3/25").
+What should this tool do?
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-2. AccessViz can create Shapefiles from the chosen Matrix text tables (e.g. *travel_times_to_5797076.txt*) by joining the Matrix file with
-MetropAccess_YKR_grid Shapefile  where ``from_id`` in Matrix file corresponds to ``YKR_ID`` in the Shapefile. The tool saves the result in the output-folder
-that user has defined. You should name the files in a way that it is possible to identify the ID from the name (e.g. 5797076).
+AccessViz is a Python tool (i.e. a set of Notebooks and/or Python script files) for managing, analyzing and visualizing the Travel Time Matrix data set. AccessViz consist of Python functions, and examples on how to use these functions.
+AccessViz has four main components for accessing the files, joining the attribute information to spatial data, visualizing the data and comparing different travel modes:
 
-3. AccessViz can visualize the travel times of selected YKR_IDs based on the travel mode that the user specifies. It can save those maps into a folder that user specifies. The output maps can be either **static** or **interactive** and user can choose which one with a parameter. You can freely design yourself the style of the map, colors, travel time intervals (classes) etc. Try to make the map as informative as possible!
+**1. FileFinder:** The AccessViz tool finds a list of travel time matrix files based on a list of YKR ID values from a specified input data folder. The code should work for different list lengths and different YKR ID values.
+If the YKR ID number does not exist in the input folder (and it's subfolders), the tools should warn about this to the user but still continue running.
+The tool should also inform the user about the execution process: tell the user what file is currently under process and how many files there are left
+(e.g. `"Processing file travel_times_to_5797076.txt.. Progress: 3/25"`). As output, FileFinder compiles a list of FilePaths for further processing. (Optional feature: FileFinder can also print out a list of filepaths into a text file.)
 
-4. AccessViz can also compare **travel times** or **travel distances** between two different travel modes (more than two travel modes are not allowed). Thus IF the user has specified two travel modes (passed in as a list) for the AccessViz, the tool will calculate the time/distance difference of those travel modes
-into a new data column that should be created in the Shapefile. The logic of the calculation is following the order of the items passed on the list where first travel mode is always subtracted by the last one: ``travelmode1 - travelmode2``. The tool should ensure that distances are not compared to travel times and vice versa. If the user chooses to compare travel modes to each other, you should add the travel modes to the filename such as ``Accessibility_5797076_pt_vs_car.shp``. If the user has not specified any travel modes, the tool should only create the Shapefile but not execute any calculations. It should be only possible to compare two travel modes between each other at the time. Accepted travel modes are the same ones that are found in the actual TravelTimeMatrix file (pt_r_tt, car_t, etc.). If the user specifies something else, stop the program, and give advice what are the acceptable values.
+**2. TableJoiner:** The AccessViz tool creates a spatial layer from the chosen Matrix text table (e.g. *travel_times_to_5797076.txt*) by joining the Matrix file with
+MetropAccess_YKR_grid Shapefile where ``from_id`` in Matrix file corresponds to ``YKR_ID`` in the Shapefile. The tool saves the result in the output-folder
+that user has defined. Output file format can be Shapefile or Geopackage. You should name the files in a way that it is possible to identify the ID from the name (e.g. 5797076).
+The table joiing can be applied to files that correspond to a list of selected YKR ID files (FileFinder handles finding the correct input files!).
+
+**3. Visualizer:** AccessViz can visualize the travel times of selected YKR_IDs based on different travel modes (it should be possible to use the same tool for visualizing travel times by car, public transport, walking or biking depending on an input parameter!).
+It saves the maps into a specified folder for output images. The output maps can be either **static** or **interactive** - it should be possible to select which kind of map output is generated when running the tool. You can freely design yourself the style of the map, colors, travel time intervals (classes) etc.
+Try to make the map as informative as possible! The visualizations can be applied to files that correspond to a list of selected YKR ID files (FileFinder handles finding the correct input files!).
+
+**4. Comparison tool:** AccessViz can also compare **travel times** or **travel distances** between two different travel modes (more than two travel modes are not allowed). Thus IF the user has specified two travel modes (passed in as a list) for the AccessViz, the tool will calculate the time/distance difference of those travel modes
+into a new column. The logic of the calculation is following the order of the items passed on the list where first travel mode is always subtracted by the last one: ``travelmode1 - travelmode2``.
+The tool should ensure that distances are not compared to travel times and vice versa. The tool saves outputs as new files (Shapefile or Geopackage).
+If the user chooses to compare travel modes to each other, you should add the travel modes to the filename such as ``Accessibility_5797076_pt_vs_car.shp``. If the user has not specified any travel modes, the tool should only create the Shapefile but not execute any calculations.
+It should be possible to compare only two travel modes between each other at the time. Accepted travel modes are the same ones that are found in the actual TravelTimeMatrix file (pt_r_tt, car_t, etc.). If the user specifies something else, stop the program, and give advice what are the acceptable values.
 
 **Additionally, you should choose and implement one of the following functionalities**:
 
@@ -130,6 +147,8 @@ into a new data column that should be created in the Shapefile. The logic of the
 7. (option 3). AccessViz can also visualize shortest path routes (walking, cycling, and/or driving) using OpenStreetMap data from Helsinki Region.
 The impedance value for the routes can be distance (as was shown in Lesson 7) or time (optional for the most advanced students).
 This functionality can also be a separate program (it is not required to bundle include this with the rest of the AccessViz tool)
+
+8. (Option 4). AccessViz can also compare travel time data from two different years
 
 .. note::
 
