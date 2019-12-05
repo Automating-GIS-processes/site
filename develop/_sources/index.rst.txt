@@ -182,34 +182,34 @@ Contents
 
 .. toctree::
    :maxdepth: 2
+   :caption: Lesson 7
+
+   lessons/L7/overview
+   lessons/L7/pyqgis
+   lessons/L7/qgis-plugins.rst
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Raster
+
+   lessons/Raster/overview
+   lessons/Raster/download-data
+   notebooks/Raster/reading-raster.ipynb
+   notebooks/Raster/plotting-raster.ipynb
+   notebooks/Raster/clipping-raster.ipynb
+   notebooks/Raster/raster-map-algebra.ipynb
+   notebooks/Raster/raster-mosaic.ipynb
+   notebooks/Raster/zonal-statistics.ipynb
+   notebooks/Raster/read-cogs.ipynb
+
+
+.. toctree::
+   :maxdepth: 2
    :caption: Final Assignment
 
    lessons/FA/final-assignment
    lessons/FA/final-assignment-grading
    lessons/FA/fa-hints
-
-    .. toctree::
-       :maxdepth: 2
-       :caption: Lesson 7
-
-       lessons/L7/overview
-       lessons/L7/pyqgis
-       lessons/L7/qgis-plugins.rst
-
-    .. toctree::
-       :maxdepth: 2
-       :caption: Raster
-
-       lessons/Raster/overview
-       lessons/Raster/download-data
-       notebooks/Raster/reading-raster.ipynb
-       notebooks/Raster/plotting-raster.ipynb
-       notebooks/Raster/clipping-raster.ipynb
-       notebooks/Raster/raster-map-algebra.ipynb
-       notebooks/Raster/raster-mosaic.ipynb
-       notebooks/Raster/zonal-statistics.ipynb
-       notebooks/Raster/read-cogs.ipynb
-
 
 
 
