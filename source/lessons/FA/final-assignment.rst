@@ -9,6 +9,11 @@ Final assignment
     Start your final assignment by accepting the `GitHub Classroom <https://classroom.github.com/a/t_W3zC8p>`_ for the final work.
 
 
+.. admonition:: Lesson slides
+
+    `Summary of the Final Assignment instructions (PDF) <autogis-final-work-intro.pdf>`__
+
+
 Aim of the work
 ---------------
 
@@ -166,7 +171,7 @@ If the tool gets invalid parameters (for example, a travel mode that does not ex
 Urban indicators
 ----------------
 
-In this assignment, the aim is to **develop an urban analytics tool** and apply it to at least two cities or neighborhoods in Finland (e.g. Helsinki and Tampere, or neighborhood areas in Helsinki).
+In this assignment, the aim is to **develop an urban analytics tool** and apply it to at least two cities or neighborhoods (e.g. Helsinki and Tampere, or neighborhood areas in Helsinki).
 The main idea is to calculate a set of metrics / indicators based on the urban form and/or population, and to compare the cities/regions based on these measures.
 This assignment is not accurately defined, as the idea is to allow you to use your own imagination and interest to explore different datasets and conduct analyses that interest to you,
 still providing useful insights about the urban areas using specific set of indicators (you should use 2-4 different indicators, see examples from below).
@@ -196,18 +201,6 @@ The tool should calculate 2-4 indicators about the urban areas. Here are some ex
    - Calculate key statistics
    - create maps and graphs
 
-**Building density**
-
-    - Fetch the data, and filter if needed
-    - Calculate building density and other metrics
-    - create mas showing the building types and
-
-**Green area index**
-
-    - Fetch green area polygons and filter the data if needed
-    - Calculate the percentage of green areas in the city /region + other statistics
-    - Visualize the results
-
 **Urban population growth**
 
     - Fetch population data from at least two different years
@@ -222,10 +215,25 @@ The tool should calculate 2-4 indicators about the urban areas. Here are some ex
     - Calculate travel time / travel distance metrics, or dominance areas
     - Visualize the results as graphs and maps
 
-**Urban design**
+**Green area index**
 
-    - Calculate street network indicators (see Lesson 6 and examples from `here <https://github.com/gboeing/osmnx-examples/tree/master/notebooks>`__)
+    - Fetch green area polygons and filter the data if needed
+    - Calculate the percentage of green areas in the city /region + other statistics
     - Visualize the results
+
+**Street network metrics**
+
+    - Fetch street network data
+    - Calculate street network metrics (see Lesson 6 and examples from `here <https://github.com/gboeing/osmnx-examples/tree/master/notebooks>`__)
+    - Visualize the results
+
+**Building density**
+
+    - Fetch the data, and filter if needed
+    - Calculate building density and other metrics
+    - create maps showing the building types and density
+
+
 
 Structure of the urban indicators tool assignmnent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -272,21 +280,19 @@ Following readings provide you some useful background information and inspiratio
 Own project work
 ----------------
 
-If you have own idea for the final project that you would be willing to do, send us a short description of your idea and we can have a short meeting where we can chat if your project would fit the requirements for the final project. You should send us a description of your own idea **before 21st of December** so that we can soon decide if it meets the requirements of the final project.
+Develop your own topic! In general, your own topic should also contain these sections:
 
-Your own final project could be for example:
+1. **Data acquisition** (Fetching data, subsetting data, storing intermediate outputs etc.)
+2. **Data analysis** (Enriching and analyzing the data, eg. spatial join, overlay, buffering, other calculations..)
+3. **Visualization** (Visualizing main results and other relevant information as maps and graphs)
 
-  - a specific tool that you would like to create for some purpose that you think would be useful
+But feel free to be creative! Your own project might be, for example, related to your thesis or work project.
+Remember to describe clearly what you are doing in the final assignment repository README.md -file.
+Preferably, present your idea to the course instructors before the winter holidays.
 
-  - a GIS analysis or a set of analyses that you would be interested to conduct and write a short report about them
 
 What is at least required from the final project, is that you have:
 
  - a working piece of code for your task / problem / analyses that solves it
 
- - a GOOD documentation (i.e. a tutorial) associated with your Notebook explaining how your tool works
-
- - OR a report about your analyses and what we can learn from them
-
-The documentation of your tool or analysis / report needs to be written in MarkDown into the same repository
-where you upload your codes.
+ - Good documentation (i.e. a tutorial) explaining how your tool works OR a report about your analyses and what we can learn from them
