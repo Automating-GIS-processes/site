@@ -307,6 +307,10 @@
 <p class="first admonition-title">Start your assignment</p>
 <p class="last">Start your final assignment by accepting the <a class="reference external" href="https://classroom.github.com/a/t_W3zC8p">GitHub Classroom</a> for the final work.</p>
 </div>
+<div class="admonition-lesson-slides admonition">
+<p class="first admonition-title">Lesson slides</p>
+<p class="last"><a class="reference external" href="autogis-final-work-intro.pdf">Summary of the Final Assignment instructions (PDF)</a></p>
+</div>
 <div class="section" id="aim-of-the-work">
 <h2>Aim of the work<a class="headerlink" href="#aim-of-the-work" title="Permalink to this headline">¶</a></h2>
 <p>The final project is an individual task where the aim is to apply Python programming to automating a GIS analysis process.
@@ -419,15 +423,11 @@ The tool should ensure that distances are not compared to travel times and vice 
 It should be possible to compare only two travel modes between each other at the time. Accepted travel modes are the same ones that are found in the actual TravelTimeMatrix file (walking, biking, public transport and car).
 If the tool gets invalid parameters (for example, a travel mode that does not exists, or too many travel modes), stop the program, and give advice what are the acceptable values. Remember to handle no data values.</p>
 <p><strong>If you are pursuing the highest grade, you should implement also at least one of the following components</strong>:</p>
-<p>5. (option 1). The  AccessViz documentation also contains a separate interactive map that shows the YKR grid values in Helsinki region.
-The purpose of the map is to help the user to choose the YKR-IDs that they are interested to visualize / analyze.</p>
-<ol class="arabic simple" start="6">
-<li>(option 2). AccessViz can also visualize the travel mode comparisons that were described in step 4.</li>
-</ol>
-<p>7. (option 3). AccessViz can also visualize shortest path routes (walking, cycling, and/or driving) using OpenStreetMap data from Helsinki Region.
-The impedance value for the routes can be distance (as was shown in Lesson 7) or time.</p>
-<ol class="arabic simple" start="8">
-<li>(Option 4). AccessViz can also compare travel time data from two different years. For example, this tool could plot a map that shows the difference with public transport travel times between 2013 and 2018.</li>
+<ol class="arabic simple" start="5">
+<li>The  AccessViz documentation also contains a separate interactive map that shows the YKR grid values in Helsinki region. The purpose of the map is to help the user to choose the YKR-IDs that they are interested to visualize / analyze.</li>
+<li>AccessViz can also visualize the travel mode comparisons that were described in step 4.</li>
+<li>AccessViz can also visualize shortest path routes (walking, cycling, and/or driving) using OpenStreetMap data from Helsinki Region. The impedance value for the routes can be distance (as was shown in Lesson 7) or time.</li>
+<li>AccessViz can also compare travel time data from two different years. For example, this tool could plot a map that shows the difference with public transport travel times between 2013 and 2018.</li>
 </ol>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -443,7 +443,7 @@ The impedance value for the routes can be distance (as was shown in Lesson 7) or
 </div>
 <div class="section" id="urban-indicators">
 <span id="urbanindicators"></span><h2>Urban indicators<a class="headerlink" href="#urban-indicators" title="Permalink to this headline">¶</a></h2>
-<p>In this assignment, the aim is to <strong>develop an urban analytics tool</strong> and apply it to at least two cities or neighborhoods in Finland (e.g. Helsinki and Tampere, or neighborhood areas in Helsinki).
+<p>In this assignment, the aim is to <strong>develop an urban analytics tool</strong> and apply it to at least two cities or neighborhoods (e.g. Helsinki and Tampere, or neighborhood areas in Helsinki).
 The main idea is to calculate a set of metrics / indicators based on the urban form and/or population, and to compare the cities/regions based on these measures.
 This assignment is not accurately defined, as the idea is to allow you to use your own imagination and interest to explore different datasets and conduct analyses that interest to you,
 still providing useful insights about the urban areas using specific set of indicators (you should use 2-4 different indicators, see examples from below).</p>
@@ -453,10 +453,10 @@ still providing useful insights about the urban areas using specific set of indi
 You can use any data that is available, for example, from the following sources:</p>
 <blockquote>
 <div><ul class="simple">
-<li><a class="reference external" href="www.openstreetmap.org">OpenSreetMap (e.g. streets, buildings, points of interest)</a> following the approach from lesson 6.</li>
-<li><a class="reference external" href="https://avaa.tdata.fi/web/paituli/latauspalvelu">PaiTuli</a>,</li>
+<li><a class="reference external" href="www.openstreetmap.org">OpenSreetMap</a> (e.g. streets, buildings, points of interest) following the approach from lesson 6.</li>
+<li><a class="reference external" href="https://avaa.tdata.fi/web/paituli/latauspalvelu">PaiTuli</a></li>
 <li><a class="reference external" href="https://www.avoindata.fi/en">Avoindata.fi service</a></li>
-<li><a class="reference external" href="https://hri.fi/en_gb/">Helsinki Region Infoshare</a>.</li>
+<li><a class="reference external" href="https://hri.fi/en_gb/">Helsinki Region Infoshare</a></li>
 <li><a class="reference external" href="https://data.tampere.fi/en_gb/">Open data service of Tampere</a></li>
 </ul>
 </div></blockquote>
@@ -467,19 +467,28 @@ You can use any data that is available, for example, from the following sources:
 <p>The tool should calculate 2-4 indicators about the urban areas. Here are some examples of potential metrics:</p>
 <p><strong>Population distribution and demographics</strong></p>
 <blockquote>
-<div><blockquote>
 <div><ul class="simple">
 <li>Input data management (table joins, data cleaning etc.)</li>
 <li>Calculate key statistics</li>
 <li>create maps and graphs</li>
 </ul>
 </div></blockquote>
-<p><strong>Building density</strong></p>
+<p><strong>Urban population growth</strong></p>
 <blockquote>
 <div><ul class="simple">
-<li>Fetch the data, and filter if needed</li>
-<li>Calculate building density and other metrics</li>
-<li>create mas showing the building types and</li>
+<li>Fetch population data from at least two different years</li>
+<li>Compare statistics from different years</li>
+<li>Visualize as graphs and maps</li>
+</ul>
+</div></blockquote>
+<p><strong>Accessibility</strong>:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Decide what travel tiles you are focusing on (walking, driving, public transport..)</li>
+<li>Decide what types of destinations you are focusing on (transport stations, health care, education, sports facilities..)</li>
+<li>Get travel time data from the Travel Time Matrix OR calculate shortest paths in a network</li>
+<li>Calculate travel time / travel distance metrics, or dominance areas</li>
+<li>Visualize the results as graphs and maps</li>
 </ul>
 </div></blockquote>
 <p><strong>Green area index</strong></p>
@@ -490,36 +499,22 @@ You can use any data that is available, for example, from the following sources:
 <li>Visualize the results</li>
 </ul>
 </div></blockquote>
-</div></blockquote>
-<p><strong>Urban population growth</strong></p>
+<p><strong>Street network metrics</strong></p>
 <blockquote>
 <div><ul class="simple">
-<li>Fetch population data from at least two different years</li>
-<li>Compare statistics from different years</li>
-<li>Visualize as graphs and maps</li>
-</ul>
-</div></blockquote>
-<dl class="docutils">
-<dt><strong>Accessibility</strong>:</dt>
-<dd><blockquote class="first">
-<div><ul class="simple">
-<li>Decide what travel tiles you are focusing on (walking, driving, public transport..)</li>
-<li>Decide what types of destinations you are focusing on (transport stations, health care, education, sports facilities..)</li>
-<li>Get travel time data from the Travel Time Matrix OR calculate shortest paths in a network</li>
-<li>Calculate travel time / travel distance metrics, or dominance areas</li>
-<li>Visualize the results as graphs and maps</li>
-</ul>
-</div></blockquote>
-<dl class="last docutils">
-<dt><strong>Urban design</strong></dt>
-<dd><ul class="first last simple">
-<li>Calculate street network indicators (see Lesson 6 and examples from <a class="reference external" href="https://github.com/gboeing/osmnx-examples/tree/master/notebooks">here</a>)</li>
+<li>Fetch street network data</li>
+<li>Calculate street network metrics (see Lesson 6 and examples from <a class="reference external" href="https://github.com/gboeing/osmnx-examples/tree/master/notebooks">here</a>)</li>
 <li>Visualize the results</li>
 </ul>
-</dd>
-</dl>
-</dd>
-</dl>
+</div></blockquote>
+<p><strong>Building density</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li>Fetch the data, and filter if needed</li>
+<li>Calculate building density and other metrics</li>
+<li>create maps showing the building types and density</li>
+</ul>
+</div></blockquote>
 </div>
 <div class="section" id="structure-of-the-urban-indicators-tool-assignmnent">
 <h3>Structure of the urban indicators tool assignmnent<a class="headerlink" href="#structure-of-the-urban-indicators-tool-assignmnent" title="Permalink to this headline">¶</a></h3>
@@ -568,24 +563,22 @@ In addition, you should provide some basic information in the README.md file of 
 </div>
 <div class="section" id="own-project-work">
 <span id="your-own-project"></span><h2>Own project work<a class="headerlink" href="#own-project-work" title="Permalink to this headline">¶</a></h2>
-<p>If you have own idea for the final project that you would be willing to do, send us a short description of your idea and we can have a short meeting where we can chat if your project would fit the requirements for the final project. You should send us a description of your own idea <strong>before 21st of December</strong> so that we can soon decide if it meets the requirements of the final project.</p>
-<p>Your own final project could be for example:</p>
-<blockquote>
-<div><ul class="simple">
-<li>a specific tool that you would like to create for some purpose that you think would be useful</li>
-<li>a GIS analysis or a set of analyses that you would be interested to conduct and write a short report about them</li>
-</ul>
-</div></blockquote>
+<p>Develop your own topic! In general, your own topic should also contain these sections:</p>
+<ol class="arabic simple">
+<li><strong>Data acquisition</strong> (Fetching data, subsetting data, storing intermediate outputs etc.)</li>
+<li><strong>Data analysis</strong> (Enriching and analyzing the data, eg. spatial join, overlay, buffering, other calculations..)</li>
+<li><strong>Visualization</strong> (Visualizing main results and other relevant information as maps and graphs)</li>
+</ol>
+<p>But feel free to be creative! Your own project might be, for example, related to your thesis or work project.
+Remember to describe clearly what you are doing in the final assignment repository README.md -file.
+Preferably, present your idea to the course instructors before the winter holidays.</p>
 <p>What is at least required from the final project, is that you have:</p>
 <blockquote>
 <div><ul class="simple">
 <li>a working piece of code for your task / problem / analyses that solves it</li>
-<li>a GOOD documentation (i.e. a tutorial) associated with your Notebook explaining how your tool works</li>
-<li>OR a report about your analyses and what we can learn from them</li>
+<li>Good documentation (i.e. a tutorial) explaining how your tool works OR a report about your analyses and what we can learn from them</li>
 </ul>
 </div></blockquote>
-<p>The documentation of your tool or analysis / report needs to be written in MarkDown into the same repository
-where you upload your codes.</p>
 </div>
 </div>
 
