@@ -20,7 +20,7 @@ There is (at least) two different Python consoles available within QGIS:
 
 1. Access the **built-in Python console** from the menu *Plugins → Python Console*. It offers basic functionality, and allows to load and save scripts from and to files.
 
-   .. figure:: img/L7-02-pyqgis-00-builtin-python-console.png
+.. figure:: img/L7-02-pyqgis-00-builtin-python-console.png
 
 2. The more advanced **iPython console** has to be installed as a Plugin before first use:
    - Go to *Plugins → Manage and Install Plugins*, 
@@ -42,7 +42,6 @@ The console is now available from the menu *Plugins → IPython QGIS Console →
     In the following steps, we are using the municipalities of Finland from the Statistics Finland
     web feature service: http://geo.stat.fi/geoserver/tilastointialueet/wfs ("Kunnat 2019").
     You can also use any other vector layer as `layer`.
-
 
 .. figure:: img/add_wfs_layer.png
 

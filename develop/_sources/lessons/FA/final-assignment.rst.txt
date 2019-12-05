@@ -141,15 +141,13 @@ If the tool gets invalid parameters (for example, a travel mode that does not ex
 
 **If you are pursuing the highest grade, you should implement also at least one of the following components**:
 
-5. (option 1). The  AccessViz documentation also contains a separate interactive map that shows the YKR grid values in Helsinki region.
-The purpose of the map is to help the user to choose the YKR-IDs that they are interested to visualize / analyze.
+5. The  AccessViz documentation also contains a separate interactive map that shows the YKR grid values in Helsinki region. The purpose of the map is to help the user to choose the YKR-IDs that they are interested to visualize / analyze.
 
-6. (option 2). AccessViz can also visualize the travel mode comparisons that were described in step 4.
+6. AccessViz can also visualize the travel mode comparisons that were described in step 4.
 
-7. (option 3). AccessViz can also visualize shortest path routes (walking, cycling, and/or driving) using OpenStreetMap data from Helsinki Region.
-The impedance value for the routes can be distance (as was shown in Lesson 7) or time.
+7. AccessViz can also visualize shortest path routes (walking, cycling, and/or driving) using OpenStreetMap data from Helsinki Region. The impedance value for the routes can be distance (as was shown in Lesson 7) or time.
 
-8. (Option 4). AccessViz can also compare travel time data from two different years. For example, this tool could plot a map that shows the difference with public transport travel times between 2013 and 2018.
+8. AccessViz can also compare travel time data from two different years. For example, this tool could plot a map that shows the difference with public transport travel times between 2013 and 2018.
 
 .. note::
 
@@ -179,10 +177,10 @@ Data
 You can use any (spatial) data that you can find, and generate your own report describing how the cities differ from each other based on different perspectives (see below hints about possible analyses).
 You can use any data that is available, for example, from the following sources:
 
-  - `OpenSreetMap (e.g. streets, buildings, points of interest) <www.openstreetmap.org>`__ following the approach from lesson 6.
-  - `PaiTuli <https://avaa.tdata.fi/web/paituli/latauspalvelu>`__,
+  - `OpenSreetMap <www.openstreetmap.org>`__ (e.g. streets, buildings, points of interest) following the approach from lesson 6.
+  - `PaiTuli <https://avaa.tdata.fi/web/paituli/latauspalvelu>`__
   - `Avoindata.fi service <https://www.avoindata.fi/en>`__
-  - `Helsinki Region Infoshare <https://hri.fi/en_gb/>`__.
+  - `Helsinki Region Infoshare <https://hri.fi/en_gb/>`__
   - `Open data service of Tampere <https://data.tampere.fi/en_gb/>`__
 
 Data sources are not limited to these, hence you can also use other data from any source that you can find (remember to document where the data is coming from!).
@@ -198,13 +196,13 @@ The tool should calculate 2-4 indicators about the urban areas. Here are some ex
    - Calculate key statistics
    - create maps and graphs
 
- **Building density**
+**Building density**
 
     - Fetch the data, and filter if needed
     - Calculate building density and other metrics
     - create mas showing the building types and
 
- **Green area index**
+**Green area index**
 
     - Fetch green area polygons and filter the data if needed
     - Calculate the percentage of green areas in the city /region + other statistics
@@ -217,13 +215,15 @@ The tool should calculate 2-4 indicators about the urban areas. Here are some ex
     - Visualize as graphs and maps
 
 **Accessibility**:
+
     - Decide what travel tiles you are focusing on (walking, driving, public transport..)
     - Decide what types of destinations you are focusing on (transport stations, health care, education, sports facilities..)
     - Get travel time data from the Travel Time Matrix OR calculate shortest paths in a network
     - Calculate travel time / travel distance metrics, or dominance areas
     - Visualize the results as graphs and maps
 
- **Urban design**
+**Urban design**
+
     - Calculate street network indicators (see Lesson 6 and examples from `here <https://github.com/gboeing/osmnx-examples/tree/master/notebooks>`__)
     - Visualize the results
 

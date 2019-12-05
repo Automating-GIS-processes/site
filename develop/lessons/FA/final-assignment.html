@@ -422,15 +422,11 @@ The tool should ensure that distances are not compared to travel times and vice 
 It should be possible to compare only two travel modes between each other at the time. Accepted travel modes are the same ones that are found in the actual TravelTimeMatrix file (walking, biking, public transport and car).
 If the tool gets invalid parameters (for example, a travel mode that does not exists, or too many travel modes), stop the program, and give advice what are the acceptable values. Remember to handle no data values.</p>
 <p><strong>If you are pursuing the highest grade, you should implement also at least one of the following components</strong>:</p>
-<p>5. (option 1). The  AccessViz documentation also contains a separate interactive map that shows the YKR grid values in Helsinki region.
-The purpose of the map is to help the user to choose the YKR-IDs that they are interested to visualize / analyze.</p>
-<ol class="arabic simple" start="6">
-<li>(option 2). AccessViz can also visualize the travel mode comparisons that were described in step 4.</li>
-</ol>
-<p>7. (option 3). AccessViz can also visualize shortest path routes (walking, cycling, and/or driving) using OpenStreetMap data from Helsinki Region.
-The impedance value for the routes can be distance (as was shown in Lesson 7) or time.</p>
-<ol class="arabic simple" start="8">
-<li>(Option 4). AccessViz can also compare travel time data from two different years. For example, this tool could plot a map that shows the difference with public transport travel times between 2013 and 2018.</li>
+<ol class="arabic simple" start="5">
+<li>The  AccessViz documentation also contains a separate interactive map that shows the YKR grid values in Helsinki region. The purpose of the map is to help the user to choose the YKR-IDs that they are interested to visualize / analyze.</li>
+<li>AccessViz can also visualize the travel mode comparisons that were described in step 4.</li>
+<li>AccessViz can also visualize shortest path routes (walking, cycling, and/or driving) using OpenStreetMap data from Helsinki Region. The impedance value for the routes can be distance (as was shown in Lesson 7) or time.</li>
+<li>AccessViz can also compare travel time data from two different years. For example, this tool could plot a map that shows the difference with public transport travel times between 2013 and 2018.</li>
 </ol>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -456,10 +452,10 @@ still providing useful insights about the urban areas using specific set of indi
 You can use any data that is available, for example, from the following sources:</p>
 <blockquote>
 <div><ul class="simple">
-<li><a class="reference external" href="www.openstreetmap.org">OpenSreetMap (e.g. streets, buildings, points of interest)</a> following the approach from lesson 6.</li>
-<li><a class="reference external" href="https://avaa.tdata.fi/web/paituli/latauspalvelu">PaiTuli</a>,</li>
+<li><a class="reference external" href="www.openstreetmap.org">OpenSreetMap</a> (e.g. streets, buildings, points of interest) following the approach from lesson 6.</li>
+<li><a class="reference external" href="https://avaa.tdata.fi/web/paituli/latauspalvelu">PaiTuli</a></li>
 <li><a class="reference external" href="https://www.avoindata.fi/en">Avoindata.fi service</a></li>
-<li><a class="reference external" href="https://hri.fi/en_gb/">Helsinki Region Infoshare</a>.</li>
+<li><a class="reference external" href="https://hri.fi/en_gb/">Helsinki Region Infoshare</a></li>
 <li><a class="reference external" href="https://data.tampere.fi/en_gb/">Open data service of Tampere</a></li>
 </ul>
 </div></blockquote>
@@ -470,7 +466,6 @@ You can use any data that is available, for example, from the following sources:
 <p>The tool should calculate 2-4 indicators about the urban areas. Here are some examples of potential metrics:</p>
 <p><strong>Population distribution and demographics</strong></p>
 <blockquote>
-<div><blockquote>
 <div><ul class="simple">
 <li>Input data management (table joins, data cleaning etc.)</li>
 <li>Calculate key statistics</li>
@@ -493,7 +488,6 @@ You can use any data that is available, for example, from the following sources:
 <li>Visualize the results</li>
 </ul>
 </div></blockquote>
-</div></blockquote>
 <p><strong>Urban population growth</strong></p>
 <blockquote>
 <div><ul class="simple">
@@ -502,9 +496,8 @@ You can use any data that is available, for example, from the following sources:
 <li>Visualize as graphs and maps</li>
 </ul>
 </div></blockquote>
-<dl class="docutils">
-<dt><strong>Accessibility</strong>:</dt>
-<dd><blockquote class="first">
+<p><strong>Accessibility</strong>:</p>
+<blockquote>
 <div><ul class="simple">
 <li>Decide what travel tiles you are focusing on (walking, driving, public transport..)</li>
 <li>Decide what types of destinations you are focusing on (transport stations, health care, education, sports facilities..)</li>
@@ -513,16 +506,13 @@ You can use any data that is available, for example, from the following sources:
 <li>Visualize the results as graphs and maps</li>
 </ul>
 </div></blockquote>
-<dl class="last docutils">
-<dt><strong>Urban design</strong></dt>
-<dd><ul class="first last simple">
+<p><strong>Urban design</strong></p>
+<blockquote>
+<div><ul class="simple">
 <li>Calculate street network indicators (see Lesson 6 and examples from <a class="reference external" href="https://github.com/gboeing/osmnx-examples/tree/master/notebooks">here</a>)</li>
 <li>Visualize the results</li>
 </ul>
-</dd>
-</dl>
-</dd>
-</dl>
+</div></blockquote>
 </div>
 <div class="section" id="structure-of-the-urban-indicators-tool-assignmnent">
 <h3>Structure of the urban indicators tool assignmnent<a class="headerlink" href="#structure-of-the-urban-indicators-tool-assignmnent" title="Permalink to this headline">¶</a></h3>
