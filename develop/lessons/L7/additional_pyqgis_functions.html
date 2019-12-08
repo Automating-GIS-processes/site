@@ -1,0 +1,669 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-88382509-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Additional PyQGIS functions &mdash; AutoGIS site documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'site',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Overview" href="../Raster/overview.html" />
+    <link rel="prev" title="Python in QGIS" href="pyqgis.html" />
+    <link href="../../_static/geo-python.css" rel="stylesheet" type="text/css">
+     
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> AutoGIS
+          
+
+          
+            
+            <img src="../../_static/logo_hy_geo_135.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2019
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Course information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/course-info.html">General info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/course-environment-components.html">Course environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/grading.html">Grading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/learning-goals.html">Learning goals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/Installing_Anacondas_GIS.html">Installing Python + GIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../course-info/License-terms.html">License and terms of usage</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 1</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L1/Intro-Python-GIS.html">Motivation for the course</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1/overview.html">Lesson overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L1/geometric-objects.html">Shapely and geometric objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1/exercise-1.html">Exercise 1</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 2</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L2/overview.html">Lesson 2 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L2/data_io.html">Vector Data I/O in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L2/geopandas-basics.html">Introduction to Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L2/projections.html">Map projections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L2/calculating-distances.html">Calculating distances</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L2/geopandas-geometries.html">Creating new layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L2/exercise-2.html">Exercise 2</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 3</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L3/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L3/geocoding.html">Geocoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L3/geocoding_in_geopandas.html">Geocoding in Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L3/point-in-polygon.html">Point in Polygon &amp; Intersect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L3/spatial_index.html">Spatial index - How to boost spatial queries?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L3/spatial-join.html">Spatial join</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L3/nearest-neighbour.html">Nearest Neighbour Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L3/nearest-neighbor-faster.html">Nearest neighbor analysis with large datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L3/exercise-3.html">Exercise 3</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 4</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L4/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L4/geometric-operations.html">Geometric operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L4/reclassify.html">Data reclassification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L4/exercise-4.html">Exercise 4</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 5</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L5/overview.html">Lesson 5 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L5/static_maps.html">Static maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L5/interactive-map-folium.html">Interactive maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L5/Employment_in_Finland.html">Employment rates in Finland</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/share-on-github.html">Sharing interactive plots on GitHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L5/exercise-5.html">Exercise 5</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 6</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../L6/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L6/retrieve_osm_data.html">Retrieving OpenStreetMap data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/L6/network-analysis.html">Network analysis in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L6/exercise-6.html">Exercise 6</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Lesson 7</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Lesson 7 Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyqgis.html">Python in QGIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyqgis.html#creating-qgis-plugins">Creating QGIS plugins</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Additional PyQGIS functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#buffer-party">Buffer Party</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#challenges">Challenges:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#polygon-drawing-window">Polygon drawing window</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Challenges</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Raster</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Raster/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Raster/download-data.html">Automatize data download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/Raster/reading-raster.html">Reading raster files with Rasterio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/Raster/plotting-raster.html">Visualizing raster layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/Raster/clipping-raster.html">Masking / clipping raster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/Raster/raster-map-algebra.html">Raster map algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/Raster/raster-mosaic.html">Creating a raster mosaic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/Raster/zonal-statistics.html">Zonal statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/Raster/read-cogs.html">Read Cloud Optimized Geotiffs</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Final Assignment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../FA/final-assignment.html">Final assignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FA/final-assignment-grading.html">Grading criteria for the final assignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FA/fa-hints.html">Final Assignment hints</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AutoGIS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Additional PyQGIS functions</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/Automating-GIS-processes/site/blob/develop/source/lessons/L7/additional_pyqgis_functions.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+
+
+    
+    
+
+
+
+    <p class="scv-banner scv-sphinx_rtd_theme"><b>Warning:</b> This document is for the development version of AutoGIS.</p>
+
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="additional-pyqgis-functions">
+<h1>Additional PyQGIS functions<a class="headerlink" href="#additional-pyqgis-functions" title="Permalink to this headline">¶</a></h1>
+<p>Below are two functions you can use for challenge, inspiration, or fun
+when further diving into PyQGIS. Simply copy the code to QGIS’s code
+editor and you’re good to go. Both of the functions have additional
+coding challenges below them.</p>
+<div class="section" id="buffer-party">
+<h2>Buffer Party<a class="headerlink" href="#buffer-party" title="Permalink to this headline">¶</a></h2>
+<p>This function takes the currently active QgsVectorLayer and creates
+buffers of random size around each individual feature. The user can
+define the min and max size of the buffers when calling the function.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+
+<span class="k">def</span> <span class="nf">bufferParty</span><span class="p">(</span><span class="n">min_length</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This function takes the currently active (vector) layer, loops through its</span>
+<span class="sd">        features and for each geometry creates a buffer of random size. The size</span>
+<span class="sd">        falls within the parameters given. A new vector layer is created from these</span>
+<span class="sd">        and added to the current project.&quot;&quot;&quot;</span>
+    <span class="n">original_layer</span> <span class="o">=</span> <span class="n">iface</span><span class="o">.</span><span class="n">activeLayer</span><span class="p">()</span>
+    <span class="n">buffered_feat_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># looping through features of the active layer</span>
+    <span class="k">for</span> <span class="nb">id</span><span class="p">,</span> <span class="n">feat</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">original_layer</span><span class="o">.</span><span class="n">getFeatures</span><span class="p">()):</span>
+        <span class="c1"># original geometry</span>
+        <span class="n">geometry</span> <span class="o">=</span> <span class="n">feat</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span>
+
+        <span class="c1"># random integer within the defined values</span>
+        <span class="n">buffer_radius</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">min_length</span><span class="p">,</span> <span class="n">max_length</span><span class="p">)</span>
+
+        <span class="c1"># create the buffered geometry. The other integer is the number</span>
+        <span class="c1"># of segments</span>
+        <span class="n">buffer</span> <span class="o">=</span> <span class="n">geometry</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="n">buffer_radius</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+
+        <span class="c1"># creating a new feature that shares the same id number but new geometry</span>
+        <span class="n">feat</span> <span class="o">=</span> <span class="n">QgsFeature</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+        <span class="n">feat</span><span class="o">.</span><span class="n">setGeometry</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span>
+
+        <span class="c1"># adding all the features to a list</span>
+        <span class="n">buffered_feat_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">feat</span><span class="p">)</span>
+
+    <span class="c1"># making sure the CRS is the same in both layers</span>
+    <span class="n">layer_crs</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="n">sourceCrs</span><span class="p">()</span><span class="o">.</span><span class="n">toWkt</span><span class="p">()</span>
+
+    <span class="c1"># creating the new vector layer as a temporary (memory) layer</span>
+    <span class="n">buff_layer</span> <span class="o">=</span> <span class="n">QgsVectorLayer</span><span class="p">(</span><span class="s1">&#39;Polygon?crs=&#39;</span><span class="o">+</span><span class="n">layer_crs</span><span class="p">,</span> <span class="s2">&quot;Buffered &quot;</span><span class="o">+</span> <span class="n">original_layer</span><span class="o">.</span><span class="n">sourceName</span><span class="p">(),</span> <span class="s2">&quot;memory&quot;</span><span class="p">)</span>
+
+    <span class="c1"># adding all the features to it</span>
+    <span class="n">buff_layer</span><span class="o">.</span><span class="n">dataProvider</span><span class="p">()</span><span class="o">.</span><span class="n">addFeatures</span><span class="p">(</span><span class="n">buffered_feat_list</span><span class="p">)</span>
+
+    <span class="c1">#check the layer is valid</span>
+    <span class="k">if</span> <span class="n">buff_layer</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
+        <span class="c1"># inserting the new layer to the project</span>
+        <span class="n">QgsProject</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span><span class="o">.</span><span class="n">addMapLayer</span><span class="p">(</span><span class="n">buff_layer</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;faulty layer&quot;</span><span class="p">)</span>
+
+<span class="c1"># call the function</span>
+<span class="n">bufferParty</span><span class="p">(</span><span class="n">min_length</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="challenges">
+<h3>Challenges:<a class="headerlink" href="#challenges" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Can you think of a way to check that the current layer is indeed a
+vector layer and not raster or empty?</li>
+<li>Can you think of a way keep the original attributes in the new layer
+as well? Check out the documentation for the relevant classes,
+e.g.&nbsp;<a class="reference external" href="https://qgis.org/pyqgis/3.2/core/Feature/QgsFeature.html">QgsFeature</a>.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="polygon-drawing-window">
+<h2>Polygon drawing window<a class="headerlink" href="#polygon-drawing-window" title="Permalink to this headline">¶</a></h2>
+<p>This neat function throws a new window in which the user may freely draw
+by clicking on the canvas. When user closes the window, the map points
+are printed in console. Consists of two classes with multiple methods:
+the window itself and the polygon drawing tool.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">drawWindow</span><span class="p">(</span><span class="n">QMainWindow</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initializing the necessary resources.&quot;&quot;&quot;</span>
+        <span class="n">QMainWindow</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="c1"># creating map canvas, which draws the maplayers</span>
+        <span class="c1"># setting up features like canvas color</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span> <span class="o">=</span> <span class="n">QgsMapCanvas</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">setSizePolicy</span><span class="p">(</span><span class="n">QSizePolicy</span><span class="o">.</span><span class="n">Preferred</span><span class="p">,</span> <span class="n">QSizePolicy</span><span class="o">.</span><span class="n">Preferred</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">setCanvasColor</span><span class="p">(</span><span class="n">Qt</span><span class="o">.</span><span class="n">white</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">enableAntiAliasing</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Qmainwindow requires a central widget. Canvas is placed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setCentralWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="p">)</span>
+
+        <span class="c1"># creating each desired action</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actionPan</span> <span class="o">=</span> <span class="n">QAction</span><span class="p">(</span><span class="s2">&quot;Pan tool&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actionDraw</span> <span class="o">=</span> <span class="n">QAction</span><span class="p">(</span><span class="s2">&quot;Polygon tool&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actionConnect</span> <span class="o">=</span> <span class="n">QAction</span><span class="p">(</span><span class="s2">&quot;Connect polygon&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actionClear</span> <span class="o">=</span> <span class="n">QAction</span><span class="p">(</span><span class="s2">&quot;Clear&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actionClose</span> <span class="o">=</span> <span class="n">QAction</span><span class="p">(</span><span class="s2">&quot;Close&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+
+        <span class="c1"># these two function as on/off. the rest are clickable</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actionPan</span><span class="o">.</span><span class="n">setCheckable</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actionDraw</span><span class="o">.</span><span class="n">setCheckable</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># when actions are clicked, do corresponding function</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actionPan</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pan</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actionDraw</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">draw</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actionClear</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">clear</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actionConnect</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actionClose</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">)</span>
+
+        <span class="c1"># toolbar at the top of the screen: houses actions as buttons</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">toolbar</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">addToolBar</span><span class="p">(</span><span class="s2">&quot;Canvas actions&quot;</span><span class="p">)</span>
+        <span class="c1"># ensure user can&#39;t close the toolbar</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">toolbar</span><span class="o">.</span><span class="n">setContextMenuPolicy</span><span class="p">(</span><span class="n">Qt</span><span class="o">.</span><span class="n">PreventContextMenu</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">toolbar</span><span class="o">.</span><span class="n">setMovable</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="c1"># change order here to change their placement on toolbar</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">toolbar</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actionPan</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">toolbar</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actionDraw</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">toolbar</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actionConnect</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">toolbar</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actionClear</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">toolbar</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actionClose</span><span class="p">)</span>
+
+        <span class="c1"># link action to premade map tool</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">toolPan</span> <span class="o">=</span> <span class="n">QgsMapToolPan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">toolPan</span><span class="o">.</span><span class="n">setAction</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actionPan</span><span class="p">)</span>
+        <span class="c1"># And the draw tool created below</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">toolDraw</span> <span class="o">=</span> <span class="n">PolygonMapTool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">toolDraw</span><span class="o">.</span><span class="n">setAction</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actionDraw</span><span class="p">)</span>
+
+        <span class="c1"># set draw tool by default</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">pan</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Simply activates pan tool&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">setMapTool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">toolPan</span><span class="p">)</span>
+        <span class="c1"># make sure the other button isn&#39;t checked to avoid confusion</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actionDraw</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Activates draw tool&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">setMapTool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">toolDraw</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actionPan</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">toolDraw</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Calls the polygon tool to connect an unconnected polygon&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">toolDraw</span><span class="o">.</span><span class="n">finishPolygon</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">showWindow</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Shows the map canvas: currently the canvas is empty,</span>
+<span class="sd">       but a reference layer can be added to it &quot;&quot;&quot;</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add code here if you want to add a layer to the window</span>
+<span class="sd">        self.canvas.setExtent(self.layer.extent())</span>
+<span class="sd">        self.canvas.setLayers([self.layer])</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">closeEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Activated anytime Mapwindow is closed either programmatically or</span>
+<span class="sd">            if the user finds some other way to close the window. Automatically</span>
+<span class="sd">            finishes the polygon if it&#39;s unconnected.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">toolDraw</span><span class="o">.</span><span class="n">finishPolygon</span><span class="p">()</span>
+        <span class="n">points</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getPolygon</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">points</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">points</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">point</span><span class="p">)</span>
+        <span class="n">QMainWindow</span><span class="o">.</span><span class="n">closeEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">getPolygon</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">toolDraw</span><span class="o">.</span><span class="n">getPoints</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">getPolygonBbox</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">toolDraw</span><span class="o">.</span><span class="n">getPolyBbox</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">PolygonMapTool</span><span class="p">(</span><span class="n">QgsMapToolEmitPoint</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This class holds a map tool to create a polygon from points got by clicking</span>
+<span class="sd">        on the map window. Points are stored in a list of point geometries, which is when finishing the polygon&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">canvas</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span> <span class="o">=</span> <span class="n">canvas</span>
+        <span class="n">QgsMapToolEmitPoint</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="p">)</span>
+        <span class="c1"># rubberband class gives the user visual feedback of the drawing</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rubberBand</span> <span class="o">=</span> <span class="n">QgsRubberBand</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># setting up outline and fill color: both red</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rubberBand</span><span class="o">.</span><span class="n">setColor</span><span class="p">(</span><span class="n">QColor</span><span class="p">(</span><span class="mi">235</span><span class="p">,</span><span class="mi">36</span><span class="p">,</span><span class="mi">21</span><span class="p">))</span>
+        <span class="c1"># RGB color values, last value indicates transparency (0-255)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rubberBand</span><span class="o">.</span><span class="n">setFillColor</span><span class="p">(</span><span class="n">QColor</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="mi">79</span><span class="p">,</span><span class="mi">66</span><span class="p">,</span><span class="mi">140</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rubberBand</span><span class="o">.</span><span class="n">setWidth</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">points</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># a flag indicating when a single polygon is finished</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">finished</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">poly_bbox</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">double_click_flag</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Empties the canvas and the points gathered thus far&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rubberBand</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">poly_bbox</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">points</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">keyPressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Pressing ESC resets the canvas. Pressing enter connects the polygon&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">key</span><span class="p">()</span> <span class="o">==</span> <span class="mi">16777216</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">key</span><span class="p">()</span> <span class="o">==</span> <span class="mi">16777220</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">finishPolygon</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">canvasDoubleClickEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Finishes the polygon on double click&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">double_click_flag</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">finishPolygon</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">canvasReleaseEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Activated when user clicks on the canvas. Gets coordinates, draws</span>
+<span class="sd">        them on the map and adds to the list of points.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">double_click_flag</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">double_click_flag</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">return</span>
+
+        <span class="c1"># if the finished flag is activated, the canvas will be reset</span>
+        <span class="c1"># for a new polygon</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">finished</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">finished</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">click_point</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">toMapCoordinates</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">pos</span><span class="p">())</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">rubberBand</span><span class="o">.</span><span class="n">addPoint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">click_point</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">points</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">click_point</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rubberBand</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+    <span class="k">def</span> <span class="nf">finishPolygon</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Activated by user or when the map window is closed without connecting</span>
+<span class="sd">            the polygon. Makes the polygon valid by making first and last point</span>
+<span class="sd">            the same. This is reflected visually. Up until now the user has been</span>
+<span class="sd">            drawing a line: a polygon is created and shown on the map.&quot;&quot;&quot;</span>
+        <span class="c1"># nothing will happen if the code below has already been ran</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">finished</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="c1"># connecting the polygon is valid if there&#39;s already at least 3 points</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">points</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">2</span><span class="p">:</span>
+            <span class="n">first_point</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">points</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">points</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">first_point</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rubberBand</span><span class="o">.</span><span class="n">closePoints</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rubberBand</span><span class="o">.</span><span class="n">addPoint</span><span class="p">(</span><span class="n">first_point</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">finished</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="c1"># a polygon is created and added to the map for visual purposes</span>
+            <span class="n">map_polygon</span> <span class="o">=</span> <span class="n">QgsGeometry</span><span class="o">.</span><span class="n">fromPolygonXY</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">points</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rubberBand</span><span class="o">.</span><span class="n">setToGeometry</span><span class="p">(</span><span class="n">map_polygon</span><span class="p">)</span>
+            <span class="c1"># get the bounding box of this new polygon</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">poly_bbox</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rubberBand</span><span class="o">.</span><span class="n">asGeometry</span><span class="p">()</span><span class="o">.</span><span class="n">boundingBox</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">finished</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">getPoints</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns list of PointXY geometries, i.e. the polygon in list form&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rubberBand</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">points</span>
+
+<span class="n">myDrawWindow</span> <span class="o">=</span> <span class="n">drawWindow</span><span class="p">()</span>
+<span class="n">myDrawWindow</span><span class="o">.</span><span class="n">showWindow</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="section" id="id1">
+<h3>Challenges<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>The polygon is drawn in an eye catching red. Find where the color is
+defined, figure out how it works and change it to something else</li>
+<li>Check out method showWindow in class drawWindow. There’s some code
+for adding a layer to the canvas. Find out how to add the active
+layer to the map canvas to use for drawing reference.</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Raster/overview.html" class="btn btn-neutral float-right" title="Overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="pyqgis.html" class="btn btn-neutral float-left" title="Python in QGIS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Henrikki Tenkanen and Vuokko Heikinheimo, Digital Geography Lab, University of Helsinki
+      <span class="lastupdated">
+        Last updated on Dec 08, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+    <p> <br/> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /> </a></p>
+     
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: develop
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../../../2018/index.html">2018</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="additional_pyqgis_functions.html">develop</a></dd>
+            <dd><a href="../../../master/index.html">master</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

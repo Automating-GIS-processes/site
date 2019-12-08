@@ -58,7 +58,7 @@
   <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="QGIS Plugins" href="qgis-plugins.html" />
+    <link rel="next" title="Additional PyQGIS functions" href="additional_pyqgis_functions.html" />
     <link rel="prev" title="Lesson 7 Overview" href="overview.html" />
     <link href="../../_static/geo-python.css" rel="stylesheet" type="text/css">
      
@@ -179,10 +179,25 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Lesson 7 Overview</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Python in QGIS</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#using-a-python-console">Using a Python console</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sample-data-for-this-tutorial">Sample data for this tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-pyqgis-code-in-console">Running PyQGIS code in console</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-pyqgis-scripts">Creating PyQGIS scripts</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="qgis-plugins.html">QGIS Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#creating-qgis-plugins">Creating QGIS plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#creating-the-plugin-base">Creating the plugin base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#initializing">Initializing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#developing-the-plugin">Developing the plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#adding-ui-elements">Adding UI elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#linking-ui-to-code">Linking UI to code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#additional-resources">Additional resources</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Python in QGIS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getting-started-with-plugin-development">Getting started with plugin development</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="additional_pyqgis_functions.html">Additional PyQGIS functions</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Raster</span></p>
 <ul>
@@ -302,135 +317,433 @@
 </style>
 <div class="section" id="python-in-qgis">
 <h1>Python in QGIS<a class="headerlink" href="#python-in-qgis" title="Permalink to this headline">¶</a></h1>
-<p>The core application and libraries of QGIS are programmed in C++. Nevertheless, Python plays an important role in its ecosystem:
-Most of the pre-installed plugins and even some of the data provider modules are written in Python,
-and virtually all functions of the interface and the libraries are exported to a Python API (<em>Application Programming Interface</em>).
-It takes only moderate effort to author extensions to QGIS which integrate seamlessly into its user interface,
-create stand-alone applications using components of QGIS, such as a map window or a data backend,
-or run custom scripts within QGIS. T
-o really dive into it, see the <a class="reference external" href="http://docs.qgis.org/3.4/en/docs/pyqgis_developer_cookbook/intro.html">PyQGIS Developer Cookbook</a>
-which walks you from easy <em>Hello World</em> examples to writing your own applications.</p>
-<p>Here, we will introduce some wery basic ways of using Python programming in QGIS. As inspiration, we have used the
-excellent <a class="reference external" href="https://anitagraser.com/pyqgis-101-introduction-to-qgis-python-programming-for-non-programmers/">tutorial by Anita Graser</a>.</p>
-<div class="section" id="using-a-python-console">
-<h2>Using a Python console<a class="headerlink" href="#using-a-python-console" title="Permalink to this headline">¶</a></h2>
-<p>There is (at least) two different Python consoles available within QGIS:</p>
-<ol class="arabic simple">
-<li>Access the <strong>built-in Python console</strong> from the menu <em>Plugins → Python Console</em>. It offers basic functionality, and allows to load and save scripts from and to files.</li>
-</ol>
-<div class="figure">
-<img alt="../../_images/L7-02-pyqgis-00-builtin-python-console.png" src="../../_images/L7-02-pyqgis-00-builtin-python-console.png" />
+<p>The core application and libraries of QGIS are programmed in C++.
+Nevertheless, Python plays an important role in its ecosystem: Most of
+the pre-installed plugins and even some of the data provider modules are
+written in Python, and virtually all functions of the interface and the
+libraries are exported to a Python API (Application Programming
+Interface). It takes only moderate effort to author extensions to QGIS
+which integrate seamlessly into its user interface, create stand-alone
+applications using components of QGIS, such as a map window or a data
+backend, or run custom scripts within QGIS. To really dive into using
+Python in QGIS, see the <a class="reference external" href="https://docs.qgis.org/3.4/en/docs/pyqgis_developer_cookbook/intro.html">PyQGIS Developer
+Cookbook</a>
+which walks you from easy Hello World examples to writing your own
+applications.</p>
+<p>Today, we will concentrate on basic functionalities of Python in QGIS,
+or PyQGIS for short. You will learn to run code from the integrated
+Python console, then write a simple Python script and finally apply the
+script’s functionality to your very own plugin.</p>
+<div class="section" id="sample-data-for-this-tutorial">
+<h2>Sample data for this tutorial<a class="headerlink" href="#sample-data-for-this-tutorial" title="Permalink to this headline">¶</a></h2>
+<p>To get us started, we’ll need some data. Open QGIS and connect to the
+City of Helsinki’s WFS service from <em>Layer &gt; Add layer &gt; Add WFS layer</em>.
+Create a new connection to URL
+<a class="reference external" href="http://kartta.hel.fi/ws/geoserver/avoindata/wfs">http://kartta.hel.fi/ws/geoserver/avoindata/wfs</a> and load the layer list.
+Select, for example, the Metro railway lines
+(<em>Seutukartta_liikenne_metro_rata</em>). <strong>Make sure the coordinate system
+is set to a projected one</strong>, like ETRS89/GK25FIN (EPSG:3879) before
+adding the layer.</p>
 </div>
-<ol class="arabic simple" start="2">
-<li>The more advanced <strong>iPython console</strong> has to be installed as a Plugin before first use:
-- Go to <em>Plugins → Manage and Install Plugins</em>,
-- Select to search in <em>All</em> plugins, and type <cite>ipython</cite> into the search field.
-- Select the <strong>IPyConsole</strong> plugin, and click <em>Install plugin</em></li>
-</ol>
-<div class="figure">
-<img alt="../../_images/L7-02-pyqgis-01-install-ipyconsole.png" src="../../_images/L7-02-pyqgis-01-install-ipyconsole.png" />
+<div class="section" id="running-pyqgis-code-in-console">
+<h2>Running PyQGIS code in console<a class="headerlink" href="#running-pyqgis-code-in-console" title="Permalink to this headline">¶</a></h2>
+<p>Now that we’re set, let’s open QGIS’s Python console and get to work!
+Open it from <em>Plugins &gt; Python console</em> or use the shortcut
+<code class="docutils literal notranslate"><span class="pre">Ctrl+Alt+P</span></code> on your keyboard.</p>
+<div class="figure" id="id2">
+<img alt="Console and editor" src="lessons/L7/img/konsoli_alussa.png" />
+<p class="caption"><span class="caption-text">Console and editor</span></p>
 </div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">IPython or Jupyter have to be installed on your computer, see the plugin description for instructions on how to install these requirements. On MS Windows operating systems, installing these modules unfortunately is not straightforward. <a class="reference external" href="https://www.lutraconsulting.co.uk/blog/2016/03/02/installing-third-party-python-modules-in-qgis-windows/">This blog post</a> has step-by-step instructions (replace <code class="docutils literal notranslate"><span class="pre">lxml</span></code> with <code class="docutils literal notranslate"><span class="pre">qtconsole</span></code> and <code class="docutils literal notranslate"><span class="pre">jupyter==1.0.0</span></code>)</p>
-</div>
-<p>The console is now available from the menu <em>Plugins → IPython QGIS Console → Windowed</em></p>
-<div class="figure">
-<img alt="../../_images/L7-02-pyqgis-02-ipyconsole.png" src="../../_images/L7-02-pyqgis-02-ipyconsole.png" />
-</div>
-<div class="admonition-note admonition">
-<p class="first admonition-title">Note</p>
-<p class="last">In the following steps, we are using the municipalities of Finland from the Statistics Finland
-web feature service: <a class="reference external" href="http://geo.stat.fi/geoserver/tilastointialueet/wfs">http://geo.stat.fi/geoserver/tilastointialueet/wfs</a> (“Kunnat 2019”).
-You can also use any other vector layer as <cite>layer</cite>.</p>
-</div>
-<div class="figure">
-<img alt="lessons/L7/img/add_wfs_layer.png" src="lessons/L7/img/add_wfs_layer.png" />
-</div>
-<p>If you have not installed the IPyConsole, you can also repeat the following steps in the stardard Python Console in QGIS.</p>
-<p>By default an <code class="docutils literal notranslate"><span class="pre">iface</span></code> object is imported, which allows the access to the currently active QGIS instance’s user interface.
-For example, we can easily load a new layer to QGIS, or start interacting with an existing layer in the session:</p>
-<ul class="simple">
-<li>Add a vector layer from a web feature service to the QGIS interface, and store it also in a variable called <cite>layer</cite>:</li>
-</ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define source (vector layer)</span>
-<span class="n">source</span> <span class="o">=</span> <span class="s2">&quot;http://geo.stat.fi/geoserver/tilastointialueet/wfs?request=GetFeature&amp;typename=tilastointialueet:kunta1000k_2019&quot;</span>
+<p>By default an iface object is imported, which allows the access to the
+currently active QGIS instance’s user interface. For example, we can
+easily retrieve the active (selected) layer, then access its type, name,
+and count its features:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get active layer:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">layer</span> <span class="o">=</span> <span class="n">iface</span><span class="o">.</span><span class="n">activeLayer</span><span class="p">()</span>
 
-<span class="c1"># Add layer from the source ti the QGIS session:</span>
-<span class="n">layer</span> <span class="o">=</span> <span class="n">iface</span><span class="o">.</span><span class="n">addVectorLayer</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="s2">&quot;admin_areas&quot;</span><span class="p">,</span> <span class="s2">&quot;ogr&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li>In case you already have some layers open in the interface, can start working with one of them:</li>
-</ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get active layer:</span>
-<span class="n">layer</span> <span class="o">=</span> <span class="n">iface</span><span class="o">.</span><span class="n">activeLayer</span><span class="p">()</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li>Check basic properties of the layer:</li>
-</ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print layer name</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">name</span><span class="p">())</span>
+<span class="c1"># Let&#39;s see what we got</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">layer</span><span class="p">))</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">qgis</span><span class="o">.</span><span class="n">_core</span><span class="o">.</span><span class="n">QgsVectorLayer</span><span class="s1">&#39;&gt;</span>
 
-<span class="c1"># Number of features</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">featureCount</span><span class="p">())</span>
-</pre></div>
-</div>
-<p>Next, you can ask python to, for example, open the attribute table of that layer:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Open attribute table in a new window</span>
-<span class="n">iface</span><span class="o">.</span><span class="n">showAttributeTable</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="figure">
-<img alt="lessons/L7/img/municipalities_attributes.png" src="lessons/L7/img/municipalities_attributes.png" />
-</div>
-<p>We can also view all the attributes in the console:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print column names</span>
-<span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">layer</span><span class="o">.</span><span class="n">fields</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">name</span><span class="p">()))</span>
-</pre></div>
-</div>
-<p>You can access a help text on objects using <code class="docutils literal notranslate"><span class="pre">help()</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>In [1]: help(layer)
-Out[1]: Help on QgsVectorLayer in module qgis._core object:
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">sourceName</span><span class="p">())</span>
+<span class="n">Seutukartta_liikenne_metro_rata</span>
 
-        class QgsVectorLayer(QgsMapLayer, QgsExpressionContextGenerator, QgsFeatureSink, QgsFeatureSource)
-         |  Represents a vector layer which manages a vector based data sets.
-         |
-         |   The QgsVectorLayer is instantiated by specifying the name of a data provider,
-         |   such as postgres or wfs, and url defining the specific data set to connect to.
-         |   The vector layer constructor in turn instantiates a QgsVectorDataProvider subclass
-         |   corresponding to the provider type, and passes it the url. The data provider
-         |   connects to the data source.
-         |
-         |   The QgsVectorLayer provides a common interface to the different data types. It also
-         |   manages editing transactions.
-         |
-         |    Sample usage of the QgsVectorLayer class:
-         |
-         |   \code
-         |       QString uri = &quot;point?crs=epsg:4326&amp;field=id:integer&quot;;
-         |       QgsVectorLayer *scratchLayer = new QgsVectorLayer(uri, &quot;Scratch point layer&quot;,  &quot;memory&quot;);
-         |   \endcode
-         |
-         |   The main data providers supported by QGIS are listed below.
-         |
-         |   \section providers Vector data providers
-         |
-         |   \subsection memory Memory data providerType (memory)
-         |
-         |   The memory data provider is used to construct in memory data, for example scratch
-         |   data or data generated from spatial operations such as contouring. There is no
-         |   inherent persistent storage of the data. The data source uri is constructed. The
-         |   url specifies the geometry type (&quot;point&quot;, &quot;linestring&quot;, &quot;polygon&quot;,
-         |   &quot;multipoint&quot;,&quot;multilinestring&quot;,&quot;multipolygon&quot;), optionally followed by url parameters
-         |   as follows:
-             …
-             …
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">featureCount</span><span class="p">())</span>
+<span class="mi">3</span>
 </pre></div>
 </div>
-<p>This help text is the same information listed in QGIS’ API documentation at <a class="reference external" href="https://qgis.org/pyqgis/3.4/">qgis.org/pyqgis</a>.</p>
+<p>The layer we got is an object of class <em>QgsVectorLayer</em>, which in turn
+is within QGIS’s <em>core</em> module. There are <a class="reference external" href="https://qgis.org/api/modules.html">seven modules in
+total</a> each housing <em>classes</em>
+critical for the program. Above, we call QgsVectorLayer’s methods like
+<em>featureCount()</em>. You may read more on the methods in the
+<a class="reference external" href="https://qgis.org/pyqgis/3.4/core/QgsVectorLayer.html">documentation</a>
+or call <em>help()</em> on the object for the same information:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">help</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span>
+<span class="n">Help</span> <span class="n">on</span> <span class="n">QgsVectorLayer</span> <span class="ow">in</span> <span class="n">module</span> <span class="n">qgis</span><span class="o">.</span><span class="n">_core</span> <span class="nb">object</span><span class="p">:</span>
+
+<span class="k">class</span> <span class="nc">QgsVectorLayer</span><span class="p">(</span><span class="n">QgsMapLayer</span><span class="p">,</span> <span class="n">QgsExpressionContextGenerator</span><span class="p">,</span> <span class="n">QgsExpressionContextScopeGenerator</span><span class="p">,</span> <span class="n">QgsFeatureSink</span><span class="p">,</span> <span class="n">QgsFeatureSource</span><span class="p">)</span>
+ <span class="o">|</span>  <span class="n">QgsVectorLayer</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">baseName</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">providerLib</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="n">QgsVectorLayer</span><span class="o">.</span><span class="n">LayerOptions</span> <span class="o">=</span> <span class="n">QgsVectorLayer</span><span class="o">.</span><span class="n">LayerOptions</span><span class="p">())</span>
+ <span class="o">|</span>  <span class="n">Constructor</span> <span class="o">-</span> <span class="n">creates</span> <span class="n">a</span> <span class="n">vector</span> <span class="n">layer</span>
+ <span class="o">|</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>Like the documentation shows, we can use a method to access the features
+(=rows on the attribute table) of the layer. Let’s loop through <a class="reference external" href="https://qgis.org/pyqgis/3.4/core/QgsFeature.html#qgis.core.QgsFeature">the
+features</a>
+and print out attributes from each feature:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">feat</span> <span class="ow">in</span> <span class="n">layer</span><span class="o">.</span><span class="n">getFeatures</span><span class="p">():</span>
+        <span class="c1"># attributes() returns a list of attributes assosiated with that feature</span>
+        <span class="c1"># we&#39;ll print the second entries on the lists, which correspond to the &#39;metrorata&#39; column</span>
+<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="n">feat</span><span class="o">.</span><span class="n">attributes</span><span class="p">()[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">Vuosaari</span>
+<span class="n">Länsimetro</span>
+<span class="n">Mellunmäki</span>
+</pre></div>
+</div>
+<p>If the features are geographical, they’ll have <em>geometry</em> as well as
+attributes. <a class="reference external" href="https://qgis.org/pyqgis/3.0/core/Geometry/QgsGeometry.html">The geometry
+objects</a>
+have a method for calculating the length of an feature in map units.
+We’ll use this to our advantage and create a simple program for summing
+up the total length of line features in the selected layer and print
+this out in kilometers:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># variable to house the sum of the lengths</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">total_length</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">feat</span> <span class="ow">in</span> <span class="n">layer</span><span class="o">.</span><span class="n">getFeatures</span><span class="p">():</span>
+<span class="o">...</span>    <span class="n">geometry</span> <span class="o">=</span> <span class="n">feat</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span>
+<span class="o">...</span>    <span class="n">total_length</span> <span class="o">+=</span> <span class="n">geometry</span><span class="o">.</span><span class="n">length</span><span class="p">()</span>
+
+<span class="c1"># printing and transforming the result (rounded to one decimal point) to km</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total length of features in layer &quot;</span><span class="o">+</span> <span class="n">layer</span><span class="o">.</span><span class="n">sourceName</span><span class="p">()</span><span class="o">+</span> <span class="s2">&quot; is:&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">total_length</span><span class="o">/</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;km&quot;</span><span class="p">)</span>
+<span class="n">Total</span> <span class="n">length</span> <span class="n">of</span> <span class="n">features</span> <span class="ow">in</span> <span class="n">layer</span> <span class="n">Seutukartta_liikenne_metro_rata</span> <span class="ow">is</span><span class="p">:</span> <span class="mf">34.8</span> <span class="n">km</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-pyqgis-scripts">
+<h2>Creating PyQGIS scripts<a class="headerlink" href="#creating-pyqgis-scripts" title="Permalink to this headline">¶</a></h2>
+<p>Great! But what if we want to show someone our cool function or reuse
+the code? Thankfully QGIS also includes a simple code editor, from which
+we can run, edit and save Python scripts. Click the middle icon on the
+top row of the console and an editor with blank text field should
+appear.</p>
+<div class="figure" id="id3">
+<img alt="Console and editor" src="lessons/L7/img/konsoli_ja_editori.png" />
+<p class="caption"><span class="caption-text">Console and editor</span></p>
+</div>
+<p>Next, apply the code created previously and make a function. The
+function gets the active layer, calculates the length of its features
+and then prints the result in the console. Although it’s in poor form to
+have so many separate tasks for one function, we do it like this to make
+things more straightforward later on.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">lineLengthCalc</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Sums together the length of features in a line type vector layer, then prints the result in km.&quot;&quot;&quot;</span>
+    <span class="c1"># get the current active layer</span>
+    <span class="n">layer</span> <span class="o">=</span> <span class="n">iface</span><span class="o">.</span><span class="n">activeLayer</span><span class="p">()</span>
+
+    <span class="n">total_length</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">feat</span> <span class="ow">in</span> <span class="n">layer</span><span class="o">.</span><span class="n">getFeatures</span><span class="p">():</span>
+        <span class="n">geometry</span> <span class="o">=</span> <span class="n">feat</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span>
+        <span class="n">total_length</span> <span class="o">+=</span> <span class="n">geometry</span><span class="o">.</span><span class="n">length</span><span class="p">()</span>
+
+    <span class="c1"># print out the result</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total length of features in layer &quot;</span><span class="o">+</span> <span class="n">layer</span><span class="o">.</span><span class="n">sourceName</span><span class="p">()</span><span class="o">+</span> <span class="s2">&quot; is:&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">total_length</span><span class="o">/</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;km&quot;</span><span class="p">)</span>
+
+<span class="c1"># call the function</span>
+<span class="n">lineLengthCalc</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Run the script to make sure it works. After that, save the result as a
+script file <em>lineLengthCalculator.py</em>. You may open it anytime from the
+code editor.</p>
+<p>Next up, we’ll apply the script code to an extremely simple plugin.</p>
+</div>
+</div>
+<div class="section" id="creating-qgis-plugins">
+<h1>Creating QGIS plugins<a class="headerlink" href="#creating-qgis-plugins" title="Permalink to this headline">¶</a></h1>
+<p><strong>Please note: the instructions below have been created for Windows
+systems. While all of the instructions can be replicated on other OS’s,
+platform differences do apply.</strong></p>
+<p>Plugins extend the functionality of the base installation. Written in
+Python, they can be shared via the official plugin repository if they
+<a class="reference external" href="https://docs.qgis.org/testing/en/docs/pyqgis_developer_cookbook/plugins/releasing.html">pass the
+requirements</a>
+or be installed from .zip packages. Whatever the method, a <a class="reference external" href="https://docs.qgis.org/testing/en/docs/pyqgis_developer_cookbook/plugins/releasing.html#plugin-structure">handful of
+files</a>
+is always required. These include the main code <em>.py</em> files, files
+relating to the user interface and a metadata text file. Creating these
+by hand would be tedious and time consuming – thankfully it’s also
+needless, since we can get a plugin to do it for us!</p>
+<p>Next, open the plugin manager (<em>Manage and install plugins</em>) and install
+two plugins that’ll help us greatly: Plugin Builder and Plugin Reloader.
+If you can’t find these, make sure Experimental plugins are enabled from
+plugin manager settings. <em>Builder</em> will create a plugin base in which to
+apply the functionality and <em>Reloader</em> will greatly help in testing the
+plugin.</p>
+<div class="section" id="creating-the-plugin-base">
+<h2>Creating the plugin base<a class="headerlink" href="#creating-the-plugin-base" title="Permalink to this headline">¶</a></h2>
+<p>Open up <em>Builder</em> and start filling the fields as shown below. Since
+we’re only creating a toy example, no need to be too serious:</p>
+<div class="figure" id="id4">
+<img alt="Plugin builder beginning" src="lessons/L7/img/plugin_builder.png" />
+<p class="caption"><span class="caption-text">Plugin builder beginning</span></p>
+</div>
+<p>You may keep the default settings throughout the wizard until the final
+window (<em>Select output directory</em>). On this example, we’ll want to
+create the plugin directly to where QGIS installs them, in the active
+user profile. The path to this folder can be a tricky one, but you’ll
+find a shortcut from QGIS’s toolbar: <em>Settings &gt; User Profiles &gt; Open
+active profile folder</em>. This should open a file navigator in a location
+with some folders and other files. Click onwards to one of the folders:
+<em>Python &gt; plugins</em>. This is QGIS plugin’s default installation folder.
+Example location below:</p>
+<div class="figure" id="id5">
+<img alt="Folder location" src="lessons/L7/img/tallennussijainti.png" />
+<p class="caption"><span class="caption-text">Folder location</span></p>
+</div>
+<p>Copy the path to this location and paste it as <em>Plugin Builder’s</em> output
+directory:</p>
+<div class="figure" id="id6">
+<img alt="Plugin builder output" src="lessons/L7/img/plugin_builder_output.png" />
+<p class="caption"><span class="caption-text">Plugin builder output</span></p>
+</div>
+<p>Nice nice! Now just generate the plugin. You may get an error about
+compiling resources, but we’ll ignore that for now. Check the <em>python &gt;
+plugins</em> folder and you ought to find the freshly made plugin.</p>
+</div>
+<div class="section" id="initializing">
+<h2>Initializing<a class="headerlink" href="#initializing" title="Permalink to this headline">¶</a></h2>
+<p>The plugin’s not quite ready for use yet, we have to make one more
+rather tedious thing to make it functional. Open
+<em>line_length_calculator</em> folder and you’ll find a file called
+<em>resources.qrc</em>. This file’s required by the ui system (Qt), but we need
+to compile it to a <em>.py</em> file before the plugin will run (a more
+detailed <a class="reference external" href="https://gis-ops.com/qgis-3-qt-designer-explained/#qt-resourcesqrc">explanation
+here</a>).
+For this purpose, we’ll create something called a <em>batch file</em>.</p>
+<p>Please note that this approach made for Windows computers. See <a class="reference external" href="http://www.qgistutorials.com/en/docs/3/building_a_python_plugin.html">Ujaval
+Gandhi’s instructions for Mac and
+Linux</a>.
+You’ll need to install something called pb_tool. Windows users might
+also find this tool handy if you want to get into serious plugin
+development.</p>
+<p>Create a new plain textfile in the plugin folder and copy the following
+commands to that file. <strong>IMPORTANT: Replace the filepath with the path
+to your computer’s installation. At the very least you’ll need to
+replace QGIS 3.X with the version number of your installation, e.g.&nbsp;QGIS
+3.4. The installation could also be somewhere else or in location
+C::raw-latex:`OSGeo`4W64…</strong><a class="reference external" href="http://www.qgistutorials.com/en/docs/3/building_a_python_plugin.html">Read more
+here</a></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@echo</span> <span class="n">off</span>
+<span class="n">call</span> <span class="s2">&quot;C:\Program Files\QGIS 3.X</span><span class="se">\b</span><span class="s2">in\o4w_env.bat&quot;</span>
+<span class="n">call</span> <span class="s2">&quot;C:\Program Files\QGIS 3.X</span><span class="se">\b</span><span class="s2">in\qt5_env.bat&quot;</span>
+<span class="n">call</span> <span class="s2">&quot;C:\Program Files\QGIS 3.X</span><span class="se">\b</span><span class="s2">in\py3_env.bat&quot;</span>
+
+<span class="nd">@echo</span> <span class="n">on</span>
+<span class="n">pyrcc5</span> <span class="o">-</span><span class="n">o</span> <span class="n">resources</span><span class="o">.</span><span class="n">py</span> <span class="n">resources</span><span class="o">.</span><span class="n">qrc</span>
+</pre></div>
+</div>
+<p>Save the textfile with the file format marking as <em>compile.bat</em>. Then
+simply double click to run it. If all goes well, a new <em>resources</em> file
+should pop up: this time it’s Python code. You plugin folder should look
+something like this:</p>
+<div class="figure" id="id7">
+<img alt="After compiling the plugin" src="lessons/L7/img/plugin_kansio_compilingin_jalkeen.png" />
+<p class="caption"><span class="caption-text">After compiling the plugin</span></p>
+</div>
+</div>
+<div class="section" id="developing-the-plugin">
+<h2>Developing the plugin<a class="headerlink" href="#developing-the-plugin" title="Permalink to this headline">¶</a></h2>
+<p>Now we can get to business. First restart QGIS and then open the plugin
+manager. Our new plugin should be listed in <em>installed</em> plugins. Click
+it active. A new icon should appear both on the <em>Plugins</em> drop-down menu
+and on the top toolbar. Run the plugin:</p>
+<div class="figure" id="id8">
+<img alt="Plugin at the beginning" src="lessons/L7/img/plugin_alkutila.png" />
+<p class="caption"><span class="caption-text">Plugin at the beginning</span></p>
+</div>
+<p>Cool! Too bad it doesn’t do anything yet – all the default buttons do is
+close the window. We’ll fix that next.</p>
+<p>Go back to your plugin’s folder. Open up the Python file
+<em>line_length_calculator.py</em> in any code or text editor, for example
+IDLE.</p>
+<p>This file, automatically created by Plugin Builder, contains all the
+necessary elements to quickly get your plugin running. It for example
+imports some necessary methods from QGIS’s modules (we didn’t need to do
+this when scripting, since most necessary methods are imported
+automatically to QGIS’s own Python console). See also how you plugin is
+a <em>class</em> that includes many methods and that a reference to the
+interface is saved at the very beginning as <em>self.iface</em>. We’re not
+interested in most of the content, however.</p>
+<p>Scroll down to the very bottom of the file and you’ll find a method
+called <em>run</em>. This section of the code is activated any time the user
+activates the plugin. Paste the method <em>lineLengthCalc</em> from the script
+we created earlier below the run method. Make sure it’s correctly
+indented!</p>
+<p>Now all we need is some handy way for the user to call the method. For
+that, we’ll need to do a bit of user interface design.</p>
+</div>
+<div class="section" id="adding-ui-elements">
+<h2>Adding UI elements<a class="headerlink" href="#adding-ui-elements" title="Permalink to this headline">¶</a></h2>
+<p>Like mentioned earlier, the user interface of plugins (and QGIS in
+general) is handled by a flexible ui framework called
+<a class="reference external" href="https://pypi.org/project/PyQt5/">Qt</a>. We could add elements like
+buttons programmatically, but there’s also a handy graphic interface
+packaged with most QGIS distributions. <strong>Open Qt Designer with QGIS 3.xx
+custom widgets</strong>.</p>
+<p>In the <em>New Form</em> dialog, select <em>Open…</em> and navigate to your plugin’s
+folder. From there, you ought to see a <em>.ui</em> file called
+<em>line_length_calculator_dialog_base.ui</em>. Select this. The UI, called
+dialog, should look similar to how it looks in QGIS (that is, bland).</p>
+<div class="figure" id="id9">
+<img alt="qt_designer beginning" src="lessons/L7/img/qt_designer_alkuvaiheessa.png" />
+<p class="caption"><span class="caption-text">qt_designer beginning</span></p>
+</div>
+<p>On the left you can see a panel of different ui elements, or widgets.
+There are options ranging from lists, sliders and text boxes to QGIS
+specific widgets like coordinate extent boxes. On the right you can see
+objects inserted in the plugin base and modify their attributes. Nothing
+there except for the default <em>Ok/Cancel</em> button box.</p>
+<p>Time to populate the plugin. Drag a <em>Push button</em> to the middle of the
+plugin. You may resize it to be more noticiable. Also notice how a
+<em>pushButton</em> object has been added to the list in <em>Object inspector</em>.
+Select it and modify a few things in the property editor directly below
+it.</p>
+<ul class="simple">
+<li>Change objectName from pushButton to lineLengthButton.</li>
+</ul>
+<p>Scroll down and:</p>
+<ul class="simple">
+<li>Change text from PushButton to <em>Calculate line lengths</em>. The text in
+the button should change immediately.</li>
+</ul>
+<p>The result should look something like below:</p>
+<div class="figure" id="id10">
+<img alt="qt_designer end" src="lessons/L7/img/qt_designer_lopussa.png" />
+<p class="caption"><span class="caption-text">qt_designer end</span></p>
+</div>
+<p>Aaand we’re done here! <strong>Save the changes</strong> and close Qt Designer.</p>
+</div>
+<div class="section" id="linking-ui-to-code">
+<h2>Linking UI to code<a class="headerlink" href="#linking-ui-to-code" title="Permalink to this headline">¶</a></h2>
+<p>Our final task in this exercise is to link the method created earlier to
+this button so that every time the user clicks on the button, the line
+length method is called. All we need is a few additions and
+modifications to the code.</p>
+<p>UI elements in Qt send something called <em>signals</em> when various things
+happen to them – they’re for example clicked and so a signal is sent
+out. We need to tie this signal to a <em>slot</em> that could e.g.&nbsp;be a method
+that’s run.</p>
+<p>Let’s do just that. Paste the bottommost line of code to <em>run</em> method,
+below the conditional clause <em>if self.first_start_ == True</em>:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">first_start</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">first_start</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">dlg</span> <span class="o">=</span> <span class="n">LineLengthCalculatorDialog</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">dlg</span><span class="o">.</span><span class="n">lineLengthButton</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lineLengthCalc</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Transforming that line into plain language, it reads:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="n">this</span> <span class="n">dialog</span><span class="p">,</span> <span class="n">every</span> <span class="n">time</span> <span class="n">lineLengthButton</span> <span class="ow">is</span> <span class="n">pressed</span><span class="p">,</span> <span class="n">run</span> <span class="n">the</span> <span class="n">method</span> <span class="n">lineLengthCalc</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>The very very final thing is to modify <em>lineLengthCalc</em> sligthly. Add a
+reference to <em>self</em> as the method’s parameter (wanna know why? <a class="reference external" href="https://medium.com/quick-code/understanding-self-in-python-a3704319e5f0">Read
+this</a>):</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">lineLengthCalc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>Also add <em>self</em> in front of <em>iface</em>. Like this:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">layer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">iface</span><span class="o">.</span><span class="n">activeLayer</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>All in all, the bottom of the file should look something like this:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Run method that performs all the real work&quot;&quot;&quot;</span>
+
+    <span class="c1"># Create the dialog with elements (after translation) and keep reference</span>
+    <span class="c1"># Only create GUI ONCE in callback, so that it will only load when the plugin is started</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">first_start</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">first_start</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dlg</span> <span class="o">=</span> <span class="n">LineLengthCalculatorDialog</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dlg</span><span class="o">.</span><span class="n">lineLengthButton</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lineLengthCalc</span><span class="p">)</span>
+
+    <span class="c1"># show the dialog</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">dlg</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="c1"># Run the dialog event loop</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dlg</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+    <span class="c1"># See if OK was pressed</span>
+    <span class="k">if</span> <span class="n">result</span><span class="p">:</span>
+        <span class="c1"># Do something useful here - delete the line containing pass and</span>
+        <span class="c1"># substitute with your code.</span>
+        <span class="k">pass</span>
+
+<span class="k">def</span> <span class="nf">lineLengthCalc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Sums together the length of features in a line type vector layer, then prints the result in km.&quot;&quot;&quot;</span>
+    <span class="c1"># get the current active layer</span>
+    <span class="n">layer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">iface</span><span class="o">.</span><span class="n">activeLayer</span><span class="p">()</span>
+
+    <span class="n">total_length</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">feat</span> <span class="ow">in</span> <span class="n">layer</span><span class="o">.</span><span class="n">getFeatures</span><span class="p">():</span>
+        <span class="n">geometry</span> <span class="o">=</span> <span class="n">feat</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span>
+        <span class="n">total_length</span> <span class="o">+=</span> <span class="n">geometry</span><span class="o">.</span><span class="n">length</span><span class="p">()</span>
+
+    <span class="c1"># print out the result</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total length of features in layer &quot;</span><span class="o">+</span> <span class="n">layer</span><span class="o">.</span><span class="n">sourceName</span><span class="p">()</span><span class="o">+</span> <span class="s2">&quot; is:&quot;</span><span class="p">,</span>
+          <span class="nb">round</span><span class="p">(</span><span class="n">total_length</span><span class="o">/</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;km&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Gongrats, you’ve created your very first QGIS plugin! Time to enjoy the
+fruits of your labor.</p>
+<p><strong>Save line_length_calculator.py</strong>. Then return to QGIS and reload your
+plugin with <em>Plugin reloader</em> for the changes to take effect
+(alternatively restart the whole program).</p>
+<p>The plugin should look something like this and function identically to
+the script made above.</p>
+<div class="figure" id="id11">
+<img alt="plugin final" src="lessons/L7/img/plugin_lopullinen.png" />
+<p class="caption"><span class="caption-text">plugin final</span></p>
+</div>
+<p>There are many ways to expand even this simple plugin. Can you for
+example think of a way to check that the layer object is not empty
+(which results in an error)? Or let user select the layer from a
+drop-down box instead of using the active layer?
+(<a class="reference external" href="https://gis.stackexchange.com/questions/118862/getting-list-of-layer-names-using-pyqgis">Hint</a>)</p>
+</div>
+<div class="section" id="additional-resources">
+<h2>Additional resources<a class="headerlink" href="#additional-resources" title="Permalink to this headline">¶</a></h2>
+<p>You’ve been very briefly introduced to PyQGIS and Python plugin
+development. If the subject interests you, we strongly recommend
+checking out these more extensive tutorials and resources:</p>
+<div class="section" id="id1">
+<h3>Python in QGIS<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Anita Graser’s beginner-friendly <a class="reference external" href="https://anitagraser.com/pyqgis-101-introduction-to-qgis-python-programming-for-non-programmers/">PyQGIS 101: Introduction to QGIS
+Python programming for
+non-programmers</a></li>
+<li><a class="reference external" href="https://docs.qgis.org/testing/en/docs/pyqgis_developer_cookbook/">PyQGIS Developer
+Cookbook</a>
+with compehensive tutorials.</li>
+<li>Gary Sherman’s book (available for purchase) <a class="reference external" href="http://locatepress.com/ppg3">The PyQGIS Programmer’s
+Guide</a></li>
+<li><a class="reference external" href="https://gis.stackexchange.com/">StackExchange GIS</a></li>
+<li>Reading the source code of installed plugins for further ideas</li>
+</ul>
+</div>
+<div class="section" id="getting-started-with-plugin-development">
+<h3>Getting started with plugin development<a class="headerlink" href="#getting-started-with-plugin-development" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://gis-ops.com/qgis-3-plugin-development-reference-guide/">QGIS 3 plugin development
+guide</a>
+by Nils Nolde</li>
+<li><a class="reference external" href="http://www.qgistutorials.com/en/docs/3/building_a_python_plugin.html">Building a Python Plugin
+(QGIS3)</a>
+by Ujaval Gandhi</li>
+</ul>
+</div>
 </div>
 </div>
 
@@ -442,7 +755,7 @@ Out[1]: Help on QgsVectorLayer in module qgis._core object:
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="qgis-plugins.html" class="btn btn-neutral float-right" title="QGIS Plugins" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="additional_pyqgis_functions.html" class="btn btn-neutral float-right" title="Additional PyQGIS functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="overview.html" class="btn btn-neutral float-left" title="Lesson 7 Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -456,7 +769,7 @@ Out[1]: Help on QgsVectorLayer in module qgis._core object:
     <p>
         &copy; Copyright 2019, Henrikki Tenkanen and Vuokko Heikinheimo, Digital Geography Lab, University of Helsinki
       <span class="lastupdated">
-        Last updated on Dec 05, 2019.
+        Last updated on Dec 08, 2019.
       </span>
 
     </p>
