@@ -186,7 +186,7 @@ Contents
 
    lessons/L7/overview
    lessons/L7/pyqgis
-   lessons/L7/qgis-plugins.rst
+   lessons/L7/additional_pyqgis_functions
 
 .. toctree::
    :maxdepth: 2
@@ -201,7 +201,6 @@ Contents
    notebooks/Raster/raster-mosaic.ipynb
    notebooks/Raster/zonal-statistics.ipynb
    notebooks/Raster/read-cogs.ipynb
-
 
 .. toctree::
    :maxdepth: 2
