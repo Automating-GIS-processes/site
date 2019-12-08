@@ -69,6 +69,7 @@ Run this codes in order to get started with a GIS Python environment (tested to 
     conda install -c conda-forge contextily
     conda install -c conda-forge folium
     conda install -c conda-forge mplleaflet
+    conda install -c conda-forge osmnx
     # ... install other packages
 
     # Start jupyter lab
@@ -77,6 +78,14 @@ Run this codes in order to get started with a GIS Python environment (tested to 
     # Jupyter lab opens up in a browser
 
     # Shut down jupyter lab using CTRL+C once done working
+
+
+You can also install several packages in one command:
+
+.. code:: bash
+
+        # Install packages
+    conda install -c conda-forge geopandas matplotlib mapclassify
 
 
 Other packages
