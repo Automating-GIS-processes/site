@@ -317,27 +317,10 @@ and a 2mx2m Digital Elevation Model (DEM) produced by National Land Survey of Fi
         <span class="k">return</span> <span class="n">url</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
 
 <span class="c1"># Filepaths</span>
-<span class="n">outdir</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;C:\HY-DATA\HENTENKA\KOODIT\Opetus\Automating-GIS-processes\Data\CSC_Lesson6&quot;</span>
+<span class="n">outdir</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;data&quot;</span>
 
 <span class="c1"># File locations</span>
-<span class="n">url_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;http://www.nic.funet.fi/index/geodata/mml/korkeusmalli2m/2017/L4/L41/L4133A.tif&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;http://www.nic.funet.fi/index/geodata/mml/korkeusmalli2m/2017/L4/L41/L4133B.tif&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;http://www.nic.funet.fi/index/geodata/mml/korkeusmalli2m/2017/L4/L41/L4133C.tif&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;http://www.nic.funet.fi/index/geodata/mml/korkeusmalli2m/2017/L4/L41/L4133D.tif&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;http://www.nic.funet.fi/index/geodata/mml/korkeusmalli2m/2017/L4/L41/L4133E.tif&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;http://www.nic.funet.fi/index/geodata/mml/korkeusmalli2m/2017/L4/L41/L4133F.tif&quot;</span><span class="p">,</span>
-
-            <span class="s2">&quot;http://www.nic.funet.fi/index/geodata/mml/korkeusmalli2m/2017/L4/L41/L4134A.tif&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;http://www.nic.funet.fi/index/geodata/mml/korkeusmalli2m/2017/L4/L41/L4134B.tif&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;http://www.nic.funet.fi/index/geodata/mml/korkeusmalli2m/2017/L4/L41/L4134C.tif&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;http://www.nic.funet.fi/index/geodata/mml/korkeusmalli2m/2017/L4/L41/L4134D.tif&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;http://www.nic.funet.fi/index/geodata/mml/korkeusmalli2m/2017/L4/L41/L4134E.tif&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;http://www.nic.funet.fi/index/geodata/mml/korkeusmalli2m/2017/L4/L41/L4134F.tif&quot;</span><span class="p">,</span>
-
-            <span class="s2">&quot;https://etsin.avointiede.fi/storage/f/paituli/ehdot/Latuviitta_ehdot.pdf&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;https://etsin.avointiede.fi/storage/f/paituli/ehdot/MML_ehdot_CC.txt&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;https://github.com/Automating-GIS-processes/CSC18/raw/master/data/Helsinki_masked_p188r018_7t20020529_z34__LV-FIN.tif&quot;</span>
-            <span class="p">]</span>
+<span class="n">url_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;https://github.com/Automating-GIS-processes/CSC18/raw/master/data/Helsinki_masked_p188r018_7t20020529_z34__LV-FIN.tif&quot;</span><span class="p">]</span>
 
 <span class="c1"># Create folder if it does no exist</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">outdir</span><span class="p">):</span>
@@ -378,7 +361,7 @@ and a 2mx2m Digital Elevation Model (DEM) produced by National Land Survey of Fi
     <p>
         &copy; Copyright 2019, Henrikki Tenkanen and Vuokko Heikinheimo, Digital Geography Lab, University of Helsinki
       <span class="lastupdated">
-        Last updated on Dec 04, 2019.
+        Last updated on Dec 09, 2019.
       </span>
 
     </p>
