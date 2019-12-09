@@ -338,13 +338,8 @@ script’s functionality to your very own plugin.</p>
 <h2>Sample data for this tutorial<a class="headerlink" href="#sample-data-for-this-tutorial" title="Permalink to this headline">¶</a></h2>
 <p>To get us started, we’ll need some data. Open QGIS and connect to the
 City of Helsinki’s WFS service from <em>Layer &gt; Add layer &gt; Add WFS layer</em>:</p>
-<ul class="simple">
-<li>Create a new connection to URL</li>
-</ul>
-<p><a class="reference external" href="http://kartta.hel.fi/ws/geoserver/avoindata/wfs">http://kartta.hel.fi/ws/geoserver/avoindata/wfs</a> and load the layer list.
-- Select, for example, the Metro railway lines
-(<em>Seutukartta_liikenne_metro_rata</em>).
-- <strong>Make sure the coordinate system is set to a projected one</strong>, like ETRS89/GK25FIN (EPSG:3879) before
+<p>Create a new connection to URL <a class="reference external" href="http://kartta.hel.fi/ws/geoserver/avoindata/wfs">http://kartta.hel.fi/ws/geoserver/avoindata/wfs</a> and load the layer list. Select, for example, the Metro railway lines
+(<em>Seutukartta_liikenne_metro_rata</em>). <strong>Make sure the coordinate system is set to a projected one</strong>, like ETRS89/GK25FIN (EPSG:3879) before
 adding the layer.</p>
 </div>
 <div class="section" id="running-pyqgis-code-in-console">
@@ -354,24 +349,24 @@ Open it from <em>Plugins &gt; Python console</em> or use the shortcut
 <code class="docutils literal notranslate"><span class="pre">Ctrl+Alt+P</span></code> on your keyboard.</p>
 <div class="figure" id="id2">
 <img alt="Console and editor" src="../../_images/konsoli_alussa.png" />
-<p class="caption"><span class="caption-text">Console and editor</span></p>
+<p class="caption"><span class="caption-text">Console</span></p>
 </div>
 <p>By default an iface object is imported, which allows the access to the
 currently active QGIS instance’s user interface. For example, we can
 easily retrieve the active (selected) layer, then access its type, name,
 and count its features:</p>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get active layer:</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">layer</span> <span class="o">=</span> <span class="n">iface</span><span class="o">.</span><span class="n">activeLayer</span><span class="p">()</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get active layer:</span>
+&gt;&gt;&gt; <span class="nv">layer</span> <span class="o">=</span> iface.activeLayer<span class="o">()</span>
 
 <span class="c1"># Let&#39;s see what we got</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">layer</span><span class="p">))</span>
-<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">qgis</span><span class="o">.</span><span class="n">_core</span><span class="o">.</span><span class="n">QgsVectorLayer</span><span class="s1">&#39;&gt;</span>
+&gt;&gt;&gt; print<span class="o">(</span>type<span class="o">(</span>layer<span class="o">))</span>
+&lt;class <span class="s1">&#39;qgis._core.QgsVectorLayer&#39;</span>&gt;
 
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">sourceName</span><span class="p">())</span>
-<span class="n">Seutukartta_liikenne_metro_rata</span>
+&gt;&gt;&gt; print<span class="o">(</span>layer.sourceName<span class="o">())</span>
+Seutukartta_liikenne_metro_rata
 
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">featureCount</span><span class="p">())</span>
-<span class="mi">3</span>
+&gt;&gt;&gt; print<span class="o">(</span>layer.featureCount<span class="o">())</span>
+<span class="m">3</span>
 </pre></div>
 </div>
 <p>The layer we got is an object of class <em>QgsVectorLayer</em>, which in turn
@@ -379,30 +374,30 @@ is within QGIS’s <em>core</em> module. There are <a class="reference external"
 total</a> each housing <em>classes</em>
 critical for the program.</p>
 <p>Above, we call QgsVectorLayer’s methods like
-<em>featureCount()</em>. You may read more on the methods in the
+<cite>featureCount()</cite>. You may read more on the methods in the
 <a class="reference external" href="https://qgis.org/pyqgis/3.4/core/QgsVectorLayer.html">documentation</a>
-or call <em>help()</em> on the object for the same information:</p>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">help</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span>
-<span class="n">Help</span> <span class="n">on</span> <span class="n">QgsVectorLayer</span> <span class="ow">in</span> <span class="n">module</span> <span class="n">qgis</span><span class="o">.</span><span class="n">_core</span> <span class="nb">object</span><span class="p">:</span>
+or call <cite>help()</cite> on the object for the same information:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">help</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span>
+<span class="go">Help on QgsVectorLayer in module qgis._core object:</span>
 
-<span class="k">class</span> <span class="nc">QgsVectorLayer</span><span class="p">(</span><span class="n">QgsMapLayer</span><span class="p">,</span> <span class="n">QgsExpressionContextGenerator</span><span class="p">,</span> <span class="n">QgsExpressionContextScopeGenerator</span><span class="p">,</span> <span class="n">QgsFeatureSink</span><span class="p">,</span> <span class="n">QgsFeatureSource</span><span class="p">)</span>
- <span class="o">|</span>  <span class="n">QgsVectorLayer</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">baseName</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">providerLib</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="n">QgsVectorLayer</span><span class="o">.</span><span class="n">LayerOptions</span> <span class="o">=</span> <span class="n">QgsVectorLayer</span><span class="o">.</span><span class="n">LayerOptions</span><span class="p">())</span>
- <span class="o">|</span>  <span class="n">Constructor</span> <span class="o">-</span> <span class="n">creates</span> <span class="n">a</span> <span class="n">vector</span> <span class="n">layer</span>
- <span class="o">|</span>
-    <span class="o">...</span>
+<span class="go">class QgsVectorLayer(QgsMapLayer, QgsExpressionContextGenerator, QgsExpressionContextScopeGenerator, QgsFeatureSink, QgsFeatureSource)</span>
+<span class="go"> |  QgsVectorLayer(path: str = &#39;&#39;, baseName: str = &#39;&#39;, providerLib: str = &#39;&#39;, options: QgsVectorLayer.LayerOptions = QgsVectorLayer.LayerOptions())</span>
+<span class="go"> |  Constructor - creates a vector layer</span>
+<span class="go"> |</span>
+<span class="go">    ...</span>
 </pre></div>
 </div>
 <p>Like the documentation shows, we can use a method to access the features
 (=rows on the attribute table) of the layer. Let’s loop through <a class="reference external" href="https://qgis.org/pyqgis/3.4/core/QgsFeature.html#qgis.core.QgsFeature">the
 features</a>
 and print out attributes from each feature:</p>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">feat</span> <span class="ow">in</span> <span class="n">layer</span><span class="o">.</span><span class="n">getFeatures</span><span class="p">():</span>
-        <span class="c1"># attributes() returns a list of attributes assosiated with that feature</span>
-        <span class="c1"># we&#39;ll print the second entries on the lists, which correspond to the &#39;metrorata&#39; column</span>
-<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="n">feat</span><span class="o">.</span><span class="n">attributes</span><span class="p">()[</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">Vuosaari</span>
-<span class="n">Länsimetro</span>
-<span class="n">Mellunmäki</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">feat</span> <span class="ow">in</span> <span class="n">layer</span><span class="o">.</span><span class="n">getFeatures</span><span class="p">():</span>
+<span class="go">        # attributes() returns a list of attributes assosiated with that feature</span>
+<span class="go">        # we&#39;ll print the second entries on the lists, which correspond to the &#39;metrorata&#39; column</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">feat</span><span class="o">.</span><span class="n">attributes</span><span class="p">()[</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">Vuosaari</span>
+<span class="go">Länsimetro</span>
+<span class="go">Mellunmäki</span>
 </pre></div>
 </div>
 <p>If the features are geographical, they’ll have <em>geometry</em> as well as
@@ -412,7 +407,7 @@ have a method for calculating the length of an feature in map units.
 We’ll use this to our advantage and create a simple program for summing
 up the total length of line features in the selected layer and print
 this out in kilometers:</p>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># variable to house the sum of the lengths</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># variable to house the sum of the lengths</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">total_length</span> <span class="o">=</span> <span class="mi">0</span>
 
 <span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">feat</span> <span class="ow">in</span> <span class="n">layer</span><span class="o">.</span><span class="n">getFeatures</span><span class="p">():</span>
@@ -441,7 +436,7 @@ function gets the active layer, calculates the length of its features
 and then prints the result in the console. Although it’s in poor form to
 have so many separate tasks for one function, we do it like this to make
 things more straightforward later on.</p>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">lineLengthCalc</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">lineLengthCalc</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Sums together the length of features in a line type vector layer, then prints the result in km.&quot;&quot;&quot;</span>
     <span class="c1"># get the current active layer</span>
     <span class="n">layer</span> <span class="o">=</span> <span class="n">iface</span><span class="o">.</span><span class="n">activeLayer</span><span class="p">()</span>
@@ -484,7 +479,7 @@ relating to the user interface and a metadata text file. Creating these
 by hand would be tedious and time consuming – thankfully it’s also
 needless, since we can get a plugin to do it for us!</p>
 <p>Next, open the plugin manager (<em>Manage and install plugins</em>) and install
-two plugins that’ll help us greatly: Plugin Builder and Plugin Reloader.
+two plugins that’ll help us greatly: <strong>Plugin Builder</strong> and <strong>Plugin Reloader</strong>.
 If you can’t find these, make sure Experimental plugins are enabled from
 plugin manager settings. <em>Builder</em> will create a plugin base in which to
 apply the functionality and <em>Reloader</em> will greatly help in testing the
@@ -536,7 +531,7 @@ Linux</a>.
 You’ll need to install something called pb_tool. Windows users might
 also find this tool handy if you want to get into serious plugin
 development.</p>
-<p>Create a new plain textfile in the plugin folder and copy the following
+<p>Create a new plain text file in the plugin folder and copy the following
 commands to that file.</p>
 <div class="admonition-note admonition">
 <p class="first admonition-title">Note</p>
@@ -544,19 +539,19 @@ commands to that file.</p>
 to your computer’s installation. At the very least you’ll need to
 replace QGIS 3.X with the version number of your installation, e.g.&nbsp;QGIS
 3.4. The installation could also be somewhere else or in location
-<cite>C:OSGeo4W64…</cite> <a class="reference external" href="http://www.qgistutorials.com/en/docs/3/building_a_python_plugin.html">Read more
+<code class="docutils literal notranslate"><span class="pre">&quot;C:\OSGeo4W64...&quot;</span></code> <a class="reference external" href="http://www.qgistutorials.com/en/docs/3/building_a_python_plugin.html">Read more
 here</a>.</p>
 </div>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@echo</span> <span class="n">off</span>
-<span class="n">call</span> <span class="s2">&quot;C:\Program Files\QGIS 3.X</span><span class="se">\b</span><span class="s2">in\o4w_env.bat&quot;</span>
-<span class="n">call</span> <span class="s2">&quot;C:\Program Files\QGIS 3.X</span><span class="se">\b</span><span class="s2">in\qt5_env.bat&quot;</span>
-<span class="n">call</span> <span class="s2">&quot;C:\Program Files\QGIS 3.X</span><span class="se">\b</span><span class="s2">in\py3_env.bat&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>@echo off
+call <span class="s2">&quot;C:\Program Files\QGIS 3.X\bin\o4w_env.bat&quot;</span>
+call <span class="s2">&quot;C:\Program Files\QGIS 3.X\bin\qt5_env.bat&quot;</span>
+call <span class="s2">&quot;C:\Program Files\QGIS 3.X\bin\py3_env.bat&quot;</span>
 
-<span class="nd">@echo</span> <span class="n">on</span>
-<span class="n">pyrcc5</span> <span class="o">-</span><span class="n">o</span> <span class="n">resources</span><span class="o">.</span><span class="n">py</span> <span class="n">resources</span><span class="o">.</span><span class="n">qrc</span>
+@echo on
+pyrcc5 -o resources.py resources.qrc
 </pre></div>
 </div>
-<p>Save the textfile with the file format marking as <em>compile.bat</em>. Then
+<p>Save the text file with the file format marking as <em>compile.bat</em>. Then
 simply double click to run it. If all goes well, a new <em>resources</em> file
 should pop up: this time it’s Python code. You plugin folder should look
 something like this:</p>
@@ -571,9 +566,8 @@ something like this:</p>
 manager. Our new plugin should be listed in <em>installed</em> plugins. Click
 it active. A new icon should appear both on the <em>Plugins</em> drop-down menu
 and on the top toolbar. Run the plugin:</p>
-<div class="figure" id="id8">
+<div class="figure">
 <img alt="Plugin at the beginning" src="../../_images/plugin_alkutila.png" />
-<p class="caption"><span class="caption-text">Plugin at the beginning</span></p>
 </div>
 <p>Cool! Too bad it doesn’t do anything yet – all the default buttons do is
 close the window. We’ll fix that next.</p>
@@ -586,7 +580,7 @@ imports some necessary methods from QGIS’s modules (we didn’t need to do
 this when scripting, since most necessary methods are imported
 automatically to QGIS’s own Python console). See also how you plugin is
 a <em>class</em> that includes many methods and that a reference to the
-interface is saved at the very beginning as <em>self.iface</em>. We’re not
+interface is saved at the very beginning as <cite>self.iface</cite>. We’re not
 interested in most of the content, however.</p>
 <p>Scroll down to the very bottom of the file and you’ll find a method
 called <em>run</em>. This section of the code is activated any time the user
@@ -608,7 +602,7 @@ custom widgets</strong>.</p>
 folder. From there, you ought to see a <em>.ui</em> file called
 <em>line_length_calculator_dialog_base.ui</em>. Select this. The UI, called
 dialog, should look similar to how it looks in QGIS (that is, bland).</p>
-<div class="figure" id="id9">
+<div class="figure" id="id8">
 <img alt="qt_designer beginning" src="../../_images/qt_designer_alkuvaiheessa.png" />
 <p class="caption"><span class="caption-text">qt_designer beginning</span></p>
 </div>
@@ -631,7 +625,7 @@ it.</p>
 the button should change immediately.</li>
 </ul>
 <p>The result should look something like below:</p>
-<div class="figure" id="id10">
+<div class="figure" id="id9">
 <img alt="qt_designer end" src="../../_images/qt_designer_lopussa.png" />
 <p class="caption"><span class="caption-text">qt_designer end</span></p>
 </div>
@@ -648,8 +642,8 @@ happen to them – they’re for example clicked and so a signal is sent
 out. We need to tie this signal to a <em>slot</em> that could e.g.&nbsp;be a method
 that’s run.</p>
 <p>Let’s do just that. Paste the bottommost line of code to <em>run</em> method,
-below the conditional clause <em>if self.first_start_ == True</em>:</p>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">first_start</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+below the conditional clause <cite>if self.first_start == True:*</cite>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">first_start</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">first_start</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">dlg</span> <span class="o">=</span> <span class="n">LineLengthCalculatorDialog</span><span class="p">()</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">dlg</span><span class="o">.</span><span class="n">lineLengthButton</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lineLengthCalc</span><span class="p">)</span>
@@ -662,15 +656,15 @@ below the conditional clause <em>if self.first_start_ == True</em>:</p>
 <p>The very very final thing is to modify <em>lineLengthCalc</em> sligthly. Add a
 reference to <em>self</em> as the method’s parameter (wanna know why? <a class="reference external" href="https://medium.com/quick-code/understanding-self-in-python-a3704319e5f0">Read
 this</a>):</p>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">lineLengthCalc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">lineLengthCalc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 </pre></div>
 </div>
-<p>Also add <em>self</em> in front of <em>iface</em>. Like this:</p>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">layer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">iface</span><span class="o">.</span><span class="n">activeLayer</span><span class="p">()</span>
+<p>Also add <cite>self</cite> in front of <cite>iface</cite>. Like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">layer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">iface</span><span class="o">.</span><span class="n">activeLayer</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>All in all, the bottom of the file should look something like this:</p>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Run method that performs all the real work&quot;&quot;&quot;</span>
 
     <span class="c1"># Create the dialog with elements (after translation) and keep reference</span>
@@ -713,15 +707,13 @@ plugin with <em>Plugin reloader</em> for the changes to take effect
 (alternatively restart the whole program).</p>
 <p>The plugin should look something like this and function identically to
 the script made above.</p>
-<div class="figure" id="id11">
+<div class="figure">
 <img alt="plugin final" src="../../_images/plugin_lopullinen.png" />
-<p class="caption"><span class="caption-text">plugin final</span></p>
 </div>
-<div class="admonition-note admonition">
-<p class="first admonition-title">Note</p>
-<p class="last"><strong>TASK:</strong> There are many ways to expand even this simple plugin. For example, can you
-example think of a way to check that the layer object is not empty
-(which results in an error)? Or let user select the layer from a
+<div class="admonition-task admonition">
+<p class="first admonition-title">Task</p>
+<p class="last">There are many ways to expand this simple plugin. Can you, for example, think of a way to
+check that the layer object is not empty (which results in an error)? Or let user select the layer from a
 drop-down box instead of using the active layer?
 (<a class="reference external" href="https://gis.stackexchange.com/questions/118862/getting-list-of-layer-names-using-pyqgis">Hint</a>)</p>
 </div>

@@ -13,7 +13,7 @@ This function takes the currently active QgsVectorLayer and creates
 buffers of random size around each individual feature. The user can
 define the min and max size of the buffers when calling the function.
 
-.. code:: ipython3
+.. code:: python
 
     import random
     
@@ -63,15 +63,15 @@ define the min and max size of the buffers when calling the function.
     # call the function
     bufferParty(min_length=10, max_length=1000)
 
-Challenges:
-^^^^^^^^^^^
 
--  Can you think of a way to check that the current layer is indeed a
-   vector layer and not raster or empty?
+.. admonition:: Tasks
 
--  Can you think of a way keep the original attributes in the new layer
-   as well? Check out the documentation for the relevant classes,
-   e.g. \ `QgsFeature <https://qgis.org/pyqgis/3.2/core/Feature/QgsFeature.html>`__.
+    -  Can you think of a way to check that the current layer is indeed a
+       vector layer and not raster or empty?
+
+    -  Can you think of a way keep the original attributes in the new layer
+       as well? Check out the documentation for the relevant classes,
+       e.g. \ `QgsFeature <https://qgis.org/pyqgis/3.2/core/Feature/QgsFeature.html>`__.
 
 Polygon drawing window
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -81,7 +81,7 @@ by clicking on the canvas. When user closes the window, the map points
 are printed in console. Consists of two classes with multiple methods:
 the window itself and the polygon drawing tool.
 
-.. code:: ipython3
+.. code:: python
 
     class drawWindow(QMainWindow):
         def __init__(self):
@@ -277,12 +277,12 @@ the window itself and the polygon drawing tool.
     myDrawWindow = drawWindow()
     myDrawWindow.showWindow()
 
-Challenges
-^^^^^^^^^^
 
--  The polygon is drawn in an eye catching red. Find where the color is
-   defined, figure out how it works and change it to something else
+.. admonition:: Tasks
 
--  Check out method showWindow in class drawWindow. There’s some code
-   for adding a layer to the canvas. Find out how to add the active
-   layer to the map canvas to use for drawing reference.
+    -  The polygon is drawn in an eye catching red. Find where the color is
+       defined, figure out how it works and change it to something else
+
+    -  Check out method showWindow in class drawWindow. There’s some code
+       for adding a layer to the canvas. Find out how to add the active
+       layer to the map canvas to use for drawing reference.
