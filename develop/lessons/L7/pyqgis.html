@@ -337,12 +337,14 @@ script’s functionality to your very own plugin.</p>
 <div class="section" id="sample-data-for-this-tutorial">
 <h2>Sample data for this tutorial<a class="headerlink" href="#sample-data-for-this-tutorial" title="Permalink to this headline">¶</a></h2>
 <p>To get us started, we’ll need some data. Open QGIS and connect to the
-City of Helsinki’s WFS service from <em>Layer &gt; Add layer &gt; Add WFS layer</em>.
-Create a new connection to URL
-<a class="reference external" href="http://kartta.hel.fi/ws/geoserver/avoindata/wfs">http://kartta.hel.fi/ws/geoserver/avoindata/wfs</a> and load the layer list.
-Select, for example, the Metro railway lines
-(<em>Seutukartta_liikenne_metro_rata</em>). <strong>Make sure the coordinate system
-is set to a projected one</strong>, like ETRS89/GK25FIN (EPSG:3879) before
+City of Helsinki’s WFS service from <em>Layer &gt; Add layer &gt; Add WFS layer</em>:</p>
+<ul class="simple">
+<li>Create a new connection to URL</li>
+</ul>
+<p><a class="reference external" href="http://kartta.hel.fi/ws/geoserver/avoindata/wfs">http://kartta.hel.fi/ws/geoserver/avoindata/wfs</a> and load the layer list.
+- Select, for example, the Metro railway lines
+(<em>Seutukartta_liikenne_metro_rata</em>).
+- <strong>Make sure the coordinate system is set to a projected one</strong>, like ETRS89/GK25FIN (EPSG:3879) before
 adding the layer.</p>
 </div>
 <div class="section" id="running-pyqgis-code-in-console">
@@ -351,7 +353,7 @@ adding the layer.</p>
 Open it from <em>Plugins &gt; Python console</em> or use the shortcut
 <code class="docutils literal notranslate"><span class="pre">Ctrl+Alt+P</span></code> on your keyboard.</p>
 <div class="figure" id="id2">
-<img alt="Console and editor" src="lessons/L7/img/konsoli_alussa.png" />
+<img alt="Console and editor" src="../../_images/konsoli_alussa.png" />
 <p class="caption"><span class="caption-text">Console and editor</span></p>
 </div>
 <p>By default an iface object is imported, which allows the access to the
@@ -375,7 +377,8 @@ and count its features:</p>
 <p>The layer we got is an object of class <em>QgsVectorLayer</em>, which in turn
 is within QGIS’s <em>core</em> module. There are <a class="reference external" href="https://qgis.org/api/modules.html">seven modules in
 total</a> each housing <em>classes</em>
-critical for the program. Above, we call QgsVectorLayer’s methods like
+critical for the program.</p>
+<p>Above, we call QgsVectorLayer’s methods like
 <em>featureCount()</em>. You may read more on the methods in the
 <a class="reference external" href="https://qgis.org/pyqgis/3.4/core/QgsVectorLayer.html">documentation</a>
 or call <em>help()</em> on the object for the same information:</p>
@@ -430,7 +433,7 @@ we can run, edit and save Python scripts. Click the middle icon on the
 top row of the console and an editor with blank text field should
 appear.</p>
 <div class="figure" id="id3">
-<img alt="Console and editor" src="lessons/L7/img/konsoli_ja_editori.png" />
+<img alt="Console and editor" src="../../_images/konsoli_ja_editori.png" />
 <p class="caption"><span class="caption-text">Console and editor</span></p>
 </div>
 <p>Next, apply the code created previously and make a function. The
@@ -464,10 +467,13 @@ code editor.</p>
 </div>
 <div class="section" id="creating-qgis-plugins">
 <h1>Creating QGIS plugins<a class="headerlink" href="#creating-qgis-plugins" title="Permalink to this headline">¶</a></h1>
-<p><strong>Please note: the instructions below have been created for Windows
-systems. While all of the instructions can be replicated on other OS’s,
-platform differences do apply.</strong></p>
-<p>Plugins extend the functionality of the base installation. Written in
+<div class="admonition-note admonition">
+<p class="first admonition-title">Note</p>
+<p class="last">The instructions below have been created for Windows
+systems. While all of the instructions can be replicated on other operating systems,
+platform differences do apply.</p>
+</div>
+<p>Plugins extend the functionality of the base installation of QGIS. Written in
 Python, they can be shared via the official plugin repository if they
 <a class="reference external" href="https://docs.qgis.org/testing/en/docs/pyqgis_developer_cookbook/plugins/releasing.html">pass the
 requirements</a>
@@ -488,7 +494,7 @@ plugin.</p>
 <p>Open up <em>Builder</em> and start filling the fields as shown below. Since
 we’re only creating a toy example, no need to be too serious:</p>
 <div class="figure" id="id4">
-<img alt="Plugin builder beginning" src="lessons/L7/img/plugin_builder.png" />
+<img alt="Plugin builder beginning" src="../../_images/plugin_builder.png" />
 <p class="caption"><span class="caption-text">Plugin builder beginning</span></p>
 </div>
 <p>You may keep the default settings throughout the wizard until the final
@@ -501,13 +507,13 @@ with some folders and other files. Click onwards to one of the folders:
 <em>Python &gt; plugins</em>. This is QGIS plugin’s default installation folder.
 Example location below:</p>
 <div class="figure" id="id5">
-<img alt="Folder location" src="lessons/L7/img/tallennussijainti.png" />
+<img alt="Folder location" src="../../_images/tallennussijainti.png" />
 <p class="caption"><span class="caption-text">Folder location</span></p>
 </div>
 <p>Copy the path to this location and paste it as <em>Plugin Builder’s</em> output
 directory:</p>
 <div class="figure" id="id6">
-<img alt="Plugin builder output" src="lessons/L7/img/plugin_builder_output.png" />
+<img alt="Plugin builder output" src="../../_images/plugin_builder_output.png" />
 <p class="caption"><span class="caption-text">Plugin builder output</span></p>
 </div>
 <p>Nice nice! Now just generate the plugin. You may get an error about
@@ -531,12 +537,16 @@ You’ll need to install something called pb_tool. Windows users might
 also find this tool handy if you want to get into serious plugin
 development.</p>
 <p>Create a new plain textfile in the plugin folder and copy the following
-commands to that file. <strong>IMPORTANT: Replace the filepath with the path
+commands to that file.</p>
+<div class="admonition-note admonition">
+<p class="first admonition-title">Note</p>
+<p class="last">Replace the filepath with the path
 to your computer’s installation. At the very least you’ll need to
 replace QGIS 3.X with the version number of your installation, e.g.&nbsp;QGIS
 3.4. The installation could also be somewhere else or in location
-C::raw-latex:`OSGeo`4W64…</strong><a class="reference external" href="http://www.qgistutorials.com/en/docs/3/building_a_python_plugin.html">Read more
-here</a></p>
+<cite>C:OSGeo4W64…</cite> <a class="reference external" href="http://www.qgistutorials.com/en/docs/3/building_a_python_plugin.html">Read more
+here</a>.</p>
+</div>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@echo</span> <span class="n">off</span>
 <span class="n">call</span> <span class="s2">&quot;C:\Program Files\QGIS 3.X</span><span class="se">\b</span><span class="s2">in\o4w_env.bat&quot;</span>
 <span class="n">call</span> <span class="s2">&quot;C:\Program Files\QGIS 3.X</span><span class="se">\b</span><span class="s2">in\qt5_env.bat&quot;</span>
@@ -551,7 +561,7 @@ simply double click to run it. If all goes well, a new <em>resources</em> file
 should pop up: this time it’s Python code. You plugin folder should look
 something like this:</p>
 <div class="figure" id="id7">
-<img alt="After compiling the plugin" src="lessons/L7/img/plugin_kansio_compilingin_jalkeen.png" />
+<img alt="After compiling the plugin" src="../../_images/plugin_kansio_compilingin_jalkeen.png" />
 <p class="caption"><span class="caption-text">After compiling the plugin</span></p>
 </div>
 </div>
@@ -562,7 +572,7 @@ manager. Our new plugin should be listed in <em>installed</em> plugins. Click
 it active. A new icon should appear both on the <em>Plugins</em> drop-down menu
 and on the top toolbar. Run the plugin:</p>
 <div class="figure" id="id8">
-<img alt="Plugin at the beginning" src="lessons/L7/img/plugin_alkutila.png" />
+<img alt="Plugin at the beginning" src="../../_images/plugin_alkutila.png" />
 <p class="caption"><span class="caption-text">Plugin at the beginning</span></p>
 </div>
 <p>Cool! Too bad it doesn’t do anything yet – all the default buttons do is
@@ -599,7 +609,7 @@ folder. From there, you ought to see a <em>.ui</em> file called
 <em>line_length_calculator_dialog_base.ui</em>. Select this. The UI, called
 dialog, should look similar to how it looks in QGIS (that is, bland).</p>
 <div class="figure" id="id9">
-<img alt="qt_designer beginning" src="lessons/L7/img/qt_designer_alkuvaiheessa.png" />
+<img alt="qt_designer beginning" src="../../_images/qt_designer_alkuvaiheessa.png" />
 <p class="caption"><span class="caption-text">qt_designer beginning</span></p>
 </div>
 <p>On the left you can see a panel of different ui elements, or widgets.
@@ -622,7 +632,7 @@ the button should change immediately.</li>
 </ul>
 <p>The result should look something like below:</p>
 <div class="figure" id="id10">
-<img alt="qt_designer end" src="lessons/L7/img/qt_designer_lopussa.png" />
+<img alt="qt_designer end" src="../../_images/qt_designer_lopussa.png" />
 <p class="caption"><span class="caption-text">qt_designer end</span></p>
 </div>
 <p>Aaand we’re done here! <strong>Save the changes</strong> and close Qt Designer.</p>
@@ -704,14 +714,17 @@ plugin with <em>Plugin reloader</em> for the changes to take effect
 <p>The plugin should look something like this and function identically to
 the script made above.</p>
 <div class="figure" id="id11">
-<img alt="plugin final" src="lessons/L7/img/plugin_lopullinen.png" />
+<img alt="plugin final" src="../../_images/plugin_lopullinen.png" />
 <p class="caption"><span class="caption-text">plugin final</span></p>
 </div>
-<p>There are many ways to expand even this simple plugin. Can you for
+<div class="admonition-note admonition">
+<p class="first admonition-title">Note</p>
+<p class="last"><strong>TASK:</strong> There are many ways to expand even this simple plugin. For example, can you
 example think of a way to check that the layer object is not empty
 (which results in an error)? Or let user select the layer from a
 drop-down box instead of using the active layer?
 (<a class="reference external" href="https://gis.stackexchange.com/questions/118862/getting-list-of-layer-names-using-pyqgis">Hint</a>)</p>
+</div>
 </div>
 <div class="section" id="additional-resources">
 <h2>Additional resources<a class="headerlink" href="#additional-resources" title="Permalink to this headline">¶</a></h2>
@@ -769,7 +782,7 @@ by Ujaval Gandhi</li>
     <p>
         &copy; Copyright 2019, Henrikki Tenkanen and Vuokko Heikinheimo, Digital Geography Lab, University of Helsinki
       <span class="lastupdated">
-        Last updated on Dec 08, 2019.
+        Last updated on Dec 09, 2019.
       </span>
 
     </p>
