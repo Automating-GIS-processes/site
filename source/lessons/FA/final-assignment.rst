@@ -11,7 +11,7 @@ Final assignment
 
 .. admonition:: Summary
 
-    `Summary of the Final Assignment instructions (PDF) <autogis-final-work-intro.pdf>`__
+    `Summary of the Final Assignment instructions (PDF) <../../_static/autogis-final-work-intro.pdf>`__
 
 
 Aim of the work
