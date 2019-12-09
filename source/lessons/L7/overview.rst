@@ -6,10 +6,11 @@ Lesson 7 Overview
 
 In this lesson we will take a quick tour on **how to use Python in QGIS**:
 
-1. :doc:`Introduction to PyQGIS and building plugins <pyqgis>`
-2. :doc:`Additional PyQGIS functions <additional_pyqgis_functions>`
+1. :doc:`Introduction to PyQGIS <pyqgis>`
+2. :doc:`Creating QGIS plugins <pyqgis#creating-qgis-plugins>`
+3. :doc:`Additional PyQGIS functions <additional_pyqgis_functions>`
 
-Credits to Tatu Leppämäki for compiling these materials!
+*Credits to Tatu Leppämäki for compiling these materials!*
 
 Learning objectives
 -------------------
@@ -20,8 +21,8 @@ QGIS Python console, and learn how to create a simple QGIS plugin that applies P
 
 .. admonition:: Note
 
-    There is no exercise in week 6! You can now continue to the **Final Assignment**. Also, please find additional
-    materials related to **raster data processing** on these course pages.
+    There is no exercise in week 6! You can now continue to the :doc:`<../FA/final-assignment.rst>` . Also, please find additional
+    materials related to :doc:`<../Raster/overview>` on these course pages.
 
 
 .. admonition:: Older course materials related to Desktop GIS software
