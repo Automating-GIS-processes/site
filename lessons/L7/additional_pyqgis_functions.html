@@ -181,14 +181,8 @@
 <li class="toctree-l1"><a class="reference internal" href="pyqgis.html">Python in QGIS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pyqgis.html#creating-qgis-plugins">Creating QGIS plugins</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Additional PyQGIS functions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#buffer-party">Buffer Party</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#challenges">Challenges:</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#polygon-drawing-window">Polygon drawing window</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1">Challenges</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#buffer-party">Buffer Party</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#polygon-drawing-window">Polygon drawing window</a></li>
 </ul>
 </li>
 </ul>
@@ -316,7 +310,7 @@ coding challenges below them.</p>
 <p>This function takes the currently active QgsVectorLayer and creates
 buffers of random size around each individual feature. The user can
 define the min and max size of the buffers when calling the function.</p>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
 
 <span class="k">def</span> <span class="nf">bufferParty</span><span class="p">(</span><span class="n">min_length</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;This function takes the currently active (vector) layer, loops through its</span>
@@ -365,9 +359,9 @@ define the min and max size of the buffers when calling the function.</p>
 <span class="n">bufferParty</span><span class="p">(</span><span class="n">min_length</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="section" id="challenges">
-<h3>Challenges:<a class="headerlink" href="#challenges" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
+<div class="admonition-tasks admonition">
+<p class="first admonition-title">Tasks</p>
+<ul class="last simple">
 <li>Can you think of a way to check that the current layer is indeed a
 vector layer and not raster or empty?</li>
 <li>Can you think of a way keep the original attributes in the new layer
@@ -382,7 +376,7 @@ e.g.&nbsp;<a class="reference external" href="https://qgis.org/pyqgis/3.2/core/F
 by clicking on the canvas. When user closes the window, the map points
 are printed in console. Consists of two classes with multiple methods:
 the window itself and the polygon drawing tool.</p>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">drawWindow</span><span class="p">(</span><span class="n">QMainWindow</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">drawWindow</span><span class="p">(</span><span class="n">QMainWindow</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Initializing the necessary resources.&quot;&quot;&quot;</span>
         <span class="n">QMainWindow</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -577,9 +571,9 @@ the window itself and the polygon drawing tool.</p>
 <span class="n">myDrawWindow</span><span class="o">.</span><span class="n">showWindow</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="section" id="id1">
-<h3>Challenges<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
+<div class="admonition-tasks admonition">
+<p class="first admonition-title">Tasks</p>
+<ul class="last simple">
 <li>The polygon is drawn in an eye catching red. Find where the color is
 defined, figure out how it works and change it to something else</li>
 <li>Check out method showWindow in class drawWindow. There’s some code
@@ -612,7 +606,7 @@ layer to the map canvas to use for drawing reference.</li>
     <p>
         &copy; Copyright 2019, Henrikki Tenkanen and Vuokko Heikinheimo, Digital Geography Lab, University of Helsinki
       <span class="lastupdated">
-        Last updated on Dec 08, 2019.
+        Last updated on Dec 09, 2019.
       </span>
 
     </p>
