@@ -21,8 +21,8 @@ QGIS Python console, and learn how to create a simple QGIS plugin that applies P
 
 .. admonition:: Note
 
-    There is no exercise in week 6! You can now continue to the :doc:`<../FA/final-assignment.rst>` . Also, please find additional
-    materials related to :doc:`<../Raster/overview>` on these course pages.
+    There is no exercise in week 6! You can now continue to the **Final Assignment**. Also, please find additional
+    materials related to **raster data processing** on these course pages.
 
 
 .. admonition:: Older course materials related to Desktop GIS software
