@@ -58,6 +58,8 @@
   <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Python in QGIS" href="pyqgis.html" />
+    <link rel="prev" title="Exercise 6" href="../L6/exercise-6.html" />
     <link href="../../_static/geo-python.css" rel="stylesheet" type="text/css">
      
 
@@ -173,6 +175,28 @@
 <li class="toctree-l1"><a class="reference internal" href="../../notebooks/L6/network-analysis.html">Network analysis in Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../L6/exercise-6.html">Exercise 6</a></li>
 </ul>
+<p class="caption"><span class="caption-text">Lesson 7</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Lesson 7 Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#learning-objectives">Learning objectives</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pyqgis.html">Python in QGIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyqgis.html#creating-qgis-plugins">Creating QGIS plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="additional_pyqgis_functions.html">Additional PyQGIS functions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Raster</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Raster/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Raster/download-data.html">Automatize data download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/Raster/reading-raster.html">Reading raster files with Rasterio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/Raster/plotting-raster.html">Visualizing raster layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/Raster/clipping-raster.html">Masking / clipping raster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/Raster/raster-map-algebra.html">Raster map algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/Raster/raster-mosaic.html">Creating a raster mosaic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/Raster/zonal-statistics.html">Zonal statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/Raster/read-cogs.html">Read Cloud Optimized Geotiffs</a></li>
+</ul>
 <p class="caption"><span class="caption-text">Final Assignment</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../FA/final-assignment.html">Final assignment</a></li>
@@ -279,22 +303,29 @@
 <div class="figure">
 <a class="reference internal image-reference" href="../../_images/L7-01-overview-01-pyqgis.svg"><img alt="../../_images/L7-01-overview-01-pyqgis.svg" src="../../_images/L7-01-overview-01-pyqgis.svg" width="500px" /></a>
 </div>
-<p>This week we will take a quick tour on <strong>how to use Python in QGIS</strong> using the <a class="reference external" href="http://docs.qgis.org/3.4/en/docs/user_manual/processing/index.html">processing</a> framework.</p>
-<div class="admonition-older-course-materials-related-to-despltop-gis-software admonition">
-<p class="first admonition-title">Older course materials related to Despltop GIS software</p>
+<p>In this lesson we will take a quick tour on <strong>how to use Python in QGIS</strong>:</p>
+<ol class="arabic simple">
+<li><a class="reference internal" href="pyqgis.html"><span class="doc">Introduction to PyQGIS</span></a></li>
+<li><span class="xref std std-doc">Creating QGIS plugins</span></li>
+<li><a class="reference internal" href="additional_pyqgis_functions.html"><span class="doc">Additional PyQGIS functions</span></a></li>
+</ol>
+<p><em>Credits to Tatu Leppämäki for compiling these materials!</em></p>
+<div class="section" id="learning-objectives">
+<h2>Learning objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">¶</a></h2>
+<p>The aim of this lesson is to get started with using Python in QGIS. You will learn to run code from
+QGIS Python console, and learn how to create a simple QGIS plugin that applies Python functions.</p>
+<div class="admonition-note admonition">
+<p class="first admonition-title">Note</p>
+<p class="last">There is no exercise in week 6! You can now continue to the <strong>Final Assignment</strong>. Also, please find additional
+materials related to <strong>raster data processing</strong> on these course pages.</p>
+</div>
+<div class="admonition-older-course-materials-related-to-desktop-gis-software admonition">
+<p class="first admonition-title">Older course materials related to Desktop GIS software</p>
 <ul class="last simple">
 <li><a class="reference external" href="https://automating-gis-processes.github.io/2016/Lesson6-overview.html">AutoGIS course materials from 2016</a> on how to use the <a class="reference external" href="http://desktop.arcgis.com/en/arcmap/10.3/analyze/arcpy/what-is-arcpy-.htm">arcpy</a>  module for automating GIS processes.</li>
 <li><a class="reference external" href="https://automating-gis-processes.github.io/site/2018/lessons/L7/pyqgis.html">AutoGIS course materials from 2018 on how to run python scripts in the QGIS processing toolbox</a></li>
 </ul>
 </div>
-<div class="section" id="learning-objectives">
-<h2>Learning objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">¶</a></h2>
-<p>The aim of this lesson is to get familiar with using Python in QGIS.</p>
-<ul class="simple">
-<li>QGIS plugin demo</li>
-<li>Overview of building QGIS plugins using Python</li>
-<li>Quick overview of PyQGIS; how to run QGIS algorithms using Python.</li>
-</ul>
 </div>
 </div>
 
@@ -304,6 +335,15 @@
           </div>
           <footer>
   
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pyqgis.html" class="btn btn-neutral float-right" title="Python in QGIS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../L6/exercise-6.html" class="btn btn-neutral float-left" title="Exercise 6" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
 
   <hr/>
 
@@ -311,7 +351,7 @@
     <p>
         &copy; Copyright 2019, Henrikki Tenkanen and Vuokko Heikinheimo, Digital Geography Lab, University of Helsinki
       <span class="lastupdated">
-        Last updated on Dec 05, 2019.
+        Last updated on Dec 09, 2019.
       </span>
 
     </p>
