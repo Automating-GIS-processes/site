@@ -1,142 +1,513 @@
 Python in QGIS
-==============
+--------------
 
-The core application and libraries of QGIS are programmed in C++. Nevertheless, Python plays an important role in its ecosystem:
-Most of the pre-installed plugins and even some of the data provider modules are written in Python,
-and virtually all functions of the interface and the libraries are exported to a Python API (*Application Programming Interface*).
-It takes only moderate effort to author extensions to QGIS which integrate seamlessly into its user interface,
-create stand-alone applications using components of QGIS, such as a map window or a data backend,
-or run custom scripts within QGIS. T
-o really dive into it, see the `PyQGIS Developer Cookbook <http://docs.qgis.org/3.4/en/docs/pyqgis_developer_cookbook/intro.html>`_
-which walks you from easy *Hello World* examples to writing your own applications.
+The core application and libraries of QGIS are programmed in C++.
+Nevertheless, Python plays an important role in its ecosystem: Most of
+the pre-installed plugins and even some of the data provider modules are
+written in Python, and virtually all functions of the interface and the
+libraries are exported to a Python API (Application Programming
+Interface). It takes only moderate effort to author extensions to QGIS
+which integrate seamlessly into its user interface, create stand-alone
+applications using components of QGIS, such as a map window or a data
+backend, or run custom scripts within QGIS. To really dive into using
+Python in QGIS, see the `PyQGIS Developer
+Cookbook <https://docs.qgis.org/3.4/en/docs/pyqgis_developer_cookbook/intro.html>`__
+which walks you from easy Hello World examples to writing your own
+applications.
 
-Here, we will introduce some wery basic ways of using Python programming in QGIS. As inspiration, we have used the
-excellent `tutorial by Anita Graser <https://anitagraser.com/pyqgis-101-introduction-to-qgis-python-programming-for-non-programmers/>`__.
+Today, we will concentrate on basic functionalities of Python in QGIS,
+or PyQGIS for short. You will learn to run code from the integrated
+Python console, then write a simple Python script and finally apply the
+script’s functionality to your very own plugin.
 
-Using a Python console
-----------------------
+Sample data for this tutorial
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-There is (at least) two different Python consoles available within QGIS:
+To get us started, we’ll need some data. Open QGIS and connect to the
+City of Helsinki’s WFS service from *Layer > Add layer > Add WFS layer*:
 
-1. Access the **built-in Python console** from the menu *Plugins → Python Console*. It offers basic functionality, and allows to load and save scripts from and to files.
+- Create a new connection to URL
+http://kartta.hel.fi/ws/geoserver/avoindata/wfs and load the layer list.
+- Select, for example, the Metro railway lines
+(*Seutukartta_liikenne_metro_rata*).
+- **Make sure the coordinate system is set to a projected one**, like ETRS89/GK25FIN (EPSG:3879) before
+adding the layer.
 
-.. figure:: img/L7-02-pyqgis-00-builtin-python-console.png
+Running PyQGIS code in console
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-2. The more advanced **iPython console** has to be installed as a Plugin before first use:
-   - Go to *Plugins → Manage and Install Plugins*, 
-   - Select to search in *All* plugins, and type `ipython` into the search field.
-   - Select the **IPyConsole** plugin, and click *Install plugin*
+Now that we’re set, let’s open QGIS’s Python console and get to work!
+Open it from *Plugins > Python console* or use the shortcut
+``Ctrl+Alt+P`` on your keyboard.
 
-.. figure:: img/L7-02-pyqgis-01-install-ipyconsole.png
+.. figure:: img/konsoli_alussa.png
+   :alt: Console and editor
 
-.. note:: IPython or Jupyter have to be installed on your computer, see the plugin description for instructions on how to install these requirements. On MS Windows operating systems, installing these modules unfortunately is not straightforward. `This blog post <https://www.lutraconsulting.co.uk/blog/2016/03/02/installing-third-party-python-modules-in-qgis-windows/>`_ has step-by-step instructions (replace ``lxml`` with ``qtconsole`` and ``jupyter==1.0.0``)
+   Console and editor
 
-The console is now available from the menu *Plugins → IPython QGIS Console → Windowed*
+By default an iface object is imported, which allows the access to the
+currently active QGIS instance’s user interface. For example, we can
+easily retrieve the active (selected) layer, then access its type, name,
+and count its features:
 
-.. figure:: img/L7-02-pyqgis-02-ipyconsole.png
+.. code:: ipython3
 
+    # Get active layer:
+    >>> layer = iface.activeLayer()
+    
+    # Let's see what we got
+    >>> print(type(layer))
+    <class 'qgis._core.QgsVectorLayer'>
+    
+    >>> print(layer.sourceName())
+    Seutukartta_liikenne_metro_rata
+    
+    >>> print(layer.featureCount())
+    3
+
+The layer we got is an object of class *QgsVectorLayer*, which in turn
+is within QGIS’s *core* module. There are `seven modules in
+total <https://qgis.org/api/modules.html>`__ each housing *classes*
+critical for the program.
+
+Above, we call QgsVectorLayer’s methods like
+*featureCount()*. You may read more on the methods in the
+`documentation <https://qgis.org/pyqgis/3.4/core/QgsVectorLayer.html>`__
+or call *help()* on the object for the same information:
+
+.. code:: ipython3
+
+    >>> help(layer)
+    Help on QgsVectorLayer in module qgis._core object:
+    
+    class QgsVectorLayer(QgsMapLayer, QgsExpressionContextGenerator, QgsExpressionContextScopeGenerator, QgsFeatureSink, QgsFeatureSource)
+     |  QgsVectorLayer(path: str = '', baseName: str = '', providerLib: str = '', options: QgsVectorLayer.LayerOptions = QgsVectorLayer.LayerOptions())
+     |  Constructor - creates a vector layer
+     |
+        ...
+
+Like the documentation shows, we can use a method to access the features
+(=rows on the attribute table) of the layer. Let’s loop through `the
+features <https://qgis.org/pyqgis/3.4/core/QgsFeature.html#qgis.core.QgsFeature>`__
+and print out attributes from each feature:
+
+.. code:: ipython3
+
+    >>> for feat in layer.getFeatures():
+            # attributes() returns a list of attributes assosiated with that feature
+            # we'll print the second entries on the lists, which correspond to the 'metrorata' column
+    ...     print(feat.attributes()[1])
+    Vuosaari
+    Länsimetro
+    Mellunmäki
+
+If the features are geographical, they’ll have *geometry* as well as
+attributes. `The geometry
+objects <https://qgis.org/pyqgis/3.0/core/Geometry/QgsGeometry.html>`__
+have a method for calculating the length of an feature in map units.
+We’ll use this to our advantage and create a simple program for summing
+up the total length of line features in the selected layer and print
+this out in kilometers:
+
+.. code:: ipython3
+
+    # variable to house the sum of the lengths
+    >>> total_length = 0
+    
+    >>> for feat in layer.getFeatures():
+    ...    geometry = feat.geometry()
+    ...    total_length += geometry.length()
+    
+    # printing and transforming the result (rounded to one decimal point) to km
+    >>> print("Total length of features in layer "+ layer.sourceName()+ " is:", round(total_length/1000, 1), "km")
+    Total length of features in layer Seutukartta_liikenne_metro_rata is: 34.8 km
+
+Creating PyQGIS scripts
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Great! But what if we want to show someone our cool function or reuse
+the code? Thankfully QGIS also includes a simple code editor, from which
+we can run, edit and save Python scripts. Click the middle icon on the
+top row of the console and an editor with blank text field should
+appear.
+
+.. figure:: img/konsoli_ja_editori.png
+   :alt: Console and editor
+
+   Console and editor
+
+Next, apply the code created previously and make a function. The
+function gets the active layer, calculates the length of its features
+and then prints the result in the console. Although it’s in poor form to
+have so many separate tasks for one function, we do it like this to make
+things more straightforward later on.
+
+.. code:: ipython3
+
+    def lineLengthCalc():
+        """Sums together the length of features in a line type vector layer, then prints the result in km."""
+        # get the current active layer
+        layer = iface.activeLayer()
+        
+        total_length = 0
+    
+        for feat in layer.getFeatures():
+            geometry = feat.geometry()
+            total_length += geometry.length()
+            
+        # print out the result
+        print("Total length of features in layer "+ layer.sourceName()+ " is:", round(total_length/1000, 1), "km")
+        
+    # call the function
+    lineLengthCalc()
+
+Run the script to make sure it works. After that, save the result as a
+script file *lineLengthCalculator.py*. You may open it anytime from the
+code editor.
+
+Next up, we’ll apply the script code to an extremely simple plugin.
+
+Creating QGIS plugins
+---------------------
 
 
 .. admonition:: Note
 
-    In the following steps, we are using the municipalities of Finland from the Statistics Finland
-    web feature service: http://geo.stat.fi/geoserver/tilastointialueet/wfs ("Kunnat 2019").
-    You can also use any other vector layer as `layer`.
+    The instructions below have been created for Windows
+    systems. While all of the instructions can be replicated on other operating systems,
+    platform differences do apply.
 
-.. figure:: img/add_wfs_layer.png
+Plugins extend the functionality of the base installation of QGIS. Written in
+Python, they can be shared via the official plugin repository if they
+`pass the
+requirements <https://docs.qgis.org/testing/en/docs/pyqgis_developer_cookbook/plugins/releasing.html>`__
+or be installed from .zip packages. Whatever the method, a `handful of
+files <https://docs.qgis.org/testing/en/docs/pyqgis_developer_cookbook/plugins/releasing.html#plugin-structure>`__
+is always required. These include the main code *.py* files, files
+relating to the user interface and a metadata text file. Creating these
+by hand would be tedious and time consuming – thankfully it’s also
+needless, since we can get a plugin to do it for us!
+
+Next, open the plugin manager (*Manage and install plugins*) and install
+two plugins that’ll help us greatly: Plugin Builder and Plugin Reloader.
+If you can’t find these, make sure Experimental plugins are enabled from
+plugin manager settings. *Builder* will create a plugin base in which to
+apply the functionality and *Reloader* will greatly help in testing the
+plugin.
+
+Creating the plugin base
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Open up *Builder* and start filling the fields as shown below. Since
+we’re only creating a toy example, no need to be too serious:
+
+.. figure:: img/plugin_builder.png
+   :alt: Plugin builder beginning
+
+   Plugin builder beginning
+
+You may keep the default settings throughout the wizard until the final
+window (*Select output directory*). On this example, we’ll want to
+create the plugin directly to where QGIS installs them, in the active
+user profile. The path to this folder can be a tricky one, but you’ll
+find a shortcut from QGIS’s toolbar: *Settings > User Profiles > Open
+active profile folder*. This should open a file navigator in a location
+with some folders and other files. Click onwards to one of the folders:
+*Python > plugins*. This is QGIS plugin’s default installation folder.
+Example location below:
+
+.. figure:: img/tallennussijainti.png
+   :alt: Folder location
+
+   Folder location
+
+Copy the path to this location and paste it as *Plugin Builder’s* output
+directory:
+
+.. figure:: img/plugin_builder_output.png
+   :alt: Plugin builder output
+
+   Plugin builder output
+
+Nice nice! Now just generate the plugin. You may get an error about
+compiling resources, but we’ll ignore that for now. Check the *python >
+plugins* folder and you ought to find the freshly made plugin.
+
+Initializing
+~~~~~~~~~~~~
+
+The plugin’s not quite ready for use yet, we have to make one more
+rather tedious thing to make it functional. Open
+*line_length_calculator* folder and you’ll find a file called
+*resources.qrc*. This file’s required by the ui system (Qt), but we need
+to compile it to a *.py* file before the plugin will run (a more
+detailed `explanation
+here <https://gis-ops.com/qgis-3-qt-designer-explained/#qt-resourcesqrc>`__).
+For this purpose, we’ll create something called a *batch file*.
+
+Please note that this approach made for Windows computers. See `Ujaval
+Gandhi’s instructions for Mac and
+Linux <http://www.qgistutorials.com/en/docs/3/building_a_python_plugin.html>`__.
+You’ll need to install something called pb_tool. Windows users might
+also find this tool handy if you want to get into serious plugin
+development.
+
+Create a new plain textfile in the plugin folder and copy the following
+commands to that file.
 
 
-If you have not installed the IPyConsole, you can also repeat the following steps in the stardard Python Console in QGIS.
+.. admonition:: Note
 
-By default an ``iface`` object is imported, which allows the access to the currently active QGIS instance’s user interface.
-For example, we can easily load a new layer to QGIS, or start interacting with an existing layer in the session:
+    Replace the filepath with the path
+    to your computer’s installation. At the very least you’ll need to
+    replace QGIS 3.X with the version number of your installation, e.g. QGIS
+    3.4. The installation could also be somewhere else or in location
+    `C:\OSGeo4W64...` `Read more
+    here <http://www.qgistutorials.com/en/docs/3/building_a_python_plugin.html>`__.
 
-- Add a vector layer from a web feature service to the QGIS interface, and store it also in a variable called `layer`:
+.. code:: ipython3
 
-.. code:: python
+    @echo off
+    call "C:\Program Files\QGIS 3.X\bin\o4w_env.bat"
+    call "C:\Program Files\QGIS 3.X\bin\qt5_env.bat"
+    call "C:\Program Files\QGIS 3.X\bin\py3_env.bat"
+    
+    @echo on
+    pyrcc5 -o resources.py resources.qrc
 
-    # Define source (vector layer)
-    source = "http://geo.stat.fi/geoserver/tilastointialueet/wfs?request=GetFeature&typename=tilastointialueet:kunta1000k_2019"
+Save the textfile with the file format marking as *compile.bat*. Then
+simply double click to run it. If all goes well, a new *resources* file
+should pop up: this time it’s Python code. You plugin folder should look
+something like this:
 
-    # Add layer from the source ti the QGIS session:
-    layer = iface.addVectorLayer(url, "admin_areas", "ogr")
+.. figure:: img/plugin_kansio_compilingin_jalkeen.png
+   :alt: After compiling the plugin
 
+   After compiling the plugin
 
-- In case you already have some layers open in the interface, can start working with one of them:
+Developing the plugin
+~~~~~~~~~~~~~~~~~~~~~
 
-.. code:: python
+Now we can get to business. First restart QGIS and then open the plugin
+manager. Our new plugin should be listed in *installed* plugins. Click
+it active. A new icon should appear both on the *Plugins* drop-down menu
+and on the top toolbar. Run the plugin:
 
-    # Get active layer:
-    layer = iface.activeLayer()
+.. figure:: img/plugin_alkutila.png
+   :alt: Plugin at the beginning
 
-- Check basic properties of the layer:
+   Plugin at the beginning
 
-.. code:: python
+Cool! Too bad it doesn’t do anything yet – all the default buttons do is
+close the window. We’ll fix that next.
 
-    # Print layer name
-    print(layer.name())
+Go back to your plugin’s folder. Open up the Python file
+*line_length_calculator.py* in any code or text editor, for example
+IDLE.
 
-    # Number of features
-    print(layer.featureCount())
+This file, automatically created by Plugin Builder, contains all the
+necessary elements to quickly get your plugin running. It for example
+imports some necessary methods from QGIS’s modules (we didn’t need to do
+this when scripting, since most necessary methods are imported
+automatically to QGIS’s own Python console). See also how you plugin is
+a *class* that includes many methods and that a reference to the
+interface is saved at the very beginning as *self.iface*. We’re not
+interested in most of the content, however.
 
-Next, you can ask python to, for example, open the attribute table of that layer:
+Scroll down to the very bottom of the file and you’ll find a method
+called *run*. This section of the code is activated any time the user
+activates the plugin. Paste the method *lineLengthCalc* from the script
+we created earlier below the run method. Make sure it’s correctly
+indented!
 
-.. code:: python
+Now all we need is some handy way for the user to call the method. For
+that, we’ll need to do a bit of user interface design.
 
-    # Open attribute table in a new window
-    iface.showAttributeTable(layer)
+Adding UI elements
+~~~~~~~~~~~~~~~~~~
 
+Like mentioned earlier, the user interface of plugins (and QGIS in
+general) is handled by a flexible ui framework called
+`Qt <https://pypi.org/project/PyQt5/>`__. We could add elements like
+buttons programmatically, but there’s also a handy graphic interface
+packaged with most QGIS distributions. **Open Qt Designer with QGIS 3.xx
+custom widgets**.
 
-.. figure:: img/municipalities_attributes.png
+In the *New Form* dialog, select *Open…* and navigate to your plugin’s
+folder. From there, you ought to see a *.ui* file called
+*line_length_calculator_dialog_base.ui*. Select this. The UI, called
+dialog, should look similar to how it looks in QGIS (that is, bland).
 
-We can also view all the attributes in the console:
+.. figure:: img/qt_designer_alkuvaiheessa.png
+   :alt: qt_designer beginning
 
-.. code:: python
+   qt_designer beginning
 
-    # Print column names
-    for field in layer.fields():
-        print(field.name()))
+On the left you can see a panel of different ui elements, or widgets.
+There are options ranging from lists, sliders and text boxes to QGIS
+specific widgets like coordinate extent boxes. On the right you can see
+objects inserted in the plugin base and modify their attributes. Nothing
+there except for the default *Ok/Cancel* button box.
 
+Time to populate the plugin. Drag a *Push button* to the middle of the
+plugin. You may resize it to be more noticiable. Also notice how a
+*pushButton* object has been added to the list in *Object inspector*.
+Select it and modify a few things in the property editor directly below
+it.
 
-You can access a help text on objects using ``help()``:
+-  Change objectName from pushButton to lineLengthButton.
 
-.. code:: python
+Scroll down and:
 
-    In [1]: help(layer)
-    Out[1]: Help on QgsVectorLayer in module qgis._core object:
+-  Change text from PushButton to *Calculate line lengths*. The text in
+   the button should change immediately.
+
+The result should look something like below:
+
+.. figure:: img/qt_designer_lopussa.png
+   :alt: qt_designer end
+
+   qt_designer end
+
+Aaand we’re done here! **Save the changes** and close Qt Designer.
+
+Linking UI to code
+~~~~~~~~~~~~~~~~~~
+
+Our final task in this exercise is to link the method created earlier to
+this button so that every time the user clicks on the button, the line
+length method is called. All we need is a few additions and
+modifications to the code.
+
+UI elements in Qt send something called *signals* when various things
+happen to them – they’re for example clicked and so a signal is sent
+out. We need to tie this signal to a *slot* that could e.g. be a method
+that’s run.
+
+Let’s do just that. Paste the bottommost line of code to *run* method,
+below the conditional clause *if self.first_start\_ == True*:
+
+.. code:: ipython3
+
+            if self.first_start == True:
+                self.first_start = False
+                self.dlg = LineLengthCalculatorDialog()
+                self.dlg.lineLengthButton.clicked.connect(self.lineLengthCalc)
+
+Transforming that line into plain language, it reads:
+
+::
+
+   In this dialog, every time lineLengthButton is pressed, run the method lineLengthCalc.
+
+The very very final thing is to modify *lineLengthCalc* sligthly. Add a
+reference to *self* as the method’s parameter (wanna know why? `Read
+this <https://medium.com/quick-code/understanding-self-in-python-a3704319e5f0>`__):
+
+.. code:: ipython3
+
+        def lineLengthCalc(self):
+
+Also add *self* in front of *iface*. Like this:
+
+.. code:: ipython3
+
+            layer = self.iface.activeLayer()
+
+All in all, the bottom of the file should look something like this:
+
+.. code:: ipython3
+
+        def run(self):
+            """Run method that performs all the real work"""
+    
+            # Create the dialog with elements (after translation) and keep reference
+            # Only create GUI ONCE in callback, so that it will only load when the plugin is started
+            if self.first_start == True:
+                self.first_start = False
+                self.dlg = LineLengthCalculatorDialog()
+                self.dlg.lineLengthButton.clicked.connect(self.lineLengthCalc)
+    
+            # show the dialog
+            self.dlg.show()
+            # Run the dialog event loop
+            result = self.dlg.exec_()
+            # See if OK was pressed
+            if result:
+                # Do something useful here - delete the line containing pass and
+                # substitute with your code.
+                pass
+    
+        def lineLengthCalc(self):
+            """Sums together the length of features in a line type vector layer, then prints the result in km."""
+            # get the current active layer
+            layer = self.iface.activeLayer()
+        
+            total_length = 0
+    
+            for feat in layer.getFeatures():
+                geometry = feat.geometry()
+                total_length += geometry.length()
             
-            class QgsVectorLayer(QgsMapLayer, QgsExpressionContextGenerator, QgsFeatureSink, QgsFeatureSource)
-             |  Represents a vector layer which manages a vector based data sets.
-             |  
-             |   The QgsVectorLayer is instantiated by specifying the name of a data provider,
-             |   such as postgres or wfs, and url defining the specific data set to connect to.
-             |   The vector layer constructor in turn instantiates a QgsVectorDataProvider subclass
-             |   corresponding to the provider type, and passes it the url. The data provider
-             |   connects to the data source.
-             |  
-             |   The QgsVectorLayer provides a common interface to the different data types. It also
-             |   manages editing transactions.
-             |  
-             |    Sample usage of the QgsVectorLayer class:
-             |  
-             |   \code
-             |       QString uri = "point?crs=epsg:4326&field=id:integer";
-             |       QgsVectorLayer *scratchLayer = new QgsVectorLayer(uri, "Scratch point layer",  "memory");
-             |   \endcode
-             |  
-             |   The main data providers supported by QGIS are listed below.
-             |  
-             |   \section providers Vector data providers
-             |  
-             |   \subsection memory Memory data providerType (memory)
-             |  
-             |   The memory data provider is used to construct in memory data, for example scratch
-             |   data or data generated from spatial operations such as contouring. There is no
-             |   inherent persistent storage of the data. The data source uri is constructed. The
-             |   url specifies the geometry type ("point", "linestring", "polygon",
-             |   "multipoint","multilinestring","multipolygon"), optionally followed by url parameters
-             |   as follows:
-                 …
-                 …
+            # print out the result
+            print("Total length of features in layer "+ layer.sourceName()+ " is:",
+                  round(total_length/1000, 1), "km")
 
-This help text is the same information listed in QGIS’ API documentation at `qgis.org/pyqgis <https://qgis.org/pyqgis/3.4/>`_.
+Gongrats, you’ve created your very first QGIS plugin! Time to enjoy the
+fruits of your labor.
+
+**Save line_length_calculator.py**. Then return to QGIS and reload your
+plugin with *Plugin reloader* for the changes to take effect
+(alternatively restart the whole program).
+
+The plugin should look something like this and function identically to
+the script made above.
+
+.. figure:: img/plugin_lopullinen.png
+   :alt: plugin final
+
+   plugin final
+
+.. admonition:: Note
+
+    **TASK:** There are many ways to expand even this simple plugin. For example, can you
+    example think of a way to check that the layer object is not empty
+    (which results in an error)? Or let user select the layer from a
+    drop-down box instead of using the active layer?
+    (`Hint <https://gis.stackexchange.com/questions/118862/getting-list-of-layer-names-using-pyqgis>`__)
+
+Additional resources
+~~~~~~~~~~~~~~~~~~~~
+
+You’ve been very briefly introduced to PyQGIS and Python plugin
+development. If the subject interests you, we strongly recommend
+checking out these more extensive tutorials and resources:
+
+Python in QGIS
+^^^^^^^^^^^^^^
+
+-  Anita Graser’s beginner-friendly `PyQGIS 101: Introduction to QGIS
+   Python programming for
+   non-programmers <https://anitagraser.com/pyqgis-101-introduction-to-qgis-python-programming-for-non-programmers/>`__
+
+-  `PyQGIS Developer
+   Cookbook <https://docs.qgis.org/testing/en/docs/pyqgis_developer_cookbook/>`__
+   with compehensive tutorials.
+
+-  Gary Sherman’s book (available for purchase) `The PyQGIS Programmer’s
+   Guide <http://locatepress.com/ppg3>`__
+
+-  `StackExchange GIS <https://gis.stackexchange.com/>`__
+
+-  Reading the source code of installed plugins for further ideas
+
+Getting started with plugin development
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+-  `QGIS 3 plugin development
+   guide <https://gis-ops.com/qgis-3-plugin-development-reference-guide/>`__
+   by Nils Nolde
+
+-  `Building a Python Plugin
+   (QGIS3) <http://www.qgistutorials.com/en/docs/3/building_a_python_plugin.html>`__
+   by Ujaval Gandhi
