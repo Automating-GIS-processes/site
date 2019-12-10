@@ -120,13 +120,13 @@
 <li class="toctree-l1"><a class="reference internal" href="grading.html">Grading</a></li>
 <li class="toctree-l1"><a class="reference internal" href="learning-goals.html">Learning goals</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installing Python + GIS</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#install-python-gis-on-windows">Install Python + GIS on Windows</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#install-python-gis-on-windows">Install Python + GIS on Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-jupyter-lab">Install Jupyter Lab</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#creating-a-new-environment-using-conda">Creating a new environment using conda</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#other-packages">Other packages</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#install-python-gis-on-linux-mac">Install Python + GIS on Linux / Mac</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#install-jupyter-lab">Install Jupyter Lab</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#how-to-find-out-which-conda-command-to-use-when-installing-a-package">How to find out which conda -command to use when installing a package?</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#the-easiest-way">The easiest way</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#alternative-way-to-install-if-typical-doesn-t-work">Alternative way to install if typical doesn’t work</a></li>
@@ -329,7 +329,7 @@ it makes life much easier when installing new tools on your Python to play with.
 Install it to <strong>all users</strong> and use default settings.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Note for University of Helsinki workers: you need to set the installation location as <code class="docutils literal notranslate"><span class="pre">C:\HYapp</span></code> so that it can be used easily by anyone without the need to
+<p class="last">Note for people with a University of Helsinki computer: you need to set the installation location as <code class="docutils literal notranslate"><span class="pre">C:\HYapp</span></code> so that it can be used easily by anyone without the need to
 pass admin credentials all the time. If you don’t have <code class="docutils literal notranslate"><span class="pre">C:\HYapp</span></code> -folder, create one with admin rights.</p>
 </div>
 <p>Test that the Anaconda´s package manage called <code class="docutils literal notranslate"><span class="pre">conda</span></code> works by <a class="reference external" href="http://www.howtogeek.com/194041/how-to-open-the-command-prompt-as-administrator-in-windows-8.1/">opening a command prompt as a admin user</a>
@@ -341,6 +341,20 @@ Installing geopandas will automatically install several fundamental GIS packages
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install geopandas -c conda-forge
 </pre></div>
 </div>
+</div>
+<div class="section" id="install-jupyter-lab">
+<h2>Install Jupyter Lab<a class="headerlink" href="#install-jupyter-lab" title="Permalink to this headline">¶</a></h2>
+<p>If you want to use Jupyter Lab on your own computer, you can install it using conda (or pip).
+First, have a quick look at the Jupyter Lab installation instructions: <a class="reference external" href="https://jupyterlab.readthedocs.io/en/stable/getting_started/installation.html">https://jupyterlab.readthedocs.io/en/stable/getting_started/installation.html</a></p>
+<p>You can install Jupyter Lab using conda:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install -c conda-forge jupyterlab
+</pre></div>
+</div>
+<p>After installation is completed, you can start a Jupyter Lab instance by running this command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter lab
+</pre></div>
+</div>
+<p>Jupyter Lab should open up in a browser window.</p>
 <div class="section" id="creating-a-new-environment-using-conda">
 <h3>Creating a new environment using conda<a class="headerlink" href="#creating-a-new-environment-using-conda" title="Permalink to this headline">¶</a></h3>
 <p>Conda allows us to create different <a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html">Python environments</a>.
@@ -383,22 +397,13 @@ conda install -c conda-forge geopandas matplotlib mapclassify
 </div>
 <div class="section" id="other-packages">
 <h3>Other packages<a class="headerlink" href="#other-packages" title="Permalink to this headline">¶</a></h3>
-<p><em>Note, this list of packages might be outdated, all these packages are not necessarily used in this course</em>
-There are also other useful packages that requires separate installation.</p>
+<p>Here are some additional packages that you might want to use at some point for doing GIS analysis in Python.
+<em>Note, this list of packages might be outdated, all these packages are not necessarily used in this course.</em></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install geoplot</span>
 conda install -c conda-forge geoplot
 
-<span class="c1"># Install osmnx</span>
-conda install -c conda-forge osmnx
-
 <span class="c1"># Install pysal</span>
 conda install -c conda-forge pysal
-
-<span class="c1">#install folium</span>
-conda install -c conda-forge folium
-
-<span class="c1"># Install contextily</span>
-conda install -c conda-forge contextily
 
 <span class="c1"># Install rasterio</span>
 conda install -c conda-forge rasterio
@@ -440,6 +445,7 @@ that is provided by us. Using them requires a few special tricks, <a class="refe
 </div>
 <div class="section" id="install-python-gis-on-linux-mac">
 <h2>Install Python + GIS on Linux / Mac<a class="headerlink" href="#install-python-gis-on-linux-mac" title="Permalink to this headline">¶</a></h2>
+<p><em>Note, download links might be outdated in this section. Check Anaconda website for latest release.</em></p>
 <p><strong>Install Anaconda 3 and add it to system path</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Download and install Anaconda</span>
 sudo wget https://repo.continuum.io/archive/Anaconda3-5.3.0-Linux-x86_64.sh
@@ -490,26 +496,13 @@ pip install plotly --upgrade  <span class="c1"># Plotly graphing library</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="install-jupyter-lab">
-<h2>Install Jupyter Lab<a class="headerlink" href="#install-jupyter-lab" title="Permalink to this headline">¶</a></h2>
-<p>If you want to use Jupyter Lab on your own computer, you can install it using conda (or pip).
-First, have a quick look at the Jupyter Lab installation instructions: <a class="reference external" href="https://jupyterlab.readthedocs.io/en/stable/getting_started/installation.html">https://jupyterlab.readthedocs.io/en/stable/getting_started/installation.html</a></p>
-<p>You can install Jupyter Lab using conda:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install -c conda-forge jupyterlab
-</pre></div>
-</div>
-<p>After installation is completed, you can start a Jupyter Lab instance by running this command:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter lab
-</pre></div>
-</div>
-<p>Jupyter Lab should open up in a browser window.</p>
-</div>
 <div class="section" id="how-to-find-out-which-conda-command-to-use-when-installing-a-package">
 <h2>How to find out which conda -command to use when installing a package?<a class="headerlink" href="#how-to-find-out-which-conda-command-to-use-when-installing-a-package" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="the-easiest-way">
 <h3>The easiest way<a class="headerlink" href="#the-easiest-way" title="Permalink to this headline">¶</a></h3>
 <p>The first thing to try when installing a new module <code class="docutils literal notranslate"><span class="pre">X</span></code> is to run in a command prompt (as admin) following command (here we try to install a hypothetical
 module called X)</p>
+<p>or downloading from a spesific channel:</p>
 <p>In most cases this approach works but sometimes you get errors like (example when installing a module called shapely):</p>
 <p>Okey, so conda couldn’t find the shapely module from the typical channel it uses for downloading the module.</p>
 </div>
@@ -553,7 +546,7 @@ that is the one to use! Thus, in our case the first page that Google gives does 
     <p>
         &copy; Copyright 2019, Henrikki Tenkanen and Vuokko Heikinheimo, Digital Geography Lab, University of Helsinki
       <span class="lastupdated">
-        Last updated on Dec 05, 2019.
+        Last updated on Dec 10, 2019.
       </span>
 
     </p>

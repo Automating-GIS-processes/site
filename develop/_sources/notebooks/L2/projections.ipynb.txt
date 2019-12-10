@@ -590,11 +590,13 @@
     "\n",
     "**TASK**\n",
     "    \n",
-    "Read in a global dataset and plot three maps with a different projections! See hints and projection definitions from:\n",
+    "Read in a global dataset and plot three maps with different projections! See hints and projection definitions from:\n",
     "    \n",
     "- http://geopandas.org/projections.html\n",
     "- https://pyproj4.github.io/pyproj/dev/api/crs.html\n",
     "- https://spatialreference.org/\n",
+    "    \n",
+    "When plotting the maps, think about the advantages and disadvantages of different world map projections.\n",
     "   \n",
     "</div>\n"
    ]
