@@ -32,6 +32,52 @@ QGIS Python console, and learn how to create a simple QGIS plugin that applies P
 
 
 
+Lecture videos
+--------------
 
+.. admonition:: Lesson 7 - Python in QGIS; building a simple QGIS plugin
+
+    .. raw:: html
+
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/-ZlRXQYqcr0" frameborder="0" allowfullscreen></iframe>
+        <p>Vuokko Heikinheimo & Tatu Leppämäki, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p>
+
+    **Contents:**
+
+        - General intro for lesson 7 0:00
+        - Python in QGIS intro 4:10
+        - Opening a WFS layer in QGIS 7:00
+        - Changing the crs of the WFS layer 08:35
+        - Python console in QGIS 10:18
+        - Basic python commands in QGIS 11:20
+        - Python script files in QGIS 22:10
+        - Installing plugins for creating plugins 27:00
+        - QGIS plugin builder 30:35
+        - Compile required files using a batch file 37:50
+        - Restart QGIS and activate plugin 43:50
+        - Add a Python function to the plugin 46:35
+        - Design the graphical user interface of the plugin using qt designer 50:30
+        - Connect the Python function and the user interface 56:30
+        - Reload the plugin 1:00:35
+        - Run the plugin 1:01:05
+        - Summary  1:02:00
+        - Additional resources 1:03:10
+        - Additional PyQGIS functions 1:04:17
+        - Example of a more complicated plugin (GeoCubes):  1:06:30
+
+.. admonition:: Lesson 7 - Final assignment instructions
+
+    .. raw:: html
+
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/8CV0tIRVY3I" frameborder="0" allowfullscreen></iframe>
+        <p>Vuokko Heikinheimo & Tatu Leppämäki, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p>
+
+    **Contents:**
+
+        - Example student project 0:00
+        - Final assignment instructions 04:30
+        - Additional resources 23:30
+        - Final assignment repository 25:30
+        - Extra exercises 26:30
 
 

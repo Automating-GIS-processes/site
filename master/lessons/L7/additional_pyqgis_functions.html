@@ -340,7 +340,7 @@ define the min and max size of the buffers when calling the function.</p>
         <span class="n">buffered_feat_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">feat</span><span class="p">)</span>
 
     <span class="c1"># making sure the CRS is the same in both layers</span>
-    <span class="n">layer_crs</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="n">sourceCrs</span><span class="p">()</span><span class="o">.</span><span class="n">toWkt</span><span class="p">()</span>
+    <span class="n">layer_crs</span> <span class="o">=</span> <span class="n">original_layer</span><span class="o">.</span><span class="n">sourceCrs</span><span class="p">()</span><span class="o">.</span><span class="n">toWkt</span><span class="p">()</span>
 
     <span class="c1"># creating the new vector layer as a temporary (memory) layer</span>
     <span class="n">buff_layer</span> <span class="o">=</span> <span class="n">QgsVectorLayer</span><span class="p">(</span><span class="s1">&#39;Polygon?crs=&#39;</span><span class="o">+</span><span class="n">layer_crs</span><span class="p">,</span> <span class="s2">&quot;Buffered &quot;</span><span class="o">+</span> <span class="n">original_layer</span><span class="o">.</span><span class="n">sourceName</span><span class="p">(),</span> <span class="s2">&quot;memory&quot;</span><span class="p">)</span>
@@ -606,7 +606,7 @@ layer to the map canvas to use for drawing reference.</li>
     <p>
         &copy; Copyright 2019, Henrikki Tenkanen and Vuokko Heikinheimo, Digital Geography Lab, University of Helsinki
       <span class="lastupdated">
-        Last updated on Dec 09, 2019.
+        Last updated on Dec 10, 2019.
       </span>
 
     </p>

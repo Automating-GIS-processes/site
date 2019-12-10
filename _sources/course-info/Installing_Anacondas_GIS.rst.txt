@@ -14,7 +14,6 @@ it makes life much easier when installing new tools on your Python to play with.
 Install Python + GIS on Windows
 -------------------------------
 
-
 `Download Anaconda installer (Python 3.7 version, 64 bit) <https://www.anaconda.com/distribution/>`_ for Windows.
 
 Install Anaconda to your computer by double clicking the installer and install it into a directory you want (needs admin rights).
@@ -22,7 +21,7 @@ Install it to **all users** and use default settings.
 
 .. note::
 
-    Note for University of Helsinki workers: you need to set the installation location as ``C:\HYapp`` so that it can be used easily by anyone without the need to
+    Note for people with a University of Helsinki computer: you need to set the installation location as ``C:\HYapp`` so that it can be used easily by anyone without the need to
     pass admin credentials all the time. If you don't have ``C:\HYapp`` -folder, create one with admin rights.
 
 
@@ -39,10 +38,29 @@ Installing geopandas will automatically install several fundamental GIS packages
 
     conda install geopandas -c conda-forge
 
+Install Jupyter Lab
+----------------------
+
+If you want to use Jupyter Lab on your own computer, you can install it using conda (or pip).
+First, have a quick look at the Jupyter Lab installation instructions: https://jupyterlab.readthedocs.io/en/stable/getting_started/installation.html
+
+You can install Jupyter Lab using conda:
+
+.. code:: bash
+
+    conda install -c conda-forge jupyterlab
+
+After installation is completed, you can start a Jupyter Lab instance by running this command:
+
+.. code:: bash
+
+    jupyter lab
+
+Jupyter Lab should open up in a browser window.
+
 
 Creating a new environment using conda
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 
 Conda allows us to create different `Python environments <https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html>`__.
 Python packages have often many dependencies, and some packages might, for example,
@@ -89,27 +107,18 @@ You can also install several packages in one command:
 
 
 Other packages
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
 
-*Note, this list of packages might be outdated, all these packages are not necessarily used in this course*
-There are also other useful packages that requires separate installation.
+Here are some additional packages that you might want to use at some point for doing GIS analysis in Python.
+*Note, this list of packages might be outdated, all these packages are not necessarily used in this course.*
 
 .. code:: bash
 
     # Install geoplot
     conda install -c conda-forge geoplot
 
-    # Install osmnx
-    conda install -c conda-forge osmnx
-
     # Install pysal
     conda install -c conda-forge pysal
-
-    #install folium
-    conda install -c conda-forge folium
-
-    # Install contextily
-    conda install -c conda-forge contextily
 
     # Install rasterio
     conda install -c conda-forge rasterio
@@ -143,7 +152,6 @@ You can test that the installations have worked by running following commands in
      import osmnx
      import contextily
 
-
 If you don't receive any errors, everything should be working!
 
 .. hint::
@@ -154,6 +162,8 @@ If you don't receive any errors, everything should be working!
 
 Install Python + GIS on Linux / Mac
 -----------------------------------
+
+*Note, download links might be outdated in this section. Check Anaconda website for latest release.*
 
 **Install Anaconda 3 and add it to system path**
 
@@ -210,28 +220,6 @@ so you will have a nice setup already using one installation command!
     pip install dash-core-components==0.14.0  # Supercharged components
     pip install plotly --upgrade  # Plotly graphing library
 
-Install Jupyter Lab
-----------------------
-
-If you want to use Jupyter Lab on your own computer, you can install it using conda (or pip).
-First, have a quick look at the Jupyter Lab installation instructions: https://jupyterlab.readthedocs.io/en/stable/getting_started/installation.html
-
-You can install Jupyter Lab using conda:
-
-.. code:: bash
-
-    conda install -c conda-forge jupyterlab
-
-
-After installation is completed, you can start a Jupyter Lab instance by running this command:
-
-
-.. code:: bash
-
-    jupyter lab
-
-Jupyter Lab should open up in a browser window.
-
 
 How to find out which conda -command to use when installing a package?
 ----------------------------------------------------------------------
@@ -245,6 +233,12 @@ module called X)
 .. code::
 
     conda install X
+
+or downloading from a spesific channel:
+
+.. code::
+
+    conda install X -c conda-forge
 
 In most cases this approach works but sometimes you get errors like (example when installing a module called shapely):
 
