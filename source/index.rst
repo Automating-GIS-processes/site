@@ -101,7 +101,6 @@ Lesson materials are published on these pages each week on Monday, after which t
 
 Contents
 --------
-*Lesson materials are updated on these pages each week on Monday*
 
 .. toctree::
    :maxdepth: 2
