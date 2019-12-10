@@ -45,7 +45,7 @@ define the min and max size of the buffers when calling the function.
             buffered_feat_list.append(feat)
         
         # making sure the CRS is the same in both layers
-        layer_crs = layer.sourceCrs().toWkt()
+        layer_crs = original_layer.sourceCrs().toWkt()
         
         # creating the new vector layer as a temporary (memory) layer
         buff_layer = QgsVectorLayer('Polygon?crs='+layer_crs, "Buffered "+ original_layer.sourceName(), "memory")
