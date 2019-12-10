@@ -24,12 +24,10 @@ Sample data for this tutorial
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To get us started, we’ll need some data. Open QGIS and connect to the
-City of Helsinki’s WFS service from *Layer > Add layer > Add WFS layer*.
-Create a new connection to URL
-http://kartta.hel.fi/ws/geoserver/avoindata/wfs and load the layer list.
-Select, for example, the Metro railway lines
-(*Seutukartta_liikenne_metro_rata*). **Make sure the coordinate system
-is set to a projected one**, like ETRS89/GK25FIN (EPSG:3879) before
+City of Helsinki’s WFS service from *Layer > Add layer > Add WFS layer*:
+
+Create a new connection to URL http://kartta.hel.fi/ws/geoserver/avoindata/wfs and load the layer list. Select, for example, the Metro railway lines
+(*Seutukartta_liikenne_metro_rata*). **Make sure the coordinate system is set to a projected one**, like ETRS89/GK25FIN (EPSG:3879) before
 adding the layer.
 
 Running PyQGIS code in console
@@ -42,14 +40,14 @@ Open it from *Plugins > Python console* or use the shortcut
 .. figure:: img/konsoli_alussa.png
    :alt: Console and editor
 
-   Console and editor
+   Console
 
 By default an iface object is imported, which allows the access to the
 currently active QGIS instance’s user interface. For example, we can
 easily retrieve the active (selected) layer, then access its type, name,
 and count its features:
 
-.. code:: ipython3
+.. code:: bash
 
     # Get active layer:
     >>> layer = iface.activeLayer()
@@ -67,12 +65,14 @@ and count its features:
 The layer we got is an object of class *QgsVectorLayer*, which in turn
 is within QGIS’s *core* module. There are `seven modules in
 total <https://qgis.org/api/modules.html>`__ each housing *classes*
-critical for the program. Above, we call QgsVectorLayer’s methods like
-*featureCount()*. You may read more on the methods in the
-`documentation <https://qgis.org/pyqgis/3.4/core/QgsVectorLayer.html>`__
-or call *help()* on the object for the same information:
+critical for the program.
 
-.. code:: ipython3
+Above, we call QgsVectorLayer’s methods like
+`featureCount()`. You may read more on the methods in the
+`documentation <https://qgis.org/pyqgis/3.4/core/QgsVectorLayer.html>`__
+or call `help()` on the object for the same information:
+
+.. code:: python
 
     >>> help(layer)
     Help on QgsVectorLayer in module qgis._core object:
@@ -88,7 +88,7 @@ Like the documentation shows, we can use a method to access the features
 features <https://qgis.org/pyqgis/3.4/core/QgsFeature.html#qgis.core.QgsFeature>`__
 and print out attributes from each feature:
 
-.. code:: ipython3
+.. code:: python
 
     >>> for feat in layer.getFeatures():
             # attributes() returns a list of attributes assosiated with that feature
@@ -106,7 +106,7 @@ We’ll use this to our advantage and create a simple program for summing
 up the total length of line features in the selected layer and print
 this out in kilometers:
 
-.. code:: ipython3
+.. code:: python
 
     # variable to house the sum of the lengths
     >>> total_length = 0
@@ -139,7 +139,7 @@ and then prints the result in the console. Although it’s in poor form to
 have so many separate tasks for one function, we do it like this to make
 things more straightforward later on.
 
-.. code:: ipython3
+.. code:: python
 
     def lineLengthCalc():
         """Sums together the length of features in a line type vector layer, then prints the result in km."""
@@ -167,11 +167,14 @@ Next up, we’ll apply the script code to an extremely simple plugin.
 Creating QGIS plugins
 ---------------------
 
-**Please note: the instructions below have been created for Windows
-systems. While all of the instructions can be replicated on other OS’s,
-platform differences do apply.**
 
-Plugins extend the functionality of the base installation. Written in
+.. admonition:: Note
+
+    The instructions below have been created for Windows
+    systems. While all of the instructions can be replicated on other operating systems,
+    platform differences do apply.
+
+Plugins extend the functionality of the base installation of QGIS. Written in
 Python, they can be shared via the official plugin repository if they
 `pass the
 requirements <https://docs.qgis.org/testing/en/docs/pyqgis_developer_cookbook/plugins/releasing.html>`__
@@ -183,7 +186,7 @@ by hand would be tedious and time consuming – thankfully it’s also
 needless, since we can get a plugin to do it for us!
 
 Next, open the plugin manager (*Manage and install plugins*) and install
-two plugins that’ll help us greatly: Plugin Builder and Plugin Reloader.
+two plugins that’ll help us greatly: **Plugin Builder** and **Plugin Reloader**.
 If you can’t find these, make sure Experimental plugins are enabled from
 plugin manager settings. *Builder* will create a plugin base in which to
 apply the functionality and *Reloader* will greatly help in testing the
@@ -246,15 +249,20 @@ You’ll need to install something called pb_tool. Windows users might
 also find this tool handy if you want to get into serious plugin
 development.
 
-Create a new plain textfile in the plugin folder and copy the following
-commands to that file. **IMPORTANT: Replace the filepath with the path
-to your computer’s installation. At the very least you’ll need to
-replace QGIS 3.X with the version number of your installation, e.g. QGIS
-3.4. The installation could also be somewhere else or in location
-C::raw-latex:`\OSGeo`4W64…**\ `Read more
-here <http://www.qgistutorials.com/en/docs/3/building_a_python_plugin.html>`__
+Create a new plain text file in the plugin folder and copy the following
+commands to that file.
 
-.. code:: ipython3
+
+.. admonition:: Note
+
+    Replace the filepath with the path
+    to your computer’s installation. At the very least you’ll need to
+    replace QGIS 3.X with the version number of your installation, e.g. QGIS
+    3.4. The installation could also be somewhere else or in location
+    ``"C:\OSGeo4W64..."`` `Read more
+    here <http://www.qgistutorials.com/en/docs/3/building_a_python_plugin.html>`__.
+
+.. code:: bash
 
     @echo off
     call "C:\Program Files\QGIS 3.X\bin\o4w_env.bat"
@@ -264,7 +272,7 @@ here <http://www.qgistutorials.com/en/docs/3/building_a_python_plugin.html>`__
     @echo on
     pyrcc5 -o resources.py resources.qrc
 
-Save the textfile with the file format marking as *compile.bat*. Then
+Save the text file with the file format marking as *compile.bat*. Then
 simply double click to run it. If all goes well, a new *resources* file
 should pop up: this time it’s Python code. You plugin folder should look
 something like this:
@@ -285,8 +293,6 @@ and on the top toolbar. Run the plugin:
 .. figure:: img/plugin_alkutila.png
    :alt: Plugin at the beginning
 
-   Plugin at the beginning
-
 Cool! Too bad it doesn’t do anything yet – all the default buttons do is
 close the window. We’ll fix that next.
 
@@ -300,7 +306,7 @@ imports some necessary methods from QGIS’s modules (we didn’t need to do
 this when scripting, since most necessary methods are imported
 automatically to QGIS’s own Python console). See also how you plugin is
 a *class* that includes many methods and that a reference to the
-interface is saved at the very beginning as *self.iface*. We’re not
+interface is saved at the very beginning as `self.iface`. We’re not
 interested in most of the content, however.
 
 Scroll down to the very bottom of the file and you’ll find a method
@@ -374,9 +380,9 @@ out. We need to tie this signal to a *slot* that could e.g. be a method
 that’s run.
 
 Let’s do just that. Paste the bottommost line of code to *run* method,
-below the conditional clause *if self.first_start\_ == True*:
+below the conditional clause `if self.first_start == True:*`:
 
-.. code:: ipython3
+.. code:: python
 
             if self.first_start == True:
                 self.first_start = False
@@ -393,19 +399,19 @@ The very very final thing is to modify *lineLengthCalc* sligthly. Add a
 reference to *self* as the method’s parameter (wanna know why? `Read
 this <https://medium.com/quick-code/understanding-self-in-python-a3704319e5f0>`__):
 
-.. code:: ipython3
+.. code:: python
 
         def lineLengthCalc(self):
 
-Also add *self* in front of *iface*. Like this:
+Also add `self` in front of `iface`. Like this:
 
-.. code:: ipython3
+.. code:: python
 
             layer = self.iface.activeLayer()
 
 All in all, the bottom of the file should look something like this:
 
-.. code:: ipython3
+.. code:: python
 
         def run(self):
             """Run method that performs all the real work"""
@@ -455,13 +461,12 @@ the script made above.
 .. figure:: img/plugin_lopullinen.png
    :alt: plugin final
 
-   plugin final
+.. admonition:: Task
 
-There are many ways to expand even this simple plugin. Can you for
-example think of a way to check that the layer object is not empty
-(which results in an error)? Or let user select the layer from a
-drop-down box instead of using the active layer?
-(`Hint <https://gis.stackexchange.com/questions/118862/getting-list-of-layer-names-using-pyqgis>`__)
+    There are many ways to expand this simple plugin. Can you, for example, think of a way to
+    check that the layer object is not empty (which results in an error)? Or let user select the layer from a
+    drop-down box instead of using the active layer?
+    (`Hint <https://gis.stackexchange.com/questions/118862/getting-list-of-layer-names-using-pyqgis>`__)
 
 Additional resources
 ~~~~~~~~~~~~~~~~~~~~

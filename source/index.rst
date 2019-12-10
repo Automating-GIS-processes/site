@@ -92,8 +92,8 @@ Lesson materials are published on these pages each week on Monday, after which t
 |                | Network analysis (networkx)     |
 |                |                                 |
 +----------------+---------------------------------+
-| **7**          | Raster processing (rasterio)    |
-|                | Python in QGIS demo             |
+| **7**          | Using Python in QGIS;           |
+|                | Raster data processing          |
 |                |                                 |
 +----------------+---------------------------------+
 
