@@ -1,8 +1,11 @@
-pandoc
-sphinx==1.7.9
-sphinx_rtd_theme
-nbsphinx==0.4.3
-IPython==6.5.0
+jupyter-book>=0.7.0b
+sphinx==2.4.4
+sphinx-book-theme
+ipython
+jupyter-sphinx
+git+https://github.com/pandas-dev/pydata-sphinx-theme.git@master
+IPython
 jupyter_client
 ipykernel
-sphinxcontrib-googleanalytics
+git+https://github.com/jelmer/googleanalytics.git@master
+git+https://github.com/executablebooks/MyST-NB.git@master
