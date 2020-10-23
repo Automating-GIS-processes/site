@@ -5,14 +5,4 @@ nbsphinx==0.4.3
 IPython==6.5.0
 jupyter_client
 ipykernel
-matplotlib
-pandas
-imageio
 sphinxcontrib-googleanalytics
-geopandas
-osmnx
-geopy
-pyrosm
-folium
-mplleaflet
-geojson
