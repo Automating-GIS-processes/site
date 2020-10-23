@@ -33,8 +33,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'AutoGIS'
-copyright = '2019, Henrikki Tenkanen and Vuokko Heikinheimo, Digital Geography Lab, University of Helsinki'
-author = 'Henrikki Tenkanen'
+copyright = '2019, Henrikki Tenkanen & Vuokko Heikinheimo, Department of Geosciences and Geography, University of Helsinki'
+author = 'Henrikki Tenkanen & Vuokko Heikinheimo'
 
 # The short X.Y version.
 version = '2019'
@@ -56,7 +56,7 @@ todo_include_todos = True
 # -- Options for HTML output ----------------------------------------------
 
 html_theme = 'sphinx_book_theme'
-html_logo = 'img/logo_hy_geo_135.png'  # "_static/geopython.png"
+html_logo = 'img/AutoGIS-logo.png'
 html_title = ""
 
 html_theme_options = {
