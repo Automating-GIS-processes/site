@@ -1,5 +1,5 @@
 jupyter-book>=0.7.0b
-sphinx==2.4.4
+sphinx
 sphinx-book-theme
 ipython
 jupyter-sphinx
