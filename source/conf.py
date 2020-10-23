@@ -127,5 +127,5 @@ texinfo_documents = [
 # Allow errors
 execution_allow_errors = True
 
-# Execute cells only if any of the cells is missing output
-jupyter_execute_notebooks = "auto"
+# Do not execute cells
+jupyter_execute_notebooks = "off"
