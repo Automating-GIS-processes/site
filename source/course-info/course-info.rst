@@ -4,14 +4,14 @@ General info
 .. admonition:: Contact teaching for University of Helsinki students
 
     Please note that access to zoom, slack and CSC notebooks is only available for students in Finnish higher education institutes.
-    Recorded lessons and course materials are available for everyone interested via these webistes and on YouTube.
+    Recorded lessons and course materials are available for everyone interested via these websites and on YouTube.
 
 
 Course meetings in teaching period II
 --------------------------------------
 
-- Lessons on Tuesdays 15:15-18:00 (UCT+2) (27 October - 8 December 2020)
-- Work sessions on Fridays Thursdays 12:15-16:00 (UCT+2) (30 October - 11 December 2020)
+- Lessons on Tuesdays 15:15-18:00 (UCT+2)
+- Work sessions on Fridays Thursdays 12:15-16:00 (UCT+2)
 
 Instructors
 -----------
