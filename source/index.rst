@@ -131,6 +131,7 @@ Contents
    course-info/course-environment-components
    course-info/grading
    course-info/learning-goals
+   installing-miniconda.rst
    course-info/Installing_Anacondas_GIS
    course-info/resources
    course-info/License-terms
@@ -157,70 +158,72 @@ Contents
    notebooks/L2/geopandas-geometries.ipynb
    lessons/L2/exercise-2
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Lesson 3
+..
 
-   lessons/L3/overview
-   lessons/L3/geocoding
-   notebooks/L3/geocoding_in_geopandas.ipynb
-   notebooks/L3/point-in-polygon.ipynb
-   notebooks/L3/spatial_index.ipynb
-   notebooks/L3/spatial-join.ipynb
-   notebooks/L3/nearest-neighbour.ipynb
-   notebooks/L3/nearest-neighbor-faster.ipynb
-   lessons/L3/exercise-3
+    .. toctree::
+       :maxdepth: 2
+       :caption: Lesson 3
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Lesson 4
+       lessons/L3/overview
+       lessons/L3/geocoding
+       notebooks/L3/geocoding_in_geopandas.ipynb
+       notebooks/L3/point-in-polygon.ipynb
+       notebooks/L3/spatial_index.ipynb
+       notebooks/L3/spatial-join.ipynb
+       notebooks/L3/nearest-neighbour.ipynb
+       notebooks/L3/nearest-neighbor-faster.ipynb
+       lessons/L3/exercise-3
 
-   lessons/L4/overview
-   notebooks/L4/geometric-operations.ipynb
-   notebooks/L4/reclassify.ipynb
-   lessons/L4/exercise-4
+    .. toctree::
+       :maxdepth: 2
+       :caption: Lesson 4
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Lesson 5
+       lessons/L4/overview
+       notebooks/L4/geometric-operations.ipynb
+       notebooks/L4/reclassify.ipynb
+       lessons/L4/exercise-4
 
-   lessons/L5/overview
-   notebooks/L5/static_maps.ipynb
-   notebooks/L5/interactive-map-folium.ipynb
-   notebooks/L5/Employment_in_Finland.ipynb
-   lessons/L5/share-on-github
-   lessons/L5/exercise-5
+    .. toctree::
+       :maxdepth: 2
+       :caption: Lesson 5
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Lesson 6
+       lessons/L5/overview
+       notebooks/L5/static_maps.ipynb
+       notebooks/L5/interactive-map-folium.ipynb
+       notebooks/L5/Employment_in_Finland.ipynb
+       lessons/L5/share-on-github
+       lessons/L5/exercise-5
 
-   lessons/L6/overview
-   notebooks/L6/retrieve_osm_data.ipynb
-   notebooks/L6/network-analysis.ipynb
-   lessons/L6/exercise-6
+    .. toctree::
+       :maxdepth: 2
+       :caption: Lesson 6
 
-.. toctree::
-   :maxdepth: 2
-   :caption: PyQGIS
+       lessons/L6/overview
+       notebooks/L6/retrieve_osm_data.ipynb
+       notebooks/L6/network-analysis.ipynb
+       lessons/L6/exercise-6
 
-   lessons/L7/overview
-   lessons/L7/pyqgis
-   lessons/L7/additional_pyqgis_functions
+    .. toctree::
+       :maxdepth: 2
+       :caption: PyQGIS
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Raster
+       lessons/L7/overview
+       lessons/L7/pyqgis
+       lessons/L7/additional_pyqgis_functions
 
-   lessons/Raster/overview
-   lessons/Raster/download-data
-   notebooks/Raster/reading-raster.ipynb
-   notebooks/Raster/plotting-raster.ipynb
-   notebooks/Raster/clipping-raster.ipynb
-   notebooks/Raster/raster-map-algebra.ipynb
-   notebooks/Raster/raster-mosaic.ipynb
-   notebooks/Raster/zonal-statistics.ipynb
-   notebooks/Raster/read-cogs.ipynb
+    .. toctree::
+       :maxdepth: 2
+       :caption: Raster
+
+       lessons/Raster/overview
+       lessons/Raster/download-data
+       notebooks/Raster/reading-raster.ipynb
+       notebooks/Raster/plotting-raster.ipynb
+       notebooks/Raster/clipping-raster.ipynb
+       notebooks/Raster/raster-map-algebra.ipynb
+       notebooks/Raster/raster-mosaic.ipynb
+       notebooks/Raster/zonal-statistics.ipynb
+       notebooks/Raster/read-cogs.ipynb
 
 .. toctree::
    :maxdepth: 2
