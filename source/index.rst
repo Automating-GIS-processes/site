@@ -17,6 +17,11 @@ the University of Helsinki, Finland.
 
 Course format
 -------------
+.. admonition:: Online teaching
+
+    Please note that the course is organized completely online during the 2020 Autumn semester.
+    Access to zoom, slack and CSC notebooks is available to students at Finnish higher education institutes. Recorded
+    lesson videos and course materials are openly available to everyone interested.
 
 The majority of this course will be spent in front of a computer learning to program with Python programming language and doing practical exercises.
 
@@ -28,14 +33,24 @@ summary write-ups that you submit must be completed individually and must clearl
 
 .. admonition:: Open Access!
 
-    The course is **open for everyone**. The aim of this course is to share the knowledge and help people to get started with their journey for doing GIS more efficiently and in a reproducible manner
-    using Python programming.
+    Course materials and recorded lesson videos are **open for everyone** at `https://autogis-github.io <https://autogis.github.io>`__. The aim of this course is to share the
+    knowledge and help people to get started with their journey for doing GIS more efficiently and in a reproducible manner
+    using Python programming. Feel free to share this website to anyone interested, and to use these materials in your own teaching.
 
-.. admonition:: Step by step instructions with cloud computing
+.. admonition:: University of Helsinki students
 
-    The materials are written in a way that you can follow them step by step exactly as they are written, as long as you use the cloud computing resources that
-    we provide for you using `Binder <https://mybinder.readthedocs.io/en/latest/>`__ and `CSC Finland <https://www.csc.fi/>`__ cloud computing resources (for Finnish students).
-    If you work from your own computer, **you need to adjust the file paths to the data** accordingly.
+    The Automating GIS processes course is part of the Geography Masters Programme at the University of Helsinki (UH).
+    UH students should sign up for this course using the course code `GEOG-329-2` in Weboodi.
+    Access to zoom, slack and CSC notebooks is available to students at Finnish higher education institutes.
+
+
+.. admonition:: Interactive contents
+
+    Each lesson in this course can be turned into an interactive programming session in the browser!
+    You can find buttons for activating the python environment using `Thebe <https://thebe.readthedocs.io/en/latest/>`__
+    or `Binder <https://mybinder.readthedocs.io/en/latest/>`__ at the top of each programming lesson. Students at Finnish
+    higher education institutions are encourage to use the `CSC notebooks <https://notebooks.csc.fi/>`__ environment.
+
 
 .. admonition:: For teachers
 
@@ -78,7 +93,6 @@ Topics per week are listed below. Please note that course materials are updated 
 +----------------+---------------------------------+
 | **3**          | Geocoding and spatial           |
 |                | queries                         |
-|                |                                 |
 |                |                                 |
 +----------------+---------------------------------+
 | **4**          | Reclassifying data,             |
