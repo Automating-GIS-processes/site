@@ -6,13 +6,13 @@ Exercise 1
 
 .. note::
 
-    Please complete this exercise by **16:00 on Wednesday the 6th of November 2019** (day before the next practical session).
+    Please complete this exercise by **the end of day on Thursday the 5th of November 2020** (day before the next practical session).
 
 .. admonition:: Start your assignment
 
-    You can start working on your copy of Exercise 1 by `accepting the GitHub Classroom assignment <https://classroom.github.com/a/a8r1EG6V>`__.
+    You can start working on your copy of Exercise 1 by `accepting the GitHub Classroom assignment <>`__.
 
-You can also take a look at the open course copy of `Exercise 1 in the course GitHub repository <https://github.com/AutoGIS-2019/Exercise-1>`__ (does not require logging in).
+You can also take a look at the open course copy of `Exercise 1 in the course GitHub repository <https://github.com/AutoGIS-2020/Exercise-1>`__ (does not require logging in).
 Note that you should not try to make changes to this copy of the exercise, but rather only to the copy available via GitHub Classroom.
 
 
@@ -23,9 +23,9 @@ Hints
 Useful materials from Geo-Python
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- `Lesson 4: Functions <https://geo-python.github.io/site/notebooks/L4/functions.html>`__
-- `Lesson 6: Iterating dataframe rows <https://geo-python.github.io/site/notebooks/L6/advanced-data-processing-with-pandas.html#Iterating-over-rows>`__
-- `Lesson 6: Good Coding Practices - Using assertions <https://geo-python.github.io/site/notebooks/L6/gcp-assertions.html?#Good-coding-practices---Using-assertions>`__
+- `Lesson 4: Functions <https://geo-python-site.readthedocs.io/en/latest/notebooks/L4/functions.html>`__
+- `Lesson 6: Iterating dataframe rows <https://geo-python-site.readthedocs.io/en/latest/notebooks/L6/advanced-data-processing-with-pandas.html#iterating-over-rows>`__
+- `Lesson 6: Good Coding Practices - Using assertions <https://geo-python-site.readthedocs.io/en/latest/notebooks/L6/gcp-5-assertions.html>`__
 
 Assert statements
 ~~~~~~~~~~~~~~~~~
@@ -33,7 +33,7 @@ Assert statements
 Assertions are a way to ``assert``, or ensure, that the values being used in your scripts are going to be
 suitable for what the code does. It is common to use ``assert`` statements with ``functions`` as they are a
 good way to ensure the correct functionality of a function and guide the user to use function as intended.
-Read more about assertions from `Geo-Python week 6 good coding practices <https://geo-python.github.io/site/notebooks/L6/gcp-assertions.html#Assertions>`__.
+Read more about assertions from `Geo-Python week 6 good coding practices <https://geo-python-site.readthedocs.io/en/latest/notebooks/L6/gcp-5-assertions.html>`__.
 
 One good example how to use assertions inside a function is to ensure that the values passed into the function are
 of correct type. It is also common to test value ranges with assert, such as test that values are positive.
