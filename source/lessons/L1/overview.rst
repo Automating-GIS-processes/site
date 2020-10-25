@@ -1,30 +1,19 @@
 Lesson overview
 ===============
 
-In this week's lesson we will introduce you a spatial data model (geometric objects) and some basics of how spatial data
-can be manipulated in pure Python.
-
-1.  :doc:`Motivation for the course: Automating GIS processes <Intro-Python-GIS>`
-2. `Shapely and Geometric Objects <../../notebooks/L1/geometric-objects.ipynb>`__
-
-    -  Overview of Geometric Objects and Shapely -module
-    -  Point -object
-    -  LineString -object
-    -  Polygon -object
-    -  Geometry collections (optional)
-
-3. :doc:`Exercise 1: Working with geometric objects <exercise-1>`
+Before starting to work with actual GIS data, we will focus on basic geometric objects such as points, lines and
+polygons. In this lesson, you will learn how to create and manipulate geometries in Python
+using the `Shapely Python Package <https://shapely.readthedocs.io/en/stable/manual.html#spatial-data-model>`__.
 
 Learning goals
 --------------
 
-After this week you should:
+After this lesson you should be able to:
 
-  - have an idea of what kind of tools are available for doing geographic data analysis ("GIS stuff") in Python
-  - know how to install Python packages using conda
-  - know what kind of geometric objects are available
-  - know how to create different kind of geometries using Shapely
-  - know how to read coordinates from a file and create Points based on those
+  - search for information about the available GIS packages in Python
+  - understand how geometric objects such as points, lines and polygons are represented in Python using Shapely
+  - create geometric objects based on coordinate values
+  - (optionally) install Python packages on your own computer using conda
 
 Intro slides
 --------------
@@ -32,19 +21,7 @@ Intro slides
 
     `Slides from lesson 1 (PDF) <../../_static/autogis-intro-slides-2019.pdf>`__
 
-Lesson video
+Lesson videos
 -------------
 
-.. admonition:: Lesson 1 - Course overview
-
-    .. raw:: html
-
-        <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/4zSLRpXZAIU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <p>Vuokko Heikinheimo, University of Helsinki <a href="https://www.youtube.com/watch?v=4zSLRpXZAIU&list=PLs9D4XVqc6dClEYe0tk6Ce1YZkppw8dbL">@ AutoGIS channel on Youtube</a>.</p>
-
-.. admonition:: Lesson 1 - Shapely and Geometric objects
-
-    .. raw:: html
-
-        <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/FizD8t5_s3M" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <p>Vuokko Heikinheimo, University of Helsinki <a href="https://www.youtube.com/watch?v=4zSLRpXZAIU&list=PLs9D4XVqc6dClEYe0tk6Ce1YZkppw8dbL">@ AutoGIS channel on Youtube</a>.</p>
+Lesson videos will be updated here as soon as possible.
