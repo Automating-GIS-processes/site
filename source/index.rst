@@ -17,11 +17,6 @@ the University of Helsinki, Finland.
 
 Course format
 -------------
-.. admonition:: Online teaching
-
-    Please note that the course is organized completely online during the 2020 Autumn semester.
-    Access to zoom, slack and CSC notebooks is available to students at Finnish higher education institutes. Recorded
-    lesson videos and course materials are openly available to everyone interested.
 
 The majority of this course will be spent in front of a computer learning to program with Python programming language and doing practical exercises.
 
@@ -37,12 +32,16 @@ summary write-ups that you submit must be completed individually and must clearl
     knowledge and help people to get started with their journey for doing GIS more efficiently and in a reproducible manner
     using Python programming. Feel free to share this website to anyone interested, and to use these materials in your own teaching.
 
+.. admonition:: Online teaching
+
+    Please note that the course is organized completely online during the 2020 Autumn semester.
+    Access to zoom, slack and CSC notebooks is available to students at Finnish higher education institutes. Recorded
+    lesson videos and course materials are openly available to everyone interested.
+
 .. admonition:: University of Helsinki students
 
     The Automating GIS processes course is part of the Geography Masters Programme at the University of Helsinki (UH).
-    UH students should sign up for this course using the course code `GEOG-329-2` in Weboodi.
-    Access to zoom, slack and CSC notebooks is available to students at Finnish higher education institutes.
-
+    UH students should sign up for this course using the course code ``GEOG-329-2`` in Weboodi.
 
 .. admonition:: Interactive contents
 
@@ -50,7 +49,6 @@ summary write-ups that you submit must be completed individually and must clearl
     You can find buttons for activating the python environment using `Thebe <https://thebe.readthedocs.io/en/latest/>`__
     or `Binder <https://mybinder.readthedocs.io/en/latest/>`__ at the top of each programming lesson. Students at Finnish
     higher education institutions are encourage to use the `CSC notebooks <https://notebooks.csc.fi/>`__ environment.
-
 
 .. admonition:: For teachers
 
@@ -70,13 +68,14 @@ summary write-ups that you submit must be completed individually and must clearl
 
 Course topics by week
 ---------------------
-In teaching period 1 (Geo-Python), we focused on learning the basics of Python programming.
-See the materials on the `Geo-Python course page <https://geo-python.github.io>`_.
 
-In teaching period 2 (Automating GIS processes), we dive into spatial data management and analysis using python.
-This part of the course runs for seven weeks starting on Tuesday the 27th of October 2020.
+During this course, we will dive into manipulating and analyzing geographic data in Python. This course builds upon topics
+introduced in the Geo-Python course, where we focused on learning the basics of Python programming.
+You can find materials from the Geo-Python course at `https://geo-python.github.io <https://geo-python.github.io>`_.
 
-Topics per week are listed below. Please note that course materials are updated each week before the lesson:
+The Automating GIS processes course runs for seven weeks at the University of Helsinki
+starting in the second teaching period on Tuesday the 27th of October 2020. Topics per week are listed below.
+Please note that this web page is updated each week before the lesson:
 
 +----------------+---------------------------------+
 | Week           | Theme                           |
@@ -111,9 +110,12 @@ Topics per week are listed below. Please note that course materials are updated 
 |                | Preparing for the final         |
 |                | assignment                      |
 |                |                                 |
-|                | Optional extra materials        |
-|                | for self-study:                 |
-|                | PyQGIS, Raster processing       |
+
++----------------+---------------------------------+
+| **Extra**      |  PyQGIS, Raster processing      |
+| **materials**  |                                 |
+| **for**        |                                 |
+| **self-study** |                                 |
 +----------------+---------------------------------+
 
 |
