@@ -1,10 +1,10 @@
 
 .. figure:: img/AutoGIS_banner.jpg
 
-Welcome to Automating GIS-processes 2019!
-=========================================
+Automating GIS-processes 2020
+==============================
 
-**Automating GIS-processes** -course teaches you how to do different GIS-related tasks in Python programming language.
+**Welcome to Automating GIS-processes 2020!** This course teaches you how to do different GIS-related tasks in Python programming language.
 Each lesson is a tutorial with specific topic(s) where the aim is to learn how to solve common GIS-related problems and
 tasks using Python tools. We are using only publicly available data which can be used and downloaded by anyone anywhere.
 We also provide a computing environment which allows you to instantly start programming and trying out the materials yourself,
@@ -12,7 +12,7 @@ directly in your browser (no installations needed).
 
 Notice: we assume that you know the basics of Python programming. If you are new to Python, we recommend that you start with
 the `Geo-Python course materials at geo-python.github.io <https://geo-python.github.io>`_. The Automating GIS processes course ("AutoGIS")
-is a direct continuation from the Geo-Python course, which is a join effort between the geography and geology study programmes at
+is a direct continuation from the Geo-Python course, which is a join effort between the geography and geosciences study programmes at
 the University of Helsinki, Finland.
 
 Course format
@@ -45,11 +45,12 @@ summary write-ups that you submit must be completed individually and must clearl
 .. admonition:: Earlier versions of the course
 
     Older course materials are available at:
+        - `2019 <https://autogis-site.readthedocs.io/en/2019/>`__
         - `2018 <https://automating-gis-processes.github.io/site/2018>`__
         - `2017 <https://automating-gis-processes.github.io/2017/>`__
         - `2016 <https://automating-gis-processes.github.io/2016/>`__
 
-    Note, that the older course materials might be outdated.
+    Older course materials might be outdated.
 
 
 Course topics by week
@@ -58,9 +59,9 @@ In teaching period 1 (Geo-Python), we focused on learning the basics of Python p
 See the materials on the `Geo-Python course page <https://geo-python.github.io>`_.
 
 In teaching period 2 (Automating GIS processes), we dive into spatial data management and analysis using python.
-This part of the course runs for seven weeks starting on Monday the 28th of October 2019.
+This part of the course runs for seven weeks starting on Tuesday the 27th of October 2020.
 
-Lesson materials are published on these pages each week on Monday, after which they are publicly available for anyone interested:
+Topics per week are listed below. Please note that course materials are updated each week before the lesson:
 
 +----------------+---------------------------------+
 | Week           | Theme                           |
@@ -80,8 +81,8 @@ Lesson materials are published on these pages each week on Monday, after which t
 |                |                                 |
 |                |                                 |
 +----------------+---------------------------------+
-| **4**          |  Reclassifying data,            |
-|                |  overlay analysis               |
+| **4**          | Reclassifying data,             |
+|                | overlay analysis                |
 |                |                                 |
 +----------------+---------------------------------+
 | **5**          | Visualization: static           |
@@ -92,9 +93,13 @@ Lesson materials are published on these pages each week on Monday, after which t
 |                | Network analysis (networkx)     |
 |                |                                 |
 +----------------+---------------------------------+
-| **7**          | Using Python in QGIS;           |
-|                | Raster data processing          |
+| **7**          | Course recap and                |
+|                | Preparing for the final         |
+|                | assignment                      |
 |                |                                 |
+|                | Optional extra materials        |
+|                | for self-study:                 |
+|                | PyQGIS, Raster processing       |
 +----------------+---------------------------------+
 
 |
@@ -181,7 +186,7 @@ Contents
 
 .. toctree::
    :maxdepth: 2
-   :caption: Lesson 7
+   :caption: PyQGIS
 
    lessons/L7/overview
    lessons/L7/pyqgis
