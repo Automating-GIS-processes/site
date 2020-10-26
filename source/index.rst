@@ -11,7 +11,7 @@ We also provide a computing environment which allows you to instantly start prog
 directly in your browser (no installations needed).
 
 Notice: we assume that you know the basics of Python programming. If you are new to Python, we recommend that you start with
-the `Geo-Python course materials at geo-python.github.io <https://geo-python.github.io>`_. The Automating GIS processes course ("AutoGIS")
+the Geo-Python course materials at `https://geo-python.github.io <https://geo-python.github.io>`_. The Automating GIS processes course ("AutoGIS")
 is a direct continuation from the Geo-Python course, which is a join effort between the geography and geosciences study programmes at
 the University of Helsinki, Finland.
 
@@ -40,8 +40,9 @@ summary write-ups that you submit must be completed individually and must clearl
 
 .. admonition:: University of Helsinki students
 
-    The Automating GIS processes course is part of the Geography Masters Programme at the University of Helsinki (UH).
-    UH students should sign up for this course using the course code ``GEOG-329-2`` in Weboodi.
+    The Automating GIS processes course is part of the
+    `Master's Programme in Geography at the University of Helsinki <https://www.helsinki.fi/en/admissions/degree-programmes/geography-masters-programme>`__.
+    under the course code ``GEOG-329-2``. This
 
 .. admonition:: Interactive contents
 
@@ -131,8 +132,8 @@ Contents
    course-info/course-environment-components
    course-info/grading
    course-info/learning-goals
-   installing-miniconda.rst
-   course-info/Installing_Anacondas_GIS
+   course-info/installing-miniconda
+   course-info/create-python-gis-env
    course-info/resources
    course-info/License-terms
 
@@ -140,8 +141,8 @@ Contents
    :maxdepth: 2
    :caption: Lesson 1
 
-   course-motivation.rst
    lessons/L1/overview
+   course-motivation.rst
    notebooks/L1/geometric-objects.ipynb
    lessons/L1/exercise-1
 
