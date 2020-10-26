@@ -111,7 +111,6 @@ Please note that this web page is updated each week before the lesson:
 |                | Preparing for the final         |
 |                | assignment                      |
 |                |                                 |
-
 +----------------+---------------------------------+
 | **Extra**      |  PyQGIS, Raster processing      |
 | **materials**  |                                 |
@@ -125,7 +124,7 @@ Contents
 --------
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Course information
 
    course-info/course-info
@@ -138,7 +137,7 @@ Contents
    course-info/License-terms
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Lesson 1
 
    lessons/L1/overview
@@ -225,13 +224,13 @@ Contents
        notebooks/Raster/zonal-statistics.ipynb
        notebooks/Raster/read-cogs.ipynb
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Final Assignment
+    .. toctree::
+       :maxdepth: 2
+       :caption: Final Assignment
 
-   lessons/FA/final-assignment
-   lessons/FA/final-assignment-grading
-   lessons/FA/fa-hints
+       lessons/FA/final-assignment
+       lessons/FA/final-assignment-grading
+       lessons/FA/fa-hints
 
 
 
