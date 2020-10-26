@@ -17,7 +17,7 @@ the University of Helsinki, Finland.
 
 .. admonition:: Open Access!
 
-    Course materials and recorded lesson videos are **open for everyone** at `https://autogis-github.io <https://autogis.github.io>`__. The aim of this course is to share the
+    Course materials and recorded lesson videos are **open for everyone** on these pages. The aim of this course is to share the
     knowledge and help people to get started with their journey for doing GIS more efficiently and in a reproducible manner
     using Python programming. Feel free to share this website to anyone interested, and to use these materials in your own teaching.
     You can read more info about the license and terms of usage in `here <course-info/License-terms.html>`_.
