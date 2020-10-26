@@ -1,8 +1,6 @@
 Grading
 =======
 
-General grading breakdown
--------------------------
 Course grades will be given using the standard six-level grading scale from 0 to 5.
 Course grade for Automating GIS-processes will be based on 1) final broader programming assignment and
 2) weekly exercises.
