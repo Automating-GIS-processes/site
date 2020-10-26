@@ -80,7 +80,7 @@ It is also possible to create a conda environment based on a pre-defined configu
 Requirements for the conda environment can be written into a YAML-file (file extension .yaml or .yml).
 
 You can find and download a configuration file that contains all required packages needed during the autogis course
-in `here <https://github.com/Automating-GIS-processes/site/blob/master/ci/py38-GIS.yaml`__.
+in `here <https://github.com/Automating-GIS-processes/site/blob/master/ci/py38-GIS.yaml>`__.
 
 The contents of the configuration file look like this:
 
