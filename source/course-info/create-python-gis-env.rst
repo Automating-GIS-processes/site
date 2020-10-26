@@ -62,72 +62,84 @@ You should now see the name of the environment at the start of the command line.
     # ... install other packages
 
 After you have installed all required packages, you can start working in a local Jupyter Lab environment that is
-linked to your python-gis conda environment by launchin jupyter lab on the command line:
+linked to your python-gis conda environment by launching jupyter lab on the command line.
+
+It's a good idea to first navigate to the folder where your Jupyter Notebook -files are located before launching Jupyter Lab.
 
 
+.. code-block::
 
-Create an environment from an .yml file
+    jupyter lab
+
+Note, Jupyter Lab will probably prompt you to "Build" the installation in order to get the git-plugin to show.
+
+Create an environment from an YAML file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+It is also possible to create a conda environment based on a pre-defined configuration file.
+Requirements for the conda environment can be written into a YAML-file (file extension .yaml or .yml).
 
+You can find and download a configuration file that contains all required packages needed during the autogis course
+in `here <https://github.com/Automating-GIS-processes/site/blob/master/ci/py38-GIS.yaml`__.
 
+The contents of the configuration file look like this:
 
+```
+name: python-gis
 
+channels:
+  - conda-forge
+  - patrikhlobil
 
+dependencies:
+  - python=3.8
+  - jupyterlab
+  - jupyterlab-git
+  - matplotlib
+  - geopandas
+  - geojson
+  - pysal
+  - mapclassify
+  - osmnx
+  - pyrosm
+  - geopy
+  - geojson
+  - rasterio
+  - contextily
+  - folium
+  - mplleaflet
+  - bokeh
+  - patrikhlobil::pandas-bokeh
+  - pip
+```
 
+Once you have downloaded the file too your own computer, you can navigate to that folder and run this command to create
+the conda environment using the file:
 
+.. code-block::
 
+    conda env create -f py38-GIS.yaml
 
-
-
-
-
-
-Install Python GIS environment using YML configuration file
-===========================================================
-
-Installing various GIS packages in Python can be sometimes a bit tricky because there might exist complex dependencies
-that requires specific versions of different packages and even specific version of Python itself.
-The easiest way to get the installation working smoothly is to build a dedicated `Python environment <https://conda.io/docs/user-guide/tasks/manage-environments.html>`__
-for GIS using conda and preferably installing packages using mostly the same `conda channel <https://conda.io/docs/glossary.html#channels>`__.
-Using dedicated environment has the advantage that you can load the environment when needed.
-In this way, it won't break any existing installations that you might have.
-
-There are basically three steps required to install GIS packages and start using them in your operating system:
-
- 1. Download suitable environment file (.yml) to your operating system
- 2. Install packages and create a dedicated conda environment for ``gis``
- 3. Activate the environment and start using the packages
-
-1. Download environment file for your operating system
-------------------------------------------------------
-
-A dedicated repository contains a list of *.yml* environment files created for different operating systems
-(*work in progress*). Go to `<https://github.com/Automating-GIS-processes/install>`__ repository.
-
-You should download a version that suits your operating system and then follow the instructions below.
-
-2. Install GIS packages into dedicated environment
---------------------------------------------------
-
-Once you have downloaded the yml file that fits your operating system you can install the packages
-by using following command:
-
-.. code:: bash
-
-    $ conda env create -f gis-win-10.yml
-
-.. note::
-
-    Solving the environment and installing all the packages might take surprisingly long time, so be patient.
-
-3. Activate the GIS environment and start doing GIS
----------------------------------------------------
+Solving the environment and installing all the packages might take surprisingly long time, so be patient.
 
 Once the installations have been done, you are ready to start using the GIS packages by activating the environment.
-It can be done by running following command from the command prompt / terminal:
 
-.. code:: bash
+.. code-block::
 
-    $ source activate gis
+    source activate gis
 
+Finally, you should be able to start working with Jupyter lab by activating it on the command line.
+It's a good idea to first navigate to the folder where your Jupyter Notebook -files are located before launching Jupyter Lab.
+
+.. code-block::
+
+    jupyter lab
+
+
+Docker environments
+--------------------
+
+Docker is a
+
+- Dockerfiles used for setting up the CSC notebooks environments for Geo-Python and AutoGIS are
+documented at `https://github.com/csc-training/geocomputing/ <https://github.com/csc-training/geocomputing/tree/master/rahti/autogis-course-part1>`__
