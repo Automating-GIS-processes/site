@@ -84,34 +84,35 @@ in `here <https://github.com/Automating-GIS-processes/site/blob/master/ci/py38-G
 
 The contents of the configuration file look like this:
 
-```
-name: python-gis
+.. code-block::
 
-channels:
-  - conda-forge
-  - patrikhlobil
+    name: python-gis
 
-dependencies:
-  - python=3.8
-  - jupyterlab
-  - jupyterlab-git
-  - matplotlib
-  - geopandas
-  - geojson
-  - pysal
-  - mapclassify
-  - osmnx
-  - pyrosm
-  - geopy
-  - geojson
-  - rasterio
-  - contextily
-  - folium
-  - mplleaflet
-  - bokeh
-  - patrikhlobil::pandas-bokeh
-  - pip
-```
+    channels:
+      - conda-forge
+      - patrikhlobil
+
+    dependencies:
+      - python=3.8
+      - jupyterlab
+      - jupyterlab-git
+      - matplotlib
+      - geopandas
+      - geojson
+      - pysal
+      - mapclassify
+      - osmnx
+      - pyrosm
+      - geopy
+      - geojson
+      - rasterio
+      - contextily
+      - folium
+      - mplleaflet
+      - bokeh
+      - patrikhlobil::pandas-bokeh
+      - pip
+
 
 Once you have downloaded the file too your own computer, you can navigate to that folder and run this command to create
 the conda environment using the file:
