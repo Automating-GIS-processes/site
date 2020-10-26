@@ -10,16 +10,16 @@ Learning goals
 
 After this lesson you should be able to:
 
-  - search for information about the available GIS packages in Python
-  - understand how geometric objects such as points, lines and polygons are represented in Python using Shapely
-  - create geometric objects based on coordinate values
-  - (optionally) install Python packages on your own computer using conda
+- search for information about the available GIS packages in Python
+- understand how geometric objects such as points, lines and polygons are represented in Python using Shapely
+- create geometric objects based on coordinate values
+- (optionally) install Python packages on your own computer using conda
 
 Intro slides
 --------------
 .. admonition:: Lesson slides
 
-    `Slides from lesson 1 (PDF) <../../_static/autogis-intro-slides-2019.pdf>`__
+    `Slides from lesson 1 (PDF) <../../_static/autogis-intro-slides-2020.pdf>`__
 
 Lesson videos
 -------------
