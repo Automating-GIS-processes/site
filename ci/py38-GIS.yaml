@@ -1,0 +1,30 @@
+name: python-gis
+
+channels:
+  - conda-forge
+  - patrikhlobil
+
+dependencies:
+  - python=3.8
+  - jupyterlab
+  - jupyterlab-git
+  - matplotlib
+  - geopandas
+  - geojson
+  - pysal
+  - mapclassify
+  - osmnx
+  - pyrosm
+  - geopy
+  - geojson
+  - rasterio
+  - contextily
+  - folium
+  - mplleaflet
+  - bokeh
+  - patrikhlobil::pandas-bokeh
+  - pip
+
+
+
+

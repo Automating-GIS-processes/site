@@ -1,25 +1,25 @@
 Motivation for the course
 =========================
 
-General overview of the latter part of the course
--------------------------------------------------
+General overview
+------------------
 
 Now that you are familiar with `the basics of Python programming <https://geo-python.github.io>`_ it is time to
-apply those skills to geographic data analysis. During the next
-seven weeks you will learn how to deal with spatial data and analyze it
-using Python and various libraries that have been developed for GIS-related tasks.
+apply those skills to geographic data analysis. During the automating GIS processes course you will learn how to
+deal with spatial data and analyze it using Python and various libraries that have been developed for GIS-related tasks.
 
 Learning objectives
 -------------------
 
 At the end of the course you should be able to:
 
--  Read / write spatial data from/to different file formats
--  Deal with different projections
--  Do different geometric operations and geocoding
--  Reclassify your data based on different criteria
--  Do spatial queries
--  Do simple spatial analyses
+-  read / write spatial data from/to different file formats
+-  work with coordinate reference systems
+-  geocode data from addresses to coordinates and vice versa
+-  apply geometric operations (intersect, union)
+-  reclassify data based on conditions
+-  apply spatial queries
+-  conduct simple spatial analyses
 -  Visualize data and create (interactive) maps, such as following:
 
 .. raw:: html

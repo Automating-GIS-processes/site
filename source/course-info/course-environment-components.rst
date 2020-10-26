@@ -3,23 +3,37 @@ Course environment
 
 During this course, we will use different tools and applications for programming and communications:
 
-1. `JupyterLab`_ for the actual programming. You have two options for accessing the programming environment:
-    - `Using JupyterLab on a cloud computing environment <#cloud-computing-environments>`_
-    - `Using JupyterLab on your own computer <#using-your-own-computer>`_
-2. `Git and GitHub`_ for version control and documentation
-3. `Slack`_ for communicating among course participants
-4. `Voting / polling  <#voting-and-polling>`_ for interactive questions during the lectures
+1. `Interactive code cells <#interactive-code-cells>`__ for live coding in the browser
+2. `JupyterLab`_ for the actual programming
+3. `Cloud computing environments`_ Binder or CSC Notebooks
+4. `Git and GitHub`_ for version control and documentation
+5. `Voting / polling  <#voting-and-polling>`_ for interactive questions during the lectures
+6. `Slack`_ for communicating among UH students
+7. `Zoom`_ for live session at UH
 
+Interactive code cells
+-----------------------
+
+All pages with code cells can be turned into an interactive mode where you can run the code directly in the browser!
+
+.. figure:: img/Thebe_launcher.png
+   :alt: Activate Thebe that makes the page interactive
+
+.. note::
+
+    The interactive code cells are a new feature in the 2020 course materials. This feature is still a bit experimental!
+    Remember that you can always open up the materials in Binder or CSC Notebooks and run the code in there.
 
 JupyterLab
 ------------
 `JupyerLab <https://jupyterlab.readthedocs.io/en/stable/getting_started/overview.html>`__ is an open-source web-based user interface for doing data science.
-The Jupyter lab interface consists of different components such as a file browser, terminal, image viewer, console, text editor, etc.
+The JupyterLab interface consists of different components such as a file browser, terminal, image viewer, console, text editor, etc.
 
-**Jupyter Notebooks** (filename extension ``.ipynb``) are documents inside the JupyterLab environment which contain computer code, and rich text elements (figures, links etc.).
+**Jupyter Notebooks** (filename extension ``.ipynb``) are documents inside the JupyterLab environment which contain computer code, and rich text elements (figures, links, etc.).
 Jupyter Notebooks are perfect for documenting a data science workflow in an interactive format.
 
-We use JupyterLab/Jupyter Notebooks as the default programming environment during this course. All of the course materials are available in a JupyterLab setting via `cloud computing environments`_ (Binder or CSC Notebooks).
+**We use JupyterLab/Jupyter Notebooks as the default programming environment during this course.**
+All of the course materials are available in a JupyterLab setting via `cloud computing environments`_ (Binder or CSC Notebooks).
 
 .. figure:: img/Binder_launcher.png
    :alt: Binder Jupyter Notebook
@@ -28,10 +42,10 @@ We use JupyterLab/Jupyter Notebooks as the default programming environment durin
    Basic view of JupyterLab
 
 .. figure:: img/JupyterLab.png
-   :alt: A Jupyter Notebook open in Jupyter Lab
+   :alt: A Jupyter Notebook open in JupyterLab
    :width: 700px
 
-   A Jupyter Notebook open in Jupyter Lab
+   A Jupyter Notebook open in JupyterLab
 
 Cloud computing environments
 --------------------------------
@@ -41,25 +55,17 @@ and to work on the weekly exercises. You can use the cloud computing environment
 
 Please note that the cloud computing environments are **temporary**. Always remember to push your changes to GitHub (and / or download a local copy).
 
-.. figure:: img/LaunchButtons2.png
-   :alt: Launch buttons on the Lesson 1: a Taste of Python page
+.. figure:: img/launch-buttons.png
+   :alt: Launch buttons
    :width: 700px
 
-   Launch buttons on the Lesson 1: a Taste of Python -page
+   Different options for making the lesson interactive
 
 Each interactive lesson and exercise will have a launch button for both Binder and CSC Notebook.
-Each lesson typically contains three different launch buttons:
-
-- *full binder* contains lesson notebooks including all the necessary code
-- *student binder* contains lesson notebooks without pre-filled code
-- *CSC notebook* contains lesson notebooks in an environment which has persistent storage
-
-Binder and CSC Notebook are similar environments, but we have two options available in case one of the services is not working properly.
-Furthermore, CSC Notebooks contain persistent cloud storage, but are only available to students in Finnish universities.
-We recommend that students from Finnish universities use the CSC Notebooks environment when working with the exercises.
+The CSC notebooks environment is only accessible to students from Finnish universities and research institutes.
 
 Binder
-~~~~~~~~~~~~~~~~~~~
+~~~~~~~
 
 Binder (https://mybinder.org/) runs Jupyter Notebooks in your web browser in a customized environment. The original files (notebooks) are hosted on GitHub.
 Binder does not require the user to log in, you can just click on the link in the lesson / exercise and start working.
@@ -75,7 +81,7 @@ Once the instance is ready, you can navigate to the lesson folders and start wor
 **Remember to save your work! The Binder instance is temporary, and all your files will be lost after the session.**
 
 CSC Notebooks
-~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~
 
 Notebooks by CSC (https://notebooks.csc.fi) is a computing environment hosted by the Finnish IT Center for Science (CSC). Similarly as in Binder, CSC notebooks are used for running Jupyter Notebooks in a customized environment.
 CSC Notebooks is available only for students who are affiliated with Finnish universities and research institutes (via the HAKA user authentication).
@@ -86,7 +92,7 @@ CSC Notebooks is available only for students who are affiliated with Finnish uni
     2. Go to Account-tab
     3. Join Group **Geo-Python** using the joining code: ``geo-python-tadl4``
 
-    After joining the group, you should be able to view an environment called `AutoGIS 2019` on the Dashboard.
+    After joining the group, you should be able to view an environment called `Geo-Python` on the Dashboard.
 
 .. figure:: img/CSC_join_group.png
    :alt: Join Group in CSC Notebooks
@@ -110,7 +116,7 @@ CSC Notebooks is available only for students who are affiliated with Finnish uni
 Using your own computer
 --------------------------------
 We recommend everyone to use the available `cloud computing environments`_ during this course.
-In case you want to work on your own computer, start by :doc:`installing Python (via Anaconda) <installing_Anacondas_GIS>` .
+In case you want to work on your own computer, you need to `install Python (via Miniconda) <../../course-info/installing-miniconda.html>`_.
 
 
 Git and GitHub
@@ -144,13 +150,6 @@ Both Git and GitHub provide many more features than the ones mentioned
 here, but for now we are happy to understand the basic idea of what they
 are.
 
-Slack
-------
-
-During the course we will use actively an application called `Slack <http://slack.com>`__ for discussion and
-questions about the lessons and exercises. All enrolled students have received an invite link to the `geopython2019` workspace at the start of the course.
-:doc:`Read more about Slack  <slack-usage>`.
-
 Voting and polling
 ------------------
 
@@ -162,6 +161,18 @@ You can access the polling system of our course from `<https://geo-python.github
     The polling system is active only **during** the lessons. If you access the website outside the lecture times, you
     will most probably see only a white page without any content.
 
+Slack
+------
+
+During the course we will use actively an application called `Slack <http://slack.com>`__ for discussion and
+questions about the lessons and exercises. All enrolled students have received an invite link to the `geopython2020` workspace at the start of the course.
+:doc:`Read more about Slack  <slack-usage>`.
+
+Zoom
+------
+
+We will use zoom during the live sessions at the University of Helsinki during the remote teaching period in Autumn 2020.
+Zoom link and details will be shared in Slack and sent out via email to registered students.
 
 Page summary
 ------------
