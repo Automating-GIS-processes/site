@@ -139,7 +139,13 @@ It's a good idea to first navigate to the folder where your Jupyter Notebook -fi
 Docker environments
 --------------------
 
-Docker is a
+Docker is a platform that can be used to "package" computing tools into a so called container.
+Docker allows to develop applications and computing environments that are "ready-to-run" without
+further hassle with installations.
 
-- Dockerfiles used for setting up the CSC notebooks environments for Geo-Python and AutoGIS are
-documented at `https://github.com/csc-training/geocomputing/ <https://github.com/csc-training/geocomputing/tree/master/rahti/autogis-course-part1>`__
+For example, the instances at CSC notebooks are based on a docker image that contains
+a ubuntu operating system with Jupyter Lab, Python and relevant Python packages for this course.
+Dockerfiles used for setting up the CSC notebooks environments for Geo-Python and AutoGIS are
+documented at `https://github.com/csc-training/geocomputing/ <https://github.com/csc-training/geocomputing/tree/master/rahti/autogis-course-part1>`__.
+
+For the purposes of this course, we recommend students to use the YAML file above to manage the installations.
