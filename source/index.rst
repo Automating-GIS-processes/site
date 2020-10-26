@@ -44,7 +44,7 @@ must clearly reflect your own work (in short, don't copy paste from other studen
 .. admonition:: University of Helsinki students
 
     The Automating GIS processes course is part of the
-    `Master's Programme in Geography at the University of Helsinki <https://www.helsinki.fi/en/admissions/degree-programmes/geography-masters-programme>`__.
+    `Master's Programme in Geography at the University of Helsinki <https://www.helsinki.fi/en/admissions/degree-programmes/geography-masters-programme>`__
     under the course code ``GEOG-329-2``.
 
 .. admonition:: Interactive contents
