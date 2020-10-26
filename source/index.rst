@@ -15,6 +15,13 @@ the Geo-Python course materials at `https://geo-python.github.io <https://geo-py
 is a direct continuation from the Geo-Python course, which is a join effort between the geography and geosciences study programmes at
 the University of Helsinki, Finland.
 
+.. admonition:: Open Access!
+
+    Course materials and recorded lesson videos are **open for everyone** at `https://autogis-github.io <https://autogis.github.io>`__. The aim of this course is to share the
+    knowledge and help people to get started with their journey for doing GIS more efficiently and in a reproducible manner
+    using Python programming. Feel free to share this website to anyone interested, and to use these materials in your own teaching.
+    You can read more info about the license and terms of usage in `here <course-info/License-terms.html>`_.
+
 Course format
 -------------
 
@@ -26,11 +33,6 @@ to submit answers to relevant questions, some related plots, and the Python code
 You are encouraged to discuss and work together with other students on the laboratory exercises, however the laboratory
 summary write-ups that you submit must be completed individually and must clearly reflect your own work.
 
-.. admonition:: Open Access!
-
-    Course materials and recorded lesson videos are **open for everyone** at `https://autogis-github.io <https://autogis.github.io>`__. The aim of this course is to share the
-    knowledge and help people to get started with their journey for doing GIS more efficiently and in a reproducible manner
-    using Python programming. Feel free to share this website to anyone interested, and to use these materials in your own teaching.
 
 .. admonition:: Online teaching
 
@@ -42,7 +44,7 @@ summary write-ups that you submit must be completed individually and must clearl
 
     The Automating GIS processes course is part of the
     `Master's Programme in Geography at the University of Helsinki <https://www.helsinki.fi/en/admissions/degree-programmes/geography-masters-programme>`__.
-    under the course code ``GEOG-329-2``. This
+    under the course code ``GEOG-329-2``.
 
 .. admonition:: Interactive contents
 
@@ -50,21 +52,6 @@ summary write-ups that you submit must be completed individually and must clearl
     You can find buttons for activating the python environment using `Thebe <https://thebe.readthedocs.io/en/latest/>`__
     or `Binder <https://mybinder.readthedocs.io/en/latest/>`__ at the top of each programming lesson. Students at Finnish
     higher education institutions are encourage to use the `CSC notebooks <https://notebooks.csc.fi/>`__ environment.
-
-.. admonition:: For teachers
-
-    If you would like to use these materials for your own teaching or develop them further, we highly support that.
-    Please read more about how to do it from `here <course-info/License-terms.html>`_.
-
-.. admonition:: Earlier versions of the course
-
-    Older course materials are available at:
-        - `2019 <https://autogis-site.readthedocs.io/en/2019/>`__
-        - `2018 <https://automating-gis-processes.github.io/site/2018>`__
-        - `2017 <https://automating-gis-processes.github.io/2017/>`__
-        - `2016 <https://automating-gis-processes.github.io/2016/>`__
-
-    Older course materials might be outdated.
 
 
 Course topics by week
@@ -119,6 +106,14 @@ Please note that this web page is updated each week before the lesson:
 +----------------+---------------------------------+
 
 |
+
+.. admonition:: Earlier versions of the course
+
+    Older course materials are available at:
+        - `2019 <https://autogis-site.readthedocs.io/en/2019/>`__
+        - `2018 <https://autogis-site.readthedocs.io/en/2018_/>`__
+        - `2017 <https://automating-gis-processes.github.io/2017/>`__
+        - `2016 <https://automating-gis-processes.github.io/2016/>`__
 
 Contents
 --------
