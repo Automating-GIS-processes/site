@@ -17,7 +17,7 @@ the University of Helsinki, Finland.
 
 .. admonition:: Open Access!
 
-    Course materials and recorded lesson videos are **open for everyone** at `https://autogis-github.io <https://autogis.github.io>`__. The aim of this course is to share the
+    Course materials and recorded lesson videos are **open for everyone** on these pages. The aim of this course is to share the
     knowledge and help people to get started with their journey for doing GIS more efficiently and in a reproducible manner
     using Python programming. Feel free to share this website to anyone interested, and to use these materials in your own teaching.
     You can read more info about the license and terms of usage in `here <course-info/License-terms.html>`_.
@@ -25,14 +25,15 @@ the University of Helsinki, Finland.
 Course format
 -------------
 
-The majority of this course will be spent in front of a computer learning to program with Python programming language and doing practical exercises.
+The majority of this course will be spent in front of a computer learning to program in the Python language.
+The course consists of interactive lectures and weekly exercises. The exercises will focus on developing
+basic programming skills using Python and applying those skills to manipulate and analyze geographic information.
 
-The computer exercises will focus on developing basic programming skills using Python and applying those skills to various GIS related problems.
-Typical exercises will involve a brief introduction, followed by topical computer-based tasks and exercises. At the end of the exercises, you are asked
-to submit answers to relevant questions, some related plots, and the Python codes you have written.
-You are encouraged to discuss and work together with other students on the laboratory exercises, however the laboratory
-summary write-ups that you submit must be completed individually and must clearly reflect your own work.
-
+Most exercises in this course involve real world examples and data.
+For each exercise, you may be asked to submit the Python codes you have written, output figures and answers
+to related questions. You are encouraged to discuss and work together with other students while working
+on the weekly exercises. The final exercise must be completed individually and
+must clearly reflect your own work (in short, don't copy paste from other students).
 
 .. admonition:: Online teaching
 
