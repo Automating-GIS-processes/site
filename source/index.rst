@@ -4,14 +4,15 @@
 Automating GIS-processes 2020
 ==============================
 
-**Welcome to Automating GIS-processes 2020!** This course introduces you to geographic data analysis in
-the Python programming language. If you are new to Python, we recommend that you start with
-the Geo-Python course materials at `https://geo-python.github.io <https://geo-python.github.io>`_ before diving into the GIS stuff.
-Geo-Python and "AutoGIS" have been developed at the Department of Geosciences and Geography, University of Helsinki, Finland.
+**Welcome to the Automating GIS-processes course 2020!** This course introduces you to geographic data analysis in
+the Python programming language through interactive lessons and hands-on exercises. If you are new to Python, we recommend that you start with
+the Geo-Python course materials at `https://geo-python.github.io <https://geo-python.github.io>`_ before diving into the GIS stuff in this course.
+Geo-Python and Automating GIS processes ("AutoGIS") have been developed at the Department of Geosciences and Geography, University of Helsinki, Finland, and
+the materials are openly available for anyone interested.
 
 .. admonition:: Open Access!
 
-    Course materials and recorded lesson videos are **open for everyone** on these pages. The aim of this course is to share the
+    Course materials and recorded lesson videos are **open for everyone**. The aim of this course is to share the
     knowledge and help people to get started with their journey for doing GIS more efficiently and in a reproducible manner
     using Python programming. Feel free to share this website to anyone interested, and to use these materials in your own teaching.
     You can read more info about the license and terms of usage in `here <course-info/License-terms.html>`_.
