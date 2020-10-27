@@ -4,16 +4,10 @@
 Automating GIS-processes 2020
 ==============================
 
-**Welcome to Automating GIS-processes 2020!** This course teaches you how to do different GIS-related tasks in Python programming language.
-Each lesson is a tutorial with specific topic(s) where the aim is to learn how to solve common GIS-related problems and
-tasks using Python tools. We are using only publicly available data which can be used and downloaded by anyone anywhere.
-We also provide a computing environment which allows you to instantly start programming and trying out the materials yourself,
-directly in your browser (no installations needed).
-
-Notice: we assume that you know the basics of Python programming. If you are new to Python, we recommend that you start with
-the Geo-Python course materials at `https://geo-python.github.io <https://geo-python.github.io>`_. The Automating GIS processes course ("AutoGIS")
-is a direct continuation from the Geo-Python course, which is a join effort between the geography and geosciences study programmes at
-the University of Helsinki, Finland.
+**Welcome to Automating GIS-processes 2020!** This course introduces you to geographic data analysis in
+the Python programming language. If you are new to Python, we recommend that you start with
+the Geo-Python course materials at `https://geo-python.github.io <https://geo-python.github.io>`_ before diving into the GIS stuff.
+Geo-Python and "AutoGIS" have been developed at the Department of Geosciences and Geography, University of Helsinki, Finland.
 
 .. admonition:: Open Access!
 
@@ -21,6 +15,20 @@ the University of Helsinki, Finland.
     knowledge and help people to get started with their journey for doing GIS more efficiently and in a reproducible manner
     using Python programming. Feel free to share this website to anyone interested, and to use these materials in your own teaching.
     You can read more info about the license and terms of usage in `here <course-info/License-terms.html>`_.
+
+After completing this course, the students can manage, analyze and visualize spatial data
+systematically and efficiently using Python, and critically evaluate the available methods.
+In addition to geographic data manipulation and analysis skills (for example, reading and writing files,
+managing coordinate reference systems,overlay analysis, network analysis) in Python,
+the students continue to learn good programming practices, including the use of a version control system (git) and
+documenting and communicating their analysis workflow in online repositories (GitHub).
+
+.. admonition:: Interactive contents
+
+    Each lesson in this course can be turned into an interactive programming session in the browser!
+    You can find buttons for activating the python environment using `Thebe <https://thebe.readthedocs.io/en/latest/>`__
+    or `Binder <https://mybinder.readthedocs.io/en/latest/>`__ at the top of each programming lesson. Students at Finnish
+    higher education institutions are encourage to use the `CSC notebooks <https://notebooks.csc.fi/>`__ environment.
 
 Course format
 -------------
@@ -35,24 +43,17 @@ to related questions. You are encouraged to discuss and work together with other
 on the weekly exercises. The final exercise must be completed individually and
 must clearly reflect your own work (in short, don't copy paste from other students).
 
-.. admonition:: Online teaching
-
-    Please note that the course is organized completely online during the 2020 Autumn semester.
-    Access to zoom, slack and CSC notebooks is available to students at Finnish higher education institutes. Recorded
-    lesson videos and course materials are openly available to everyone interested.
-
 .. admonition:: University of Helsinki students
 
     The Automating GIS processes course is part of the
     `Master's Programme in Geography at the University of Helsinki <https://www.helsinki.fi/en/admissions/degree-programmes/geography-masters-programme>`__
     under the course code ``GEOG-329-2``.
 
-.. admonition:: Interactive contents
+.. admonition:: Online teaching
 
-    Each lesson in this course can be turned into an interactive programming session in the browser!
-    You can find buttons for activating the python environment using `Thebe <https://thebe.readthedocs.io/en/latest/>`__
-    or `Binder <https://mybinder.readthedocs.io/en/latest/>`__ at the top of each programming lesson. Students at Finnish
-    higher education institutions are encourage to use the `CSC notebooks <https://notebooks.csc.fi/>`__ environment.
+    Please note that the course is organized completely online during the 2020 Autumn semester.
+    Access to zoom, slack and CSC notebooks is available to students at Finnish higher education institutes. Recorded
+    lesson videos and course materials are openly available to everyone interested.
 
 
 Course topics by week
@@ -137,7 +138,7 @@ Contents
    :caption: Lesson 1
 
    lessons/L1/overview
-   course-motivation.rst
+   lessons/L1/course-motivation
    notebooks/L1/geometric-objects.ipynb
    lessons/L1/exercise-1
 
