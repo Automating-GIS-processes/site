@@ -10,12 +10,16 @@ Exercise 1
 
 .. admonition:: Start your assignment
 
-    You can start working on your copy of Exercise 1 by `accepting the GitHub Classroom assignment <>`__.
+    You can start working on your copy of Exercise 1 by `accepting the GitHub Classroom assignment <https://classroom.github.com/a/2krg1xSI>`__.
 
 You can also take a look at the open course copy of `Exercise 1 in the course GitHub repository <https://github.com/AutoGIS-2020/Exercise-1>`__ (does not require logging in).
 Note that you should not try to make changes to this copy of the exercise, but rather only to the copy available via GitHub Classroom.
 
+.. note::
 
+    We will continue to use git and GitHub when working with the exercises.
+    You can find instructions for using git and the Jupyter Lab git plugin
+    `in the Geo-Python course website <https://geo-python-site.readthedocs.io/en/latest/lessons/L2/git-basics.html>`__.
 
 Hints
 -----
