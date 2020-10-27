@@ -114,14 +114,14 @@ The contents of the configuration file look like this:
       - pip
 
 
-Once you have downloaded the file too your own computer, you can navigate to that folder and run this command to create
+Once you have downloaded the file to your own computer, you can navigate to that folder and run this command to create
 the conda environment using the file:
 
 .. code-block::
 
     conda env create -f py38-GIS.yaml
 
-Solving the environment and installing all the packages might take surprisingly long time, so be patient.
+Solving the environment and installing all the packages might take a surprisingly long time, so be patient.
 
 Once the installations have been done, you are ready to start using the GIS packages by activating the environment.
 
