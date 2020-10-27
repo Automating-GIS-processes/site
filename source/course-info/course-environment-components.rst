@@ -116,7 +116,7 @@ CSC Notebooks is available only for students who are affiliated with Finnish uni
 Using your own computer
 --------------------------------
 We recommend everyone to use the available `cloud computing environments`_ during this course.
-In case you want to work on your own computer, you need to `install Python (via Miniconda) <../../course-info/installing-miniconda.html>`_.
+In case you want to work on your own computer, you need to `install Python and relevant packages on your own computer <installing-miniconda.html>`_.
 
 
 Git and GitHub
