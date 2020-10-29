@@ -83,6 +83,8 @@ function, and guide the user how to use the function correctly with informative 
 Alternatives for iterrows (Problem 3)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+It is possible to solve problem 3  using `iterrows()` following this example:
+
 .. code:: python
 
     #-----------------------------------------
@@ -95,8 +97,7 @@ Alternatives for iterrows (Problem 3)
 
         # ..continue
 
-
-There are other **faster** solutions for this. Check out the following examples, and try to understand what happens in them. Pick one of these solutions and use it in problem 2 :) You'll need to change the variable and column names.
+However, there are other **faster** (and shorter) solutions for this. Check out the following examples:
 
 .. code:: python
 
