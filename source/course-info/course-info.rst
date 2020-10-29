@@ -10,8 +10,8 @@ General info
 Course meetings in teaching period II
 --------------------------------------
 
-- Lessons on Tuesdays 15:15-18:00 (UCT+2)
-- Work sessions on Fridays Thursdays 12:15-16:00 (UCT+2)
+- Lessons on Tuesdays 15:15-18:00 (UTC+2)
+- Work sessions on Fridays 12:15-16:00 (UTC+2)
 
 Instructors
 -----------
