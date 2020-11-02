@@ -127,7 +127,7 @@ Once the installations have been done, you are ready to start using the GIS pack
 
 .. code-block::
 
-    source activate gis
+    source activate python-gis
 
 Finally, you should be able to start working with Jupyter lab by activating it on the command line.
 It's a good idea to first navigate to the folder where your Jupyter Notebook -files are located before launching Jupyter Lab.

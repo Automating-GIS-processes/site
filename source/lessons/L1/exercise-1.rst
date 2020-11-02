@@ -21,6 +21,14 @@ Note that you should not try to make changes to this copy of the exercise, but r
     You can find instructions for using git and the Jupyter Lab git plugin
     `in the Geo-Python course website <https://geo-python-site.readthedocs.io/en/latest/lessons/L2/git-basics.html>`__.
 
+.. admonition:: Pair programming (optional!)
+
+    Students attending the course in Helsinki **can continue working in pairs**.
+    See more information in Slack, and in week 2: `Why are we working in pairs? <https://geo-python-site.readthedocs.io/en/latest/lessons/L2/why-pairs.html>`_.
+    However, each student should submit their own copy of the exercise.
+
+
+
 Hints
 -----
 
@@ -70,6 +78,59 @@ Consider following example that combines these two checks:
 
 This example demonstrates how it is possible to check and control that the input values are appropriate for the
 function, and guide the user how to use the function correctly with informative error messages.
+
+
+Alternatives for iterrows (Problem 3)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+It is possible to solve problem 3  using `iterrows()` following this example:
+
+.. code:: python
+
+    #-----------------------------------------
+
+    # OPTION 1: Iterate over dataframe rows:
+    for idx, row in df.iterrows():
+
+        # create a point based on x and y column values on this row:
+        point = Point(row['x'], row['y'])
+
+        # ..continue
+
+However, there are other **faster** (and shorter) solutions for this. Check out the following examples:
+
+.. code:: python
+
+    #-----------------------------------------
+
+    # OPTION 2: apply a function
+
+    # Define a function for creating points from row values
+    def create_point(row):
+        '''Returns a shapely point object based on values in x and y columns'''
+
+        point = Point(row['x'], row['y'])
+
+        return point
+
+    # Apply the function to each row
+    point_series = df.apply(create_point, axis=1)
+
+    #-----------------------------------------
+
+
+    # OPTION 3: apply a lambda function
+    # see: https://docs.python.org/3.5/tutorial/controlflow.html#lambda-expressions
+
+    point_series = df.apply(lambda row: Point(row['x'], row['y']), axis=1)
+
+    #-----------------------------------------
+
+    # OPTION 4: zip and for-loop
+
+    geom = []
+    for x, y in zip(df['x'], df['y']):
+        geom.append(Point(x, y))
 
 Iterating multiple lists simultaneously
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

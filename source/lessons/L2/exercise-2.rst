@@ -2,16 +2,24 @@ Exercise 2
 ==========
 
 .. image:: https://img.shields.io/badge/launch-CSC%20notebook-blue.svg
-   :target: https://notebooks.csc.fi/#/blueprint/8d7886c2f0ac402aa99235f8d289a52b
+   :target: https://notebooks.csc.fi/#/blueprint/d189695c52ad4c0d89ef72572e81b16c
 
 .. admonition:: Start your assignment
 
-    You can start working on your copy of Exercise 2 by `accepting the GitHub Classroom assignment <https://classroom.github.com/a/QQyBjWM2>`__.
+    You can start working on your copy of Exercise 2 by `accepting the GitHub Classroom assignment <>`__.
 
-    **Exercise 2 is due by by 16:00 on Wednesday the 13th of November 2019** (day before the next practical session).
+    **Exercise 2 is due by 5pm on Thursday the 12th of November 2020** (day before the next practical session).
 
-You can also take a look at the open course copy of `Exercise 2 in the course GitHub repository <https://github.com/AutoGIS-2019/Exercise-2>`__ (does not require logging in).
+You can also take a look at the open course copy of `Exercise 2 in the course GitHub repository <https://github.com/AutoGIS-2020/Exercise-2>`__ (does not require logging in).
 Note that you should not try to make changes to this copy of the exercise, but rather only to the copy available via GitHub Classroom.
+
+
+.. admonition:: Pair programming (optional!)
+
+    Students attending the course in Helsinki **can continue working in pairs**.
+    See more information in Slack, and in week 2: `Why are we working in pairs? <https://geo-python-site.readthedocs.io/en/latest/lessons/L2/why-pairs.html>`_.
+    However, each student should submit their own copy of the exercise.
+
 
 Hints
 -----
@@ -74,9 +82,9 @@ In exercise 2, problem 2 you need to create Shapely Points for each row of data.
 
         # Add the point object to the geometry column on this row:
         df.at[idx, 'geometry'] = point
-        
-        
-        
+
+
+
 There are other **faster** solutions for this. Check out the following examples, and try to understand what happens in them. Pick one of these solutions and use it in problem 2 :) You'll need to change the variable and column names.
 
 .. code:: python
@@ -93,7 +101,7 @@ There are other **faster** solutions for this. Check out the following examples,
 
         return point
 
-    # Apply the function to each row 
+    # Apply the function to each row
     df['geometry'] = df.apply(create_point, axis=1)
 
     #-----------------------------------------
