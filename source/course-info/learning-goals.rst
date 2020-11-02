@@ -15,8 +15,8 @@ After each week you should be able to achieve following learning goals.
 +---------------------------------+-------------------------------------------------------------------------------------+
 | 2.                              | After lesson 2 you should be able to:                                               |
 |                                 |     - Read and write spatial data from/to common file formats                       |
-|                                 |     - Manage spatial data using Geopandas                                           |
-|                                 |     - Re-project a geodatagfame from one projection to another                      |
+|                                 |     - Conduct simple analysis on spatial and non-spatial data                       |
+|                                 |     - Manage coordinate reference systems and re-project data                       |
 |                                 |                                                                                     |
 +---------------------------------+-------------------------------------------------------------------------------------+
 | 3.                              |  After lesson 3 you should be able to:                                              |
