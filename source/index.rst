@@ -149,12 +149,11 @@ Contents
        :caption: Lesson 2
 
        lessons/L2/overview
-       lessons/L2/quiz.rst
-       notebooks/L2/data_io.ipynb
-       notebooks/L2/geopandas-basics.ipynb
-       notebooks/L2/projections.ipynb
-       notebooks/L2/calculating-distances.ipynb
-       notebooks/L2/geopandas-geometries.ipynb
+       lessons/L2/definitions.rst
+       notebooks/L2/00-data_io.ipynb
+       notebooks/L2/01-geopandas-basics.ipynb
+       notebooks/L2/02-projections.ipynb
+       notebooks/L2/EXTRA-geopandas-geometries.ipynb
        lessons/L2/exercise-2
 
     .. toctree::

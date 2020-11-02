@@ -1,6 +1,7 @@
+Key concepts
+=============
 
-
-.. admonition:: **Test your understanding**
+.. admonition:: **Check your understanding**
 
     Before diving into this week's Python lesson, you should already be familiar with some basic
     spatial data file formats and projection definitions, such as these:
