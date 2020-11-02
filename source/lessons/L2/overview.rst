@@ -1,12 +1,14 @@
 Lesson 2 Overview
 =================
 
-In this week, we will learn how to read and write spatial data, and how to deal with projections in Python using `Geopandas <http://geopandas.org/>`_ -module
-and some useful data management functionalities.
+In this lesson, we will learn how to handle spatial data in python using
+`Geopandas <http://geopandas.org/>`_. Geopandas combines the power of Pandas to analyze tabular data,
+and Shapely for handling geometries. In particular, we will learn how to read and write spatial data in Python,
+and to manipulate geometries in a GeoDataFrame. Furthermore, we will learn to
 
-1. `Introduction to Geopandas <../../notebooks/L2/geopandas-basics.ipynb>`__
-2. `Managing map projections <../../notebooks/L2/projections.ipynb>`__
-3. :doc:`Exercise 2: Working with geometric objects <exercise-2>`
+
+
+we will get to know `Geopandas <http://geopandas.org/>`_
 
 
 Learning goals
