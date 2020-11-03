@@ -6,7 +6,7 @@ Exercise 2
 
 .. admonition:: Start your assignment
 
-    You can start working on your copy of Exercise 2 by `accepting the GitHub Classroom assignment <>`__.
+    You can start working on your copy of Exercise 2 by `accepting the GitHub Classroom assignment <https://classroom.github.com/a/gtbzvQh3>`__.
 
     **Exercise 2 is due by 5pm on Thursday the 12th of November 2020** (day before the next practical session).
 
