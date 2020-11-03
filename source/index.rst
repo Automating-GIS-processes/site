@@ -152,7 +152,7 @@ Contents
    notebooks/L2/00-data_io.ipynb
    notebooks/L2/01-geopandas-basics.ipynb
    notebooks/L2/02-projections.ipynb
-   notebooks/L2/EXTRA-geopandas-geometries.ipynb
+   notebooks/L2/03-create-geodataframes.ipynb
    lessons/L2/exercise-2
 
 ..
