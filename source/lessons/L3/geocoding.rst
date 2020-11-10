@@ -6,15 +6,15 @@ Overview of Geocoders
 
 Geocoding is the process of transforming place names or addresses into coordinates.
 In this lesson we will learn how to geocode addresses using Geopandas and
-`geopy <https://geopy.readthedocs.io/en/stable/>`__. There are also other Python modules in addition to geopy
-that can do geocoding such as `Geocoder <http://geocoder.readthedocs.io/>`__.
+`geopy <https://geopy.readthedocs.io/en/stable/>`__.
 
-Geocoding libraries make it easy to locate the coordinates of addresses, cities, countries, and landmarks
-across the globe using different geocoding web services ("geocoders"). In practice, geocoders are often
+Geopy and other geocoding libaries (such as `geocoder <http://geocoder.readthedocs.io/>`__)
+make it easy to locate the coordinates of addresses, cities, countries, and landmarks
+across the globe using web services ("geocoders"). In practice, geocoders are often
 Application Programming Interfaces (APIs) where you can send requests, and receive responses in the form of place names,
 addresses and coordinates.
 
-Several different geocoding services are available via geopy, including these:
+Geopy offers access to several geocoding services, including:
 
 -  `ESRI ArcGIS <https://developers.arcgis.com/rest/geocode/api-reference/overview-world-geocoding-service.htm>`__
 -  `Baidu Maps <http://lbsyun.baidu.com/index.php?title=webapi/guide/webservice-geocoding>`__
@@ -31,7 +31,7 @@ Several different geocoding services are available via geopy, including these:
 -  `What3words <https://developer.what3words.com/public-api/docsv2#overview>`__
 -  `Yandex <https://tech.yandex.com/maps/doc/geocoder/desc/concepts/input_params-docpage/>`__
 
-Chec the `Geopy documentation <https://geopy.readthedocs.io/en/stable/>`__ for more details
+Chec the `geopy documentation <https://geopy.readthedocs.io/en/stable/>`__ for more details
 about how to use each service via Python.
 
 As you see, there are plenty of geocoders where to choose from! The quality of the geocoders might
@@ -42,18 +42,16 @@ but not using the Google Geocoding API - and vice versa.
 Geocoding services might require an **API key** in order to use them. (i.e. you need to register for the service before
 you can access results from their API). Furthermore, **rate limiting** also restrict the use of these services.
 The geocoding process might end up in an error if you are making too many requests in a short time period (eg.
-trying to geocode DataFrame with large number of rows). See hints for dealing with rate limiting when geocoding
-pandas Dataframes from the `Geopy documentation <https://geopy.readthedocs.io/en/stable/#usage-with-pandas>`__.
-Under paid plans, you can naturally make more requests to the API.
+trying to geocode large number of addresses). See hints for dealing with rate limiting when geocoding
+pandas DataFrames from the `geopy documentation <https://geopy.readthedocs.io/en/stable/#usage-with-pandas>`__.
+If you pay for the geocoding service, you can naturally make more requests to the API.
 
 In this lesson we will use the Nominatim geocoder for locating a relatively small number of addresses.
-Usage of the Nominatim geocoding service is rate is rate-limited to 1 request per second (3600 / hour). You can
+Usage of the Nominatim geocoding service is rate-limited to 1 request per second (3600 / hour). You can
 read more about Nominatim usage policy in `here <https://operations.osmfoundation.org/policies/nominatim/>`__
 
 Luckily, Nominatim, which is a geocoder based on OpenStreetMap data does not require a API key to use their service
-if it is used for small scale geocoding jobs as the service
-As we are only making a small set of queries, we can do the geocoding by using Nominatim.
-
+if it is used to geocode only a small number of addresses.
 
 .. Note::
 
@@ -61,7 +59,7 @@ As we are only making a small set of queries, we can do the geocoding by using N
 
 .. Note::
 
-    As noted on the `Geopy documentation for the Nominatim geocoder <https://geopy.readthedocs.io/en/stable/#nominatim>`__
+    As noted in the `geopy documentation for the Nominatim geocoder <https://geopy.readthedocs.io/en/stable/#nominatim>`__
     we need to specify a custom `user_agent` parameter when making requests not to violate the
     `Nominatim Usage Policy <https://operations.osmfoundation.org/policies/nominatim/>`__.
 
