@@ -169,16 +169,16 @@ Contents
    notebooks/L3/06_nearest-neighbor-faster.ipynb
    lessons/L3/exercise-3
 
+.. toctree::
+   :maxdepth: 2
+   :caption: Lesson 4
+
+   lessons/L4/overview
+   notebooks/L4/geometric-operations.ipynb
+   notebooks/L4/reclassify.ipynb
+   lessons/L4/exercise-4
+
 ..
-    .. toctree::
-       :maxdepth: 2
-       :caption: Lesson 4
-
-       lessons/L4/overview
-       notebooks/L4/geometric-operations.ipynb
-       notebooks/L4/reclassify.ipynb
-       lessons/L4/exercise-4
-
     .. toctree::
        :maxdepth: 2
        :caption: Lesson 5
