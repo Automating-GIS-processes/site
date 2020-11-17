@@ -179,6 +179,15 @@ Contents
    notebooks/L4/reclassify.ipynb
    lessons/L4/exercise-4
 
+.. toctree::
+   :maxdepth: 2
+   :caption: Final Assignment
+
+   lessons/FA/final-assignment
+   lessons/FA/final-assignment-grading
+   lessons/FA/fa-hints
+
+
 ..
     .. toctree::
        :maxdepth: 2
@@ -222,13 +231,6 @@ Contents
        notebooks/Raster/zonal-statistics.ipynb
        notebooks/Raster/read-cogs.ipynb
 
-    .. toctree::
-       :maxdepth: 2
-       :caption: Final Assignment
-
-       lessons/FA/final-assignment
-       lessons/FA/final-assignment-grading
-       lessons/FA/fa-hints
 
 
 
