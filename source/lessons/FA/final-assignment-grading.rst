@@ -4,7 +4,7 @@ Grading criteria for the final assignment
 **The grading is based on a typical 0-5 scale. The grade is based on a total of 70 points:**
 
 
-**50 points points for major analysis steps/ functionality**:
+**60 points points for major analysis steps/ functionality**:
 
 	- Reading and manipulating data
     - Analyzing data
@@ -20,7 +20,7 @@ Grading criteria for the final assignment
 	- are all input data and output results (maps, graphs) presented and explained clearly?
     - Is the code easy to read and well-formatted (following the PEP8 guidelines)
 
-**10 points** for other merits in the work (if aiming for the highest grade):
+**Extra points** available for other merits in the work:
 
 	- something in the work is exceptionally well done
 	- some problem in the code is solved in a "smart" way
@@ -40,19 +40,3 @@ You can write your code into python script files and /or jupyter notebook files.
 **The workflow should be repeatable and well documented.** In other words, anyone who gets a copy of your repository should be able to run your code, and read your code.
 
 In case you are creating something with a totally different structure, please discuss with the course instructors :)
-
-
-Grade for the final assignment:
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-*final grade thresholds are defined after assessing the assignments*
-
-- 5 --> ~90 % or more of the points received (i.e. > 45 points)
-
-- 4 --> ~80 % or more of the points received (i.e. > 40 points)
-
-- 3 --> ~70 % or more of the points received (i.e. > 35 points)
-
-- 2 --> ~60 % or more of the points received (i.e. > 30 points)
-
-- 1 --> 50 % or more of the points received (i.e. > 25 points)
