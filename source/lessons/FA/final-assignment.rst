@@ -2,11 +2,11 @@ Final assignment
 ================
 
 .. image:: https://img.shields.io/badge/launch-CSC%20notebook-blue.svg
-   :target: https://notebooks.csc.fi/#/blueprint/8d7886c2f0ac402aa99235f8d289a52b
+   :target: https://notebooks.csc.fi/#/blueprint/d189695c52ad4c0d89ef72572e81b16c
 
 .. admonition:: Start your assignment
 
-    Start your final assignment by accepting the `GitHub Classroom <https://classroom.github.com/a/t_W3zC8p>`_ for the final work.
+    Start your final assignment by accepting the `GitHub Classroom <>`_ for the final work.
 
 
 .. admonition:: Summary
@@ -21,7 +21,7 @@ The final project is an individual task where the aim is to apply Python program
 **The main aim is to create a GIS analysis workflow that can be easily repeated for similar input data.**
 
 You can select a pre-defined topic, or develop your own question. You should take advantage of your programming skills
-(basics of python, defining your own functions, reading and writing data, data analysis usign pandas, spatial analysis using geopandas,
+(basics of Python, defining your own functions, reading and writing data, data analysis usign pandas, spatial analysis using geopandas,
 creating static and/or interactive data visualizations, ...), version control skills (git + GitHub),
 and good coding practices (writing readable code) when doing the final assignment.
 
@@ -61,25 +61,8 @@ When is the deadline?
 ~~~~~~~~~~~~~~~~~~~~~
 
 Label your submissions as "submitted" in the exercise repository's `README.md` under "status" once you are finished with the Final assignment.
-GitHub classroom creates an automatic commit to the repository at the deadline.
 
-**Deadline: January 15th 2020 at 4pm**
-
-- You should commit all changes to GitHub by Wednesday the 15th of January 2020 at 16:00.
-- Those who submit by this deadline will get their grades at the end of January.
-- If you need your grade earlier, please contact Vuokko via Slack so we can agree on an earlier schedule
-
-**Late submissions:**
-
-- Submitted between Wednesday the 15th of January 2020 at 16:00 and Wednesday the 26th of February 2020 at 16:00
-- Will get grades by easter
-- Maximum grade 4/5
-
-**Very late submissions:**
-
-- Submitted after Wednesday the 26th of February 2020 at 16:00
-- Agree with Vuokko on the schedule :)
-- Maximum grade 3/5
+**TBA**
 
 
 Grading
@@ -87,10 +70,10 @@ Grading
 The grading is based on a typical 0-5 scale. See detailed grading criteria :doc:`here <final-assignment-grading>`.
 The final assignment is graded based on:
 
-- Functionality of the main analysis steps (data fetching, data analysis, visualization)
+- Main analysis steps (data fetching, data analysis, visualization)
 - Repeatability (it should be possible to repeat the main analysis steps for different input files / input parameters)
-- Quality of visualizations
-- Overall documentation of the work
+- Quality of visualizations (maps and graphs)
+- Overall documentation of the work (use markdown cells for structuring the work, and code comments to explain details)
 
 **Good documentation of the code and your project is highly appreciated!!!**
 You should add necessary details to the `README.md` file, and use inline comments and Markdown cells to document your work along the way. Take a look of these hints for using markdown:
@@ -232,8 +215,6 @@ The tool should calculate 2-4 indicators about the urban areas. Here are some ex
     - Fetch the data, and filter if needed
     - Calculate building density and other metrics
     - create maps showing the building types and density
-
-
 
 Structure of the urban indicators tool assignmnent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

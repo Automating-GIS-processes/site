@@ -2,16 +2,16 @@ Exercise 4
 ==========
 
 .. image:: https://img.shields.io/badge/launch-CSC%20notebook-blue.svg
-   :target: https://notebooks.csc.fi/#/blueprint/8d7886c2f0ac402aa99235f8d289a52b
+   :target: https://notebooks.csc.fi/#/blueprint/d189695c52ad4c0d89ef72572e81b16c
 
 .. admonition:: Start your assignment
 
-    You can start working on your copy of Exercise 4 by `accepting the GitHub Classroom assignment <https://classroom.github.com/a/FpA8NDxG>`__.
+    You can start working on your copy of Exercise 4 by `accepting the GitHub Classroom assignment <https://classroom.github.com/a/C7NViKE7>`__.
 
 
-**Exercise 4 is due by Wednesday the 27th of November at 4pm** (day before the next practical session).
+**Exercise 4 is due by Thursday the 26th of November at 5pm** (day before the next practical session).
 
-You can also take a look at the open course copy of `Exercise 4 in the course GitHub repository <https://github.com/AutoGIS-2019/Exercise-4>`__.
+You can also take a look at the open course copy of `Exercise 4 in the course GitHub repository <https://github.com/AutoGIS-2020/Exercise-4>`__.
 Note that you should not try to make changes to this copy of the exercise, but rather only to the copy available via GitHub Classroom.
 
 
@@ -24,10 +24,10 @@ Digital Geography Lab's Accessibility Research Group website: `http://blogs.hels
 Problem 1
 ~~~~~~~~~~~~
 
-- Note that the input travel time data is stored in text files when reading in the data.
+- Note that the input travel time data is stored in text files when reading in the data (read in with pandas, not geopandas).
 - Keep columns `'from_id'`,`'to_id'`,`'pt_r_tt'` and `'car_r_t'` in the travel time data files
 - Join the data using columns `'from_id'` from the travel time data, and `'YKR_ID'` in the grid-shapefile
-- See hints for joining the travel time data to the grid shapefile from our earlier materials from first period (Geo-Python course): `Table join <https://geo-python.github.io/2017/lessons/L6/exercise-6-hints.html?highlight=merge#joining-data-from-one-dataframe-to-another>`__
+- See hints for joining data to the grid (GeoDataFrame) from the travel time data (DataFrames) from Lesson 3, spatial join and from Geo-Python exercise 6: `Table join <https://geo-python-site.readthedocs.io/en/latest/lessons/L6/exercise-6.html#joining-data-from-one-dataframe-to-anothera>`__
 - Plotting the data might take a moment (be patient!)
 
 Problem 2
