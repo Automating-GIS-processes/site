@@ -175,6 +175,7 @@ Contents
 
    lessons/L4/overview
    notebooks/L4/geometric-operations.ipynb
+   notebooks/L4/create_health_district_polygons.ipynb
    notebooks/L4/reclassify.ipynb
    lessons/L4/exercise-4
 
