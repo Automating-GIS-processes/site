@@ -1,22 +1,26 @@
 Grading criteria for the final assignment
 ==========================================
 
-**The grading is based on a typical 0-5 scale. The grade is based on a total of 50 points:**
+**The grading is based on a typical 0-5 scale. The grade is based on a total of 70 points:**
 
 
-**40 points points for major analysis steps/ functionality** (reading and managing data, analyzing data and visualizing data) :
+**50 points points for major analysis steps/ functionality**:
 
-	- is the desired functionality working as it should
-	- is each functionality well documented
-	- is the code written in a modular way (eg. using functions)?
+	- Reading and manipulating data
+    - Analyzing data
+    - Visualizations (maps, graphs)
+    - Is the code written in a modular way (avoid repetition eg. using functions and for-loops)
+    - Does everything work as it should
+    - Overall difficulty of the analysis task is taken into account in the assessment
 
 **10 points for overall documentation of the work**
 
 	- is there a general description in about the research problem / purpose of the tool?
 	- is the usage of the tool/ available functions described and demonstrated clearly?
 	- are all input data and output results (maps, graphs) presented and explained clearly?
+    - Is the code easy to read and well-formatted (following the PEP8 guidelines)
 
-In addition, you can gain **5 extra points** for other merits in the work:
+**10 points** for other merits in the work (if aiming for the highest grade):
 
 	- something in the work is exceptionally well done
 	- some problem in the code is solved in a "smart" way
