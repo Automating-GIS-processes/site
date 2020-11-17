@@ -6,7 +6,7 @@ Final assignment
 
 .. admonition:: Start your assignment
 
-    Start your final assignment by accepting the `GitHub Classroom <>`_ for the final work.
+    Start your final assignment by accepting the `GitHub Classroom <https://classroom.github.com/a/4MOBkObf>`_ for the final work.
 
 
 .. admonition:: Summary

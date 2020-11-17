@@ -4,7 +4,7 @@ Grading criteria for the final assignment
 **The grading is based on a typical 0-5 scale. The grade is based on a total of 70 points:**
 
 
-**50 points points for major analysis steps/ functionality**:
+**60 points points for major analysis steps/ functionality**:
 
 	- Reading and manipulating data
     - Analyzing data
@@ -20,7 +20,7 @@ Grading criteria for the final assignment
 	- are all input data and output results (maps, graphs) presented and explained clearly?
     - Is the code easy to read and well-formatted (following the PEP8 guidelines)
 
-**10 points** for other merits in the work (if aiming for the highest grade):
+**Extra points** available for other merits in the work:
 
 	- something in the work is exceptionally well done
 	- some problem in the code is solved in a "smart" way
