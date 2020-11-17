@@ -62,7 +62,12 @@ When is the deadline?
 
 Label your submissions as "submitted" in the exercise repository's `README.md` under "status" once you are finished with the Final assignment.
 
-**TBA**
+You can choose from these two deadlines:
+- 1st deadline: Thursday the 31st December 2020
+- 2nd deadline Friday the 15th of January 2020
+
+Submissions are checked after each deadline (you can get the feedback earlier if aiming for the first deadline).
+If you need the course grade earlier, please contact the course instructor.
 
 
 Grading
