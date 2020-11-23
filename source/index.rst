@@ -184,9 +184,9 @@ Contents
    :caption: Lesson 5
 
    lessons/L5/overview
-   notebooks/L5/static_maps.ipynb
-   notebooks/L5/interactive-map-folium.ipynb
-   notebooks/L5/Employment_in_Finland.ipynb
+   notebooks/L5/01_static_maps.ipynb
+   notebooks/L5/02_interactive-map-folium.ipynb
+   notebooks/L5/03_employment_rate_map.ipynb
    lessons/L5/share-on-github
    lessons/L5/exercise-5
 
