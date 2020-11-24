@@ -1,15 +1,10 @@
-Lesson 7 Overview
-=================
+Overview
+===========
 
 .. figure:: img/L7-01-overview-01-pyqgis.svg
     :width: 500 px
 
-In this lesson we will take a quick tour on **how to use Python in QGIS**:
-
-1. :doc:`Introduction to PyQGIS <pyqgis>`
-2. :doc:`Creating QGIS plugins <pyqgis#creating-qgis-plugins>`
-3. :doc:`Additional PyQGIS functions <additional_pyqgis_functions>`
-
+This section gives a quick introduction on **how to use Python in QGIS**.
 *Credits to Tatu Leppämäki for compiling these materials!*
 
 Learning objectives
@@ -17,7 +12,6 @@ Learning objectives
 
 The aim of this lesson is to get started with using Python in QGIS. You will learn to run code from
 QGIS Python console, and learn how to create a simple QGIS plugin that applies Python functions.
-
 
 .. admonition:: Note
 
@@ -30,17 +24,15 @@ QGIS Python console, and learn how to create a simple QGIS plugin that applies P
     - `AutoGIS course materials from 2016 <https://automating-gis-processes.github.io/2016/Lesson6-overview.html>`_ on how to use the `arcpy <http://desktop.arcgis.com/en/arcmap/10.3/analyze/arcpy/what-is-arcpy-.htm>`_  module for automating GIS processes.
     - `AutoGIS course materials from 2018 on how to run python scripts in the QGIS processing toolbox <https://automating-gis-processes.github.io/site/2018/lessons/L7/pyqgis.html>`__
 
-
-
 Lecture videos
 --------------
 
-.. admonition:: Lesson 7 - Python in QGIS; building a simple QGIS plugin
+.. admonition:: AutoGIS 2019 Lesson 7 - Python in QGIS; building a simple QGIS plugin
 
     .. raw:: html
 
         <iframe width="560" height="315" src="https://www.youtube.com/embed/-ZlRXQYqcr0" frameborder="0" allowfullscreen></iframe>
-        <p>Vuokko Heikinheimo & Tatu Leppämäki, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p>
+        <p>Tatu Leppämäki, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p>
 
     **Contents:**
 
@@ -64,20 +56,5 @@ Lecture videos
         - Additional resources 1:03:10
         - Additional PyQGIS functions 1:04:17
         - Example of a more complicated plugin (GeoCubes):  1:06:30
-
-.. admonition:: Lesson 7 - Final assignment instructions
-
-    .. raw:: html
-
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/8CV0tIRVY3I" frameborder="0" allowfullscreen></iframe>
-        <p>Vuokko Heikinheimo & Tatu Leppämäki, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p>
-
-    **Contents:**
-
-        - Example student project 0:00
-        - Final assignment instructions 04:30
-        - Additional resources 23:30
-        - Final assignment repository 25:30
-        - Extra exercises 26:30
 
 
