@@ -1,5 +1,5 @@
-Lesson 7 Overview
-=================
+Overview
+===========
 
 .. figure:: img/L7-01-overview-01-pyqgis.svg
     :width: 500 px
