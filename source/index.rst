@@ -192,12 +192,19 @@ Contents
 
 .. toctree::
    :maxdepth: 2
+   :caption: Extra: PyQGIS
+
+   lessons/L7/overview
+   lessons/L7/pyqgis
+   lessons/L7/additional_pyqgis_functions
+
+.. toctree::
+   :maxdepth: 2
    :caption: Final Assignment
 
    lessons/FA/final-assignment
    lessons/FA/final-assignment-grading
    lessons/FA/fa-hints
-
 
 ..
 
@@ -209,14 +216,6 @@ Contents
        notebooks/L6/retrieve_osm_data.ipynb
        notebooks/L6/network-analysis.ipynb
        lessons/L6/exercise-6
-
-    .. toctree::
-       :maxdepth: 2
-       :caption: PyQGIS
-
-       lessons/L7/overview
-       lessons/L7/pyqgis
-       lessons/L7/additional_pyqgis_functions
 
     .. toctree::
        :maxdepth: 2
