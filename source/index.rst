@@ -194,9 +194,9 @@ Contents
    :maxdepth: 2
    :caption: Extra: PyQGIS
 
-   lessons/L7/overview
-   lessons/L7/pyqgis
-   lessons/L7/additional_pyqgis_functions
+   lessons/PyQGIS/overview
+   lessons/PyQGIS/pyqgis
+   lessons/PyQGIS/additional_pyqgis_functions
 
 .. toctree::
    :maxdepth: 2
@@ -207,7 +207,6 @@ Contents
    lessons/FA/fa-hints
 
 ..
-
     .. toctree::
        :maxdepth: 2
        :caption: Lesson 6
