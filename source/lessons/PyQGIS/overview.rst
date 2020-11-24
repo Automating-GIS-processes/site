@@ -32,7 +32,7 @@ Lecture videos
     .. raw:: html
 
         <iframe width="560" height="315" src="https://www.youtube.com/embed/-ZlRXQYqcr0" frameborder="0" allowfullscreen></iframe>
-        <p>Vuokko Heikinheimo & Tatu Leppämäki, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p>
+        <p>Tatu Leppämäki, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p>
 
     **Contents:**
 
