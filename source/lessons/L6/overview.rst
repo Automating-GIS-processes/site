@@ -4,10 +4,6 @@ Overview
 In this week we will see how to easily retrieve OpenStreetMap data and how to do simple
 network analysis in Python.
 
-1. `Retrieving OpenStreetMap data <../../notebooks/L6/retrieve_osm_data.ipynb>`__
-2. `Network analysis in Python <../../notebooks/L6/network-analysis.ipynb>`__
-3. :doc:`Exercise 6 <exercise-6>`
-
 Learning goals
 --------------
 
@@ -25,28 +21,36 @@ and `OpenStreetMap <https://wiki.openstreetmap.org/wiki/Main_Page>`__.
 
 
 
-.. admonition:: Lesson 6 - Fetching OpenStreetMap Data using osmnx in Python
+Lesson videos
+--------------
 
-    .. raw:: html
-
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/QQmvq1cQHrk" frameborder="0" allowfullscreen></iframe>
-        <p>Vuokko Heikinheimo, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p>
-
-
-.. admonition:: Lesson 6 - Network analysis and routing in Python using OSMnx and Networkx -packages
-
-    .. raw:: html
-
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/ZHr0Ch6KRSM" frameborder="0" allowfullscreen></iframe>
-        <p>Vuokko Heikinheimo, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p>
-
-
-
+Lesson videos will be added here as soon as possible
 
 .. admonition:: Meet the developer: Introduction to OSMnx package by Geoff Boeing
 
     .. raw:: html
 
         <iframe width="560" height="315" src="https://www.youtube.com/embed/Q0uxu25ddc4" frameborder="0" allowfullscreen></iframe>
-        <p>Henrikki Tenkanen, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p>
+        <p>Henrikki Tenkanen interviewing Geoff Boeing, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p>
+
+
+
+
+.. admonition:: Lesson 6 - Fetching OpenStreetMap Data using OSMnx in Python
+
+    .. raw:: html
+
+        <iframe width="560" height="315" src="" frameborder="0" allowfullscreen></iframe>
+        <p>Vuokko Heikinheimo, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p>
+
+
+.. admonition:: Lesson 6 - Network analysis and routing in Python using OSMnx and NetworkX -packages
+
+    .. raw:: html
+
+        <iframe width="560" height="315" src="" frameborder="0" allowfullscreen></iframe>
+        <p>Vuokko Heikinheimo, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p>
+
+
+
 

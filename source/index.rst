@@ -192,11 +192,23 @@ Contents
 
 .. toctree::
    :maxdepth: 2
-   :caption: Extra: PyQGIS
+   :caption: Lesson 6
 
-   lessons/PyQGIS/overview
-   lessons/PyQGIS/pyqgis
-   lessons/PyQGIS/additional_pyqgis_functions
+   lessons/L6/overview
+   notebooks/L6/retrieve_osm_data.ipynb
+   notebooks/L6/network-analysis.ipynb
+   lessons/L6/exercise-6
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Lesson 6
+
+   lessons/L6/overview
+   notebooks/L6/retrieve_osm_data.ipynb
+   notebooks/L6/network-analysis.ipynb
+   lessons/L6/exercise-6
+
+
 
 .. toctree::
    :maxdepth: 2
@@ -206,29 +218,27 @@ Contents
    lessons/FA/final-assignment-grading
    lessons/FA/fa-hints
 
-..
-    .. toctree::
-       :maxdepth: 2
-       :caption: Lesson 6
+.. toctree::
+   :maxdepth: 2
+   :caption: Extra: PyQGIS
 
-       lessons/L6/overview
-       notebooks/L6/retrieve_osm_data.ipynb
-       notebooks/L6/network-analysis.ipynb
-       lessons/L6/exercise-6
+   lessons/PyQGIS/overview
+   lessons/PyQGIS/pyqgis
+   lessons/PyQGIS/additional_pyqgis_functions
 
-    .. toctree::
-       :maxdepth: 2
-       :caption: Raster
+.. toctree::
+   :maxdepth: 2
+   :caption: Extra: Raster
 
-       lessons/Raster/overview
-       lessons/Raster/download-data
-       notebooks/Raster/reading-raster.ipynb
-       notebooks/Raster/plotting-raster.ipynb
-       notebooks/Raster/clipping-raster.ipynb
-       notebooks/Raster/raster-map-algebra.ipynb
-       notebooks/Raster/raster-mosaic.ipynb
-       notebooks/Raster/zonal-statistics.ipynb
-       notebooks/Raster/read-cogs.ipynb
+   lessons/Raster/overview
+   lessons/Raster/download-data
+   notebooks/Raster/reading-raster.ipynb
+   notebooks/Raster/plotting-raster.ipynb
+   notebooks/Raster/clipping-raster.ipynb
+   notebooks/Raster/raster-map-algebra.ipynb
+   notebooks/Raster/raster-mosaic.ipynb
+   notebooks/Raster/zonal-statistics.ipynb
+   notebooks/Raster/read-cogs.ipynb
 
 
 
