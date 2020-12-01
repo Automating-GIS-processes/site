@@ -3,7 +3,7 @@ Exercise 6
 
 .. admonition:: Start your assignment
 
-    You can start working on your copy of Exercise 6 by `accepting the GitHub Classroom assignment <h>`__.
+    You can start working on your copy of Exercise 6 by `accepting the GitHub Classroom assignment <https://classroom.github.com/a/iQT46pDe>`__.
 
  **Exercise 6 is due by Thursday 10th of December at 5pm** (day before the last practical session!).
 
