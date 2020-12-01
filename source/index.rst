@@ -208,13 +208,7 @@ Contents
    notebooks/L6/network-analysis.ipynb
    lessons/L6/exercise-6
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Extra: PyQGIS
 
-   lessons/PyQGIS/overview
-   lessons/PyQGIS/pyqgis
-   lessons/PyQGIS/additional_pyqgis_functions
 
 .. toctree::
    :maxdepth: 2
@@ -226,7 +220,15 @@ Contents
 
 .. toctree::
    :maxdepth: 2
-   :caption: Raster
+   :caption: Extra: PyQGIS
+
+   lessons/PyQGIS/overview
+   lessons/PyQGIS/pyqgis
+   lessons/PyQGIS/additional_pyqgis_functions
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Extra: Raster
 
    lessons/Raster/overview
    lessons/Raster/download-data
