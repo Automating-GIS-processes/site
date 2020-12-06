@@ -24,7 +24,6 @@ and `OpenStreetMap <https://wiki.openstreetmap.org/wiki/Main_Page>`__.
 Lesson videos
 --------------
 
-Lesson videos will be added here as soon as possible
 
 .. admonition:: Meet the developer: Introduction to OSMnx package by Geoff Boeing
 
