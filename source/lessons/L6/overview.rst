@@ -40,7 +40,7 @@ Lesson videos will be added here as soon as possible
 
     .. raw:: html
 
-        <iframe width="560" height="315" src="" frameborder="0" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/yJiHOVm3ZH4" frameborder="0" allowfullscreen></iframe>
         <p>Vuokko Heikinheimo, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p>
 
 
@@ -48,7 +48,7 @@ Lesson videos will be added here as soon as possible
 
     .. raw:: html
 
-        <iframe width="560" height="315" src="" frameborder="0" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/TqGJ5yuXl7g" frameborder="0" allowfullscreen></iframe>
         <p>Vuokko Heikinheimo, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q/playlists">@ AutoGIS channel on Youtube</a>.</p>
 
 
