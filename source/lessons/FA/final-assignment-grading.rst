@@ -21,9 +21,10 @@ The following aspects are considered in the assessment
 - Are all input data and output results (maps, graphs) presented and explained clearly?
 - Is the code easy to read and well-formatted (following the PEP8 guidelines)
 
-**Extra points (1/ of final grade)** available for other merits in the work:
+**Other merits in the work (~1/5 of final grade)**:
 
-- Something in the work is exceptionally well done
+- Good style of coding (writing efficient and well-documentent code)
+- Something in the work is exceptionally well done 
 - Some problem in the code is solved in a "smart" way
 - The work is exceptionally well documented
 - The visualizations are exceptionally good
