@@ -50,7 +50,7 @@ todo_include_todos = True
 
 # -- Options for HTML output ----------------------------------------------
 
-html_theme = 'pydata_sphinx_theme'
+html_theme = 'sphinx_book_theme'
 html_logo = 'img/AutoGIS-logo.png'
 html_title = ""
 
