@@ -1,10 +1,10 @@
 
 .. figure:: img/AutoGIS_banner.jpg
 
-Automating GIS-processes 2020
+Automating GIS-processes 2021
 ==============================
 
-**Welcome to the Automating GIS-processes course 2020!** This course introduces you to geographic data analysis in
+**Welcome to the Automating GIS-processes course 2021!** This course introduces you to geographic data analysis in
 the Python programming language through interactive lessons and hands-on exercises. If you are new to Python, we recommend that you start with
 the Geo-Python course materials at `https://geo-python.github.io <https://geo-python.github.io>`_ before diving into the GIS stuff in this course.
 Geo-Python and Automating GIS processes ("AutoGIS") have been developed at the Department of Geosciences and Geography, University of Helsinki, Finland, and
@@ -52,8 +52,8 @@ must clearly reflect your own work (in short, don't copy paste from other studen
 
 .. admonition:: Online teaching
 
-    Please note that the course is organized completely online during the 2020 Autumn semester.
-    Access to zoom, slack and CSC notebooks is available to students at Finnish higher education institutes. Recorded
+    Please note that the course is organized online during the 2021 Autumn semester.
+    Access to Zoom, Slack and CSC notebooks is available to students at Finnish higher education institutes. Recorded
     lesson videos and course materials are openly available to everyone interested.
 
 
@@ -65,7 +65,7 @@ introduced in the Geo-Python course, where we focused on learning the basics of 
 You can find materials from the Geo-Python course at `https://geo-python.github.io <https://geo-python.github.io>`_.
 
 The Automating GIS processes course runs for seven weeks at the University of Helsinki
-starting in the second teaching period on Tuesday the 27th of October 2020. Topics per week are listed below.
+starting in the second teaching period on Tuesday the 2nd of November 2021. Topics per week are listed below.
 Please note that this web page is updated each week before the lesson:
 
 +----------------+---------------------------------+
@@ -113,6 +113,7 @@ Please note that this web page is updated each week before the lesson:
 .. admonition:: Earlier versions of the course
 
     Older course materials are available at:
+        - `2020 <https://autogis-site.readthedocs.io/en/2020_/>`__
         - `2019 <https://autogis-site.readthedocs.io/en/2019/>`__
         - `2018 <https://autogis-site.readthedocs.io/en/2018_/>`__
         - `2017 <https://automating-gis-processes.github.io/2017/>`__
@@ -134,100 +135,101 @@ Contents
    course-info/resources
    course-info/License-terms
 
-.. toctree::
-   :maxdepth: 1
-   :caption: Lesson 1
+..
+   .. toctree::
+      :maxdepth: 1
+      :caption: Lesson 1
 
-   lessons/L1/overview
-   lessons/L1/course-motivation
-   notebooks/L1/geometric-objects.ipynb
-   lessons/L1/exercise-1
+      lessons/L1/overview
+      lessons/L1/course-motivation
+      notebooks/L1/geometric-objects.ipynb
+      lessons/L1/exercise-1
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Lesson 2
+   .. toctree::
+      :maxdepth: 2
+      :caption: Lesson 2
 
-   lessons/L2/overview
-   lessons/L2/definitions.rst
-   notebooks/L2/00-data-io.ipynb
-   notebooks/L2/01-geopandas-basics.ipynb
-   notebooks/L2/02-projections.ipynb
-   notebooks/L2/03-create-geodataframes.ipynb
-   lessons/L2/exercise-2
+      lessons/L2/overview
+      lessons/L2/definitions.rst
+      notebooks/L2/00-data-io.ipynb
+      notebooks/L2/01-geopandas-basics.ipynb
+      notebooks/L2/02-projections.ipynb
+      notebooks/L2/03-create-geodataframes.ipynb
+      lessons/L2/exercise-2
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Lesson 3
+   .. toctree::
+      :maxdepth: 2
+      :caption: Lesson 3
 
-   lessons/L3/overview
-   lessons/L3/geocoding
-   notebooks/L3/01_geocoding_in_geopandas.ipynb
-   notebooks/L3/02_point-in-polygon.ipynb
-   notebooks/L3/03_spatial-join.ipynb
-   notebooks/L3/04_nearest-neighbour.ipynb
-   notebooks/L3/05_spatial_index.ipynb
-   notebooks/L3/06_nearest-neighbor-faster.ipynb
-   lessons/L3/exercise-3
+      lessons/L3/overview
+      lessons/L3/geocoding
+      notebooks/L3/01_geocoding_in_geopandas.ipynb
+      notebooks/L3/02_point-in-polygon.ipynb
+      notebooks/L3/03_spatial-join.ipynb
+      notebooks/L3/04_nearest-neighbour.ipynb
+      notebooks/L3/05_spatial_index.ipynb
+      notebooks/L3/06_nearest-neighbor-faster.ipynb
+      lessons/L3/exercise-3
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Lesson 4
+   .. toctree::
+      :maxdepth: 2
+      :caption: Lesson 4
 
-   lessons/L4/overview
-   notebooks/L4/geometric-operations.ipynb
-   notebooks/L4/create_health_district_polygons.ipynb
-   notebooks/L4/reclassify.ipynb
-   lessons/L4/exercise-4
+      lessons/L4/overview
+      notebooks/L4/geometric-operations.ipynb
+      notebooks/L4/create_health_district_polygons.ipynb
+      notebooks/L4/reclassify.ipynb
+      lessons/L4/exercise-4
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Lesson 5
+   .. toctree::
+      :maxdepth: 2
+      :caption: Lesson 5
 
-   lessons/L5/overview
-   notebooks/L5/01_static_maps.ipynb
-   notebooks/L5/02_interactive-map-folium.ipynb
-   notebooks/L5/03_employment_rate_map.ipynb
-   lessons/L5/share-on-github
-   lessons/L5/exercise-5
+      lessons/L5/overview
+      notebooks/L5/01_static_maps.ipynb
+      notebooks/L5/02_interactive-map-folium.ipynb
+      notebooks/L5/03_employment_rate_map.ipynb
+      lessons/L5/share-on-github
+      lessons/L5/exercise-5
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Lesson 6
+   .. toctree::
+      :maxdepth: 2
+      :caption: Lesson 6
 
-   lessons/L6/overview
-   notebooks/L6/retrieve_osm_data.ipynb
-   notebooks/L6/network-analysis.ipynb
-   lessons/L6/exercise-6
+      lessons/L6/overview
+      notebooks/L6/retrieve_osm_data.ipynb
+      notebooks/L6/network-analysis.ipynb
+      lessons/L6/exercise-6
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Final Assignment
+   .. toctree::
+      :maxdepth: 2
+      :caption: Final Assignment
 
-   lessons/FA/final-assignment
-   lessons/FA/final-assignment-grading
-   lessons/FA/fa-hints
+      lessons/FA/final-assignment
+      lessons/FA/final-assignment-grading
+      lessons/FA/fa-hints
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Extra: PyQGIS
+   .. toctree::
+      :maxdepth: 2
+      :caption: Extra: PyQGIS
 
-   lessons/PyQGIS/overview
-   lessons/PyQGIS/pyqgis
-   lessons/PyQGIS/additional_pyqgis_functions
+      lessons/PyQGIS/overview
+      lessons/PyQGIS/pyqgis
+      lessons/PyQGIS/additional_pyqgis_functions
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Extra: Raster
+   .. toctree::
+      :maxdepth: 2
+      :caption: Extra: Raster
 
-   lessons/Raster/overview
-   lessons/Raster/download-data
-   notebooks/Raster/reading-raster.ipynb
-   notebooks/Raster/plotting-raster.ipynb
-   notebooks/Raster/clipping-raster.ipynb
-   notebooks/Raster/raster-map-algebra.ipynb
-   notebooks/Raster/raster-mosaic.ipynb
-   notebooks/Raster/zonal-statistics.ipynb
-   notebooks/Raster/read-cogs.ipynb
+      lessons/Raster/overview
+      lessons/Raster/download-data
+      notebooks/Raster/reading-raster.ipynb
+      notebooks/Raster/plotting-raster.ipynb
+      notebooks/Raster/clipping-raster.ipynb
+      notebooks/Raster/raster-map-algebra.ipynb
+      notebooks/Raster/raster-mosaic.ipynb
+      notebooks/Raster/zonal-statistics.ipynb
+      notebooks/Raster/read-cogs.ipynb
 
 
 

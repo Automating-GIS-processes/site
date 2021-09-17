@@ -33,11 +33,11 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'AutoGIS'
-copyright = '2020, Henrikki Tenkanen & Vuokko Heikinheimo, Department of Geosciences and Geography, University of Helsinki'
-author = 'Henrikki Tenkanen & Vuokko Heikinheimo'
+copyright = '2021, Henrikki Tenkanen, Vuokko Heikinheimo & Håvard Wallin Aagesen, Department of Geosciences and Geography, University of Helsinki'
+author = 'Henrikki Tenkanen, Vuokko Heikinheimo & Håvard Wallin Aagesen'
 
 # The short X.Y version.
-version = '2020'
+version = '2021'
 # The full version, including alpha/beta/rc tags.
 release = 'site'
 

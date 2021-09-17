@@ -3,7 +3,7 @@ General info
 
 .. admonition:: Contact teaching for University of Helsinki students
 
-    Please note that access to zoom, slack and CSC notebooks is only available for students in Finnish higher education institutes.
+    Please note that access to Zoom, Slack and CSC notebooks is only available for students in Finnish higher education institutes.
     Recorded lessons and course materials are available for everyone interested via these websites and on YouTube.
 
 
@@ -18,13 +18,13 @@ Instructors
 
 **Lessons**:
 
+* Håvard Wallin Aagesen
 * Vuokko Heikinheimo
 * Henrikki Tenkanen
 
 **Practical exercises**:
 
-* Emil Ehnström
-* Sonja Koivisto
+* Bryan R. Vallejo
 
 Email: *firstname.lastname@helsinki.fi*
 

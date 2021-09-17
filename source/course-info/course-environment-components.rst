@@ -21,7 +21,7 @@ All pages with code cells can be turned into an interactive mode where you can r
 
 .. note::
 
-    The interactive code cells are a new feature in the 2020 course materials. This feature is still a bit experimental!
+    The interactive code cells are a new feature in the course materials. This feature is still a bit experimental!
     Remember that you can always open up the materials in Binder or CSC Notebooks and run the code in there.
 
 JupyterLab
@@ -165,13 +165,13 @@ Slack
 ------
 
 During the course we will use actively an application called `Slack <http://slack.com>`__ for discussion and
-questions about the lessons and exercises. All enrolled students have received an invite link to the `geopython2020` workspace at the start of the course.
+questions about the lessons and exercises. All enrolled students have received an invite link to the `Geo-Python 2021` workspace at the start of the course.
 :doc:`Read more about Slack  <slack-usage>`.
 
 Zoom
 ------
 
-We will use zoom during the live sessions at the University of Helsinki during the remote teaching period in Autumn 2020.
+We will use zoom during the live sessions at the University of Helsinki during the remote teaching period in Autumn 2021.
 Zoom link and details will be shared in Slack and sent out via email to registered students.
 
 Page summary
