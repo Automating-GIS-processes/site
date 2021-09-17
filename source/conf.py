@@ -8,7 +8,7 @@ extensions = [
     'sphinx.ext.githubpages',
     'sphinx.ext.todo',
     "sphinx_thebe",
-    'sphinxcontrib.googleanalytics',
+    #'sphinxcontrib.googleanalytics',
     'IPython.sphinxext.ipython_console_highlighting',
     'IPython.sphinxext.ipython_directive',
     'myst_nb',
@@ -16,8 +16,8 @@ extensions = [
 ]
 
 # Google Analytics ID to enable tracking of site traffic
-googleanalytics_id = "UA-88382509-1"
-googleanalytics_enabled = True
+#googleanalytics_id = "UA-88382509-1"
+#googleanalytics_enabled = True
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
