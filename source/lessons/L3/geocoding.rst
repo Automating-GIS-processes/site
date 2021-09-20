@@ -31,7 +31,7 @@ Geopy offers access to several geocoding services, including:
 -  `What3words <https://developer.what3words.com/public-api/docsv2#overview>`__
 -  `Yandex <https://tech.yandex.com/maps/doc/geocoder/desc/concepts/input_params-docpage/>`__
 
-Chec the `geopy documentation <https://geopy.readthedocs.io/en/stable/>`__ for more details
+Check the `geopy documentation <https://geopy.readthedocs.io/en/stable/>`__ for more details
 about how to use each service via Python.
 
 As you see, there are plenty of geocoders where to choose from! The quality of the geocoders might
