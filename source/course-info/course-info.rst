@@ -19,12 +19,15 @@ Instructors
 **Lessons**:
 
 * Håvard Wallin Aagesen
+
+
 * Vuokko Heikinheimo
 * Henrikki Tenkanen
 
 **Practical exercises**:
 
 * Bryan R. Vallejo
+* Justus S. Poutanen
 
 Email: *firstname.lastname@helsinki.fi*
 
@@ -35,7 +38,7 @@ Course websites
 
   - Main course site: `<https://autogis.github.io>`_
   - Notebooks by CSC: `<https://notebooks.csc.fi>`_
-  - Slack (Q&A + chat): `<https://geo-python-2020.slack.com>`_
+  - Slack (Q&A + chat): `<https://geo-python2021.slack.com>`_
   - Polling / voting (active during lectures only): `<https://geo-python.github.io/poll>`_
 
 - Course site for teaching period I (Geo-Python):

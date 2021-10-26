@@ -93,13 +93,13 @@ Please note that this web page is updated each week before the lesson:
 |                | and interactive maps            |
 |                |                                 |
 +----------------+---------------------------------+
-| **6**          | OpenStreetMap data (osmnx) and  |
-|                | Network analysis (networkx)     |
-|                |                                 |
-+----------------+---------------------------------+
-| **7**          | Course recap and                |
+| **6**          | Course recap and                |
 |                | Preparing for the final         |
 |                | assignment                      |
+|                |                                 |
++----------------+---------------------------------+
+| **7**          | OpenStreetMap data (osmnx) and  |
+|                | Network analysis (networkx)     |
 |                |                                 |
 +----------------+---------------------------------+
 | **Extra**      |  PyQGIS, Raster processing      |
