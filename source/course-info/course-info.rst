@@ -3,7 +3,7 @@ General info
 
 .. admonition:: Contact teaching for University of Helsinki students
 
-    Please note that access to zoom, slack and CSC notebooks is only available for students in Finnish higher education institutes.
+    Please note that access to Zoom, Slack and CSC notebooks is only available for students in Finnish higher education institutes.
     Recorded lessons and course materials are available for everyone interested via these websites and on YouTube.
 
 
@@ -18,13 +18,16 @@ Instructors
 
 **Lessons**:
 
+* Håvard Wallin Aagesen
+
+
 * Vuokko Heikinheimo
 * Henrikki Tenkanen
 
 **Practical exercises**:
 
-* Emil Ehnström
-* Sonja Koivisto
+* Bryan R. Vallejo
+* Justus S. Poutanen
 
 Email: *firstname.lastname@helsinki.fi*
 
@@ -35,7 +38,7 @@ Course websites
 
   - Main course site: `<https://autogis.github.io>`_
   - Notebooks by CSC: `<https://notebooks.csc.fi>`_
-  - Slack (Q&A + chat): `<https://geo-python-2020.slack.com>`_
+  - Slack (Q&A + chat): `<https://geo-python2021.slack.com>`_
   - Polling / voting (active during lectures only): `<https://geo-python.github.io/poll>`_
 
 - Course site for teaching period I (Geo-Python):
