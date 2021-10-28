@@ -6,13 +6,13 @@ Exercise 1
 
 .. note::
 
-    Please complete this exercise by **the end of day on Thursday the 5th of November 2020** (day before the next practical session).
+    Please complete this exercise by **the end of day on Thursday the 11th of November 2021** (day before the next practical session).
 
 .. admonition:: Start your assignment
 
-    You can start working on your copy of Exercise 1 by `accepting the GitHub Classroom assignment <https://classroom.github.com/a/2krg1xSI>`__.
+    You can start working on your copy of Exercise 1 by `accepting the GitHub Classroom assignment <https://classroom.github.com/a/pCZvcynq>`__.
 
-You can also take a look at the open course copy of `Exercise 1 in the course GitHub repository <https://github.com/AutoGIS-2020/Exercise-1>`__ (does not require logging in).
+You can also take a look at the open course copy of `Exercise 1 in the course GitHub repository <https://github.com/AutoGIS-2021/exercise-1>`__ (does not require logging in).
 Note that you should not try to make changes to this copy of the exercise, but rather only to the copy available via GitHub Classroom.
 
 .. note::
