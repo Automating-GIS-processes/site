@@ -135,16 +135,16 @@ Contents
    course-info/resources
    course-info/License-terms
 
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Lesson 1
+
+   lessons/L1/overview
+   lessons/L1/course-motivation
+   notebooks/L1/geometric-objects.ipynb
+   lessons/L1/exercise-1
 ..
-   .. toctree::
-      :maxdepth: 1
-      :caption: Lesson 1
-
-      lessons/L1/overview
-      lessons/L1/course-motivation
-      notebooks/L1/geometric-objects.ipynb
-      lessons/L1/exercise-1
-
    .. toctree::
       :maxdepth: 2
       :caption: Lesson 2
