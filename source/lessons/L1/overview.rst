@@ -19,7 +19,7 @@ Intro slides
 --------------
 .. admonition:: Lesson slides
 
-    `Slides from lesson 1 (PDF) <../../_static/autogis-intro-slides-2020.pdf>`__
+    `Slides from lesson 1 (PDF) <../../_static/autogis-intro-slides-2021.pdf>`__
 
 Lesson videos
 -------------
