@@ -6,11 +6,11 @@ Exercise 2
 
 .. admonition:: Start your assignment
 
-    You can start working on your copy of Exercise 2 by `accepting the GitHub Classroom assignment <https://classroom.github.com/a/gtbzvQh3>`__.
+    You can start working on your copy of Exercise 2 by `accepting the GitHub Classroom assignment <https://classroom.github.com/a/hkn1jd7L>`__.
 
-    **Exercise 2 is due by 5pm on Thursday the 12th of November 2020** (day before the next practical session).
+    **Exercise 2 is due by 5pm on Thursday the 18th of November 2021** (day before the next practical session).
 
-You can also take a look at the open course copy of `Exercise 2 in the course GitHub repository <https://github.com/AutoGIS-2020/Exercise-2>`__ (does not require logging in).
+You can also take a look at the open course copy of `Exercise 2 in the course GitHub repository <https://github.com/AutoGIS-2021/Exercise-2>`__ (does not require logging in).
 Note that you should not try to make changes to this copy of the exercise, but rather only to the copy available via GitHub Classroom.
 
 
