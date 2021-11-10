@@ -29,4 +29,24 @@ This lesson partly based on `Geopandas documentation <http://geopandas.org/>`_.
 Lesson videos
 --------------
 
-Videos vill be added after the lecture.
+.. admonition:: Lesson 2.1 - Introduction to Geopandas
+
+    .. raw:: html
+
+        <iframe width="720" height="405" src="https://www.youtube.com/embed/rVrn3vHlc5Y" title="Lesson 2.1 - Introduction to Geopandas" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <p>Håvard Wallin Aagesen, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q">@ AutoGIS channel on Youtube</a>.</p>
+
+.. admonition:: Lesson 2.2 - Coordinate Reference Systems
+
+    .. raw:: html
+
+        <iframe width="720" height="405" src="https://www.youtube.com/embed/yPBnkgkE0rU" title="Lesson 2.2 - Coordinate Reference Systems" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <p>Vuokko Heikinheimo, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q">@ AutoGIS channel on Youtube</a>.</p>
+
+
+.. admonition:: Lesson 2.3 - Exercise 2
+
+    .. raw:: html
+
+        <iframe width="720" height="405" src="https://www.youtube.com/embed/C1xUXvK0Eb4" title="Lesson 2.3 - Exercise 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <p>Håvard Wallin Aagesen, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q">@ AutoGIS channel on Youtube</a>.</p>
