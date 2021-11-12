@@ -157,21 +157,21 @@ Contents
    notebooks/L2/03-create-geodataframes.ipynb
    lessons/L2/exercise-2
 
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Lesson 3
+
+   lessons/L3/overview
+   lessons/L3/geocoding
+   notebooks/L3/01_geocoding_in_geopandas.ipynb
+   notebooks/L3/02_point-in-polygon.ipynb
+   notebooks/L3/03_spatial-join.ipynb
+   notebooks/L3/04_nearest-neighbour.ipynb
+   notebooks/L3/05_spatial_index.ipynb
+   notebooks/L3/06_nearest-neighbor-faster.ipynb
+   lessons/L3/exercise-3
 ..
-   .. toctree::
-      :maxdepth: 2
-      :caption: Lesson 3
-
-      lessons/L3/overview
-      lessons/L3/geocoding
-      notebooks/L3/01_geocoding_in_geopandas.ipynb
-      notebooks/L3/02_point-in-polygon.ipynb
-      notebooks/L3/03_spatial-join.ipynb
-      notebooks/L3/04_nearest-neighbour.ipynb
-      notebooks/L3/05_spatial_index.ipynb
-      notebooks/L3/06_nearest-neighbor-faster.ipynb
-      lessons/L3/exercise-3
-
    .. toctree::
       :maxdepth: 2
       :caption: Lesson 4
