@@ -7,7 +7,7 @@ Exercise 3
 
 .. admonition:: Start your assignment
 
-    You can start working on your copy of Exercise 3 by `accepting the GitHub Classroom assignment <https://classroom.github.com/a/AAJygAbVr>`__.
+    You can start working on your copy of Exercise 3 by `accepting the GitHub Classroom assignment <https://classroom.github.com/a/AAJygAbV>`__.
 
 
 **Exercise 3 is due by by 17:00 on Thursday the 25th of November 2020** (day before the next practical session).
