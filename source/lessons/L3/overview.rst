@@ -25,30 +25,4 @@ Lesson materials are partly based on documentation of `Geopandas <http://geopand
 Lesson videos
 --------------
 
-.. admonition:: Lesson 3.1 - Geocoding
-
-    .. raw:: html
-
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/1f4xS1PUzvE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <p>Vuokko Heikinheimo, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q">@ AutoGIS channel on Youtube</a>.</p>
-
-
-
-
-.. admonition:: Lesson 3.2 - Point in polygon, spatial join, nearest neighbor analysis
-
-    .. raw:: html
-
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/EqpFVXBDCe8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <p>Vuokko Heikinheimo, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q">@ AutoGIS channel on Youtube</a>.</p>
-
-
-
-.. admonition:: Lesson 3.3 - Intro to exercise 3
-
-    .. raw:: html
-
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/Yr-DzFVoghg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <p>Vuokko Heikinheimo, University of Helsinki <a href="https://www.youtube.com/channel/UCGrJqJjVHGDV5l0XijSAN1Q">@ AutoGIS channel on Youtube</a>.</p>
-
-
+Recordings will be added after the lecture.
