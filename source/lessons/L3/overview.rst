@@ -25,4 +25,30 @@ Lesson materials are partly based on documentation of `Geopandas <http://geopand
 Lesson videos
 --------------
 
-Recordings will be added after the lecture.
+.. admonition:: Lesson 3.1 - Geocoding
+
+    .. raw:: html
+
+        <iframe width="720" height="405" src="https://www.youtube.com/embed/pmFLD_8A6uo" title="Lesson 3.1 - Geocoding" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <p>Håvard Wallin Aagesen, University of Helsinki <a href="https://www.youtube.com/c/AutomatingGISprocesses">@ AutoGIS channel on Youtube</a>.</p>
+
+.. admonition:: Lesson 3.2 - Spatial queries and spatial joins
+
+    .. raw:: html
+
+        <iframe width="720" height="405" src="https://www.youtube.com/embed/36iaXge3e4k" title="Lesson 3.2 - Spatial queries and spatial joins" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <p>Håvard Wallin Aagesen, University of Helsinki <a href="https://www.youtube.com/c/AutomatingGISprocesses">@ AutoGIS channel on Youtube</a>.</p>
+
+.. admonition:: Lesson 3.3 - Nearest neighbour analysis
+
+    .. raw:: html
+
+        <iframe width="720" height="405" src="https://www.youtube.com/embed/n--qghSQaBo" title="Lesson 3.3 - Nearest neighbour analysis" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <p>Håvard Wallin Aagesen, University of Helsinki <a href="https://www.youtube.com/c/AutomatingGISprocesses">@ AutoGIS channel on Youtube</a>.</p>
+
+.. admonition:: Lesson 3.4 - Exercise 3
+
+    .. raw:: html
+
+        <iframe width="720" height="405" src="https://www.youtube.com/embed/NTQ9hj34t74" title="Lesson 3.4 - Exercise 3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <p>Håvard Wallin Aagesen, University of Helsinki <a href="https://www.youtube.com/c/AutomatingGISprocesses">@ AutoGIS channel on Youtube</a>.</p>
