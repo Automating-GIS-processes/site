@@ -21,11 +21,11 @@ Following materials are partly based on documentation of `Geopandas <http://geop
 Lesson videos
 --------------
 
-.. admonition:: Lesson 4.1 - Introduction to Geopandas
+.. admonition:: Lesson 4.1 - Geometric operations
 
     .. raw:: html
 
-        <iframe title='Lesson 4.1 - Geometric opeations' width='720' height='405' src='https://www.youtube.com/embed/Nu1Y9rnfMBY' frameborder='0' allowfullscreen allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'></iframe><p>Håvard Wallin Aagesen, University of Helsinki <a href='https://www.youtube.com/c/AutomatingGISprocesses'>@ AutoGIS channel on Youtube</a>.</p>
+        <iframe title='Lesson 4.1 - Geometric operations' width='720' height='405' src='https://www.youtube.com/embed/Nu1Y9rnfMBY' frameborder='0' allowfullscreen allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'></iframe><p>Håvard Wallin Aagesen, University of Helsinki <a href='https://www.youtube.com/c/AutomatingGISprocesses'>@ AutoGIS channel on Youtube</a>.</p>
 
 .. admonition:: Lesson 4.2 - Data reclassification
 
