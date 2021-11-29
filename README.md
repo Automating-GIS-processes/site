@@ -70,10 +70,12 @@ Binder environment is controlled from [environment.yml](environment.yml). CSC No
 
 ## Contact & Developers
 
+- **Håvard Wallin Aagesen**
+
 - **Henrikki Tenkanen**
 
 - **Vuokko Heikinheimo**
 
-See contact info from [here](https://automating-gis-processes.github.io/site/course-info/course-info.html).
+See contact info from [our course website](https://autogis-site.readthedocs.io/en/latest/course-info/course-info.html).
 
 
