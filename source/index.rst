@@ -190,7 +190,7 @@ Contents
    notebooks/L5/01_static_maps.ipynb
    notebooks/L5/02_interactive-map-folium.ipynb
    notebooks/L5/03_employment_rate_map.ipynb
-   ..lessons/L5/share-on-github
+   lessons/L5/share-on-github
    lessons/L5/exercise-5
 ..
    .. toctree::
