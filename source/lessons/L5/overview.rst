@@ -31,4 +31,20 @@ After this weeks lesson you should be able to:
 Lesson videos
 --------------
 
-Lesson videos will be added here as soon as possible.
+.. admonition:: Lesson 5.1 - Static maps
+
+    .. raw:: html
+
+        <iframe title='Lesson 5.1 - Static maps' width='720' height='405' src='https://www.youtube.com/embed/o-cFcty3mE8' frameborder='0' allowfullscreen allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'></iframe><p>Håvard Wallin Aagesen, University of Helsinki <a href='https://www.youtube.com/c/AutomatingGISprocesses'>@ AutoGIS channel on Youtube</a>.</p>
+
+.. admonition:: Lesson 5.2 - Interactive maps
+
+    .. raw:: html
+
+        <iframe title='Lesson 5.2 - Interactive maps' width='720' height='405' src='https://www.youtube.com/embed/j16QjAb-LCc' frameborder='0' allowfullscreen allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'></iframe><p>Håvard Wallin Aagesen, University of Helsinki <a href='https://www.youtube.com/c/AutomatingGISprocesses'>@ AutoGIS channel on Youtube</a>.</p>
+
+.. admonition:: Lesson 5.3 - Exercise 5
+
+    .. raw:: html
+
+        <iframe title='Lesson 5.3 - Exercise 5' width='720' height='405' src='https://www.youtube.com/embed/szlOzHE6aGk' frameborder='0' allowfullscreen allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'></iframe><p>Håvard Wallin Aagesen, University of Helsinki <a href='https://www.youtube.com/c/AutomatingGISprocesses'>@ AutoGIS channel on Youtube</a>.</p>
