@@ -39,7 +39,7 @@ What is currently located there are following files:
 
 Thus, there is already a single map that I have made called *test_map.html*, a html file called *index.html* and the most important file for us called ``index.md``.
 
-Let's see how does the ``index.md`` file look like (here is a `link <https://github.com/AutoGIS-2020/Exercise-5/blob/master/docs/index.md>`_ to the actual page on our public repository):
+Let's see how does the ``index.md`` file look like (here is a `link <https://github.com/AutoGIS-2021/Exercise-5/blob/master/docs/index.md>`_ to the actual page on our public repository):
 
 .. image:: img/index-md.PNG
     :scale: 80 %

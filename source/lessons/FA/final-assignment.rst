@@ -6,12 +6,9 @@ Final assignment
 
 .. admonition:: Start your assignment
 
-    Start your final assignment by accepting the `GitHub Classroom <https://classroom.github.com/a/4MOBkObf>`_ for the final work.
+    Start your final assignment by accepting the `GitHub Classroom <https://classroom.github.com/a/CnsJqTEr>`_ for the final work.
 
 
-.. admonition:: Summary
-
-    `Summary of the Final Assignment instructions (PDF) <../../_static/autogis-final-work-intro.pdf>`__
 
 
 Aim of the work
@@ -63,8 +60,8 @@ When is the deadline?
 Label your submissions as "submitted" in the exercise repository's `README.md` under "status" once you are finished with the Final assignment.
 
 You can choose from these two deadlines:
-- 1st deadline: Thursday the 31st December 2020
-- 2nd deadline Friday the 15th of January 2020
+- 1st deadline: Thursday the 31st December 2021
+- 2nd deadline Friday the 16th of January 2022
 
 Submissions are checked after each deadline (you can get the feedback earlier if aiming for the first deadline).
 If you need the course grade earlier, please contact the course instructor.
@@ -83,7 +80,6 @@ The final assignment is graded based on:
 **Good documentation of the code and your project is highly appreciated!!!**
 You should add necessary details to the `README.md` file, and use inline comments and Markdown cells to document your work along the way. Take a look of these hints for using markdown:
 
-- `using markdown in Jupyter Notebooks  <http://www.firstpythonnotebook.org/markdown/>`_
 - `General Markdown syntax guide <https://guides.github.com/features/mastering-markdown/>`__.
 
 .. _AccessViz:
@@ -101,8 +97,7 @@ You can develop the tool by using data from one year. Optionally, your tool coul
 
 The travel time matrix contsists of 13231 text files. Each file contains travel time and travel distance information by different modes of transport (walking, biking, public transport and car) from all other grid squares to one target grid square.
 The files are named and organized based on their ID number in th YKR ID data set. For example, the Travel Time Matrix file for the railway station is named `travel_times_to_5975375.txt`, and this
-file is located in folder `5975xxx`. All possible YKR ID values can be found from the attribute table of a Shapefile called MetropAccess_YKR_grid.shp that you can download from `here <http://www.helsinki.fi/science/accessibility/data/MetropAccess-matka-aikamatriisi/MetropAccess_YKR_grid.zip>`_.
-Individual YKR IDs can be found from `this web map <http://www.helsinki.fi/science/accessibility/tools/YKR/YKR_Identifier.html>`__.
+file is located in folder `5975xxx`. All possible YKR ID values can be found from the attribute table of a Shapefile called MetropAccess_YKR_grid.shp that you can download from `here <https://zenodo.org/record/3247564/files/MetropAccess_YKR_grid.zip?download=1>`_.
 Read further description about the travel time matrix from the `Digital Geography Lab / Accessibility research group blog <http://blogs.helsinki.fi/accessibility/helsinki-region-travel-time-matrix/>`__.
 
 What should this tool do?
@@ -170,7 +165,7 @@ Data
 You can use any (spatial) data that you can find, and generate your own report describing how the cities differ from each other based on different perspectives (see below hints about possible analyses).
 You can use any data that is available, for example, from the following sources:
 
-  - `OpenSreetMap <www.openstreetmap.org>`__ (e.g. streets, buildings, points of interest) following the approach from lesson 6.
+  - `OpenSreetMap <https://www.openstreetmap.org>`__ (e.g., streets, buildings, points of interest) following the approach from lesson 6.)
   - `PaiTuli <https://avaa.tdata.fi/web/paituli/latauspalvelu>`__
   - `Avoindata.fi service <https://www.avoindata.fi/en>`__
   - `Helsinki Region Infoshare <https://hri.fi/en_gb/>`__
@@ -250,7 +245,7 @@ Take care that you:
    - Create other kind of graphs (e.g. bar graphs, line graphs, scatter plots etc.)
    - Use subplots that allows to easily compare results side-by-side
 
- - When writing the codes, we highly recommend that you use and write functions for repetitive parts of the code. As a motivation: think that you should repeat your analyses for all cities in Finland, write your codes in a way that this would be possible. Furthermore, we recommend that you save those functions into a separate .py -script file that you import into the Notebook (`see example from Geo-Python Lesson 4 <https://geo-python.github.io/2018/notebooks/L4/functions.html#Calling-functions-from-a-script-file>`__)
+ - When writing the codes, we highly recommend that you use and write functions for repetitive parts of the code. As a motivation: think that you should repeat your analyses for all cities in Finland, write your codes in a way that this would be possible. Furthermore, we recommend that you save those functions into a separate .py -script file that you import into the Notebook (`see example from Geo-Python Lesson 4 <https://geo-python-site.readthedocs.io/en/latest/notebooks/L4/functions.html#calling-functions-from-a-script-file>`__)
 
 Literature + inspiration
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -259,7 +254,7 @@ Following readings provide you some useful background information and inspiratio
 
  - `European Commission (2015). "Indicators for Sustainable Cities" <http://ec.europa.eu/environment/integration/research/newsalert/pdf/indicators_for_sustainable_cities_IR12_en.pdf>`__
 
- - `Rob Kitchin, Tracey Lauriault & Gavin McArdle (2015). Knowing and governing cities through urban indicators, city benchmarking and real-time dashboards <https://github.com/Automating-GIS-processes/2018/raw/develop/literature/Kitchin_et_al_(2015).pdf>`__ . *Regional Studies, Regional Science,* Vol. 2, No. 1, 6–28.
+ - `Rob Kitchin, Tracey Lauriault & Gavin McArdle (2015). Knowing and governing cities through urban indicators, city benchmarking and real-time dashboards <https://github.com/Automating-GIS-processes/site/blob/master/literature/Kitchin_et_al_(2015).pdf>`__ . *Regional Studies, Regional Science,* Vol. 2, No. 1, 6–28.
 
 .. _Your-own-project:
 
