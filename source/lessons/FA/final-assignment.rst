@@ -16,7 +16,7 @@ Final assignment
 
     .. raw:: html
 
-        <iframe title='Presentation' width='720' height='405' src='https://raw.githubusercontent.com/haavardaagesen/autogis-presentations/main/final_assignment_2021.html?token=ABLAPAN4HIDYZDNKAPJFDYTBXC5TY'></iframe>
+        <iframe title='Presentation' width='848' height='480' src='https://haavardaagesen.github.io/autogis-presentations/final_assignment_2021.html'></iframe>
 
 Aim of the work
 ---------------
