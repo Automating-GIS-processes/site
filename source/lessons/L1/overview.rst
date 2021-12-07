@@ -25,7 +25,7 @@ Intro slides
 
     .. raw:: html
 
-        <embed title='Presentation' style='display:flex; width:100%;height:30em;' src='https://haavardaagesen.github.io/autogis-presentations/intro_slides_2021.html'></iframe>
+        <embed title='Presentation' style='display:flex; width:100%;height:30em;' src='https://haavardaagesen.github.io/autogis-presentations/intro_slides_2021.html'>
 
 Lesson videos
 -------------
