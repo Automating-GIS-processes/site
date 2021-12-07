@@ -21,6 +21,12 @@ Intro slides
 
     `Slides from lesson 1 (PDF) <../../_static/autogis-intro-slides-2021.pdf>`__
 
+.. admonition:: Presentation
+
+    .. raw:: html
+
+        <embed title='Presentation' style='display:flex; width:100%;height:30em;' src='https://haavardaagesen.github.io/autogis-presentations/intro_slides_2021.html'></iframe>
+
 Lesson videos
 -------------
 
