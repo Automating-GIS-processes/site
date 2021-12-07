@@ -8,7 +8,9 @@ Final assignment
 
     Start your final assignment by accepting the `GitHub Classroom <https://classroom.github.com/a/CnsJqTEr>`_ for the final work.
 
+.. admonition:: Summary
 
+    `Summary of the Final Assignment instructions (PDF) <https://autogis-site.readthedocs.io/en/latest/_static/autogis-final-assignment-2021.pdf>`_
 
 
 Aim of the work
