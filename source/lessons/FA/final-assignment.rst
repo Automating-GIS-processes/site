@@ -12,6 +12,11 @@ Final assignment
 
     `Summary of the Final Assignment instructions (PDF) <https://autogis-site.readthedocs.io/en/latest/_static/autogis-final-assignment-2021.pdf>`_
 
+.. admonition:: Presentation
+
+    .. raw:: html
+
+        <iframe title='Presentation' width='720' height='405' src='https://raw.githubusercontent.com/haavardaagesen/autogis-presentations/main/final_assignment_2021.html?token=ABLAPAN4HIDYZDNKAPJFDYTBXC5TY'></iframe>
 
 Aim of the work
 ---------------
