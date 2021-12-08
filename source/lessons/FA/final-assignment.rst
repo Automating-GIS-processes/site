@@ -8,6 +8,12 @@ Final assignment
 
     Start your final assignment by accepting the `GitHub Classroom <https://classroom.github.com/a/CnsJqTEr>`_ for the final work.
 
+.. admonition:: Final Assignment
+
+    .. raw:: html
+
+        <iframe title='Final Assignment' width='720' height='405' src='https://www.youtube.com/embed/QmZ0zgbpndM' frameborder='0' allowfullscreen allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'></iframe><p>Håvard Wallin Aagesen, University of Helsinki <a href='https://www.youtube.com/c/AutomatingGISprocesses'>@ AutoGIS channel on Youtube</a>.</p>
+
 .. admonition:: Summary
 
     `Summary of the Final Assignment instructions (PDF) <https://autogis-site.readthedocs.io/en/latest/_static/autogis-final-assignment-2021.pdf>`_
