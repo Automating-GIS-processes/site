@@ -3,11 +3,11 @@ Exercise 6
 
 .. admonition:: Start your assignment
 
-    You can start working on your copy of Exercise 6 by `accepting the GitHub Classroom assignment <https://classroom.github.com/a/iQT46pDe>`__.
+    You can start working on your copy of Exercise 6 by `accepting the GitHub Classroom assignment <https://classroom.github.com/a/AdmQdIHc>`__.
 
- **Exercise 6 is due by Thursday 10th of December at 5pm** (day before the last practical session!).
+ **Exercise 6 is due by Thursday 23rd of December at 5pm**.
 
-You can also take a look at the open course copy of `Exercise 6 in the course GitHub repository <https://github.com/AutoGIS-2020/Exercise-6>`__ (does not require logging in).
+You can also take a look at the open course copy of `Exercise 6 in the course GitHub repository <https://github.com/AutoGIS-2021/Exercise-6>`__ (does not require logging in).
 Note that you should not try to make changes to this copy of the exercise, but rather only to the copy available via GitHub Classroom.
 
 Hints
