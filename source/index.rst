@@ -192,15 +192,15 @@ Contents
    notebooks/L5/03_employment_rate_map.ipynb
    lessons/L5/share-on-github
    lessons/L5/exercise-5
-..
-   .. toctree::
-      :maxdepth: 2
-      :caption: Lesson 6
 
-      lessons/L6/overview
-      notebooks/L6/retrieve_osm_data.ipynb
-      notebooks/L6/network-analysis.ipynb
-      lessons/L6/exercise-6
+.. toctree::
+  :maxdepth: 2
+  :caption: Lesson 6
+
+  lessons/L6/overview
+  notebooks/L6/00_retrieve_osm_data.ipynb
+  notebooks/L6/01_network_analysis.ipynb
+  lessons/L6/exercise-6
 
 .. toctree::
    :maxdepth: 2
