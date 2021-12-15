@@ -34,7 +34,7 @@ you can get the corner coordinates of the bounding box from the `total_bounds <h
 - Finally, buffer the bounding box polygon (eg. adding 0.05 decimal degrees to the extent using Shapely's `buffer <https://shapely.readthedocs.io/en/stable/manual.html#object.buffer>`__ method)
 
 **Option 2 - Convex hull:**
-- Specify a Polygon that represents the **convex hull** of the combined points like we did in `Lesson 1 <https://automating-gis-processes.github.io/site/notebooks/L1/geometric-objects.html?highlight=convex%20hull#Geometry-collection--objects%E2%80%99-attributes-and-functions>`__
+- Specify a Polygon that represents the **convex hull** of the combined points like we did in `Lesson 1 <https://autogis-site.readthedocs.io/en/latest/notebooks/L1/geometric-objects.html#convex-hull-and-envelope>`__
     - First, create a MultiPolygon of the points (eg. using `unary_union`)
     - Then, you can access the `convex_hull` of that MultiPolygon object
 - Finally, buffer the convex hull polygon (eg. adding 0.1 decimal degrees to the extent using Shapely's `buffer <https://shapely.readthedocs.io/en/stable/manual.html#object.buffer>`__ method)
