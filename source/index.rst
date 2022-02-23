@@ -1,28 +1,105 @@
 
 .. figure:: img/AutoGIS_banner.jpg
 
-Automating GIS-processes 2021
+Introduction to Python GIS
 ==============================
 
-**Welcome to the Automating GIS-processes course 2021!** This course introduces you to geographic data analysis in
-the Python programming language through interactive lessons and hands-on exercises. If you are new to Python, we recommend that you start with
-the Geo-Python course materials at `https://geo-python.github.io <https://geo-python.github.io>`_ before diving into the GIS stuff in this course.
-Geo-Python and Automating GIS processes ("AutoGIS") have been developed at the Department of Geosciences and Geography, University of Helsinki, Finland, and
-the materials are openly available for anyone interested.
+**Welcome to the Introduction to Python GIS course 2021!** This is a 3-day course organized by `CSC Finland - IT Center for Science <https://ssl.eventilla.com/event/pENQa>`_ which introduces you to geographic data analysis in the Python programming language through interactive lessons and hands-on exercises. If you are new to Python, we recommend that you start with the Geo-Python course materials at
+`https://geo-python.github.io <https://geo-python.github.io>`_ before diving into the GIS stuff in this course. Geo-Python and Automating GIS processes ("AutoGIS") have been developed at the Department of Geosciences and Geography, University of Helsinki, Finland, and the materials are openly available for anyone interested.
 
-.. admonition:: Open Access!
 
-    Course materials and recorded lesson videos are **open for everyone**. The aim of this course is to share the
-    knowledge and help people to get started with their journey for doing GIS more efficiently and in a reproducible manner
-    using Python programming. Feel free to share this website to anyone interested, and to use these materials in your own teaching.
-    You can read more info about the license and terms of usage in `here <course-info/License-terms.html>`_.
+Course format
+-------------
 
-After completing this course, the students can manage, analyze and visualize spatial data
-systematically and efficiently using Python, and critically evaluate the available methods.
-In addition to geographic data manipulation and analysis skills (for example, reading and writing files,
-managing coordinate reference systems,overlay analysis, network analysis) in Python,
-the students continue to learn good programming practices, including the use of a version control system (git) and
-documenting and communicating their analysis workflow in online repositories (GitHub).
+The majority of this course will be spent in front of a computer learning to program in the Python language.
+The course consists of interactive lectures and exercises. The exercises will focus on developing
+basic programming skills using Python and applying those skills to manipulate and analyze geographic information.
+
+Schedule
+-----------
+
++----------------+---------------------------------+
+| Time           | Theme                           |
++================+=================================+
+| **Day 1, Monday 7.3**                            |
++----------------+---------------------------------+
+| 9:00-10.30     | Lesson 1: GIS in Python;        |
+|                | Spatial Data Model, Shapely,    |
+|                | Geometric Objects               |
++----------------+---------------------------------+
+| 10:30-10:45    | Coffee break                    |
++----------------+---------------------------------+
+| 10:45-12:15    | Lesson 1 continues              |
++----------------+---------------------------------+
+| 12:15-13:00    | Lunch break                     |
++----------------+---------------------------------+
+| 13:00-14:30    | Lesson 2: Working with          |
+|                | (Geo)DataFrames                 |
++----------------+---------------------------------+
+| 14:30-14:45    | Coffee break                    |
++----------------+---------------------------------+
+| 14:45-16:15    | Lesson 2 continues              |
++----------------+---------------------------------+
+| **Day 2, Tuesday 8.3**                           |
++----------------+---------------------------------+
+| 9:00-10.30     | Lesson 3: Geocoding and         |
+|                | spatial queries                 |
++----------------+---------------------------------+
+| 10:30-10:45    | Coffee break                    |
++----------------+---------------------------------+
+| 10:45-12:15    | Lesson 3 continues              |
++----------------+---------------------------------+
+| 12:15-13:00    | Lunch break                     |
++----------------+---------------------------------+
+| 13:00-13:15    | Running Python scripts          |
+|                | on CSC's Puhti supercluster     |
++----------------+---------------------------------+
+| 13:15-14:30    | Lesson 4: Geometric operations, |
+|                | reclassifying data              |
++----------------+---------------------------------+
+| 14:30-14:45    | Coffee break                    |
++----------------+---------------------------------+
+| 14:45-16:15    | Lesson 4 continues              |
++----------------+---------------------------------+
+| **Day 3, Wednesday 9.3**                         |
++----------------+---------------------------------+
+| 9:00-10.30     | Lesson 5: Visualization, static |
+|                | and interactive maps            |
++----------------+---------------------------------+
+| 10:30-10:45    | Coffee break                    |
++----------------+---------------------------------+
+| 10:45-12:15    | Lesson 5 continues              |
++----------------+---------------------------------+
+| 12:15-13:00    | Lunch break                     |
++----------------+---------------------------------+
+| 13:00-14:30    | Lesson 6: Raster data processing|
+|                | in Python                       |
++----------------+---------------------------------+
+| 14:30-14:45    | Coffee break                    |
++----------------+---------------------------------+
+| 14:45-16:15    | Lesson 6 continues              |
++----------------+---------------------------------+
+| **Day 4, Thursday 10.3**                         |
++----------------+---------------------------------+
+| Optional for course participants,                |
+| open to everybody.                               |
++----------------+---------------------------------+
+| 12:30-13.30    | Lesson 7: Running Python code   |
+|                | in CSC's Puhti supercomputer    |
++----------------+---------------------------------+
+| 13:30-13:45    | Coffee break                    |
++----------------+---------------------------------+
+| 13:45-15:15    | Lesson 7 continues with         |
+|                | hands-on exercise               |
++----------------+---------------------------------+
+
+
+Instructors
+-----------
+
+* Håvard Wallin Aagesen (University of Helsinki)
+* Samantha Wittke (CSC)
+* Kylli Ek (CSC)
 
 .. admonition:: Interactive contents
 
@@ -30,94 +107,6 @@ documenting and communicating their analysis workflow in online repositories (Gi
     You can find buttons for activating the python environment using `Thebe <https://thebe.readthedocs.io/en/latest/>`__
     or `Binder <https://mybinder.readthedocs.io/en/latest/>`__ at the top of each programming lesson. Students at Finnish
     higher education institutions are encourage to use the `CSC notebooks <https://notebooks.csc.fi/>`__ environment.
-
-Course format
--------------
-
-The majority of this course will be spent in front of a computer learning to program in the Python language.
-The course consists of interactive lectures and weekly exercises. The exercises will focus on developing
-basic programming skills using Python and applying those skills to manipulate and analyze geographic information.
-
-Most exercises in this course involve real world examples and data.
-For each exercise, you may be asked to submit the Python codes you have written, output figures and answers
-to related questions. You are encouraged to discuss and work together with other students while working
-on the weekly exercises. The final exercise must be completed individually and
-must clearly reflect your own work (in short, don't copy paste from other students).
-
-.. admonition:: University of Helsinki students
-
-    The Automating GIS processes course is part of the
-    `Master's Programme in Geography at the University of Helsinki <https://www.helsinki.fi/en/admissions/degree-programmes/geography-masters-programme>`__
-    under the course code ``GEOG-329-2``.
-
-.. admonition:: Online teaching
-
-    Please note that the course is organized online during the 2021 Autumn semester.
-    Access to Zoom, Slack and CSC notebooks is available to students at Finnish higher education institutes. Recorded
-    lesson videos and course materials are openly available to everyone interested.
-
-
-Course topics by week
----------------------
-
-During this course, we will dive into manipulating and analyzing geographic data in Python. This course builds upon topics
-introduced in the Geo-Python course, where we focused on learning the basics of Python programming.
-You can find materials from the Geo-Python course at `https://geo-python.github.io <https://geo-python.github.io>`_.
-
-The Automating GIS processes course runs for seven weeks at the University of Helsinki
-starting in the second teaching period on Tuesday the 2nd of November 2021. Topics per week are listed below.
-Please note that this web page is updated each week before the lesson:
-
-+----------------+---------------------------------+
-| Week           | Theme                           |
-+================+=================================+
-| **1**          | Shapely and geometric objects   |
-|                | (points, lines and polygons)    |
-|                |                                 |
-|                |                                 |
-+----------------+---------------------------------+
-| **2**          | Managing spatial data with      |
-|                | Geopandas (reading and writing  |
-|                | data, projections, table joins) |
-|                |                                 |
-+----------------+---------------------------------+
-| **3**          | Geocoding and spatial           |
-|                | queries                         |
-|                |                                 |
-+----------------+---------------------------------+
-| **4**          | Reclassifying data,             |
-|                | overlay analysis                |
-|                |                                 |
-+----------------+---------------------------------+
-| **5**          | Visualization: static           |
-|                | and interactive maps            |
-|                |                                 |
-+----------------+---------------------------------+
-| **6**          | Course recap and                |
-|                | Preparing for the final         |
-|                | assignment                      |
-|                |                                 |
-+----------------+---------------------------------+
-| **7**          | OpenStreetMap data (osmnx) and  |
-|                | Network analysis (networkx)     |
-|                |                                 |
-+----------------+---------------------------------+
-| **Extra**      |  PyQGIS, Raster processing      |
-| **materials**  |                                 |
-| **for**        |                                 |
-| **self-study** |                                 |
-+----------------+---------------------------------+
-
-|
-
-.. admonition:: Earlier versions of the course
-
-    Older course materials are available at:
-        - `2020 <https://autogis-site.readthedocs.io/en/2020_/>`__
-        - `2019 <https://autogis-site.readthedocs.io/en/2019/>`__
-        - `2018 <https://autogis-site.readthedocs.io/en/2018_/>`__
-        - `2017 <https://automating-gis-processes.github.io/2017/>`__
-        - `2016 <https://automating-gis-processes.github.io/2016/>`__
 
 Contents
 --------
@@ -128,8 +117,6 @@ Contents
 
    course-info/course-info
    course-info/course-environment-components
-   course-info/grading
-   course-info/learning-goals
    course-info/installing-miniconda
    course-info/create-python-gis-env
    course-info/resources
@@ -202,13 +189,7 @@ Contents
    notebooks/L6/01_network_analysis.ipynb
    lessons/L6/exercise-6
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Final Assignment
 
-   lessons/FA/final-assignment
-   lessons/FA/final-assignment-grading
-   lessons/FA/fa-hints
 
 .. toctree::
    :maxdepth: 2
@@ -232,7 +213,13 @@ Contents
    notebooks/Raster/zonal-statistics.ipynb
    notebooks/Raster/read-cogs.ipynb
 
+.. .. toctree::
+   :maxdepth: 2
+   :caption: Final Assignment
 
+   lessons/FA/final-assignment
+   lessons/FA/final-assignment-grading
+   lessons/FA/fa-hints
 
 
 

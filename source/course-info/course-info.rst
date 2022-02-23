@@ -1,49 +1,99 @@
 General info
 ============
 
-.. admonition:: Contact teaching for University of Helsinki students
-
-    Please note that access to Zoom, Slack and CSC notebooks is only available for students in Finnish higher education institutes.
-    Recorded lessons and course materials are available for everyone interested via these websites and on YouTube.
-
-
-Course meetings in teaching period II
---------------------------------------
-
-- Lessons on Tuesdays 15:15-18:00 (UTC+2)
-- Work sessions on Fridays 12:15-16:00 (UTC+2)
-
-Instructors
+Schedule
 -----------
 
-**Lessons**:
++----------------+---------------------------------+
+| Time           | Theme                           |
++================+=================================+
+| **Day 1, Monday 7.3**                            |
++----------------+---------------------------------+
+| 9:00-10.30     | Lesson 1: GIS in Python;        |
+|                | Spatial Data Model, Shapely,    |
+|                | Geometric Objects               |
++----------------+---------------------------------+
+| 10:30-10:45    | Coffee break                    |
++----------------+---------------------------------+
+| 10:45-12:15    | Lesson 1 continues              |
++----------------+---------------------------------+
+| 12:15-13:00    | Lunch break                     |
++----------------+---------------------------------+
+| 13:00-14:30    | Lesson 2: Working with          |
+|                | (Geo)DataFrames                 |
++----------------+---------------------------------+
+| 14:30-14:45    | Coffee break                    |
++----------------+---------------------------------+
+| 14:45-16:15    | Lesson 2 continues              |
++----------------+---------------------------------+
+| **Day 2, Tuesday 8.3**                           |
++----------------+---------------------------------+
+| 9:00-10.30     | Lesson 3: Geocoding and         |
+|                | spatial queries                 |
++----------------+---------------------------------+
+| 10:30-10:45    | Coffee break                    |
++----------------+---------------------------------+
+| 10:45-12:15    | Lesson 3 continues              |
++----------------+---------------------------------+
+| 12:15-13:00    | Lunch break                     |
++----------------+---------------------------------+
+| 13:00-13:15    | Running Python scripts          |
+|                | on CSC's Puhti supercluster     |
++----------------+---------------------------------+
+| 13:15-14:30    | Lesson 4: Geometric operations, |
+|                | reclassifying data              |
++----------------+---------------------------------+
+| 14:30-14:45    | Coffee break                    |
++----------------+---------------------------------+
+| 14:45-16:15    | Lesson 4 continues              |
++----------------+---------------------------------+
+| **Day 3, Wednesday 9.3**                         |
++----------------+---------------------------------+
+| 9:00-10.30     | Lesson 5: Visualization, static |
+|                | and interactive maps            |
++----------------+---------------------------------+
+| 10:30-10:45    | Coffee break                    |
++----------------+---------------------------------+
+| 10:45-12:15    | Lesson 5 continues              |
++----------------+---------------------------------+
+| 12:15-13:00    | Lunch break                     |
++----------------+---------------------------------+
+| 13:00-14:30    | Lesson 6: Raster data processing|
+|                | in Python                       |
++----------------+---------------------------------+
+| 14:30-14:45    | Coffee break                    |
++----------------+---------------------------------+
+| 14:45-16:15    | Lesson 6 continues              |
++----------------+---------------------------------+
+| **Day 4, Thursday 10.3**                         |
++----------------+---------------------------------+
+| Optional for course participants,                |
+| open to everybody.                               |
++----------------+---------------------------------+
+| 12:30-13.30    | Lesson 7: Running Python code   |
+|                | in CSC's Puhti supercomputer    |
++----------------+---------------------------------+
+| 13:30-13:45    | Coffee break                    |
++----------------+---------------------------------+
+| 13:45-15:15    | Lesson 7 continues with         |
+|                | hands-on exercise               |
++----------------+---------------------------------+
 
-* Håvard Wallin Aagesen
 
+Instructor
+-----------
 
-* Vuokko Heikinheimo
-* Henrikki Tenkanen
+**Håvard Wallin Aagesen**
 
-**Practical exercises**:
+Email: *havard.aagesen@helsinki.fi*
 
-* Bryan R. Vallejo
-* Justus S. Poutanen
-
-Email: *firstname.lastname@helsinki.fi*
-
-Course websites
+Useful websites
 ---------------
 
-- Course sites for Period II (Automating GIS processes):
-
-  - Main course site: `<https://autogis.github.io>`_
-  - Notebooks by CSC: `<https://notebooks.csc.fi>`_
-  - Slack (Q&A + chat): `<https://geo-python2021.slack.com>`_
-  - Polling / voting (active during lectures only): `<https://geo-python.github.io/poll>`_
-
-- Course site for teaching period I (Geo-Python):
-
-  - Main course site: `<https://geo-python.github.io>`_
+- Main course site: `<https://autogis.github.io/en/csc>`_
+- Notebooks by CSC: `<https://notebooks.csc.fi>`_
+- Polling / voting: `<https://geo-python.github.io/poll>`_
+- Course site for Geo-Python course: `<https://geo-python.github.io>`_
 
 
 
