@@ -177,31 +177,11 @@ Contents
    notebooks/L5/01_static_maps.ipynb
    notebooks/L5/02_interactive-map-folium.ipynb
    notebooks/L5/03_employment_rate_map.ipynb
-   lessons/L5/share-on-github
    lessons/L5/exercise-5
 
 .. toctree::
    :maxdepth: 2
-   :caption: Lesson 6
-
-   lessons/L6/overview
-   notebooks/L6/00_retrieve_osm_data.ipynb
-   notebooks/L6/01_network_analysis.ipynb
-   lessons/L6/exercise-6
-
-
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Extra: PyQGIS
-
-   lessons/PyQGIS/overview
-   lessons/PyQGIS/pyqgis
-   lessons/PyQGIS/additional_pyqgis_functions
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Extra: Raster
+   :caption: Lesson 6: Raster
 
    lessons/Raster/overview
    lessons/Raster/download-data
