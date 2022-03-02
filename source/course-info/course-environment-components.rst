@@ -11,27 +11,13 @@ CSC Notebooks is available only for students who are affiliated with Finnish uni
 
 .. note:: **When using the CSC Notebooks for the first time, you need to join the group created for this course:**
 
-    1. Log in at https://notebooks.csc.fi/
-    2. Go to Account-tab
-    3. Join Group **Geo-Python** using the joining code: ``geo-python-tadl4``
+    1. Log in at https://notebooks-beta.rahtiapp.fi/welcome
+    2. Click ‘Join workspace’ in the top bar and insert code provided in the HackMD.
+    3. Now you should see ‘Python GIS course’ in the list on the dashboard.
+    4. Click Start session under ‘Python GIS course’
+    5. Wait for a moment, JupyterLab will open.
 
-    After joining the group, you should be able to view an environment called `Geo-Python` on the Dashboard.
 
-.. figure:: img/CSC_join_group.png
-   :alt: Join Group in CSC Notebooks
-
-.. note:: **Repeat these steps every time when starting to work on a programming task using the CSC Notebooks:**
-
-    1. Log in at https://notebooks.csc.fi/
-    2. Click ``Launch new`` on the Dashboard
-    3. Wait. It might take a few moments for the instance to launch
-    4. Click ``Open in browser`` once the instance is ready
-    5. If you are asked to ``Click to copy password & proceed``, then click on the button, and paste the password on the following page
-
-.. figure:: img/CSC_launch_new.png
-   :alt: Launch new Jupyter Lab instance
-
-   Launching the instance takes a few moments.
 
 **Remember to save your work!**
 
