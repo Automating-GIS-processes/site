@@ -91,8 +91,7 @@ Useful websites
 ---------------
 
 - Main course site: `<https://autogis.github.io/en/csc>`_
-- Notebooks by CSC: `<https://notebooks.csc.fi>`_
-- Polling / voting: `<https://geo-python.github.io/poll>`_
+- Notebooks by CSC: `<https://notebooks-beta.rahtiapp.fi/welcome>`_
 - Course site for Geo-Python course: `<https://geo-python.github.io>`_
 
 

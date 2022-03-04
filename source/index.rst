@@ -117,11 +117,6 @@ Contents
 
    course-info/course-info
    course-info/course-environment-components
-   course-info/installing-miniconda
-   course-info/create-python-gis-env
-   course-info/resources
-   course-info/License-terms
-
 
 .. toctree::
    :maxdepth: 2
@@ -193,13 +188,11 @@ Contents
    notebooks/Raster/zonal-statistics.ipynb
    notebooks/Raster/read-cogs.ipynb
 
-.. .. toctree::
-   :maxdepth: 2
-   :caption: Final Assignment
+.. toctree::
+   :maxdepth: 1
+   :caption: Extra information
 
-   lessons/FA/final-assignment
-   lessons/FA/final-assignment-grading
-   lessons/FA/fa-hints
-
-
-
+   course-info/installing-miniconda
+   course-info/create-python-gis-env
+   course-info/resources
+   course-info/License-terms
