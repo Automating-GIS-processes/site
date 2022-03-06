@@ -133,10 +133,10 @@ Contents
 
    lessons/L2/overview
    lessons/L2/definitions.rst
-   notebooks/L2/00-data-io.ipynb
    notebooks/L2/01-geopandas-basics.ipynb
    notebooks/L2/02-projections.ipynb
    notebooks/L2/03-create-geodataframes.ipynb
+   notebooks/L2/00-data-io.ipynb
    lessons/L2/exercise-2
 
 
