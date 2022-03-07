@@ -8,17 +8,9 @@ Exercise 2
 
     You can start working on your copy of Exercise 2 by `accepting the GitHub Classroom assignment <https://classroom.github.com/a/hkn1jd7L>`__.
 
-    **Exercise 2 is due by 5pm on Thursday the 18th of November 2021** (day before the next practical session).
 
 You can also take a look at the open course copy of `Exercise 2 in the course GitHub repository <https://github.com/AutoGIS-2021/Exercise-2>`__ (does not require logging in).
 Note that you should not try to make changes to this copy of the exercise, but rather only to the copy available via GitHub Classroom.
-
-
-.. admonition:: Pair programming (optional!)
-
-    Students attending the course in Helsinki **can continue working in pairs**.
-    See more information in Slack, and in week 2: `Why are we working in pairs? <https://geo-python-site.readthedocs.io/en/latest/lessons/L2/why-pairs.html>`_.
-    However, each student should submit their own copy of the exercise.
 
 
 Hints

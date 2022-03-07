@@ -4,9 +4,6 @@ Exercise 1
 .. image:: https://img.shields.io/badge/launch-CSC%20notebook-blue.svg
    :target: https://notebooks.csc.fi/#/blueprint/d189695c52ad4c0d89ef72572e81b16c
 
-.. note::
-
-    Please complete this exercise by **the end of day on Thursday the 11th of November 2021** (day before the next practical session).
 
 .. admonition:: Start your assignment
 
