@@ -1,0 +1,18 @@
+#Test your understanding:
+
+#* In above plot we do not have Coordinates at the plot, why? 
+
+print(type(ndvi))
+
+# -> array, does not have any coordinates attached
+
+# How could we get them?
+
+# -> plot the newly saved file
+
+with rasterio.open("./data/S2_NDVI_Seurasaari.tif") as src:
+    show(src, title="Read from saved NDVI geotiff")
+
+# We could also pass the transform with the array to 'show'
+
+show(ndvi, transform=seurasaariS2.transform, title="NDVI array with transform")

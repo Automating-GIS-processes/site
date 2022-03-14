@@ -1,0 +1,29 @@
+# Test your understanding:
+
+# Something seems off about the histogram, can you find out what and fix it? (Hint: check the shape of stack)
+
+# check that we have the data in correct format for show_hist (bands, height, width)
+
+print("first fix")
+
+print(falsecolor_stack.shape)
+stack_for_hist = np.transpose(falsecolor_stack,axes=[2,0,1])
+print(stack_for_hist.shape)
+
+# and plot the histogram
+
+show_hist(stack_for_hist, bins=50, lw=0, stacked=False, alpha=0.9,histtype="stepfilled")
+
+# The basic output of the histogram function is not very nice and even wrong in one place, can you do better? (Hint: show_hist also takes matplotlib axes (`ax=`) and title `title=` as optional parameters)
+
+# add labels (we know that nir is first, red, is second and green is third band in our stack) using label
+# add descriptive title 
+# adjust x-axis label by using matplotlibs axis to reflect what is actually shown in our case 
+
+print("second fix")
+
+fig, ax = plt.subplots()
+show_hist(stack_for_hist, bins=50, lw=0, stacked=False, alpha=0.9,histtype="stepfilled", label = ["nir","red","green"], title = "Histogram Sentinel-2 false color stack", ax = ax)
+ax.set_xlabel("Reflectance")
+
+# in this case the histogram could also be plotted using only matplotlib.pyplot
