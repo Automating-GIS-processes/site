@@ -6,4 +6,11 @@ channels:
 dependencies:
     - python=3.10
 
+    # sphinx + dependencies
+    - myst-nb
+    - sphinx
+    - sphinx-book-theme
+    - sphinx-thebe
+
+    # lessons
     - geopandas
