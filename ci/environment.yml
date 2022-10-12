@@ -1,0 +1,9 @@
+name: autogis-2
+
+channels:
+    - conda-forge
+
+dependencies:
+    - python=3.10
+
+    - geopandas
