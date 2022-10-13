@@ -7,7 +7,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = "Automating GIS Processes"
-copyright = "2015-2022"
+copyright = "2016-2022"
 author = "Henrikki Tenkanen, Vuokko Heikinheimo, Håvard Wallin Aagesen, Christoph Fink"
 
 version = "2022"
@@ -32,9 +32,15 @@ myst_enable_extensions = [
     "colon_fence",
     "substitution",
 ]
+
+# The following are the main things that need to be updated every year
+# These variables are replaced throughout the course documents
+# (see the comment for the first item for an example)
 myst_substitutions = {
     "year": "2022",  # use {{year}} in markdown files to replace it with the current value
-    "starting_date": "Tuesday, 1 November 2022",  # same-same
+    "starting_date": "Tuesday, 1 November 2022",
+    "lectures_weekday_time_location": "Tuesday, 15:15-16:45, Exactum C222",
+    "work_sessions_weekday_time_location": "Friday, 12:15-16:00, Physicum A113+A114 (GIS lab)",
 }
 
 

@@ -129,7 +129,7 @@ caption: Course information
 maxdepth: 1
 ---
 
-course-info/course-info
+course-info/general-information
 course-info/course-environment-components
 course-info/grading
 course-info/learning-goals
