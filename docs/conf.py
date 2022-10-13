@@ -55,6 +55,10 @@ html_static_path = ["_static"]
 html_theme = "sphinx_book_theme"
 html_theme_options = {
     "collapse_navigation": False,
+    "launch_buttons": {
+        "binderhub_url": "https://mybinder.org",
+        "notebook_interface": "jupyterlab",
+    },
     "path_to_docs": "docs",
     "repository_branch": "main",
     "repository_url": "https://github.com/Automating-GIS-processes/site/",
