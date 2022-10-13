@@ -18,7 +18,6 @@ release = "2022"
 
 extensions = [
     "myst_nb",
-    "sphinx_thebe",
 ]
 
 templates_path = ["_templates"]

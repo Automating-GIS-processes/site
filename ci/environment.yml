@@ -10,7 +10,6 @@ dependencies:
     - myst-nb
     - sphinx
     - sphinx-book-theme
-    - sphinx-thebe
 
     # lessons
     - geopandas
