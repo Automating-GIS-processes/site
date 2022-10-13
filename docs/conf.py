@@ -33,7 +33,8 @@ myst_enable_extensions = [
     "substitution",
 ]
 myst_substitutions = {
-  "year": "2022",  # use {{year}} in markdown files to replace it with the current value
+    "year": "2022",  # use {{year}} in markdown files to replace it with the current value
+    "starting_date": "Tuesday, 1 November 2022",  # same-same
 }
 
 
