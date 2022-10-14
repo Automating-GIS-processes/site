@@ -135,7 +135,7 @@ course-info/learning-goals
 course-info/installing-python
 course-info/create-python-gis-environment
 course-info/resources
-course-info/license-terms
+course-info/license
 ```
 
 ```{toctree}
