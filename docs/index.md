@@ -129,7 +129,6 @@ maxdepth: 1
 ---
 
 course-info/general-information
-course-info/course-environment-components
 course-info/grading
 course-info/learning-goals
 course-info/installing-python
@@ -138,115 +137,115 @@ course-info/resources
 course-info/license
 ```
 
-```{toctree}
----
-caption: Lesson 1
-maxdepth: 2
----
-lessons/lesson-1/overview
-lessons/lesson-1/course-motivation
-notebooks/lesson-1/geometric-objects
-lessons/lesson-1/exercise-1
-```
+% ```{toctree}
+% ---
+% caption: Lesson 1
+% maxdepth: 2
+% ---
+% lessons/lesson-1/overview
+% lessons/lesson-1/course-motivation
+% lessons/lesson-1/geometric-objects
+% lessons/lesson-1/exercise-1
+% ```
 
-```{toctree}
----
-caption: Lesson 2
-maxdepth: 2
----
-lessons/lesson-2/overview
-lessons/lesson-2/definitions.rst
-notebooks/lesson-2/00-data-io
-notebooks/lesson-2/01-geopandas-basics
-notebooks/lesson-2/02-projections
-notebooks/lesson-2/03-create-geodataframes
-lessons/lesson-2/exercise-2
-```
+% ```{toctree}
+% ---
+% caption: Lesson 2
+% maxdepth: 2
+% ---
+% lessons/lesson-2/overview
+% lessons/lesson-2/definitions
+% lessons/lesson-2/data-io
+% lessons/lesson-2/geopandas-basics
+% lessons/lesson-2/projections
+% lessons/lesson-2/create-geodataframes
+% lessons/lesson-2/exercise-2
+% ```
 
-```{toctree}
----
-caption: Lesson 3
-maxdepth: 2
----
-lessons/lesson-3/overview
-lessons/lesson-3/geocoding
-notebooks/lesson-3/01_geocoding_in_geopandas
-notebooks/lesson-3/02_point-in-polygon
-notebooks/lesson-3/03_spatial-join
-notebooks/lesson-3/04_nearest-neighbour
-notebooks/lesson-3/05_spatial_index
-notebooks/lesson-3/06_nearest-neighbor-faster
-lessons/lesson-3/exercise-3
-```
+% ```{toctree}
+% ---
+% caption: Lesson 3
+% maxdepth: 2
+% ---
+% lessons/lesson-3/overview
+% lessons/lesson-3/geocoding
+% lessons/lesson-3/geocoding-in-geopandas
+% lessons/lesson-3/point-in-polygon
+% lessons/lesson-3/spatial-join
+% lessons/lesson-3/nearest-neighbour
+% lessons/lesson-3/spatial-index
+% lessons/lesson-3/nearest-neighbor-faster
+% lessons/lesson-3/exercise-3
+% ```
 
-```{toctree}
----
-caption: Lesson 4
-maxdepth: 2
----
-lessons/lesson-4/overview
-notebooks/lesson-4/geometric-operations
-notebooks/lesson-4/create_health_district_polygons
-notebooks/lesson-4/reclassify
-lessons/lesson-4/exercise-4
-```
+% ```{toctree}
+% ---
+% caption: Lesson 4
+% maxdepth: 2
+% ---
+% lessons/lesson-4/overview
+% lessons/lesson-4/geometric-operations
+% lessons/lesson-4/create-health-district-polygons
+% lessons/lesson-4/reclassify
+% lessons/lesson-4/exercise-4
+% ```
 
-```{toctree}
----
-caption: Lesson 5
-maxdepth: 2
----
-lessons/lesson-5/overview
-notebooks/lesson-5/01_static_maps
-notebooks/lesson-5/02_interactive-map-folium
-notebooks/lesson-5/03_employment_rate_map
-lessons/lesson-5/share-on-github
-lessons/lesson-5/exercise-5
-```
+% ```{toctree}
+% ---
+% caption: Lesson 5
+% maxdepth: 2
+% ---
+% lessons/lesson-5/overview
+% lessons/lesson-5/static-maps
+% lessons/lesson-5/interactive-map-folium
+% lessons/lesson-5/employment-rate-map
+% lessons/lesson-5/share-on-github
+% lessons/lesson-5/exercise-5
+% ```
 
-```{toctree}
----
-caption: Lesson 6
-maxdepth: 2
----
-lessons/lesson-6/overview
-notebooks/lesson-6/00_retrieve_osm_data
-notebooks/lesson-6/01_network_analysis
-lessons/lesson-6/exercise-6
-```
+% ```{toctree}
+% ---
+% caption: Lesson 6
+% maxdepth: 2
+% ---
+% lessons/lesson-6/overview
+% lessons/lesson-6/retrieve-osm-data
+% lessons/lesson-6/network-analysis
+% lessons/lesson-6/exercise-6
+% ```
 
-```{toctree}
----
-caption: Final Assignment
-maxdepth: 2
----
-lessons/final-assignment/final-assignment
-lessons/final-assignment/final-assignment-grading
-lessons/final-assignment/final-assignment-hints
-```
+% ```{toctree}
+% ---
+% caption: Final Assignment
+% maxdepth: 2
+% ---
+% lessons/final-assignment/final-assignment
+% lessons/final-assignment/final-assignment-grading
+% lessons/final-assignment/final-assignment-hints
+% ```
 
-```{toctree}
----
-caption: "Extra: PyQGIS"
-maxdepth: 2
----
-lessons/pyqgis/overview
-lessons/pyqgis/pyqgis
-lessons/pyqgis/additional_pyqgis_functions
-```
+% ```{toctree}
+% ---
+% caption: "Extra: PyQGIS"
+% maxdepth: 2
+% ---
+% lessons/pyqgis/overview
+% lessons/pyqgis/pyqgis
+% lessons/pyqgis/additional_pyqgis_functions
+% ```
 
-```{toctree}
----
-caption: "Extra: Raster"
-maxdepth: 2
----
-lessons/raster/overview
-lessons/raster/download-data
-notebooks/raster/reading-raster
-notebooks/raster/plotting-raster
-notebooks/raster/clipping-raster
-notebooks/raster/raster-map-algebra
-notebooks/raster/raster-mosaic
-notebooks/raster/zonal-statistics
-notebooks/raster/read-cogs
-```
+% ```{toctree}
+% ---
+% caption: "Extra: Raster"
+% maxdepth: 2
+% ---
+% lessons/raster/overview
+% lessons/raster/download-data
+% lessons/raster/reading-raster
+% lessons/raster/plotting-raster
+% lessons/raster/clipping-raster
+% lessons/raster/raster-map-algebra
+% lessons/raster/raster-mosaic
+% lessons/raster/zonal-statistics
+% lessons/raster/read-cogs
+% ```
