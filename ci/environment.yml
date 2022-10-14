@@ -1,4 +1,4 @@
-name: autogis-2
+name: autogis
 
 channels:
     - conda-forge
@@ -11,5 +11,17 @@ dependencies:
     - sphinx
     - sphinx-book-theme
 
+    # JupyterLab
+    - jupyterlab
+    - jupyterlab-git
+
     # lessons
+    - bokeh
+    - folium
+    - geojson
     - geopandas
+    - geopy
+    - matplotlib
+    - osmnx
+    - pyrosm
+    - r5py
