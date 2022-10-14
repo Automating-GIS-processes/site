@@ -134,7 +134,6 @@ course-info/course-environment-components
 course-info/grading
 course-info/learning-goals
 course-info/installing-python
-course-info/installing-packages-using-conda
 course-info/create-python-gis-env
 course-info/resources
 course-info/license-terms
