@@ -111,17 +111,17 @@ Use `pacman` to install `python-conda`
 
 Unfortunately, at the time of this writing, there is no `.deb`-package of
 *conda* available, which is why you have to follow the `curl | sh` pattern to
-which the warning above relates. To improve the situation slightly, we
-recommend to:
+which the warning above relates.
+To improve security despite this, we recommend to:
 
 1. first download the installation script from [Miniconda’s download
   page](https://docs.conda.io/en/latest/miniconda.html#linux-installers)
   (select the latest Python version, and the correct architecture), then 
 2. check the file against its checksum hash (printed next to the download link)
-  using `sha256 ${FILENAME}`, 
+  using `sha256sum filename`, 
 3. open the file in a text editor to check the script that is about to be run,
   and
-4. **only then**, run the installation script using `sh ${FILENAME}`:
+4. **only then**, run the installation script using `sh filename`:
 
 ```
 user@ubuntu:~# curl -LO https://repo.anaconda.com/miniconda/Miniconda3-pyXX_X.YY.Z-Linux-x86_64.sh
