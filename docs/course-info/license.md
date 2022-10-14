@@ -12,7 +12,7 @@ git repository. We hope others can then benefit from your work, if you provide
 your materials in a similar manner as we do here.
 
 We are very open to collaboration and to ideas on how to improve this course.
-Please get in touch via [e-mail](general-information.html#instructors), or open
+Please get in touch via [e-mail](./general-information), or open
 merge requests to our repositores on GitHub.
 
 **The material presented here are licensed as explained below**:
