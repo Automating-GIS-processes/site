@@ -44,7 +44,6 @@ their analysis workflow in an online repository (GitHub).
 
 Each lesson in this course can be turned into an interactive programming session
 in the browser. You’ll find buttons for activating the python environment using
-<a href="https://thebe.readthedocs.io/">Thebe</a> or 
 <a href="https://mybinder.readthedocs.io/">Binder</a> at the top of each
 programming lesson. Students at Finnish higher education institutions are
 encouraged to use <a href="https://notebooks.csc.fi/">CSC’s *Notebooks*</a>.
