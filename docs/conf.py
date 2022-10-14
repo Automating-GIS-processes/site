@@ -46,7 +46,7 @@ myst_substitutions = {
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_logo = "_static/img/autogis-logo_300x210px.svg"
+html_logo = "_static/images/autogis-logo_300x210px.svg"
 html_short_title = "AutoGIS"
 html_title = ""
 
