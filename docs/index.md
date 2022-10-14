@@ -23,7 +23,7 @@ manner: using Python and its manifold modules. Feel free to share this website
 with anyone interested, and use the provided material in your own teaching. 
 
 Read more about the license and terms of usage 
-<a href="course-info/license-terms.html">here</a>.
+<a href="course-info/license.html">here</a>.
 
 :::
 
