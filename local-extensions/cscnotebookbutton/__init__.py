@@ -30,8 +30,6 @@ def add_csc_notebook_button(app, pagename, templatename, context, doctree):
 
     Note: This currently only works if any other launch button is
     configured, e.g., Binder.
-
-    Added 2022-10-15 (Christoph Fink)
     """
     if app.env.metadata[pagename].get("kernelspec"):  # is notebook
         header_buttons = context["header_buttons"]
@@ -64,7 +62,7 @@ def setup(app):
     """
     Register extension with sphinx.
 
-    This is a callback function called by sphinx during setup.
+    This is a callback function called by sphinx when it loads the extension.
     """
     app.connect(
         "html-page-context",
