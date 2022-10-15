@@ -35,10 +35,14 @@ functionality is realised using [Binder](https://mybinder.org/) and the
 [CSC](https://csc.fi/)’s [Notebooks](https://notebooks.csc.fi/) (the latter are
 available to students and staff at Finnish universities, only).
 
-<!-- Binder environment is controlled from [environment.yml](environment.yml).
-CSC Notebooks are controlled separately from
-[https://github.com/Automating-GIS-processes/notebooks](https://github.com/Automating-GIS-processes/notebooks)
--repository. -->
+<!--
+TODO: Add instructions for future teachers of this course:
+    - How to set up GitHub class rooms
+    - How to update the documents (including setting the
+      substitution-variable in conf.py)
+    - How to set up CSC Notebooks
+    - ...
+-->
 
 ## Contact
 
