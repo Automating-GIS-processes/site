@@ -16,7 +16,14 @@ copyright = f"2016-{version}"
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
+# search for extensions in ../local-extensions/
+import pathlib
+import sys
+sys.path.append(str(pathlib.Path().absolute().parent / "local-extensions"))
+print(sys.path)
+
 extensions = [
+    "cscnotebookbutton",
     "myst_nb",
 ]
 
