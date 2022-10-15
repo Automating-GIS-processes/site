@@ -32,7 +32,7 @@ you can use the default settings.
 After installation has completed, start an *Anaconda Prompt (miniconda3)* that
 has been newly added to your Start Menu: 
 
-![Anaconda Prompt in Windows Start Menu](../_static/img/course-info-anaconda-prompt_260x120px.png)
+![Anaconda Prompt in Windows Start Menu](../_static/images/course-info-anaconda-prompt_260x120px.png)
 
 In the command shell window that opens, type the command `conda --version` and
 press *Return* to execute it. If installation was successful, it should print

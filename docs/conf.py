@@ -16,7 +16,14 @@ copyright = f"2016-{version}"
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
+# search for extensions in ../local-extensions/
+import pathlib
+import sys
+sys.path.append(str(pathlib.Path().absolute().parent / "local-extensions"))
+print(sys.path)
+
 extensions = [
+    "cscnotebookbutton",
     "myst_nb",
 ]
 
@@ -46,7 +53,7 @@ myst_substitutions = {
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_logo = "_static/img/autogis-logo_300x210px.svg"
+html_logo = "_static/images/autogis-logo_300x210px.svg"
 html_short_title = "AutoGIS"
 html_title = ""
 
