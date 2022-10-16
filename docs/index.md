@@ -129,6 +129,7 @@ maxdepth: 1
 ---
 
 course-info/general-information
+course-info/course-environment
 course-info/grading
 course-info/learning-goals
 course-info/installing-python
