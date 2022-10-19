@@ -122,20 +122,20 @@ The course pages and material of earlier years are available at:
 
 ## Contents
 
-% ```{toctree}
-% ---
-% caption: Course information
-% maxdepth: 1
-% ---
-% 
-% course-info/general-information
-% course-info/grading
-% course-info/learning-goals
-% course-info/installing-python
-% course-info/create-python-gis-environment
-% course-info/resources
-% course-info/license
-% ```
+```{toctree}
+---
+caption: Course information
+maxdepth: 1
+---
+
+course-info/general-information
+course-info/grading
+course-info/learning-goals
+course-info/installing-python
+course-info/create-python-gis-environment
+course-info/resources
+course-info/license
+```
 
 % ```{toctree}
 % ---
