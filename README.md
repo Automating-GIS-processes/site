@@ -8,6 +8,7 @@ anybody interested in learning **how to use Python to automate the handling and
 analysis of geographic information** is welcome to follow the course content at
 [autogis-site.readthedocs.io](https://autogis-site.readthedocs.io/).
 
+
 ## License and terms of usage
 
 <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img
@@ -27,6 +28,7 @@ license**, respectively.
 **Read more about the license and terms of usage
 [here](https://autogis-site.readthedocs.io/en/latest/course-info/license.html)**.
 
+
 ## Browser based programming environment
 
 The instructions in this course provide a programming environment that allows
@@ -34,6 +36,7 @@ anyone to immediately try and run all sample code directly in the browser. This
 functionality is realised using [Binder](https://mybinder.org/) and the
 [CSC](https://csc.fi/)’s [Notebooks](https://notebooks.csc.fi/) (the latter are
 available to students and staff at Finnish universities, only).
+
 
 ## Instructions for updating the University of Helsinki course each year
 
@@ -145,7 +148,7 @@ TODO: Add instructions for future teachers of this course:
     - How to remove the lesson contents and add them week after week using pull requests
     - Refreshing the notebooks, and also adding them week after week.
     - ...
--->
+
 
 ## Contact
 
