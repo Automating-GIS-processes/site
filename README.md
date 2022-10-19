@@ -41,10 +41,10 @@ There a few tasks that need to be done to prepare this course for being taught
 each autumn. Even without updating any of the content, reserve at minimum a
 few days to get everything set up.
 
-1. Before you do anything else, make sure the previous year’s course content has
-   been tagged, so that readthedocs provides a yearly version. This can (and
-   should) have been done at the end of last autumn’s course, but please
-   double-check: 
+1. Before you do anything else, make sure to **tag the previous year’s course
+   content**, so that readthedocs provides a yearly version.
+   This can (and should) have been done at the end of last autumn’s course,
+   but please double-check:
 
     ```
     git clone git@github.com:Automating-GIS-processes/site
@@ -53,9 +53,9 @@ few days to get everything set up.
     git push --tags
     ```
 
-2. Update the Python environment (ensure stable versions throughout the lifetime
+2. **Update the Python environment** (ensure stable versions throughout the lifetime
    of the course and of the course page’s version for the current year)
-    - Update the pinned versions in pip’s `requirements.txt`:
+    - Update the pinned versions in **pip**’s `requirements.txt` (rtd uses pip!):
         ```
         # remove a possibly existing stale environment
         rm -Rf .virtualenv/
@@ -73,7 +73,7 @@ few days to get everything set up.
         # deactivate the virtual environment
         deactivate
         ```
-    - Update conda’s `environment.yml` in a similar way:
+    - Update **conda**’s `environment.yml` in a similar way:
         - First, make sure [`environment.in.yml`](ci/environment.in.yml) pins
           Python (the interpreter itself) to the [lastest major version available
           from conda-forge](https://anaconda.org/conda-forge/python). In autumn
@@ -104,7 +104,7 @@ previous version, as some of the packages might not have been updated in time.
 
 97. Update, rebuild and upload the docker image TODO
 
-97. Create a *CSC Notebooks* ‘workspace’ and ‘application’
+97. Create a *CSC Notebooks* ‘workspace’ and ‘application’ TODO
 
 98. Slack TODO
 
