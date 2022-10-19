@@ -46,12 +46,12 @@ few days to get everything set up.
    should) have been done at the end of last autumn’s course, but please
    double-check: 
 
-```
-git clone git@github.com:Automating-GIS-processes/site
-cd site
-git tag -a 2022  # <- CHANGE THE YEAR!
-git push --tags
-```
+    ```
+    git clone git@github.com:Automating-GIS-processes/site
+    cd site
+    git tag -a 2022  # <- CHANGE THE YEAR!
+    git push --tags
+    ```
 
 2. Update the Python environment (ensure stable versions throughout the lifetime
    of the course and of the course page’s version for the current year)
