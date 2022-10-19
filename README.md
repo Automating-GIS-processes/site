@@ -49,6 +49,7 @@ TODO: Add instructions for future teachers of this course:
     - How to fork the repository, and use merge requests as a way to test
       changes before going live
     - How to remove the lesson contents and add them week after week using pull requests
+    - How to update the gh-action access token
     - ...
 -->
 
