@@ -30,8 +30,9 @@ documentation](https://shapely.readthedocs.io/) and on chapter 3 of [Westra E.
 
 ![Spatial data model](/_static/images/lesson-1/simple-features_595x500px.svg)
 
-Fundamental geometric objects (‘simple features’) that can be used in Python with [Shapely](https://shapely.readthedocs.io/). <br />
-*(Figures by M. W. Toews; cf. [Wikipedia’s article on GeoJSON](https://en.wikipedia.org/wiki/GeoJSON))*
+Fundamental geometric objects (‘simple features’) that can be used in Python
+with [Shapely](https://shapely.readthedocs.io/). <br /> *(Figures by M. W.
+Toews; cf. [Wikipedia’s article on GeoJSON](https://en.wikipedia.org/wiki/GeoJSON))*
 
 :::
 
@@ -61,17 +62,88 @@ changed](https://shapely.readthedocs.io/en/latest/migration.html).
 :::
 
 
-**Geometric objects consist of coordinate tuples where:**
+Shapely, like the vast majority of geospatial software, follows the data model
+set forward in the [Open Geospatial Consortium’s *Simple Feature Access*
+standard](https://www.ogc.org/standards/sfa). In this chapter, we use the
+terminology used by *shapely*, but the general concepts are applicable much more
+widely.
 
--  `Point` -object represents a single point in space. Points can be either two-dimensional (x, y) or three dimensional (x, y, z).
--  `LineString` -object (i.e. a line) represents a sequence of points joined together to form a line. Hence, a line consist of a list of at least two coordinate tuples
--  `Polygon` -object represents a filled area that consists of a list of at least three coordinate tuples that forms the outerior ring and a (possible) list of hole polygons.
 
-**It is also possible to have a collection of geometric objects (e.g. Polygons with multiple parts):**
+#### Geometric objects are described and constructed by *coordinate tuples*
 
--  `MultiPoint` -object represents a collection of points and consists of a list of coordinate-tuples
--  `MultiLineString` -object represents a collection of lines and consists of a list of line-like sequences
--  `MultiPolygon` -object represents a collection of polygons that consists of a list of polygon-like sequences that construct from exterior ring and (possible) hole list tuples
+Even more fundamental than that, **coordinate tuples** are what is used to
+define the geometric fundamentals point, line, and polygon. Coordinate tuples
+typically are either two-dimensional `(x, y)`, or three-dimensional `(x, y, z)`.
+
+:::{admonition} Tuples
+:class: info
+
+A [tuple](https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences)
+is a Python data structure that consists of a number of values separated by
+commas. Coordinate pairs are often represented as a tuple. For example,
+`(60.192059, 24.945831)` is a tuple with two values, `(1,)` a tuple with one
+value (note the comma that distinguishes a one-value tuple from a mathematical
+expression in parentheses), and `tuple([1, 2, 3])` converts (‘casts’) a `list`
+into a `tuple`.
+
+Tuples belong to the [sequence data
+types](https://docs.python.org/3/library/stdtypes.html#typesseq) in Python.
+Other sequence data types are lists and ranges. Tuples have many similarities
+with lists and ranges, but they are often used for different purposes.
+
+The main difference between tuples and lists is that tuples are
+[immutable](https://docs.python.org/3/glossary.html#term-immutable), which means
+that the contents of a tuple cannot be altered (while lists are mutable; you
+can, for example, add and remove values from lists).
+
+:::
+
+
+**Point** geometries represent a singular point (in two- or three-dimensional
+Euclidean space). Points are defined by a single coordinate tuple.
+
+**LineString** geometries (and the related **LinearRing**s) represent lines.
+They are defined by a sequence of points. By connecting the points in order,
+a line is formed, if the first and last point are the same, a linear ring.
+Consequently, to describe a *LineString*, at least two points are necessary, 
+for a *LinearRing* at least three.
+
+Finally, **Polygon** geometries represent an area in space. They are defined by
+exactly one *LinearRing* as its circumference, and any number of additional
+*LinearRing*s representing holes that are cut out. As such, at minimum, a
+*Polygon* is defined by three coordinate tuples (but it get’s more difficult
+quickly, as, naturally, the coordinates defining the holes have to lie within
+the exterior *LinearRing*, and must not intersect each other).
+
+
+#### Collections of geometric objects
+
+All of the fundamental geometric types can be combined to represent more complex
+geographic features, such as, for instance, administrative areas that consist of
+multiple discontinuous regions:
+
+
+:::{figure-md} Multipolygons
+
+![A map of Austria showing that the province of Tyrol consists of two
+parts](/_static/images/lessons/lesson1/multipolygons_595x300px.svg)
+
+*Tyrol*, a federal state of Austria, is a **MultiPolygon**. *(Data: [Statistics
+Austria](https://data.statistik.gv.at/web/meta.jsp?dataset=OGDEXT_GEM_1))*
+
+:::
+
+
+
+- **MultiPoint** geometries represent collections of points.
+- **MultiLineString** geometries represent collections of lines.
+- **MultiPolygon** geometries represent collections of polygons.
+
+
+
+
+
+<!-- CONTINUE FROM HERE -->
 
 **Useful attributes and methods in Shapely include:**
 
@@ -80,20 +152,6 @@ changed](https://shapely.readthedocs.io/en/latest/migration.html).
 -  Conducting geometric operations based on the input geometries such as `union`, `difference`, `distance` etc.
 -  Conducting spatial queries between geometries such as `intersects`, `touches`, `crosses`, `within` etc.
 
-
-
-<div class="alert alert-info">
-
-**Tuple**
-
-[Tuple](https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences) is a Python data structure that consists of a number of values separated by commas. Coordinate pairs are often represented as a tuple. For example:
-
-```{code-cell}
-(60.192059, 24.945831)
-```
-
-Tuples belong to [sequence data types](https://docs.python.org/3/library/stdtypes.html#typesseq) in Python. Other sequence data types are lists and ranges. Tuples have many similarities with lists and ranges, but they are often used for different purposes. The main difference between tuples and lists is that tuples are [immutable](https://docs.python.org/3/glossary.html#term-immutable), which means that the contents of a tuple cannot be altered (while lists are mutable; you can, for example, add and remove values from lists).
-</div>
 
 
 ```{code-cell}
