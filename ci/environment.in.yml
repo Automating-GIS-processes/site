@@ -1,0 +1,38 @@
+name: autogis
+
+channels:
+    - conda-forge
+
+dependencies:
+    - python=3.10
+
+    # sphinx + dependencies
+    - myst-nb
+    - sphinx
+    - sphinx-book-theme
+
+    # JupyterLab
+    - jupyterlab
+    - jupyterlab-git
+
+    # lessons
+    - contextily
+    - folium
+    - geojson
+    - geopandas
+    - geopy
+    - mapclassify
+    - matplotlib
+    - osmnx
+    - psycopg2
+    - pyproj
+    - pyrosm
+    - requests
+    - scikit-learn
+    - shapely
+    - sqlalchemy
+
+    # optional
+    # - bokeh
+    # - osmnx
+    # - r5py
