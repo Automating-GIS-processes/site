@@ -1,9 +1,5 @@
 # Exercise 2
 
-```{image} https://img.shields.io/badge/launch-CSC%20notebook-blue.svg
-:target: https://notebooks.csc.fi/#/blueprint/d189695c52ad4c0d89ef72572e81b16c
-```
-
 :::{admonition} Start your assignment
 You can start working on your copy of Exercise 2 by [accepting the GitHub Classroom assignment](https://classroom.github.com/a/hkn1jd7L).
 
@@ -25,7 +21,7 @@ However, each student should submit their own copy of the exercise.
 
 Quite often you are in a situation where you have read data e.g. from text file into a pandas DataFrame where you have latitude and longitude columns representing the location of a record. The first step is to create a column where with corresponding the shapely geometries:
 
-```python
+```{code-cell}
 >>> print(data)
     value  lat  lon     geometry
 0      0    2    4  POINT (4 2)
@@ -37,14 +33,14 @@ Quite often you are in a situation where you have read data e.g. from text file 
 
 - Notice that the data is still a pandas **DataFrame**, not a GeoDataFrame:
 
-```python
+```{code-cell}
 >>> type(data)
 pandas.core.frame.DataFrame
 ```
 
 - We need to convert the DataFrame into a GeoDataFrame, so that we can e.g. save it into a Shapefile. It is easily done by passing the DataFrame into a GeoDataFrame object. We need to determine which column contains the geometry information (needs to be always a column called 'geometry'), and optionally we can also determine the coordinate reference system when creating the GeoDataFrame:
 
-```python
+```{code-cell}
 import geopandas as gpd
 from pyproj import CRS
 
@@ -61,7 +57,7 @@ Now we have converted Pandas DataFrame into a proper GeoDataFrame that we can ex
 
 In exercise 2, problem 2 you need to create Shapely Points for each row of data. Our input data set is rather large, so the iterrows-approach will be rather slow. You can try this approach, but prepare to wait for a while for the code to run!
 
-```python
+```{code-cell}
 #-----------------------------------------
 
 # OPTION 1: Iterate over dataframe rows:
@@ -76,7 +72,7 @@ for idx, row in df.iterrows():
 
 There are other **faster** solutions for this. Check out the following examples, and try to understand what happens in them. Pick one of these solutions and use it in problem 2 :) You'll need to change the variable and column names.
 
-```python
+```{code-cell}
 #-----------------------------------------
 
 # OPTION 2: apply a function
@@ -119,7 +115,7 @@ When creating the `movements` geodataframe, it might be useful to pre-define the
 
 In this exercise, you need to add/append items to a (geo)dataframe iteratively (one row at a time). When adding new information to a dataframe, you can use the `.at` or `.loc` indexer like in this example:
 
-```python
+```{code-cell}
 # Add a point object into the geometry-column on the first row (here, the row-label is 0)
 df.at[0, 'geometry'] = point
 ```
