@@ -60,18 +60,15 @@ few days to get everything set up.
    of the course and of the course page’s version for the current year)
     - Update the pinned versions in **pip**’s `requirements.txt` (rtd uses pip!):
         ```
-        # remove a possibly existing stale environment
-        rm -Rf .virtualenv/
-
         # create a new virtual environment and activate it
-        python -m venv .virtualenv
+        python -m venv --clear .virtualenv
         source .virtualenv/bin/activate
 
         # install using the _unpinned_ docs/requirements.in.txt
         pip install -r docs/requirements.in.txt
 
         # save a pinned docs/requirement.txt
-        pip freeze > docs/requirement.txt
+        pip freeze --local -r docs/requirements.in.txt > docs/requirements.txt
 
         # deactivate the virtual environment
         deactivate
