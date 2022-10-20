@@ -35,10 +35,23 @@ functionality is realised using [Binder](https://mybinder.org/) and the
 [CSC](https://csc.fi/)’s [Notebooks](https://notebooks.csc.fi/) (the latter are
 available to students and staff at Finnish universities, only).
 
-<!-- Binder environment is controlled from [environment.yml](environment.yml).
-CSC Notebooks are controlled separately from
-[https://github.com/Automating-GIS-processes/notebooks](https://github.com/Automating-GIS-processes/notebooks)
--repository. -->
+<!--
+TODO: Add instructions for future teachers of this course:
+    - How to set up GitHub class rooms
+    - How to update the documents (including setting the
+      substitution-variable in conf.py)
+    - How to set up CSC Notebooks
+    - How to set up Slack, and where to change the links
+    - How to update the dependencies at the beginning of a new year,
+      and how to lock them to certain versions
+    - How to locally install the dependencies using a virtual env, or conda env
+    - How to regenerate the docs locally
+    - How to fork the repository, and use merge requests as a way to test
+      changes before going live
+    - How to remove the lesson contents and add them week after week using pull requests
+    - How to update the gh-action access token
+    - ...
+-->
 
 ## Contact
 
