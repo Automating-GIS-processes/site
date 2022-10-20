@@ -55,8 +55,6 @@ def add_csc_notebook_button(app, pagename, templatename, context, doctree):
                     break
             except KeyError:
                 continue
-        else:
-            print("No header_buttons")
 
 
 def _copy_icon_to_build_directory(build_directory):
