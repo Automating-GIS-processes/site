@@ -51,13 +51,12 @@ def add_csc_notebook_button(app, pagename, templatename, context, doctree):
                             "tooltip_placement": "left",
                         }
                     )
+                    _copy_icon_to_build_directory(app.builder.outdir)
+                    break
             except KeyError:
                 continue
-
-            _copy_icon_to_build_directory(app.builder.outdir)
-            break
-
-        print("No header_buttons")
+        else:
+            print("No header_buttons")
 
 
 def _copy_icon_to_build_directory(build_directory):
