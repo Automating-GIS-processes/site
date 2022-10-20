@@ -32,22 +32,30 @@ def add_csc_notebook_button(app, pagename, templatename, context, doctree):
     configured, e.g., Binder.
     """
     if app.env.metadata[pagename].get("kernelspec"):  # is notebook
-        header_buttons = context["header_buttons"]
+        try:
+            header_buttons = context["header_buttons"]
+        except KeyError:
+            return
+
         for item in header_buttons:
-            if item["label"] == "launch-buttons":
-                launch_buttons = item["buttons"]
-                launch_buttons.append(
-                    {
-                        "type": "link",
-                        "text": "CSC Notebooks",
-                        "tooltip": "Open CSC Notebooks",
-                        "icon": str(CSC_NOTEBOOK_ICON_PATH),
-                        "url": "https://notebooks.csc.fi",
-                        "tooltip_placement": "left",
-                    }
-                )
-                _copy_icon_to_build_directory(app.builder.outdir)
-                break
+            try:
+                if item["label"] == "launch-buttons":
+                    launch_buttons = item["buttons"]
+                    launch_buttons.append(
+                        {
+                            "type": "link",
+                            "text": "CSC Notebooks",
+                            "tooltip": "Open CSC Notebooks",
+                            "icon": str(CSC_NOTEBOOK_ICON_PATH),
+                            "url": "https://notebooks.csc.fi",
+                            "tooltip_placement": "left",
+                        }
+                    )
+            except KeyError:
+                continue
+
+            _copy_icon_to_build_directory(app.builder.outdir)
+            break
 
 
 def _copy_icon_to_build_directory(build_directory):
