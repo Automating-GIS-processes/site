@@ -47,6 +47,7 @@ myst_substitutions = {
     "starting_date": "Tuesday, 1 November 2022",
     "lectures_weekday_time_location": "Tuesday, 15:15-16:45, Exactum C222",
     "work_sessions_weekday_time_location": "Friday, 12:15-16:00, Physicum A113+A114 (GIS lab)",
+    "csc_workspace_join_code": "aut-wuis16sc"
 }
 
 
