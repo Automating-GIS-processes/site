@@ -9,6 +9,7 @@ docs/_build/
 *.swp
 *.pyc
 .DS_Store
+__pycache__
 
 .ipynb_checkpoints
 docs/jupyter_execute/
