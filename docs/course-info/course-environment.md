@@ -156,7 +156,7 @@ the course’s application.
 
 
 (#git-and-github)=
-## `git` and GitHub: keep track of changes
+## Git and GitHub: keep track of changes
 
 One of the core goals of this course (besides learning how to program) is to learn
 how to use [version control](https://en.wikipedia.org/wiki/Version_control)
