@@ -12,7 +12,8 @@ docs/_build/
 __pycache__
 
 .ipynb_checkpoints
-docs/jupyter_execute/
+.jupyter_cache
+jupyter_execute
 
 .tox
 .coverage
