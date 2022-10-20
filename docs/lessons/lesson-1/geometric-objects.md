@@ -12,17 +12,19 @@ jupyter:
     name: python3
 ---
 
+
 # Shapely and geometric objects
 
-In this lesson, you will learn how to create and manipulate geometries in Python using the [Shapely Python Package](https://shapely.readthedocs.io/en/stable/manual.html).
+In this lesson, you will learn how to create and manipulate geometries in Python
+using the [Shapely Python
+Package](https://shapely.readthedocs.io/en/stable/manual.html).
 
-**Sources:**
+**Sources:** Parts of this chapter are based on [shapely’s
+documentation](https://shapely.readthedocs.io/) and on chapter 3 of [Westra E.
+(2013)](https://www.packtpub.com/application-development/python-geospatial-development-second-edition).
 
-These materials are partly based on [Shapely-documentation](https://shapely.readthedocs.io/en/stable/manual.html) and [Westra
-E. (2013), Chapter 3](https://www.packtpub.com/application-development/python-geospatial-development-second-edition).
 
 ## Spatial data model
-
 
 :::{figure-md} simple-features
 
@@ -33,9 +35,31 @@ Fundamental geometric objects (‘simple features’) that can be used in Python
 
 :::
 
+All geospatial vector data can be described by a combining a set of fundamental
+geometric objects: **points**, **lines**, and **polygons** are the basic
+ingredients of working with spatial data.
 
-The most fundamental geometric objects are `Points`, `Lines` and `Polygons` which are the basic ingredients when working with spatial data in vector format. 
-Python has a specific module called [Shapely](https://shapely.readthedocs.io/en/stable/manual.html) for doing various geometric operations. Basic knowledge of using Shapely is fundamental for understanding how geometries are stored and handled in GeoPandas.
+In Python, the library package [shapely](https://shapely.readthedocs.io/) has
+become the standard tool for working with geo-spatial objects, and for carruing
+out a range of geometric operations. A basic understanding of how *shapely*
+works is paramount for using higher-level tools, such as, for instance,
+[geopandas](https://geopandas.pydata.org/) (see [lesson 2 of this
+course](../lesson-2/overview) that handles entire data sets of geographic
+information (‘layers’).
+
+
+:::{admonition} shapely 2.0
+:class: warning
+
+While we are having this course, the team developing shapely is preapring the
+library’s next updates. It will be a major version that breaks with some of the
+programming patterns that were possible with earlier versions.
+
+When you work with shapely in the future, be sure to (check out what will have
+changed](https://shapely.readthedocs.io/en/latest/migration.html).
+
+:::
+
 
 **Geometric objects consist of coordinate tuples where:**
 
@@ -66,7 +90,7 @@ Python has a specific module called [Shapely](https://shapely.readthedocs.io/en/
 
 ```{code-cell}
 (60.192059, 24.945831)
-``` 
+```
 
 Tuples belong to [sequence data types](https://docs.python.org/3/library/stdtypes.html#typesseq) in Python. Other sequence data types are lists and ranges. Tuples have many similarities with lists and ranges, but they are often used for different purposes. The main difference between tuples and lists is that tuples are [immutable](https://docs.python.org/3/glossary.html#term-immutable), which means that the contents of a tuple cannot be altered (while lists are mutable; you can, for example, add and remove values from lists).
 </div>
@@ -91,7 +115,7 @@ point3 = Point(9.26, -2.456)
 point3D = Point(9.26, -2.456, 0.57)
 ```
 
-Let's see what these variables now contain: 
+Let's see what these variables now contain:
 
 ```{code-cell}
 point1
@@ -115,7 +139,7 @@ type(point1)
 ```
 
 We can see that the type of the point is shapely's Point. The point object is represented in a specific format based on
-[GEOS](https://trac.osgeo.org/geos) C++ library that is one of the standard libraries behind various Geographic Information Systems. It runs under the hood e.g. in [QGIS](http://www.qgis.org/en/site/). 
+[GEOS](https://trac.osgeo.org/geos) C++ library that is one of the standard libraries behind various Geographic Information Systems. It runs under the hood e.g. in [QGIS](http://www.qgis.org/en/site/).
 
 
 ### Point attributes and functions
@@ -173,7 +197,7 @@ print(f"Distance between the points is {dist} units")
 ## LineString
 
 
-Creating LineString -objects is fairly similar to creating Shapely Points. 
+Creating LineString -objects is fairly similar to creating Shapely Points.
 
 Now instead using a single coordinate-tuple we can construct the line using either a list of shapely Point -objects or pass the points as coordinate-tuples:
 <!-- #endregion -->
@@ -190,10 +214,10 @@ line2 = LineString([(2.2, 4.2), (7.2, -25.1), (9.26, -2.456)])
 
 ```{code-cell}
 # Check if lines are identical
-line == line2 
+line == line2
 ```
 
-Let's see how our line looks like: 
+Let's see how our line looks like:
 
 ```{code-cell}
 line
@@ -234,7 +258,7 @@ list(line.coords)
 
 Again, we have a list of coordinate tuples (x,y) inside a list.
 
-If you would need to access all x-coordinates or all y-coordinates of the line, you can do it directly using the `xy` attribute: 
+If you would need to access all x-coordinates or all y-coordinates of the line, you can do it directly using the `xy` attribute:
 
 ```{code-cell} jupyter={"outputs_hidden": false}
 # Extract x and y coordinates separately
@@ -260,13 +284,13 @@ print(f"Length of our line: {l_length} units")
 print(line.centroid)
 ```
 
-As you can see, the centroid of the line is again a Shapely Point object. 
+As you can see, the centroid of the line is again a Shapely Point object.
 
 <!-- #region -->
 ## Polygon
 
 
-Creating a `Polygon` -object continues the same logic of how `Point` and `LineString` were created but Polygon object only accepts a sequence of coordinates as input. 
+Creating a `Polygon` -object continues the same logic of how `Point` and `LineString` were created but Polygon object only accepts a sequence of coordinates as input.
 
 Polygon needs **at least three coordinate-tuples** (three points are reguired to form a surface):
 <!-- #endregion -->
@@ -306,7 +330,7 @@ poly
 print(poly)
 ```
 
-Notice that `Polygon` representation has double parentheses around the coordinates (i.e. `POLYGON ((<values in here>))` ). This is because Polygon can also have holes inside of it. 
+Notice that `Polygon` representation has double parentheses around the coordinates (i.e. `POLYGON ((<values in here>))` ). This is because Polygon can also have holes inside of it.
 
 
 Check also the data type:
@@ -348,7 +372,7 @@ Help on Polygon in module shapely.geometry.polygon object:
       |      The ring which bounds the positive space of the polygon.
       |  interiors : sequence
       |      A sequence of rings which bound all existing holes.
-      
+
 ```
 
 
@@ -414,10 +438,10 @@ As we can see above, it is again fairly straightforward to access different attr
 
 Plot these shapes using Shapely!
 
-- **Pentagon**, example coords: `(30, 2.01), (31.91, 0.62), (31.18, -1.63), (28.82, -1.63), (28.09, 0.62)` 
-- **Triangle**   
-- **Square**    
-- **Cicrle**    
+- **Pentagon**, example coords: `(30, 2.01), (31.91, 0.62), (31.18, -1.63), (28.82, -1.63), (28.09, 0.62)`
+- **Triangle**
+- **Square**
+- **Cicrle**
 
 
 ```{code-cell}
@@ -445,9 +469,9 @@ point.buffer(1)
 ## Geometry collections (optional)
 
 
-In some occassions it is useful to store multiple geometries (for example, several points or several polygons) in a single feature. A practical example would be a country that is composed of several islands. In such case, all these polygons share the same attributes on the country-level and it might be reasonable to store that country as geometry collection that contains all the polygons. The attribute table would then contain one row of information with country-level attributes, and the geometry related to those attributes would represent several polygon. 
+In some occassions it is useful to store multiple geometries (for example, several points or several polygons) in a single feature. A practical example would be a country that is composed of several islands. In such case, all these polygons share the same attributes on the country-level and it might be reasonable to store that country as geometry collection that contains all the polygons. The attribute table would then contain one row of information with country-level attributes, and the geometry related to those attributes would represent several polygon.
 
-In Shapely, collections of points are implemented by using a MultiPoint -object, collections of curves by using a MultiLineString -object, and collections of surfaces by a MultiPolygon -object. 
+In Shapely, collections of points are implemented by using a MultiPoint -object, collections of curves by using a MultiLineString -object, and collections of surfaces by a MultiPolygon -object.
 <!-- #endregion -->
 
 ```{code-cell}
@@ -482,13 +506,13 @@ multi_point
 multi_line
 ```
 
-MultiPolygons are constructed in a similar manner. Let's create a bounding box for "the world" by combinin two separate polygons that represent the western and eastern hemispheres. 
+MultiPolygons are constructed in a similar manner. Let's create a bounding box for "the world" by combinin two separate polygons that represent the western and eastern hemispheres.
 
 ```{code-cell} jupyter={"outputs_hidden": false}
 # Let's create the exterior of the western part of the world
 west_exterior = [(-180, 90), (-180, -90), (0, -90), (0, 90)]
 
-# Let's create a hole --> remember there can be multiple holes, thus we need to have a list of hole(s). 
+# Let's create a hole --> remember there can be multiple holes, thus we need to have a list of hole(s).
 # Here we have just one.
 west_hole = [[(-170, 80), (-170, -80), (-10, -80), (-10, 80)]]
 
@@ -503,7 +527,7 @@ print(west_poly)
 west_poly
 ```
 
-Shapely also has a tool for creating [a bounding box](https://en.wikipedia.org/wiki/Minimum_bounding_box) based on minimum and maximum x and y coordinates. Instead of using the Polygon constructor, let's use the [box](https://shapely.readthedocs.io/en/stable/manual.html#shapely.geometry.box) constructor for creating the polygon:  
+Shapely also has a tool for creating [a bounding box](https://en.wikipedia.org/wiki/Minimum_bounding_box) based on minimum and maximum x and y coordinates. Instead of using the Polygon constructor, let's use the [box](https://shapely.readthedocs.io/en/stable/manual.html#shapely.geometry.box) constructor for creating the polygon:
 
 ```{code-cell}
 from shapely.geometry import box
@@ -543,7 +567,7 @@ We can see that the outputs are similar to the basic geometric objects that we c
 
 ### Convex hull and envelope
 
-Convex hull refers to the smalles possible polygon that contains all objects in a collection. Alongside with the minimum bounding box, convex hull is a useful shape when aiming to describe the extent of your data.  
+Convex hull refers to the smalles possible polygon that contains all objects in a collection. Alongside with the minimum bounding box, convex hull is a useful shape when aiming to describe the extent of your data.
 
 Let's create a convex hull around our multi_point object:
 
@@ -558,11 +582,11 @@ multi_point.convex_hull
 ```
 
 ```{code-cell}
-# Envelope (smalles rectangular polygon around the geometry collection): 
+# Envelope (smalles rectangular polygon around the geometry collection):
 multi_point.envelope
 ```
 
-### Other useful attributes 
+### Other useful attributes
 lenght of the geometry collection:
 
 ```{code-cell}
@@ -581,7 +605,7 @@ print(f"Area of our Western Hemisphere polygon: {multi_poly[0].area}")
 From the above we can see that MultiPolygons have exactly the same attributes available as single geometric objects but now the information such as area calculates the area of **ALL** of the individual -objects combined. We can also access individual objects inside the geometry collections using indices.
 
 
-Finally, we can check if we have a "valid" MultiPolygon. MultiPolygon is thought as valid if the individual polygons does notintersect with each other. 
+Finally, we can check if we have a "valid" MultiPolygon. MultiPolygon is thought as valid if the individual polygons does notintersect with each other.
 Here, because the polygons have a common 0-meridian, we should NOT have a valid polygon. We can check the validity of an object from the **is_valid** -attribute that tells if the polygons or lines intersect with each other. This can be really useful information when trying to find topological errors from your data:
 
 ```{code-cell}
