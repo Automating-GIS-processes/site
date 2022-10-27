@@ -115,53 +115,83 @@ show(p)
 ```
 
 
-
-<!-- CONTINUE UPDATING FROM HERE -->
-
 ## Why Python for GIS?
 
-Python is an extremely useful language to learn in terms of GIS since many
-(or most) of the different GIS Software packages (such as ArcGIS, QGIS,
-PostGIS etc.) provide an interface to do analysis using Python
-scripting. During this course, we will mostly focus on doing GIS without
-any third party softwares such as ArcGIS. **Why?** There are several
-reasons for doing GIS using Python without any additional software:
+When it comes to data science, and especially spatial data science and spatial
+data analysis, Python currently is the most useful programming or scripting 
+language to learn. On the one hand, the Python ecosystem, which allows people to
+share their libraries easily with others, is very rich, and has packages for
+almost any task imaginable. Researchers who find that a particular tool does not
+exist, often go ahead and create it themselves. Python’s packages cover such a
+broad range of applications, that its `import` statement has become the trope of
+many jokes:
 
-- **Everything is free**: you don't need to buy and expensive license
-  for ArcGIS (for example)
-- You will **learn and understand** much more deeply how different
-  geoprocessing operations work
-- Python is **highly efficient**: used for analysing Big Data
-- Python is **highly flexible**: supports all data formats that you can
-  imagine
-- Using Python (or any other open-source programming language)
-  **supports open source softwares/codes and open science** by making
-  it possible for everyone to reproduce your work, free-of-charge.
-- **Plug-in and chain different third-party softwares** to build e.g. a
-  fancy web-GIS applications as you want (using e.g.
-  [GeoDjango](https://docs.djangoproject.com/en/1.8/ref/contrib/gis/)
-  with [PostGIS](http://postgis.net/) as a back-end)
 
-## What sort of tools are available for doing GIS in pure Python?
+:::{figure-md} xkcd 353: Python
 
-We have already used few Python modules for conducting different tasks,
-such as **numpy** for doing mathematical calculations or **matplotlib**
-for visualizing our data. From now on, we will familiarize ourselves
-with punch of other Python modules that are useful when doing data
-analysis or different GIS tasks.
+![A web comic from xkcd.com about the ease of
+Python](https://imgs.xkcd.com/comics/python.png)
 
-One drawback when compared to using a specific GIS-software such as
-[ArcGIS](http://arcgis.com/), is that GIS tools are spread under different Python modules and
-created by different developers. This means that you need to familiarize
-yourself with many different modules (and their documentation), whereas
-e.g. in ArcGIS everything is packaged under a same module called
-[arcpy](http://desktop.arcgis.com/en/arcmap/10.3/analyze/arcpy/what-is-arcpy-.htm).
+Learning to do *anything* is easy in Python: there is a package for everything.
+Source: [xkcd.com/353](https://xkcd.com/353/)
 
-Below we have listed most of the crucial modules (and links to their
-docs) that helps you get going when doing data analysis or GIS in
-Python. If you are interested or when you start using these modules in
-your own work, you should read the documentation from the web pages of
-the module that you need:
+:::
+
+
+There are more advantages more specifically for geographers and spatial data:
+most desktop GIS (e.g., QGIS, ESRI ArcGIS) have language bindings or programming
+interfaces for Python: that means that you can write Python programs that
+interact with data, libraries, and user interface of these applications, and
+create custom plugins to extend their functionality. Beyond that, here are 
+powerful Python packages for virtually any task regarding spatial data
+management and spatial analysis.
+
+During this course, we will focus on the latter: carrying GIS analysis and data
+management tasks _without_ a desktop GIS, let alone a proprietary third-party
+software package such as ESRI ArcGIS. **Why?** There’s more than one reason:
+
+- Python itself, and most packages for it, is open source. It means it’s **free
+  to use** (as in *free beer*), and **free to modify** for your own purposes (as
+  in *free speech*). Open source and *libre software* is inherently democratic:
+  you don’t have to rely on access to a license, and anybody across the globe can
+  use them. [Read more about *free beer* vs. *free speech* at the Free Software
+  Foundation’s web page](https://www.gnu.org/philosophy/free-sw.en.html)
+- Writing a script that solves a problem makes you **learn and understand more
+  deeply** how geo-processing operations work, and how they work together. In
+  this course, you will gain a deeper understanding of GIS.
+- Python is **efficient** and **scales** very well: You can use a Python script
+  to analyse *Big Data* and other large datasets, and it is likely to outperform
+  any desktop GIS tool.
+- Python is **highly flexible**: it can read and write almost any data format,
+  and its [package ecosystem](installing-python#install-python-packages-using-conda)
+  provides libraries for almost any programming task imaginable.
+- Using Python, or any other open source software, for what it’s worth, supports
+  the ideas of **open science** and **reproducable research**. Anyone can take
+  your code and repeat your experiment or analysis to verify your claims and to
+  learn from your example.
+- **Combining the functionality of different Python packages** you can achieve
+  surprising results with comparably low effort: e.g., building fancy web-GIS
+  applications by chaining
+  [GeoDjango](https://docs.djangoproject.com/en/4.1/ref/contrib/gis/tutorial/)
+  with a PostGIS backend.
+
+
+## Which GIS packages are available in Python?
+
+During the [GeoPython course](https://geo-python.github.io/), we have already
+used a few Python modules for carrying out different tasks, such as **numpy**
+for mathematical calculations, and **matplotlib** for data visualisation. In
+’AutoGIS’, we will get to know a range of other Python packages that are useful
+for data analysis and the handling of geo-spatial data sets.
+
+Below we listed most of the most common Python packages for GIS and data
+analysis (and links to their documentation). This list helps you get started
+when you approach a data analysis or GIS problem (but be sure to also use your
+favourite search engine to see if better alternatives have become available). 
+
+Even if you learnt about a package from a blog post, or from this course, always
+check the package’s own documentation page for its recommended use.
+
 
 - **Data analysis & visualization:**
 
@@ -221,6 +251,24 @@ the module that you need:
   - [Rasterio](https://github.com/mapbox/rasterio): Clean and
     fast and geospatial raster I/O for Python.
   - [RSGISLib](http://www.rsgislib.org/index.html#python-documentation): Remote Sensing and GIS Software Library for Python.
+
+
+:::{raw}html
+<figure id="pythongis-ecosystem" class="align-default">
+    <iframe src="https://ecosystem.pythongis.org/_static/pythongis-ecosystem.html">
+    </iframe>
+    <figcaption>
+        <p>
+            <span class="caption-text">
+                In the Python ecosystem, there are tools and libraries for
+                almost any GIS-related task.
+                Source: <a href="https://ecosystem.pythongis.org/">Tenkanen, 2022</a>.
+            </span>
+        </p>
+    </figcaption>
+</figure>
+:::
+
 
 :::{admonition} Install to your own computer!
 See **directions how to install these modules to your own computer under** [the course info](Installing_Anacondas_GIS.html)
