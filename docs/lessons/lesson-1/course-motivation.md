@@ -129,8 +129,7 @@ many jokes:
 
 :::{figure-md} xkcd 353: Python
 
-![A web comic from xkcd.com about the ease of
-Python](https://imgs.xkcd.com/comics/python.png)
+![I wrote 20 short programs in Python yesterday. It was wonderful. Perl, I'm leaving you.] (https://imgs.xkcd.com/comics/python.png)
 
 Learning to do *anything* is easy in Python: there is a package for everything.
 Source: [xkcd.com/353](https://xkcd.com/353/)
