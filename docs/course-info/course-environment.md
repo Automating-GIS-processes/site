@@ -148,9 +148,9 @@ with one click.
 *CSC Notebooks* have seen a new, vastly improved version since last year’s
 course, some features have not yet been fully implemented.
 
-For this reason, the ‘launch button’ on top of interactive pages only take you
-to the main page of *CSC Notebooks*, from where you still have to manually start
-the course’s application.
+For this reason, the ‘launch button’ on top of interactive pages takes you to
+the main page of *CSC Notebooks*, only, from where you still have to manually
+start the course’s application.
 
 :::
 
