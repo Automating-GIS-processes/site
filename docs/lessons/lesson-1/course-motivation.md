@@ -129,10 +129,9 @@ many jokes:
 
 :::{figure-md} xkcd 353: Python
 
-![I wrote 20 short programs in Python yesterday. It was wonderful. Perl, I'm leaving you.] (https://imgs.xkcd.com/comics/python.png)
+![I wrote 20 short programs in Python yesterday. It was wonderful. Perl, I'm leaving you.](https://imgs.xkcd.com/comics/python.png)
 
-Learning to do *anything* is easy in Python: there is a package for everything. <br>
-Source: [xkcd.com/353](https://xkcd.com/353/)
+Learning to do *anything* is easy in Python: there is a package for everything. *Source: [xkcd.com/353](https://xkcd.com/353/)*
 
 :::
 
@@ -253,14 +252,14 @@ check the package’s own documentation page for its recommended use.
 
 
 <figure id="pythongis-ecosystem" class="align-default">
-    <iframe src="https://ecosystem.pythongis.org/_static/pythongis-ecosystem.html">
+    <iframe src="https://ecosystem.pythongis.org/_static/pythongis-ecosystem.html" style="width:100%; height:500px">
     </iframe>
     <figcaption>
         <p>
             <span class="caption-text">
                 In the Python ecosystem, there are tools and libraries for
                 almost any GIS-related task.
-                Source: <a href="https://ecosystem.pythongis.org/">Tenkanen, 2022</a>.
+                <em>Source: <a href="https://ecosystem.pythongis.org/">Tenkanen, 2022</a></em>.
             </span>
         </p>
     </figcaption>
