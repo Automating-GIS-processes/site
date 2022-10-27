@@ -8,6 +8,7 @@ jupyterlab
 jupyterlab-git
 
 # lessons
+bokeh
 contextily
 folium
 geojson
