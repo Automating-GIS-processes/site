@@ -161,7 +161,7 @@ software package such as ESRI ArcGIS. **Why?** There’s more than one reason:
   to analyse *Big Data* and other large datasets, and it is likely to outperform
   any desktop GIS tool.
 - Python is **highly flexible**: it can read and write almost any data format,
-  and its [package ecosystem](installing-python#install-python-packages-using-conda)
+  and its [package ecosystem](../../course-info/installing-python)
   provides libraries for almost any programming task imaginable.
 - Using Python, or any other open source software, for what it’s worth, supports
   the ideas of **open science** and **reproducable research**. Anyone can take
@@ -252,7 +252,7 @@ check the package’s own documentation page for its recommended use.
 
 
 <figure id="pythongis-ecosystem" class="align-default">
-    <iframe src="https://ecosystem.pythongis.org/_static/pythongis-ecosystem.html" style="width:100%; height:500px">
+    <iframe src="https://ecosystem.pythongis.org/_static/pythongis-ecosystem.html" style="width:100%; height:500px; border:none;">
     </iframe>
     <figcaption>
         <p>
@@ -266,6 +266,7 @@ check the package’s own documentation page for its recommended use.
 </figure>
 
 
-:::{admonition} Install to your own computer!
-See **directions how to install these modules to your own computer under** [the course info](Installing_Anacondas_GIS.html)
+:::{note}
+If you want to install Python and Python packages on your own computer, see the
+instructions on the [course information pages](../../course-info/installing-python)
 :::

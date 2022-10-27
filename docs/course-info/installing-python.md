@@ -135,7 +135,7 @@ user@ubuntu:~# sha256sum Miniconda3-pyXX_X.YY.Z-Linux-x86_64.sh
 user@ubuntu:~# sh Miniconda3-pyXX_X.YY.Z-Linux-x86_64.sh
 ```
 
-
+(#install-python-packages-using-conda)=
 ## Install Python packages using conda
 
 Conda has an excellent [online user guide](https://docs.conda.io/projects/conda)
