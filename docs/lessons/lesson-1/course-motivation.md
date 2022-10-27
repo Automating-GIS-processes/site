@@ -131,7 +131,7 @@ many jokes:
 
 ![I wrote 20 short programs in Python yesterday. It was wonderful. Perl, I'm leaving you.] (https://imgs.xkcd.com/comics/python.png)
 
-Learning to do *anything* is easy in Python: there is a package for everything.
+Learning to do *anything* is easy in Python: there is a package for everything. <br>
 Source: [xkcd.com/353](https://xkcd.com/353/)
 
 :::
@@ -252,7 +252,6 @@ check the package’s own documentation page for its recommended use.
   - [RSGISLib](http://www.rsgislib.org/index.html#python-documentation): Remote Sensing and GIS Software Library for Python.
 
 
-:::{raw}html
 <figure id="pythongis-ecosystem" class="align-default">
     <iframe src="https://ecosystem.pythongis.org/_static/pythongis-ecosystem.html">
     </iframe>
@@ -266,7 +265,6 @@ check the package’s own documentation page for its recommended use.
         </p>
     </figcaption>
 </figure>
-:::
 
 
 :::{admonition} Install to your own computer!
