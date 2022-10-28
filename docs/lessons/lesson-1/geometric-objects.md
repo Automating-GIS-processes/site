@@ -114,6 +114,7 @@ geographic features, such as, for instance, administrative areas that consist of
 multiple discontinuous regions:
 
 
+(#multipolygons)=
 :::{figure-md} Multipolygons
 
 ![A map of Austria showing that the province of Tyrol consists of two
@@ -274,7 +275,7 @@ dist = point1.distance(point2)
 print(f"Distance between the points is {dist:.2f} units")
 ```
 
-:::{warning}
+:::{caution}
 
 Shapely geometries are, by design, agnostic (unaware) of the reference system
 used to represent them. Distances and surface area calculated using the
@@ -613,163 +614,149 @@ point.buffer(1)
 ```
 
 
-% ## Geometry collections (optional)
+## Geometry collections (optional)
+
+Sometimes, it can be useful to store multiple geometries (for example, several
+points or several polygons) in a single feature. See, for instance, the
+[example of Tyrol above](#multipolygons). Its two parts share the same
+attributes, and together are equivalent to any of the other provinces of
+Austria. Semantically, it would not make sense to store the two polygons in
+separate rows. If expressed as a MultiPolygon, Tyrol would represent one
+row of information in the attribute table with multiple polygons attached.
 
 
-% In some occassions it is useful to store multiple geometries (for example, several points or several polygons) in a single feature. A practical example would be a country that is composed of several islands. In such case, all these polygons share the same attributes on the country-level and it might be reasonable to store that country as geometry collection that contains all the polygons. The attribute table would then contain one row of information with country-level attributes, and the geometry related to those attributes would represent several polygon.
+:::{caution}
+By convention, data sets should always consist of either single- or
+multi-geometries. Some file formats enforce this, and many GIS tools refuse
+operation on data sets with mixed single- and multi-geometries.
 
-% In Shapely, collections of points are implemented by using a MultiPoint -object, collections of curves by using a MultiLineString -object, and collections of surfaces by a MultiPolygon -object.
-% <!-- #endregion -->
-
-% ```{code-cell}
-% # Import constructors for creating geometry collections
-% from shapely.geometry import MultiPoint, MultiLineString, MultiPolygon
-% ```
-
-% Let's start by creating MultiPoint and MultilineString objects:
-
-% ```{code-cell}
-% # Create a MultiPoint object of our points 1,2 and 3
-% multi_point = MultiPoint([point1, point2, point3])
-
-% # It is also possible to pass coordinate tuples inside
-% multi_point2 = MultiPoint([(2.2, 4.2), (7.2, -25.1), (9.26, -2.456)])
-
-% # We can also create a MultiLineString with two lines
-% line1 = LineString([point1, point2])
-% line2 = LineString([point2, point3])
-% multi_line = MultiLineString([line1, line2])
-
-% # Print object definitions
-% print(multi_point)
-% print(multi_line)
-% ```
-
-% ```{code-cell}
-% multi_point
-% ```
-
-% ```{code-cell}
-% multi_line
-% ```
-
-% MultiPolygons are constructed in a similar manner. Let's create a bounding box for "the world" by combinin two separate polygons that represent the western and eastern hemispheres.
-
-% ```{code-cell} jupyter={"outputs_hidden": false}
-% # Let's create the exterior of the western part of the world
-% west_exterior = [(-180, 90), (-180, -90), (0, -90), (0, 90)]
-
-% # Let's create a hole --> remember there can be multiple holes, thus we need to have a list of hole(s).
-% # Here we have just one.
-% west_hole = [[(-170, 80), (-170, -80), (-10, -80), (-10, 80)]]
-
-% # Create the Polygon
-% west_poly = Polygon(shell=west_exterior, holes=west_hole)
-
-% # Print object definition
-% print(west_poly)
-% ```
-
-% ```{code-cell}
-% west_poly
-% ```
-
-% Shapely also has a tool for creating [a bounding box](https://en.wikipedia.org/wiki/Minimum_bounding_box) based on minimum and maximum x and y coordinates. Instead of using the Polygon constructor, let's use the [box](https://shapely.readthedocs.io/en/stable/manual.html#shapely.geometry.box) constructor for creating the polygon:
-
-% ```{code-cell}
-% from shapely.geometry import box
-% ```
-
-% ```{code-cell}
-% # Specify the bbox extent (lower-left corner coordinates and upper-right corner coordinates)
-% min_x, min_y = 0, -90
-% max_x, max_y = 180, 90
-
-% # Create the polygon using Shapely
-% east_poly = box(minx=min_x, miny=min_y, maxx=max_x, maxy=max_y)
-
-% # Print object definition
-% print(east_poly)
-% ```
-
-% ```{code-cell}
-% east_poly
-% ```
-
-% Finally, we can combine the two polygons into a MultiPolygon:
-
-% ```{code-cell}
-% # Let's create our MultiPolygon. We can pass multiple Polygon -objects into our MultiPolygon as a list
-% multi_poly = MultiPolygon([west_poly, east_poly])
-
-% # Print object definition
-% print(multi_poly)
-% ```
-
-% ```{code-cell}
-% multi_poly
-% ```
-
-% We can see that the outputs are similar to the basic geometric objects that we created previously but now these objects contain multiple features of those points, lines or polygons.
-
-% ### Convex hull and envelope
-
-% Convex hull refers to the smalles possible polygon that contains all objects in a collection. Alongside with the minimum bounding box, convex hull is a useful shape when aiming to describe the extent of your data.
-
-% Let's create a convex hull around our multi_point object:
-
-% ```{code-cell}
-% # Check input geometry
-% multi_point
-% ```
-
-% ```{code-cell}
-% # Convex Hull (smallest polygon around the geometry collection)
-% multi_point.convex_hull
-% ```
-
-% ```{code-cell}
-% # Envelope (smalles rectangular polygon around the geometry collection):
-% multi_point.envelope
-% ```
-
-% ### Other useful attributes
-% lenght of the geometry collection:
-
-% ```{code-cell}
-% print(f"Number of objects in our MultiLine: {len(multi_line)}")
-% print(f"Number of objects in our MultiPolygon: {len(multi_poly)}")
-% ```
-
-% Area:
-
-% ```{code-cell} jupyter={"outputs_hidden": false}
-% # Print outputs:
-% print(f"Area of our MultiPolygon: {multi_poly.area}")
-% print(f"Area of our Western Hemisphere polygon: {multi_poly[0].area}")
-% ```
-
-% From the above we can see that MultiPolygons have exactly the same attributes available as single geometric objects but now the information such as area calculates the area of **ALL** of the individual -objects combined. We can also access individual objects inside the geometry collections using indices.
+If one feature in a data set is a MultiGeometry, all other features should be
+converted, too. All single geometries can be expressed as a collection of one
+item.
+:::
 
 
-% Finally, we can check if we have a "valid" MultiPolygon. MultiPolygon is thought as valid if the individual polygons does notintersect with each other.
-% Here, because the polygons have a common 0-meridian, we should NOT have a valid polygon. We can check the validity of an object from the **is_valid** -attribute that tells if the polygons or lines intersect with each other. This can be really useful information when trying to find topological errors from your data:
+In shapely, collections of points are implemented as `MultiPoint` geometries,
+collections of lines as `MultiLineString` geometries, and collections of
+polygons as `MultiPolygon` geometries.
 
-% ```{code-cell}
-% print(f"Is polygon valid?: {multi_poly.is_valid}")
-% ```
+```{code-cell}
+from shapely.geometry import MultiPoint, MultiLineString, MultiPolygon
+
+# Create a MultiPoint object of our points 1,2 and 3
+multipoint = MultiPoint([point1, point2, point3])
+
+# We can also create a MultiLineString with two lines
+line1 = LineString([point1, point2])
+line2 = LineString([point2, point3])
+multiline = MultiLineString([line1, line2])
+
+print(multipoint)
+print(multiline)
+```
+
+```{code-cell}
+multipoint
+```
+
+```{code-cell}
+multiline
+```
+
+`MultiPolygons` are constructed in a similar manner. Let’s create a bounding box
+for ‘the world’ by combining two separate polygons that represent the western and
+eastern hemispheres.
+
+```{code-cell}
+# Let’s create the exterior of the western part of the world
+western_hemisphere = Polygon([(-180, 90), (-180, -90), (0, -90), (0, 90)])
+print(western_hemisphere)
+western_hemisphere
+```
+
+Shapely has a short-hand function for creating rectangular polygons, ‘boxes’. It
+can be used, for instance, to create [bounding
+boxes](https://en.wikipedia.org/wiki/Minimum_bounding_box) using minimum and
+maximum x and y coordinates. 
+
+Let’s use
+[shapely.geometry.box()](https://shapely.readthedocs.io/en/stable/manual.html#shapely.geometry.box)
+for creating the polygon representing the the eastern hemisphere:
+
+```{code-cell}
+from shapely.geometry import box
+min_x = 0
+max_x = 180
+min_y = -90
+max_y = 90
+
+eastern_hemisphere = box(min_x, min_y, max_x, max_y)
+
+print(eastern_hemisphere)
+eastern_hemisphere
+```
+
+Finally, we can combine the two polygons into a MultiPolygon:
+
+```{code-cell}
+# Let’s create our MultiPolygon.
+# Pass multiple Polygon objects as a list
+multipolygon = MultiPolygon([western_hemisphere, eastern_hemisphere])
+
+print(multipolygon)
+multipolygon
+```
+
+Multi-geometries are in many ways similar to simple geometries, like the ones we
+created earlier. The main difference is that they can combine multiple geometric
+primitives into one feature.
 
 
-<!-- KEEP THIS -->
+## Convex hull and envelope
+
+A ‘convex hull’ refers to the smallest possible
+[convex](https://en.wikipedia.org/wiki/Convex_set) polygon that can contain a
+geometry or a set of geometries. Alongside bounding boxes, convex hulls are
+useful to describe the extent of data sets.
+
+```{code-cell}
+# Check input geometry
+multipoint
+```
+
+```{code-cell}
+# Convex Hull
+[multipoint.convex_hull, multipoint]
+```
+
+```{code-cell}
+# Envelope (smalles rectangular polygon around a geometry/set of geometries):
+multipoint.envelope
+```
+
+
+## Validity of geometries
+
+As discussed on the very top of this page, already the geometric primitives have
+certain requirements. For instance, a `LineString` must consist of at least two
+points, and a `Polygon`’s [exterior shell and holes must not
+intersect](https://shapely.readthedocs.io/en/1.8.5/manual.html#polygons).
+
+Each shapely geometry has a built-in check that can be of great help, for
+instance, finding topological errors:
+
+```{code-cell}
+print(f"Is polygon valid?: {multipolygon.is_valid}")
+```
 
 :::{admonition} shapely 2.0
-:class: warning
+:class: caution
 
 While we are having this course, the team developing shapely is preparing the
 library’s next updates. It will be a major version that breaks with some of the
 programming patterns that were possible with earlier versions.
 
-When you work with shapely in the future, be sure to (check out what will have
-changed](https://shapely.readthedocs.io/en/latest/migration.html).
+When you work with shapely in the future, be sure to [check out what will have
+changed](https://shapely.readthedocs.io/1.8.5/migration.html).
 
 :::
