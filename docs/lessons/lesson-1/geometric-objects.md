@@ -87,6 +87,7 @@ can, for example, add and remove values from lists).
 **Point** geometries represent a singular point (in two- or three-dimensional
 Euclidean space). Points are defined by a single coordinate tuple.
 
+(#linestrings)=
 ### LineStrings
 
 **LineString** geometries (and the related **LinearRing**s) represent lines.
@@ -95,6 +96,7 @@ a line is formed, if the first and last point are the same, a linear ring.
 Consequently, to describe a *LineString*, at least two points are necessary, 
 for a *LinearRing* at least three (first and last being identical).
 
+(#polygons)=
 ### Polygons
 
 Finally, **Polygon** geometries represent an area. A polygon is defined by
@@ -123,304 +125,398 @@ Austria](https://data.statistik.gv.at/web/meta.jsp?dataset=OGDEXT_GEM_1))*
 :::
 
 
-
 - **MultiPoint** geometries represent collections of points.
 - **MultiLineString** geometries represent collections of lines.
 - **MultiPolygon** geometries represent collections of polygons.
+- **GeometryCollection** geometries are collections of points,
+  lines, and polygons, as well as multi-points, multi-lines,
+  and multi-polygons.
 
 
+## Using shapely to create, access, manipulate and analyse geometric objects
 
+Shapely can perform many useful operations on geometries, and provides a range
+of attributes of geometries. For instance, you can:
+- create lines and polygons from a set of points
+- calculate the area, length, perimeter, etc., of geometries
+- perform geometric operations on a set of geometries, for instance, merging
+  (`union`), subtracting (`difference`), or calculating the distance between
+  geometries.
+- query the relationship between geometries, i.e., find out whether two
+  geometries intersect, touch, cross, etc.
 
 
-% <!-- CONTINUE FROM HERE -->
+### Creating `Point` geometries and accessing their properties
 
-% **Useful attributes and methods in Shapely include:**
+Creating a point geometry object is easy: simply pass coordinates (x, y, and
+possibly z) to its [constructor](https://pythonbasics.org/constructor/).
 
-% -  Creating lines and polygons based on a collection of point objects.
-% -  Calculating areas/length/bounds etc. of input geometries
-% -  Conducting geometric operations based on the input geometries such as `union`, `difference`, `distance` etc.
-% -  Conducting spatial queries between geometries such as `intersects`, `touches`, `crosses`, `within` etc.
+```{code-cell}
+# Import `shapely.geometry.Point` class
+from shapely.geometry import Point
 
+# Create `Point` objects:
+point1 = Point(2.2, 4.2)
+point2 = Point(7.2, -25.1)
+point3 = Point(9.26, -2.456)
+point4_3D = Point(9.26, -2.456, 0.57)
+```
 
+Let’s see what these variables now contain:
 
-% ```{code-cell}
-% from shapely.geometry import Point, LineString, Polygon, MultiLineString, MultiPolygon, MultiPoint, GeometryCollection
-% ```
+```{code-cell}
+point1
+```
 
-% ## Point
+As we can see, Jupyter notebook is able to display the shape directly on the screen.
 
-% Creating point is easy, you pass x and y coordinates into `Point()` -object (+ possibly also z -coordinate):
+Alternatively, use a `print` statement to show the text representation of a
+shapely geometry object:
 
-% ```{code-cell}
-% # Import necessary geometric objects from shapely module
-% from shapely.geometry import Point, LineString, Polygon
+```{code-cell}
+print(point1)
+print(point4_3D)
+```
 
-% # Create Point geometric object(s) with coordinates
-% point1 = Point(2.2, 4.2)
-% point2 = Point(7.2, -25.1)
-% point3 = Point(9.26, -2.456)
-% point3D = Point(9.26, -2.456, 0.57)
-% ```
+This text representation is in [‘Well-Known Text’ (WKT)
+format](https://en.wikipedia.org/wiki/Well-Known_Text/), a standard set forward
+in the [Open Geospatial Consortium’s (OGC)](https://www.ogc.org/) [*Simple
+Feature Access*](https://www.ogc.org/standards/sfa) (see above). This includes
+the additional letter ‘Z’ that marks the three-dimensional version of a
+geometry (e.g., our point `point4_3D`).
 
-% Let's see what these variables now contain:
 
-% ```{code-cell}
-% point1
-% ```
+Let’s also check the data type of a point:
 
-% As we see here, Jupyter notebook is able to display the shape directly on the screen.
+```{code-cell}
+type(point1)
+```
 
-% We can use the print statement to get information about the actual definition of these objects:
+We can see that the type of the point is a `shapely.geometry.point.Point`
+(which is equivalent to `shapely.geometry.Point`, the class we used to
+instantiate the point object). 
 
-% ```{code-cell}
-% print(point1)
-% print(point3D)
-% ```
+Under the hood, shapely uses [GEOS](https://osgeo.org/projects/geos/) to handle
+geometry objects. GEOS is a C++ library (much faster than Python code), and is
+one of the fundamental pillars of the open source GIS world, powering
+geospatial processing for many projects, including [QGIS](https://qgis.org/).
 
-% 3D-point can be recognized from the capital Z -letter in front of the coordinates.
 
-% Let's also check the data type of a point:
+### Point properties and methods
 
-% ```{code-cell}
-% type(point1)
-% ```
+Points and other shapely geometry objects have useful built-in [properties and
+methods](https://shapely.readthedocs.io/en/stable/manual.html#general-attributes-and-methods).
+Using the available attributes, we can for example extract the coordinate
+values of a Point and calculate the Euclidian distance between points.
 
-% We can see that the type of the point is shapely's Point. The point object is represented in a specific format based on
-% [GEOS](https://trac.osgeo.org/geos) C++ library that is one of the standard libraries behind various Geographic Information Systems. It runs under the hood e.g. in [QGIS](http://www.qgis.org/en/site/).
+The `geom_type` property contains information about the geometry type of a
+shapely geometry:
 
+```{code-cell}
+point1.geom_type
+```
 
-% ### Point attributes and functions
+There are multiple ways to access the coordinates of geometry object. For
+instance, `coords` is a `spapely.coords.CoordinateSequence`. It is an
+`Iterator`, an efficient Python data structure to iterate over lists of items,
+but for now we can simply convert it into a list of the (one pair of)
+coordinates:
 
-% Points and other shapely objects have useful built-in [attributes and methods](https://shapely.readthedocs.io/en/stable/manual.html#general-attributes-and-methods). Using the available attributes, we can for example extract the coordinate values of a Point and calculate the Euclidian distance between points.
+```{code-cell}
+# Get coordinate tuple(s)
+list(point1.coords)
+```
 
+However, since points, by definition, only contain one coordinate tuple,
+`shapely.geometry.Point`s have properties to *directly* access its coordinate
+values: the properties `x`, `y`, and (possibly) `z`, which are basic `float`
+type decimal numbers.
 
-% `geom_type` attribute contains information about  the geometry type of the Shapely object:
+```{code-cell}
+# Read x and y coordinates separately
+x = point1.x
+y = point1.y
 
-% ```{code-cell}
-% point1.geom_type
-% ```
+print(x, y)
+```
 
-% Extracting the coordinates of a Point can be done in a couple of different ways:
+```{code-cell}
+# Read x, y, and z
+x = point4_3D.x
+y = point4_3D.y
+z = point4_3D.z
 
+print(x, y, z)
+```
 
-% `coords` attribute contains the coordinate information as a `CoordinateSequence` which is another data type related to Shapely.
+It is also possible to calculate the distance between two objects using the
+[distance](https://shapely.readthedocs.io/en/stable/manual.html#object.distance)
+method.
 
-% ```{code-cell}
-% # Get xy coordinate tuple
-% list(point1.coords)
-% ```
+In our example the distance is calculated in a cartesian coordinate system.
+When working with real GIS data the distance is based on the used coordinate
+reference system. always check what is the unit of measurement (for example,
+meters) in the coordinate reference system you are using.
 
-% Here we have a coordinate tuple inside a list. Using the attributes `x` and `y` it is possible to get the coordinates directly as plain decimal numbers.
+Let’s calculate the distance between `point1` and `point2`:
 
-% ```{code-cell} jupyter={"outputs_hidden": false}
-% # Read x and y coordinates separately
-% x = point1.x
-% y = point1.y
-% ```
+```{code-cell}
+# Check input data
+print(point1)
+print(point2)
+```
 
-% ```{code-cell}
-% print( x, y)
-% ```
+```{code-cell}
+# Calculate the distance between point1 and point2
+dist = point1.distance(point2)
 
-% It is also possible to calculate the distance between two objects using the [distance](https://shapely.readthedocs.io/en/stable/manual.html#object.distance) method. In our example the distance is calculated in a cartesian coordinate system. When working with real GIS data the distance is based on the used coordinate reference system. always check what is the unit of measurement (for example, meters) in the coordinate reference system you are using.
+# Print out a nicely formatted info message
+print(f"Distance between the points is {dist:.2f} units")
+```
 
-% Let's calculate the distance between `point1` and `point2`:
+:::{warning}
 
-% ```{code-cell}
-% # Check input data
-% print(point1)
-% print(point2)
-% ```
+Shapely geometries are, by design, agnostic (unaware) of the reference system
+used to represent them. Distances and surface area calculated using the
+built-in shapely methods will always:
+a) assume a flat, Cartesian, Euclidean space, and 
+b) return the calculated value in the unit of the coordinates (e.g.,
+   meters, or degrees).
 
-% ```{code-cell}
-% # Calculate the distance between point1 and point2
-% dist = point1.distance(point2)
+This is perfectly fine for small-scale geo-spatial operations, if you **keep
+yourself aware of the expected output unit**. Most packages built on top of
+shapely, for instance [GeoPandas](https://geopandas.org/), which we will get to
+know in lesson 2, bring their own functions and take the coordinate reference
+system into consideration.
 
-% # Print out a nicely formatted info message
-% print(f"Distance between the points is {dist} units")
-% ```
+:::
 
-% <!-- #region -->
-% ## LineString
 
 
-% Creating LineString -objects is fairly similar to creating Shapely Points.
+## Lines
 
-% Now instead using a single coordinate-tuple we can construct the line using either a list of shapely Point -objects or pass the points as coordinate-tuples:
-% <!-- #endregion -->
 
-% ```{code-cell} jupyter={"outputs_hidden": false}
-% # Create a LineString from our Point objects
-% line = LineString([point1, point2, point3])
-% ```
+Creating `LineString` objects is similar to creating `Points`. Instead of a
+single coordinate tuple, we pass a list of coordinate tuples, or a list of
+points, that make up the line:
 
-% ```{code-cell}
-% # It is also possible to produce the same outcome using coordinate tuples
-% line2 = LineString([(2.2, 4.2), (7.2, -25.1), (9.26, -2.456)])
-% ```
+```{code-cell}
+# import the LineString class
+from shapely.geometry import LineString
 
-% ```{code-cell}
-% # Check if lines are identical
-% line == line2
-% ```
+# Create a LineString from our Point objects
+line = LineString([point1, point2, point3])
+```
 
-% Let's see how our line looks like:
+```{code-cell}
+# Create a LineString from a list of coordinates:
+# (with the same coordinate values as the points, so results should be identical)
+line2 = LineString([(2.2, 4.2), (7.2, -25.1), (9.26, -2.456)])
+```
 
-% ```{code-cell}
-% line
-% ```
+```{code-cell}
+# Check if the lines are, indeed, identical:
+line == line2
+```
 
-% ```{code-cell}
-% print(line)
-% ```
+Let’s see how our line looks like:
 
-% As we can see from above, the `line` -variable constitutes of multiple coordinate-pairs.
+```{code-cell}
+line
+```
 
+```{code-cell}
+print(line)
+```
 
-% Check also the data type:
+Again, the text representation is in WKT format. WKT is convenient as it is a
+human-readable text format that also most GIS tools can readily use. 
 
-% ```{code-cell}
-% # Check data type of the line object
-% type(line)
-% ```
+It’s not surprising, but we can see that a `LineString` is constituted of
+multiple coordinate tuples. In fact, the value(s) of a WKT `LINESTRING` are made
+up of the values of multiple WKT `POINTS`, joined together with a comma.
 
-% ```{code-cell}
-% # Check geometry type of the line object
-% line.geom_type
-% ```
+Check also the data type:
 
-% <!-- #region -->
-% ### LineString attributes and functions
+```{code-cell}
+# Check data type of the line object
+type(line)
+```
 
+```{code-cell}
+# Check geometry type of the line object
+line.geom_type
+```
 
-% `LineString` -object has many useful built-in attributes and functionalities. It is for instance possible to extract the coordinates or the length of a LineString (line), calculate the centroid of the line, create points along the line at specific distance, calculate the closest distance from a line to specified Point and simplify the geometry. See full list of functionalities from [Shapely documentation](http://toblerity.org/shapely/manual.html). Here, we go through a few of them.
+### `LineString` properties and methods
 
-% We can extract the coordinates of a LineString similarly as with `Point`
-% <!-- #endregion -->
+Linear geometries in their shapely representations (`LineString`, `LinearRing`,
+`MultiLineString`) have a variety of properties and methods that expose useful
+functionality. For instance, it is possible to access a geometry’s coordinates,
+calculate its lengths, find its centre point, create points along the line at a
+specified interval, or compute the closest distance between a line an another
+geometry. 
 
-% ```{code-cell} jupyter={"outputs_hidden": false}
-% # Get xy coordinate tuples
-% list(line.coords)
-% ```
 
-% Again, we have a list of coordinate tuples (x,y) inside a list.
+:::{tip}
 
-% If you would need to access all x-coordinates or all y-coordinates of the line, you can do it directly using the `xy` attribute:
+Consult the [Shapely user
+manual](https://shapely.readthedocs.io/en/stable/manual.html) for a complete
+list of geometry attributes and operations on one or more geometries.
 
-% ```{code-cell} jupyter={"outputs_hidden": false}
-% # Extract x and y coordinates separately
-% xcoords = list(line.xy[0])
-% ycoords = list(line.xy[1])
-% ```
+:::
 
-% ```{code-cell}
-% print(xcoords)
-% print(ycoords)
-% ```
 
-% It is possible to retrieve specific attributes such as lenght of the line and center of the line (centroid) straight from the LineString object itself:
+Fundamentally, accessing the coordinates of a line is very similar as accessing
+the ones of a point:
 
-% ```{code-cell} jupyter={"outputs_hidden": false}
-% # Get the lenght of the line
-% l_length = line.length
-% print(f"Length of our line: {l_length} units")
-% ```
+```{code-cell}
+# Get coordinate tuples
+list(line.coords)
+```
 
-% ```{code-cell}
-% # Get the centroid of the line
-% print(line.centroid)
-% ```
+Because a line has to have at least two coordinate tuples, the list now
+contains more than the one value we saw earlier with points.
 
-% As you can see, the centroid of the line is again a Shapely Point object.
 
-% <!-- #region -->
-% ## Polygon
+If you would need to access all x-coordinates or all y-coordinates of the line,
+you can use its `xy` attribute (an iterator, but, again, for now, we can use
+them as lists):
 
+```{code-cell}
+# Obtain x and y coordinates
+xcoords = list(line.xy[0])
+ycoords = list(line.xy[1])
 
-% Creating a `Polygon` -object continues the same logic of how `Point` and `LineString` were created but Polygon object only accepts a sequence of coordinates as input.
+print(xcoords)
+print(ycoords)
+```
 
-% Polygon needs **at least three coordinate-tuples** (three points are reguired to form a surface):
-% <!-- #endregion -->
 
-% ```{code-cell} jupyter={"outputs_hidden": false}
-% # Create a Polygon from the coordinates
-% poly = Polygon([(2.2, 4.2), (7.2, -25.1), (9.26, -2.456)])
-% ```
+:::{admonition} 3D-LineStrings
+:class: warning
 
-% We can also use information from the Shapely Point objects created earlier, but we can't use the point objects directly. Instead, we need to get information of the x,y coordinate pairs as a sequence. We can achieve this by using a list comprehension.
+Note that the `xy` property of shapely geometries does not return `z` values
+for three-dimensional geometries.
 
-% ```{code-cell}
-% # Create a Polygon based on information from the Shapely points
-% poly2 = Polygon([[p.x, p.y] for p in [point1, point2, point3]])
-% ```
+:::
 
-% In order to understand what just happened, let's check what the list comprehension produces:
 
-% ```{code-cell}
-% [[p.x, p.y] for p in [point1, point2, point3]]
-% ```
+Other properties of lines that are useful for GIS analyses include the length
+and the centre point (centroid) of lines:
 
-% This list of lists was passed as input for creating the Polygon.
+```{code-cell}
+# Get the length of the line
+line_length = line.length
+print(f"Length of our line: {line_length:.1f} units")
+```
 
-% ```{code-cell}
-% # Check that polygon objects created using two different approaches are identical
-% poly == poly2
-% ```
+```{code-cell}
+# Get the centre point of the line
+print(line.centroid)
+```
 
-% Let's see how our Polygon looks like
+The centroid (or centre *point*) of a line (or any other shapely geometry) is a
+`shapely.geometry.Point` object.
 
-% ```{code-cell}
-% poly
-% ```
 
-% ```{code-cell}
-% print(poly)
-% ```
 
-% Notice that `Polygon` representation has double parentheses around the coordinates (i.e. `POLYGON ((<values in here>))` ). This is because Polygon can also have holes inside of it.
+## Polygon
 
+Creating a polygon geometry follows the same logic as creating a point or line
+geometry. However, [as discussed above](#polygons) the rules for what
+constitutes a polygon are more complex: It is constructed of exactly one linear
+ring forming its exterior (perimeter), and any number of additional linear
+rings forming holes that are cut out of the exterior shell.
 
-% Check also the data type:
+Consequently, the `shapely.geometry.Polygon` *constructor* function accepts two
+parameter: the first one, `shell`, is a list of coordinate tuples, a list of
+points, or a `LinearRing`, and will form the outer hull of the new polygon. The
+second, optional, parameter `holes` can be a list of holes to cut out of
+`shell` (the items in the list can be the same data types as `shell`).
 
-% ```{code-cell}
-% # Data type
-% type(poly)
-% ```
+For now, let’s create a simple polygon without any holes. The first example
+uses **(at least three) coordinate tuples** (three points are required to form
+a surface):
 
-% ```{code-cell}
-% # Geometry type
-% poly.geom_type
-% ```
+```{code-cell}
+from shapely.geometry import Polygon
 
-% ```{code-cell}
-% # Check the help for Polygon objects:
-% #help(Polygon)
-% ```
+# Create a Polygon from the coordinates
+polygon1 = Polygon([(2.2, 4.2), (7.2, -25.1), (9.26, -2.456)])
+```
 
-% <!-- #region -->
+We can also construct the polygon directly from a list of points:
 
+```{code-cell}
+polygon2 = Polygon([point1, point2, point3])
+```
 
-% As the help of [Polygon](https://shapely.readthedocs.io/en/stable/manual.html#polygons) -object tells, a Polygon can be constructed using exterior coordinates and interior coordinates (optional) where the interior coordinates creates a hole inside the Polygon:
+… or from a [`LinearRing`](https://shapely.readthedocs.io/en/stable/manual.html#linearrings)
+(which has an [almost identical behaviour](#linestrings) as a `LineString`,
+except that it is closed, i.e., the first and last point are identical):
 
-% <!-- #endregion -->
+```{code-cell}
+from shapely.geometry import LinearRing
 
-% ```
-% Help on Polygon in module shapely.geometry.polygon object:
-%      class Polygon(shapely.geometry.base.BaseGeometry)
-%       |  A two-dimensional figure bounded by a linear ring
-%       |
-%       |  A polygon has a non-zero area. It may have one or more negative-space
-%       |  "holes" which are also bounded by linear rings. If any rings cross each
-%       |  other, the feature is invalid and operations on it may fail.
-%       |
-%       |  Attributes
-%       |  ----------
-%       |  exterior : LinearRing
-%       |      The ring which bounds the positive space of the polygon.
-%       |  interiors : sequence
-%       |      A sequence of rings which bound all existing holes.
+shell = LinearRing([point1, point2, point3, point1])
+polygon3 = Polygon(shell)
+```
 
-% ```
+
+We used different methods to construct the three polygons, but we used the
+same values. Let’s see whether they ended up describing identical geometries:
+
+```{code-cell}
+polygon1 == polygon2 == polygon3
+```
+
+
+Let’s also see how the polygon looks like drawn, and what its text
+representation is:
+
+```{code-cell}
+polygon1
+```
+
+```{code-cell}
+print(polygon1)
+```
+
+Just like with points and lines, the text representation of a
+`shapely.geometry.Polygon` is in the Well-Known Text format. Note how a WKT
+`POLYGON` is made up of the values of one or more WKT `LINEARRING`’s values
+(closed line strings), in parentheses, and joined together by commas. The first
+linear ring represents the exterior, all following ones holes.
+(Our example polygon consists of one linear ring, only, so no need for the comma).
+
+
+Check also the data type:
+
+```{code-cell}
+# Data type
+type(polygon1)
+```
+
+```{code-cell}
+# Geometry type
+polygon1.geom_type
+```
+
+:::{tip}
+
+You can always use the built-in `help()` function to find out how a function or
+class works, which parameters it expects, and what properties and methods you
+can use:
+
+:::
+
+```{code-cell}
+:tags: ["hide-output"]
+
+# Check the help for Polygon objects:
+help(Polygon)
+```
 
 
 % Let's see how we can create a `Polygon` with a hole:
@@ -665,7 +761,7 @@ Austria](https://data.statistik.gv.at/web/meta.jsp?dataset=OGDEXT_GEM_1))*
 :::{admonition} shapely 2.0
 :class: warning
 
-While we are having this course, the team developing shapely is preapring the
+While we are having this course, the team developing shapely is preparing the
 library’s next updates. It will be a major version that breaks with some of the
 programming patterns that were possible with earlier versions.
 
