@@ -193,62 +193,73 @@ check the package’s own documentation page for its recommended use.
 
 - **Data analysis & visualization:**
 
-  - [NumPy](http://www.numpy.org/): Fundamental package for
-    scientific computing with Python
-  - [Pandas](http://pandas.pydata.org/): High-performance,
-    easy-to-use data structures and data analysis tools
-  - [SciPy](http://www.scipy.org/about.html): A collection of
-    numerical algorithms and domain-specific toolboxes, including
-    signal processing, optimization and statistics
-  - [MatplotLib](http://matplotlib.org/): Basic plotting library
-    for Python
-  - [Bokeh](http://bokeh.pydata.org/en/latest/): Interactive
-    visualizations for the web (also maps)
-  - [Plotly](https://plot.ly/python/): Interactive
-    visualizations (also maps) for the web (commercial - free for
-    educational purposes)
+  - [NumPy](http://www.numpy.org/): Fundamental package for scientific
+    computing with Python
+  - [Pandas](http://pandas.pydata.org/): High-performance, easy-to-use data
+    structures and data analysis tools
+  - [SciPy](http://www.scipy.org/about.html): A collection of numerical
+    algorithms and domain-specific toolboxes, including signal processing,
+    optimization and statistics
+  - [MatplotLib](http://matplotlib.org/): Basic plotting library for Python
+  - [Bokeh](http://bokeh.pydata.org/en/latest/): Interactive visualizations for
+    the web (also maps)
+  - [Plotly](https://plot.ly/python/): Interactive visualizations (also maps)
+    for the web (commercial - free for educational purposes)
 
 - **GIS:**
 
-  - [GDAL](http://www.gdal.org/): Fundamental package for
-    processing vector and raster data formats (many modules below
-    depend on this). Used for raster processing.
-  - [Geopandas](http://geopandas.org/#description): Working with
-    geospatial data in Python made easier, combines the capabilities
-    of pandas and shapely.
-  - [Shapely](http://toblerity.org/shapely/manual.html): Python
-    package for manipulation and analysis of planar geometric objects
-    (based on widely deployed
-    [GEOS](https://trac.osgeo.org/geos/)).
-  - [Fiona](https://pypi.python.org/pypi/Fiona): Reading and
-    writing spatial data (alternative for geopandas).
-  - [Pyproj](https://pypi.python.org/pypi/pyproj?): Performs
-    cartographic transformations and geodetic computations (based on
-    [PROJ.4](http://trac.osgeo.org/proj)).
-  - [Pysal](https://pysal.readthedocs.org/en/latest/): Library
-    of spatial analysis functions written in Python.
-  - [Geopy](http://geopy.readthedocs.io/en/latest/): Geocoding
-    library: coordinates to address \<-> address to coordinates.
-  - [Contextily](https://github.com/darribas/contextily): Add background basemaps for your (static) map visualizations
-  - [GeoViews](http://geo.holoviews.org/index.html): Interactive
-    Maps for the web.
-  - [Geoplot](https://github.com/ResidentMario/geoplot): High-level geospatial data visualization library for Python.
-  - [Dash](https://plot.ly/products/dash/): Dash is a Python framework for building analytical web applications.
-  - [OSMnx](https://github.com/gboeing/osmnx): Python for street networks. Retrieve, construct, analyze, and visualize street networks from OpenStreetMap
-  - [Networkx](https://networkx.github.io/documentation/networkx-1.10/overview.html)
-   : Network analysis and routing in Python (e.g. Dijkstra and A\*
-    -algorithms), see [this
-    post](http://gis.stackexchange.com/questions/65056/is-it-possible-to-route-shapefiles-using-python-and-without-arcgis-qgis-or-pgr).
-  - [Cartopy](http://scitools.org.uk/cartopy/docs/latest/index.html)
-   : Make drawing maps for data analysis and visualisation as easy
-    as possible.
-  - [Scipy.spatial](http://docs.scipy.org/doc/scipy/reference/spatial.html)
-   : Spatial algorithms and data structures.
-  - [Rtree](http://toblerity.org/rtree/): Spatial indexing for
-    Python for quick spatial lookups.
-  - [Rasterio](https://github.com/mapbox/rasterio): Clean and
-    fast and geospatial raster I/O for Python.
-  - [RSGISLib](http://www.rsgislib.org/index.html#python-documentation): Remote Sensing and GIS Software Library for Python.
+  - [GDAL](https://www.gdal.org/): Fundamental package for processing vector
+    and raster data formats (many modules below depend on this). Used for
+    raster processing.
+  - [Geopandas](https://geopandas.org/): Working with geospatial data in Python
+    made easier, combines the capabilities of pandas and shapely.
+  - [Shapely](https://shapely.readthedocs.io/): Python package for manipulation
+    and analysis of planar geometric objects (based on widely deployed
+    [GEOS](https://www.osgeo.org/projects/geos/)
+  - [Fiona](https://fiona.readthedocs.io): Reading and writing spatial data
+    (alternative for geopandas).
+  - [Pyproj](https://pyproj4.github.io/pyproj/): Performs cartographic
+    transformations and geodetic computations (based on
+    [PROJ.4](https://proj.org/)).
+  - [Pysal](https://pysal.readthedocs.io): Library of spatial analysis
+    functions written in Python.
+  - [Geopy](http://geopy.readthedocs.io/): Geocoding library: coordinates to
+    address \<-> address to coordinates.
+  - [Contextily](https://contextily.readthedocs.io/): Add background basemaps
+    for your (static) map visualizations
+  - [GeoViews](https://geoviews.org/): Interactive Maps for the web.
+  - [Geoplot](https://github.com/ResidentMario/geoplot): High-level geospatial
+    data visualization library for Python.
+  - [Dash](https://plot.ly/products/dash/): Dash is a Python framework for
+    building analytical web applications.
+  - [OSMnx](https://osmnx.readthedocs.io): Python for street networks.
+    Retrieve, construct, analyze, and visualize street networks from
+    OpenStreetMap
+  - [Networkx](https://networkx.org/): Network analysis and routing in Python
+    (e.g. Dijkstra and A\* -algorithms), see [this
+    post](https://gis.stackexchange.com/q/65056).
+  - [Cartopy](https://scitools.org.uk/cartopy/): Make drawing maps for data
+    analysis and visualisation as easy as possible.
+  - [Scipy.spatial](https://docs.scipy.org/doc/scipy/reference/spatial.html):
+    Spatial algorithms and data structures.
+  - [Rtree](https://rtree.readthedocs.io/): Spatial indexing for Python for
+    quick spatial lookups.
+  - [Rasterio](https://rasterio.readthedocs.io): Clean and fast and geospatial
+    raster I/O for Python.
+  - [RSGISLib](http://www.rsgislib.org/): Remote Sensing and GIS Software
+    Library for Python.
+
+
+:::{tip}
+
+If you look through the list of links above, you will notice that many projects
+host their documentation on [readthedocs.io](https://readthedocs.io/) (RTD),
+more specifically at the URL `https://{PROJECT_NAME}.readthedocs.io/`. RTD has
+become the de-facto standard service for hosting documentation for Python
+packages; if you are looking for documentation for a Python package, quickly
+trying its (assumed) readthedocs address often works.
+
+:::
 
 
 <figure id="pythongis-ecosystem" class="align-default">
