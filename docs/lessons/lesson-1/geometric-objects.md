@@ -463,6 +463,9 @@ shell = LinearRing([point1, point2, point3, point1])
 polygon3 = Polygon(shell)
 ```
 
+(When constructing a `shapely.geometry.LinearRing`, you can omit listing
+the first point again at the end; shapely will then implicitely add the
+first point another time to the end of the list of points)
 
 We used different methods to construct the three polygons, but we used the
 same values. Let’s see whether they ended up describing identical geometries:
@@ -518,97 +521,98 @@ can use:
 help(Polygon)
 ```
 
+Let’s still see how to create a polygon with a hole:
 
-% Let's see how we can create a `Polygon` with a hole:
+```{code-cell}
+# define the exterior
+outer = LinearRing([(-180, 90), (-180, -90), (180, -90), (180, 90)])
 
-% ```{code-cell}
-% # Define the outer border
-% border = [(-180, 90), (-180, -90), (180, -90), (180, 90)]
-% ```
+# define a hole:
+hole = LinearRing([(-170, 80), (-100, -80), (100, -80), (170, 80)])
+```
 
-% ```{code-cell}
-% # Outer polygon
-% world = Polygon(shell=border)
-% print(world)
-% ```
+Let’s see how the exterior shell and the hole look like on their own:
 
-% ```{code-cell}
-% world
-% ```
+```{code-cell}
+outer
+```
 
-% ```{code-cell}
-% # Let's create a single big hole where we leave ten units at the boundaries
-% # Note: there could be multiple holes, so we need to provide list of coordinates for the hole inside a list
-% hole = [[(-170, 80), (-170, -80), (170, -80), (170, 80)]]
-% ```
+```{code-cell}
+hole
+```
 
-% ```{code-cell}
-% # Now we can construct our Polygon with the hole inside
-% frame = Polygon(shell=border, holes=hole)
-% print(frame)
-% ```
+A polygon using only the exterior shell:
 
-% Let's see what we have now:
+```{code-cell}
+polygon_without_hole = Polygon(outer)
+polygon_without_hole
+```
 
-% ```{code-cell}
-% frame
-% ```
+And, finally, a polygon defined by the exterior shell, and one hole
+(note that `holes` need to be specified as a list):
 
-% As we can see the `Polygon` has now two different tuples of coordinates. The first one represents the **outerior** and the second one represents the **hole** inside of the Polygon.
+```{code-cell}
+polygon_with_hole = Polygon(outer, [hole])
+polygon_with_hole
+```
 
-% <!-- #region -->
-% ### Polygon attributes and functions
-
-
-% We can again access different attributes directly from the `Polygon` object itself that can be really useful for many analyses, such as `area`, `centroid`, `bounding box`, `exterior`, and `exterior-length`. See a full list of methods in the [Shapely User Manual](https://shapely.readthedocs.io/en/stable/manual.html#the-shapely-user-manual).
-
-% Here, we can see a few of the available attributes and how to access them:
-% <!-- #endregion -->
-
-% ```{code-cell}
-% # Print the outputs
-% print(f"Polygon centroid: {world.centroid}")
-% print(f"Polygon Area: {world.area}")
-% print(f"Polygon Bounding Box: {world.bounds}")
-% print(f"Polygon Exterior: {world.exterior}")
-% print(f"Polygon Exterior Length: {world.exterior.length}")
-% ```
-
-% As we can see above, it is again fairly straightforward to access different attributes from the `Polygon` -object. Note that distance metrics will make more sense when we start working with data in a projected coordinate system.
+```{code-cell}
+print(polygon_without_hole)
+print(polygon_with_hole)
+```
 
 
-% #### Check your understanding
+### Polygon properties and methods
 
-% Plot these shapes using Shapely!
+Very similar to lines and points, also `shapely.geometry.Polygon`s expose a
+number of properties and methods that can be useful for spatial analysis tasks.
+Consult the [shapely user
+manual](https://shapely.readthedocs.io/en/stable/manual.html) for a complete
+list, and see a few examples here:
 
-% - **Pentagon**, example coords: `(30, 2.01), (31.91, 0.62), (31.18, -1.63), (28.82, -1.63), (28.09, 0.62)`
-% - **Triangle**
-% - **Square**
-% - **Cicrle**
+```{code-cell}
+print(f"Polygon centroid: {polygon_with_hole.centroid}")
+print(f"Polygon area: {polygon_with_hole.area}")
+print(f"Polygon bounding box: {polygon_with_hole.bounds}")
+print(f"Polygon exterior ring: {polygon_with_hole.exterior}")
+print(f"Polygon circumference: {polygon_with_hole.exterior.length}")
+```
+
+As we can see above, it is again fairly straightforward to access different attributes of `Polygon` objects. Note that distance metrics will make more sense when we start working with data in projected coordinate systems.
 
 
-% ```{code-cell}
-% # Pentagon - Coordinates borrowed from this thread: https://tex.stackexchange.com/questions/179843/make-a-polygon-with-automatically-labelled-nodes-according-to-their-coordinates
-% Polygon([(30, 2.01), (31.91, 0.62), (31.18, -1.63), (28.82, -1.63), (28.09, 0.62)])
-% ```
+## Check your understanding
 
-% ```{code-cell}
-% # Triangle
-% Polygon([(0,0), (2,4), (4,0)])
-% ```
+Plot these shapes using shapely!
 
-% ```{code-cell}
-% # Square
-% Polygon([(0,0), (0,4), (4,4), (4,0)])
-% ```
+- **Pentagon**, example coordinates: `(30, 2.01), (31.91, 0.62), (31.18, -1.63), (28.82, -1.63), (28.09, 0.62)`
+- **Triangle**
+- **Square**
+- **Circle**
 
-% ```{code-cell}
-% # Circle (using a buffer around a point)
-% point = Point((0,0))
-% point.buffer(1)
-% ```
 
-% <!-- #region -->
+```{code-cell}
+# Pentagon 
+Polygon([(30, 2.01), (31.91, 0.62), (31.18, -1.63), (28.82, -1.63), (28.09, 0.62)])
+```
+
+```{code-cell}
+# Triangle
+Polygon([(0,0), (2,4), (4,0)])
+```
+
+```{code-cell}
+# Square
+Polygon([(0,0), (0,4), (4,4), (4,0)])
+```
+
+```{code-cell}
+# Circle (using a buffer around a point)
+point = Point((0,0))
+point.buffer(1)
+```
+
+
 % ## Geometry collections (optional)
 
 
