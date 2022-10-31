@@ -66,7 +66,7 @@ html_theme_options = {
     "collapse_navigation": False,
     "launch_buttons": {
         "binderhub_url": "https://mybinder.org",
-        "notebook_interface": "jupyterlab",
+        "notebook_interface": "classic"
     },
     "path_to_docs": "docs",
     "repository_branch": "main",
