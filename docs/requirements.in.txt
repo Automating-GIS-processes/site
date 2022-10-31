@@ -6,6 +6,7 @@ sphinx-book-theme
 # JupyterLab
 jupyterlab
 jupyterlab-git
+jupyterlab-myst
 jupytext
 
 # lessons

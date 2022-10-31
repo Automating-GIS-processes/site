@@ -24,7 +24,7 @@ documentation](https://shapely.readthedocs.io/) and on chapter 3 of [Westra E.
 
 ## Spatial data model
 
-:::{figure-md} simple-features
+:::{figure} simple-features
 
 ![Spatial data model](/_static/images/lesson-1/simple-features_595x500px.svg)
 
@@ -115,7 +115,7 @@ multiple discontinuous regions:
 
 
 (#multipolygons)=
-:::{figure-md} Multipolygons
+:::{figure} Multipolygons
 
 ![A map of Austria showing that the province of Tyrol consists of two
 parts](/_static/images/lesson-1/multipolygons_595x300px.svg)

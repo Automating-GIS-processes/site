@@ -6,6 +6,7 @@ sphinx-book-theme==0.3.3
 # JupyterLab
 jupyterlab==3.5.0
 jupyterlab-git==0.39.3
+jupyterlab-myst==0.1.6
 jupytext==1.14.1
 # lessons
 bokeh==2.4.3
@@ -77,6 +78,7 @@ jupyter-server==1.21.0
 jupyter-server-mathjax==0.2.6
 jupyter_client==7.4.4
 jupyter_core==4.11.2
+jupyterlab-markup==1.1.0
 jupyterlab-pygments==0.2.2
 jupyterlab_server==2.16.1
 kiwisolver==1.4.4
