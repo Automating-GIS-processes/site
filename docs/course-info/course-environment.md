@@ -36,18 +36,18 @@ during this course.** All of the course material can be directly opened in a
 trying out the programming examples yourself is always just one click away.
 
 
-:::{figure-md} jupyterlab-launcher-screenshot
-
-![screenshot of the JupyterLab launcher (start screen)](../_static/images/course-info/jupyterlab-launcher_845x656px.png)
+:::{figure} /static/images/course-info/jupyterlab-launcher_845x656px.png
+:name: jupyterlab-launcher-screenshot
+:alt: screenshot of the JupyterLab launcher (start screen)
 
 Screenshot of the *JupyterLab* launcher screen, showing its different components.
 
 :::
 
 
-:::{figure-md} jupyterlab-notebook-screenshot
-
-![screenshot of a notebook opened in JupyterLab](../_static/images/course-info/jupyterlab-example-notebook_845x656px.png)
+:::{figure} /static/images/course-info/jupyterlab-example-notebook_845x656px.png)
+:name: jupyterlab-notebook-screenshot
+:alt: screenshot of a notebook opened in JupyterLab
 
 Screenshot of a notebook opened in *JupyterLab*, next to a console window and
 a file manager pane.
@@ -65,8 +65,8 @@ buttons in the *Rocket* menu at the top of the page.
 
 (#launch-buttons)=
 <video autoplay loop muted>
-    <source src="../_static/images/course-info/launch-buttons_486x159px.webm" type="video/webm" />
-    <img src="../_static/images/course-info/launch-buttons_still_486x159px.png" title="The launch buttons on top of the page">
+    <source src="/static/images/course-info/launch-buttons_486x159px.webm" type="video/webm" />
+    <img src="/static/images/course-info/launch-buttons_still_486x159px.png" title="The launch buttons on top of the page">
 </video>
 
 We will use two different cloud computing platforms ([Binder](#binder) and [CSC
@@ -94,8 +94,8 @@ the user to log in. Simply click on the [launch button](#launch-buttons) at the
 top of a notebook page, and wait for Binder to load the exercise or lesson:
 
 <video autoplay loop muted>
-    <source src="../_static/images/course-info/binder-launching_650x330px.webm" type="video/webm" />
-    <img src="../_static/images/course-info/binder-launching_still_650x330px.png" title="Binder can take a few moments to launch.">
+    <source src="/static/images/course-info/binder-launching_650x330px.webm" type="video/webm" />
+    <img src="/static/images/course-info/binder-launching_still_650x330px.png" title="Binder can take a few moments to launch.">
 </video>
 
 Once the instance is ready, you can navigate to the lesson folders and start working with existing notebooks or create a new one.
@@ -132,14 +132,11 @@ To start using *CSC Notebooks*:
    2, {{year}}’ with one application: click the ‘power button’ on the right side
    to start it.
 
-:::{figure-md}
-
-![Starting a *CSC
-Notebook*](/_static/images/course-info/csc-notebooks_700x440px.png)
+:::{figure} /static/images/course-info/csc-notebooks_700x440px.png
+:alt: Starting a *CSC Notebook*
 
 Once you’ve joined the course’s *workspace*, you can launch its *CSC Notebook*
 with one click.
-
 :::
 
 

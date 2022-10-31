@@ -24,14 +24,12 @@ documentation](https://shapely.readthedocs.io/) and on chapter 3 of [Westra E.
 
 ## Spatial data model
 
-:::{figure} simple-features
-
-![Spatial data model](/_static/images/lesson-1/simple-features_595x500px.svg)
+:::{figure} /static/images/lesson-1/simple-features_595x500px.svg
+:alt: Spatial data model
 
 Fundamental geometric objects (‘simple features’) that can be used in Python
 with [shapely](https://shapely.readthedocs.io/). <br /> *(Figures by M. W.
 Toews; cf. [Wikipedia’s article on GeoJSON](https://en.wikipedia.org/wiki/GeoJSON))*
-
 :::
 
 All geospatial vector data can be described by a combining a set of fundamental
@@ -114,15 +112,12 @@ geographic features, such as, for instance, administrative areas that consist of
 multiple discontinuous regions:
 
 
-(#multipolygons)=
-:::{figure} Multipolygons
-
-![A map of Austria showing that the province of Tyrol consists of two
-parts](/_static/images/lesson-1/multipolygons_595x300px.svg)
+:::{figure} ../../static/images/lesson-1/multipolygons_595x300px.svg
+:name: MultiPolygons
+:alt: A map of Austria showing that the province of Tyrol consists of two
 
 *Tyrol*, a federal state of Austria, is a **MultiPolygon**. *(Data: [Statistics
 Austria](https://data.statistik.gv.at/web/meta.jsp?dataset=OGDEXT_GEM_1))*
-
 :::
 
 
