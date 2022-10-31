@@ -36,7 +36,7 @@ during this course.** All of the course material can be directly opened in a
 trying out the programming examples yourself is always just one click away.
 
 
-:::{figure} /static/images/course-info/jupyterlab-launcher_845x656px.png
+:::{figure} ../static/images/course-info/jupyterlab-launcher_845x656px.png
 :name: jupyterlab-launcher-screenshot
 :alt: screenshot of the JupyterLab launcher (start screen)
 
@@ -45,7 +45,7 @@ Screenshot of the *JupyterLab* launcher screen, showing its different components
 :::
 
 
-:::{figure} /static/images/course-info/jupyterlab-example-notebook_845x656px.png)
+:::{figure} ../static/images/course-info/jupyterlab-example-notebook_845x656px.png)
 :name: jupyterlab-notebook-screenshot
 :alt: screenshot of a notebook opened in JupyterLab
 
@@ -65,7 +65,7 @@ buttons in the *Rocket* menu at the top of the page.
 
 (#launch-buttons)=
 <video autoplay loop muted>
-    <source src="..//static/images/course-info/launch-buttons_486x159px.webm" type="video/webm" />
+    <source src="../static/images/course-info/launch-buttons_486x159px.webm" type="video/webm" />
     <img src="../static/images/course-info/launch-buttons_still_486x159px.png" title="The launch buttons on top of the page">
 </video>
 
@@ -132,7 +132,7 @@ To start using *CSC Notebooks*:
    2, {{year}}’ with one application: click the ‘power button’ on the right side
    to start it.
 
-:::{figure} /static/images/course-info/csc-notebooks_700x440px.png
+:::{figure} ../static/images/course-info/csc-notebooks_700x440px.png
 :alt: Starting a *CSC Notebook*
 
 Once you’ve joined the course’s *workspace*, you can launch its *CSC Notebook*

@@ -24,7 +24,7 @@ documentation](https://shapely.readthedocs.io/) and on chapter 3 of [Westra E.
 
 ## Spatial data model
 
-:::{figure} /static/images/lesson-1/simple-features_595x500px.svg
+:::{figure} ../../static/images/lesson-1/simple-features_595x500px.svg
 :alt: Spatial data model
 
 Fundamental geometric objects (‘simple features’) that can be used in Python
