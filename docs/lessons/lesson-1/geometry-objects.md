@@ -112,8 +112,8 @@ geographic features, such as, for instance, administrative areas that consist of
 multiple discontinuous regions:
 
 
+(#multipolygons)=
 :::{figure} ../../static/images/lesson-1/multipolygons_595x300px.svg
-:name: MultiPolygons
 :alt: A map of Austria showing that the province of Tyrol consists of two
 
 *Tyrol*, a federal state of Austria, is a **MultiPolygon**. *(Data: [Statistics

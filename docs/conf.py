@@ -38,6 +38,7 @@ myst_enable_extensions = [
     "colon_fence",
     "substitution",
 ]
+myst_heading_anchors = 3
 
 # The following are the main things that need to be updated every year
 # These variables are replaced throughout the course documents

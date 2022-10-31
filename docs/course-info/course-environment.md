@@ -45,7 +45,7 @@ Screenshot of the *JupyterLab* launcher screen, showing its different components
 :::
 
 
-:::{figure} ../static/images/course-info/jupyterlab-example-notebook_845x656px.png)
+:::{figure} ../static/images/course-info/jupyterlab-example-notebook_845x656px.png
 :name: jupyterlab-notebook-screenshot
 :alt: screenshot of a notebook opened in JupyterLab
 
