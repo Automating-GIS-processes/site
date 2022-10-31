@@ -128,7 +128,7 @@ many jokes:
 
 
 :::{figure} https://imgs.xkcd.com/comics/python.png
-:name xkcd-353-Python
+:name: xkcd-353-Python
 :alt: I wrote 20 short programs in Python yesterday. It was wonderful. Perl, I'm leaving you.
 
 Learning to do *anything* is easy in Python: there is a package for everything. *Source: [xkcd.com/353](https://xkcd.com/353/)*
