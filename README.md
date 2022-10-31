@@ -16,7 +16,7 @@ alt="Creative Commons License" style="border-width:0" align="left"
 src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a></a> <img
 src="https://github.com/Automating-GIS-processes/2016/blob/master/source/img/GPLv3_Logo.jpg"
 width="80">
- 
+
 We hope that the teaching material provided here is helpful to other teachers
 and learners. Thus, we share all the lessons openly, as well as the source code
 and sample data.
@@ -76,9 +76,9 @@ few days to get everything set up.
     - Update **conda**’s `environment.yml` in a similar way:
         - First, make sure [`environment.in.yml`](ci/environment.in.yml) pins
           Python (the interpreter itself) to the [lastest major version available
-          from conda-forge](https://anaconda.org/conda-forge/python). In autumn
-          2022, the version listed is `3.10.6`, accordingly, the respective line
-          in the environment file should read `- python=3.10`.
+          from conda-forge](https://anaconda.org/conda-forge/python). For
+          instance, in autumn 2022, the version listed is `3.10.6`; accordingly,
+          the respective line in the environment file should read `- python=3.10`.
         - Then use the following commands (they’re analogue to the pip workflow,
           above):
             ```
@@ -103,7 +103,7 @@ few days to get everything set up.
       you want to stick with the previous version, as some of the packages
       might not have been updated in time.
 
-3. Update the docker image for the *CSC Notebooks*, and upload it to CSC’s registry. 
+3. Update the docker image for the *CSC Notebooks*, and upload it to CSC’s registry.
    Create a *CSC Notebooks* ‘workspace’ and ‘application’ using the docker image.
    [Follow the instructions in the `Automating-GIS-processes/csc-notebook-dockerfile`
    repository](https://github.com/Automating-GIS-processes/csc-notebook-dockerfile)
@@ -122,7 +122,7 @@ throughout all documents. Edit them to reflect this year’s course’s details
     # The following are the main things that need to be updated every year
     # These variables are replaced throughout the course documents
     # (see the comment for the first item for an example)
-    myst_substitutions = { 
+    myst_substitutions = {
         "year": "2022",  # use {{year}} in markdown files to replace it with the current value
         "starting_date": "Tuesday, 1 November 2022",
         "lectures_weekday_time_location": "Tuesday, 15:15-16:45, Exactum C222",

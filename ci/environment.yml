@@ -93,7 +93,7 @@ dependencies:
   - importlib-metadata=5.0.0
   - importlib_resources=5.10.0
   - ipykernel=6.16.2
-  - ipython=8.5.0
+  - ipython=8.6.0
   - ipython_genutils=0.2.0
   - jack=1.9.21
   - jedi=0.18.1
@@ -112,12 +112,13 @@ dependencies:
   - jupyterlab-git=0.39.3
   - jupyterlab_pygments=0.2.2
   - jupyterlab_server=2.16.1
+  - jupytext=1.14.0
   - kealib=1.4.15
   - keyutils=1.6.1
   - kiwisolver=1.4.4
   - krb5=1.19.3
   - lame=3.100
-  - lcms2=2.12
+  - lcms2=2.13.1
   - ld_impl_linux-64=2.39
   - lerc=4.0.0
   - libblas=3.9.0
@@ -195,9 +196,9 @@ dependencies:
   - myst-parser=0.18.1
   - nbclassic=0.4.7
   - nbclient=0.5.13
-  - nbconvert=7.2.2
-  - nbconvert-core=7.2.2
-  - nbconvert-pandoc=7.2.2
+  - nbconvert=7.2.3
+  - nbconvert-core=7.2.3
+  - nbconvert-pandoc=7.2.3
   - nbdime=3.1.1
   - nbformat=5.7.0
   - ncurses=6.3
@@ -268,7 +269,7 @@ dependencies:
   - send2trash=1.8.0
   - setuptools=65.5.0
   - shapely=1.8.5
-  - sip=6.7.2
+  - sip=6.7.3
   - six=1.16.0
   - smmap=3.0.5
   - snappy=1.1.9
