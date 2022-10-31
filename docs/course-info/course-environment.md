@@ -141,14 +141,20 @@ with one click.
 
 
 :::{important}
-
 *CSC Notebooks* have seen a new, vastly improved version since last year’s
 course, some features have not yet been fully implemented.
 
 For this reason, the ‘launch button’ on top of interactive pages takes you to
 the main page of *CSC Notebooks*, only, from where you still have to manually
 start the course’s application.
+:::
 
+
+:::{caution}
+Everything you save within the `my-work` directory *should* persist between
+runs. However, make sure you save finished and unfinished work also in another
+place, to be on the safe side, for instance, by committing and pushing it to
+[your personal git repository](#git-and-github-keep-track-of-changes).
 :::
 
 
