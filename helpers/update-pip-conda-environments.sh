@@ -23,11 +23,11 @@ conda env remove --name=autogis
 
 # install a new environment using the _unpinned_
 # ci/environment.in.yml
-conda env create --file=ci/environment.in.yml
+conda env create --file=environment.in.yml
 
 # save a pinned vi/environment.yml
 # (removing the ‘prefix:’ line because it hard-codes
 # your system’s path)
 conda env export --no-builds --name autogis \
 | grep -Ev '^prefix:' \
-> ci/environment.yml
+> environment.yml
