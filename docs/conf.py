@@ -39,6 +39,7 @@ myst_enable_extensions = [
     "substitution",
 ]
 myst_heading_anchors = 3
+suppress_warnings = ["mystnb.unknown_mime_type"]
 
 # The following are the main things that need to be updated every year
 # These variables are replaced throughout the course documents
