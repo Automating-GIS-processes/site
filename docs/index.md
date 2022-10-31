@@ -97,7 +97,7 @@ During the teaching period, this web page is updated each week before the lectur
 
 | week  | theme                                                                                     |
 | ----- | ----------------------------------------------------------------------------------------- |
-| **1** | Shapely and geometric objects (points, lines and polygons)                                |
+| **1** | Shapely and geometry objects (points, lines and polygons)                                |
 | **2** | Managing spatial data with GeoPandas (reading and writing data, projections, table joins) |
 | **3** | Geocoding and spatial queries                                                             |
 | **4** | Reclassifying data, overlay analysis                                                      |
@@ -138,16 +138,16 @@ course-info/resources
 course-info/license
 ```
 
-% ```{toctree}
-% ---
-% caption: Lesson 1
-% maxdepth: 2
-% ---
-% lessons/lesson-1/overview
-% lessons/lesson-1/course-motivation
-% lessons/lesson-1/geometric-objects
-% lessons/lesson-1/exercise-1
-% ```
+```{toctree}
+---
+caption: Lesson 1
+maxdepth: 2
+---
+lessons/lesson-1/overview
+lessons/lesson-1/course-motivation
+lessons/lesson-1/geometry-objects
+lessons/lesson-1/exercise-1
+```
 
 % ```{toctree}
 % ---
