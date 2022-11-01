@@ -158,4 +158,4 @@ Wallin Aagesen. Currently (autumn term 2022), Christoph Fink is the responsible
 teacher.
 
 You can find contact information on the [course
-website](https://autogis-site.readthedocs.io/en/latest/course-info/course-info.html).
+website](https://autogis-site.readthedocs.io/en/latest/course-info/general-information.html).
