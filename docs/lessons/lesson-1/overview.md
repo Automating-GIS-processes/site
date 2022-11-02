@@ -17,8 +17,6 @@ After this lesson, you will be able to:
 - create geometries given their coordinate values.
 
 
-:::{note}
+## Slides
 
-After the Tuesday lessons, video recordings and slides will be uploaded here.
-
-:::
+<embed src="https://automating-gis-processes.github.io/slides/2022/introduction.html" type="text/html" style="width: 100%; height: 30em" />
