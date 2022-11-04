@@ -146,7 +146,7 @@ point_series = data.apply(create_point, axis=1)
 
 #### `Apply()`ing an anonymous *lambda function*
 
-Finally, for simply functions that fit into one single line, we can pass the
+Finally, for simple functions that fit into one single line, we can pass the
 function in so-called ‘lambda notation’.  Lambda functions follow the syntax
 `lambda arguments: return-value`, i.e., the keyword `lambda` followed by one or
 more, comma-separated, argument names (input variables), a colon (`:`), and the
