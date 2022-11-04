@@ -38,6 +38,8 @@ myst_enable_extensions = [
     "colon_fence",
     "substitution",
 ]
+myst_heading_anchors = 3
+suppress_warnings = ["mystnb.unknown_mime_type"]
 
 # The following are the main things that need to be updated every year
 # These variables are replaced throughout the course documents
@@ -54,11 +56,11 @@ myst_substitutions = {
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_logo = "_static/images/autogis-logo_300x210px.svg"
+html_logo = "static/images/autogis-logo_300x210px.svg"
 html_short_title = "AutoGIS"
 html_title = ""
 
-html_static_path = ["_static"]
+html_static_path = ["static"]
 html_last_updated_fmt = "%d %B %Y"
 
 html_theme = "sphinx_book_theme"
@@ -66,7 +68,7 @@ html_theme_options = {
     "collapse_navigation": False,
     "launch_buttons": {
         "binderhub_url": "https://mybinder.org",
-        "notebook_interface": "jupyterlab",
+        "notebook_interface": "classic"
     },
     "path_to_docs": "docs",
     "repository_branch": "main",

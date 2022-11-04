@@ -14,8 +14,11 @@ dependencies:
     # JupyterLab
     - jupyterlab
     - jupyterlab-git
+    - jupyterlab-myst
+    - jupytext
 
     # lessons
+    - bokeh
     - contextily
     - folium
     - geojson
@@ -33,6 +36,5 @@ dependencies:
     - sqlalchemy
 
     # optional
-    # - bokeh
     # - osmnx
     # - r5py

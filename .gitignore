@@ -1,14 +1,16 @@
 .virtualenv/
-dist/
-build/
+.venv/
+
 docs/build/
 docs/_build/
 
-*.egg-info/
 *~
 *.swp
-*.pyc
 .DS_Store
+
+*.pyc
+*.egg-info/
+__pycache__
 
 .ipynb_checkpoints
 .jupyter_cache
