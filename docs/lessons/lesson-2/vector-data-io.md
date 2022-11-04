@@ -90,7 +90,7 @@ geospatially-enabled version of a `pandas.DataFrame`), use
 ```{code-cell}
 import geopandas
 municipalities = geopandas.read_file(
-    DATA_DIRECTORY / "finland_municipalities.gpkg"
+    DATA_DIRECTORY / "finland_municipalities" / "finland_municipalities_2021.gpkg"
 )
 municipalities.head()
 ```

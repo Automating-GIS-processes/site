@@ -78,3 +78,9 @@ html_theme_options = {
 }
 
 nb_execution_mode = "force"
+
+exclude_patterns = [
+    "_build",
+    "jupyter_execute",
+    "static"
+]

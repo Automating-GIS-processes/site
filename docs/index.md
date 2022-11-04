@@ -158,9 +158,8 @@ lessons/lesson-2/overview
 lessons/lesson-2/key-concepts
 lessons/lesson-2/managing-file-paths
 lessons/lesson-2/vector-data-io
-% lessons/lesson-2/geopandas-basics
-% lessons/lesson-2/projections
-% lessons/lesson-2/create-geodataframes
+lessons/lesson-2/geopandas-an-introduction
+lessons/lesson-2/map-projections
 lessons/lesson-2/exercise-2
 :::
 
