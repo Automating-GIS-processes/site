@@ -1,3 +1,15 @@
+---
+kernelspec:
+  name: python3
+  display_name: python3
+jupytext:
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: '0.13'
+    jupytext_version: 1.14.1
+---
+
 # Lesson 2 Overview
 
 In this lesson, we will learn how to handle spatial data in Python using

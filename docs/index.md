@@ -155,8 +155,9 @@ caption: Lesson 2
 maxdepth: 2
 ---
 lessons/lesson-2/overview
-lessons/lesson-2/definitions
-% lessons/lesson-2/data-io
+lessons/lesson-2/key-concepts
+lessons/lesson-2/managing-file-paths
+lessons/lesson-2/vector-data-io
 % lessons/lesson-2/geopandas-basics
 % lessons/lesson-2/projections
 % lessons/lesson-2/create-geodataframes
