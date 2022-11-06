@@ -11,13 +11,6 @@ kernelspec:
   name: python3
 ---
 
-```{code-cell}
-:tags: ["remove-input", "remove-output"]
-
-# this is a horrible workaround to keep matplotlib from starting to
-# ‘uPdAtE tHe FoNt CaChE’ just when we want to plot
-import matplotlib
-```
 
 # Managing file paths
 

@@ -78,6 +78,7 @@ html_theme_options = {
 }
 
 nb_execution_mode = "force"
+nb_execution_timeout = 120  # needed, e.g., when matplotlib updates its font cache
 
 exclude_patterns = [
     "_build",
