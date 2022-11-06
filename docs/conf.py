@@ -85,3 +85,9 @@ exclude_patterns = [
     "jupyter_execute",
     "static"
 ]
+
+
+# import matplotlib here, otherwise we get the 
+# ‘building font cache’ warning in the middle of
+# a notebook (when it runs for the first time)
+import matplotlib.pyplot

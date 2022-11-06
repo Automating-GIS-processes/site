@@ -33,6 +33,10 @@ Today, we’ll concentrate on vector data, so let’s first take a closer look a
 fiona’s capabilities, and then import and export data using
 [geopandas](https://geopandas.org/), which uses fiona under its hood.
 
+
+---
+
+
 :::{admonition} Defining a data directory constant
 :class: note
 
@@ -47,6 +51,9 @@ import pathlib
 NOTEBOOK_PATH = pathlib.Path().resolve()
 DATA_DIRECTORY = NOTEBOOK_PATH / "data"
 ```
+
+
+---
 
 
 ## File formats
