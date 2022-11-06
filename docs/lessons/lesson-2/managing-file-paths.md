@@ -121,7 +121,7 @@ DATA_DIRECTORY = NOTEBOOK_PATH / "data"
 ```
 
 ```{code-cell}
-# this can then be used, for instance, in `geopandas.read_file()`:
+# this can then be used, for instance, in `geopandas.read_file()` (see next section):
 import geopandas
 data_set = geopandas.read_file(DATA_DIRECTORY / "finland_municipalities" / "finland_municipalities_2021.gpkg")
 data_set.plot()
