@@ -11,13 +11,42 @@ kernelspec:
   name: python3
 ---
 
-# Introduction to geopandas
+# Geopandas: an introduction
 
 In this section, we will cover the basics of *geopandas*, a Python library to
 interact with geospatial vector data.
 
-[Geopandas](https://geopandas.org/) provides an easy-to-use interface to vector data sets. It combines the capabilities of *pandas*, the data analysis package we got to know in the [Geo-Python course](https://geo-python-site.readthedocs.io/en/latest/lessons/L5/pandas-overview.html), with the geometry handling functionality of [shapely](../lesson-1/geometry-objects), the [geo-spatial file format support of fiona](vector-data-io) and the [map projection libraries of pyproj](map-projections).
+[Geopandas](https://geopandas.org/) provides an easy-to-use interface to vector
+data sets. It combines the capabilities of *pandas*, the data analysis package
+we got to know in the [Geo-Python
+course](https://geo-python-site.readthedocs.io/en/latest/lessons/L5/pandas-overview.html),
+with the geometry handling functionality of
+[shapely](../lesson-1/geometry-objects), the [geo-spatial file format support
+of fiona](vector-data-io) and the [map projection libraries of
+pyproj](map-projections).
 
+The main data structures in geopandas are `GeoDataFrame`s and `GeoSeries`. They
+extend the functionality of `pandas.DataFrame`s and `pandas.Series`. This means
+that **we can use all our *pandas* skills also when we work with
+*geopandas*!**. 
+
+:::{tip}
+
+If you feel like you need to refresh your memory about pandas, head back to
+[lesson
+5](https://geo-python-site.readthedocs.io/en/latest/lessons/L5/pandas-overview.html)
+and [lesson
+6](https://geo-python-site.readthedocs.io/en/latest/notebooks/L6/advanced-data-processing-with-pandas.html)
+of Geo-Python.
+:::
+
+There is one key difference between pandas’s data frames and geopandas’
+[`GeoDataFrame`s](https://geopandas.org/en/stable/docs/user_guide/data_structures.html#geodataframe):
+a `GeoDataFrame` contains an additional column for geometries. By default, the
+name of this column is `geometry`, and it is a
+[`GeoSeries`](https://geopandas.org/en/stable/docs/user_guide/data_structures.html#geoseries)
+that contains the geometries (points, lines, polygons, ...) as
+`shapely.geometry` objects.
 
 
 ```{code-cell}
@@ -60,112 +89,66 @@ df = df.rename(columns={"RYHMA": "GROUP", "LUOKKA": "CLASS", "geom": "geometry"}
 )
 ```
 
-
-% In this lesson, we will cover basics steps needed for interacting with spatial data in Python using geopandas:
-
-% - Managing filepaths
-% - Reading spatial data from file 
-% - Geometry calculations 
-% - Writing spatial data to file
-% - Grouping and splitting spatial data into multiple layers
+---
 
 
-% Geopandas (http://geopandas.org/) makes it possible to work with geospatial data in Python in a relatively easy way. Geopandas combines the capabilities of the data analysis library [pandas](https://pandas.pydata.org/pandas-docs/stable/) with other packages like [shapely](https://shapely.readthedocs.io/en/stable/manual.html) and [fiona](https://fiona.readthedocs.io/en/latest/manual.html) for managing spatial data. 
+## Input data: Finnish topographic database 
 
-% The main data structures in geopandas are `GeoSeries` and `GeoDataFrame` which extend the capabilities of `Series` and `DataFrames` from pandas. This means that we can use all our pandas skills also when working with geopandas!  If you need to refresh your memory about pandas, check out week 5 and 6 lesson materials from the [Geo-Python website](geo-python.github.io). 
+In this lesson, we will work with the [National Land Survey of Finland (NLS)/Maanmittauslaitos (MML) topographic database](https://www.maanmittauslaitos.fi/en/maps-and-spatial-data/expert-users/product-descriptions/topographic-database). 
+- The data set is licensed under the NLS’ [open data licence](https://www.maanmittauslaitos.fi/en/opendata-licence-cc40) (CC BY 4.0).
+- The structure of the data is described in a [separate Excel file](http://www.nic.funet.fi/index/geodata/mml/maastotietokanta/2022/maastotietokanta_kohdemalli_eng_2019.xlsx).
+- Further information about file naming is available at [fairdata.fi](https://etsin.fairdata.fi/dataset/5023ecc7-914a-4494-9e32-d0a39d3b56ae) (this link relates to the 2018 issue of the topographic database, but is still valid).
 
-% The main difference between geodataframes and pandas dataframes is that a [geodataframe](http://geopandas.org/data_structures.html#geodataframe) should contain one column for geometries. By default, the name of this column is `'geometry'`. The geometry column is a [geoseries](http://geopandas.org/data_structures.html#geoseries) which contains the geometries (points, lines, polygons, multipolygons etc.) as shapely objects. 
+For this lesson, we have acquired a subset of the topographic database as
+shapefiles from the Helsinki Region in Finland via the [CSC’s Paituli download
+portal](https://paituli.csc.fi).
 
-% ![geodataframe.png](img/geodataframe.png)
+:::{figure} ../../static/images/lesson-2/paituli-download_700x650px.png
+:alt: Screenshot of the Paituli download page
 
-% As we learned in the Geo-Python course, it is conventional to import pandas as `pd`. Similarly,we will import geopandas as `gpd`:
-
-% ```{code-cell} ipython3
-% import geopandas as gpd
-% ```
-
-% ## Input data: Finnish topographic database 
-
-% In this lesson we will work with the [National Land Survey of Finland (NLS) topographic database (from 2018)](https://www.maanmittauslaitos.fi/en/maps-and-spatial-data/expert-users/product-descriptions/topographic-database). 
-% - The data set is licensed under the NLS' [open data licence](https://www.maanmittauslaitos.fi/en/opendata-licence-cc40) (CC BY 4.0).
-% - Structure of the data is described in a separate Excel file ([download link](http://www.maanmittauslaitos.fi/sites/maanmittauslaitos.fi/files/attachments/2018/10/maastotietokanta_kohdemalli_eng.xlsx)).
-% - Further information about file naming is available at [fairdata.fi](https://etsin.fairdata.fi/dataset/5023ecc7-914a-4494-9e32-d0a39d3b56ae).
-
-% For this lesson, we have acquired a subset of the topographic database as shapefiles from the Helsinki Region in Finland via the [CSC open data portal](https://avaa.tdata.fi/web/paituli/latauspalvelu):
-
-% ![Paituli data download](img/Paituli_maastotietokanta_download.png)
+The Paituli *spatial download service* offers data from a long list of national institutes and agencies.
+:::
 
 
-% In this lesson, we will focus on **terrain objects** (Feature group: "Terrain/1" in the topographic database). The Terrain/1 feature group contains several feature classes. **Our aim in this lesson is to save all the Terrain/1 feature classes into separate files**.
-
-% *Terrain/1 features in the Topographic Database:*
-
-% |  feature class | Name of feature                                            | Feature group |
-% |----------------|------------------------------------------------------------|---------------|
-% | 32421          | Motor traffic area                                         | Terrain/1     |
-% | 32200          | Cemetery                                                   | Terrain/1     |
-% | 34300          | Sand                                                       | Terrain/1     |
-% | 34100          | Rock - area                                                | Terrain/1     |
-% | 34700          | Rocky area                                                 | Terrain/1     |
-% | 32500          | Quarry                                                     | Terrain/1     |
-% | 32112          | Mineral resources extraction area, fine-grained material   | Terrain/1     |
-% | 32111          | Mineral resources extraction area, coarse-grained material | Terrain/1     |
-% | 32611          | Field                                                      | Terrain/1     |
-% | 32612          | Garden                                                     | Terrain/1     |
-% | 32800          | Meadow                                                     | Terrain/1     |
-% | 32900          | Park                                                       | Terrain/1     |
-% | 35300          | Paludified land                                            | Terrain/1     |
-% | 35412          | Bog, easy to traverse forested                             | Terrain/1     |
-% | 35411          | Open bog, easy to traverse treeless                        | Terrain/1     |
-% | 35421          | Open fen, difficult to traverse treeless                   | Terrain/1     |
-% | 33000          | Earth fill                                                 | Terrain/1     |
-% | 33100          | Sports and recreation area                                 | Terrain/1     |
-% | 36200          | Lake water                                                 | Terrain/1     |
-% | 36313          | Watercourse area                                           | Terrain/1     |
+---
 
 
-% According to the [naming convention](https://etsin.fairdata.fi/dataset/5023ecc7-914a-4494-9e32-d0a39d3b56ae), all files that start with a letter `m` and end with `p` contain the objects we are interested in (Terrain/1 polygons). 
+In this lesson, we will focus on **terrain objects** (Feature group:
+"Terrain/1" in the topographic database). The Terrain/1 feature group contains
+several feature classes. **Our aim in this lesson is to save all the Terrain/1
+feature classes into separate files**.
 
-% +++
+*Terrain/1 features in the Topographic Database:*
 
-% ## Downloading data
+|  feature class | Name of feature                                            | Feature group |
+|----------------|------------------------------------------------------------|---------------|
+| 32421          | Motor traffic area                                         | Terrain/1     |
+| 32200          | Cemetery                                                   | Terrain/1     |
+| 34300          | Sand                                                       | Terrain/1     |
+| 34100          | Rock - area                                                | Terrain/1     |
+| 34700          | Rocky area                                                 | Terrain/1     |
+| 32500          | Quarry                                                     | Terrain/1     |
+| 32112          | Mineral resources extraction area, fine-grained material   | Terrain/1     |
+| 32111          | Mineral resources extraction area, coarse-grained material | Terrain/1     |
+| 32611          | Field                                                      | Terrain/1     |
+| 32612          | Garden                                                     | Terrain/1     |
+| 32800          | Meadow                                                     | Terrain/1     |
+| 32900          | Park                                                       | Terrain/1     |
+| 35300          | Paludified land                                            | Terrain/1     |
+| 35412          | Bog, easy to traverse forested                             | Terrain/1     |
+| 35411          | Open bog, easy to traverse treeless                        | Terrain/1     |
+| 35421          | Open fen, difficult to traverse treeless                   | Terrain/1     |
+| 33000          | Earth fill                                                 | Terrain/1     |
+| 33100          | Sports and recreation area                                 | Terrain/1     |
+| 36200          | Lake water                                                 | Terrain/1     |
+| 36313          | Watercourse area                                           | Terrain/1     |
 
-% You can use `wget` program (available in Binder and CSC Notebooks) to download the data from the command line from this download link: https://github.com/AutoGIS/data/raw/master/L2_data.zip. Let's download the data into the same folder with the lesson 2 notebooks (`.../notebooks/L2`):
 
-% 1. Open up a new terminal window
-% 2. Navigate to the correct folder in the terminal:
+According to the [naming
+convention](https://etsin.fairdata.fi/dataset/5023ecc7-914a-4494-9e32-d0a39d3b56ae),
+all files that we interested in (*Terrain/1* and *polygons*), start with a letter `m` and end with a `p`.
 
-% ```
-% # Navigate to lesson 2 notebooks directory:
-% cd autogis/notebooks/L2
-%     
-% ```
-% 3. Use `wget` to dowload the data from the dowload link:
-%     
-% ```
-% wget https://github.com/AutoGIS/data/raw/master/L2_data.zip
-%     
-% ```
-% <div class="alert alert-info">
 
-% **Copy-paste**
-%     
-% You can paste copied text in JupyterLab Terminal by pressing `SHIFT` + `RIGHT-CLICK` on your mouse and choosing `Paste`.
-
-% </div>
-
-% Once you have downloaded the `L2_data.zip` file into your (cloud) computer, you can unzip the file using `unzip` command in the Terminal (or e.g. 7zip on Windows if working with own computer). Run the following commands in the `.../notebooks/L2` -directory:
-
-% ``` 
-% $ unzip L2_data.zip
-% $ ls L2_data
-
-% ```
-% You can also check the contents of the downloaded and unzipped file in the file browser window. 
-
-% The L2_data folder contains several subfolders according to the file strucutre in the topographic database shapefile distribution. After unzipping the downloaded file, you can find the data for this tutorial under: `L2_data/NLS/2018/L4/L41/L4132R.shp`. Notice that Shapefile -fileformat contains many separate files such as `.dbf` that contains the attribute information, and `.prj` -file that contains information about coordinate reference system.
-
-% +++
 
 % ## Managing filepaths
 

@@ -58,11 +58,7 @@ might even tell something about you:
 
 
 :::{figure} https://imgs.xkcd.com/comics/map_projections.png
-:alt: What’s that?
-
-You think I don’t like the Peters map because I’m uncomfortable with having my
-cultural assumptions challenged? Are you sure you’re not ... *puts on
-sunglasses* ... projecting?
+:alt: What’s that?  You think I don’t like the Peters map because I’m uncomfortable with having my cultural assumptions challenged? Are you sure you’re not ... *puts on sunglasses* ... projecting?
 
 The XKCD web comic had it figured out long ago: ‘What your favourite map
 projection tells about you’. *Source: [xkcd.com](https://xkcd.com/977)*
