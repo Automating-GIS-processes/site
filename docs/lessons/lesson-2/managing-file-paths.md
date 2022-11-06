@@ -11,6 +11,14 @@ kernelspec:
   name: python3
 ---
 
+```{code-cell}
+:tags: ["remove-input", "remove-output"]
+
+# this is a horrible workaround to keep matplotlib from starting to
+# ‘uPdAtE tHe FoNt CaChE’ just when we want to plot
+import matplotlib
+```
+
 # Managing file paths
 
 When working with data, it is important to keep track of where which input
@@ -31,8 +39,8 @@ a path into directories, and file names into base names and file extensions.
 However, manipulating file paths still required knowledge about the computer a
 script would ultimately run on. For instance, on all Unix-based operating
 systems, such as Linux or MacOS, directories are separated by forward-slashes
-`/`, while Microsoft Windows uses back-slashes `\\` (this particular problem is
-partly solved by using `os.sep`, but it’s not very convenient). 
+(`/`), while Microsoft Windows uses back-slashes (`\`) (this particular problem
+can be worked around with `os.sep`, but not in a very convenient way). 
 
 Since Python 3.4 (so, fairly recently), there exists a built-in module that
 eases much of the hassle with managing file paths:
