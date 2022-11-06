@@ -11,7 +11,55 @@ kernelspec:
   name: python3
 ---
 
-# Introduction to Geopandas
+# Introduction to geopandas
+
+In this section, we will cover the basics of *geopandas*, a Python library to
+interact with geospatial vector data.
+
+[Geopandas](https://geopandas.org/) provides an easy-to-use interface to vector data sets. It combines the capabilities of *pandas*, the data analysis package we got to know in the [Geo-Python course](https://geo-python-site.readthedocs.io/en/latest/lessons/L5/pandas-overview.html), with the geometry handling functionality of [shapely](../lesson-1/geometry-objects), the [geo-spatial file format support of fiona](vector-data-io) and the [map projection libraries of pyproj](map-projections).
+
+
+
+```{code-cell}
+:tags: ["remove-input"]
+
+import pathlib
+import geopandas
+import numpy
+import pandas
+
+DATA_DIRECTORY = pathlib.Path().resolve() / "data"
+
+HIGHLIGHT_STYLE = "background: #f66161;"
+
+# so the following block is a bit of bad magic to make the table output look
+# nice (this cell is hidden, we are only interested in a short table listing
+# in which the geometry column is highlighted).
+#
+# For this, we
+#    1. convert the geopandas back into a ‘normal’ pandas.DataFrame with a shortened
+#       WKT string in the geometry column
+#    1b. while doing so, get rid of most of the columns (rename the remaining ones), and
+#    1c. shorten the table to just 5 rows.
+#    2. apply the style to all cells in the column "geometry", and to the axis-1-index "geometry"
+
+# Why did I got via a ‘plain’ `pandas.DataFrame`?
+# `pandas.set_option("display.max_colwidth", 40)` was ignored, so this seemed like the cleanest way
+
+df = geopandas.read_file(DATA_DIRECTORY / "finland_topographic_database" / "m_L4132R_p.shp")
+
+df["geom"] = df.geometry.to_wkt().apply(lambda wkt: wkt[:40] + " ...")
+
+df = df[["RYHMA", "LUOKKA", "geom"]].loc[:4]
+df = df.rename(columns={"RYHMA": "GROUP", "LUOKKA": "CLASS", "geom": "geometry"})
+
+(
+    df.style
+        .applymap(lambda x: HIGHLIGHT_STYLE, subset=["geometry"])
+        .apply_index(lambda x: numpy.where(x.isin(["geometry"]), HIGHLIGHT_STYLE, ""), axis=1)
+)
+```
+
 
 % In this lesson, we will cover basics steps needed for interacting with spatial data in Python using geopandas:
 
@@ -596,3 +644,4 @@ kernelspec:
 % 5. Automate a task to save specific rows from data into Shapefile based on specific key using `groupby()` -function
 
 % 6. Extra: saving attribute information to a csv file.
+
