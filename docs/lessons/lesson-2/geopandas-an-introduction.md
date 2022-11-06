@@ -101,7 +101,7 @@ In this lesson, we will work with the [National Land Survey of Finland (NLS)/Maa
 
 For this lesson, we have acquired a subset of the topographic database as
 shapefiles from the Helsinki Region in Finland via the [CSC’s Paituli download
-portal](https://paituli.csc.fi).
+portal](https://paituli.csc.fi). You can find the files in `data/finland_topographic_database/`.
 
 :::{figure} ../../static/images/lesson-2/paituli-download_700x650px.png
 :alt: Screenshot of the Paituli download page
@@ -148,6 +148,49 @@ According to the [naming
 convention](https://etsin.fairdata.fi/dataset/5023ecc7-914a-4494-9e32-d0a39d3b56ae),
 all files that we interested in (*Terrain/1* and *polygons*), start with a letter `m` and end with a `p`.
 
+
+---
+
+
+:::{admonition} Defining a data directory constant
+:class: note
+
+To make it easier to manage the paths of input and output data files, it is a
+good habit to [define a constant pointing to the data
+directory](managing-file-paths) at the top of a notebook:
+
+:::
+
+```{code-cell}
+import pathlib 
+NOTEBOOK_PATH = pathlib.Path().resolve()
+DATA_DIRECTORY = NOTEBOOK_PATH / "data"
+```
+
+---
+
+
+:::{admonition} Searching for files using a pattern
+:class: hint
+
+A `pathlib.Path` (such as `DATA_DIRECTORY`) has a handy method to list all
+files in a directory (or subdirectories) that match a pattern:
+[`glob()`](https://docs.python.org/3/library/pathlib.html#pathlib.Path.glob).
+To list all shapefiles in our topographic database directory, we can use the
+following expression:
+
+```{code}
+(DATA_DIRECTORY / "finland_topographic_database").glob("*.shp")
+```
+
+In the search pattern, `?` represents any one single character, `*` multiple
+(or none, or one) characters, and `**` multiple characters that can include
+subdirectories.
+
+Did you notice the parentheses in the code example above? They work just like
+they would in a mathematical expression: first, the expression inside the
+parentheses is evaluated, only then, the code outside.
+:::
 
 
 % ## Managing filepaths
