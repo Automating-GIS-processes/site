@@ -48,9 +48,8 @@ name of this column is `geometry`, and it is a
 that contains the geometries (points, lines, polygons, ...) as
 `shapely.geometry` objects.
 
-
-```{code-cell}
-:tags: ["remove-input"]
+```{code-cell} ipython3
+:tags: [remove-input]
 
 import pathlib
 import geopandas
@@ -68,8 +67,7 @@ HIGHLIGHT_STYLE = "background: #f66161;"
 # For this, we
 #    1. convert the geopandas back into a ‘normal’ pandas.DataFrame with a shortened
 #       WKT string in the geometry column
-#    1b. while doing so, get rid of most of the columns (rename the remaining ones), and
-#    1c. shorten the table to just 5 rows.
+#    1b. while doing so, get rid of most of the columns (rename the remaining ones)
 #    2. apply the style to all cells in the column "geometry", and to the axis-1-index "geometry"
 
 # Why did I got via a ‘plain’ `pandas.DataFrame`?
@@ -79,11 +77,11 @@ df = geopandas.read_file(DATA_DIRECTORY / "finland_topographic_database" / "m_L4
 
 df["geom"] = df.geometry.to_wkt().apply(lambda wkt: wkt[:40] + " ...")
 
-df = df[["RYHMA", "LUOKKA", "geom"]].loc[:4]
+df = df[["RYHMA", "LUOKKA", "geom"]]
 df = df.rename(columns={"RYHMA": "GROUP", "LUOKKA": "CLASS", "geom": "geometry"})
 
 (
-    df.style
+    df.head().style
         .applymap(lambda x: HIGHLIGHT_STYLE, subset=["geometry"])
         .apply_index(lambda x: numpy.where(x.isin(["geometry"]), HIGHLIGHT_STYLE, ""), axis=1)
 )
@@ -113,9 +111,22 @@ The Paituli *spatial download service* offers data from a long list of national 
 ---
 
 
+## Read and explore geo-spatial data sets
+
+Before we attempt to load any files, let’s not forget to defining a constant
+that points to our data directory:
+
+```{code-cell} ipython3
+import pathlib 
+NOTEBOOK_PATH = pathlib.Path().resolve()
+DATA_DIRECTORY = NOTEBOOK_PATH / "data"
+```
+
 In this lesson, we will focus on **terrain objects** (Feature group:
 "Terrain/1" in the topographic database). The Terrain/1 feature group contains
-several feature classes. **Our aim in this lesson is to save all the Terrain/1
+several feature classes. 
+
+**Our aim in this lesson is to save all the Terrain/1
 feature classes into separate files**.
 
 *Terrain/1 features in the Topographic Database:*
@@ -144,33 +155,7 @@ feature classes into separate files**.
 | 36313          | Watercourse area                                           | Terrain/1     |
 
 
-According to the [naming
-convention](https://etsin.fairdata.fi/dataset/5023ecc7-914a-4494-9e32-d0a39d3b56ae),
-all files that we interested in (*Terrain/1* and *polygons*), start with a letter `m` and end with a `p`.
-
-
----
-
-
-:::{admonition} Defining a data directory constant
-:class: note
-
-To make it easier to manage the paths of input and output data files, it is a
-good habit to [define a constant pointing to the data
-directory](managing-file-paths) at the top of a notebook:
-
-:::
-
-```{code-cell}
-import pathlib 
-NOTEBOOK_PATH = pathlib.Path().resolve()
-DATA_DIRECTORY = NOTEBOOK_PATH / "data"
-```
-
----
-
-
-:::{admonition} Searching for files using a pattern
+:::{admonition} Search for files using a pattern
 :class: hint
 
 A `pathlib.Path` (such as `DATA_DIRECTORY`) has a handy method to list all
@@ -193,481 +178,368 @@ parentheses is evaluated, only then, the code outside.
 :::
 
 
-% ## Managing filepaths
+If you take a quick look at the data directory using a file browser, you will
+notice that the topographic database consists of *many* smaller files. Their
+names follow a strictly defined 
+[convention](https://etsin.fairdata.fi/dataset/5023ecc7-914a-4494-9e32-d0a39d3b56ae),
+according to this file naming convention, all files that we interested in
+(*Terrain/1* and *polygons*) start with a letter `m` and end with a `p`.
 
-% Built-in module `os` provides many useful functions for interacting with the operating system. One of the most useful submodules in the os package is the [os.path-module](https://docs.python.org/2/library/os.path.html) for manipulating file paths. This week, we have data in different sub-folders and we can practice how to use `os` path tools when defining filepaths.
+We can use the `glob()` pattern search functionality to find those files:
 
-% Let's import `os` and see how we can construct a filepath by joining a folder path and file name:
+```{code-cell} ipython3
+TOPOGRAPHIC_DATABASE_DIRECTORY = DATA_DIRECTORY / "finland_topographic_database"
 
-% ```{code-cell} ipython3
-% import os
+TOPOGRAPHIC_DATABASE_DIRECTORY
+```
 
-% # Define path to folder
-% input_folder = r"L2_data/NLS/2018/L4/L41/L4132R.shp"
+```{code-cell} ipython3
+list(TOPOGRAPHIC_DATABASE_DIRECTORY.glob("m*p.shp"))
+```
 
-% # Join folder path and filename 
-% fp = os.path.join(input_folder, "m_L4132R_p.shp")
+(Note that `glob()` returns an iterator, but, for now, we quickly convert
+it to a list)
 
-% # Print out the full file path
-% print(fp)
-% ```
+It seems our input data set has only one file that matches our search pattern.
+We can save its filename into a new variable, choosing the first item of the
+list (index 0):
 
-% ## Reading a Shapefile
+```{code-cell} ipython3
+input_filename = list(TOPOGRAPHIC_DATABASE_DIRECTORY.glob("m*p.shp"))[0] 
+```
 
-% Esri Shapefile is the default file format when reading in data usign geopandas, so we only need to pass the file path in order to read in our data:
+Now, it’s finally time to open the file and look at its contents:
 
-% ```{code-cell} ipython3
-% import geopandas as gpd
+```{code-cell} ipython3
+import geopandas
+data = geopandas.read_file(input_filename)
+```
 
-% # Read file using gpd.read_file()
-% data = gpd.read_file(fp)
-% ```
+First, check the data type of the read data set:
 
-% Let's check the data type:
+```{code-cell} ipython3
+type(data)
+```
 
-% ```{code-cell} ipython3
-% ---
-% jupyter:
-%   outputs_hidden: false
-% ---
-% type(data)
-% ```
+Everything went fine, and we have a `geopandas.GeoDataFrame`. 
+Let’s also explore the data: (1) print the first few rows, and 
+(2) list the columns.
 
-% Here we see that our `data` -variable is a `GeoDataFrame`. GeoDataFrame extends the functionalities of
-% `pandas.DataFrame` in a way that it is possible to handle spatial data using similar approaches and datastructures as in pandas (hence the name geopandas). 
+```{code-cell} ipython3
+data.head()
+```
 
-% Let's check the first rows of data: 
+```{code-cell} ipython3
+data.columns
+```
 
-% ```{code-cell} ipython3
-% ---
-% jupyter:
-%   outputs_hidden: false
-% ---
-% data.head()
-% ```
+Oh boy! This data set has many columns, and all of the column names are in
+Finnish.
 
-% - Check all column names:
+Let’s select a few useful ones and also translate their names to
+English. We’ll keep ’RYHMA’ and ’LUOKKA’ (‘group’ and ‘class’, respectively),
+and, of course, the `geometry` column.
 
-% ```{code-cell} ipython3
-% data.columns.values
-% ```
+```{code-cell} ipython3
+data = data[["RYHMA", "LUOKKA", "geometry"]]
+```
 
-% As you might guess, the column names are in Finnish.
-% Let's select only the useful columns and rename them into English:
+Renaming a column in (geo)pandas works by passing a dictionary to
+`DataFrame.rename()`. In this dictionary, the keys are the old names, the values
+the new ones:
 
-% ```{code-cell} ipython3
-% data = data[['RYHMA', 'LUOKKA',  'geometry']]
-% ```
+```{code-cell} ipython3
+data = data.rename(
+    columns={
+        "RYHMA": "GROUP",
+        "LUOKKA": "CLASS"
+    }
+)
+```
 
-% Define new column names in a dictionary:
+How does the data set look now?
 
-% ```{code-cell} ipython3
-% colnames = {'RYHMA':'GROUP', 'LUOKKA':'CLASS'}
-% ```
+```{code-cell} ipython3
+data.head()
+```
 
-% Rename:
+:::{admonition} Check your understanding:
+:class: hint
 
-% ```{code-cell} ipython3
-% data.rename(columns=colnames, inplace=True)
-% ```
+Use your pandas skills on this geopandas data set to figure out the following
+information:
 
-% Check the output:
+- How many rows does the data set have?
+- How many unique classes?
+- ... and how many unique groups?
+:::
 
-% ```{code-cell} ipython3
-% data.head()
-% ```
 
-% #### Check your understanding
+---
 
-% +++
+### Explore the data set in a map:
 
-% <div class="alert alert-info">
-%     
-% Figure out the following information from our input data using your pandas skills:
-%     
-% - Number of rows?
-% - Number of classes?
-% - Number of groups?
-% </div>
+As geographers, we love maps. But beyond that, it’s always a good idea to
+explore a new data set also in a map. To create a simple map of a
+`geopandas.GeoDataFrame`, simply use its `plot()` method. It works similar to
+pandas (see [Lesson 7 of the Geo-Python 
+course](https://geo-python.github.io/site/notebooks/L7/matplotlib.html), but
+**draws a map based on the geometries of the data set** instead of a chart.
+
+```{code-cell} ipython3
+data.plot()
+```
 
-% ```{code-cell} ipython3
-% print("Number of rows", len(data['CLASS']))
-% print("Number of classes", data['CLASS'].nunique())
-% print("Number of groups", data['GROUP'].nunique())
-% ```
+Voilá! It is indeed this easy to produce a map out of an geospatial data set.
+Geopandas automatically positions your map in a way that it covers the whole
+extent of your data.
 
-% It is always a good idea to explore your data also on a map. Creating a simple map from a `GeoDataFrame` is really easy: you can use ``.plot()`` -function from geopandas that **creates a map based on the geometries of the data**. Geopandas actually uses matplotlib for plotting which we introduced in [Lesson 7 of the Geo-Python course](https://geo-python.github.io/site/notebooks/L7/matplotlib.html).
+:::{note}
+If you live in the Helsinki region, you might recognise some of the shapes in
+the map ;)
+:::
 
-% Let's try it out, and plot our GeoDataFrame:
+### Geometries in geopandas
 
-% ```{code-cell} ipython3
-% ---
-% jupyter:
-%   outputs_hidden: false
-% ---
-% data.plot()
-% ```
+Geopandas takes advantage of shapely’s geometry objects. Geometries are stored
+in a column called *geometry*.
 
-% Voilá! As we can see, it is really easy to produce a map out of your Shapefile with geopandas. Geopandas automatically positions your map in a way that it covers the whole extent of your data.
+Let’s print the first 5 rows of the column `geometry`:
 
-% *If you are living in the Helsinki region, you might recognize the shapes plotted on the map!*
+```{code-cell} ipython3
+data.geometry.head()
+```
 
-% +++
+Lo and behold, the `geometry` column contains familiar-looking values:
+*Well-Known Text* (WKT) strings. Don’t be fooled, they are, in fact,
+`shapely.geometry` objects (you might remember from [last week’s
+lesson](../lesson-1/geometry-objects)) that, when `print()`ed or type-cast into
+a `str`, are represented as a WKT string).
 
-% ## Geometries in Geopandas
+Since the geometries in a `GeoDataFrame` are stored as shapely objects, we can
+use **shapely methods** to handle geometries in geopandas.
 
-% Geopandas takes advantage of Shapely's geometric objects. Geometries are stored in a column called *geometry* that is a default column name for
-% storing geometric information in geopandas.
+Let’s take a closer look at (one of) the polygon geometries in the terrain data
+set, and try to use some of the shapely functionality we are already familiar
+with. For the sake of clarity, first, we’ll work with the geometry of the very
+first record, only:
 
-% +++
+```{code-cell} ipython3
+# The value of the column `geometry` in row 0:
+data.at[0, "geometry"]
+```
 
-% Let's print the first 5 rows of the column 'geometry':
+```{code-cell} ipython3
+# Print information about the area 
+print(f"Area: {round(data.at[0, 'geometry'].area)} m².")
+```
 
-% ```{code-cell} ipython3
-% ---
-% jupyter:
-%   outputs_hidden: false
-% ---
-% data['geometry'].head()
-% ```
+:::{admonition} Area measurement unit
+:class: note
 
-% As we can see the `geometry` column contains familiar looking values, namely Shapely `Polygon` -objects. Since the spatial data is stored as Shapely objects, **it is possible to use Shapely methods** when dealing with geometries in geopandas.
+Here, we know the coordinate reference system (CRS) of the input data set. The
+CRS also defines the unit of measurement (in our case, metres). That’s why we
+can print the computed area including an area measurement unit (square metres).
+:::
 
-% Let's have a closer look at the polygons and try to apply some of the Shapely methods we are already familiar with.
 
-% Let's start by checking the area of the first polygon in the data:
+Let’s do the same for multiple rows, and explore different options of how to.
+First, use the reliable and tried `iterrows()` pattern we learned in [lesson 6
+of the Geo-Python course](https://geo-python.github.io/site/notebooks/L6/pandas/advanced-data-processing-with-pandas.html#Iterating-rows-and-using-self-made-functions-in-Pandas).
 
-% ```{code-cell} ipython3
-% # Access the geometry on the first row of data
-% data.at[0, "geometry"]
-% ```
+```{code-cell} ipython3
+# Iterate over the first 5 rows of the data set
+for index, row in data[:5].iterrows():
+    polygon_area = row["geometry"].area
+    print(f"The polygon in row {index} has a surface area of {polygon_area:0.1f} m².")
+```
 
-% ```{code-cell} ipython3
-% # Print information about the area 
-% print("Area:", round(data.at[0, "geometry"].area, 0), "square meters")
-% ```
+As you see, all **pandas** functions, such as the `iterrows()` method, are
+available in geopandas without the need to call pandas separately. Geopandas
+builds on top of pandas, and it inherits most of its functionality.
 
+Of course the `iterrows()` pattern is not the most convenient and efficient way
+to calculate the area of many rows. Both `GeoSeries` (geometry columns) and
+`GeoDataFrame`s have an `area` property:
 
-% Let's do the same for the first five rows in the data; 
+```{code-cell} ipython3
+# the `area` property of a `GeoDataFrame`
+data.area
+```
 
-% - Iterate over the GeoDataFrame rows using the `iterrows()` -function that we learned [during the Lesson 6 of the Geo-Python course](https://geo-python.github.io/site/notebooks/L6/pandas/advanced-data-processing-with-pandas.html#Iterating-rows-and-using-self-made-functions-in-Pandas).
-% - For each row, print the area of the polygon (here, we'll limit the for-loop to a selection of the first five rows):
+```{code-cell} ipython3
+# the `area property of a `GeoSeries`
+data["geometry"].area
+```
 
-% ```{code-cell} ipython3
-% ---
-% jupyter:
-%   outputs_hidden: false
-% ---
-% # Iterate over rows and print the area of a Polygon
-% for index, row in data[0:5].iterrows():
-%     
-%     # Get the area from the shapely-object stored in the geometry-column
-%     poly_area = row['geometry'].area
-%     
-%     # Print info
-%     print("Polygon area at index {index} is: {area:.0f} square meters".format(index=index, area=poly_area))
-% ```
+It’s straight-forward to create a new column holding the area:
 
-% As you see from here, all **pandas** methods, such as the `iterrows()` function, are directly available in Geopandas without the need to call pandas separately because Geopandas is an **extension** for pandas. 
+```{code-cell} ipython3
+data["area"] = data.area
+data
+```
 
-% In practice, it is not necessary to use the iterrows()-approach to calculate the area for all features. Geodataframes and geoseries have an attribute `area` which we can use for accessing the area for each feature at once: 
+:::{admonition} Descriptive statistics
+:class: hint
 
-% ```{code-cell} ipython3
-% data.area
-% ```
+Do you remember how to calculate the *minimum*, *maximum*, *sum*, *mean*, and
+*standard deviation* of a pandas column? ([Lesson 5 of
+Geo-Python](https://geo-python-site.readthedocs.io/en/latest/notebooks/L5/exploring-data-using-pandas.html#descriptive-statistics))
+What are these values for the area column of the data set?
+:::
 
-% Let's next create a new column into our GeoDataFrame where we calculate and store the areas of individual polygons:
 
-% ```{code-cell} ipython3
-% ---
-% jupyter:
-%   outputs_hidden: false
-% ---
-% # Create a new column called 'area' 
-% data['area'] = data.area
-% ```
 
-% Check the output:
+## Write a subset of data to a file
 
-% ```{code-cell} ipython3
-% data['area']
-% ```
+[In the previous section](./vector-data-io.md#writing-geospatial-data-to-a-file), we
+learnt how to write an entire `GeoDataFrame` to a file. We can also write a
+filtered subset of a data set to a new file, e.g., to help with processing
+complex data sets.
 
-% These values correspond to the ones we saw in previous step when iterating rows.
+First, isolate the lakes in the input data set (class number `36200`, see table
+above):
 
-% Let's check what is the `min`, `max` and `mean` of those areas using familiar functions from our previous Pandas lessions.
+```{code-cell} ipython3
+lakes = data[data.CLASS == 36200]
+```
 
-% ```{code-cell} ipython3
-% # Maximum area
-% round(data['area'].max(), 2)
-% ```
+Then, plot the data subset to visually check whether it looks correct:
 
-% ```{code-cell} ipython3
-% # Minimum area
-% round(data['area'].min(), 2)
-% ```
+```{code-cell} ipython3
+lakes.plot()
+```
 
-% ```{code-cell} ipython3
-% # Average area
-% round(data['area'].mean(), 2)
-% ```
+And finally, write the filtered data to a Shapefile:
 
-% ## Writing data into a shapefile
+```{code-cell} ipython3
+lakes.to_file(DATA_DIRECTORY / "finland_topographic_database" / "lakes.shp")
+```
 
-% It is possible to export GeoDataFrames into various data formats using the [to_file()](http://geopandas.org/io.html#writing-spatial-data) method. In our case, we want to export subsets of the data into Shapefiles (one file for each feature class).
+Check the [Vector Data I/O](vector-data-io) section to see which data formats
+geopandas can write to.
 
-% Let's first select one class (class number `36200`, "Lake water") from the data as a new GeoDataFrame:
 
-% ```{code-cell} ipython3
-% # Select a class
-% selection = data.loc[data["CLASS"]==36200]
-% ```
 
-% Check the selection:
+## Grouping data
 
-% ```{code-cell} ipython3
-% selection.plot()
-% ```
+A particularly useful method of (geo)pandas’ data frames is their grouping
+function: [`groupby()`](https://pandas.pydata.org/docs/user_guide/groupby.html)
+can **split data into groups** based on some criteria, **apply** a function
+individually to each of the groups, and **combine** results of such an
+operation into a common data structure.
 
-% - write this layer into a new Shapefile using the `gpd.to_file()` -function:
+We have used this function earlier: in [Geo-Python, 
+lesson 6](https://geo-python-site.readthedocs.io/en/latest/notebooks/L6/advanced-data-processing-with-pandas.html#aggregating-data-in-pandas-by-grouping).
 
-% ```{code-cell} ipython3
-% # Create a output path for the data
-% output_folder = r"L2_data/"
-% output_fp = os.path.join(output_folder, "Class_36200.shp")
-% ```
+We can use *grouping* here to split our input data set into subsets that relate
+to each of the `CLASS`es of terrain cover, then save a separate file for each
+class.
 
-% ```{code-cell} ipython3
-% # Write those rows into a new file (the default output file format is Shapefile)
-% selection.to_file(output_fp)
-% ```
+Let’s start this by, again, taking a look at how the data set actually looks
+like:
 
-% #### Check your understanding
+```{code-cell} ipython3
+data.head()
+```
 
-% +++
+Remember: the `CLASS` column contains information about a polygon’s land use
+type. Use the
+[`pandas.Series.unique()`](https://pandas.pydata.org/docs/reference/api/pandas.Series.unique.html)
+method to list all values that occur:
 
-% <div class="alert alert-info">
+```{code-cell} ipython3
+data["CLASS"].unique()
+```
 
-% Read the output Shapefile in a new geodataframe, and check that the data looks ok.
-% </div>
+To group data, use the data frame’s `groupby()` method, supply a column name as
+a parameter:
 
-% ```{code-cell} ipython3
-% temp = gpd.read_file(output_fp)
-% ```
+```{code-cell} ipython3
+grouped_data = data.groupby("CLASS")
+grouped_data
+```
 
-% ```{code-cell} ipython3
-% # Check first rows
-% temp.head()
-% ```
+So, `grouped_data` is a `DataFrameGroupBy` object. Inside a `GroupBy` object,
+its property `groups` is a dictionary that works as a lookup table: it records
+which rows belong to which group. The keys of the dictionary are the unique
+values of the grouping column:
 
-% ```{code-cell} ipython3
-% # You can also plot the data for a visual check
-% temp.plot()
-% ```
+```{code-cell}
+grouped_data.groups
+```
 
-% ## Grouping the Geodataframe
+However, one can also simply iterate over the entire `GroupBy` object. Let’s
+count how many rows of data each group has:
 
-% One really useful function that can be used in Pandas/Geopandas is [groupby()](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.groupby.html) which groups data based on values on selected column(s). We saw and used this function already in Lesson 6 of the Geo-Python course. 
+```{code-cell}
+for key, group in grouped_data:
+    print(f"Terrain class {key} has {len(group)} rows.")
+```
 
-% Next we will automate the file export task; we will group the data based on column `CLASS` and export a shapefile for each class.
+There are, for instance, 56 lake polygons (class `36200`) in the input data set.
 
-% Let's continue with the same input file we already read previously into the variable `data`. We also selected and renamed a subset of the columns.
+To obtain all rows that belong to one particular group, use the `get_group()`
+method, which returns a brand-new `GeoDataFrame`:
 
-% Check again the first rows of our input data:
+```{code-cell}
+lakes = grouped_data.get_group(36200)
+type(lakes)
+```
 
-% ```{code-cell} ipython3
-% data.head()
-% ```
+:::{caution}
+The index in the new data frame stays the same as in the ungrouped input data
+set. This can be helpful, for instance, when you want to join the grouped data
+back to the original input data.
+:::
 
-% The `CLASS` column in the data contains information about different land use types. With `.unique()` -function we can quickly see all different values in that column:
 
-% ```{code-cell} ipython3
-% ---
-% jupyter:
-%   outputs_hidden: false
-% ---
-% # Print all unique values in the column
-% data['CLASS'].unique()
-% ```
+## Write grouped data to separate files
 
-% - Now we can use that information to group our data and save all land use types into different layers:
+Now we have all the necessary tools in hand to split the input data into
+separate data sets for each terrain class, and write the individual subsets to
+new, separate, files. In fact, the code looks almost too simple, doesn’t it?
 
-% ```{code-cell} ipython3
-% ---
-% jupyter:
-%   outputs_hidden: false
-% ---
-% # Group the data by class
-% grouped = data.groupby('CLASS')
+```{code-cell}
+# Iterate over the input data, grouped by CLASS
+for key, group in data.groupby("CLASS"):
+    # save the group to a new shapefile
+    group.to_file(TOPOGRAPHIC_DATABASE_DIRECTORY / f"terrain_{key}.shp")
+```
 
-% # Let's see what we have
-% grouped
-% ```
+:::{admonition} File name
+:class: attention
 
-% As we can see, `groupby` -function gives us an object called `DataFrameGroupBy` which is similar to list of keys and values (in a dictionary) that we can iterate over.
+We used a `pathlib.Path` combined with an f-string to generate the new output
+file’s path and name. Check this week’s section [Managing file
+paths](managing-file-paths), and [Geo-Python lesson
+2](https://geo-python-site.readthedocs.io/en/latest/notebooks/L2/Python-basic-elements.html#f-string-formatting)
+to revisit how they work.
+:::
 
-% Check group keys:
 
-% ```{code-cell} ipython3
-% grouped.groups.keys()
-% ```
+## Extra: save summary statistics to CSV spreadsheet
 
-% The group keys are unique values from the column by which we grouped the dataframe.
+Whenever the results of an operation on a `GeoDataFrame` do not include a
+geometry, the output data frame will automatically become a ‘plain’
+`pandas.DataFrame`, and can be saved to the standard table formats.
 
-% Check how many rows of data each group has:
+One interesting application of this is to save basic descriptive statistics of
+a geospatial data set into a CSV table. For instance, we might want to know the
+area each terrain class covers. 
 
-% ```{code-cell} ipython3
-% ---
-% jupyter:
-%   outputs_hidden: false
-% ---
-% # Iterate over the grouped object
-% for key, group in grouped:
+Again, we start by grouping the input data by terrain classes, and then compute
+the sum of each classes’ area. This can be condensed into one line of code:
 
-%     # Let's check how many rows each group has:
-%     print('Terrain class:', key)
-%     print('Number of rows:', len(group), "\n")
-% ```
+```{code-cell}
+area_information = data.groupby("CLASS").area.sum()
+area_information
+```
 
-% There are, for example, 56 lake polygons in the input data.
+We can then save the resulting table into a CSV file using the standard pandas
+approach we learned about in [Geo-Python
+lesson 5](https://geo-python-site.readthedocs.io/en/latest/notebooks/L5/processing-data-with-pandas.html#writing-data-to-a-file).
 
-% +++
-
-% We can also check how the _last_ group looks like (we have the variables in memory from the last iteration of the for-loop):
-
-% ```{code-cell} ipython3
-% group.head()
-% ```
-
-% Notice that the index numbers refer to the row numbers in the original data -GeoDataFrame.
-
-% +++
-
-% Check also the data type of the group:
-
-% ```{code-cell} ipython3
-% type(group)
-% ```
-
-% As we can see, each set of data are now grouped into separate GeoDataFrames, and we can save them into separate files.
-
-% +++
-
-% ### Saving multiple output files
-
-% Let's **export each class into a separate Shapefile**. While doing this, we also want to **create unique filenames for each class**.
-
-% When looping over the grouped object, information about the class is stored in the variable `key`, and we can use this information for creating new variable names inside the for-loop. For example, we want to name the shapefile containing lake polygons as "terrain_36200.shp".
-
-
-% <div class="alert alert-info">
-
-% **String formatting**
-%     
-% There are different approaches for formatting strings in Python. Here are a couple of different ways for putting together file-path names using two variables:
-
-% ```
-% basename = "terrain"
-% key = 36200
-
-% # OPTION 1. Concatenating using the `+` operator:
-% out_fp = basename + "_" + str(key) + ".shp"
-
-% # OPTION 2. Positional formatting using `%` operator
-% out_fp = "%s_%s.shp" %(basename, key)
-%     
-% # OPTION 3. Positional formatting using `.format()`
-% out_fp = "{}_{}.shp".format(basename, key)
-% ```
-%     
-% Read more from here: https://pyformat.info/
-% </div>
-
-
-% Let's now export terrain classes into separate Shapefiles.
-
-% - First, create a new folder for the outputs:
-
-% ```{code-cell} ipython3
-% # Determine output directory
-% output_folder = r"L2_data/"
-
-% # Create a new folder called 'Results' 
-% result_folder = os.path.join(output_folder, 'Results')
-
-% # Check if the folder exists already
-% if not os.path.exists(result_folder):
-%     
-%     print("Creating a folder for the results..")
-%     # If it does not exist, create one
-%     os.makedirs(result_folder)
-%     
-% else:
-%     print("Results folder exists already.")
-% ```
-
-% At this point, you can go to the file browser and check that the new folder was created successfully.
-
-% - Iterate over groups, create a file name, and save group to file:
-
-% ```{code-cell} ipython3
-% ---
-% jupyter:
-%   outputs_hidden: false
-% ---
-% # Iterate over the groups
-% for key, group in grouped:
-%     # Format the filename 
-%     output_name = "terrain_{}.shp".format(key)
-
-%     # Print information about the process
-%     print("Saving file", os.path.basename(output_name))
-
-%     # Create an output path
-%     outpath = os.path.join(result_folder, output_name)
-
-%     # Export the data
-%     group.to_file(outpath)
-% ```
-
-% Excellent! Now we have saved those individual classes into separate Shapefiles and named the file according to the class name. These kind of grouping operations can be really handy when dealing with layers of spatial data. Doing similar process manually would be really laborious and error-prone.
-
-% +++
-
-% ### Extra: save data to csv
-
-% +++
-
-% We can also extract basic statistics from our geodataframe, and save this information as a text file. 
-
-% Let's summarize the total area of each group:
-
-% ```{code-cell} ipython3
-% area_info = grouped.area.sum().round()
-% ```
-
-% ```{code-cell} ipython3
-% area_info
-% ```
-
-% - save area info to csv using pandas:
-
-% ```{code-cell} ipython3
-% # Create an output path
-% area_info.to_csv(os.path.join(result_folder, "terrain_class_areas.csv"), header=True)
-% ```
-
-% ## Summary
-
-% In this tutorial we introduced the first steps of using geopandas. More specifically you should know how to:
-
-% 1. Read data from Shapefile using geopandas
-
-% 2. Access geometry information in a geodataframe
-
-% 4. Write GeoDataFrame data from Shapefile using geopandas
-
-% 5. Automate a task to save specific rows from data into Shapefile based on specific key using `groupby()` -function
-
-% 6. Extra: saving attribute information to a csv file.
-
+```{code-cell}
+area_information.to_csv(TOPOGRAPHIC_DATABASE_DIRECTORY / "area_by_terrain_class.csv")
+```

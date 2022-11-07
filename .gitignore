@@ -4,10 +4,13 @@
 docs/build/
 docs/_build/
 
-# ignore data that is downloaded during sphinx-build
+# ignore data that is created during sphinx-build
 docs/static/data/europe_nuts_regions.geojson
 docs/static/data/europe_nuts_regions.gpkg
 docs/static/data/eu_countries/eu_countries_EPSG3035.gpkg
+docs/static/data/finland_topographic_database/lakes.*
+docs/static/data/finland_topographic_database/terrain_*.*
+docs/static/data/finland_topographic_database/area_by_terrain_class.csv
 
 *~
 *.swp

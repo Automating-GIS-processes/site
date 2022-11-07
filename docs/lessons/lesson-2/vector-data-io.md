@@ -115,6 +115,7 @@ nuts_regions = geopandas.read_file("https://gisco-services.ec.europa.eu/distribu
 nuts_regions.head()
 ```
 
+
 #### Writing geospatial data to a file
 
 Writing data to a file is equally straight-forward: simply use the [`to_file()`
