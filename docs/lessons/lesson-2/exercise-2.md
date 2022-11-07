@@ -84,3 +84,111 @@ gdf
 
 Now, we have a ‘proper‘ `GeoDataFrame` with which we can do all geospatial
 operations we would want to do.
+
+
+
+### Creating a new `geopandas.GeoDataFrame`: alternative 1
+
+Sometimes, it makes sense to start from scratch with an empty data set and
+gradually add records. Of course, this is also possible with geopandas’ data
+frames, that can then be saved as a new geopackage or shapefile.
+
+First, create a completely empty `GeoDataFrame`:
+
+```{code-cell}
+import geopandas
+
+new_geodataframe = geopandas.GeoDataFrame()
+```
+
+Then, create shapely geometry objects and insert them into the data frame. To
+insert a geometry object into the `geometry` column, and a name into the `name`
+column, in a newly added row, use:
+
+```{code-cell}
+import shapely.geometry
+polygon = shapely.geometry.Polygon(
+    [
+        (24.9510, 60.1690),
+        (24.9510, 60.1698),
+        (24.9536, 60.1698),
+        (24.9536, 60.1690)
+    ]
+)
+name = "Senaatintori"
+
+new_geodataframe.at[
+    len(new_geodataframe),  # in which row,
+    ["name", "geometry"]    # in which columns to save values
+] = [name, polygon]
+
+new_geodataframe
+```
+
+```{code-cell}
+polygon
+```
+
+:::{hint}
+We used the `len(new_geodataframe)` as a row number. Since rows are counted from
+0, the number of rows (length of data frame) is one greater than the address of
+the last row. This expression, thus, always adds a new row, independent of the
+actual length of the data frame.
+:::
+
+Before saving the newly created dataset, don’t forget to define a cartographic
+reference system for it. Otherwise, you will have trouble reusing the file in
+other programs:
+
+```{code-cell}
+new_geodataframe.crs = "EPSG:4326"
+```
+
+
+### Creating a new `geopadnas.GeoDataFrame`: alternative 2
+
+Often, it is more convenient, and more elegant, to first create a dictionary
+to collect data, that can then be converted into a data frame all at once.
+
+For this, first define a `dict` with the column names as keys, and empty `list`s
+as values:
+
+```{code-cell}
+data = {
+    "name": [],
+    "geometry": []
+}
+```
+
+Then, fill the dict with data:
+
+```{code-cell}
+import shapely.geometry
+
+data["name"].append("Senaatintori")
+data["geometry"] = shapely.geometry.Polygon(
+    [
+        (24.9510, 60.1690),
+        (24.9510, 60.1698),
+        (24.9536, 60.1698),
+        (24.9536, 60.1690)
+    ]
+)
+```
+
+Finally, use this dictionary as input for a new `GeoDataFrame`. Don’t forget to
+specify a CRS:
+
+```{code-cell}
+new_geodataframe = geopandas.GeoDataFrame(data, crs="EPSG:4326")
+new_geodataframe
+```
+
+---
+
+:::{note}
+These two approaches result in identical `GeoDataFrame`s. Sometimes, one
+technique is more convenient than the other. You should always evaluate
+different ways of solving a problem, and find the most appropriate and efficient
+solution (there is **always** more than one possible solution).
+:::
