@@ -117,7 +117,7 @@ polygon = shapely.geometry.Polygon(
 )
 name = "Senaatintori"
 
-new_geodataframe.at[
+new_geodataframe.loc[
     len(new_geodataframe),  # in which row,
     ["name", "geometry"]    # in which columns to save values
 ] = [name, polygon]
@@ -125,15 +125,15 @@ new_geodataframe.at[
 new_geodataframe
 ```
 
-```{code-cell}
-polygon
-```
-
 :::{hint}
-We used the `len(new_geodataframe)` as a row number. Since rows are counted from
-0, the number of rows (length of data frame) is one greater than the address of
+We used the `len(new_geodataframe)` as a row index (which, in a newly created
+data frame is equivalent to the row number).  Since rows are counted from 0,
+the number of rows (length of data frame) is one greater than the address of
 the last row. This expression, thus, always adds a new row, independent of the
 actual length of the data frame.
+
+Note, that, strictly speaking, the index is independent from the row number,
+but in newly created data frames there are identical.
 :::
 
 Before saving the newly created dataset, don’t forget to define a cartographic
