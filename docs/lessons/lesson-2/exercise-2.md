@@ -166,13 +166,15 @@ Then, fill the dict with data:
 import shapely.geometry
 
 data["name"].append("Senaatintori")
-data["geometry"] = shapely.geometry.Polygon(
-    [
-        (24.9510, 60.1690),
-        (24.9510, 60.1698),
-        (24.9536, 60.1698),
-        (24.9536, 60.1690)
-    ]
+data["geometry"].append(
+    shapely.geometry.Polygon(
+        [
+            (24.9510, 60.1690),
+            (24.9510, 60.1698),
+            (24.9536, 60.1698),
+            (24.9536, 60.1690)
+        ]
+    )
 )
 ```
 
