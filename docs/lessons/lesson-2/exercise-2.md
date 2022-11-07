@@ -125,17 +125,6 @@ new_geodataframe.loc[
 new_geodataframe
 ```
 
-:::{hint}
-We used the `len(new_geodataframe)` as a row index (which, in a newly created
-data frame is equivalent to the row number).  Since rows are counted from 0,
-the number of rows (length of data frame) is one greater than the address of
-the last row. This expression, thus, always adds a new row, independent of the
-actual length of the data frame.
-
-Note, that, strictly speaking, the index is independent from the row number,
-but in newly created data frames there are identical.
-:::
-
 Before saving the newly created dataset, don’t forget to define a cartographic
 reference system for it. Otherwise, you will have trouble reusing the file in
 other programs:
@@ -144,8 +133,19 @@ other programs:
 new_geodataframe.crs = "EPSG:4326"
 ```
 
+:::{hint}
+In the example above, we used the `len(new_geodataframe)` as a row index
+(which, in a newly created data frame is equivalent to the row number).  Since
+rows are counted from 0, the number of rows (length of data frame) is one
+greater than the address of the last row. This expression, thus, always adds a
+new row, independent of the actual length of the data frame.
 
-### Creating a new `geopadnas.GeoDataFrame`: alternative 2
+Note, that, strictly speaking, the index is independent from the row number,
+but in newly created data frames there are identical.
+:::
+
+
+### Creating a new `geopandas.GeoDataFrame`: alternative 2
 
 Often, it is more convenient, and more elegant, to first create a dictionary
 to collect data, that can then be converted into a data frame all at once.
