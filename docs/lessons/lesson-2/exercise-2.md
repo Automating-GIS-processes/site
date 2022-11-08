@@ -20,7 +20,7 @@ Please complete this exercise
 :::
 
 To start this assignment, [accept the GitHub classroom
-assignment](https://classroom.github.com/a/aSlecihw), and clone *your own*
+assignment](#exercise-2), and clone *your own*
 repository, e.g., in a [CSC
 Notebook](../../course-info/course-environment)
 instance. Make sure you commit and push all changes you make (you can
