@@ -1,0 +1,8 @@
+# Countries of the European Union, 2022
+
+Data (c) EuroGeographics and UN-FAO
+
+- downloaded from https://ec.europa.eu/eurostat/web/gisco/geodata/reference-data/administrative-units-
+  statistical-units/countries,
+- filtered to include only E.U. countries, and
+- clipped to a bounding box of [-12.5, 34, 35.5, 70] degrees

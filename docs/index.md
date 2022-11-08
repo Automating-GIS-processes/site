@@ -149,19 +149,19 @@ lessons/lesson-1/geometry-objects
 lessons/lesson-1/exercise-1
 ```
 
-% ```{toctree}
-% ---
-% caption: Lesson 2
-% maxdepth: 2
-% ---
-% lessons/lesson-2/overview
-% lessons/lesson-2/definitions
-% lessons/lesson-2/data-io
-% lessons/lesson-2/geopandas-basics
-% lessons/lesson-2/projections
-% lessons/lesson-2/create-geodataframes
-% lessons/lesson-2/exercise-2
-% ```
+```{toctree}
+---
+caption: Lesson 2
+maxdepth: 2
+---
+lessons/lesson-2/overview
+lessons/lesson-2/key-concepts
+lessons/lesson-2/managing-file-paths
+lessons/lesson-2/vector-data-io
+lessons/lesson-2/geopandas-an-introduction
+lessons/lesson-2/map-projections
+lessons/lesson-2/exercise-2
+```
 
 % ```{toctree}
 % ---

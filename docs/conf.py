@@ -78,3 +78,19 @@ html_theme_options = {
 }
 
 nb_execution_mode = "force"
+nb_execution_timeout = 120  # needed, e.g., when matplotlib updates its font cache
+nb_execution_raise_on_error = True  # fail instead of hiding the error in logs
+
+myst_heading_anchors = 4  # create #id links for h1-h4
+
+exclude_patterns = [
+    "_build",
+    "jupyter_execute",
+    "static"
+]
+
+
+# import matplotlib here, otherwise we get the 
+# ‘building font cache’ warning in the middle of
+# a notebook (when it runs for the first time)
+import matplotlib.pyplot
