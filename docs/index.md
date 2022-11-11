@@ -163,21 +163,21 @@ lessons/lesson-2/map-projections
 lessons/lesson-2/exercise-2
 ```
 
-% ```{toctree}
-% ---
-% caption: Lesson 3
-% maxdepth: 2
-% ---
-% lessons/lesson-3/overview
-% lessons/lesson-3/geocoding
-% lessons/lesson-3/geocoding-in-geopandas
-% lessons/lesson-3/point-in-polygon
-% lessons/lesson-3/spatial-join
-% lessons/lesson-3/nearest-neighbour
-% lessons/lesson-3/spatial-index
-% lessons/lesson-3/nearest-neighbor-faster
-% lessons/lesson-3/exercise-3
-% ```
+```{toctree}
+---
+caption: Lesson 3
+maxdepth: 2
+---
+lessons/lesson-3/overview
+lessons/lesson-3/geocoding
+lessons/lesson-3/geocoding-in-geopandas
+lessons/lesson-3/point-in-polygon-and-intersect
+lessons/lesson-3/spatial-join
+lessons/lesson-3/nearest-neighbour-analysis
+lessons/lesson-3/spatial-index
+lessons/lesson-3/nearest-neighbour-analysis-on-large-data-sets
+lessons/lesson-3/exercise-3
+```
 
 % ```{toctree}
 % ---
