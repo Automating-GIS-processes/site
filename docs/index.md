@@ -176,16 +176,16 @@ lessons/lesson-3/spatial-join
 lessons/lesson-3/exercise-3
 ```
 
-% ```{toctree}
-% ---
-% caption: Lesson 4
-% maxdepth: 2
-% ---
-% lessons/lesson-4/nearest-neighbour-analysis
-% lessons/lesson-4/spatial-index
-% lessons/lesson-4/nearest-neighbour-analysis-on-large-data-sets
-% lessons/lesson-4/exercise-4
-% ```
+```{toctree}
+---
+caption: Lesson 4
+maxdepth: 2
+---
+lessons/lesson-4/nearest-neighbour-analysis
+lessons/lesson-4/spatial-index
+lessons/lesson-4/nearest-neighbour-analysis-on-large-data-sets
+lessons/lesson-4/exercise-4
+```
 
 % ```{toctree}
 % ---
