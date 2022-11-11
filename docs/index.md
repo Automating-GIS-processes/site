@@ -173,15 +173,23 @@ lessons/lesson-3/geocoding
 lessons/lesson-3/geocoding-in-geopandas
 lessons/lesson-3/point-in-polygon-and-intersect
 lessons/lesson-3/spatial-join
-lessons/lesson-3/nearest-neighbour-analysis
-lessons/lesson-3/spatial-index
-lessons/lesson-3/nearest-neighbour-analysis-on-large-data-sets
 lessons/lesson-3/exercise-3
 ```
 
 % ```{toctree}
 % ---
 % caption: Lesson 4
+% maxdepth: 2
+% ---
+% lessons/lesson-3/nearest-neighbour-analysis
+% lessons/lesson-3/spatial-index
+% lessons/lesson-3/nearest-neighbour-analysis-on-large-data-sets
+% lessons/lesson-3/exercise-4
+% ```
+
+% ```{toctree}
+% ---
+% caption: Lesson 5
 % maxdepth: 2
 % ---
 % lessons/lesson-4/overview
@@ -193,7 +201,7 @@ lessons/lesson-3/exercise-3
 
 % ```{toctree}
 % ---
-% caption: Lesson 5
+% caption: Lesson 6
 % maxdepth: 2
 % ---
 % lessons/lesson-5/overview
@@ -202,17 +210,6 @@ lessons/lesson-3/exercise-3
 % lessons/lesson-5/employment-rate-map
 % lessons/lesson-5/share-on-github
 % lessons/lesson-5/exercise-5
-% ```
-
-% ```{toctree}
-% ---
-% caption: Lesson 6
-% maxdepth: 2
-% ---
-% lessons/lesson-6/overview
-% lessons/lesson-6/retrieve-osm-data
-% lessons/lesson-6/network-analysis
-% lessons/lesson-6/exercise-6
 % ```
 
 % ```{toctree}
@@ -227,6 +224,16 @@ lessons/lesson-3/exercise-3
 
 % ```{toctree}
 % ---
+% caption: Extra: Network analysis
+% maxdepth: 2
+% ---
+% lessons/lesson-6/overview
+% lessons/lesson-6/retrieve-osm-data
+% lessons/lesson-6/network-analysis
+% lessons/lesson-6/exercise-6
+
+% ```{toctree}
+% ---
 % caption: "Extra: PyQGIS"
 % maxdepth: 2
 % ---
@@ -237,7 +244,7 @@ lessons/lesson-3/exercise-3
 
 % ```{toctree}
 % ---
-% caption: "Extra: Raster"
+% caption: "Extra: Raster handling in Python"
 % maxdepth: 2
 % ---
 % lessons/raster/overview
