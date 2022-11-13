@@ -32,7 +32,7 @@ After this week, you should be able to:
 
 ## Lesson video
 
-<iframe id="ytplayer" type="text/html" width="768" height="576"
+<iframe id="ytplayer" type="text/html" width="700" height="394"
   src="https://www.youtube.com/embed/XhqvQdZXBF8?autoplay=0
   frameborder="0">
 </iframe>
