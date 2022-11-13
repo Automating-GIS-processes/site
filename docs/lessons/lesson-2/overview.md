@@ -33,6 +33,6 @@ After this week, you should be able to:
 ## Lesson video
 
 <iframe id="ytplayer" type="text/html" width="768" height="576"
-  src="https://www.youtube.com/embed/XhqvQdZXBF8autoplay=0&origin=https://autogis-site.readthedocs.io"
+  src="https://www.youtube.com/embed/XhqvQdZXBF8?autoplay=0
   frameborder="0">
 </iframe>
