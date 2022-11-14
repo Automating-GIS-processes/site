@@ -61,7 +61,7 @@ In terms of the *join-type*, geopandas implements three different options:
 - *inner*: keep only records of matching records, keep *left* geometry column
 
 
-:::{hint}
+:::{tip}
 The [PyGIS
 book](https://pygis.io/docs/e_spatial_joins.html) has a great overview of
 spatial predicaments and join-types with explanatory drawings.
