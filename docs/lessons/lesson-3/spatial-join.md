@@ -118,9 +118,8 @@ already the parentheses of the method call would suffice.
 :::
 
 
-```{code-cell}
-addresses.head()
-```
+---
+
 
 ```{code-cell}
 population_grid.head()
