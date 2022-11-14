@@ -46,29 +46,45 @@ addresses.head()
 We have an `id` for each row and an address in the `addr` column.
 
 
-## Geocode addresses using *photon*
+## Geocode addresses using *Nominatim*
 
-In our example, we will use the default geocoder built into geopandas’
+In our example, we will use *Nominatim* as a *geocoding provider*. [*Nominatim*](https://nominatim.org/) is a library and service using OpenStreetMap data, and run by the OpenStreetMap Foundation. Geopandas’
 [`geocode()`
-function](http://geopandas.org/reference/geopandas.tools.geocode.html): a
-service called [*photon*](https://photon.komoot.io/) that uses OpenStreetMap
-data and is provided as an open-source and free-to-use service by
-[Komoot](https://kommot.io). The service is provided on a fair-use principle,
-if you implement large-scale geocoding, you should install your own instance,
-or use another, paid-for geocoding service.
+function](http://geopandas.org/reference/geopandas.tools.geocode.html) supports it natively.
+
+
+:::{admonition} Fair-use
+:class: note
+
+[Nominatim’s terms of use](https://operations.osmfoundation.org/policies/nominatim/)
+require that users of the service make sure they don’t send more frequent
+requests than one per second, and that a custom **user-agent** string is
+attached to each query.
+
+Geopandas’ implementation allows us to specify a `user_agent`; the library also
+takes care of respecting the rate-limit of Nominatim.
+:::
+
 
 ```{code-cell}
 import geopandas
 
-geocoded_addresses = geopandas.tools.geocode(addresses["addr"], provider="nominatim", user_agent="autogis2022")
+geocoded_addresses = geopandas.tools.geocode(
+    addresses["addr"],
+    provider="nominatim",
+    user_agent="autogis2022"
+)
 geocoded_addresses.head()
 ```
 
-And voilà! As a result we received a `GeoDataFrame` that contains our original
-address and a `geometry` column of `shapely.geometry.Point`s that
-we can use, for instance, to export the data to a geospatial data format.
+Et voilà! As a result we received a `GeoDataFrame` that contains a parsed
+version of our original addresses and a `geometry` column of
+`shapely.geometry.Point`s that we can use, for instance, to export the data to
+a geospatial data format.
 
-However, the `id` column was discarded in the process. To combine the input data set with our result set, we can use pandas’ [*join* operations](https://pandas.pydata.org/docs/user_guide/merging.html). 
+However, the `id` column was discarded in the process. To combine the input
+data set with our result set, we can use pandas’ [*join*
+operations](https://pandas.pydata.org/docs/user_guide/merging.html).
 
 
 ## Join data frames
@@ -112,7 +128,8 @@ The output of `join()` is a new `geopandas.GeoDataFrame`:
 type(geocoded_addresses_with_id)
 ```
 
-The new data frame has all original columns plus a new column for `geometry`. 
+The new data frame has all original columns plus new columns for the `geometry`
+and for a parsed `address` that can be used to spot-check the results.
 
 :::{note}
 If you would do the join the other way around, i.e. `addresses.join(geocoded_addresses)`, the output would be a `pandas.DataFrame`, not a `geopandas.GeoDataFrame`.
