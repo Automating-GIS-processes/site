@@ -1,24 +1,65 @@
+---
+kernelspec:
+  name: python3
+  display_name: python3
+jupytext:
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: '0.13'
+    jupytext_version: 1.14.1
+---
+
+
 # Exercise 3
 
-```{image} https://img.shields.io/badge/launch-CSC%20notebook-blue.svg
-:target: https://notebooks.csc.fi/#/blueprint/d189695c52ad4c0d89ef72572e81b16c
-```
-
-:::{admonition} Start your assignment
-You can start working on your copy of Exercise 3 by [accepting the GitHub Classroom assignment](https://classroom.github.com/a/AAJygAbV).
+:::{important}
+Please complete this exercise
+**by the end of day** on Friday, 25 November, 2022**
+(the day of next week’s work session).
 :::
 
-**Exercise 3 is due by by 17:00 on Thursday the 25th of November 2020** (day before the next practical session).
+To start this assignment, [accept the GitHub classroom
+assignment](#https://classroom.github.com/a/ADD_LINK), and clone *your own*
+repository, e.g., in a [CSC
+Notebook](../../course-info/course-environment)
+instance. Make sure you commit and push all changes you make (you can
+revisit instructions on how to use `git` and the JupyterLab git-plugin
+on the [website of the Geo-Python
+course](https://geo-python-site.readthedocs.io/en/latest/lessons/L2/git-basics.html).
 
-You can also take a look at the open course copy of [Exercise 3 in the course GitHub repository](https://github.com/AutoGIS-2021/Exercise-3) (does not require logging in).
-Note that you should not try to make changes to this copy of the exercise, but rather only to the copy available via GitHub Classroom.
+To preview the exercise without logging in, you can find the open course copy
+of the course’s GitHub repository at
+[github.com/Automating-GIS-processes-2022/Exercise-3](https://github.com/Automating-GIS-processes-2022/Exercise-3).
+Don’t attempt to commit changes to that repository, but rather work with your
+personal GitHub classroom copy (see above).
+
 
 ## Hints
 
 ### Coordinate reference systems
+ 
+:::{caution}
 
-Remember the difference between defining a crs, and re-projecting a layer to a new crs!
-Before re-projecting, the layer should have a valid crs definition which you can check like this: `data.crs`.
+Remember the difference between defining a CRS, and re-projecting a layer into
+a new CRS!  Before re-projecting, the layer should have a valid CRS definition
+which you can check like this: `data.crs`.
+:::
+ 
+To **define a projection**, assign a new CRS to a geo-data frame’s `crs`
+property:
 
-- defining a projection is done like this: `data.crs = CRS.from_epsg(4326)`  (this command only updates the metadata about coordinate reference system which is stored in the class variable .crs, and does not modify the actual coordinate values. Do this only if the original crs definition is missing or invalid!)
-- re-projecting a layer, eg: `data = data.to_crs(CRS.from_epsg(4326))` (this one will actually re-project the coordinates in the geometry-column AND re-define the .crs definition)
+```{code}
+data.crs = pyproj.CRS("EPSG:4326")
+```
+
+This will update the metadata, only. The actual coordinate values will remained
+unmodified. Use this only if the original CRS definition is missing or invalid.
+
+To **re-project** a `geopandas.GeoDataFrame`, use its `to_crs()` method:
+
+```{code}
+data = data.to_crs("EPSG:4326")
+```
+
+This will actually transform the geometry features of the data frame, *AND* re-define the CRS definition stored in the `.crs` property.
