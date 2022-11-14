@@ -20,9 +20,9 @@ data based on location. Such spatial queries are one of the typical
 first steps of the workflow when doing spatial analysis. Performing a
 spatial join (will be introduced later) between two spatial datasets is
 one of the most typical applications where Point in Polygon (PIP) query
-is used. 
+is used.
 
-For further reading about PIP and other geometric operations, 
+For further reading about PIP and other geometric operations,
 see Chapter 4.2 in Smith, Goodchild & Longley: [Geospatial Analysis - 6th edition](https://www.spatialanalysisonline.com/HTML/index.html).
 
 
@@ -94,7 +94,7 @@ point2.within(polygon)
 It seems that the first point is inside the polygon, but the second one is not.
 
 We can turn the logic of the look-up around: Rather than check of the point is
-within the polygon, we can also ask whether the polygon `contains()` the point: 
+within the polygon, we can also ask whether the polygon `contains()` the point:
 
 ```{code-cell}
 polygon.contains(point1)
@@ -122,7 +122,7 @@ Then, which one should you use? Well, it depends:
    polygons until you find a polygon that **`contains()`** the point specified
 :::
 
- 
+
 ## Point-in-polygon queries on `geopandas.GeoDataFrame`s
 
 In the following practical example we find which of the addresses we obtained
@@ -152,8 +152,9 @@ city_districts.plot()
 
 Specifically, we want to find out which points are within the ‘Eteläinen’
 (‘southern’) city district. Let’s start by obtaining a separate data set for
-this district, and plotting a multi-layer map that shows all districts, the
-‘Eteläinen’ district, and all the points in one map:
+this district, loading the addresses data, and plotting a multi-layer map
+that shows all districts, the ‘Eteläinen’ district, and all the points in
+one map:
 
 ```{code-cell}
 southern_district = city_districts[city_districts.name == "Eteläinen"]
@@ -161,152 +162,77 @@ southern_district
 ```
 
 ```{code-cell}
-import matplotlib.pyplot
-
-figure, axis = matplotlib.pyplot.subplots()
+addresses = geopandas.read_file(DATA_DIRECTORY / "addresses.gpkg")
 ```
 
-% 
-% +++ {"deletable": true, "editable": true}
-% 
-% Now we should be able to read a KML file using the geopandas [read_file()](http://geopandas.org/reference/geopandas.read_file.html#geopandas.read_file) function.
-% 
-% - Let's read district polygons from a KML -file that is located in the data-folder:
-% 
-% ```{code-cell} ipython3
-% :deletable: true
-% :editable: true
-% 
-% # Filepath to KML file
-% fp = "data/PKS_suuralue.kml"
-% polys = gpd.read_file(fp, driver='KML')
-% ```
-% 
-% ```{code-cell} ipython3
-% #Check the data
-% print(f"Number of rows: {len(polys)}")
-% polys.head(11)
-% ```
-% 
-% Nice, now we can see that we have 23 districts in our area. 
-% Let's quickly plot the geometries to see how the layer looks like: 
-% 
-% ```{code-cell} ipython3
-% polys.plot()
-% ```
-% 
-% +++ {"deletable": true, "editable": true}
-% 
-% We are interested in an area that is called ``Eteläinen`` (*'Southern'* in English).
-% 
-% Let's select the ``Eteläinen`` district and see where it is located on a map:
-% 
-% ```{code-cell} ipython3
-% # Select data 
-% southern = polys.loc[polys['Name']=='Eteläinen']
-% ```
-% 
-% ```{code-cell} ipython3
-% # Reset index for the selection
-% southern.reset_index(drop=True, inplace=True)
-% ```
-% 
-% ```{code-cell} ipython3
-% # Check the selction
-% southern.head()
-% ```
-% 
-% - Let's create a map which shows the location of the selected district, and let's also plot the geocoded address points on top of the map:
-% 
-% ```{code-cell} ipython3
-% :deletable: true
-% :editable: true
-% 
-% import matplotlib.pyplot as plt
-% 
-% # Create a figure with one subplot
-% fig, ax = plt.subplots()
-% 
-% # Plot polygons
-% polys.plot(ax=ax, facecolor='gray')
-% southern.plot(ax=ax, facecolor='red')
-% 
-% # Plot points
-% data.plot(ax=ax, color='blue', markersize=5)
-% 
-% plt.tight_layout()
-% ```
-% 
-% +++ {"deletable": true, "editable": true}
-% 
-% Okey, so we can see that, indeed, certain points are within the selected red Polygon.
-% 
-% Let's find out which one of them are located within the Polygon. Hence, we are conducting a **Point in Polygon query**.
-% 
-% First, let's check that we have  `shapely.speedups` enabled. This module makes some of the spatial queries running faster (starting from Shapely version 1.6.0 Shapely speedups are enabled by default):
-% 
-% ```{code-cell} ipython3
-% :deletable: true
-% :editable: true
-% 
-% #import shapely.speedups
-% from shapely import speedups
-% speedups.enabled
-% 
-% # If false, run this line:
-% #shapely.speedups.enable()
-% ```
-% 
-% +++ {"deletable": true, "editable": true}
-% 
-% - Let's check which Points are within the ``southern`` Polygon. Notice, that here we check if the Points are ``within`` the **geometry**
-%   of the ``southern`` GeoDataFrame. 
-% - We use the ``.at[0, 'geometry']`` to parse the actual Polygon geometry object from the GeoDataFrame.
-% 
-% ```{code-cell} ipython3
-% :deletable: true
-% :editable: true
-% 
-% pip_mask = data.within(southern.at[0, 'geometry'])
-% print(pip_mask)
-% ```
-% 
-% +++ {"deletable": true, "editable": true}
-% 
-% As we can see, we now have an array of boolean values for each row, where the result is ``True``
-% if Point was inside the Polygon, and ``False`` if it was not.
-% 
-% We can now use this mask array to select the Points that are inside the Polygon. Selecting data with this kind of mask array (of boolean values) is easy by passing the array inside the ``loc`` indexer:
-% 
-% ```{code-cell} ipython3
-% :deletable: true
-% :editable: true
-% 
-% pip_data = data.loc[pip_mask]
-% pip_data
-% ```
-% 
-% +++ {"deletable": true, "editable": true}
-% 
-% Let's finally confirm that our Point in Polygon query worked as it should by plotting the points that are within the southern district:
-% 
-% ```{code-cell} ipython3
-% :deletable: true
-% :editable: true
-% 
-% # Create a figure with one subplot
-% fig, ax = plt.subplots()
-% 
-% # Plot polygons
-% polys.plot(ax=ax, facecolor='gray')
-% southern.plot(ax=ax, facecolor='red')
-% 
-% # Plot points
-% pip_data.plot(ax=ax, color='gold', markersize=2)
-% 
-% plt.tight_layout()
-% ```
-% 
-% +++ {"deletable": true, "editable": true}
-% 
-% Perfect! Now we only have the (golden) points that, indeed, are inside the red Polygon which is exactly what we wanted!
+:::{admonition} Plotting multiple map layers
+:class: hint
+
+To plot several map layers in one figure, use the `ax` parameter to specify in
+which *axes* data should be plotted. We used this in [lesson 7 of
+Geo-Python](https://geo-python-site.readthedocs.io/en/latest/notebooks/L7/matplotlib.html) to add text to a plot, or modify axes’ properties.
+
+The easiest way to obtain an *axes* is to save the first `plot()`’s
+return value (see below). Another option is to create [`subplots()`](https://geo-python-site.readthedocs.io/en/latest/notebooks/L7/advanced-plotting.html#using-subplots), possibly with only one row and one column.
+:::
+
+```{code-cell}
+axes = city_districts.plot(facecolor="grey")
+southern_district.plot(ax=axes, facecolor="red")
+addresses.plot(ax=axes, color="blue", markersize=5)
+```
+
+Some points are within the ‘Eteläinen’ district, but others are not. To find
+out which are the ones inside the district, we can use a **point-in-polygon
+query**, this time on the entire `geopandas.GeoDataFrame`. Its method
+`within()` returns Boolean (`True`/`False`) values that indicate whether or not
+a row’s geometry is contained in the supplied *other* geometry:
+
+
+:::{admonition} geometry vs. geometry column
+:class: caution
+
+In the example below, we use `southern.at[0, "geometry"]` to obtain a single
+value, a `shapely.geometry.Polygon`, instead of an entire column (a
+`GeoSeries`). This is in order to match each row’s geometry of the entire
+`addresses` data frame against *the same polygon*. If, in contrast, we would
+run `within()` against a column, the operation would be carried out row-wise,
+i.e. the first address point would be checked against the first polygon, the
+second address point against the second polygon, and so forth.
+
+Check the [documentation for
+`within()`](https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoSeries.within.html)
+to learn more!
+:::
+
+
+```{code-cell}
+addresses.within(southern_district.at[0, "geometry"])
+```
+
+This list of Boolean values, also called a *mask array* can be used to filter
+the input data frame:
+
+```{code-cell}
+addresses_in_the_southern_district = addresses[
+    addresses.within(southern_district.at[0, "geometry"])
+]
+addresses_in_the_southern_district
+```
+
+Finally, let’s plot this list of addresses one more time to visually verify
+that ll of them, indeed, are located within the ‘Eteläinen’ city district:
+
+```{code-cell}
+axes = city_districts.plot(facecolor="grey")
+southern_district.plot(ax=axes, facecolor="red")
+
+addresses_in_the_southern_district.plot(
+    ax=axes,
+    color="gold",
+    markersize=5
+)
+```
+
+Perfect! Now we are left with only the (golden) points which, indeed, are
+inside the red polygon. That’s exactly what we wanted!
