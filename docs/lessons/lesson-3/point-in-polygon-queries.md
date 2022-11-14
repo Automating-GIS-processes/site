@@ -124,49 +124,48 @@ Then, which one should you use? Well, it depends:
 
  
 ## Point-in-polygon queries on `geopandas.GeoDataFrame`s
-% 
-% Next we will do a practical example where we check which of the addresses from [the geocoding tutorial](geocoding_in_geopandas.ipynb) are located in Southern district of Helsinki. Let's start by reading a KML-file ``PKS_suuralue.kml`` that has the Polygons for districts of Helsinki Region (data openly available from [Helsinki Region Infoshare](http://www.hri.fi/fi/dataset/paakaupunkiseudun-aluejakokartat).
-% 
-% Let's start by reading the addresses from the Shapefile that we saved earlier.
-% 
-% ```{code-cell} ipython3
-% :deletable: true
-% :editable: true
-% 
-% import geopandas as gpd
-% 
-% fp = "data/addresses.shp"
-% data = gpd.read_file(fp)
-% 
-% data.head()
-% ```
-% 
-% +++ {"deletable": true, "editable": true}
-% 
-% 
-% ### Reading KML-files in Geopandas
-% 
-% It is possible to read the data from KML-files with GeoPandas in a similar manner as Shapefiles. However, we need to first, enable the KML-driver which is not enabled by default (because KML-files can contain unsupported data structures, nested folders etc., hence be careful when reading KML-files). Supported drivers are managed with [`fiona.supported_drivers`](https://github.com/Toblerity/Fiona/blob/master/fiona/drvsupport.py), which is integrated in geopandas. Let's first check which formats are currently supported:
-% 
-% ```{code-cell} ipython3
-% import geopandas as gpd
-% gpd.io.file.fiona.drvsupport.supported_drivers
-% ```
-% 
-% - Let's enable the read and write functionalities for KML-driver by passing ``'rw'`` to whitelist of fiona's supported drivers:
-% 
-% ```{code-cell} ipython3
-% :deletable: true
-% :editable: true
-% 
-% gpd.io.file.fiona.drvsupport.supported_drivers['KML'] = 'rw'
-% ```
-% 
-% Let's check again the supported drivers:
-% 
-% ```{code-cell} ipython3
-% gpd.io.file.fiona.drvsupport.supported_drivers
-% ```
+
+In the following practical example we find which of the addresses we obtained
+in the [geocoding section](geocoding-in-geopandas) are located within a certain
+city district of Helsinki.
+
+The data set we are using is from [Helsinki Region Infoshare](https://hri.fi/data/en_GB/dataset/helsingin-piirijako), and licensed under a [Creative-Commons-Attribution-4.0](https://creativecommons.org/licenses/by/4.0/) license.
+
+```{code-cell}
+import pathlib
+NOTEBOOK_PATH = pathlib.Path().resolve()
+DATA_DIRECTORY = NOTEBOOK_PATH / "data"
+```
+
+```{code-cell}
+import geopandas
+
+city_districts = geopandas.read_file(
+    DATA_DIRECTORY / "helsinki_city_districts" / "helsinki_city_districts_2021.gpkg"
+)
+city_districts.head()
+```
+
+```{code-cell}
+city_districts.plot()
+```
+
+Specifically, we want to find out which points are within the ‘Eteläinen’
+(‘southern’) city district. Let’s start by obtaining a separate data set for
+this district, and plotting a multi-layer map that shows all districts, the
+‘Eteläinen’ district, and all the points in one map:
+
+```{code-cell}
+southern_district = city_districts[city_districts.name == "Eteläinen"]
+southern_district
+```
+
+```{code-cell}
+import matplotlib.pyplot
+
+figure, axis = matplotlib.pyplot.subplots()
+```
+
 % 
 % +++ {"deletable": true, "editable": true}
 % 
