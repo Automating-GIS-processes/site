@@ -221,7 +221,7 @@ addresses_in_the_southern_district
 ```
 
 Finally, let’s plot this list of addresses one more time to visually verify
-that ll of them, indeed, are located within the ‘Eteläinen’ city district:
+that all of them, indeed, are located within the ‘Eteläinen’ city district:
 
 ```{code-cell}
 axes = city_districts.plot(facecolor="grey")
