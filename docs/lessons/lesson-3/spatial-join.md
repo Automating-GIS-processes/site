@@ -168,20 +168,6 @@ guidelines](https://peps.python.org/pep-0008/#should-a-line-break-before-or-afte
 ---
 
 
-Let’s also still quickly plot the input data sets to see what data we are
-dealing with. Remember that, for plotting multiple layers in the same map, we
-need to capture the *axes* object of the first `plot()` command, and pass it as
-a parameter to subsequent calls:
-
-```{code-cell}
-ax = population_grid.plot()
-addresses.plot(ax=ax)
-```
-
-
----
-
-
 ## Join input layers
 
 
