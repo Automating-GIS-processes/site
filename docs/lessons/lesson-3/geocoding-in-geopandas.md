@@ -29,14 +29,13 @@ Finland.
 ```{code-cell}
 import pathlib
 NOTEBOOK_PATH = pathlib.Path().resolve()
-
 DATA_DIRECTORY = NOTEBOOK_PATH / "data"
 ```
 
 ```{code-cell}
 import pandas
 addresses = pandas.read_csv(
-    DATA_DIRECTORY / "addresses.txt",
+    DATA_DIRECTORY / "helsinki_addresses" / "addresses.txt",
     sep=";"
 )
 
