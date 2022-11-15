@@ -13,268 +13,270 @@ kernelspec:
 
 # Spatial join
 
-[Spatial join](http://wiki.gis.com/wiki/index.php/Spatial_Join) is
-yet another classic GIS problem. Getting attributes from one layer and
-transferring them into another layer based on their spatial relationship
-is something you most likely need to do on a regular basis.
+*Spatial joins* are operations that combine data from two or more spatial data
+sets based on their geometric relationship. In the previous sections, we got to
+know two specific cases of spatial joins: [Point-in-polygon
+queries](point-in-polygon-queries) and [intersects-queries](intersect). However,
+there is more to using the geometric relationship between features and between
+entire layers.
 
-In the previous section we learned how to perform **a Point in Polygon query**.
-We can now use the same logic to conduct **a spatial join** between two layers based on their
-spatial relationship. We could, for example, join the attributes of a polygon layer into a point layer where each point would get the
-attributes of a polygon that ``contains`` the point.
+Spatial join operations require two input parameters: the *predicament*, i.e., the
+geometric condition that needs to be met between two geometries, and the
+*join-type*: whether only rows with matching geometries are kept, or all of one
+input table’s rows, or all records. 
 
-Luckily, [spatial join is already implemented in Geopandas](http://geopandas.org/mergingdata.html#spatial-joins), thus we do not need to create our own function for doing it. There are three possible types of
-join that can be applied in spatial join that are determined with ``op`` -parameter in the ``gpd.sjoin()`` -function:
+*Geopandas* (using `shapely` to implement geometric relationships) [supports a
+standard set of geometric
+predicates](https://geopandas.org/en/stable/docs/user_guide/mergingdata.html#binary-predicate-joins),
+that is similar to most GIS analysis tools and applications:
 
--  ``"intersects"``
--  ``"within"``
--  ``"contains"``
+- intersects
+- contains
+- within
+- touches
+- crosses
+- overlaps
 
-Sounds familiar? Yep, all of those spatial relationships were discussed
-in the [Point in Polygon lesson](point-in-polygon.ipynb), thus you should know how they work. 
-
-Furthermore, pay attention to the different options for the type of join via the `how` parameter; "left", "right" and "inner". You can read more about these options in the [geopandas sjoin documentation](http://geopandas.org/mergingdata.html#sjoin-arguments) and pandas guide for [merge, join and concatenate](https://pandas.pydata.org/pandas-docs/stable/user_guide/merging.html)
-
-Let's perform a spatial join between these two layers:
-- **Addresses:** the geocoded address-point (we created this Shapefile in the geocoding tutorial)
-- **Population grid:** 250m x 250m grid polygon layer that contains population information from the Helsinki Region.
-    - The population grid a dataset is produced by the **Helsinki Region Environmental
-Services Authority (HSY)** (see [this page](https://www.hsy.fi/fi/asiantuntijalle/avoindata/Sivut/AvoinData.aspx?dataID=7) to access data from different years).
-    - You can download the data from [from this link](https://www.hsy.fi/sites/AvoinData/AvoinData/SYT/Tietoyhteistyoyksikko/Shape%20(Esri)/V%C3%A4est%C3%B6tietoruudukko/Vaestotietoruudukko_2018_SHP.zip) in the  [Helsinki Region Infroshare
-(HRI) open data portal](https://hri.fi/en_gb/).
-
+Geometric predicaments are expressed as verbs, so they have an intuitive
+meaning. See the [shapely user
+manual](https://shapely.readthedocs.io/en/stable/manual.html#binary-predicates)
+for a detailed description of each geometric predicate.
 
 
-- Here, we will access the data directly from the HSY wfs:
+:::{admonition} Binary geometric predicates
+:class: hint
+
+Shapely supports more *binary geometric predicates* than geopandas implements
+for spatial joins. What are they? Can they be expressed by combining the
+implemented ones?
+:::
 
 
-```{code-cell} ipython3
-import geopandas as gpd
-from pyproj import CRS
-import requests
-import geojson
+In terms of the *join-type*, geopandas implements three different options:
 
-# Specify the url for web feature service
-url = 'https://kartta.hsy.fi/geoserver/wfs'
+- *left*: keep all records of the *left* data frame, fill with empty values if
+  no match, keep *left* geometry column
+- *right*: keep all records of the *left* data frame, fill with empty values if
+  no match, keep *right* geometry column
+- *inner*: keep only records of matching records, keep *left* geometry column
 
-# Specify parameters (read data in json format). 
-# Available feature types in this particular data source: http://geo.stat.fi/geoserver/vaestoruutu/wfs?service=wfs&version=2.0.0&request=describeFeatureType
-params = dict(service='WFS', 
-              version='2.0.0', 
-              request='GetFeature', 
-              typeName='asuminen_ja_maankaytto:Vaestotietoruudukko_2018', 
-              outputFormat='json')
 
-# Fetch data from WFS using requests
-r = requests.get(url, params=params)
+:::{tip}
+The [PyGIS
+book](https://pygis.io/docs/e_spatial_joins.html) has a great overview of
+spatial predicaments and join-types with explanatory drawings.
+:::
 
-# Create GeoDataFrame from geojson
-pop = gpd.GeoDataFrame.from_features(geojson.loads(r.content))
+
+---
+
+
+## Load input data
+
+As a practical example, let’s find the population density at each of the
+addresses from [earlier in this lesson](geocoding-in-geopandas), by combining
+the data set with data from a population grid.
+
+The population grid data is available from [HSY, the Helsinki Region
+Environmental
+Services](https://www.hsy.fi/en/environmental-information/open-data/), for
+instance via their WFS endpoint.
+
+```{code-cell}
+import pathlib 
+NOTEBOOK_PATH = pathlib.Path().resolve()
+DATA_DIRECTORY = NOTEBOOK_PATH / "data"
 ```
 
-Check the result: 
 
-```{code-cell} ipython3
-pop.head()
+```{code}
+import geopandas
+
+addresses = geopandas.read_file(DATA_DIRECTORY / "addresses.gpkg")
+
+population_grid = geopandas.read_file(
+    (
+        "https://kartta.hsy.fi/geoserver/wfs"
+        "?service=wfs"
+        "&version=2.0.0"
+        "&request=GetFeature"
+        "&typeName=asuminen_ja_maankaytto:Vaestotietoruudukko_2020"
+        "&srsName=EPSG:3879"
+    ),
+)
+population_grid.crs = crs="EPSG:3879"  # for WFS data, the CRS needs to be specified manually
 ```
 
-Okey so we have multiple columns in the dataset but the most important
-one here is the column `asukkaita` ("population" in Finnish) that
-tells the amount of inhabitants living under that polygon.
+```{code-cell}
+:tags: ["remove-input", "remove-output"]
 
--  Let's change the name of that column into `pop18` so that it is
-   more intuitive. As you might remember, we can easily rename (Geo)DataFrame column names using the ``rename()`` function where we pass a dictionary of new column names like this: ``columns={'oldname': 'newname'}``.
+import geopandas
 
-```{code-cell} ipython3
-# Change the name of a column
-pop = pop.rename(columns={'asukkaita': 'pop18'})
+addresses = geopandas.read_file(DATA_DIRECTORY / "addresses.gpkg")
 
-# Check the column names
-pop.columns
+population_grid = geopandas.read_file(
+    "https://avoidatastr.blob.core.windows.net/avoindata/AvoinData/"
+    "6_Asuminen/Vaestotietoruudukko/Shp/Vaestotietoruudukko_2021_shp.zip"
+)
+population_grid = (
+    population_grid[["ASUKKAITA", "geometry"]]
+    .rename(columns={"ASUKKAITA": "asukkaita"})
+)
 ```
 
-Let's also get rid of all unnecessary columns by selecting only columns that we need i.e. ``pop18`` and ``geometry``
+:::{admonition} Concatenating long strings
+:class: note
 
-```{code-cell} ipython3
-# Subset columns
-pop = pop[["pop18", "geometry"]]
+In the WFS address above, we split a long string across multiple lines. Strings
+between parentheses are automatically concatenated (joint together), even
+without any operator (e.g., `+`).
+
+For the sake of clarity, the example has an additional set of parentheses, but
+already the parentheses of the method call would suffice.
+:::
+
+
+---
+
+
+```{code-cell}
+population_grid.head()
 ```
 
-```{code-cell} ipython3
-pop.head()
+The population grid has many columns, and all of its column names are in
+Finnish. Let’s drop (delete) all of the columns except the population total,
+and rename the remaining to English:
+
+```{code-cell}
+population_grid = population_grid[["asukkaita", "geometry"]]
+population_grid = population_grid.rename(columns={"asukkaita": "population"})
 ```
 
-Now we have cleaned the data and have only those columns that we need
-for our analysis.
+Finally, calculate the population density by dividing the number of inhabitants
+of each grid cell by its area in km²:
 
-+++
-
-## Join the layers
-
-Now we are ready to perform the spatial join between the two layers that
-we have. The aim here is to get information about **how many people live
-in a polygon that contains an individual address-point** . Thus, we want
-to join attributes from the population layer we just modified into the
-addresses point layer ``addresses.shp`` that we created trough gecoding in the previous section.
-
--  Read the addresses layer into memory:
-
-```{code-cell} ipython3
-# Addresses filpath
-addr_fp = r"data/addresses.shp"
-
-# Read data
-addresses = gpd.read_file(addr_fp)
+```{code-cell}
+population_grid["population_density"] = (
+    population_grid["population"]
+    / (population_grid.area / 1_000_000)
+)
+population_grid.head()
 ```
 
-```{code-cell} ipython3
-# Check the head of the file
-addresses.head()
+:::{admonition} Coding style: big numbers, operators in multi-line expressions
+:class: tip
+
+If you need to use very large numbers, such as, in the above example, the *1
+million* to convert m² to km², you can use underscore characters (`_`) as
+thousands separators. The Python interpreter will treat a sequence of numbers
+interleaved with underscores as a regular numeric value.
+[You can use the same syntax to group
+numbers](https://peps.python.org/pep-0515/) by a different logic, for instance,
+to group hexadecimal or binary values into groups of four.
+
+In case an expression, such as, e.g., a mathematical formula, spreads across
+multiple lines, it is considered good coding style to place an operator at the
+beginning of a new line, rather than let it trail in the previous line. This is
+considered more readable, as explained in the [PEP-8 styling
+guidelines](https://peps.python.org/pep-0008/#should-a-line-break-before-or-after-a-binary-operator)
+:::
+
+
+---
+
+
+## Join input layers
+
+
+Now we are ready to perform the spatial join between the two layers.
+Remember: the aim is to find the population density around each of the address
+points. We want to attach population density information from the
+`population_grid` polygon layer to the `addresses` point layer, depending on
+whether the **point is within the polygon**. During this operation, we want to
+**retain the geometries of the point layer**.
+
+Before we can go ahead with the join operation, we have to make sure the two
+layers are in the same cartographic reference system:
+
+```{code-cell}
+:tags: ["raises-exception"]
+
+assert addresses.crs == population_grid.crs, "CRS are not identical"
 ```
 
-In order to do a spatial join, the layers need to be in the same projection
+They do not share the same CRS, let’s reproject one of them:
 
-- Check the crs of input layers:
-
-```{code-cell} ipython3
-addresses.crs
+```{code-cell}
+population_grid = population_grid.to_crs(addresses.crs)
 ```
 
-```{code-cell} ipython3
-pop.crs
+Now we are ready to carry out the actual spatial join using the
+[`geopandas.GeoDataFrame.sjoin()`](https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoDataFrame.sjoin.html)
+method. Remember, we want to use a *within* geometric predicate and retain the
+point layer’s geometries (in the example below the *left* data frame).
+
+```{code-cell}
+addresses_with_population_data = addresses.sjoin(
+    population_grid,
+    how="left",
+    predicate="within"
+)
+addresses_with_population_data.head()
 ```
 
-If the crs information is missing from the population grid, we can **define the coordinate reference system** as **ETRS GK-25 (EPSG:3879)** because we know what it is based on the [population grid metadata](https://hri.fi/data/dataset/vaestotietoruudukko). 
 
-```{code-cell} ipython3
-# Define crs
-pop.crs = CRS.from_epsg(3879).to_wkt()
+That looks great! We now have an address data set with population density
+information attached to it. 
+
+
+---
+
+
+As a final task, let’s look at how to plot data using a *graduated*
+cartographic visualisation scheme. 
+
+The `geopandas.GeoDataFrame.plot()` method can vary the map colours depending on a column’s values by passing its name as a named argument `column`. On top of that, the method accepts many arguments to influence the style of the map. Among them are `scheme` and `cmap` that define the [categorisation scheme](https://geopandas.org/en/stable/gallery/choropleths.html), and the [colour map](https://matplotlib.org/stable/tutorials/colors/colormaps.html) used. Many more arguments are passed through to `matplotlib`, such as `markersize` to set the size of point symbols, and `facecolor` to set the colour of polygon areas. To draw a legend, set `legend` to `True`, to set the size of the figure, pass a tuple (with values in inch) as `figsize`.
+
+```{code-cell}
+ax = addresses_with_population_data.plot(
+    figsize=(10, 10),
+    column="population_density",
+    cmap="Reds",
+    scheme="quantiles",
+    markersize=15,
+    legend=True
+)
+ax.set_title("Population density around address points")
 ```
 
-```{code-cell} ipython3
-pop.crs
+
+---
+
+
+We can apply the same arguments to plot a population density map using the
+entire `population_grid` data set:
+
+```{code-cell}
+ax = population_grid.plot(
+    figsize=(10, 10),
+    column="population_density",
+    cmap="Reds",
+    scheme="quantiles",
+    legend=True
+)
+ax.set_title("Population density in the Helsinki metropolitan area")
+
 ```
 
-```{code-cell} ipython3
-# Are the layers in the same projection?
-addresses.crs == pop.crs
-```
 
-Let's re-project addresses to the projection of the population layer:
+---
 
-```{code-cell} ipython3
-addresses = addresses.to_crs(pop.crs)
-```
 
--  Let's make sure that the coordinate reference system of the layers
-are identical
+Finally, remember to save the output data frame to a file. We can append it to
+the existing *GeoPackage* by specifying a new layer name:
 
-```{code-cell} ipython3
-# Check the crs of address points
-print(addresses.crs)
-
-# Check the crs of population layer
-print(pop.crs)
-
-# Do they match now?
-addresses.crs == pop.crs
-```
-
-Now they should be identical. Thus, we can be sure that when doing spatial
-queries between layers the locations match and we get the right results
-e.g. from the spatial join that we are conducting here.
-
--  Let's now join the attributes from ``pop`` GeoDataFrame into
-   ``addresses`` GeoDataFrame by using ``gpd.sjoin()`` -function:
-
-```{code-cell} ipython3
-# Make a spatial join
-join = gpd.sjoin(addresses, pop, how="inner", op="within")
-```
-
-```{code-cell} ipython3
-join.head()
-```
-
-Awesome! Now we have performed a successful spatial join where we got
-two new columns into our ``join`` GeoDataFrame, i.e. ``index_right``
-that tells the index of the matching polygon in the population grid and
-``pop18`` which is the population in the cell where the address-point is
-located.
-
-- Let's still check how many rows of data we have now:
-
-```{code-cell} ipython3
-len(join)
-```
-
-Did we lose some data here? 
-
-- Check how many addresses we had originally:
-
-```{code-cell} ipython3
-len(addresses)
-```
-
-If we plot the layers on top of each other, we can observe that some of the points are located outside the populated grid squares (increase figure size if you can't see this properly!)
-
-```{code-cell} ipython3
-import matplotlib.pyplot as plt
-
-# Create a figure with one subplot
-fig, ax = plt.subplots(figsize=(15,8))
-
-# Plot population grid
-pop.plot(ax=ax)
-
-# Plot points
-addresses.plot(ax=ax, color='red', markersize=5)
-```
-
-Let's also visualize the joined output:
-
-+++
-
-Plot the points and use the ``pop18`` column to indicate the color.
-   ``cmap`` -parameter tells to use a sequential colormap for the
-   values, ``markersize`` adjusts the size of a point, ``scheme`` parameter can be used to adjust the classification method based on [pysal](http://pysal.readthedocs.io/en/latest/library/esda/mapclassify.html), and ``legend`` tells that we want to have a legend:
-
-```{code-cell} ipython3
-# Create a figure with one subplot
-fig, ax = plt.subplots(figsize=(10,6))
-
-# Plot the points with population info
-join.plot(ax=ax, column='pop18', cmap="Reds", markersize=15, scheme='quantiles', legend=True);
-
-# Add title
-plt.title("Amount of inhabitants living close the the point");
-
-# Remove white space around the figure
-plt.tight_layout()
-```
-
-In a similar way, we can plot the original population grid and check the overall population distribution in Helsinki:
-
-```{code-cell} ipython3
-# Create a figure with one subplot
-fig, ax = plt.subplots(figsize=(10,6))
-
-# Plot the grid with population info
-pop.plot(ax=ax, column='pop18', cmap="Reds", scheme='quantiles', legend=True);
-
-# Add title
-plt.title("Population 2018 in 250 x 250 m grid squares");
-
-# Remove white space around the figure
-plt.tight_layout()
-```
-
-Finally, let's save the result point layer into a file:
-
-```{code-cell} ipython3
-# Output path
-outfp = r"data/addresses_population.shp"
-
-# Save to disk
-join.to_file(outfp)
-```
+```{code-cell}
+addresses_with_population_data.to_file(
+    DATA_DIRECTORY / "addresses.gpkg",
+    layer="addresses_with_population_data"
+)

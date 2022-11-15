@@ -15,7 +15,7 @@ jupytext:
 
 :::{important}
 Please complete this exercise
-**by the end of day** on Thursday, 17 November, 2022**
+**by the end of day** on Thursday, 17 November, 2022
 (the day before the next work session).
 :::
 

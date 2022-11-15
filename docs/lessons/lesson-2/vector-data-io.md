@@ -172,7 +172,7 @@ Geopandas can also read data directly from a WFS endpoint, such as, for instance
 The following code loads a population grid of Helsinki. The parameters encoded into the WFS address specify the layer name, a bounding box, and the requested reference system.
 
 
-```{code-cell}
+```{code}
 population_grid = geopandas.read_file(
     "https://kartta.hsy.fi/geoserver/wfs"
     "?service=wfs"
@@ -182,6 +182,16 @@ population_grid = geopandas.read_file(
     "&srsName=EPSG:3879"
     "&bbox=25494767,6671328,25497720,6673701,EPSG:3879",
     crs="EPSG:3879"
+)
+population_grid.head()
+```
+
+```{code-cell}
+:tags: ["remove-input"]
+
+population_grid = geopandas.read_file(
+    "https://avoidatastr.blob.core.windows.net/avoindata/AvoinData/"
+    "6_Asuminen/Vaestotietoruudukko/Shp/Vaestotietoruudukko_2021_shp.zip"
 )
 population_grid.head()
 ```

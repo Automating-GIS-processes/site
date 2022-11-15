@@ -171,7 +171,8 @@ maxdepth: 2
 lessons/lesson-3/overview
 lessons/lesson-3/geocoding
 lessons/lesson-3/geocoding-in-geopandas
-lessons/lesson-3/point-in-polygon-and-intersect
+lessons/lesson-3/point-in-polygon-queries
+lessons/lesson-3/intersect
 lessons/lesson-3/spatial-join
 lessons/lesson-3/exercise-3
 ```
