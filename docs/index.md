@@ -163,31 +163,28 @@ lessons/lesson-2/map-projections
 lessons/lesson-2/exercise-2
 ```
 
-% ```{toctree}
-% ---
-% caption: Lesson 3
-% maxdepth: 2
-% ---
-% lessons/lesson-3/overview
-% lessons/lesson-3/geocoding
-% lessons/lesson-3/geocoding-in-geopandas
-% lessons/lesson-3/point-in-polygon
-% lessons/lesson-3/spatial-join
-% lessons/lesson-3/nearest-neighbour
-% lessons/lesson-3/spatial-index
-% lessons/lesson-3/nearest-neighbor-faster
-% lessons/lesson-3/exercise-3
-% ```
+```{toctree}
+---
+caption: Lesson 3
+maxdepth: 2
+---
+lessons/lesson-3/overview
+lessons/lesson-3/geocoding
+lessons/lesson-3/geocoding-in-geopandas
+lessons/lesson-3/point-in-polygon-queries
+lessons/lesson-3/intersect
+lessons/lesson-3/spatial-join
+lessons/lesson-3/exercise-3
+```
 
 % ```{toctree}
 % ---
 % caption: Lesson 4
 % maxdepth: 2
 % ---
-% lessons/lesson-4/overview
-% lessons/lesson-4/geometric-operations
-% lessons/lesson-4/create-health-district-polygons
-% lessons/lesson-4/reclassify
+% lessons/lesson-4/nearest-neighbour-analysis
+% lessons/lesson-4/spatial-index
+% lessons/lesson-4/nearest-neighbour-analysis-on-large-data-sets
 % lessons/lesson-4/exercise-4
 % ```
 
@@ -197,10 +194,9 @@ lessons/lesson-2/exercise-2
 % maxdepth: 2
 % ---
 % lessons/lesson-5/overview
-% lessons/lesson-5/static-maps
-% lessons/lesson-5/interactive-map-folium
-% lessons/lesson-5/employment-rate-map
-% lessons/lesson-5/share-on-github
+% lessons/lesson-5/geometric-operations
+% lessons/lesson-5/create-health-district-polygons
+% lessons/lesson-5/reclassify
 % lessons/lesson-5/exercise-5
 % ```
 
@@ -210,8 +206,10 @@ lessons/lesson-2/exercise-2
 % maxdepth: 2
 % ---
 % lessons/lesson-6/overview
-% lessons/lesson-6/retrieve-osm-data
-% lessons/lesson-6/network-analysis
+% lessons/lesson-6/static-maps
+% lessons/lesson-6/interactive-map-folium
+% lessons/lesson-6/employment-rate-map
+% lessons/lesson-6/share-on-github
 % lessons/lesson-6/exercise-6
 % ```
 
@@ -220,33 +218,43 @@ lessons/lesson-2/exercise-2
 % caption: Final Assignment
 % maxdepth: 2
 % ---
-% lessons/final-assignment/final-assignment
-% lessons/final-assignment/final-assignment-grading
-% lessons/final-assignment/final-assignment-hints
+% final-assignment/final-assignment
+% final-assignment/final-assignment-grading
+% final-assignment/final-assignment-hints
 % ```
+
+% ```{toctree}
+% ---
+% caption: Extra: Network analysis
+% maxdepth: 2
+% ---
+% extra/network-analysis/overview
+% extra/network-analysis/retrieve-osm-data
+% extra/network-analysis/network-analysis
+% extra/network-analysis/exercise-6
 
 % ```{toctree}
 % ---
 % caption: "Extra: PyQGIS"
 % maxdepth: 2
 % ---
-% lessons/pyqgis/overview
-% lessons/pyqgis/pyqgis
-% lessons/pyqgis/additional_pyqgis_functions
+% extra/pyqgis/overview
+% extra/pyqgis/pyqgis
+% extra/pyqgis/additional_pyqgis_functions
 % ```
 
 % ```{toctree}
 % ---
-% caption: "Extra: Raster"
+% caption: "Extra: Raster handling in Python"
 % maxdepth: 2
 % ---
-% lessons/raster/overview
-% lessons/raster/download-data
-% lessons/raster/reading-raster
-% lessons/raster/plotting-raster
-% lessons/raster/clipping-raster
-% lessons/raster/raster-map-algebra
-% lessons/raster/raster-mosaic
-% lessons/raster/zonal-statistics
-% lessons/raster/read-cogs
+% extra/raster/overview
+% extra/raster/download-data
+% extra/raster/reading-raster
+% extra/raster/plotting-raster
+% extra/raster/clipping-raster
+% extra/raster/raster-map-algebra
+% extra/raster/raster-mosaic
+% extra/raster/zonal-statistics
+% extra/raster/read-cogs
 % ```
