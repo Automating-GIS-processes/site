@@ -15,12 +15,12 @@ jupytext:
 
 :::{important}
 Please complete this exercise
-**by the end of day** on Friday, 25 November, 2022**
+**by the end of day** on Friday, 25 November, 2022
 (the day of next week’s work session).
 :::
 
 To start this assignment, [accept the GitHub classroom
-assignment](https://classroom.github.com/a/ADD_LINK), and clone *your own*
+assignment](https://classroom.github.com/a/M23Oi-SK), and clone *your own*
 repository, e.g., in a [CSC
 Notebook](../../course-info/course-environment)
 instance. Make sure you commit and push all changes you make (you can
