@@ -88,7 +88,7 @@ NOTEBOOK_PATH = pathlib.Path().resolve()
 DATA_DIRECTORY = NOTEBOOK_PATH / "data"
 ```
 
-```{code-cell}
+```{code}
 import geopandas
 
 addresses = geopandas.read_file(DATA_DIRECTORY / "addresses.gpkg")
@@ -104,6 +104,15 @@ population_grid = geopandas.read_file(
     ),
 )
 population_grid.crs = crs="EPSG:3879"  # for WFS data, the CRS needs to be specified manually
+```
+
+```{code-cell}
+:tags: ["remove-input", "remove-output"]
+
+population_grid = geopandas.read_file(
+    "https://avoidatastr.blob.core.windows.net/avoindata/AvoinData/"
+    "6_Asuminen/Vaestotietoruudukko/Shp/Vaestotietoruudukko_2021_shp.zip"
+)
 ```
 
 :::{admonition} Concatenating long strings
