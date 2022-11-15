@@ -109,9 +109,17 @@ population_grid.crs = crs="EPSG:3879"  # for WFS data, the CRS needs to be speci
 ```{code-cell}
 :tags: ["remove-input", "remove-output"]
 
+import geopandas
+
+addresses = geopandas.read_file(DATA_DIRECTORY / "addresses.gpkg")
+
 population_grid = geopandas.read_file(
     "https://avoidatastr.blob.core.windows.net/avoindata/AvoinData/"
     "6_Asuminen/Vaestotietoruudukko/Shp/Vaestotietoruudukko_2021_shp.zip"
+)
+population_grid = (
+    population_grid[["ASUKKAITA", "geometry"]]
+    .rename(columns={"ASUKKAITA": "asukkaita"})
 )
 ```
 
