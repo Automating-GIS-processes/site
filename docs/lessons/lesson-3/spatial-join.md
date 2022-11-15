@@ -88,6 +88,7 @@ NOTEBOOK_PATH = pathlib.Path().resolve()
 DATA_DIRECTORY = NOTEBOOK_PATH / "data"
 ```
 
+
 ```{code}
 import geopandas
 
