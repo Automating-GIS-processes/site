@@ -155,6 +155,7 @@ feature classes into separate files**.
 | 36313          | Watercourse area                                           | Terrain/1     |
 
 
+(#search-for-files-using-a-pattern)=
 :::{admonition} Search for files using a pattern
 :class: hint
 

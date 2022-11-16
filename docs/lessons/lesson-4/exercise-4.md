@@ -1,24 +1,44 @@
-# Exercise 3
+---
+kernelspec:
+  name: python3
+  display_name: python3
+jupytext:
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: '0.13'
+    jupytext_version: 1.14.1
+---
 
-```{image} https://img.shields.io/badge/launch-CSC%20notebook-blue.svg
-:target: https://notebooks.csc.fi/#/blueprint/d189695c52ad4c0d89ef72572e81b16c
-```
 
-:::{admonition} Start your assignment
-You can start working on your copy of Exercise 3 by [accepting the GitHub Classroom assignment](https://classroom.github.com/a/AAJygAbV).
+# Exercise 4
+
+:::{important}
+Please complete this exercise
+**by the end of day** on Friday, 2 December, 2022
+(the day of next week’s work session).
 :::
 
-**Exercise 3 is due by by 17:00 on Thursday the 25th of November 2020** (day before the next practical session).
+To start this assignment, [accept the GitHub classroom
+assignment](https://classroom.github.com/a/CHANGE_LINK_HERE), and clone *your own*
+repository, e.g., in a [CSC
+Notebook](../../course-info/course-environment)
+instance. Make sure you commit and push all changes you make (you can
+revisit instructions on how to use `git` and the JupyterLab git-plugin
+on the [website of the Geo-Python
+course](https://geo-python-site.readthedocs.io/en/latest/lessons/L2/git-basics.html).
 
-You can also take a look at the open course copy of [Exercise 3 in the course GitHub repository](https://github.com/AutoGIS-2021/Exercise-3) (does not require logging in).
-Note that you should not try to make changes to this copy of the exercise, but rather only to the copy available via GitHub Classroom.
+To preview the exercise without logging in, you can find the open course copy
+of the course’s GitHub repository at
+[github.com/Automating-GIS-processes-2022/Exercise-4](https://github.com/Automating-GIS-processes-2022/Exercise-4).
+Don’t attempt to commit changes to that repository, but rather work with your
+personal GitHub classroom copy (see above).
+
 
 ## Hints
 
-### Coordinate reference systems
+### Searching for files using a pattern
 
-Remember the difference between defining a crs, and re-projecting a layer to a new crs!
-Before re-projecting, the layer should have a valid crs definition which you can check like this: `data.crs`.
+In [Lesson 2](../lesson-2/geopandas-an-introduction.md#search-for-files-using-a-pattern) we discussed how to use a file pattern to search for files, using [`pathlib.Path.glob()`](https://docs.python.org/3/library/pathlib.html#pathlib.Path.glob).
 
-- defining a projection is done like this: `data.crs = CRS.from_epsg(4326)`  (this command only updates the metadata about coordinate reference system which is stored in the class variable .crs, and does not modify the actual coordinate values. Do this only if the original crs definition is missing or invalid!)
-- re-projecting a layer, eg: `data = data.to_crs(CRS.from_epsg(4326))` (this one will actually re-project the coordinates in the geometry-column AND re-define the .crs definition)
+This will come in handy for *problem 2*, when reading in all travel time data files. Be sure to revisit the explanation in [Lesson 2](../lesson-2/geopandas-an-introduction.md#search-for-files-using-a-pattern).
