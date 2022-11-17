@@ -184,7 +184,7 @@ maxdepth: 2
 ---
 lessons/lesson-4/overview
 lessons/lesson-4/overlay-analysis
-lessons/lesson-4/aggregating-vector-data
+lessons/lesson-4/vector-data-aggregating
 lessons/lesson-4/simplifying-geometries
 lessons/lesson-4/reclassifying-data
 lessons/lesson-4/exercise-4
