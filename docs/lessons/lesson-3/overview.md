@@ -29,9 +29,9 @@ After this lesson, you should know how to:
 - join two vector data sets based on their features’ location
 
 
-% ## Lesson video
-% 
-% <iframe id="ytplayer" type="text/html" width="700" height="394"
-%   src="https://www.youtube.com/embed/ADD_VIDEO_ID?modestbranding=1
-%   frameborder="0">
-% </iframe>
+## Lesson video
+
+<iframe id="ytplayer" type="text/html" width="700" height="394"
+  src="https://www.youtube.com/embed/E9VnKJGEdA8?modestbranding=1
+  frameborder="0">
+</iframe>
