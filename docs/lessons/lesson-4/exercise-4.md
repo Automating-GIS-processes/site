@@ -52,7 +52,7 @@ import pathlib
 DATA_DIRECTORY = pathlib.Path().resolve() / "data"
 
 for input_file in (DATA_DIRECTORY / "finland_topographic_database").glob("*_s.shp"):
-    print(input_file
+    print(input_file)
 ```
 
 This will come in handy for *problem 2*, when reading in all travel time data
