@@ -40,7 +40,7 @@ personal GitHub classroom copy (see above).
 ### Searching for files using a pattern
 
 In [Lesson
-2](../lesson-2/geopandas-an-introduction.md#search-for-files-using-a-pattern)
+2](../lesson-2/geopandas-an-introduction)
 we discussed how to use a file pattern to search for files, using
 [`pathlib.Path.glob()`](https://docs.python.org/3/library/pathlib.html#pathlib.Path.glob).
 
@@ -57,4 +57,4 @@ for input_file in (DATA_DIRECTORY / "finland_topographic_database").glob("*_s.sh
 
 This will come in handy for *problem 2*, when reading in all travel time data
 files. Be sure to revisit the explanation in [Lesson
-2](../lesson-2/geopandas-an-introduction.md#search-for-files-using-a-pattern).
+2](../lesson-2/geopandas-an-introduction).
