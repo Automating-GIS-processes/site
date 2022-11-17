@@ -12,6 +12,7 @@ docs/static/data/europe_nuts_regions.gpkg
 docs/static/data/finland_topographic_database/area_by_terrain_class.csv
 docs/static/data/finland_topographic_database/lakes.*
 docs/static/data/finland_topographic_database/terrain_*.*
+docs/static/data/intersection.geojson
 
 *~
 *.swp
