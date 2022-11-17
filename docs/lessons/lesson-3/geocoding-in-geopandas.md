@@ -62,6 +62,11 @@ attached to each query.
 
 Geopandas’ implementation allows us to specify a `user_agent`; the library also
 takes care of respecting the rate-limit of Nominatim.
+
+Looking up an address is a quite expensive database operation. This is why,
+sometimes, the public and free-to-use Nominatim server takes slightly longer to
+respond. In this example, we add a parameter `timeout=10` to wait up to 10
+seconds for a response.
 :::
 
 
@@ -71,7 +76,8 @@ import geopandas
 geocoded_addresses = geopandas.tools.geocode(
     addresses["addr"],
     provider="nominatim",
-    user_agent="autogis2022"
+    user_agent="autogis2022",
+    timeout=10
 )
 geocoded_addresses.head()
 ```
