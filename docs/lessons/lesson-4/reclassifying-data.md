@@ -6,11 +6,10 @@ jupytext:
     format_version: 0.13
     jupytext_version: 1.14.1
 kernelspec:
-  display_name: Python 3
+  display_name: Python 3 (ipykernel)
   language: python
   name: python3
 ---
-
 
 # Reclassifying data
 
@@ -73,7 +72,7 @@ Alternatively, you can re-download [L4 data](https://github.com/AutoGIS/data/raw
 
 - First, we need to read our Travel Time data from Helsinki:
 
-```{code-cell}
+```{code-cell} ipython3
 import geopandas as gpd
 
 fp = "data/TravelTimes_to_5975375_RailwayStation_Helsinki.geojson"
@@ -91,7 +90,7 @@ As we can see, there are plenty of different variables (see [from here the descr
 
 - Thus we need to remove the No Data values first.
 
-```{code-cell}
+```{code-cell} ipython3
 # Include only data that is above or equal to 0
 acc = acc.loc[acc['pt_r_tt'] >=0]
 ```
@@ -100,7 +99,7 @@ acc = acc.loc[acc['pt_r_tt'] >=0]
 - `cmap` parameter defines the color map. Read more about [choosing colormaps in matplotlib](https://matplotlib.org/3.1.0/tutorials/colors/colormaps.html)
 - `scheme` option scales the colors according to a classification scheme (requires `mapclassify` module to be installed):
 
-```{code-cell}
+```{code-cell} ipython3
 import matplotlib.pyplot as plt
 
 # Plot using 9 classes and classify the values using "Natural Breaks" classification
@@ -114,7 +113,7 @@ As we can see from this map, the travel times are lower in the south where the c
 
 - Let's also make a plot about walking distances:
 
-```{code-cell}
+```{code-cell} ipython3
 # Plot walking distance
 acc.plot(column="walk_d", scheme="Natural_Breaks", k=9, cmap="RdYlBu", linewidth=0, legend=True)
 
@@ -128,25 +127,25 @@ Okay, from here we can see that the walking distances (along road network) remin
 
 As mentioned, the `scheme` option defines the classification scheme using `pysal/mapclassify`. Let's have a closer look at how these classifiers work.
 
-```{code-cell}
+```{code-cell} ipython3
 import mapclassify
 ```
 
 - Natural Breaks
 
-```{code-cell}
+```{code-cell} ipython3
 mapclassify.NaturalBreaks(y=acc['pt_r_tt'], k=9)
 ```
 
 - Quantiles (default is 5 classes):
 
-```{code-cell}
+```{code-cell} ipython3
 mapclassify.Quantiles(y=acc['pt_r_tt'])
 ```
 
 - It's possible to extract the threshold values into an array:
 
-```{code-cell}
+```{code-cell} ipython3
 classifier = mapclassify.NaturalBreaks(y=acc['pt_r_tt'], k=9)
 classifier.bins
 ```
@@ -154,14 +153,14 @@ classifier.bins
 - Let's apply one of the `Pysal` classifiers into our data and classify the travel times by public transport into 9 classes
 - The classifier needs to be initialized first with `make()` function that takes the number of desired classes as input parameter
 
-```{code-cell}
+```{code-cell} ipython3
 # Create a Natural Breaks classifier
 classifier = mapclassify.NaturalBreaks.make(k=9)
 ```
 
 - Now we can apply that classifier into our data by using `apply` -function
 
-```{code-cell}
+```{code-cell} ipython3
 # Classify the data
 classifications = acc[['pt_r_tt']].apply(classifier)
 
@@ -169,7 +168,7 @@ classifications = acc[['pt_r_tt']].apply(classifier)
 classifications.head()
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 type(classifications)
 ```
 
@@ -177,7 +176,7 @@ Okay, so now we have a DataFrame where our input column was classified into 9 di
 
 - We can also add the classification values directly into a new column in our dataframe:
 
-```{code-cell}
+```{code-cell} ipython3
 # Rename the column so that we know that it was classified with natural breaks
 acc['nb_pt_r_tt'] = acc[['pt_r_tt']].apply(classifier)
 
@@ -187,7 +186,7 @@ acc[['pt_r_tt', 'nb_pt_r_tt']].head()
 
 Great, now we have those values in our accessibility GeoDataFrame. Let's visualize the results and see how they look.
 
-```{code-cell}
+```{code-cell} ipython3
 # Plot
 acc.plot(column="nb_pt_r_tt", linewidth=0, legend=True)
 
@@ -205,7 +204,7 @@ A histogram is a graphic representation of the distribution of the data. When cl
 - plot the histogram using [pandas.DataFrame.plot.hist](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.plot.hist.html)
 - Number of histogram bins (groups of data) can be controlled using the parameter `bins`:
 
-```{code-cell}
+```{code-cell} ipython3
 # Histogram for public transport rush hour travel time
 acc['pt_r_tt'].plot.hist(bins=50)
 ```
@@ -214,7 +213,7 @@ Let's also add threshold values on thop of the histogram as vertical lines.
 
 - Natural Breaks:
 
-```{code-cell}
+```{code-cell} ipython3
 # Define classifier
 classifier = mapclassify.NaturalBreaks(y=acc['pt_r_tt'], k=9)
 
@@ -228,7 +227,7 @@ for value in classifier.bins:
 
 - Quantiles:
 
-```{code-cell}
+```{code-cell} ipython3
 # Define classifier
 classifier = mapclassify.Quantiles(y=acc['pt_r_tt'])
 
@@ -238,7 +237,6 @@ acc['pt_r_tt'].plot.hist(bins=50)
 for value in classifier.bins:
     plt.axvline(value, color='k', linestyle='dashed', linewidth=1)
 ```
-
 
 <div class="alert alert-info">
 
@@ -252,7 +250,7 @@ Select another column from the data (for example, travel times by car: `car_r_t`
 
 </div>
 
-```{code-cell}
+```{code-cell} ipython3
 
 ```
 
@@ -268,7 +266,7 @@ It also possible to do classifiers with multiple criteria easily in Pandas/Geopa
 
 - Let's call it `custom_classifier` that does the binary classification based on two treshold values:
 
-```{code-cell}
+```{code-cell} ipython3
 def custom_classifier(row, src_col1, src_col2, threshold1, threshold2, output_col):
     """Custom classirifer that can be applied on each row of a pandas dataframe (axis=1).
     
@@ -306,7 +304,7 @@ Now we have defined the function, and we can start using it.
 
 - Let's create an empty column for our classification results called `"suitable_area"`.
 
-```{code-cell}
+```{code-cell} ipython3
 # Create column for the classification results
 acc["suitable_area"] = None
 
@@ -327,7 +325,7 @@ Okey we have new values in `suitable_area` -column.
 
 - How many Polygons are suitable for us? Let's find out by using a Pandas function called `value_counts()` that return the count of different values in our column.
 
-```{code-cell}
+```{code-cell} ipython3
 # Get value counts
 acc['suitable_area'].value_counts()
 ```
@@ -336,7 +334,7 @@ Okay, so there seems to be nine suitable locations for us where we can try to fi
 
 - Let's see where they are located:
 
-```{code-cell}
+```{code-cell} ipython3
 # Plot
 acc.plot(column="suitable_area", linewidth=0)
 
@@ -346,215 +344,3 @@ plt.tight_layout()
 
 A-haa, okay so we can see that suitable places for us with our criteria seem to be located in the
 eastern part from the city center. Actually, those locations are along the metro line which makes them good locations in terms of travel time to city center since metro is really fast travel mode.
-
-
-
-## Practical example: hospital districts
-
-In this tutorial, we will create boundaries of Finnish hospital districts (*sairaanhoitopiiri* in Finnish) by dissolving municipality boundaries into larger entities. Main processing steps include a table join and dissolving the municipality geometries into larger entities.
-
-We will combine information from [municipality polygons](https://www.stat.fi/org/avoindata/paikkatietoaineistot/vaesto_tilastointialueittain.html) from Statistics Finland and a [list of health care districts](https://www.kuntaliitto.fi/sosiaali-ja-terveysasiat/sairaanhoitopiirien-jasenkunnat) by the Finnish Municipality authority Kuntaliitto.
-
-
-Importing required python packages:
-
-```{code-cell}
-import json
-import numpy as np
-import pandas as pd
-import geopandas as gpd
-from pyproj import CRS
-import matplotlib.pyplot as plt
-```
-
-## Read in data
-- **Municipality polygons** from Statistics Finland web feature service: https://www.stat.fi/org/avoindata/paikkatietoaineistot/kuntapohjaiset_tilastointialueet.html
-    - wfs: http://geo.stat.fi/geoserver/tilastointialueet/wfs?
-    - feature: `tilastointialueet:kunta1000k` (most recent information about municipality polygons)
-
-
-
-
-```{code-cell}
-# For available features, see http://geo.stat.fi/geoserver/tilastointialueet/wfs?request=GetCapabilities
-url = "http://geo.stat.fi/geoserver/tilastointialueet/wfs?request=GetFeature&typename=tilastointialueet:kunta1000k&outputformat=JSON"
-geodata = gpd.read_file(url)
-```
-
-```{code-cell}
-geodata.head()
-```
-
-```{code-cell}
-# Check length (there are 310 municipalities in Finland in 2020)
-len(geodata)
-```
-
-```{code-cell}
-#Select and rename columns
-geodata.rename(columns={'kunta':'code'}, inplace=True)
-geodata = geodata[['code','name', 'geometry']]
-geodata.head()
-```
-
-```{code-cell}
-geodata.plot()
-```
-
-```{code-cell}
-geodata.dtypes
-```
-
-- **Finnish municipalities with hospital district information** as an Excel spreadsheet 
-    - Downloaded from: https://www.kuntaliitto.fi/sosiaali-ja-terveysasiat/sairaanhoitopiirien-jasenkunnat in March 2020. 
-    - File `Shp_jäsenkunnat_2020.xls`, sheet `kunnat_shp_2020_ aakkosjärj.` This is the original unaltered file.
-    - In this file, "shp" stands for "sairaanhoitopiiri" (hospital district in Finnish)
-    
-*Note: this data set does not include Åland (Ahvenanmaa). Åland municipalities are added in the later step.*
-*Note: "hospital districts" is a more proper translation to sairaanhoitopiirit, but in this lesson I use "health care districts" to refer to these entities*
-
-Excel files often come with additional formatting such as metadata on the first lines of the data array. This is why it is a good idea to download the file on your own computer and have a look at the data structure before reading in the file using Python.
-It is also often a good idea to save the file as a csv file before reading in the data. However, it is also possible to read in data directly from Excel. For this, you need to have the xlrd module installed:
-
-```
-conda install -c conda-forge xlrd
-```
-
-Now we are ready to read in the data using pandas.
-
-In the case of this health districts excel the header is located on the 4th row (index 3) of the excel spreadsheet. 
-
-```{code-cell}
-# Read in the excel spreadsheet
-data = pd.read_excel(r"data/Shp_jäsenkunnat_2020.xls", sheet_name="kunnat_shp_2020_ aakkosjärj.", header=3)
-```
-
-```{code-cell}
-data.head()
-```
-
-In addition, the first row after the header is empty. We can get rid of it using the dropna() -function:
-
-```{code-cell}
-data.dropna(inplace=True)
-```
-
-Check number of rows (16 Åland municipalities are missing)
-
-```{code-cell}
-len(data)
-```
-
-The data needs some fixing and cleaning after reading the excel sheet
-
-```{code-cell}
-# Rename columns from Finnish to English 
-data.rename(columns={"kunta-\nkoodi":"code", 'sairaanhoitopiiri':'healthCareDistrict'}, inplace=True)
-
-# Select only useful columns
-data = data[['code','healthCareDistrict']]
-```
-
-```{code-cell}
-data
-```
-
-Looks better! Now we need to prepare the data for table join. We will use the municipality code as the common key.
-
-```{code-cell}
-data.dtypes
-```
-
-The code column is currently a floating point number. We need to modify these codes so that they match the ones in the spatial data:
-
-```{code-cell}
-# Example using one code
-number = data.at[1, "code"]
-number
-```
-
-```{code-cell}
-# Conver this number to character string 020
-print("20".zfill(3))
-```
-
-Let's apply this process on all rows at once, and take into account different number of digits:
-
-```{code-cell}
-# Convert to character string
-data["code"] = data["code"].astype(int).astype('str')
-
-# Add missing zeros to municipality codes
-data["code"] = data["code"].str.zfill(3)
-```
-
-```{code-cell}
-data.head()
-```
-
-## Join Health district info to the municipality polygons
-
-```{code-cell}
-# Merge health district info to geodata using "code" as the common key
-geodata = geodata.merge(data, on="code", how="left")
-```
-
-```{code-cell}
-geodata
-```
-
-Looks good! However, Municipalities in the Åland island did not have a matching health care district in the data. Let's have a closer look: 
-
-```{code-cell}
-# List all municipalities that lack health district info:
-geodata[geodata["healthCareDistrict"].isnull()].name
-```
-
-```{code-cell}
-# Update "Ahvenanmaa" as the health care district for Åland municipalities (16 municipalities in total)
-geodata.loc[geodata["healthCareDistrict"].isnull(), "healthCareDistrict"] = "Ahvenanmaa"
-```
-
-Check the count of municipalities per health care disctrict
-
-```{code-cell}
-geodata["healthCareDistrict"].value_counts()
-```
-
-## Create polygons for health care districts 
-
-```{code-cell}
-# Dissolve (=combine) municipality polygon geometries for each health care district
-districts = geodata.dissolve(by='healthCareDistrict')
-```
-
-```{code-cell}
-districts.reset_index(inplace=True)
-```
-
-```{code-cell}
-# Select useful columns
-districts = districts[["healthCareDistrict", "geometry"]]
-```
-
-```{code-cell}
-districts
-```
-
-```{code-cell}
-districts.plot(column='healthCareDistrict', cmap='tab20', k=20)
-plt.axis('off')
-```
-
-```{code-cell}
-# Write GeoJSON in original projection
-districts.to_file("healthDistrictsEPSG3067.geojson", driver='GeoJSON', encoding='utf-8')
-```
-
-```{code-cell}
-# Re-project to WGS84 and save again
-wgs84 = CRS.from_epsg(4326)
-districts.to_crs(wgs84).to_file("healthDistrictsEPSG4326.geojson", driver='GeoJSON', encoding='utf-8')
-```
-
-That's it! You can elaborate this workflow by joining additional data. For example, if you join population info per municipality you can sum it up for each health care district using the `aggfunc=sum` argument to get population count per health care district.

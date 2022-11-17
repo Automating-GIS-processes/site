@@ -6,11 +6,10 @@ jupytext:
     format_version: 0.13
     jupytext_version: 1.14.1
 kernelspec:
-  display_name: Python 3
+  display_name: Python 3 (ipykernel)
   language: python
   name: python3
 ---
-
 
 # Simplifying geometries
 
@@ -28,7 +27,7 @@ and simplify it's geometries.
 
 - Let's first read the data and see how the river looks like:
 
-```{code-cell}
+```{code-cell} ipython3
 import geopandas as gpd
 
 # File path
@@ -46,8 +45,7 @@ The LineString that is presented here is quite detailed, so let's see how we can
 
 - Generalization can be done easily by using a Shapely function called `.simplify()`. The `tolerance` parameter can be used to adjusts how much geometries should be generalized. **The tolerance value is tied to the coordinate system of the geometries**. Hence, the value we pass here is 20 000 **meters** (20 kilometers).
 
-
-```{code-cell}
+```{code-cell} ipython3
 # Generalize geometry
 data['geom_gen'] = data.simplify(tolerance=20000)
 

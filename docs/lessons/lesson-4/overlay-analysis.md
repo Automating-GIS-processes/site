@@ -6,11 +6,10 @@ jupytext:
     format_version: 0.13
     jupytext_version: 1.14.1
 kernelspec:
-  display_name: Python 3
+  display_name: Python 3 (ipykernel)
   language: python
   name: python3
 ---
-
 
 # Overlay analysis
 
@@ -52,7 +51,7 @@ $ unzip L4_data.zip
 
 You should now see the files in the `data` folder.Let's first read the data and see how they look like.
 
-```{code-cell}
+```{code-cell} ipython3
 import geopandas as gpd
 import matplotlib.pyplot as plt
 import shapely.speedups
@@ -69,7 +68,7 @@ hel = gpd.read_file(border_fp)
 
 Let's do a quick overlay visualization of the two layers:
 
-```{code-cell}
+```{code-cell} ipython3
 # Plot the layers
 ax = grid.plot(facecolor='gray')
 hel.plot(ax=ax, facecolor='None', edgecolor='blue')
@@ -79,12 +78,12 @@ Here the grey area is the Travel Time Matrix - a data set that contains  13231 g
 
 When conducting overlay analysis, it is important to first check that the CRS of the layers match. The overlay visualization indicates that everything should be ok (the layers are plotted nicely on top of each other). However, let's still check if the crs match using Python:
 
-```{code-cell}
+```{code-cell} ipython3
 # Check the crs of the municipality polygon
 print(hel.crs)
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 # Ensure that the CRS matches, if not raise an AssertionError
 assert hel.crs == grid.crs, "CRS differs between layers!"
 ```
@@ -93,13 +92,13 @@ Indeed, they do. We are now ready to conduct an overlay analysis between these l
 
 We will create a new layer based on grid polygons that `intersect` with our Helsinki layer. We can use a function called `overlay()` to conduct the overlay analysis that takes as an input 1) first GeoDataFrame, 2) second GeoDataFrame, and 3) parameter `how` that can be used to control how the overlay analysis is conducted (possible values are `'intersection'`, `'union'`, `'symmetric_difference'`, `'difference'`, and `'identity'`):
 
-```{code-cell}
+```{code-cell} ipython3
 intersection = gpd.overlay(grid, hel, how='intersection')
 ```
 
 Let's plot our data and see what we have:
 
-```{code-cell}
+```{code-cell} ipython3
 intersection.plot(color="b")
 ```
 
@@ -107,7 +106,7 @@ As a result, we now have only those grid cells that intersect with the Helsinki 
 
 - Whatabout the data attributes? Let's see what we have:
 
-```{code-cell}
+```{code-cell} ipython3
 intersection.head()
 ```
 
@@ -115,7 +114,7 @@ As we can see, due to the overlay analysis, the dataset contains the attributes 
 
 Let's save our result grid as a GeoJSON file that is commonly used file format nowadays for storing spatial data.
 
-```{code-cell}
+```{code-cell} ipython3
 # Output filepath
 outfp = "data/TravelTimes_to_5975375_RailwayStation_Helsinki.geojson"
 
