@@ -64,10 +64,10 @@ coordinate system of the geometries**. Hence, the value we pass here is 20 000
 
 ```{code-cell}
 # Generalize geometry
-amazon['geom_gen'] = amazon.simplify(tolerance=20000)
+amazon['simplegeom'] = amazon.simplify(tolerance=20000)
 
 # Set geometry to be our new simlified geometry
-% amazon = amazon.set_geometry('geom_gen')
+amazon = amazon.set_geometry('simplegeom')
 
 # Plot 
 amazon.plot()
