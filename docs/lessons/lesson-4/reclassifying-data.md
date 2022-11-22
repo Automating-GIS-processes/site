@@ -46,13 +46,13 @@ that contains travel time and distance information for routes between all 250 m
 x 250 m grid cell centroids (n = 13231) in the Capital Region of Helsinki by
 walking, cycling, public transportation and car.
 
-```{code-cell} ipython3
+```{code-cell}
 import pathlib 
 NOTEBOOK_PATH = pathlib.Path().resolve()
 DATA_DIRECTORY = NOTEBOOK_PATH / "data"
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 import geopandas
 accessibility_grid = geopandas.read_file(
     DATA_DIRECTORY
@@ -100,7 +100,7 @@ Euclidian distance).
 **The NoData values are presented with value -1**. 
 Thus we need to remove the No Data values first.
 
-```{code-cell} ipython3
+```{code-cell}
 # Include only data that is above or equal to 0
 accessibility_grid = accessibility_grid.loc[accessibility_grid["pt_r_tt"] >=0]
 ```
@@ -109,7 +109,7 @@ Let's plot the data and see how it looks like
 - `cmap` parameter defines the color map. Read more about [choosing colormaps in matplotlib](https://matplotlib.org/3.1.0/tutorials/colors/colormaps.html)
 - `scheme` option scales the colors according to a classification scheme (requires `mapclassify` module to be installed):
 
-```{code-cell} ipython3
+```{code-cell}
 # Plot using 9 classes and classify the values using "Natural Breaks" classification
 accessibility_grid.plot(column="pt_r_tt", scheme="Natural_Breaks", k=9, cmap="RdYlBu", linewidth=0, legend=True)
 ```
@@ -120,7 +120,7 @@ some other areas (where the color is red).
 
 Let's also make a plot about walking distances:
 
-```{code-cell} ipython3
+```{code-cell}
 # Plot walking distance
 accessibility_grid.plot(column="walk_d", scheme="Natural_Breaks", k=9, cmap="RdYlBu", linewidth=0, legend=True)
 ```
@@ -133,19 +133,19 @@ reminds more or less Euclidian distances.
 As mentioned, the `scheme` option defines the classification scheme using
 `pysal/mapclassify`. Let's have a closer look at how these classifiers work.
 
-```{code-cell} ipython3
+```{code-cell}
 import mapclassify
 ```
 
 #### Natural Breaks
 
-```{code-cell} ipython3
+```{code-cell}
 mapclassify.NaturalBreaks(y=accessibility_grid["pt_r_tt"], k=9)
 ```
 
 #### Quantiles (default is 5 classes):
 
-```{code-cell} ipython3
+```{code-cell}
 mapclassify.Quantiles(y=accessibility_grid["pt_r_tt"])
 ```
 
@@ -153,7 +153,7 @@ mapclassify.Quantiles(y=accessibility_grid["pt_r_tt"])
 
 It's possible to extract the threshold values into an array:
 
-```{code-cell} ipython3
+```{code-cell}
 classifier = mapclassify.NaturalBreaks(y=accessibility_grid["pt_r_tt"], k=9)
 classifier.bins
 ```
@@ -163,14 +163,14 @@ travel times by public transport into 9 classes
 The classifier needs to be initialized first with `make()` function that takes
 the number of desired classes as input parameter
 
-```{code-cell} ipython3
+```{code-cell}
 # Create a Natural Breaks classifier
 classifier = mapclassify.NaturalBreaks.make(k=9)
 ```
 
 - Now we can apply that classifier into our data by using `apply` -function
 
-```{code-cell} ipython3
+```{code-cell}
 # Classify the data
 classifications = accessibility_grid[["pt_r_tt"]].apply(classifier)
 
@@ -178,7 +178,7 @@ classifications = accessibility_grid[["pt_r_tt"]].apply(classifier)
 classifications.head()
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 type(classifications)
 ```
 
@@ -188,7 +188,7 @@ classification](http://wiki-1-1930356585.us-east-1.elb.amazonaws.com/wiki/index.
 
 We can also add the classification values directly into a new column in our dataframe:
 
-```{code-cell} ipython3
+```{code-cell}
 # Rename the column so that we know that it was classified with natural breaks
 accessibility_grid["nb_pt_r_tt"] = accessibility_grid[["pt_r_tt"]].apply(classifier)
 
@@ -199,7 +199,7 @@ accessibility_grid[["pt_r_tt", "nb_pt_r_tt"]].head()
 Great, now we have those values in our accessibility GeoDataFrame. Let's
 visualize the results and see how they look.
 
-```{code-cell} ipython3
+```{code-cell}
 # Plot
 accessibility_grid.plot(column="nb_pt_r_tt", linewidth=0, legend=True)
 ```
@@ -217,7 +217,7 @@ and how the classification shceme divides values into different ranges.
 - plot the histogram using [pandas.DataFrame.plot.hist](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.plot.hist.html)
 - Number of histogram bins (groups of data) can be controlled using the parameter `bins`:
 
-```{code-cell} ipython3
+```{code-cell}
 # Histogram for public transport rush hour travel time
 accessibility_grid["pt_r_tt"].plot.hist(bins=50)
 ```
@@ -226,7 +226,7 @@ Let's also add threshold values on thop of the histogram as vertical lines.
 
 - Natural Breaks:
 
-```{code-cell} ipython3
+```{code-cell}
 import matplotlib.pyplot as plt
 
 # Define classifier
@@ -242,7 +242,7 @@ for break_point in classifier.bins:
 
 - Quantiles:
 
-```{code-cell} ipython3
+```{code-cell}
 # Define classifier
 classifier = mapclassify.Quantiles(y=accessibility_grid['pt_r_tt'])
 
@@ -292,21 +292,21 @@ Let's do our classification based on two criteria: and find out grid cells
 
 Let's first see how to classify a single row:
 
-```{code-cell} ipython3
+```{code-cell}
 accessibility_grid.iloc[0]["pt_r_tt"] < 20 and accessibility_grid.iloc[0]["walk_d"] > 4000
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 int(accessibility_grid.iloc[11293]["pt_r_tt"] < 20 and accessibility_grid.iloc[11293]["walk_d"] > 4000)
 ```
 
 Let's now apply this to our GeoDataFrame and save it to a column called `"suitable_area"`:
 
-```{code-cell} ipython3
+```{code-cell}
 accessibility_grid["suitable_area"] = accessibility_grid.apply(lambda row: int(row["pt_r_tt"] < 20 and row["walk_d"] > 4000), axis=1)
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 accessibility_grid.head()
 ```
 
@@ -316,7 +316,7 @@ Okey we have new values in `suitable_area` -column.
   function called `value_counts()` that return the count of different values in
   our column.
 
-```{code-cell} ipython3
+```{code-cell}
 # Get value counts
 accessibility_grid["suitable_area"].value_counts()
 ```
@@ -326,7 +326,7 @@ find an appartment to buy.
 
 - Let's see where they are located:
 
-```{code-cell} ipython3
+```{code-cell}
 # Plot
 accessibility_grid.plot(column="suitable_area", linewidth=0)
 ```

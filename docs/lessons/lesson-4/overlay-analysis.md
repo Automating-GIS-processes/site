@@ -35,13 +35,13 @@ data set (with one feature) of the area the municipality of Helsinki covers
 (`helsinki_municipality.gpkg`). Both files are in logically named subfolders
 of the `DATA_DIRECTORY`.
 
-```{code-cell} ipython3
+```{code-cell}
 import pathlib 
 NOTEBOOK_PATH = pathlib.Path().resolve()
 DATA_DIRECTORY = NOTEBOOK_PATH / "data"
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 import geopandas
 
 grid = geopandas.read_file(
@@ -57,7 +57,7 @@ helsinki = geopandas.read_file(
 
 Let’s do a quick overlay visualization of the two layers:
 
-```{code-cell} ipython3
+```{code-cell}
 # Plot the layers
 ax = grid.plot(facecolor="gray")
 helsinki.plot(ax=ax, facecolor="None", edgecolor="blue")
@@ -74,12 +74,12 @@ of the layers match. The overlay visualization indicates that everything should
 be ok (the layers are plotted nicely on top of each other). However, let's
 still check if the crs match using Python:
 
-```{code-cell} ipython3
+```{code-cell}
 # Check the crs of the municipality polygon
 print(helsinki.crs)
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 # Ensure that the CRS matches, if not raise an AssertionError
 assert helsinki.crs == grid.crs, "CRS differs between layers!"
 ```
@@ -93,13 +93,13 @@ parameter `how` that can be used to control how the overlay analysis is
 conducted (possible values are `'intersection'`, `'union'`,
 `'symmetric_difference'`, `'difference'`, and `'identity'`):
 
-```{code-cell} ipython3
+```{code-cell}
 intersection = grid.overlay(helsinki, how="intersection")
 ```
 
 Let's plot our data and see what we have:
 
-```{code-cell} ipython3
+```{code-cell}
 intersection.plot(color="b")
 ```
 
@@ -109,7 +109,7 @@ clipped based on the boundary.**
 
 - Whatabout the data attributes? Let's see what we have:
 
-```{code-cell} ipython3
+```{code-cell}
 intersection.head()
 ```
 
@@ -118,7 +118,7 @@ from both input layers.
 
 Let's save our result grid as a GeoPackage.
 
-```{code-cell} ipython3
+```{code-cell}
 intersection.to_file(
     DATA_DIRECTORY / "intersection.gpkg",
     layer="travel_time_matrix_helsinki_region"

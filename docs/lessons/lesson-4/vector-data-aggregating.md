@@ -29,13 +29,13 @@ Railway Station will be merged together.
 Let’s start with loading `intersection.gpkg`, the output file of the
 [previous section](overlay-analysis):
 
-```{code-cell} ipython3
+```{code-cell}
 import pathlib 
 NOTEBOOK_PATH = pathlib.Path().resolve()
 DATA_DIRECTORY = NOTEBOOK_PATH / "data"
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 import geopandas
 intersection = geopandas.read_file(DATA_DIRECTORY / "intersection.gpkg")
 ```
@@ -43,7 +43,7 @@ intersection = geopandas.read_file(DATA_DIRECTORY / "intersection.gpkg")
 For doing the aggregation we will use a method called `dissolve()` that takes
 as input the column that will be used for conducting the aggregation:
 
-```{code-cell} ipython3
+```{code-cell}
 # Conduct the aggregation
 dissolved = intersection.dissolve(by="car_r_t")
 
@@ -54,7 +54,7 @@ dissolved.head()
 Let’s compare the number of cells in the layers before and after the
 aggregation:
 
-```{code-cell} ipython3
+```{code-cell}
 print(f"Rows in original intersection GeoDataFrame: {len(intersection)}")
 print(f"Rows in dissolved layer: {len(dissolved)}")
 ```
@@ -66,7 +66,7 @@ What actually happened here? Let's take a closer look.
 
 Let's see what columns we have now in our GeoDataFrame:
 
-```{code-cell} ipython3
+```{code-cell}
 dissolved.columns
 ```
 
@@ -76,7 +76,7 @@ it?
 
 Let’s take a look at the indices of our GeoDataFrame:
 
-```{code-cell} ipython3
+```{code-cell}
 dissolved.index
 ```
 
@@ -86,17 +86,17 @@ our `dissolved` GeoDataFrame.
 Now, we can for example select only such geometries from the layer that are for
 example exactly 15 minutes away from the Helsinki Railway Station:
 
-```{code-cell} ipython3
+```{code-cell}
 # Select only geometries that are within 15 minutes away
 dissolved.loc[15]
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 # See the data type
 type(dissolved.loc[15])
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 # See the data
 dissolved.loc[15].head()
 ```
@@ -108,14 +108,14 @@ Let’s also visualize those 15 minute grid cells.
 
 First, we need to convert the selected row back to a GeoDataFrame:
 
-```{code-cell} ipython3
+```{code-cell}
 # Create a GeoDataFrame
 selection = geopandas.GeoDataFrame([dissolved.loc[15]], crs=dissolved.crs)
 ```
 
 Plot the selection on top of the entire grid:
 
-```{code-cell} ipython3
+```{code-cell}
 # Plot all the grid cells, and the grid cells that are 15 minutes
 # away from the Railway Station
 ax = dissolved.plot(facecolor="gray")
@@ -124,14 +124,14 @@ selection.plot(ax=ax, facecolor="red")
 
 Another way to visualize the travel times in the entire GeoDataFrame is to plot using one specific column. In order to use our `car_r_t` column, which is now the index of the GeoDataFrame, we need to reset the index:
 
-```{code-cell} ipython3
+```{code-cell}
 dissolved = dissolved.reset_index()
 dissolved.head()
 ```
 
 As we can see, we now have our `car_r_t` as a column again, and can then plot the GeoDataFrame passing this column using the `column` parameter:
 
-```{code-cell} ipython3
+```{code-cell}
 dissolved.plot(column="car_r_t")
 ```
 
