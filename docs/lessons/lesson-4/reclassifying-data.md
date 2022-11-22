@@ -102,7 +102,7 @@ Thus we need to remove the No Data values first.
 
 ```{code-cell} ipython3
 # Include only data that is above or equal to 0
-accessibility_grid = accessibility_grid.loc[accessibility_grid['pt_r_tt'] >=0]
+accessibility_grid = accessibility_grid.loc[accessibility_grid["pt_r_tt"] >=0]
 ```
 
 Let's plot the data and see how it looks like
@@ -140,13 +140,13 @@ import mapclassify
 #### Natural Breaks
 
 ```{code-cell} ipython3
-mapclassify.NaturalBreaks(y=accessibility_grid['pt_r_tt'], k=9)
+mapclassify.NaturalBreaks(y=accessibility_grid["pt_r_tt"], k=9)
 ```
 
 #### Quantiles (default is 5 classes):
 
 ```{code-cell} ipython3
-mapclassify.Quantiles(y=accessibility_grid['pt_r_tt'])
+mapclassify.Quantiles(y=accessibility_grid["pt_r_tt"])
 ```
 
 #### Extract threshold values
@@ -154,7 +154,7 @@ mapclassify.Quantiles(y=accessibility_grid['pt_r_tt'])
 It's possible to extract the threshold values into an array:
 
 ```{code-cell} ipython3
-classifier = mapclassify.NaturalBreaks(y=accessibility_grid['pt_r_tt'], k=9)
+classifier = mapclassify.NaturalBreaks(y=accessibility_grid["pt_r_tt"], k=9)
 classifier.bins
 ```
 
@@ -172,7 +172,7 @@ classifier = mapclassify.NaturalBreaks.make(k=9)
 
 ```{code-cell} ipython3
 # Classify the data
-classifications = accessibility_grid[['pt_r_tt']].apply(classifier)
+classifications = accessibility_grid[["pt_r_tt"]].apply(classifier)
 
 # Let's see what we have
 classifications.head()
@@ -190,10 +190,10 @@ We can also add the classification values directly into a new column in our data
 
 ```{code-cell} ipython3
 # Rename the column so that we know that it was classified with natural breaks
-accessibility_grid['nb_pt_r_tt'] = accessibility_grid[['pt_r_tt']].apply(classifier)
+accessibility_grid["nb_pt_r_tt"] = accessibility_grid[["pt_r_tt"]].apply(classifier)
 
 # Check the original values and classification
-accessibility_grid[['pt_r_tt', 'nb_pt_r_tt']].head()
+accessibility_grid[["pt_r_tt", "nb_pt_r_tt"]].head()
 ```
 
 Great, now we have those values in our accessibility GeoDataFrame. Let's
@@ -219,7 +219,7 @@ and how the classification shceme divides values into different ranges.
 
 ```{code-cell} ipython3
 # Histogram for public transport rush hour travel time
-accessibility_grid['pt_r_tt'].plot.hist(bins=50)
+accessibility_grid["pt_r_tt"].plot.hist(bins=50)
 ```
 
 Let's also add threshold values on thop of the histogram as vertical lines.
@@ -230,14 +230,14 @@ Let's also add threshold values on thop of the histogram as vertical lines.
 import matplotlib.pyplot as plt
 
 # Define classifier
-classifier = mapclassify.NaturalBreaks(y=accessibility_grid['pt_r_tt'], k=9)
+classifier = mapclassify.NaturalBreaks(y=accessibility_grid["pt_r_tt"], k=9)
 
 # Plot histogram for public transport rush hour travel time
-accessibility_grid['pt_r_tt'].plot.hist(bins=50)
+accessibility_grid["pt_r_tt"].plot.hist(bins=50)
 
 # Add vertical lines for class breaks
-for value in classifier.bins:
-    plt.axvline(value, color='k', linestyle='dashed', linewidth=1)
+for break_point in classifier.bins:
+    plt.axvline(break_point, color="k", linestyle="dashed", linewidth=1)
 ```
 
 - Quantiles:
@@ -247,10 +247,10 @@ for value in classifier.bins:
 classifier = mapclassify.Quantiles(y=accessibility_grid['pt_r_tt'])
 
 # Plot histogram for public transport rush hour travel time
-accessibility_grid['pt_r_tt'].plot.hist(bins=50)
+accessibility_grid["pt_r_tt"].plot.hist(bins=50)
 
-for value in classifier.bins:
-    plt.axvline(value, color='k', linestyle='dashed', linewidth=1)
+for break_point in classifier.bins:
+    plt.axvline(break_point, color="k", linestyle="dashed", linewidth=1)
 ```
 
 :::{admonition} Check your understanding
@@ -280,7 +280,7 @@ called a [binary
 classification](https://en.wikipedia.org/wiki/Binary_classification).
 
 To classify each row of our GeoDataFrame we can iterate over each row or we can apply
-a function for each row. In our case, we will apply a lambda function for each row in
+a function for each row. In our case, we will apply a [lambda function](https://autogis-site.readthedocs.io/en/latest/lessons/lesson-1/exercise-1.html#apply-ing-an-anonymous-lambda-function) for each row in
 our GeoDataFrame, which returns a value based on the conditions we provide.
 
 Let's do our classification based on two criteria: and find out grid cells
@@ -293,17 +293,17 @@ Let's do our classification based on two criteria: and find out grid cells
 Let's first see how to classify a single row:
 
 ```{code-cell} ipython3
-accessibility_grid.iloc[0]['pt_r_tt'] < 20 and accessibility_grid.iloc[0]['walk_d'] > 4000
+accessibility_grid.iloc[0]["pt_r_tt"] < 20 and accessibility_grid.iloc[0]["walk_d"] > 4000
 ```
 
 ```{code-cell} ipython3
-int(accessibility_grid.iloc[11293]['pt_r_tt'] < 20 and accessibility_grid.iloc[11293]['walk_d'] > 4000)
+int(accessibility_grid.iloc[11293]["pt_r_tt"] < 20 and accessibility_grid.iloc[11293]["walk_d"] > 4000)
 ```
 
 Let's now apply this to our GeoDataFrame and save it to a column called `"suitable_area"`:
 
 ```{code-cell} ipython3
-accessibility_grid["suitable_area"] = accessibility_grid.apply(lambda row: int(row['pt_r_tt'] < 20 and row['walk_d'] > 4000), axis=1)
+accessibility_grid["suitable_area"] = accessibility_grid.apply(lambda row: int(row["pt_r_tt"] < 20 and row["walk_d"] > 4000), axis=1)
 ```
 
 ```{code-cell} ipython3
@@ -318,7 +318,7 @@ Okey we have new values in `suitable_area` -column.
 
 ```{code-cell} ipython3
 # Get value counts
-accessibility_grid['suitable_area'].value_counts()
+accessibility_grid["suitable_area"].value_counts()
 ```
 
 Okay, so there seems to be nine suitable locations for us where we can try to

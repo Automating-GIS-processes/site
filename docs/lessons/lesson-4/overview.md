@@ -1,13 +1,14 @@
 ---
-kernelspec:
-  name: python3
-  display_name: python3
 jupytext:
   text_representation:
     extension: .md
     format_name: myst
-    format_version: '0.13'
-    jupytext_version: 1.14.1
+    format_version: 0.13
+    jupytext_version: 1.14.0
+kernelspec:
+  display_name: Python 3 (ipykernel)
+  language: python
+  name: python3
 ---
 
 # Overview
@@ -25,9 +26,9 @@ After this lesson, you should know how to:
 
 - create new geometries by adding, subtracting or intersecting two geometries,
 - combine geometries based on a common attribute (*dissolving* them),
-- simplify geometries according to a maximum-error threshold, and
 - create categories for numerical data based on classifiers such as *natural
-  breaks*, *equal interval*, or *quantiles*.
+  breaks*, *equal interval*, or *quantiles*, and
+- simplify geometries according to a maximum-error threshold
 
 
 % ## Lesson video
@@ -36,3 +37,7 @@ After this lesson, you should know how to:
 %   src="https://www.youtube.com/embed/ADD_VIDEO_ID?modestbranding=1
 %   frameborder="0">
 % </iframe>
+
+```{code-cell} ipython3
+
+```

@@ -4,7 +4,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.14.1
+    jupytext_version: 1.14.0
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
@@ -32,18 +32,16 @@ exercise, we use two input data sets: a grid of statistical polygons with the
 travel time to the Helsinki railway station, covering the entire metropolitan
 area (`helsinki_region_travel_times_to_railway_station.gpkg`) and a polygon
 data set (with one feature) of the area the municipality of Helsinki covers
-(`helsinki_municipality.gpkg`). Both files are in logically names subfolders
+(`helsinki_municipality.gpkg`). Both files are in logically named subfolders
 of the `DATA_DIRECTORY`.
 
-
-```{code-cell}
+```{code-cell} ipython3
 import pathlib 
 NOTEBOOK_PATH = pathlib.Path().resolve()
 DATA_DIRECTORY = NOTEBOOK_PATH / "data"
 ```
 
-
-```{code-cell}
+```{code-cell} ipython3
 import geopandas
 
 grid = geopandas.read_file(
@@ -55,16 +53,14 @@ grid = geopandas.read_file(
 helsinki = geopandas.read_file(
     DATA_DIRECTORY / "helsinki_municipality" / "helsinki_municipality.gpkg"
 )
-
 ```
-
 
 Let’s do a quick overlay visualization of the two layers:
 
-```{code-cell}
+```{code-cell} ipython3
 # Plot the layers
-ax = grid.plot(facecolor='gray')
-helsinki.plot(ax=ax, facecolor='None', edgecolor='blue')
+ax = grid.plot(facecolor="gray")
+helsinki.plot(ax=ax, facecolor="None", edgecolor="blue")
 ```
 
 Here the grey area is the Travel Time Matrix - a data set that contains  13231
@@ -78,12 +74,12 @@ of the layers match. The overlay visualization indicates that everything should
 be ok (the layers are plotted nicely on top of each other). However, let's
 still check if the crs match using Python:
 
-```{code-cell}
+```{code-cell} ipython3
 # Check the crs of the municipality polygon
 print(helsinki.crs)
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 # Ensure that the CRS matches, if not raise an AssertionError
 assert helsinki.crs == grid.crs, "CRS differs between layers!"
 ```
@@ -97,13 +93,13 @@ parameter `how` that can be used to control how the overlay analysis is
 conducted (possible values are `'intersection'`, `'union'`,
 `'symmetric_difference'`, `'difference'`, and `'identity'`):
 
-```{code-cell}
-intersection = grid.overlay(helsinki, how='intersection')
+```{code-cell} ipython3
+intersection = grid.overlay(helsinki, how="intersection")
 ```
 
 Let's plot our data and see what we have:
 
-```{code-cell}
+```{code-cell} ipython3
 intersection.plot(color="b")
 ```
 
@@ -113,18 +109,20 @@ clipped based on the boundary.**
 
 - Whatabout the data attributes? Let's see what we have:
 
-```{code-cell}
+```{code-cell} ipython3
 intersection.head()
 ```
 
 As we can see, due to the overlay analysis, the dataset contains the attributes
 from both input layers.
 
-Let's save our result grid as a GeoJSON file that is commonly used file format
-nowadays for storing spatial data used online.
+Let's save our result grid as a GeoPackage.
 
-```{code-cell}
-intersection.to_file(DATA_DIRECTORY / "intersection.geojson")
+```{code-cell} ipython3
+intersection.to_file(
+    DATA_DIRECTORY / "intersection.gpkg",
+    layer="travel_time_matrix_helsinki_region"
+)
 ```
 
 There are many more examples for different types of overlay analysis in
