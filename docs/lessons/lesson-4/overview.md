@@ -31,13 +31,9 @@ After this lesson, you should know how to:
 - simplify geometries according to a maximum-error threshold
 
 
-% ## Lesson video
-% 
-% <iframe id="ytplayer" type="text/html" width="700" height="394"
-%   src="https://www.youtube.com/embed/ADD_VIDEO_ID?modestbranding=1
-%   frameborder="0">
-% </iframe>
+## Lesson video
 
-```{code-cell} ipython3
-
-```
+<iframe id="ytplayer" type="text/html" width="700" height="394"
+  src="https://www.youtube.com/embed/BiYu1nIZ0UA?modestbranding=1
+  frameborder="0">
+</iframe>
