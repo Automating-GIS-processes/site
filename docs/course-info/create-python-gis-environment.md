@@ -94,7 +94,7 @@ YAML-file (file extension `.yaml` or .`yml`).
 
 You can find and download a configuration file that contains all required
 packages needed during the *Automating GIS processes* course from its GitHub
-repository: [github.com/Automating-GIS-processes/site/](https://github.com/Automating-GIS-processes/site/tree/master/ci)
+repository: [github.com/Automating-GIS-processes/site/](https://github.com/Automating-GIS-processes/site/blob/main/environment.yml)
 
 The configuration file looks like this:
 
