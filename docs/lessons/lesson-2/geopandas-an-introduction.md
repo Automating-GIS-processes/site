@@ -158,6 +158,7 @@ feature classes into separate files**.
 :::{admonition} Search for files using a pattern
 :class: hint
 
+(#search-for-files-using-a-pattern)=
 A `pathlib.Path` (such as `DATA_DIRECTORY`) has a handy method to list all
 files in a directory (or subdirectories) that match a pattern:
 [`glob()`](https://docs.python.org/3/library/pathlib.html#pathlib.Path.glob).
