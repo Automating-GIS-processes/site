@@ -190,17 +190,13 @@ lessons/lesson-4/reclassifying-data
 lessons/lesson-4/exercise-4
 ```
 
-% ```{toctree}
-% ---
-% caption: Lesson 5
-% maxdepth: 2
-% ---
-% lessons/lesson-5/overview
-% lessons/lesson-5/geometric-operations
-% lessons/lesson-5/create-health-district-polygons
-% lessons/lesson-5/reclassify
-% lessons/lesson-5/exercise-5
-% ```
+```{toctree}
+---
+caption: Lesson 5
+maxdepth: 2
+---
+lessons/lesson-5/overview
+```
 
 % ```{toctree}
 % ---
