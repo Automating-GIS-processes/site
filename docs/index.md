@@ -197,6 +197,7 @@ maxdepth: 2
 ---
 lessons/lesson-5/overview
 lessons/lesson-5/static-maps
+lessons/lesson-5/interactive-maps
 ```
 
 % ```{toctree}
@@ -205,10 +206,6 @@ lessons/lesson-5/static-maps
 % maxdepth: 2
 % ---
 % lessons/lesson-6/overview
-% lessons/lesson-6/static-maps
-% lessons/lesson-6/interactive-map-folium
-% lessons/lesson-6/employment-rate-map
-% lessons/lesson-6/share-on-github
 % lessons/lesson-6/exercise-6
 % ```
 
