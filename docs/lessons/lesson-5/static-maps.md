@@ -30,7 +30,7 @@ data sets need to be in the same coordinate system!
 
 ## Data
 
-We will use three different data sets: 
+We will use three different data sets:
 - the travel time to the Helsinki railway station we used in [lesson
   4](../lesson-4/reclassifying-data), which is in `DATA_DIRECTORY /
 "helsinki_region_travel_times_to_railway_station"`,
@@ -40,19 +40,21 @@ We will use three different data sets:
   also available via WFS from the same endpoint.
 
 ```{code-cell}
-import pathlib 
+import pathlib
 NOTEBOOK_PATH = pathlib.Path().resolve()
 DATA_DIRECTORY = NOTEBOOK_PATH / "data"
 ```
 
 ```{code-cell}
 import geopandas
+import numpy
 
 accessibility_grid = geopandas.read_file(
     DATA_DIRECTORY
     / "helsinki_region_travel_times_to_railway_station"
     / "helsinki_region_travel_times_to_railway_station.gpkg"
 )
+accessibility_grid["pt_r_t"] = accessibility_grid["pt_r_t"].replace(-1, numpy.nan)
 
 WFS_BASE_URL = (
     "https://kartta.hel.fi/ws/geoserver/avoindata/wfs"
@@ -127,7 +129,7 @@ assert accessibility_grid.crs == metro.crs == roads.crs, "Input data sets’ CRS
 
 Complete the next steps at your own pace (clear out the code cells first).
 Make sure to revisit previous lessons if you feel unsure how to complete
-a task. 
+a task.
 
 - Visualise a multi-layer map using the `geopandas.GeoDataFrame.plot()` method;
 - first, plot the accessibility grid using a ‘quantiles’ classification scheme,
@@ -158,7 +160,7 @@ and vertical extents of the map (e.g., to a geo-data frame’s `total_bounds`).
 ```{code-cell}
 ax = accessibility_grid.plot(
     figsize=(12, 8),
-    
+
     column="pt_r_t",
     scheme="quantiles",
     cmap="Spectral",
@@ -189,263 +191,202 @@ ax.set_ylim(miny, maxy)
 To plot a legend for a map, add the `legend=True` parameter.
 
 For figures without a classification `scheme`, the legend consists of a colour
-gradient bar, the *legend title* (and other parameters) can be adjusted by
-setting `legend_kwds` (see below). Find details on how to create and customise
-a map legend at
-[geopandas.org/mapping.html](https://geopandas.org/en/stable/docs/user_guide/mapping.html#creating-a-legend).
+gradient bar. The legend is an instance of
+[`matplotlib.pyplot.colorbar.Colorbar`](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.colorbar.html),
+and all arguments defined in `legend_kwds` are passed through to it. See below
+how to use the `label` property to set the *legend title*:
+
+```{code-cell}
+ax = accessibility_grid.plot(
+    figsize=(12, 8),
+
+    column="pt_r_t",
+    cmap="Spectral",
+    linewidth=0,
+    alpha=0.8,
+
+    legend=True,
+    legend_kwds={"label": "Travel time (min)"}
+)
+```
+
+:::{admonition} Set other `Colorbar` parameters
+:class: hint
+
+Check out [`matplotlib.pyplot.colorbar.Colorbar`’s
+documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.colorbar.html)
+and experiment with other parameters! Anything you add to the `legend_kwds`
+dictionary will be passed to the colour bar.
+:::
+
+
+---
+
+
+For figures that use a classification `scheme`, on the other hand, `plot()`
+creates a
+[`matplotlib.legend.Legend`](https://matplotlib.org/stable/api/legend_api.html#matplotlib.legend.Legend).
+Again, `legend_kwds` are passed through, but the parameters are slightly
+different: for instance, use `title` instead of `label` to set the legend
+title:
+
+```{code-cell}
+accessibility_grid.plot(
+    figsize=(12, 8),
+
+    column="pt_r_t",
+    scheme="quantiles",
+    cmap="Spectral",
+    linewidth=0,
+    alpha=0.8,
+
+    legend=True,
+    legend_kwds={"title": "Travel time (min)"}
+)
+```
+
+:::{admonition} Set other `Legend` parameters
+:class: hint
+
+Check out [`matplotlib.pyplot.legend.Legend`’s
+documentation](https://matplotlib.org/stable/api/legend_api.html#matplotlib.legend.Legend),
+and experiment with other parameters! Anything you add to the `legend_kwds`
+dictionary will be passed to the legend.
+
+What `legend_kwds` keyword would spread the legend onto two columns?
+:::
+
+
+## Adding a base map
+
+For better orientation, it is often helpful to add a base map to a map plot. A
+base map, for instance, from map providers such as
+[OpenStreetMap](https://osm.org/) or [Stamen](https://maps.stamen.com/), adds
+streets, place names, and other contextual information.
+
+The Python package [contextily](https://contextily.readthedocs.io/) takes care
+of downloading the necessary map tiles and rendering them in a geopandas plot.
+
+:::{admonition} Web Mercator
+:class: caution
+
+Map tiles from online map providers are typically in [Web Mercator projection
+(EPSG:3857](http://spatialreference.org/ref/sr-org/epsg3857-wgs84-web-mercator-auxiliary-sphere/).
+It is generally advisable to transform all other layers to `EPSG:3857`, too.
+:::
+
+```{code-cell}
+accessibility_grid = accessibility_grid.to_crs("EPSG:3857")
+metro = metro.to_crs("EPSG:3857")
+roads = roads.to_crs("EPSG:3857")
+```
+
+To add a base map to an existing plot, use the
+[`contextily.add_basemap()`](https://contextily.readthedocs.io/en/latest/intro_guide.html)
+function, and supply the plot’s `ax` object obtained in an earlier step.
+
+```{code-cell}
+import contextily
+
+ax = accessibility_grid.plot(
+    figsize=(12, 8),
+
+    column="pt_r_t",
+    scheme="quantiles",
+    cmap="Spectral",
+    linewidth=0,
+    alpha=0.8,
+
+    legend=True,
+    legend_kwds={"title": "Travel time (min)"}
+)
+contextily.add_basemap(ax)
+```
+
+
+By default, *contextily* uses the [Stamen
+Terrain](http://maps.stamen.com/#terrain) as a base map, but [there are many
+other online maps to choose
+from](https://contextily.readthedocs.io/en/latest/intro_guide.html#Providers).
+Any of the other `contextily.providers` (see link above) can be passed as a
+`source` to `add_basemap()`. For instance, use OpenStreetMap in its default
+*Mapnik* style:
 
 
 ```{code-cell}
 ax = accessibility_grid.plot(
     figsize=(12, 8),
-    
+
     column="pt_r_t",
+    scheme="quantiles",
     cmap="Spectral",
     linewidth=0,
-    alpha=0.8
+    alpha=0.8,
 
     legend=True,
-    legend_kwds={"label": "Travel time"})
+    legend_kwds={"title": "Travel time (min)"}
+)
+contextily.add_basemap(
+    ax,
+    source=contextily.providers.OpenStreetMap.Mapnik
 )
 ```
 
 
-#For figures that use a classification `scheme`, the 
+In this zoom level, the benefits from using OpenStreetMap (such as place names)
+do not live to their full potential. Let’s look at a subset of the travel time
+matrix: grid cells that are within 15 minutes from the railway station.
 
-% If plotting a map using a classification scheme, we get a different kind of ledend that shows the class values. In this case, we can control the position and title of the legend using matplotlib tools. We first need to access the [Legend object](https://matplotlib.org/3.3.2/api/legend_api.html#matplotlib.legend.Legend) and then change it's properties.
-% 
-% ```{code-cell} ipython3
-% # Create one subplot. Control figure size in here.
-% fig, ax = plt.subplots(figsize=(10,5))
-% 
-% # Visualize the travel times into 9 classes using "Quantiles" classification scheme
-% grid.plot(ax=ax, 
-%           column="car_r_t", 
-%           linewidth=0.03, 
-%           cmap="Spectral", 
-%           scheme="quantiles", 
-%           k=9, 
-%           legend=True, 
-%           )
-% 
-% # Re-position the legend and set a title
-% ax.get_legend().set_bbox_to_anchor((1.3,1))
-% ax.get_legend().set_title("Travel time (min)")
-% 
-% # Remove the empty white-space around the axes
-% plt.tight_layout()
-% ```
-% 
-% You can read more info about adjusting legends in the matplotlig [legend guide](https://matplotlib.org/tutorials/intermediate/legend_guide.html).
-% 
-% +++
-% 
-% ## Adding basemap from external source
-% 
-% It is often useful to add a basemap to your visualization that shows e.g. streets, placenames and other contextual information. This can be done easily by using ready-made background map tiles from different providers such as [OpenStreetMap](https://wiki.openstreetmap.org/wiki/Tiles) or [Stamen Design](http://maps.stamen.com). A Python library called [contextily](https://github.com/darribas/contextily) is a handy package that can be used to fetch geospatial raster files and add them to your maps. Map tiles are typically distributed in [Web Mercator projection (EPSG:3857)](http://spatialreference.org/ref/sr-org/epsg3857-wgs84-web-mercator-auxiliary-sphere/), hence **it is often necessary to reproject all the spatial data into** [Web Mercator](https://en.wikipedia.org/wiki/Web_Mercator_projection) before visualizing the data.
-% 
-% In this tutorial, we will see how to add a basemap underneath our previous visualization.
-% 
-% - Read in the travel time data:
-% 
-% ```{code-cell} ipython3
-% import geopandas as gpd
-% import matplotlib.pyplot as plt
-% import contextily as ctx
-% %matplotlib inline
-% 
-% # Filepaths
-% grid_fp = "data/TravelTimes_to_5975375_RailwayStation.shp"
-% 
-% # Read data
-% grid = gpd.read_file(grid_fp)
-% grid.head(3)
-% ```
-% 
-% Check the input crs:
-% 
-% ```{code-cell} ipython3
-% print(grid.crs)
-% ```
-% 
-% Reproject the layer to ESPG 3857 projection (Web Mercator):
-% 
-% ```{code-cell} ipython3
-% # Reproject to EPSG 3857
-% data = grid.to_crs(epsg=3857)
-% print(data.crs)
-% ```
-% 
-% Now the crs is `epsg:3857`. Also the coordinate values in the `geometry` column have changed:
-% 
-% ```{code-cell} ipython3
-% data.head(2)
-% ```
-% 
-% Next, we can plot our data using geopandas and add a basemap for our plot by using a function called `add_basemap()` from contextily:
-% 
-% ```{code-cell} ipython3
-% # Control figure size in here
-% fig, ax = plt.subplots(figsize=(12,8))
-% 
-% # Plot the data
-% data.plot(ax=ax, column='pt_r_t', cmap='RdYlBu', linewidth=0, scheme="quantiles", k=9, alpha=0.6)
-% 
-% # Add basemap 
-% ctx.add_basemap(ax)
-% ```
-% 
-% As we can see, now the map has a background map that is by default using the Stamen Terrain background from [Stamen Design](http://maps.stamen.com/#terrain). 
-% 
-% There are also various other possible data sources and styles for background maps. 
-% 
-% Contextily's `tile_providers` contain a list of providers and styles that can be used to control the appearence of your background map:
-% 
-% ```{code-cell} ipython3
-% dir(ctx.providers)
-% ```
-% 
-% There are multiple style options for most of these providers, for example: 
-% 
-% ```{code-cell} ipython3
-% ctx.providers.OpenStreetMap.keys()
-% ```
-% 
-% It is possible to change the tile provider using the `source` -parameter in `add_basemap()` function. Let's see how we can change the bacground map as the basic OpenStreetMap background:
-% 
-% ```{code-cell} ipython3
-% # Control figure size in here
-% fig, ax = plt.subplots(figsize=(12,8))
-% 
-% # Plot the data
-% data.plot(ax=ax, column='pt_r_t', cmap='RdYlBu', linewidth=0, scheme="quantiles", k=9, alpha=0.6)
-% 
-% # Add basemap with basic OpenStreetMap visualization
-% ctx.add_basemap(ax, source=ctx.providers.OpenStreetMap.Mapnik)
-% ```
-% 
-%  Let's take a subset of our data to see a bit better the background map characteristics:
-% 
-% ```{code-cell} ipython3
-% # Control figure size in here
-% fig, ax = plt.subplots(figsize=(12,8))
-% 
-% # Subset the data to seel only grid squares near the destination
-% subset = data.loc[(data['pt_r_t']>=0) & (data['pt_r_t']<=15)]
-% 
-% # Plot the data from subset
-% subset.plot(ax=ax, column='pt_r_t', cmap='RdYlBu', linewidth=0, scheme="quantiles", k=5, alpha=0.6)
-% 
-% # Add basemap with `OSM_A` style
-% ctx.add_basemap(ax, source=ctx.providers.OpenStreetMap.Mapnik)
-% ```
-% 
-% As we can see now our map has much more details in it as the zoom level of the background map is larger. By default `contextily` sets the zoom level automatically but it is possible to also control that manually using parameter `zoom`. The zoom level is by default specified as `auto` but you can control that by passing in [zoom level](https://wiki.openstreetmap.org/wiki/Zoom_levels) as numbers ranging typically from 1 to 19 (the larger the number, the more details your basemap will have).
-% 
-% - Let's reduce the level of detail from our map by passing `zoom=11`:
-% 
-% ```{code-cell} ipython3
-% # Control figure size in here
-% fig, ax = plt.subplots(figsize=(12,8))
-% 
-% # Plot the data from subset
-% subset.plot(ax=ax, column='pt_r_t', cmap='RdYlBu', linewidth=0, scheme="quantiles", k=5, alpha=0.6)
-% 
-% # Add basemap with `OSM_A` style using zoom level of 11
-% ctx.add_basemap(ax, zoom=11, source=ctx.providers.OpenStreetMap.Mapnik)
-% ```
-% 
-% As we can see, the map has now less detail (a bit too blurry for such a small area).
-% 
-% We can also use `ax.set_xlim()` and `ax.set_ylim()` -parameters to crop our map without altering the data. The parameters takes as input the coordinates for minimum and maximum on both axis (x and y). We can also change / remove the contribution text by using parameter `attribution`
-% 
-% Let's add details about the data source, plot the original data, and crop the map:
-% 
-% ```{code-cell} ipython3
-% credits = "Travel time data by Digital Geography Lab, Map Data © OpenStreetMap contributors"
-% ```
-% 
-% ```{code-cell} ipython3
-% # Control figure size in here
-% fig, ax = plt.subplots(figsize=(12,8))
-% 
-% # Plot the data
-% data.plot(ax=ax, column='pt_r_t', cmap='RdYlBu', linewidth=0, scheme="quantiles", k=9, alpha=0.6)
-% 
-% # Add basemap with `OSM_A` style using zoom level of 11 
-% # Modify the attribution 
-% ctx.add_basemap(ax, zoom=11, attribution=credits, source=ctx.providers.OpenStreetMap.Mapnik)
-% 
-% # Crop the figure
-% ax.set_xlim(2760000, 2800000)
-% ax.set_ylim(8430000, 8470000)
-% ```
-% 
-% It is also possible to use many other map tiles from different [Tile Map Services](https://en.m.wikipedia.org/wiki/Tile_Map_Service) as the background map. A good list of different available sources can be found from [here](http://leaflet-extras.github.io/leaflet-providers/preview/). When using map tiles from different sources, it is necessary to parse a url address to the tile provider following a format defined by the provider. 
-% 
-% Next, we will see how to use map tiles provided by CartoDB. To do that we need to parse the url address following their [definition](https://github.com/CartoDB/basemap-styles#1-web-raster-basemaps) `'https://{s}.basemaps.cartocdn.com/{style}/{z}/{x}/{y}{scale}.png'` where:
-% 
-%  - {s}: one of the available subdomains, either [a,b,c,d]
-%  - {z} : Zoom level. We support from 0 to 20 zoom levels in OSM tiling system.
-%  - {x},{y}: Tile coordinates in OSM tiling system
-%  - {scale}: OPTIONAL "@2x" for double resolution tiles
-%  - {style}: Map style, possible value is one of:
-%  
-%     - light_all,
-%     - dark_all,
-%     - light_nolabels,
-%     - light_only_labels,
-%     - dark_nolabels,
-%     - dark_only_labels,
-%     - rastertiles/voyager,
-%     - rastertiles/voyager_nolabels,
-%     - rastertiles/voyager_only_labels,
-%     - rastertiles/voyager_labels_under
-%     
-% - We will use this information to parse the parameters in a way that contextily wants them:
-% 
-% ```{code-cell} ipython3
-% # Control figure size in here
-% fig, ax = plt.subplots(figsize=(12,8))
-% 
-% # The formatting should follow: 'https://{s}.basemaps.cartocdn.com/{style}/{z}/{x}/{y}{scale}.png'
-% # Specify the style to use
-% style = "rastertiles/voyager"
-% cartodb_url = 'https://a.basemaps.cartocdn.com/%s/{z}/{x}/{y}.png' % style
-% 
-% # Plot the data from subset
-% subset.plot(ax=ax, column='pt_r_t', cmap='RdYlBu', linewidth=0, scheme="quantiles", k=5, alpha=0.6)
-%     
-% # Add basemap with `OSM_A` style using zoom level of 14 
-% ctx.add_basemap(ax, zoom=14, attribution="", source=cartodb_url)
-% 
-% # Crop the figure
-% ax.set_xlim(2770000, 2785000)
-% ax.set_ylim(8435000, 8442500)
-% ```
-% 
-% As we can see now we have yet again different kind of background map, now coming from CartoDB. 
-% 
-% Let's make a minor modification and change the style from `"rastertiles/voyager"` to `"dark_all"`:
-% 
-% ```{code-cell} ipython3
-% # Control figure size in here
-% fig, ax = plt.subplots(figsize=(12,8))
-% 
-% # The formatting should follow: 'https://{s}.basemaps.cartocdn.com/{style}/{z}/{x}/{y}{r}.png'
-% # Specify the style to use
-% style = "dark_all"
-% cartodb_url = 'https://a.basemaps.cartocdn.com/%s/{z}/{x}/{y}.png' % style
-% 
-% # Plot the data from subset
-% subset.plot(ax=ax, column='pt_r_t', cmap='RdYlBu', linewidth=0, scheme="quantiles", k=5, alpha=0.6)
-% 
-% # Add basemap with `OSM_A` style using zoom level of 14 
-% ctx.add_basemap(ax, zoom=13, attribution="", source=cartodb_url)
-% 
-% # Crop the figure
-% ax.set_xlim(2770000, 2785000)
-% ax.set_ylim(8435000, 8442500)
-% ```
-% 
-% Great! Now we have dark background map fetched from CartoDB. In a similar manner, you can use any map tiles from various other tile providers such as the ones listed in [leaflet-providers](http://leaflet-extras.github.io/leaflet-providers/preview/).
+
+```{code-cell}
+ax = accessibility_grid[accessibility_grid.pt_r_t <= 15].plot(
+    figsize=(12, 8),
+
+    column="pt_r_t",
+    scheme="quantiles",
+    k=7,
+    cmap="Spectral",
+    linewidth=0,
+    alpha=0.8,
+
+    legend=True,
+    legend_kwds={"title": "Travel time (min)"}
+)
+contextily.add_basemap(
+    ax,
+    source=contextily.providers.OpenStreetMap.Mapnik
+)
+```
+
+
+Finally, we can modify the attribution (copyright notice) displayed in the
+bottom left of the map plot. Note that you should *always* respect the map
+providers’ terms of use, which typically include a data source attribution
+(*contextily*’s defaults take care of this). We can and should, however,
+add a data source for any layer we added, such as the travel time matrix
+data set:
+
+
+```{code-cell}
+ax = accessibility_grid[accessibility_grid.pt_r_t <= 15].plot(
+    figsize=(12, 8),
+
+    column="pt_r_t",
+    scheme="quantiles",
+    k=7,
+    cmap="Spectral",
+    linewidth=0,
+    alpha=0.8,
+
+    legend=True,
+    legend_kwds={"title": "Travel time (min)"}
+)
+contextily.add_basemap(
+    ax,
+    source=contextily.providers.OpenStreetMap.Mapnik,
+    attribution=(
+        "Travel time data (c) Digital Geography Lab, "
+        "map data (c) OpenStreetMap contributors"
+    )
+)
+```
