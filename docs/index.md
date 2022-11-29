@@ -190,17 +190,16 @@ lessons/lesson-4/reclassifying-data
 lessons/lesson-4/exercise-4
 ```
 
-% ```{toctree}
-% ---
-% caption: Lesson 5
-% maxdepth: 2
-% ---
-% lessons/lesson-5/overview
-% lessons/lesson-5/geometric-operations
-% lessons/lesson-5/create-health-district-polygons
-% lessons/lesson-5/reclassify
-% lessons/lesson-5/exercise-5
-% ```
+```{toctree}
+---
+caption: Lesson 5
+maxdepth: 2
+---
+lessons/lesson-5/overview
+lessons/lesson-5/static-maps
+lessons/lesson-5/interactive-maps
+lessons/lesson-5/exercise-5
+```
 
 % ```{toctree}
 % ---
@@ -208,10 +207,6 @@ lessons/lesson-4/exercise-4
 % maxdepth: 2
 % ---
 % lessons/lesson-6/overview
-% lessons/lesson-6/static-maps
-% lessons/lesson-6/interactive-map-folium
-% lessons/lesson-6/employment-rate-map
-% lessons/lesson-6/share-on-github
 % lessons/lesson-6/exercise-6
 % ```
 
