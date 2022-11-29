@@ -325,3 +325,15 @@ tooltip_layer.add_to(map)
 
 map
 ```
+
+
+:::{admonition} Python packages for interactive (web) maps
+:class: note
+
+*Folium* is just one of many packages that provide an easy way to create interactive maps using data stored in (geo-)pandas data frames. Other interesting libraries include:
+
+- [GeoViews](https://geoviews.org/),
+- [Mapbox GL for Jupyter](https://github.com/mapbox/mapboxgl-jupyter),
+- [Bokeh](https://docs.bokeh.org/en/latest/docs/gallery.html),
+- [Plotly Express](https://plotly.com/python/maps/), and many more.
+:::
