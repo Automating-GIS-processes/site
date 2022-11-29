@@ -13,22 +13,21 @@ kernelspec:
 
 # Overview
 
-% In this lesson, we will get to know how geopandas handles some typical GIS
-% operations: **overlay analysis** (e.g., unions, or differences of multiple
-% geometries), **aggregating** geometries (e.g., smaller statistical units into
-% larger ones), **simplifying** geometries (to be printed or shown at smaller map
-% scales), and **classifying** numerical data into categories for map display. 
+In this lesson, we will learn how to create more complex **static maps**, as well as
+**interactive web maps**. 
 
 
 ## Learning goals
 
-% After this lesson, you should know how to:
-% 
-% - create new geometries by adding, subtracting or intersecting two geometries,
-% - combine geometries based on a common attribute (*dissolving* them),
-% - create categories for numerical data based on classifiers such as *natural
-%   breaks*, *equal interval*, or *quantiles*, and
-% - simplify geometries according to a maximum-error threshold
+After this lesson, you should know how to:
+
+- create static thematic maps comprising of multiple data layers using
+  [GeoPandas](https://geopandas.org) and [matplotlib](https://matplotlib.org),
+- add base maps, such as [OpenStreetMap](https://osm.org), to such maps using
+  [contextily](https://contextily.readthedocs.io),
+- create simple interactive maps using
+  [Folium](https://python-visualization.github.io/folium/), and
+- enrich the interactive maps with popups and hover tooltips.
 
 
 % ## Lesson video
