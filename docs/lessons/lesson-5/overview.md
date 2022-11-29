@@ -30,9 +30,9 @@ After this lesson, you should know how to:
 - enrich the interactive maps with popups and hover tooltips.
 
 
-% ## Lesson video
-% 
-% <iframe id="ytplayer" type="text/html" width="700" height="394"
-%   src="https://www.youtube.com/embed/INSERT_VIDEO_ID_HERE?modestbranding=1
-%   frameborder="0">
-% </iframe>
+## Lesson video
+
+<iframe id="ytplayer" type="text/html" width="700" height="394"
+  src="https://www.youtube.com/embed/xL7TWab9zug?modestbranding=1
+  frameborder="0">
+</iframe>
