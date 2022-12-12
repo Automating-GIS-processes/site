@@ -201,14 +201,16 @@ lessons/lesson-5/interactive-maps
 lessons/lesson-5/exercise-5
 ```
 
-% ```{toctree}
-% ---
-% caption: Lesson 6
-% maxdepth: 2
-% ---
-% lessons/lesson-6/overview
-% lessons/lesson-6/exercise-6
-% ```
+```{toctree}
+---
+caption: Lesson 6
+maxdepth: 2
+---
+lessons/lesson-6/overview
+lessons/lesson-6/retrieve-data-from-openstreetmap
+lessons/lesson-6/network-analysis
+lessons/lesson-6/exercise-6
+```
 
 % ```{toctree}
 % ---
@@ -219,16 +221,6 @@ lessons/lesson-5/exercise-5
 % final-assignment/final-assignment-grading
 % final-assignment/final-assignment-hints
 % ```
-
-% ```{toctree}
-% ---
-% caption: Extra: Network analysis
-% maxdepth: 2
-% ---
-% extra/network-analysis/overview
-% extra/network-analysis/retrieve-osm-data
-% extra/network-analysis/network-analysis
-% extra/network-analysis/exercise-6
 
 % ```{toctree}
 % ---
