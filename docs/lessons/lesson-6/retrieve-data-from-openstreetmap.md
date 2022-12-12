@@ -24,24 +24,32 @@ a collaborative global effort to collect free and open geodata. *Source:
 [wiki.openstreetmap.org](https://wiki.openstreetmap.org/wiki/Logos)*
 :::
 
-OpenStreetMap (OSM) is a global collaborative (crowd-sourced) dataset and
-project that aims at creating a free editable map of the world containing a lot
-of information about our environment.  It contains data for example about
-streets, buildings, different services, and landuse to mention a few. You can
-view the map at www.openstreetmap.org. You can also sign up as a contributor if
-you want to edit the map. More details about OpenStreetMap and its contents are
-available in the [OpenStreetMap
+OpenStreetMap (OSM) is a global collaborative (crowd-sourced) database and
+project that aims at creating a free editable map of the world containing of
+information about our environment. It contains data about streets, buildings,
+different services, and landuse, to mention but a few.
+The collected data is also basis for the map at [openstreetmap.org](https://openstreetmap.org/). 
+
+
+:::{admonition} Contribute!
+:class: note
+
+You can also sign up as a contributor if you want to add to the database and
+map or correct and improve existing data. Read more in the  [OpenStreetMap
 Wiki](https://wiki.openstreetmap.org/wiki/Main_Page).
+:::
 
-OSM has a large userbase with more than 4 million users and over a million
-contributers that update actively the OSM database with 3 million changesets
-per day. In total OSM contains 5 billion nodes and counting! ([stats from
-November 2019](http://wiki.openstreetmap.org/wiki/Stats)).
 
-OpenStreetMap is used not only for integrating the **OSM maps** as background
-maps to visualizations or online maps, but also for many other purposes such as
+OSM has more than 8 million registered users who contribute around 4 million
+changes daily.  Its database contains data that is described by [more than 7
+billion nodes](http://wiki.openstreetmap.org/wiki/Stats) (that make up lines,
+polygons and other objects).
+
+While the most well-known side of OpenStreetMap is the map itself, that [we
+have used as a background map](../lesson-5/static-maps), the project is much
+more than that. OSM’s data can be used for many other purposes such as
 **routing**, **geocoding**, **education**, and **research**. OSM is also widely
-used for humanitarian response e.g. in crisis areas (e.g. after natural
+used for humanitarian response, e.g., in crisis areas (e.g. after natural
 disasters) and for fostering economic development. Read more about humanitarian
 projects that use OSM data from the [Humanitarian OpenStreetMap Team (HOTOSM)
 website](https://www.hotosm.org).
@@ -52,15 +60,16 @@ website](https://www.hotosm.org).
 
 ### OSMnx
 
-This week we will explore a Python module called
-[OSMnx](https://github.com/gboeing/osmnx) that can be used to retrieve,
-construct, analyze, and visualize street networks from OpenStreetMap, and also
-retrieve data about Points of Interest such as restaurants, schools, and lots
-of different kind of services. It is also easy to conduct network routing based
-on walking, cycling or driving by combining OSMnx functionalities with a
-package called [NetworkX](https://networkx.github.io/documentation/stable/).
+This week we will explore a Python package called
+[OSMnx](https://github.com/gboeing/osmnx) that can be used to retrieve street
+networks from OpenStreetMap, and construct, analyse, and visualise them. OSMnx
+can also fetch data about Points of Interest, such as restaurants, schools, and
+different kinds of services.  The package also includes tools to find routes on
+a network downloaded from OpenStreetMap, and implements algorithms for finding
+shortest connections for walking, cycling, or driving.
 
-To get an overview of the capabilities of the package, see an introductory
+
+To get an overview of the capabilities of the package, watch the introductory
 video given by the lead developer of the package, Prof. Geoff Boeing: ["Meet
 the developer: Introduction to OSMnx package by Geoff
 Boeing"](https://www.youtube.com/watch?v=Q0uxu25ddc4&list=PLs9D4XVqc6dCAhhvhZB7aHGD8fCeCC_6N).
@@ -73,72 +82,56 @@ There is also a scientific article available describing the package:
 > Computers, Environment and Urban Systems 65, 126-139.
 > doi:10.1016/j.compenvurbsys.2017.05.004
 
-
 [This
 tutorial](https://github.com/gboeing/osmnx-examples/blob/master/notebooks/01-overview-osmnx.ipynb)
 provides a practical overview of OSMnx functionalities, and has also inspired
 this AutoGIS lesson.
 
-*Note: major changes were implemented in OSMnx versions > 0.9. This lesson has
-been updated accordingly.*
-
-
-
 
 ### NetworkX
 
-We will also use [NetworkX](https://networkx.github.io/documentation/stable/)
-to for manipulating and analyzing the street network data retrieved from
-OpenSTreetMap. NetworkX is a Python package that can be used to create,
+We will also use [NetworkX](https://networkx.github.io/documentation//)
+to manipulate and analyse the street network data retrieved from
+OpenStreetMap. NetworkX is a Python package that can be used to create,
 manipulate, and study the structure, dynamics, and functions of complex
-networks. Networkx module contains algorithms that can be used to calculate
-[shortest
-paths](https://networkx.github.io/documentation/networkx-1.10/reference/algorithms.shortest_paths.html)
-along road networks using e.g.
-[Dijkstra's](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm) or [A\*
-algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm).
+networks. 
 
 
+---
 
-## Download and visualize OpenStreetMap data with OSMnx
 
-One the most useful features that OSMnx provides is an easy-to-use way of
-retrieving [OpenStreetMap](http://www.openstreetmap.org) data using [OverPass
-API](http://wiki.openstreetmap.org/wiki/Overpass_API) in the background. In
-this tutorial, we will learn how to download and visualize the street network
-and additional data from OpenStreetMap covering a specified area of interest.
+## Download and visualise OpenStreetMap data with OSMnx
+
+A useful feature of OSMnx is its easy-to-use tools to download
+[OpenStreetMap](http://www.openstreetmap.org) data via the project’s [OverPass
+API](http://wiki.openstreetmap.org/wiki/Overpass_API).
+In this section, we will learn how to download and visualise the street network
+and additional data from OpenStreetMap covering an area of interest.
+
 
 ### Street network
 
-The [osmnx.graph
--module](https://osmnx.readthedocs.io/en/stable/osmnx.html?highlight=graph_from#module-osmnx.graph)
-enables downloading and constructing a routable road network graph based on
-user-defined area of interest. The user can specify the area of interest, for
-example using a placename, a bounding box or a polygon. Here, we will use a
-placename for fetching data from the Kamppi area in Helsinki, Finland. In the
-place name query, OSMnx uses the Nominatim Geocoding API.
+The [`osmnx.graph`
+module](https://osmnx.readthedocs.io/en/stable/osmnx.html#module-osmnx.graph)
+downloads data to construct a routable road network graph, based on an
+user-defined area of interest. This area of interest can be specified, for
+instance, using a place name, a bounding box, or a polygon.  Here, we will use
+a placename for fetching data covering the Kamppi area in Helsinki, Finland. 
 
-Let's start by specifying ``"Kamppi, Helsinki, Finland"`` as the place from
-where the data should be downloaded. The place name should be *geocodable*
-which means that the place name should exist in the OpenStreetMap database (you
-can do a test search at https://www.openstreetmap.org/ or at
-https://nominatim.openstreetmap.org/ to verify that the place name is valid).  
+In the place name query, OSMnx uses the Nominatim Geocoding API. This means
+that place names should exist in the OpenStreetMap database (run a test search
+at [openstreetmap.org](https://www.openstreetmap.org/) or
+[nominatim.openstreetmap.org](https://nomination.openstreetmap.org/)).
+
+We will read an OSM street network using OSMnx’s
+[graph_from_place()](https://osmnx.readthedocs.io/en/stable/osmnx.html#osmnx.graph.graph_from_place) function:
+
 
 ```{code-cell}
 import osmnx
 
-# Specify the name that is used to seach for the data
-place_name = "Kamppi, Helsinki, Finland"
-
-```
-
-Next, we will read in the OSM street network using OSMnx using the
-[graph_from_place](https://osmnx.readthedocs.io/en/stable/osmnx.html?highlight=graph%20from#osmnx.graph.graph_from_place)
-function:
-
-```{code-cell}
-# Fetch OSM street network from the location
-graph = osmnx.graph_from_place(place_name)
+PLACE_NAME = "Kamppi, Helsinki, Finland"
+graph = osmnx.graph_from_place(PLACE_NAME)
 ```
 
 Check the data type of the graph:
@@ -147,39 +140,38 @@ Check the data type of the graph:
 type(graph)
 ```
 
-What we have here is a networkx
-[MultiDiGraph](https://networkx.org/documentation/networkx-1.10/reference/classes.multidigraph.html)
-object. 
+What we have here is a
+[`networkx.MultiDiGraph`](https://networkx.org/documentation/stable/reference/classes/multidigraph.html) object.
 
-Let's have a closer look a the street nework. OSMnx has its own function
-[plot_graph()](https://osmnx.readthedocs.io/en/stable/osmnx.html?highlight=plot_graph#osmnx.plot.plot_graph)
-for visualizing graph objects. The function utilizes Matplotlib for visualizing
-the data, hence as a result it returns a matplotlib figure and axis objects:
+
+OSMnx’s graphs do not have a built-in method to plot them, but the package
+comes with a function to do so:
 
 ```{code-cell}
-# Plot the streets
-fig, ax = osmnx.plot_graph(graph)
+figure, ax = osmnx.plot_graph(graph)
 ```
 
-Great! Now we can see that our graph contains nodes (the points) and edges (the
+Just as its GeoPandas and Pandas equivalents, `osmnx.plot_graph()` uses
+matplotlib. The function returns a `(figure, axes)` tuple, that can be used to
+modify the figure using all matplotlib functions we already got to know.
+
+We can see that our graph contains nodes (the points) and edges (the
 lines) that connects those nodes to each other.
 
 
 
+### Convert a graph to `GeoDataFrame`s
 
-### Graph to GeoDataFrame
+The street network we just downloaded is a *graph*, more specifically a
+`networkx.MultiDiGraph`. Its main purpose is to represent the topological
+relationships between nodes and the links (edges) between them. Sometimes, it
+is more convenient to have the underlying geodata in `geopandas.GeoDataFrame`s.
+OSMnx comes with a convenient function that converts a graph into two geo-data
+frames, one for nodes, and one for edges:
+[`osmnx.graph_to_gdfs()`](https://osmnx.readthedocs.io/en/stable/osmnx.html#osmnx.utils_graph.graph_to_gdfs).
 
-We can now plot all these different OSM layers by using the familiar `plot()`
-function of geopandas. As you might remember, the street network data is not a
-GeoDataFrame, but a graph object. Luckily, OSMnx provides a convenient function
-`graph_to_gdfs()` that can convert the graph into two separate GeoDataFrames
-where the first one contains the information about the nodes and the second one
-about the edge.
-
-Let's extract the nodes and edges from the graph as GeoDataFrames:
 
 ```{code-cell}
-# Retrieve nodes and edges
 nodes, edges = osmnx.graph_to_gdfs(graph)
 ```
 
@@ -198,25 +190,25 @@ them using the same functions and tools as we have used before.
 
 ### Place polygon
 
-Let's also plot the Polygon that represents our area of interest (Kamppi,
-Helsinki). We can retrieve the Polygon geometry using the
-[geocode_to_gdf()](https://osmnx.readthedocs.io/en/stable/osmnx.html?highlight=geocode_to_gdf(#osmnx.geocoder.geocode_to_gdf)
--function.
+Let’s also plot the polygon that represents our area of interest (Kamppi,
+Helsinki). We can retrieve the polygon geometry using the
+[osmnx.geocode_to_gdf()](https://osmnx.readthedocs.io/en/stable/osmnx.html?highlight=geocode_to_gdf(#osmnx.geocoder.geocode_to_gdf)
+function.
 
 ```{code-cell}
 # Get place boundary related to the place name as a geodataframe
-area = osmnx.geocode_to_gdf(place_name)
+area = osmnx.geocode_to_gdf(PLACE_NAME)
 ```
 
 As the name of the function already tells us, it returns a GeoDataFrame object
-based on the specified place name query.  Let's still verify the data type: 
+based on the specified place name query.  Let’s still verify the data type: 
 
 ```{code-cell}
 # Check the data type
 type(area)
 ```
 
-Let's also have a look at the data:
+Let’s also have a look at the data:
 
 ```{code-cell}
 # Check data values
@@ -228,70 +220,50 @@ area
 area.plot()
 ```
 
+
+
 ### Building footprints
 
-It is also possible to retrieve other types of OSM data features with OSMnx
-such as buildings or points of interest (POIs). Let's download the buildings
-with `OSMnx`
-[geometries_from_place()](https://osmnx.readthedocs.io/en/stable/osmnx.html?highlight=geometries_from_place#osmnx.geometries.geometries_from_place)
--function and plot them on top of our street network in Kamppi. 
+Besides network data, OSMnx can also download any other data contained in the OpenStreetMap database. This includes, for instance, building footprints, and different points-of-interests (POIs). To download arbitrary geometries, filtered by [OSM tags](https://wiki.openstreetmap.org/wiki/Map_features) and a place name, use [`osmnx.geometries_from_place()`](https://osmnx.readthedocs.io/en/stable/osmnx.html#osmnx.geometries.geometries_from_place). The tag to retrieve all [buildings](https://wiki.openstreetmap.org/wiki/Buildings) is `building = yes`.
 
-
-
-When fetching spesific types of geometries from OpenStreetMap using OSMnx
-`geometries_from_place` we also need to specify the correct tags. For getting
-[all types of buildings](https://wiki.openstreetmap.org/wiki/Buildings), we can
-use the tag `building=yes`.
-
-```{code-cell}
-# List key-value pairs for tags
-tags = {'building': True}
-```
 
 ```{code-cell} 
-buildings = osmnx.geometries_from_place(place_name, tags)
+buildings = osmnx.geometries_from_place(
+    PLACE_NAME,
+    {"building": True},
+)
 ```
-
-Let's check how many building footprints we received:
 
 ```{code-cell} 
 len(buildings) 
 ```
 
-Let's also have a look at the data:
-
 ```{code-cell} 
 buildings.head() 
 ```
 
-As you can see, there are several columns in the buildings-layer. Each column
-contains information about a spesific tag that OpenStreetMap contributors have
-added. Each tag consists of a key (the column name), and several potential
-values (for example `building=yes` or `building=school`). Read more about tags
-and tagging practices in the [OpenStreetMap
+As you can see, there are several columns in `buildings`. Each column contains
+information about a specific tag that OpenStreetMap contributors have added.
+Each tag consists of a key (the column name), and a values (for example
+`building=yes` or `building=school`). Read more about tags and tagging
+practices in the [OpenStreetMap
 wiki](https://wiki.openstreetmap.org/wiki/Tags). 
 
 ```{code-cell} 
 buildings.columns 
 ```
 
+
+
 ### Points-of-interest
 
-It is also possible to retrieve other types of geometries from OSM using the
-`geometries_from_place` by passing different tags. Point-of-interest (POI) is a
-generic concept that describes point locations that represent places of
-interest. 
+Point-of-interest (POI) is a generic concept that describes point locations
+that represent places of interest. As `osmnx.geometries_from_place()` can download any geometry data contained in the OpenStreetMap database, it can also be used to download any kind of POI data. 
 
-In OpenStreetMap, many POIs are described using the
-[amenity-tags](https://wiki.openstreetmap.org/wiki/Key:amenityhttps://wiki.openstreetmap.org/wiki/Key:amenity).
-We can, for excample, retrieve all restaurat locations by referring to the tag
-`amenity=restaurant`. See all available amenity categories from [OSM
-wiki](https://wiki.openstreetmap.org/wiki/Key:amenity). 
 
-*Note: We used the `pois_from_place()` method to retrieve POIs in older
-versions of OSMnx.*
-
-Let's retrieve restaurants that are located in our area of interest:
+In OpenStreetMap, many POIs are described using the [`amenity`
+tag](https://wiki.openstreetmap.org/wiki/Key:amenity).  We can, for example,
+retrieve all restaurant locations by querying `amenity=restaurant`. 
 
 ```{code-cell}
 # List key-value pairs for tags
@@ -299,16 +271,18 @@ tags = {'amenity': 'restaurant'}
 ```
 
 ```{code-cell}
-# Retrieve restaurants
-restaurants = osmnx.geometries_from_place(place_name, tags)
-
-# How many restaurants do we have?
+restaurants = osmnx.geometries_from_place(
+    PLACE_NAME,
+    {
+        "amenity": "restaurant"
+    }
+)
 len(restaurants) 
 ```
 
 As we can see, there are quite many restaurants in the area.
 
-Let's explore what kind of attributes we have in our restaurants GeoDataFrame:
+Let’s explore what kind of attributes we have in our restaurants GeoDataFrame:
 
 ```{code-cell}
 # Available columns
@@ -316,140 +290,108 @@ restaurants.columns.values
 ```
 
 As you can see, there is quite a lot of (potential) information related to the
-amenities. Let's subset the columns and inspect the data further. Useful
-columns include at least `name`, `address information` and `opening_hours`
-information:
+amenities. Let’s subset the columns and inspect the data further. Can we
+extract all restaurants’ names, address, and opening hours?
 
 ```{code-cell}
 # Select some useful cols and print
-cols = ['name', 'opening_hours', 'addr:city', 'addr:country',
-'addr:housenumber', 'addr:postcode', 'addr:street']
+interesting_columns = [
+    "name",
+    "opening_hours",
+    "addr:city",
+    "addr:country",
+    "addr:housenumber",
+    "addr:postcode",
+    "addr:street"
+]
 
 # Print only selected cols
-restaurants[cols].head(10) 
+restaurants[interesting_columns].head(10) 
 ```
 
-As we can see, there is a lot of useful information about restaurants that can
-be retrieved easily with OSMnx. Also, if some of the information need updating,
-you can go over to www.openstreetmap.org and edit the source data! :)
+:::{tip}
+if some of the information needs an update, head over to [openstreetmap.org](https://openstreetmap.org) and edit the source data!
+:::
 
 
 
-### Plotting the data
+### Parks and green areas
 
-Let's create a map out of the streets, buildings, restaurants, and the area
-Polygon but let's exclude the nodes (to keep the figure clearer).
-
-```{code-cell} 
-import matplotlib
-fig, ax = matplotlib.pyplot.subplots(figsize=(12,8))
-
-# Plot the footprint
-area.plot(ax=ax, facecolor='black')
-
-# Plot street edges
-edges.plot(ax=ax, linewidth=1, edgecolor='dimgray')
-
-# Plot buildings
-buildings.plot(ax=ax, facecolor='silver', alpha=0.7)
-
-# Plot restaurants
-restaurants.plot(ax=ax, color='yellow', alpha=0.7, markersize=10)
-matplotlib.pyplot.tight_layout()
-```
-
-Cool! Now we have a map where we have plotted the restaurants, buildings,
-streets and the boundaries of the selected region of 'Kamppi' in Helsinki. And
-all of this required only a few lines of code. Pretty neat! 
-
-
-
-### Extra: Park polygons Notice that we can retrieve all kinds of different
-features from OpenStreetMap using the
-[geometries_from_place()](https://osmnx.readthedocs.io/en/stable/osmnx.html?highlight=geometries_from_place#osmnx.geometries.geometries_from_place)
-method by passing different OpenStreetMap tags.
-
-Let's try to fetch all public parks in the Kamppi area. In OpenStreetMap, parks
-are often tagged as `leisure=park`. We can also add other green surfaces, such
-as `landuse=grass`. see OpenStreetMap, and OSM wiki for more details.
-
-- We need to start by fetching all footprints from the tag `leisure`:
+Let’s try to fetch all public parks in the Kamppi area. In OpenStreetMap,
+[parks hould be tagged](https://wiki.openstreetmap.org/wiki/Map_features) as
+`leisure = park`.  Smaller green areas (*puistikot*) are sometimes also tagged
+`landuse = grass`. We can combine multiple tags in one data query.
 
 ```{code-cell}
-# List key-value pairs for tags
-tags = {'leisure': 'park', 'landuse': 'grass'}
+parks = osmnx.geometries_from_place(
+    PLACE_NAME,
+    {
+        "leisure": "park",
+        "landuse": "grass",
+    },
+)
 ```
 
 ```{code-cell}
-# Get the data
-parks = osmnx.geometries_from_place(place_name, tags)
-
-# Check the result
-print("Retrieved", len(parks), "objects")
+parks.head()
 ```
-
-let's check the first rows:
-
-```{code-cell}
-parks.head(3)
-```
-
-Check all column headers:
-
-```{code-cell} 
-parks.columns.values 
-```
-
-plot the parks:
 
 ```{code-cell} 
 parks.plot(color="green") 
 ```
 
-Finally, we can add the park polygons to our map:
 
-```{code-cell}
-# Create a subplot object for plotting the layers onto a common map
-fig, ax = matplotlib.pyplot.subplots(figsize=(12,8))
+### Plotting the data
+
+Let’s create a map out of the streets, buildings, restaurants, and the area polygon.
+
+
+```{code-cell} 
+import matplotlib
+figure, ax = matplotlib.pyplot.subplots(figsize=(12,8))
 
 # Plot the footprint
-area.plot(ax=ax, facecolor='black')
+area.plot(ax=ax, facecolor="black")
 
-# Plot the parks
+# Plot parks
 parks.plot(ax=ax, facecolor="green")
 
-# Plot street edges
-edges.plot(ax=ax, linewidth=1, edgecolor='dimgray')
+# Plot street ‘edges’
+edges.plot(ax=ax, linewidth=1, edgecolor="dimgray")
 
 # Plot buildings
-buildings.plot(ax=ax, facecolor='silver', alpha=0.7)
+buildings.plot(ax=ax, facecolor="silver", alpha=0.7)
 
 # Plot restaurants
-restaurants.plot(ax=ax, color='yellow', alpha=0.7, markersize=10)
-matplotlib.pyplot.tight_layout()
+restaurants.plot(ax=ax, color="yellow", alpha=0.7, markersize=10)
 ```
 
+Cool! Now we have a map where we have plotted the restaurants, buildings,
+streets and the boundaries of the selected region of ‘Kamppi’ in Helsinki. And
+all of this required only a few lines of code. Pretty neat! 
 
-**Check your understading**
+
+
+:::{admonition} Check your understanding
+:class: hint
 
 Retrieve OpenStreetMap data from some other area! Download these elements using
 OSMnx functions from your area of interest:
     
 - Extent of the area using `geocode_to_gdf()`
-- Street network using `graph_from_place()`, and convert to gdf using
+- Street network using `graph_from_place()`, and convert to geo-data frame using
   `graph_to_gdfs()`
 - Building footprints (and other geometries) using `geometries_from_place()`
   and appropriate tags.
     
 *Note, the larger the area you choose, the longer it takes to retrieve data
-from the API! Use parameter `network_type=drive` to limit the graph query to
-filter out un-driveable roads.*
+from the API!*
 
 
 ```{code}
 # Specify the name that is used to seach for the data. Check that the place
 # name is valid from https://nominatim.openstreetmap.org/ui/search.html
-my_place = ""
+MY_PLACE = ""
 ```
 
 ```{code}
@@ -463,26 +405,26 @@ my_place = ""
 ```{code}
 # Plot the data
 ```
+:::
 
-### Advanced reading
 
-If analyzing OpenStreetMap data over large areas, it is often more efficient
-and meaningful to download the data all at once, in stead of separate queries
-to the API. Such data dumps from OpenStreetMap are available in various file
-formats, OSM [Protocolbuffer Binary
+## Advanced reading
+
+To analyse OpenStreetMap data over large areas, it is often more efficient and
+meaningful to download the data all at once, instead of separate queries to the
+API. Such data dumps from OpenStreetMap are available in various file formats,
+OSM [Protocolbuffer Binary
 Format](https://wiki.openstreetmap.org/wiki/PBF_Format) (PBF) being one of
-them. Data extracts covering whole countries and continents are available at:
-https://download.geofabrik.de/europe.html
+them. Data extracts covering whole countries and continents are available, for
+instance, at [download.geofabrik.de](https://download.geofabrik.de/).
 
-[Pyrosm](https://pyrosm.readthedocs.io/en/latest/) is a python package
-developed for reading OpenStreetMap from PBF -files into Geopandas
-GeoDataFrames. Pyrosm makes it easy to extract road networks, buildings, Points
-of Interest (POI), landuse, natural elements, administrative boundaries and
-much more - similar to osmnx but more efficient when analyzing data covering
-large areas of interest. While osmnx reads the data from the Overpass API,
-pyrosm reads the data from a .pbf file that can be located on your local
-computer (faster!). 
+[Pyrosm](https://pyrosm.readthedocs.io/) is a Python package for reading
+OpenStreetMap data from PBF files into `geopandas.GeoDataFrames`. Pyrosm makes
+it easy to extract road networks, buildings, Points of Interest (POI), landuse,
+natural elements, administrative boundaries and much more - similar to OSMnx,
+but taylored to analyses of large areas.  While OSMnx reads the data from the
+Overpass API, pyrosm reads the data from a local PBF file.
 
-Read more about fetching and using pbf files as a source for analyzing
+Read more about fetching and using pbf files as a source for analysing
 OpenStreetMap data in Python from the [pyrosm
 documentation](https://pyrosm.readthedocs.io/en/latest/basics.html#protobuf-file-what-is-it-and-how-to-get-one).

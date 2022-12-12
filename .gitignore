@@ -14,7 +14,9 @@ docs/static/data/finland_topographic_database/lakes.*
 docs/static/data/finland_topographic_database/terrain_*.*
 docs/static/data/intersection.geojson
 docs/static/data/intersection.gpkg
+docs/static/data/OSM_Kamppi.gpkg
 docs/lessons/lesson-5/html/
+docs/lessons/lesson-6/cache/
 
 *~
 *.swp
