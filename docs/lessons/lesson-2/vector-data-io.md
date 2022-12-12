@@ -110,8 +110,20 @@ the [European Union’s GISCO/eurostat download
 page](https://ec.europa.eu/eurostat/web/gisco/geodata/reference-data/administrative-units-statistical-units/nuts)
 is one line of code:
 
-```{code-cell}
+
+% ----------- TODO --------------
+% GISCO starting blocking requests from geopandas 2022-12, responding
+% with a HTTP 403 (Forbidden) error. Faking this for now, but for next
+% year, we should find a new example
+
+```{code}
 nuts_regions = geopandas.read_file("https://gisco-services.ec.europa.eu/distribution/v2/nuts/shp/NUTS_RG_60M_2021_3035.shp.zip")
+nuts_regions.head()
+```
+
+```{code-cell}
+:tags: ["remove-input", "remove-output"]
+nuts_regions = geopandas.read_file(DATA_DIRECTORY / "europe_nuts_regions.geojson")
 nuts_regions.head()
 ```
 

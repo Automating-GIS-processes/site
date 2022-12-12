@@ -7,8 +7,8 @@ docs/_build/
 # ignore data that is created during sphinx-build
 docs/static/data/addresses.gpkg
 docs/static/data/eu_countries/eu_countries_EPSG3035.gpkg
-docs/static/data/europe_nuts_regions.geojson
 docs/static/data/europe_nuts_regions.gpkg
+# docs/static/data/europe_nuts_regions.geojson  # workaround after GISCO blocked access
 docs/static/data/finland_topographic_database/area_by_terrain_class.csv
 docs/static/data/finland_topographic_database/lakes.*
 docs/static/data/finland_topographic_database/terrain_*.*
