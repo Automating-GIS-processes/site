@@ -209,7 +209,6 @@ maxdepth: 2
 lessons/lesson-6/overview
 lessons/lesson-6/retrieve-data-from-openstreetmap
 lessons/lesson-6/network-analysis
-lessons/lesson-6/exercise-6
 ```
 
 % ```{toctree}
