@@ -33,9 +33,9 @@ and good coding practices (writing readable code) when doing the final assignmen
 
 You have three options for the final project that you can choose from:
 
-1. [AccessViz] - a GIS-tool that can visualize and compare travel times by different travel modes in Helsinki Region.
-2. [UrbanIndicators] - a workflow that calculates and reports different urban indicators for an urban region, and allows the comparison of different urban areas based on these indicators.
-3. [Your-own-project] - your own tool or analysis process (for example, related to your thesis!). Suggest your idea before the last practical exercise!
+1. [Access Viz](#accessviz): a GIS-tool that can visualize and compare travel times by different travel modes in Helsinki Region.
+2. [Urban Indicators](#urban-indicators): a workflow that calculates and reports different urban indicators for an urban region, and allows the comparison of different urban areas based on these indicators.
+3. [Your own project](#own-project-work): your own tool or analysis process (for example, related to your thesis!). Suggest your idea before the last practical exercise!
 
 Think about the final project as a challenge for yourself to show and implement the programming skills that you have learned this far. You have learned a lot already!
 
@@ -63,8 +63,8 @@ and **add links to all relevant files to the README.md file**. Anyone who downlo
 Label your submissions as "submitted" in the exercise repository's `README.md` under "status" once you are finished with the Final assignment.
 
 You can choose from these two deadlines:
-\- 1st deadline: Thursday the 31st December 2021
-\- 2nd deadline Friday the 16th of January 2022
+- 1st deadline: Thursday the 31st December 2022
+- 2nd deadline Friday the 13th of January 2023
 
 Submissions are checked after each deadline (you can get the feedback earlier if aiming for the first deadline).
 If you need the course grade earlier, please contact the course instructor.
@@ -84,7 +84,6 @@ You should add necessary details to the `README.md` file, and use inline comment
 
 - [General Markdown syntax guide](https://guides.github.com/features/mastering-markdown/).
 
-(accessviz)=
 
 ## AccessViz
 
@@ -145,7 +144,6 @@ Notice that there are NoData values present in the data (value -1). In such case
 One of the best practice guidelines is that you should avoid repeating yourself. Thus, we recommend to modularize different tasks in your code and use functions as much as possible. Use meaningful parameter and variable names when defining the functions, so that they are intuitive but short.
 :::
 
-(urbanindicators)=
 
 ## Urban indicators
 
@@ -245,7 +243,6 @@ Following readings provide you some useful background information and inspiratio
  - [European Commission (2015). "Indicators for Sustainable Cities"](http://ec.europa.eu/environment/integration/research/newsalert/pdf/indicators_for_sustainable_cities_IR12_en.pdf)
  - [Rob Kitchin, Tracey Lauriault & Gavin McArdle (2015). Knowing and governing cities through urban indicators, city benchmarking and real-time dashboards](<https://github.com/Automating-GIS-processes/site/blob/master/literature/Kitchin_et_al_(2015).pdf>) . *Regional Studies, Regional Science,* Vol. 2, No. 1, 6–28.
 
-(your-own-project)=
 
 ## Own project work
 
