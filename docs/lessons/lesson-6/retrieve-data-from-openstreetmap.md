@@ -266,11 +266,6 @@ tag](https://wiki.openstreetmap.org/wiki/Key:amenity).  We can, for example,
 retrieve all restaurant locations by querying `amenity=restaurant`. 
 
 ```{code-cell}
-# List key-value pairs for tags
-tags = {'amenity': 'restaurant'} 
-```
-
-```{code-cell}
 restaurants = osmnx.geometries_from_place(
     PLACE_NAME,
     {
