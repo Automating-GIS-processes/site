@@ -75,6 +75,7 @@ html_theme_options = {
     "repository_url": "https://github.com/Automating-GIS-processes/site/",
     "use_edit_page_button": True,
     "use_repository_button": True,
+    "google_analytics_id": "UA-88382509-1",
 }
 
 nb_execution_mode = "force"
