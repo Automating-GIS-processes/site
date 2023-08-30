@@ -45,10 +45,10 @@ suppress_warnings = ["mystnb.unknown_mime_type"]
 # These variables are replaced throughout the course documents
 # (see the comment for the first item for an example)
 myst_substitutions = {
-    "year": "2022",  # use {{year}} in markdown files to replace it with the current value
-    "starting_date": "Tuesday, 1 November 2022",
-    "lectures_weekday_time_location": "Tuesday, 15:15-16:45, Exactum C222",
-    "work_sessions_weekday_time_location": "Friday, 12:15-16:00, Physicum A113+A114 (GIS lab)",
+    "year": "2023",  # use {{year}} in markdown files to replace it with the current value
+    "starting_date": "Wednesday, 1 November 2023",
+    "lectures_weekday_time_location": "Wednesday, 16:15-17:45, Exactum D122",
+    "work_sessions_weekday_time_location": "Friday, 12:15-15:45, Physicum A113+A114 (GIS lab)",
     "csc_workspace_join_code": "aut-wuis16sc"
 }
 
