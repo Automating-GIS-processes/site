@@ -510,7 +510,9 @@ output_gpkg = DATA_DIRECTORY / "OSM_Kamppi.gpkg"
 edges.to_file(output_gpkg, layer="streets")
 route_geom.to_file(output_gpkg, layer="route")
 nodes.to_file(output_gpkg, layer="nodes")
-buildings[['geometry', 'name', 'addr:street']].to_file(output_gpkg, layer="buildings")
+#buildings[['geometry', 'name', 'addr:street']].to_file(output_gpkg, layer="buildings")
+display(buildings.describe())
+display(buildings)
 ```
 
 Great, now we have saved all the data that was used to produce the maps into a geopackage.
