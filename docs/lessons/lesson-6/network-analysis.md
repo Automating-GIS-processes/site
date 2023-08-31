@@ -474,6 +474,7 @@ problematic_columns = [
     "lanes",
     "name",
     "highway",
+    "width",
     "maxspeed",
     "reversed",
     "junction",
