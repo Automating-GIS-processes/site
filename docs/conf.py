@@ -10,7 +10,7 @@ project = "Automating GIS Processes"
 version = "2022"
 release = "2022"
 
-author = "Henrikki Tenkanen, Vuokko Heikinheimo, Håvard Wallin Aagesen, Christoph Fink"
+author = "Henrikki Tenkanen, Vuokko Heikinheimo, Håvard Wallin Aagesen, Christoph Fink, Kamyar Hasanzadeh"
 copyright = f"2016-{version}"
 
 # -- General configuration ---------------------------------------------------
@@ -49,7 +49,7 @@ myst_substitutions = {
     "starting_date": "Wednesday, 1 November 2023",
     "lectures_weekday_time_location": "Wednesday, 16:15-17:45, Exactum D122",
     "work_sessions_weekday_time_location": "Friday, 12:15-15:45, Physicum A113+A114 (GIS lab)",
-    "csc_workspace_join_code": "aut-wuis16sc"
+    "csc_workspace_join_code": "aut-z2y1a9nw"
 }
 
 
