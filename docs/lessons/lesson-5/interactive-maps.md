@@ -74,13 +74,13 @@ HTML_DIRECTORY.mkdir(exist_ok=True)
 ```{code-cell}
 import folium
 
-map = folium.Map(
+interactive_map = folium.Map(
     location=(60.2, 24.8),
     zoom_start=10,
     control_scale=True
 )
 
-map
+interactive_map
 ```
 
 
@@ -90,7 +90,7 @@ To save this map to an HTML file that can be opened in any web browser,
 use [`folium.Map.save()`](https://python-visualization.github.io/branca/element.html#branca.element.Element.save):
 
 ```{code-cell}
-map.save(HTML_DIRECTORY / "base-map.html")
+interactive_map.save(HTML_DIRECTORY / "base-map.html")
 ```
 
 
@@ -105,12 +105,12 @@ While we’re at it, let’s also vary the centre location and the zoom level
 of the map:
 
 ```{code-cell}
-map = folium.Map(
+interactive_map = folium.Map(
     location=(40.7, -73.9),
     zoom_start=12,
     tiles="Stamen Toner"
 )
-map
+interactive_map
 ```
 
 
@@ -124,7 +124,7 @@ as a parameter `icon` to influence how the marker is styled, and set `tooltip`
 to display a text when the mouse pointer hovers over it.
 
 ```{code-cell}
-map = folium.Map(
+interactive_map = folium.Map(
     location=(60.2, 25.0),
     zoom_start=12
 )
@@ -134,9 +134,9 @@ kumpula = folium.Marker(
     tooltip="Kumpula Campus",
     icon=folium.Icon(color="green", icon="ok-sign")
 )
-kumpula.add_to(map)
+kumpula.add_to(interactive_map)
 
-map
+interactive_map
 ```
 
 
@@ -158,7 +158,7 @@ addresses
 ```
 
 ```{code-cell}
-map = folium.Map(
+interactive_map = folium.Map(
     location=(60.2, 25.0),
     zoom_start=12
 )
@@ -167,9 +167,9 @@ addresses_layer = folium.features.GeoJson(
     addresses,
     name="Public transport stops"
 )
-addresses_layer.add_to(map)
+addresses_layer.add_to(interactive_map)
 
-map
+interactive_map
 ```
 
 ## Add a polygon layer
@@ -237,7 +237,7 @@ number of parameters:
   basically identical to `columns`, except it’s only the first value)
 
 ```{code-cell}
-map = folium.Map(
+interactive_map = folium.Map(
     location=(60.17, 24.94),
     zoom_start=12
 )
@@ -248,9 +248,9 @@ population_grid_layer = folium.Choropleth(
     columns=("id", "population"),
     key_on="feature.id"
 )
-population_grid_layer.add_to(map)
+population_grid_layer.add_to(interactive_map)
 
-map
+interactive_map
 ```
 
 
@@ -260,7 +260,7 @@ and add a layer name to the legend:
 
 
 ```{code-cell}
-map = folium.Map(
+interactive_map = folium.Map(
     location=(60.17, 24.94),
     zoom_start=12
 )
@@ -278,9 +278,9 @@ population_grid_layer = folium.Choropleth(
 
     highlight=True
 )
-population_grid_layer.add_to(map)
+population_grid_layer.add_to(interactive_map)
 
-map
+interactive_map
 ```
 
 
@@ -321,9 +321,9 @@ tooltip_layer = folium.features.GeoJson(
     style_function=style_function,
     tooltip=tooltip
 )
-tooltip_layer.add_to(map)
+tooltip_layer.add_to(interactive_map)
 
-map
+interactive_map
 ```
 
 

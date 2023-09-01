@@ -45,11 +45,13 @@ suppress_warnings = ["mystnb.unknown_mime_type"]
 # These variables are replaced throughout the course documents
 # (see the comment for the first item for an example)
 myst_substitutions = {
+
     "year": "2023",  # use {{year}} in markdown files to replace it with the current value
     "starting_date": "Wednesday, 1 November 2023",
     "lectures_weekday_time_location": "Wednesday, 16:15-17:45, Exactum D122",
     "work_sessions_weekday_time_location": "Friday, 12:15-15:45, Physicum A113+A114 (GIS lab)",
     "csc_workspace_join_code": "aut-z2y1a9nw"
+
 }
 
 
@@ -75,7 +77,6 @@ html_theme_options = {
     "repository_url": "https://github.com/Automating-GIS-processes/site/",
     "use_edit_page_button": True,
     "use_repository_button": True,
-    "google_analytics_id": "UA-88382509-1",
 }
 
 nb_execution_mode = "force"

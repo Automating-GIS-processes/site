@@ -103,20 +103,32 @@ few days to get everything set up.
       you want to stick with the previous version, as some of the packages
       might not have been updated in time.
 
-3. Update the docker image for the *CSC Notebooks*, and upload it to CSC’s registry.
+3. **Update the docker image** for the *CSC Notebooks*, and upload it to CSC’s registry.
    Create a *CSC Notebooks* ‘workspace’ and ‘application’ using the docker image.
    [Follow the instructions in the `Automating-GIS-processes/csc-notebook-dockerfile`
    repository](https://github.com/Automating-GIS-processes/csc-notebook-dockerfile)
 
-4. Set up Slack TODO
+4. **Set up Slack**: Create a new Slack instance, e.g.,
+   ‘Automating-GIS-processes-2023’, and set up the channel structure such as in
+   previous years: `#general` and `#random` exist by default, create `#week1`
+   through `#week7`, as well as `#final-assignments`; create `#instructors` to
+   coordinate with the student tutors. *I (@christophfink) will leave the 2022
+   version around, drop me a line and I’ll add you there so you can see for what
+   we used Slack*.
 
-5. Set up GitHub classroom TODO (make new org, create per-exercise repository)
+5. **Set up GitHub classroom**: register for GitHub Education
+   (https://classroom.github.com), create a new organisation for this year’s
+   exercise repository templates (see
+   [Automating-GIS-processes-2022](https://github.com/Automating-GIS-processes-2022),
+   and add the exercise repositories there, one by one, as the course advances.
+   For each exercise, create a classroom, and update the links in the respective
+   `docs/lesson-X/exercise-X.md` files.
 
-6. Update the course details defined in [`conf.py`](docs/conf.py). Things that
-change every year are set up as ‘substitutions’, variables that are replaced
-throughout all documents. Edit them to reflect this year’s course’s details
-(as of October 2022, this block is starting [at line 42 of
-`conf.py`](docs/conf.py#L42)):
+6. **Update the course details** defined in [`conf.py`](docs/conf.py). Things that
+   change every year are set up as ‘substitutions’, variables that are replaced
+   throughout all documents. Edit them to reflect this year’s course’s details
+   (as of October 2022, this block is starting [at line 42 of
+   `conf.py`](docs/conf.py#L42)):
 
     ```
     # The following are the main things that need to be updated every year
@@ -133,13 +145,6 @@ throughout all documents. Edit them to reflect this year’s course’s details
 
 <!--
 TODO: Add instructions for future teachers of this course:
-    - How to set up GitHub class rooms
-    - How to update the documents (including setting the
-      substitution-variable in conf.py)
-    - How to set up Slack, and where to change the links
-    - How to update the dependencies at the beginning of a new year,
-      and how to lock them to certain versions
-    - How to locally install the dependencies using a virtual env, or conda env
     - How to regenerate the docs locally
     - How to fork the repository, and use merge requests as a way to test
       changes before going live
