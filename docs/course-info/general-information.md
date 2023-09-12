@@ -3,7 +3,7 @@
 :::{admonition} Contact teaching at the University of Helsinki
 :class: info
 
-Please note that access to *Slack* and to the *CSC Notebooks* is limited to students at Finnish universities. The recorded lesson videos, as well as all other course material on this page, are available to anyone interested.
+Please note that access to *Discord* and to the *CSC Notebooks* is limited to students at Finnish universities. The recorded lesson videos, as well as all other course material on this page, are available to anyone interested.
 
 :::
 
@@ -17,11 +17,11 @@ Please note that access to *Slack* and to the *CSC Notebooks* is limited to stud
 ## Instructors
 
 - Lectures: 
-    - Christoph Fink
+    - Kamyar Hasanzadeh
 
 - Practical exercises:
-    - Justus S. Poutanen
-    - Mikko Kangasmaa
+    - To be added
+    - To be added
 
 Email: firstname.lastname@helsinki.fi
 
@@ -31,6 +31,6 @@ Email: firstname.lastname@helsinki.fi
 - *Automating GIS processes* (period Ⅱ)
     - course page: [autogis.github.io](https://autogis.github.io/)
     - CSC notebooks: [notebooks.csc.fi](https://notebooks.csc.fi/)
-    - Slack (Q&A and chat): [autogis2022.slack.com](https://autogis2022.slack.com/)
+    - Discrod (Q&A and chat): [autogis2023 Discord Server](https://discord.com/channels/1141294124633423932/1141294951729213460)
 - *Geo-Python* (period Ⅰ):
     - course page: [geo-python.github.io](https://geo-python.github.io/)

@@ -7,8 +7,8 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = "Automating GIS Processes"
-version = "2022"
-release = "2022"
+version = "2023"
+release = "2023"
 
 author = "Henrikki Tenkanen, Vuokko Heikinheimo, Håvard Wallin Aagesen, Christoph Fink, Kamyar Hasanzadeh"
 copyright = f"2016-{version}"
