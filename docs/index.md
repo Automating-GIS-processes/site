@@ -112,6 +112,7 @@ During the teaching period, this web page is updated each week before the lectur
 
 The course pages and material of earlier years are available at:
 
+- [2022](https://autogis-site.readthedocs.io/en/2022/)
 - [2021](https://autogis-site.readthedocs.io/en/2021/)
 - [2020](https://autogis-site.readthedocs.io/en/2020_/)
 - [2019](https://autogis-site.readthedocs.io/en/2019/)
