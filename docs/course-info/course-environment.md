@@ -11,7 +11,7 @@ We will use:
 3. [`git` and GitHub](#git-and-github) for version control and documentation,
 4. [Presemo](#voting-and-polling) for interactive questions during the lectures,
    and
-5. [Slack](#slack) for communication between the University of Helsinki
+5. [Discord](#discord) for communication between the University of Helsinki
    students, the course assistents, and the teachers.
 
 
@@ -132,7 +132,7 @@ To start using *CSC Notebooks*:
    2, {{year}}’ with one application: click the ‘power button’ on the right side
    to start it.
 
-:::{figure} ../static/images/course-info/csc-notebooks_700x440px.png
+:::{figure} ../static/images/course-info/csc-notebooks_2.png
 :alt: Starting a *CSC Notebook*
 
 Once you’ve joined the course’s *workspace*, you can launch its *CSC Notebook*
@@ -205,16 +205,18 @@ the lecture time, chances are high that you’ll see nothing but a white page.
 :::
 
 
-(#slack)=
-## Slack: connect with others
+(#discord)=
+## Discord: connect with others
+
+:::{figure} ../static/images/course-info/discord_logo.png
 
 Throughout the course, we will use one main channel for communication: an online
-application called [*Slack*](https://slack.com/) that is designed for team
+application called [*Discord*](https://discord.com/) that is designed for team
 collaboration. Post your questions about the lessons and exercises there, answer
 other peoples’ questions (and gain academic karma), and engage in discussions
 about anything else concerning the course.
 
-All enrolled students have received an invitation to the course’s Slack
+All enrolled students have received an invitation to the course’s Discord
 workspace, let us know if you haven’t.
 
 
