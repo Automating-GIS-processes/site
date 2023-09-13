@@ -216,8 +216,11 @@ about anything else concerning the course.
 
 All enrolled students have received an invitation to the course’s Discord
 workspace, let us know if you haven’t.
+
 :::{figure} ../static/images/course-info/discord_logo.png
 :alt: Discord Logo
+
+:::
 
 % -----
 %
