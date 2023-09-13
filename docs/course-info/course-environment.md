@@ -208,8 +208,6 @@ the lecture time, chances are high that you’ll see nothing but a white page.
 (#discord)=
 ## Discord: connect with others
 
-:::{figure} ../static/images/course-info/discord_logo.png
-
 Throughout the course, we will use one main channel for communication: an online
 application called [*Discord*](https://discord.com/) that is designed for team
 collaboration. Post your questions about the lessons and exercises there, answer
@@ -219,7 +217,10 @@ about anything else concerning the course.
 All enrolled students have received an invitation to the course’s Discord
 workspace, let us know if you haven’t.
 
+:::{figure} ../static/images/course-info/discord_logo.png
+:alt: Discord Logo
 
+:::
 
 % -----
 %
