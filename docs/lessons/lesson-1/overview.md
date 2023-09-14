@@ -19,4 +19,4 @@ After this lesson, you will be able to:
 
 ## Slides
 
-<embed src="https://automating-gis-processes.github.io/slides/2022/introduction.html" type="text/html" style="width: 100%; height: 30em" />
+<embed src="https://automating-gis-processes.github.io/slides/2023/introduction.html" type="text/html" style="width: 100%; height: 30em" />
