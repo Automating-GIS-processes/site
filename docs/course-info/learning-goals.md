@@ -43,6 +43,6 @@ revisit a previous week’s material.
 - extract simple street network properties and statistics, and
 - carry out simple route optimisation, using a shortest-path algorithm.
 
-**After working through the optional material for self-study, you should be able to:**
-- understand the basics of raster data processing, and
-- use Python scripts in QGIS.
+%**After working through the optional material for self-study, you should be able to:**
+%- understand the basics of raster data processing, and
+%- use Python scripts in QGIS.
