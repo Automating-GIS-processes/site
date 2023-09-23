@@ -203,15 +203,15 @@ lessons/lesson-5/interactive-maps
 lessons/lesson-5/exercise-5
 ```
 
-% ```{toctree}
-% ---
-% caption: Lesson 6
-% maxdepth: 2
-% ---
-% lessons/lesson-6/overview
-% lessons/lesson-6/retrieve-data-from-openstreetmap
-% lessons/lesson-6/network-analysis
-% ```
+```{toctree}
+---
+caption: Lesson 6
+maxdepth: 2
+---
+lessons/lesson-6/overview
+lessons/lesson-6/retrieve-data-from-openstreetmap
+lessons/lesson-6/network-analysis
+```
 
 ```{toctree}
 ---
