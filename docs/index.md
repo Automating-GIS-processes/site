@@ -139,21 +139,17 @@ course-info/ai-tools
 course-info/resources
 course-info/license
 ```
-
-```{toctree}
----
-caption: Lesson 1
-maxdepth: 2
----
-lessons/lesson-1/overview
-:hidden:
-lessons/lesson-1/course-motivation
-:hidden:
-lessons/lesson-1/geometry-objects
-:hidden:
-lessons/lesson-1/exercise-1
-:hidden:
-```
+.. only:: not html
+	```{toctree}
+	---
+	caption: Lesson 1
+	maxdepth: 2
+	---
+	lessons/lesson-1/overview
+	lessons/lesson-1/course-motivation
+	lessons/lesson-1/geometry-objects
+	lessons/lesson-1/exercise-1
+	```
 
 ```{toctree}
 ---
