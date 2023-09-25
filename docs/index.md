@@ -139,7 +139,7 @@ course-info/ai-tools
 course-info/resources
 course-info/license
 ```
-
+<!--
 ```{toctree}
 ---
 caption: Lesson 1
@@ -222,7 +222,7 @@ final-assignment/final-assignment
 final-assignment/final-assignment-grading
 final-assignment/final-assignment-hints
 ```
-
+-->
 % ```{toctree}
 % ---
 % caption: "Extra: PyQGIS"
