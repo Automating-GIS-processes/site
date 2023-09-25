@@ -139,16 +139,20 @@ course-info/ai-tools
 course-info/resources
 course-info/license
 ```
-<!--
+
 ```{toctree}
 ---
 caption: Lesson 1
 maxdepth: 2
 ---
 lessons/lesson-1/overview
+:hidden:
 lessons/lesson-1/course-motivation
+:hidden:
 lessons/lesson-1/geometry-objects
+:hidden:
 lessons/lesson-1/exercise-1
+:hidden:
 ```
 
 ```{toctree}
@@ -222,7 +226,7 @@ final-assignment/final-assignment
 final-assignment/final-assignment-grading
 final-assignment/final-assignment-hints
 ```
--->
+
 % ```{toctree}
 % ---
 % caption: "Extra: PyQGIS"
