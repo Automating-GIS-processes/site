@@ -16,7 +16,7 @@ Please note that access to *Discord* and to the *CSC Notebooks* is limited to st
 
 ## Instructors
 
-- Lecturer: 
+- Lecture: 
     - Kamyar Hasanzadeh
 
 - Practical exercises:
