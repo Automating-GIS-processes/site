@@ -15,7 +15,7 @@ jupytext:
 
 :::{important}
 Please complete this exercise
-**by the end of day** on Thursday, 17 November, 2022
+**by the end of day** on Thursday, 16 November, 2023
 (the day before the next work session).
 :::
 
@@ -30,7 +30,7 @@ course](https://geo-python-site.readthedocs.io/en/latest/lessons/L2/git-basics.h
 
 To preview the exercise without logging in, you can find the open course copy
 of the course’s GitHub repository at
-[github.com/Automating-GIS-processes-2022/Exercise-2](https://github.com/Automating-GIS-processes-2022/Exercise-2).
+[github.com/Automating-GIS-processes-II-2023/Exercise-2](https://github.com/Automating-GIS-processes-II-2023/Exercise-2).
 Don’t attempt to commit changes to that repository, but rather work with your
 personal GitHub classroom copy (see above).
 
