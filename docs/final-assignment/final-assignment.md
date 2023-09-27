@@ -4,30 +4,37 @@
 Start your final assignment by accepting the [GitHub Classroom](https://classroom.github.com/a/71BB6FaM) for the final work.
 :::
 
-## Lesson video
+% ## Lesson video
 
-:::{admonition} Video from previous year  
-:class: caution
+% :::{admonition} Video from previous year  
+% :class: caution
 
-The recorded instructions for the final assignment are from last year’s course.
-As such, the dates mentioned are likely incorrect.
-:::
+% The recorded instructions for the final assignment are from last year’s course.
+% As such, the dates mentioned are likely incorrect.
+% :::
 
-<iframe id="ytplayer" type="text/html" width="700" height="394"
-  src="https://www.youtube.com/embed/QmZ0zgbpndM?modestbranding=1 frameborder="0">
-</iframe>
+% <iframe id="ytplayer" type="text/html" width="700" height="394"
+%   src="https://www.youtube.com/embed/QmZ0zgbpndM?modestbranding=1 frameborder="0">
+% </iframe>
 
----
+% ---
 
 ## Aim of the work
 
-The final project is an individual task where the aim is to apply Python programming to automating a GIS analysis process.
+The final project is can be done individually or in pair. In the task, the aim is to apply Python programming to automating a GIS analysis process.
 **The main aim is to create a GIS analysis workflow that can be easily repeated for similar input data.**
 
 You can select a pre-defined topic, or develop your own question. You should take advantage of your programming skills
-(basics of Python, defining your own functions, reading and writing data, data analysis usign pandas, spatial analysis using geopandas,
+(basics of Python, defining your own functions, reading and writing data, data analysis using pandas, spatial analysis using geopandas,
 creating static and/or interactive data visualizations, ...), version control skills (git + GitHub),
 and good coding practices (writing readable code) when doing the final assignment.
+
+:::{admonition} Pair programming (optional)
+Students who attend the course at the University of Helsinki can do the final assignment in pairs. Those who choose to work in pairs, need to also
+submit a one-page report on their project (description, aims, how it works, what tools and methods you have used). It is enough if one person submits the project. But the
+report needs to be submitted individually as a md file or a pdf on your assignment's `git` repository. 
+
+:::
 
 ### Final work topic
 

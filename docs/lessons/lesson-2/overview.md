@@ -27,7 +27,7 @@ After this week, you should be able to:
 
 - read and write spatial data from and to common file formats,
 - filter and re-group data by spatial and non-spatial characteristics, and
-- manage and transformt a data set’s coordinate reference system.
+- manage and transform a data set’s coordinate reference system.
 
 
 % ## Lesson video
