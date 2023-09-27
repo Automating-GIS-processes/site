@@ -84,7 +84,7 @@ before enrolling into this course, and expect basic skills in Python programming
 
 ## Course topics by week
 
-Over the course of seven weeks, we will dive into manipulating and analysing
+Over the course of six weeks, we will dive into manipulating and analysing
 geographic data in Python. This course builds upon the skills introduced in the
 *[GeoPython](https://geo-python.readthedocs.io/)* course, which focusses on
 learning the basics of Python programming. 
@@ -102,9 +102,7 @@ During the teaching period, this web page is updated each week before the lectur
 | **3** | Geocoding and spatial queries                                                             |
 | **4** | Reclassifying data, overlay analysis                                                      |
 | **5** | Visualisation: static and interactive maps                                                |
-| **6** | Course recap and preparing for the final assignment                                       |
-| **7** | OpenStreetMap data (osmnx) and Network analysis (networkx)                                |
-| **extra material for self‑study** | PyQGIS, Raster processing                                     |
+| **6** | OpenStreetMap data (osmnx) and Network analysis (networkx)                                |
 |       |                                                                                           |
 
 
@@ -140,88 +138,88 @@ course-info/resources
 course-info/license
 ```
 
-```{toctree}
----
-caption: Lesson 1
-maxdepth: 2
----
-lessons/lesson-1/overview
-lessons/lesson-1/course-motivation
-lessons/lesson-1/geometry-objects
-lessons/lesson-1/exercise-1
-```
+% ```{toctree}
+% ---
+% caption: Lesson 1
+% maxdepth: 2
+% ---
+% lessons/lesson-1/overview
+% lessons/lesson-1/course-motivation
+% lessons/lesson-1/geometry-objects
+% lessons/lesson-1/exercise-1
+% ```
 
-```{toctree}
----
-caption: Lesson 2
-maxdepth: 2
----
-lessons/lesson-2/overview
-lessons/lesson-2/key-concepts
-lessons/lesson-2/managing-file-paths
-lessons/lesson-2/vector-data-io
-lessons/lesson-2/geopandas-an-introduction
-lessons/lesson-2/map-projections
-lessons/lesson-2/exercise-2
-```
+% ```{toctree}
+% ---
+% caption: Lesson 2
+% maxdepth: 2
+% ---
+% lessons/lesson-2/overview
+% lessons/lesson-2/key-concepts
+% lessons/lesson-2/managing-file-paths
+% lessons/lesson-2/vector-data-io
+% lessons/lesson-2/geopandas-an-introduction
+% lessons/lesson-2/map-projections
+% lessons/lesson-2/exercise-2
+% ```
 
-```{toctree}
----
-caption: Lesson 3
-maxdepth: 2
----
-lessons/lesson-3/overview
-lessons/lesson-3/geocoding
-lessons/lesson-3/geocoding-in-geopandas
-lessons/lesson-3/point-in-polygon-queries
-lessons/lesson-3/intersect
-lessons/lesson-3/spatial-join
-lessons/lesson-3/exercise-3
-```
+% ```{toctree}
+% ---
+% caption: Lesson 3
+% maxdepth: 2
+% ---
+% lessons/lesson-3/overview
+% lessons/lesson-3/geocoding
+% lessons/lesson-3/geocoding-in-geopandas
+% lessons/lesson-3/point-in-polygon-queries
+% lessons/lesson-3/intersect
+% lessons/lesson-3/spatial-join
+% lessons/lesson-3/exercise-3
+% ```
 
-```{toctree}
----
-caption: Lesson 4
-maxdepth: 2
----
-lessons/lesson-4/overview
-lessons/lesson-4/overlay-analysis
-lessons/lesson-4/vector-data-aggregating
-lessons/lesson-4/simplifying-geometries
-lessons/lesson-4/reclassifying-data
-lessons/lesson-4/exercise-4
-```
+% ```{toctree}
+% ---
+% caption: Lesson 4
+% maxdepth: 2
+% ---
+% lessons/lesson-4/overview
+% lessons/lesson-4/overlay-analysis
+% lessons/lesson-4/vector-data-aggregating
+% lessons/lesson-4/simplifying-geometries
+% lessons/lesson-4/reclassifying-data
+% lessons/lesson-4/exercise-4
+% ```
 
-```{toctree}
----
-caption: Lesson 5
-maxdepth: 2
----
-lessons/lesson-5/overview
-lessons/lesson-5/static-maps
-lessons/lesson-5/interactive-maps
-lessons/lesson-5/exercise-5
-```
+% ```{toctree}
+% ---
+% caption: Lesson 5
+% maxdepth: 2
+% ---
+% lessons/lesson-5/overview
+% lessons/lesson-5/static-maps
+% lessons/lesson-5/interactive-maps
+% lessons/lesson-5/exercise-5
+% ```
 
-```{toctree}
----
-caption: Lesson 6
-maxdepth: 2
----
-lessons/lesson-6/overview
-lessons/lesson-6/retrieve-data-from-openstreetmap
-lessons/lesson-6/network-analysis
-```
+% ```{toctree}
+% ---
+% caption: Lesson 6
+% maxdepth: 2
+% ---
+% lessons/lesson-6/overview
+% lessons/lesson-6/retrieve-data-from-openstreetmap
+% lessons/lesson-6/network-analysis
+% ```
 
-```{toctree}
----
-caption: Final Assignment
-maxdepth: 2
----
-final-assignment/final-assignment
-final-assignment/final-assignment-grading
-final-assignment/final-assignment-hints
-```
+% ```{toctree}
+% ---
+% caption: Final Assignment
+% maxdepth: 2
+% ---
+% final-assignment/final-assignment
+% final-assignment/final-assignment-grading
+% final-assignment/final-assignment-hints
+% ```
 
 % ```{toctree}
 % ---

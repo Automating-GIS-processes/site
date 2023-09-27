@@ -15,7 +15,7 @@ jupytext:
 
 :::{important}
 Please complete this exercise
-**by the end of day** on Thursday, 10 November, 2022
+**by 3 pm** on Thursday, 9 November, 2023
 (the day before the next work session).
 :::
 
@@ -30,19 +30,14 @@ course](https://geo-python-site.readthedocs.io/en/latest/lessons/L2/git-basics.h
 
 To preview the exercise without logging in, you can find the open course copy
 of the course’s GitHub repository at
-[github.com/Automating-GIS-processes-2022/Exercise-1](https://github.com/Automating-GIS-processes-II-2023/Exercise-1).
+[github.com/Automating-GIS-processes-II-2023/Exercise-1](https://github.com/Automating-GIS-processes-II-2023/Exercise-1).
 Don’t attempt to commit changes to that repository, but rather work with your
 personal GitHub classroom copy (see above).
 
-:::{admonition} Pair programming (optional)
-Students who attend the course at the University of Helsinki **can continue to
-work in pairs** as in the Geo-Python course. Find more information in
-Geo-Python’s [lesson
-2 ‘Why are we working in
-pairs?’](https://geo-python-site.readthedocs.io/en/latest/lessons/L2/why-pairs.html).
+:::{admonition} Exercises are done individually
+All the weekly exercises need to be done individually in this period. 
+So **NO pair programming** for exercises in this period. 
 
-However, since working in pairs is optional and voluntary, please each submit
-your own copy of the completed exercise.
 :::
 
 
@@ -66,7 +61,7 @@ condition is met. They are a good way to check that variables are in a suitable
 range for further computation. For instance, if a function converts a
 temperature, it can test that its input value is not below absolute zero. In a
 way, `assert` statements work similar to an electrical fuse: if input current
-is higher than expected, the fuse blows to protect the applicance that comes
+is higher than expected, the fuse blows to protect the appliance that comes
 after. If input values are outside an expected range, the `assert` statement
 fails with an error, and stops the program to protect the following code from
 being executed with wrong input.
