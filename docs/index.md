@@ -84,7 +84,7 @@ before enrolling into this course, and expect basic skills in Python programming
 
 ## Course topics by week
 
-Over the course of seven weeks, we will dive into manipulating and analysing
+Over the course of six weeks, we will dive into manipulating and analysing
 geographic data in Python. This course builds upon the skills introduced in the
 *[GeoPython](https://geo-python.readthedocs.io/)* course, which focusses on
 learning the basics of Python programming. 
@@ -121,22 +121,22 @@ The course pages and material of earlier years are available at:
 
 ## Contents
 
-% ```{toctree}
-% ---
-% caption: Course information
-% maxdepth: 1
-% ---
+```{toctree}
+---
+caption: Course information
+maxdepth: 1
+---
 
-% course-info/general-information
-% course-info/course-environment
-% course-info/grading
-% course-info/learning-goals
-% course-info/installing-python
-% course-info/create-python-gis-environment
-% course-info/ai-tools
-% course-info/resources
-% course-info/license
-% ```
+course-info/general-information
+course-info/course-environment
+course-info/grading
+course-info/learning-goals
+course-info/installing-python
+course-info/create-python-gis-environment
+course-info/ai-tools
+course-info/resources
+course-info/license
+```
 
 % ```{toctree}
 % ---
