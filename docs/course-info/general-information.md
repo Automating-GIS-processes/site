@@ -16,12 +16,13 @@ Please note that access to *Discord* and to the *CSC Notebooks* is limited to st
 
 ## Instructors
 
-- Lecture: 
+- Lecturer: 
     - Kamyar Hasanzadeh
 
-- Practical exercises:
-    - To be added
-    - To be added
+- Course assistants:
+    - Mikko Kangasmaa
+    - Aino Schulz
+    - Veeti Sihvola
 
 Email: firstname.lastname@helsinki.fi
 

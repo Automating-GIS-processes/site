@@ -102,9 +102,7 @@ During the teaching period, this web page is updated each week before the lectur
 | **3** | Geocoding and spatial queries                                                             |
 | **4** | Reclassifying data, overlay analysis                                                      |
 | **5** | Visualisation: static and interactive maps                                                |
-| **6** | Course recap and preparing for the final assignment                                       |
-| **7** | OpenStreetMap data (osmnx) and Network analysis (networkx)                                |
-| **extra material for self‑study** | PyQGIS, Raster processing                                     |
+| **6** | OpenStreetMap data (osmnx) and Network analysis (networkx)                                |
 |       |                                                                                           |
 
 
