@@ -17,7 +17,7 @@ In this lesson, we will learn how to handle spatial data in Python using
 analyse tabular data and shapely for handling geometries.
 
 We will learn how to read and write spatial data from and to files, how to
-manipulate geometries, and how to transformt data between different coordinate
+manipulate geometries, and how to transform data between different coordinate
 reference systems (CRS).
 
 
@@ -30,9 +30,9 @@ After this week, you should be able to:
 - manage and transformt a data set’s coordinate reference system.
 
 
-## Lesson video
+% ## Lesson video
 
-<iframe id="ytplayer" type="text/html" width="700" height="394"
-  src="https://www.youtube.com/embed/XhqvQdZXBF8?modestbranding=1
-  frameborder="0">
-</iframe>
+% <iframe id="ytplayer" type="text/html" width="700" height="394"
+%  src="https://www.youtube.com/embed/XhqvQdZXBF8?modestbranding=1
+%  frameborder="0">
+% </iframe>
