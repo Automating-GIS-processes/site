@@ -31,8 +31,9 @@ and good coding practices (writing readable code) when doing the final assignmen
 
 :::{admonition} Pair programming (optional)
 Students who attend the course at the University of Helsinki can do the final assignment in pairs. Those who choose to work in pairs, need to also
-submit a one-page report on their project (description, aims, how it works, what tools and methods you have used). It is enough if one person submits the project. But the
-report needs to be submitted individually as a md file or a pdf on your assignment's `git` repository. 
+submit a **one-page report** on their project (description, aims, how it works, what tools and methods you have used). It is enough if one person submits the project. But the
+report needs to be submitted individually as a .md file or a pdf on your assignment's `git` repository. Those who do their projects individually do not need to
+submit the report. 
 
 :::
 
