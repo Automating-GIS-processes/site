@@ -419,7 +419,7 @@ buildings, and plot also the origin and target points on top of our map.
 Download buildings:
 
 ```{code-cell}
-buildings = osmnx.features_from_place(
+buildings = osmnx.geometries_from_place(
     PLACE_NAME,
     {
         "building" : True
