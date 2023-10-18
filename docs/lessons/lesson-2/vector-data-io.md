@@ -181,7 +181,7 @@ countries.to_postgis(
 
 Geopandas can also read data directly from a WFS endpoint, such as, for instance the geodata APIs of [Helsinki Region Infoshare](https://hri.fi). Constructing a valid WFS URI (address) is not part of this course (but check, for instance, the properties of a layer added to QGIS).
 
-The following code loads a population grid of Helsinki. The parameters encoded into the WFS address specify the layer name, a bounding box, and the requested reference system.
+The following code loads a population grid of Helsinki from 2022. The parameters encoded into the WFS address specify the layer name, a bounding box, and the requested reference system.
 
 
 ```{code}
@@ -190,7 +190,7 @@ population_grid = geopandas.read_file(
     "?service=wfs"
     "&version=2.0.0"
     "&request=GetFeature"
-    "&typeName=asuminen_ja_maankaytto:Vaestotietoruudukko_2020"
+    "&typeName=asuminen_ja_maankaytto:Vaestotietoruudukko_2022"
     "&srsName=EPSG:3879"
     "&bbox=25494767,6671328,25497720,6673701,EPSG:3879",
     crs="EPSG:3879"
