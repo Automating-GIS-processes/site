@@ -194,7 +194,7 @@ questions: how easy or difficult a particular exercise felt, or what part of
 last week’s content you would want to hear more about.
 
 You can find the current poll or question at
-[presemo.helsinki.fi/geopython](https://presemo.helsinki.fi/geopython)
+[presemo.helsinki.fi/autogis](https://presemo.helsinki.fi/autogis)
 
 
 :::{note}
