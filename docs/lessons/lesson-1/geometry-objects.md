@@ -743,15 +743,3 @@ instance, finding topological errors:
 ```{code-cell}
 print(f"Is polygon valid?: {polygon_with_hole.is_valid}")
 ```
-
-:::{admonition} shapely 2.0
-:class: caution
-
-While we are having this course, the team developing shapely is preparing the
-library’s next updates. It will be a major version that breaks with some of the
-programming patterns that were possible with earlier versions.
-
-When you work with shapely in the future, be sure to [check out what will have
-changed](https://shapely.readthedocs.io/1.8.5/migration.html).
-
-:::
