@@ -37,7 +37,7 @@ geometric objects: **points**, **lines**, and **polygons** are the basic
 ingredients of working with spatial data.
 
 In Python, the library package [shapely](https://shapely.readthedocs.io/) has
-become the standard tool for working with geo-spatial objects, and for carruing
+become the standard tool for working with geo-spatial objects, and for carrying
 out a range of geometric operations. A basic understanding of how *shapely*
 works is paramount for using higher-level tools, such as, for instance,
 [geopandas](https://geopandas.pydata.org/) (see [lesson 2](../lesson-2/overview))
