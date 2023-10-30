@@ -721,7 +721,7 @@ multipoint
 
 ```{code-cell}
 # Convex Hull
-[multipoint.convex_hull, multipoint]
+multipoint.convex_hull
 ```
 
 ```{code-cell}
