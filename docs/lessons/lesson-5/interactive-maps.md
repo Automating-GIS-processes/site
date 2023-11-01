@@ -177,6 +177,9 @@ interactive_map
 In the following section we are going to revisit another data set with which we have worked before: the Helsinki Region population grid we got to know in [lesson 2](../lesson-2/vector-data-io), and which you used during [exercise 3](../lesson-3/exercise-3). We can load the layer directly from [HSY’s open data WFS endpoint](https://hri.fi/):
 
 ```{code-cell}
+# To ignore the SSL certificate issue
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context
 population_grid = (
     geopandas.read_file(
         "https://kartta.hsy.fi/geoserver/wfs"

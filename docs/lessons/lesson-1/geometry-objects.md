@@ -37,7 +37,7 @@ geometric objects: **points**, **lines**, and **polygons** are the basic
 ingredients of working with spatial data.
 
 In Python, the library package [shapely](https://shapely.readthedocs.io/) has
-become the standard tool for working with geo-spatial objects, and for carruing
+become the standard tool for working with geo-spatial objects, and for carrying
 out a range of geometric operations. A basic understanding of how *shapely*
 works is paramount for using higher-level tools, such as, for instance,
 [geopandas](https://geopandas.pydata.org/) (see [lesson 2](../lesson-2/overview))
@@ -721,7 +721,7 @@ multipoint
 
 ```{code-cell}
 # Convex Hull
-[multipoint.convex_hull, multipoint]
+multipoint.convex_hull
 ```
 
 ```{code-cell}
@@ -743,15 +743,3 @@ instance, finding topological errors:
 ```{code-cell}
 print(f"Is polygon valid?: {polygon_with_hole.is_valid}")
 ```
-
-:::{admonition} shapely 2.0
-:class: caution
-
-While we are having this course, the team developing shapely is preparing the
-library’s next updates. It will be a major version that breaks with some of the
-programming patterns that were possible with earlier versions.
-
-When you work with shapely in the future, be sure to [check out what will have
-changed](https://shapely.readthedocs.io/1.8.5/migration.html).
-
-:::

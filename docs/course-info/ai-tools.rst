@@ -11,7 +11,7 @@ Guidelines for AI-LLM use in the Geo-Python course
 
 .. note::
 
-   Please note these guidelines apply only to students enrolled in the AutoGIS 2 course for credit.
+   Please note these guidelines apply only to students enrolled in the Automating GIS processes II course for credit.
 
 1. Unless stated otherwise, AI-LLMs should not be used to generate code or answer questions in the course exercises.
 2. Exercise problems or parts of problems where AI-LLM use is OK will be clearly indicated in the exercise assignment by the text "**AI-LLM OK**".
@@ -21,11 +21,11 @@ Guidelines for AI-LLM use in the Geo-Python course
 The guidelines above are based on the `University of Helsinki guidelines for the use of AI in teaching <https://teaching.helsinki.fi/system/files/inline-files/AI_in_teaching_guidelines_University%20of%20Helsinki_0.pdf>`_.
 More information is available in the `instructions for students <https://studies.helsinki.fi/instructions/article/using-ai-support-learning>`_.
 
+
 An introduction to AI-LLMs
 --------------------------
 
-During the first week in which the use of AI-LLMs is possible for the course exercises, we will provide a brief introduction to how to use ChatGPT in our work.
-In this demonstration we will highlight some of the advantages and disadvantages to the code ChatGPT produces, as well as how to review the code to ensure it works properly.
+In the course GeoPython 2023, we provided a brief introduction to how to use ChatGPT in our work. In this demonstration we highlighted some of the advantages and disadvantages to the code ChatGPT produces, as well as how to review the code to ensure it works properly. You can access this on the 'Geopython course page <https://geo-python-site.readthedocs.io/en/latest/notebooks/L4/use-of-ai.html>'_.
 
 .. note::
 
