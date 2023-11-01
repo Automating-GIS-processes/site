@@ -10,9 +10,9 @@ We will use:
    libraries have already been installed,
 3. [`git` and GitHub](#git-and-github) for version control and documentation,
 4. [Presemo](#voting-and-polling) for interactive questions during the lectures,
-   and
 5. [Discord](#discord) for communication between the University of Helsinki
    students, the course assistents, and the teachers.
+6. You can clone every week lessons from the following `git` repository: [https://github.com/Automating-GIS-processes/notebooks.git](https://github.com/Automating-GIS-processes/notebooks.git)
 
 
 (#jupyterlab)=
