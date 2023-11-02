@@ -20,3 +20,8 @@ After this lesson, you will be able to:
 ## Slides
 
 <embed src="https://automating-gis-processes.github.io/slides/2023/introduction.html" type="text/html" style="width: 100%; height: 30em" />
+
+
+## Lesson video
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/heEKeH2ECSk?si=TZem7YtYXlz3xaxh" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
