@@ -25,6 +25,6 @@ After this lesson, you will be able to:
 ## Lesson video
 
 <iframe id="ytplayer" type="text/html" width="700" height="394"
-  src="https://www.youtube.com/watch?v=heEKeH2ECSk"
+  src="https://www.youtube.com/embed/heEKeH2ECSk?si=35gYhPncSKpNEwnC"
   frameborder="0">
 </iframe>
