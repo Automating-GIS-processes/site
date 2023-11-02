@@ -24,7 +24,4 @@ After this lesson, you will be able to:
 
 ## Lesson video
 
-<iframe id="ytplayer" type="text/html" width="700" height="394"
-  src="https://www.youtube.com/embed/heEKeH2ECSk?si=35gYhPncSKpNEwnC"
-  frameborder="0">
-</iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/heEKeH2ECSk?si=TZem7YtYXlz3xaxh" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
