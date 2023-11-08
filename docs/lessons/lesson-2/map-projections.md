@@ -101,7 +101,7 @@ information of a data set, and how to re-project the data into another CRS**.
 You might have noticed that geospatial data sets in *ESRI Shapefile* format are
 consisting of multiple files with different file extensions. The `.prj` file
 contains information about the coordinate reference system. Be careful not to
-loose it!
+lose it!
 :::
 
 
