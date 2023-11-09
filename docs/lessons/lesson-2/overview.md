@@ -30,9 +30,6 @@ After this week, you should be able to:
 - manage and transform a data set’s coordinate reference system.
 
 
-% ## Lesson video
+## Lesson video
 
-% <iframe id="ytplayer" type="text/html" width="700" height="394"
-%  src="https://www.youtube.com/embed/XhqvQdZXBF8?modestbranding=1
-%  frameborder="0">
-% </iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/DzkEbhQEbpY?si=V_ob6uP4FsBSmsXE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
