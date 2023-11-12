@@ -49,7 +49,7 @@ We can see here, that the share the point `(1, 1)`, in which `line1` ends, and
 `line2` begins. The two lines do not intersect otherwise (‘in their interior’),
 so the predicament ’`touch()`’ - as defined above - is true.
 
-If the lines would share some of their interior, the would not be counted as
+If the lines would share some of their interior, that would not be counted as
 touching. For instance, `line1` does not touch `line1` (itself), but fulfils
 all requirements to be counted as `intersect()`ing with itself:
 
