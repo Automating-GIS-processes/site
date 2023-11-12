@@ -76,7 +76,7 @@ import geopandas
 geocoded_addresses = geopandas.tools.geocode(
     addresses["addr"],
     provider="nominatim",
-    user_agent="autogis2022",
+    user_agent="autogis2023",
     timeout=10
 )
 geocoded_addresses.head()
