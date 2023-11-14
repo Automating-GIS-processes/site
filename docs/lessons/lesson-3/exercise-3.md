@@ -15,12 +15,12 @@ jupytext:
 
 :::{important}
 Please complete this exercise
-**by the end of day** on Friday, 25 November, 2022
-(the day of next week’s work session).
+**by the end of day** on Thursday, 23 November, 2023
+(the day before next week’s work session).
 :::
 
 To start this assignment, [accept the GitHub classroom
-assignment](https://classroom.github.com/a/M23Oi-SK), and clone *your own*
+assignment]https://classroom.github.com/a/4Mc7iYSB), and clone *your own*
 repository, e.g., in a [CSC
 Notebook](../../course-info/course-environment)
 instance. Make sure you commit and push all changes you make (you can
@@ -30,7 +30,7 @@ course](https://geo-python-site.readthedocs.io/en/latest/lessons/L2/git-basics.h
 
 To preview the exercise without logging in, you can find the open course copy
 of the course’s GitHub repository at
-[github.com/Automating-GIS-processes-2022/Exercise-3](https://github.com/Automating-GIS-processes-2022/Exercise-3).
+[github.com/Automating-GIS-processes-2022/Exercise-3](https://github.com/Automating-GIS-processes-II-2023/Exercise-3).
 Don’t attempt to commit changes to that repository, but rather work with your
 personal GitHub classroom copy (see above).
 
