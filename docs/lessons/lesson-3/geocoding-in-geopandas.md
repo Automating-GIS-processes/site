@@ -16,7 +16,7 @@ kernelspec:
 Geopandas supports geocoding via a library called
 [geopy](http://geopy.readthedocs.io/), which needs to be installed to use
 [geopandas’ `geopandas.tools.geocode()`
-function](https://geopandas.org/en/stable/docs/user_guide/geocoding.html).
+function](https://geopandas.org/en/stable/docs/reference/api/geopandas.tools.geocode.html).
 `geocode()` expects a `list` or `pandas.Series` of addresses (strings) and
 returns a `GeoDataFrame` with resolved addresses and point geometries.
 
@@ -76,7 +76,7 @@ import geopandas
 geocoded_addresses = geopandas.tools.geocode(
     addresses["addr"],
     provider="nominatim",
-    user_agent="autogis2022",
+    user_agent="autogis2023",
     timeout=10
 )
 geocoded_addresses.head()

@@ -104,7 +104,7 @@ population_grid = geopandas.read_file(
         "&srsName=EPSG:3879"
     ),
 )
-population_grid.crs = crs="EPSG:3879"  # for WFS data, the CRS needs to be specified manually
+population_grid.crs = "EPSG:3879"  # for WFS data, the CRS needs to be specified manually
 ```
 
 ```{code-cell}
