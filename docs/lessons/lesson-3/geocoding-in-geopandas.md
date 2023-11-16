@@ -49,7 +49,7 @@ We have an `id` for each row and an address in the `addr` column.
 
 In our example, we will use *Nominatim* as a *geocoding provider*. [*Nominatim*](https://nominatim.org/) is a library and service using OpenStreetMap data, and run by the OpenStreetMap Foundation. Geopandas’
 [`geocode()`
-function](http://geopandas.org/reference/geopandas.tools.geocode.html) supports it natively.
+function](hhttps://geopandas.org/en/stable/docs/reference/api/geopandas.tools.geocode.html) supports it natively.
 
 
 :::{admonition} Fair-use
