@@ -96,10 +96,6 @@ dissolved.loc[15]
 type(dissolved.loc[15])
 ```
 
-```{code-cell}
-# See the data
-dissolved.loc[15].head()
-```
 
 As we can see, as a result, we have now a Pandas `Series` object containing
 basically one row from our original aggregated GeoDataFrame.
