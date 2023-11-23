@@ -67,7 +67,11 @@ and **add links to all relevant files to the README.md file**. Anyone who downlo
 
 *Note: If your code requires some python packages not found in the csc notebooks environment, please mention them also in the README.md file and provide installation instrutions.*
 
-*Note: If you do the exercise in pair, the none-driver groupmate needs to submit a one-page report on his/her own git reporistory. In your report include: description, aims, how it works, what tools and methods you have used, how you have divided the work). The driver does not need to submi the report (only the required.md file)
+:::{warning}
+**If you are working in pair**
+
+If you do the exercise in pair, the none-driver groupmate needs to submit a one-page report on his/her own git reporistory. In your report include: description, aims, how it works, what tools and methods you have used, how you have divided the work). The driver does not need to submi the report (only the required.md file)
+:::
 
 ### When is the deadline?
 
