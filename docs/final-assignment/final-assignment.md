@@ -1,7 +1,7 @@
 # Final assignment
 
 :::{admonition} Start your assignment
-Start your final assignment by accepting the [GitHub Classroom](https://classroom.github.com/a/71BB6FaM) for the final work.
+Start your final assignment by accepting the [GitHub Classroom](https://classroom.github.com/a/6KLiFij3) for the final work.
 :::
 
 % ## Lesson video
@@ -31,9 +31,9 @@ and good coding practices (writing readable code) when doing the final assignmen
 
 :::{admonition} Pair programming (optional)
 Students who attend the course at the University of Helsinki can do the final assignment in pairs. Those who choose to work in pairs, need to also
-submit a **one-page report** on their project (description, aims, how it works, what tools and methods you have used). It is enough if one person submits the project. But the
+submit a **one-page report** on their project (description, aims, how it works, what tools and methods you have used, how you have divided the work). It is enough if one person submits the project. But the
 report needs to be submitted individually as a .md file or a pdf on your assignment's `git` repository. Those who do their projects individually do not need to
-submit the report. 
+submit the report. The driver does not need to submit any report other than the required .md file.
 
 :::
 
@@ -43,6 +43,7 @@ You have three options for the final project that you can choose from:
 
 1. [Access Viz](#accessviz): a GIS-tool that can visualize and compare travel times by different travel modes in Helsinki Region.
 2. [Urban Indicators](#urban-indicators): a workflow that calculates and reports different urban indicators for an urban region, and allows the comparison of different urban areas based on these indicators.
+3. [A context-based spatial data anonymizer](#spatial-anonymization): A context sensitive approach to anonymizing sensitive GIS data
 3. [Your own project](#own-project-work): your own tool or analysis process (for example, related to your thesis!). Suggest your idea before the last practical exercise!
 
 Think about the final project as a challenge for yourself to show and implement the programming skills that you have learned this far. You have learned a lot already!
@@ -66,13 +67,15 @@ and **add links to all relevant files to the README.md file**. Anyone who downlo
 
 *Note: If your code requires some python packages not found in the csc notebooks environment, please mention them also in the README.md file and provide installation instrutions.*
 
+*Note: If you do the exercise in pair, the none-driver groupmate needs to submit a one-page report on his/her own git reporistory. In your report include: description, aims, how it works, what tools and methods you have used, how you have divided the work). The driver does not need to submi the report (only the required.md file)
+
 ### When is the deadline?
 
 Label your submissions as "submitted" in the exercise repository's `README.md` under "status" once you are finished with the Final assignment.
 
 You can choose from these two deadlines:
-- 1st deadline: Thursday the 31st December 2022
-- 2nd deadline Friday the 13th of January 2023
+- 1st deadline: Sunday the 31st December 2023
+- 2nd deadline Sunday the 14th of January 2024
 
 Submissions are checked after each deadline (you can get the feedback earlier if aiming for the first deadline).
 If you need the course grade earlier, please contact the course instructor.
@@ -250,6 +253,28 @@ Following readings provide you some useful background information and inspiratio
 
  - [European Commission (2015). "Indicators for Sustainable Cities"](http://ec.europa.eu/environment/integration/research/newsalert/pdf/indicators_for_sustainable_cities_IR12_en.pdf)
  - [Rob Kitchin, Tracey Lauriault & Gavin McArdle (2015). Knowing and governing cities through urban indicators, city benchmarking and real-time dashboards](<https://github.com/Automating-GIS-processes/site/blob/master/literature/Kitchin_et_al_(2015).pdf>) . *Regional Studies, Regional Science,* Vol. 2, No. 1, 6–28.
+
+## Spatial anonymization
+
+With the increase in interest in open data and science, the subjective of data privacy and safety is increasingly gaining attention. When openly publishing data, it is often required to anonymize the data using some kind of algorithm in order to protect the private information and comply with regulations. Broadly speaking, the anonymization approaches fall into two categories of Generalization and noise addition. Generalization means that we move a data point to a larger category or group making it difficult to identify an individual ([read about k-anonymity]( https://www.k2view.com/blog/what-is-k-anonymity)). Noise addition means that some level of noise is added to the original values in the data to prevent identification of individuals. In the case of geospatial data, generalization would mean that we generalize the features (for example points) to a bigger spatial unit. For example, instead of publishing data on point level, we would publish them on a grid level or within a polygon such as neighborhood. Noise addition means that the point is moved to another location. This can be based on a randomization process, or with the help of a mathematical function (e.g., Gaussian), or systematically moving points to a more general location (such as nearest intersection) (perturbation). 
+When anonymizing geospatial data, the level of anonymity achieved is directly related to the geographical context. For example, when anonymizing home locations, it is easier to reach a higher level of k-anonymity in a populous area than in a sparsely populated suburban area. This can be used to optimize the anonymization: reaching the satisfactory anonymity while minimizing the data quality loss. 
+
+### Suggested analytical steps:
+
+In this assignment we are going to work with an imaginary point dataset collected from public participation GIS survey ([read more](https://www.maptionnaire.com/blog/what-is-participatory-planning-and-ppgis)) representing participants’ home locations. You can get creative and try new things, but you can also get ideas form [this paper](https://doi.org/10.1016/j.compenvurbsys.2020.101513). We will follow these steps in this exercise: 
+
+1. **Step 1:** Create a set of at least 2000 imaginary home locations (random points) in a city/region of your choice. Make it more realistic by getting rid of points which may be located in inaccessible area (water, forests, etc.). To make it even more realistic you can make sure that the points are within residential buildings. 
+2. **Step 2:** Add a random displacement to the x and y coordinates between 50 to 500 meters. Weight the amount of displacement so that you have a bigger displacement in areas of lower population density. You can do this using a simple classification or get more creative with math. Feel free to use other relevant contextual data (such as building density) in weighting your displacement values.
+3. **Step 3:** Create suitable charts (e.g., a histogram) to show the values of displacements. Classify the values using an appropriate method and highlight the classification break points using dashed vertical lines. 
+4. **Step 4:** Create an interactive map showing the amount of displacement in different areas. Can you create a nice map showing how your displacements are (negatively) correlated with the population distribution?
+5. **Step 5 (Extra):** Can you calculate and visualize the k-anonymity using the approach described [here](https://doi.org/10.1016/j.compenvurbsys.2020.101513)
+
+### Data recommendations:
+You do not need to necessarily choose Helsinki as your study site. However, it might be easier to find the data you need from the capital region. Remember that you can download the required data and use them locally or use wfs if it is available from source. 
+ - Home locations: This is a randomly generated point data you should create 
+ - Urban structure:
+   \- Buildings: https://hri.fi/data/en_GB/dataset/helsingin-rakennukset
+   \- Population grid: https://www.paikkatietohakemisto.fi/geonetwork/srv/eng/catalog.search#/metadata/a901d40a-8a6b-4678-814c-79d2e2ab130c
 
 
 ## Own project work
