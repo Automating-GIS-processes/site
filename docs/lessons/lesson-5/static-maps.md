@@ -48,6 +48,8 @@ DATA_DIRECTORY = NOTEBOOK_PATH / "data"
 ```{code-cell}
 import geopandas
 import numpy
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context
 
 accessibility_grid = geopandas.read_file(
     DATA_DIRECTORY
@@ -300,36 +302,19 @@ ax = accessibility_grid.plot(
     legend=True,
     legend_kwds={"title": "Travel time (min)"}
 )
-contextily.add_basemap(ax)
+contextily.add_basemap(ax, source=contextily.providers.OpenStreetMap.Mapnik)
 ```
 
 
-By default, *contextily* uses the [Stamen
-Terrain](http://maps.stamen.com/#terrain) as a base map, but [there are many
+[There are many
 other online maps to choose
 from](https://contextily.readthedocs.io/en/latest/intro_guide.html#Providers).
 Any of the other `contextily.providers` (see link above) can be passed as a
-`source` to `add_basemap()`. For instance, use OpenStreetMap in its default
-*Mapnik* style:
+`source` to `add_basemap()`. You can get a list of available providers:
 
 
 ```{code-cell}
-ax = accessibility_grid.plot(
-    figsize=(12, 8),
-
-    column="pt_r_t",
-    scheme="quantiles",
-    cmap="Spectral",
-    linewidth=0,
-    alpha=0.8,
-
-    legend=True,
-    legend_kwds={"title": "Travel time (min)"}
-)
-contextily.add_basemap(
-    ax,
-    source=contextily.providers.OpenStreetMap.Mapnik
-)
+contextily.providers
 ```
 
 
@@ -344,7 +329,7 @@ ax = accessibility_grid[accessibility_grid.pt_r_t <= 15].plot(
 
     column="pt_r_t",
     scheme="quantiles",
-    k=7,
+    k=5,
     cmap="Spectral",
     linewidth=0,
     alpha=0.8,
@@ -373,7 +358,7 @@ ax = accessibility_grid[accessibility_grid.pt_r_t <= 15].plot(
 
     column="pt_r_t",
     scheme="quantiles",
-    k=7,
+    k=5,
     cmap="Spectral",
     linewidth=0,
     alpha=0.8,
