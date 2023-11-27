@@ -182,6 +182,31 @@ addresses_layer.add_to(interactive_map)
 interactive_map
 ```
 
+We can also add a pop-up window to our map which would show the addresses at the point of interest upon clicking:
+
+```{code-cell}
+interactive_map = folium.Map(
+    location=(60.2, 25.0),
+    zoom_start=12
+)
+
+popup = folium.GeoJsonPopup(
+    fields=["address"],
+    aliases=["Address"],
+    localize=True,
+    labels=True,
+    style="background-color: yellow;",
+)
+
+addresses_layer = folium.features.GeoJson(
+    addresses,
+    name="Public transport stops",
+    popup=popup
+)
+addresses_layer.add_to(interactive_map)
+
+interactive_map
+```
 ## Add a polygon layer
 
 In the following section we are going to revisit another data set with which we have worked before: the Helsinki Region population grid we got to know in [lesson 2](../lesson-2/vector-data-io), and which you used during [exercise 3](../lesson-3/exercise-3). We can load the layer directly from [HSY’s open data WFS endpoint](https://hri.fi/):
