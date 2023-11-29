@@ -39,7 +39,7 @@ submit the report. The driver does not need to submit any report other than the 
 
 ### Final work topic
 
-You have three options for the final project that you can choose from:
+You have four options for the final project that you can choose from:
 
 1. [Access Viz](#accessviz): a GIS-tool that can visualize and compare travel times by different travel modes in Helsinki Region.
 2. [Urban Indicators](#urban-indicators): a workflow that calculates and reports different urban indicators for an urban region, and allows the comparison of different urban areas based on these indicators.
