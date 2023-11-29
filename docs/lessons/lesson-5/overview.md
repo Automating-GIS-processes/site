@@ -32,7 +32,4 @@ After this lesson, you should know how to:
 
 ## Lesson video
 
-<iframe id="ytplayer" type="text/html" width="700" height="394"
-  src="https://www.youtube.com/embed/xL7TWab9zug?modestbranding=1
-  frameborder="0">
-</iframe>
+

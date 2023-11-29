@@ -98,21 +98,31 @@ interactive_map.save(HTML_DIRECTORY / "base-map.html")
 
 If you want to use a different base layer than the default OpenStreetMap,
 `folium.Map` accepts a parameter `tiles`, that can either reference [one of the
-built-in map providers](https://python-visualization.github.io/folium/modules.html#folium.folium.Map)
-or point to a custom *tileset URL*.
+built-in map providers](https://python-visualization.github.io/folium/modules.html#folium.folium.Map).
 
 While we’re at it, let’s also vary the centre location and the zoom level
 of the map:
 
 ```{code-cell}
 interactive_map = folium.Map(
-    location=(40.7, -73.9),
+    location=(60.2, 25.00),
     zoom_start=12,
-    tiles="Stamen Toner"
+    tiles="cartodbpositron"
 )
 interactive_map
 ```
 
+Or we can point to a custom *tileset URL*:
+
+```{code-cell}
+interactive_map = folium.Map(
+    location=(60.2, 25.00),
+    zoom_start=12,
+    tiles="https://mt1.google.com/vt/lyrs=r&x={x}&y={y}&z={z}",
+    attr="Google maps",
+)
+interactive_map
+```
 
 ## Add a point marker
 
@@ -154,7 +164,7 @@ with a geo-data frame, and add it to a map. In the example below, we use the
 import geopandas
 
 addresses = geopandas.read_file(DATA_DIRECTORY / "addresses.gpkg")
-addresses
+addresses.head()
 ```
 
 ```{code-cell}
@@ -172,6 +182,31 @@ addresses_layer.add_to(interactive_map)
 interactive_map
 ```
 
+We can also add a pop-up window to our map which would show the addresses at the point of interest upon clicking:
+
+```{code-cell}
+interactive_map = folium.Map(
+    location=(60.2, 25.0),
+    zoom_start=12
+)
+
+popup = folium.GeoJsonPopup(
+    fields=["address"],
+    aliases=["Address"],
+    localize=True,
+    labels=True,
+    style="background-color: yellow;",
+)
+
+addresses_layer = folium.features.GeoJson(
+    addresses,
+    name="Public transport stops",
+    popup=popup
+)
+addresses_layer.add_to(interactive_map)
+
+interactive_map
+```
 ## Add a polygon layer
 
 In the following section we are going to revisit another data set with which we have worked before: the Helsinki Region population grid we got to know in [lesson 2](../lesson-2/vector-data-io), and which you used during [exercise 3](../lesson-3/exercise-3). We can load the layer directly from [HSY’s open data WFS endpoint](https://hri.fi/):
@@ -217,7 +252,7 @@ a few more small tasks to quickly create beautiful thematic maps.
 
 The class expects an input data set that has an explicit, `str`-type, index
 column, as it treats the geospatial input and the thematic input as separate
-data sets that need to be joint (see also, below, how we specify both
+data sets that need to be joined (see also, below, how we specify both
 `geo_data` and `data`).
 
 A good approach to create such a column is to copy the data frame’s index
