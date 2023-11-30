@@ -32,4 +32,5 @@ After this lesson, you should know how to:
 
 ## Lesson video
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/WK4FVQxGDOk?si=O5_XVyR-IbhyyqVc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
