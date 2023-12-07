@@ -98,6 +98,7 @@ The final assignment is graded based on:
 You should add necessary details to the `README.md` file, and use inline comments and Markdown cells to document your work along the way. Take a look of these hints for using markdown:
 
 - [General Markdown syntax guide](https://guides.github.com/features/mastering-markdown/).
+- [Markdown Cheatsheet](https://www.markdownguide.org/cheat-sheet/).
 
 
 :::{note}
