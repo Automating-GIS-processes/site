@@ -205,7 +205,7 @@ osmnx.basic_stats(graph)
 ```
 
 This does not yet yield all interesting characteristics of our network, as
-OSMnx does not automatically takes the area covered by the network into
+OSMnx does not automatically take the area covered by the network into
 consideration. We can do that manually, by, first, delineating the [complex
 hull](https://en.wikipedia.org/wiki/Convex_hull) of the network (of an ’unary’
 union of all its features), and then, second, computing the area of this hull.

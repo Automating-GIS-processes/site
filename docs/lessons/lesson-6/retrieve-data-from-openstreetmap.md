@@ -121,7 +121,7 @@ a placename for fetching data covering the Kamppi area in Helsinki, Finland.
 In the place name query, OSMnx uses the Nominatim Geocoding API. This means
 that place names should exist in the OpenStreetMap database (run a test search
 at [openstreetmap.org](https://www.openstreetmap.org/) or
-[nominatim.openstreetmap.org](https://nomination.openstreetmap.org/)).
+[nominatim.openstreetmap.org](https://nominatim.openstreetmap.org/ui/search.html)).
 
 We will read an OSM street network using OSMnx’s
 [graph_from_place()](https://osmnx.readthedocs.io/en/stable/osmnx.html#osmnx.graph.graph_from_place) function:

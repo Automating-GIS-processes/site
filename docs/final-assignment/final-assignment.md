@@ -70,7 +70,7 @@ and **add links to all relevant files to the README.md file**. Anyone who downlo
 :::{note}
 **If you are working in pair**
 
-If you do the exercise in pair, the "none-driver" groupmate needs to submit a one-page report on his/her own git reporistory. In your report include: description, aims, how it works, what tools and methods you have used, how you have divided the work). The driver does not need to submi the report (only the required.md file)
+If you do the exercise in pair, the "none-driver" groupmate needs to submit a one-page report on his/her own git repository. In your report include: description, aims, how it works, what tools and methods you have used, how you have divided the work). The driver does not need to submit a separate report.
 :::
 
 ### When is the deadline?
@@ -98,6 +98,7 @@ The final assignment is graded based on:
 You should add necessary details to the `README.md` file, and use inline comments and Markdown cells to document your work along the way. Take a look of these hints for using markdown:
 
 - [General Markdown syntax guide](https://guides.github.com/features/mastering-markdown/).
+- [Markdown Cheatsheet](https://www.markdownguide.org/cheat-sheet/).
 
 
 :::{note}
