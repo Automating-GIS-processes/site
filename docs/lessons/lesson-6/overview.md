@@ -28,9 +28,10 @@ After this lesson, you should know how to:
   [NetworkX](https://networkx.readthedocs.io/)
 
 
-% ## Lesson video
-% 
-% <iframe id="ytplayer" type="text/html" width="700" height="394"
-%   src="https://www.youtube.com/embed/VIDEO_ID?modestbranding=1
-%   frameborder="0">
-% </iframe>
+## Lesson video
+ 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/EZnKCn0LXkw?si=sGeZHqkZY5e86cov" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+## Slides about final assignment
+
+<iframe src="https://onedrive.live.com/embed?resid=29BAE38AD4BE2F78%211684&amp;authkey=!AObt9rmm-oVhMLc&amp;em=2&amp;wdAr=1.7777777777777777" width="476px" height="288px" frameborder="0">This is an embedded <a target="_blank" href="https://office.com">Microsoft Office</a> presentation, powered by <a target="_blank" href="https://office.com/webapps">Office</a>.</iframe>
