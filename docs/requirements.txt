@@ -3,6 +3,7 @@ nbsphinx
 jupyterlab
 geopandas
 sphinx_book_theme
+insegel
 matplotlib
 geopandas
 pandas
