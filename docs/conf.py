@@ -29,7 +29,7 @@ html_logo = "static/logo/CartoGIS.png"
 html_short_title = "CartoGIS"
 html_title = ""
 
-html_theme = "insegel"
+html_theme = "sphinx_book_theme"
 
 
 html_theme_options = {
