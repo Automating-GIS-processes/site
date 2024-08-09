@@ -6,7 +6,7 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'CartoGIS'
+project = 'AutoGIS'
 copyright = '2024, Kamyar Hasanzadeh'
 author = 'Kamyar Hasanzadeh'
 release = '2024'
@@ -25,8 +25,8 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
 html_last_updated_fmt = "%d %B %Y"
-html_logo = "static/logo/CartoGIS.png"
-html_short_title = "CartoGIS"
+html_logo = "static/logo/AutoGIS.PNG"
+html_short_title = "AutoGIS"
 html_title = ""
 
 html_theme = "sphinx_book_theme"
@@ -42,7 +42,7 @@ html_theme_options = {
     },
     "path_to_docs": "docs",
     "repository_branch": "main",
-    "repository_url": "https://github.com/Carto-gis/site",
+    "repository_url": "https://autogis-site.readthedocs.io",
     "use_edit_page_button": True,
     "use_repository_button": True,
     'logo_only': True,
@@ -55,5 +55,5 @@ html_static_path = ['_static']
 nb_execution_mode = "force"
 nb_execution_timeout = 120  # needed, e.g., when matplotlib updates its font cache
 nb_execution_show_tb = True  # show errors
-nbsphinx_allow_errors = True
+#nbsphinx_allow_errors = True
 
