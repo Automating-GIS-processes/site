@@ -42,7 +42,7 @@ html_theme_options = {
     },
     "path_to_docs": "docs",
     "repository_branch": "main",
-    "repository_url": "https://autogis-site.readthedocs.io",
+    "repository_url": "https://github.com/Automating-GIS-processes/site",
     "use_edit_page_button": True,
     "use_repository_button": True,
     'logo_only': True,
