@@ -32,3 +32,4 @@ sphinx
 sphinx-book-theme
 sqlalchemy
 tilemapbase
+bokeh_sampledata
