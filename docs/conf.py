@@ -16,8 +16,6 @@ release = '2024'
 
 extensions = ['nbsphinx']
 
-extensions = ['nbsphinx']
-
 nbsphinx_prolog = """
 {% if 'remove-input' in cell.metadata.tags %}
 {%- set cell_style = 'display:none;' %}
@@ -27,11 +25,8 @@ nbsphinx_prolog = """
 {% endif %}
 """
 
-
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
-
-
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
@@ -42,7 +37,6 @@ html_short_title = "AutoGIS"
 html_title = ""
 
 html_theme = "sphinx_book_theme"
-
 
 html_theme_options = {
     "collapse_navigation": False,
@@ -59,13 +53,10 @@ html_theme_options = {
     "use_repository_button": True,
     'logo_only': True,
     'display_version': False,
-
-
 }
+
 html_static_path = ['_static']
 
 nb_execution_mode = "force"
 nb_execution_timeout = 120  # needed, e.g., when matplotlib updates its font cache
 nb_execution_show_tb = True  # show errors
-#nbsphinx_allow_errors = True
-
