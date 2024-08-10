@@ -16,14 +16,7 @@ release = '2024'
 
 extensions = ['nbsphinx']
 
-nbsphinx_prolog = """
-{% if 'remove-input' in cell.metadata.tags %}
-{%- set cell_style = 'display:none;' %}
-{% endif %}
-{% if 'remove-output' in cell.metadata.tags %}
-{%- set output_style = 'display:none;' %}
-{% endif %}
-"""
+nbsphinx_execute = 'always'
 
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
