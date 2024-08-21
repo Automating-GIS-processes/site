@@ -80,7 +80,7 @@ At the University of Helsinki, the *Automating GIS processes* course runs for
 seven weeks during the second teaching period in the autumn semester, starting
 on {{starting_date}}.
 
-During the teaching period, this web page is updated each week before the lecture..
+During the teaching period, this web page is updated each week before the lecture.
 
 +-------+-----------------------------------------------------------------------------------------------------+
 | week  | theme                                                                                               |
@@ -172,30 +172,30 @@ Contents
    lessons/lesson-4/reclassifying-data
    lessons/lesson-4/exercise-4
 
-.. toctree::
-   :caption: Lesson 5
-   :maxdepth: 2
+.. .. toctree::
+..    :caption: Lesson 5
+..    :maxdepth: 2
 
-   lessons/lesson-5/overview
-   lessons/lesson-5/static-maps
-   lessons/lesson-5/interactive-maps
-   lessons/lesson-5/exercise-5
+..    lessons/lesson-5/overview
+..    lessons/lesson-5/static-maps
+..    lessons/lesson-5/interactive-maps
+..    lessons/lesson-5/exercise-5
 
-.. toctree::
-   :caption: Lesson 6
-   :maxdepth: 2
+.. .. toctree::
+..    :caption: Lesson 6
+..    :maxdepth: 2
 
-   lessons/lesson-6/overview
-   lessons/lesson-6/retrieve-data-from-openstreetmap
-   lessons/lesson-6/network-analysis
+..    lessons/lesson-6/overview
+..    lessons/lesson-6/retrieve-data-from-openstreetmap
+..    lessons/lesson-6/network-analysis
 
-.. toctree::
-   :caption: Final Assignment
-   :maxdepth: 2
+.. .. toctree::
+..    :caption: Final Assignment
+..    :maxdepth: 2
 
-   final-assignment/final-assignment
-   final-assignment/final-assignment-grading
-   final-assignment/final-assignment-hints
+..    final-assignment/final-assignment
+..    final-assignment/final-assignment-grading
+..    final-assignment/final-assignment-hints
 
 .. .. toctree::
 ..    :caption: "Extra: PyQGIS"
