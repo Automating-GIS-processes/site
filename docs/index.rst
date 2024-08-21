@@ -177,8 +177,8 @@ Contents
    :maxdepth: 2
 
    lessons/lesson-5/overview
-   lessons/lesson-5/static-maps
-..    lessons/lesson-5/interactive-maps
+..    lessons/lesson-5/static-maps
+   lessons/lesson-5/interactive-maps
    lessons/lesson-5/exercise-5
 
 .. toctree::
