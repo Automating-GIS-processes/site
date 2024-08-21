@@ -189,13 +189,13 @@ Contents
    lessons/lesson-6/retrieve-data-from-openstreetmap
    lessons/lesson-6/network-analysis
 
-.. .. toctree::
-..    :caption: Final Assignment
-..    :maxdepth: 2
+.. toctree::
+   :caption: Final Assignment
+   :maxdepth: 2
 
-..    final-assignment/final-assignment
-..    final-assignment/final-assignment-grading
-..    final-assignment/final-assignment-hints
+   final-assignment/final-assignment
+   final-assignment/final-assignment-grading
+   final-assignment/final-assignment-hints
 
 .. .. toctree::
 ..    :caption: "Extra: PyQGIS"
