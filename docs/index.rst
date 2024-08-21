@@ -172,14 +172,14 @@ Contents
    lessons/lesson-4/reclassifying-data
    lessons/lesson-4/exercise-4
 
-.. .. toctree::
-..    :caption: Lesson 5
-..    :maxdepth: 2
+.. toctree::
+   :caption: Lesson 5
+   :maxdepth: 2
 
-..    lessons/lesson-5/overview
+   lessons/lesson-5/overview
 ..    lessons/lesson-5/static-maps
 ..    lessons/lesson-5/interactive-maps
-..    lessons/lesson-5/exercise-5
+   lessons/lesson-5/exercise-5
 
 .. toctree::
    :caption: Lesson 6
