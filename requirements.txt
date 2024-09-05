@@ -35,3 +35,4 @@ sphinx-book-theme
 sqlalchemy
 tilemapbase
 xarray
+owslib
