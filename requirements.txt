@@ -6,7 +6,6 @@ folium
 geojson
 geopandas
 geopy
-gdal
 ipykernel
 ipywidgets
 jupyterlab
