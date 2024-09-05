@@ -188,6 +188,15 @@ Contents
    lessons/lesson-6/overview
    lessons/lesson-6/retrieve-data-from-openstreetmap
    lessons/lesson-6/network-analysis
+   
+.. toctree::
+   :caption: Lesson 7
+   :maxdepth: 2
+
+   lessons/lesson-7/overview
+   lessons/lesson-7/Raster_lesson
+   lessons/lesson-7/create-hillshade
+
 
 .. toctree::
    :caption: Final Assignment
