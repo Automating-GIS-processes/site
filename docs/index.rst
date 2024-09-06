@@ -194,8 +194,8 @@ Contents
    :maxdepth: 2
 
    lessons/lesson-7/overview
-   lessons/lesson-7/Raster_lesson
-   lessons/lesson-7/create-hillshade
+   lessons/lesson-7/raster-part1
+   lessons/lesson-7/raster-part2
 
 
 .. toctree::
