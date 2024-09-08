@@ -1123,7 +1123,7 @@
    "outputs": [],
    "source": [
     "# For rendering HTML - not part of the lesson\n",
-    "#!jupyter nbconvert --to html Raster_lesson1.ipynb --output Raster_lesson.html"
+    "#!jupyter nbconvert --to html --embed-images Raster_lesson1.ipynb --output Raster_lesson.html"
    ]
   },
   {
