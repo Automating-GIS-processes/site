@@ -1,4 +1,4 @@
-Static-maps
+Overview
 ===========
 
 .. raw:: html

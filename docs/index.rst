@@ -195,7 +195,6 @@ Contents
 
    lessons/lesson-7/overview
    lessons/lesson-7/raster-part1
-   lessons/lesson-7/raster-part2
 
 
 .. toctree::
