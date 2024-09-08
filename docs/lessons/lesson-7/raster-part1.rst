@@ -1,4 +1,4 @@
-Overview
+Working with Raster
 ===========
 
 .. raw:: html
