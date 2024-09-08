@@ -50,7 +50,7 @@ html_theme_options = {
     'display_version': False,
 }
 
-html_static_path = ['static']
+#html_static_path = ['static']
 
 nb_execution_mode = "force"
 nb_execution_timeout = 120  # needed, e.g., when matplotlib updates its font cache
