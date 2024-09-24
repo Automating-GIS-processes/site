@@ -27,6 +27,7 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 html_last_updated_fmt = "%d %B %Y"
 html_logo = "static/logo/AutoGIS.PNG"
+html_favicon = 'static/logo/favicon.ico'
 html_short_title = "AutoGIS"
 html_title = ""
 
