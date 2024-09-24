@@ -16,7 +16,8 @@ release = '2024'
 
 extensions = ['nbsphinx']
 
-nbsphinx_execute = 'always'
+#nbsphinx_execute = 'always'
+nbsphinx_execute = 'auto'  # Execute by default, but respect notebook metadata
 
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
@@ -53,3 +54,4 @@ html_theme_options = {
 nb_execution_mode = "force"
 nb_execution_timeout = 120  # needed, e.g., when matplotlib updates its font cache
 nb_execution_show_tb = True  # show errors
+
