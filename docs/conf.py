@@ -16,8 +16,6 @@ release = '2024'
 
 extensions = ['nbsphinx']
 
-
-
 nbsphinx_execute = 'always'
 
 templates_path = ['_templates']

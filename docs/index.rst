@@ -1,7 +1,7 @@
-Automating GIS Processes {{year}}
+Automating GIS Processes 2025
 =================================
 
-**Welcome to the *Automating GIS processes* course {{year}}!** Through interactive
+**Welcome to the *Automating GIS processes* course!** Through interactive
 lessons and hands-on exercises, this course introduces you to geographic data
 analysis using the Python programming language. If you are new to Python, we
 recommend you first start with the *Geo-Python* course
@@ -96,6 +96,8 @@ During the teaching period, this web page is updated each week before the lectur
 | **5** | Visualisation: static and interactive maps                                                          |
 +-------+-----------------------------------------------------------------------------------------------------+
 | **6** | OpenStreetMap data (osmnx) and Network analysis (networkx)                                          |
++-------+-----------------------------------------------------------------------------------------------------+
+| **7** | Working with Raster data                                                                            |
 +-------+-----------------------------------------------------------------------------------------------------+
 
 Earlier versions of this course
