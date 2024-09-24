@@ -1,7 +1,7 @@
 Automating GIS Processes 2024
 =================================
 
-**Welcome to the *Automating GIS processes* course!** Through interactive
+**Welcome to the Automating GIS processes course!** Through interactive
 lessons and hands-on exercises, this course introduces you to geographic data
 analysis using the Python programming language. If you are new to Python, we
 recommend you first start with the *Geo-Python* course
