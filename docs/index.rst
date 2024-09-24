@@ -1,4 +1,4 @@
-Automating GIS Processes 2025
+Automating GIS Processes 2024
 =================================
 
 **Welcome to the *Automating GIS processes* course!** Through interactive
