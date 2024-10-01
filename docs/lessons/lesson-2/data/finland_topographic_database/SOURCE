@@ -1,0 +1,9 @@
+# Topographic database of Finland, 2022
+
+(c) Maanmittauslaitos
+(Licensed under CC-BY-4.0)
+
+Downloaded from https://paituli.csc.fi/, and re-compressed using geopandas
+(see script `download-mml-data.py` in this directory)
+
+Data description: http://urn.fi/urn:nbn:fi:att:d32f46b8-17cb-4f78-8dad-d026179835dd
