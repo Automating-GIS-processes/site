@@ -196,7 +196,8 @@ Contents
    :maxdepth: 2
 
    lessons/lesson-7/overview
-   lessons/lesson-7/Raster_lesson1
+   lessons/lesson-7/Raster-explore
+   lessons/lesson-7/Raster-processing
 
 
 .. toctree::
