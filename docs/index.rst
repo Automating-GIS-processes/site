@@ -11,9 +11,10 @@ into using it for GIS analyses in this course.
 *Geo-Python* and *Automating GIS Processes* (‘AutoGIS’) have been developed by the Department of Geosciences and Geography at the University of Helsinki, Finland. The course has been planned and organized by the `Digital Geography Lab <https://www.helsinki.fi/en/researchgroups/digital-geography-lab>`_. The teaching materials are openly accessible for anyone interested in learning.
 
 
-.. note:: **Acknowledgements**
+.. admonition:: **Acknowledgements**
+	:class: info
 
-   A special shout-out to Henrikki Tenkanen, Vuokko Heikinheimo, Håvard Wallin Aagesen, Christoph Fink, and others, for their invaluable contributions to the development of this course over the years. Their contributions have shaped it into what it is today.
+    A special shout-out to Henrikki Tenkanen, Vuokko Heikinheimo, Håvard Wallin Aagesen, Christoph Fink, and others, for their invaluable contributions to the development of this course over the years. Their contributions have shaped it into what it is today.
 
 
 .. admonition:: Open Access
