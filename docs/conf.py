@@ -7,7 +7,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'AutoGIS'
-copyright = '2024, Kamyar Hasanzadeh'
+copyright = '2024, Kamyar Hasanzadeh, Department of Geosciences & Geography, University of Helsinki'
 author = 'Kamyar Hasanzadeh'
 release = '2024'
 
