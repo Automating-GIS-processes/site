@@ -140,7 +140,6 @@ Contents
    course-info/resources
    course-info/license
 
-..
 .. toctree::
 ..    :caption: Lesson 1
 ..    :maxdepth: 2
@@ -201,7 +200,7 @@ Contents
 ..    lessons/lesson-6/overview
 ..    lessons/lesson-6/retrieve-data-from-openstreetmap
 ..    lessons/lesson-6/network-analysis
-..   
+..
 .. toctree::
 ..    :caption: Lesson 7
 ..    :maxdepth: 2
