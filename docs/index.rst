@@ -140,7 +140,7 @@ Contents
    course-info/resources
    course-info/license
 
-toctree::
+.. toctree::
    :caption: Lesson 1
    :maxdepth: 2
 
