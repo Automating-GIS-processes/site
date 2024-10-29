@@ -45,7 +45,7 @@ their analysis workflow in an online repository (GitHub).
    in the browser. You’ll find buttons for activating the python environment using
    `Binder <https://mybinder.readthedocs.io/>`_ at the top of each
    programming lesson. Students at Finnish higher education institutions are
-   encouraged to use `CSC’s *Notebooks* <https://notebooks.csc.fi/>`_.
+   encouraged to use `CSC’s *Noppe* <https://noppe.csc.fi/>`_.
 
 Course format
 -------------
