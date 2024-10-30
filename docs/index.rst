@@ -14,7 +14,7 @@ into using it for GIS analyses in this course.
 .. admonition:: **Acknowledgements**
    :class: info
 
-    A special shout-out to Henrikki Tenkanen, Vuokko Heikinheimo, Håvard Wallin Aagesen, Christoph Fink, and others, for their invaluable contributions to the development of this course over the years. Their contributions have shaped it into what it is today.
+   A special shout-out to Henrikki Tenkanen, Vuokko Heikinheimo, Håvard Wallin Aagesen, Christoph Fink, and others, for their invaluable contributions to the development of this course over the years. Their contributions have shaped it into what it is today.
 
 
 .. admonition:: Open Access
