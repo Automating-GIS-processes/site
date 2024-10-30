@@ -12,9 +12,9 @@ into using it for GIS analyses in this course.
 
 
 .. admonition:: **Acknowledgements**
-	:class: info
+   :class: info
 
-    A special shout-out to Henrikki Tenkanen, Vuokko Heikinheimo, Håvard Wallin Aagesen, Christoph Fink, and others, for their invaluable contributions to the development of this course over the years. Their contributions have shaped it into what it is today.
+   A special shout-out to Henrikki Tenkanen, Vuokko Heikinheimo, Håvard Wallin Aagesen, Christoph Fink, and others, for their invaluable contributions to the development of this course over the years. Their contributions have shaped it into what it is today.
 
 
 .. admonition:: Open Access
@@ -45,7 +45,7 @@ their analysis workflow in an online repository (GitHub).
    in the browser. You’ll find buttons for activating the python environment using
    `Binder <https://mybinder.readthedocs.io/>`_ at the top of each
    programming lesson. Students at Finnish higher education institutions are
-   encouraged to use `CSC’s *Notebooks* <https://notebooks.csc.fi/>`_.
+   encouraged to use `CSC’s *Noppe* <https://noppe.csc.fi/>`_.
 
 Course format
 -------------
@@ -141,14 +141,14 @@ Contents
    course-info/license
 
 .. toctree::
-..    :caption: Lesson 1
-..    :maxdepth: 2
-..
-..    lessons/lesson-1/overview
-..    lessons/lesson-1/course-motivation
-..    lessons/lesson-1/geometry-objects
-..    lessons/lesson-1/exercise-1
-..
+   :caption: Lesson 1
+   :maxdepth: 2
+
+   lessons/lesson-1/overview
+   lessons/lesson-1/course-motivation
+   lessons/lesson-1/geometry-objects
+   lessons/lesson-1/exercise-1
+
 .. toctree::
 ..    :caption: Lesson 2
 ..    :maxdepth: 2
