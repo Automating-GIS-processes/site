@@ -208,6 +208,7 @@ Contents
 ..    lessons/lesson-7/overview
 ..    lessons/lesson-7/Raster-explore
 ..    lessons/lesson-7/Raster-processing
+..    lessons/lesson-7/exercise-6
 ..
 .. toctree::
 ..    :caption: Final Assignment
