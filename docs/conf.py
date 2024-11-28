@@ -57,4 +57,4 @@ nb_execution_timeout = 120  # needed, e.g., when matplotlib updates its font cac
 nb_execution_show_tb = True  # show errors
 
 # temp for wfs issue
-nbsphinx_allow_errors = True
+#nbsphinx_allow_errors = True
