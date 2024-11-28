@@ -36,3 +36,4 @@ sqlalchemy
 tilemapbase
 xarray
 owslib
+fiona
