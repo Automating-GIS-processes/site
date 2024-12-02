@@ -209,14 +209,14 @@ Contents
 ..    lessons/lesson-7/Raster-explore
 ..    lessons/lesson-7/Raster-processing
 ..    lessons/lesson-7/exercise-6
-..
+
 .. toctree::
-..    :caption: Final Assignment
-..    :maxdepth: 2
-..
-..    final-assignment/final-assignment
-..    final-assignment/final-assignment-grading
-..    final-assignment/final-assignment-hints
+   :caption: Final Assignment
+   :maxdepth: 2
+
+   final-assignment/final-assignment
+   final-assignment/final-assignment-grading
+   final-assignment/final-assignment-hints
 
 
 .. .. toctree::
