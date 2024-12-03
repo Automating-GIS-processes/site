@@ -1,7 +1,7 @@
 # Final assignment
 
 :::{admonition} Start your assignment
-Start your final assignment by accepting the [GitHub Classroom](https://classroom.github.com/a/6KLiFij3) for the final work.
+Start your final assignment by accepting the [GitHub Classroom](https://classroom.github.com/a/P3VlJKWK) for the final work.
 :::
 
 % ## Lesson video
