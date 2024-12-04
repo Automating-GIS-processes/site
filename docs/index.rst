@@ -194,29 +194,29 @@ Contents
    lessons/lesson-5/exercise-5
 
 .. toctree::
-..    :caption: Lesson 6
-..    :maxdepth: 2
-..
-..    lessons/lesson-6/overview
-..    lessons/lesson-6/retrieve-data-from-openstreetmap
-..    lessons/lesson-6/network-analysis
-..
+   :caption: Lesson 6
+   :maxdepth: 2
+
+   lessons/lesson-6/overview
+   lessons/lesson-6/retrieve-data-from-openstreetmap
+   lessons/lesson-6/network-analysis
+
 .. toctree::
-..    :caption: Lesson 7
-..    :maxdepth: 2
-..
-..    lessons/lesson-7/overview
-..    lessons/lesson-7/Raster-explore
-..    lessons/lesson-7/Raster-processing
-..    lessons/lesson-7/exercise-6
-..
+..     :caption: Lesson 7
+..     :maxdepth: 2
+.. 
+..     lessons/lesson-7/overview
+..     lessons/lesson-7/Raster-explore
+..     lessons/lesson-7/Raster-processing
+..     lessons/lesson-7/exercise-6
+
 .. toctree::
-..    :caption: Final Assignment
-..    :maxdepth: 2
-..
-..    final-assignment/final-assignment
-..    final-assignment/final-assignment-grading
-..    final-assignment/final-assignment-hints
+   :caption: Final Assignment
+   :maxdepth: 2
+
+   final-assignment/final-assignment
+   final-assignment/final-assignment-grading
+   final-assignment/final-assignment-hints
 
 
 .. .. toctree::
