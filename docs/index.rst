@@ -202,13 +202,13 @@ Contents
    lessons/lesson-6/network-analysis
 
 .. toctree::
-    :caption: Lesson 7
-    :maxdepth: 2
-
-    lessons/lesson-7/overview
-    lessons/lesson-7/Raster-explore
-    lessons/lesson-7/Raster-processing
-    lessons/lesson-7/exercise-6
+..     :caption: Lesson 7
+..     :maxdepth: 2
+.. 
+..     lessons/lesson-7/overview
+..     lessons/lesson-7/Raster-explore
+..     lessons/lesson-7/Raster-processing
+..     lessons/lesson-7/exercise-6
 
 .. toctree::
    :caption: Final Assignment
