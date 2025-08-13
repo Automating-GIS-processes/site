@@ -1,4 +1,4 @@
-Automating GIS Processes 2024
+Automating GIS Processes 2025
 =================================
 
 **Welcome to the Automating GIS processes course!** Through interactive
@@ -110,6 +110,7 @@ Earlier versions of this course
 
 The course pages and material of earlier years are available at:
 
+- `2024 <https://autogis-site.readthedocs.io/en/2024.0/>`_
 - `2023 <https://autogis-site.readthedocs.io/en/2023/>`_
 - `2022 <https://autogis-site.readthedocs.io/en/2022/>`_
 - `2021 <https://autogis-site.readthedocs.io/en/2021/>`_
