@@ -194,14 +194,14 @@ Contents
    lessons/lesson-5/interactive-maps
    lessons/lesson-5/exercise-5
 
-.. .. toctree::
-..    :caption: Lesson 6
-..    :maxdepth: 2
-..
-..    lessons/lesson-6/overview
-..    lessons/lesson-6/retrieve-data-from-openstreetmap
-..    lessons/lesson-6/network-analysis
-..
+.. toctree::
+   :caption: Lesson 6
+   :maxdepth: 2
+
+   lessons/lesson-6/overview
+   lessons/lesson-6/retrieve-data-from-openstreetmap
+   lessons/lesson-6/network-analysis
+
 .. .. toctree::
 ..     :caption: Lesson 7
 ..     :maxdepth: 2
@@ -211,21 +211,21 @@ Contents
 ..     lessons/lesson-7/Raster-processing
 ..     lessons/lesson-7/exercise-6
 ..
-.. .. toctree::
-..    :caption: Final Assignment
-..    :maxdepth: 2
+.. toctree::
+   :caption: Final Assignment
+   :maxdepth: 2
+
+   final-assignment/final-assignment
+   final-assignment/final-assignment-grading
+   final-assignment/final-assignment-hints
 ..
-..    final-assignment/final-assignment
-..    final-assignment/final-assignment-grading
-..    final-assignment/final-assignment-hints
-..
-.. .. toctree::
-..    :caption: "Extra: PyQGIS"
-..    :maxdepth: 2
-..
-..    extra/pyqgis/overview
-..    extra/pyqgis/pyqgis
-..    extra/pyqgis/additional_pyqgis_functions
+.. toctree::
+   :caption: "Extra: PyQGIS"
+   :maxdepth: 2
+
+   extra/pyqgis/overview
+   extra/pyqgis/pyqgis
+   extra/pyqgis/additional_pyqgis_functions
 
 
 .. .. toctree::
