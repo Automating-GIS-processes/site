@@ -219,13 +219,13 @@ Contents
    final-assignment/final-assignment-grading
    final-assignment/final-assignment-hints
 ..
-.. toctree::
-   :caption: "Extra: PyQGIS"
-   :maxdepth: 2
-
-   extra/pyqgis/overview
-   extra/pyqgis/pyqgis
-   extra/pyqgis/additional_pyqgis_functions
+.. .. toctree::
+..    :caption: "Extra: PyQGIS"
+..    :maxdepth: 2
+..
+..    extra/pyqgis/overview
+..    extra/pyqgis/pyqgis
+..    extra/pyqgis/additional_pyqgis_functions
 
 
 .. .. toctree::
