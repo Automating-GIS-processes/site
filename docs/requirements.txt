@@ -19,7 +19,7 @@ myst-nb
 nbsphinx
 networkx
 osmnx
-pandas
+pandas<3
 pillow
 plotly
 psycopg2
