@@ -7,9 +7,9 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'AutoGIS'
-copyright = '2024, Kamyar Hasanzadeh, Department of Geosciences & Geography, University of Helsinki'
+copyright = '2026, Kamyar Hasanzadeh, Department of Geosciences & Geography, University of Helsinki'
 author = 'Kamyar Hasanzadeh'
-release = '2024'
+release = '2026'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
