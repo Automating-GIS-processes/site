@@ -83,7 +83,7 @@ learning the basics of Python programming.
 
 At the University of Helsinki, the *Automating GIS processes* course runs for
 seven weeks during the second teaching period in the autumn semester, starting
-on {{starting_date}}.
+on Wednesday, 28 October 2026.
 
 During the teaching period, this web page is updated each week before the lecture.
 
