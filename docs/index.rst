@@ -247,3 +247,8 @@ Contents
 ..    extra/raster/raster-map-algebra
 ..    extra/raster/raster-mosaic
 
+.. .. toctree::
+..    :caption: "Extra: Web services (WFS and WMS)"
+..    :maxdepth: 2
+
+..    extra/web-services/web-services
