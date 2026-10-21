@@ -128,20 +128,20 @@ Other course versions:
 Contents
 --------
 
-.. .. toctree::
-..    :caption: Course information
-..    :maxdepth: 1
-..
-..    course-info/general-information
-..    course-info/course-environment
-..    course-info/grading
-..    course-info/learning-goals
-..    course-info/installing-python
-..    course-info/create-python-gis-environment
-..    course-info/ai-tools
-..    course-info/resources
-..    course-info/license
-..
+.. toctree::
+   :caption: Course information
+   :maxdepth: 1
+
+   course-info/general-information
+   course-info/course-environment
+   course-info/grading
+   course-info/learning-goals
+   course-info/installing-python
+   course-info/create-python-gis-environment
+   course-info/ai-tools
+   course-info/resources
+   course-info/license
+
 .. .. toctree::
 ..    :caption: Lesson 1
 ..    :maxdepth: 2
