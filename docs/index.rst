@@ -83,7 +83,7 @@ learning the basics of Python programming.
 
 At the University of Helsinki, the *Automating GIS processes* course runs for
 seven weeks during the second teaching period in the autumn semester, starting
-on {{starting_date}}.
+on Wednesday, 28 October 2026.
 
 During the teaching period, this web page is updated each week before the lecture.
 
@@ -110,6 +110,7 @@ Earlier versions of this course
 
 The course pages and material of earlier years are available at:
 
+- `2025 <https://autogis-site.readthedocs.io/en/2025.0/>`_
 - `2024 <https://autogis-site.readthedocs.io/en/2024.0/>`_
 - `2023 <https://autogis-site.readthedocs.io/en/2023/>`_
 - `2022 <https://autogis-site.readthedocs.io/en/2022/>`_
@@ -127,20 +128,20 @@ Other course versions:
 Contents
 --------
 
-.. .. toctree::
-..    :caption: Course information
-..    :maxdepth: 1
-..
-..    course-info/general-information
-..    course-info/course-environment
-..    course-info/grading
-..    course-info/learning-goals
-..    course-info/installing-python
-..    course-info/create-python-gis-environment
-..    course-info/ai-tools
-..    course-info/resources
-..    course-info/license
-..
+.. toctree::
+   :caption: Course information
+   :maxdepth: 1
+
+   course-info/general-information
+   course-info/course-environment
+   course-info/grading
+   course-info/learning-goals
+   course-info/installing-python
+   course-info/create-python-gis-environment
+   course-info/ai-tools
+   course-info/resources
+   course-info/license
+
 .. .. toctree::
 ..    :caption: Lesson 1
 ..    :maxdepth: 2
@@ -247,3 +248,8 @@ Contents
 ..    extra/raster/raster-map-algebra
 ..    extra/raster/raster-mosaic
 
+.. .. toctree::
+..    :caption: "Extra: Web services (WFS and WMS)"
+..    :maxdepth: 2
+
+..    extra/web-services/web-services
