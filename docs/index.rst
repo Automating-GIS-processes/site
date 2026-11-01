@@ -249,7 +249,7 @@ Contents
 ..    extra/raster/raster-mosaic
 
 .. toctree::
-   :caption: "Extra: Web services (WFS and WMS)"
+   :caption: Extras
    :maxdepth: 2
 
    extra/web-services/web-services
