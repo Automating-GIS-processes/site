@@ -151,20 +151,20 @@ Contents
    lessons/lesson-1/geometry-objects
    lessons/lesson-1/ai-assisted-workflow
    lessons/lesson-1/exercise-1
-..
-.. .. toctree::
-..    :caption: Lesson 2
-..    :maxdepth: 2
-..
-..    lessons/lesson-2/overview
-..    lessons/lesson-2/key-concepts
-..    lessons/lesson-2/managing-file-paths
-..    lessons/lesson-2/vector-data-io
-..    lessons/lesson-2/geopandas-an-introduction
-..    lessons/lesson-2/map-projections
-..    lessons/lesson-2/ai-assisted-workflow
-..    lessons/lesson-2/exercise-2
-..
+
+.. toctree::
+   :caption: Lesson 2
+   :maxdepth: 2
+
+   lessons/lesson-2/overview
+   lessons/lesson-2/key-concepts
+   lessons/lesson-2/managing-file-paths
+   lessons/lesson-2/vector-data-io
+   lessons/lesson-2/geopandas-an-introduction
+   lessons/lesson-2/map-projections
+   lessons/lesson-2/ai-assisted-workflow
+   lessons/lesson-2/exercise-2
+
 .. .. toctree::
 ..    :caption: Lesson 3
 ..    :maxdepth: 2
@@ -248,8 +248,8 @@ Contents
 ..    extra/raster/raster-map-algebra
 ..    extra/raster/raster-mosaic
 
-.. .. toctree::
-..    :caption: "Extra: Web services (WFS and WMS)"
-..    :maxdepth: 2
+.. toctree::
+   :caption: Extras
+   :maxdepth: 2
 
-..    extra/web-services/web-services
+   extra/web-services/web-services
