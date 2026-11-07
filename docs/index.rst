@@ -165,19 +165,19 @@ Contents
    lessons/lesson-2/ai-assisted-workflow
    lessons/lesson-2/exercise-2
 
-.. .. toctree::
-..    :caption: Lesson 3
-..    :maxdepth: 2
-..
-..    lessons/lesson-3/overview
-..    lessons/lesson-3/geocoding
-..    lessons/lesson-3/geocoding-in-geopandas
-..    lessons/lesson-3/point-in-polygon-queries
-..    lessons/lesson-3/intersect
-..    lessons/lesson-3/spatial-join
-..    lessons/lesson-3/ai-assisted-workflow
-..    lessons/lesson-3/exercise-3
-..
+.. toctree::
+   :caption: Lesson 3
+   :maxdepth: 2
+
+   lessons/lesson-3/overview
+   lessons/lesson-3/geocoding
+   lessons/lesson-3/geocoding-in-geopandas
+   lessons/lesson-3/point-in-polygon-queries
+   lessons/lesson-3/intersect
+   lessons/lesson-3/spatial-join
+   lessons/lesson-3/ai-assisted-workflow
+   lessons/lesson-3/exercise-3
+
 .. .. toctree::
 ..    :caption: Lesson 4
 ..    :maxdepth: 2
