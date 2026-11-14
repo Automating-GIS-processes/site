@@ -223,6 +223,7 @@ Contents
 ..    :caption: Final Assignment
 ..    :maxdepth: 2
 ..
+..    final-assignment/final-assignment-part-a
 ..    final-assignment/final-assignment
 ..    final-assignment/final-assignment-grading
 ..    final-assignment/final-assignment-hints
