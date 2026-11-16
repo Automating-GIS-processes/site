@@ -21,7 +21,7 @@ Guidelines for AI-LLM use in the Automating GIS processes course
 The guidelines above are based on the `University of Helsinki guidelines for the use of AI in teaching <https://teaching.helsinki.fi/instructions/article/artificial-intelligence-teaching>`_.
 More information is available in the `instructions for students <https://studies.helsinki.fi/instructions/article/using-ai-support-learning>`_.
 
-The *AI-assisted workflow* notebooks of the lessons demonstrate how to use AI assistants responsibly. The :doc:`final assignment <../final-assignment/final-assignment>` allows the use of AI-LLMs ("**AI-LLM OK**"), if you keep an AI-use log and verify the results.
+The *AI-assisted workflow* notebooks of the lessons demonstrate how to use AI assistants responsibly. In the :doc:`final assignment <../final-assignment/final-assignment>`, AI-LLMs are not allowed in part A (code review). Part B allows the use of AI-LLMs ("**AI-LLM OK**"), if you keep an AI-use log and verify the results.
 
 .. admonition:: Students at the University of Helsinki
    :class: hint

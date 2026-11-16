@@ -178,17 +178,17 @@ Contents
    lessons/lesson-3/ai-assisted-workflow
    lessons/lesson-3/exercise-3
 
-.. .. toctree::
-..    :caption: Lesson 4
-..    :maxdepth: 2
-..
-..    lessons/lesson-4/overview
-..    lessons/lesson-4/overlay-analysis
-..    lessons/lesson-4/vector-data-aggregating
-..    lessons/lesson-4/simplifying-geometries
-..    lessons/lesson-4/reclassifying-data
-..    lessons/lesson-4/ai-assisted-workflow
-..    lessons/lesson-4/exercise-4
+.. toctree::
+   :caption: Lesson 4
+   :maxdepth: 2
+
+   lessons/lesson-4/overview
+   lessons/lesson-4/overlay-analysis
+   lessons/lesson-4/vector-data-aggregating
+   lessons/lesson-4/simplifying-geometries
+   lessons/lesson-4/reclassifying-data
+   lessons/lesson-4/ai-assisted-workflow
+   lessons/lesson-4/exercise-4
 ..
 .. .. toctree::
 ..    :caption: Lesson 5
@@ -218,14 +218,15 @@ Contents
 ..     lessons/lesson-7/Raster-processing
 ..     lessons/lesson-7/ai-assisted-workflow
 ..     lessons/lesson-7/exercise-6
-..
+
 .. .. toctree::
 ..    :caption: Final Assignment
 ..    :maxdepth: 2
-..
+
 ..    final-assignment/final-assignment
 ..    final-assignment/final-assignment-grading
 ..    final-assignment/final-assignment-hints
+
 ..
 .. .. toctree::
 ..    :caption: "Extra: PyQGIS"
