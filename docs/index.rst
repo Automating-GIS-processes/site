@@ -219,13 +219,13 @@ Contents
 ..     lessons/lesson-7/ai-assisted-workflow
 ..     lessons/lesson-7/exercise-6
 
-.. .. toctree::
-..    :caption: Final Assignment
-..    :maxdepth: 2
+.. toctree::
+   :caption: Final Assignment
+   :maxdepth: 2
 
-..    final-assignment/final-assignment
-..    final-assignment/final-assignment-grading
-..    final-assignment/final-assignment-hints
+   final-assignment/final-assignment
+   final-assignment/final-assignment-grading
+   final-assignment/final-assignment-hints
 
 ..
 .. .. toctree::
